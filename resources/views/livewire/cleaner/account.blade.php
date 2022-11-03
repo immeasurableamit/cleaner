@@ -1,4 +1,3 @@
-
 <div>
     <section class="light-banner customer-account-page" style="background-image: url('assets/images/white-pattern.png')">
         <div class="container">
@@ -24,16 +23,30 @@
                                     </div>
 
 
-                                    <form>
+                                 
                                         <div class="customer-avatar-upload-div">
                                             <div class="customer-avatar-upload">
                                                 <div class="customer-avatar-edit">
-                                                    <input type='file' id="customerimageUpload" accept=".png, .jpg, .jpeg" />
-                                                    <label for="customerimageUpload">Upload a profile pic</label>
+                                                    <input type='file' id="upload" accept=".png, .jpg, .jpeg" />
+                                                    <label for="upload">Upload a profile pic</label>
                                                 </div>
                                                 <div class="customer-avatar-preview position-relative">
-                                                    <div id="customerimagePreview" style="background-image: url(assets/images/thumbnail.png);">
-                                                        <button class="delete-btn"><img src="assets/images/icons/delete.svg"></button>
+                                                    <div id="uploaded" style="background-image: url('/storage/images/$user->image');">
+                                                        <img src="{{ asset('storage/images/'.$user->image) }}">
+                                                        
+                                                        <a href="javascript::void(0)" wire:click="imageUpload({{$user->id}})"><i class="fas fa-save"></i></a>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="lawyer_profile-img mb-3">
+                                                    <!-- <div class="circle" id="uploaded">
+                                                        <img class="profile-pic" src="">
+                                                    </div> -->
+                                                    <div class="p-image">
+                                                        <!-- <span class="pencil_icon"><i class="fa-solid fa-pencil upload-button"></i></span> -->
+                                                        <!-- <input class="file-upload" id="upload" type="file" accept="image/*" /> -->
+                                                        <input type="hidden" name="image" id="upload-img" />
                                                     </div>
                                                 </div>
 
@@ -43,7 +56,7 @@
                                                 <p>Upload a new profile photo.</p>
                                             </div>
                                         </div>
-                                    </form>
+                                   
                                     <div class="h4-design">
                                         <h4>Account Information</h4>
                                     </div>
@@ -203,3 +216,9 @@
         </div>
     </section>
 </div>
+
+@section('script')
+
+@include('layouts.common.cropper')
+
+@endsection

@@ -31,11 +31,11 @@
         <input type="hidden" name="user_type" value="cleaner">
         <div class="row no-mrg">
           <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 no-padd">
-            <div class="blue-bg-wrapper ">
+            <div class="blue-bg-wrapper" id="uploaded" >
               <div class="avatar-upload">
-                <div class="avatar-edit">
-                  <input type='file' name="image" id="imageUpload" class= "file" accept="image/*" />
-                  <label for="imageUpload">Upload a profile pic</label>
+                <div id="uploaded" class="avatar-edit">
+                  <input type='file' name="image" id="upload" class= "file" accept="image/*" />
+                  <label for="upload">Upload a profile pic</label>
           
                 </div>
 
@@ -46,19 +46,20 @@
                         <img class="profile-pic" src="">
                     </div>
                     <div class="p-image">
-                        <span class="pencil_icon"><i class="fa-solid fa-pencil upload-button"></i></span>
-                        <input class="file-upload" id="upload" type="file" accept="image/*" />
+                        <!-- <span class="pencil_icon"><i class="fa-solid fa-pencil upload-button"></i></span> -->
+                        <!-- <input class="file-upload" id="upload" type="file" accept="image/*" /> -->
                         <input type="hidden" name="image" id="upload-img" />
                     </div>
                 </div>
 
 
-                <div class="avatar-preview">
+                <div class="avatar-preview" id="uploaded">
                   <div id="imagePreview" style="background-image: url(assets/images/thumbnail.png);">
-                    <button class="delete-btn"><img src="assets/images/icons/delete.svg"></button>
+                    <!-- <button class="delete-btn"><img src="assets/images/icons/delete.svg"></button> -->
                   </div>
                 </div>
               </div>
+
               <div class="form-grouph textarea-single-design">
                 <label>About yourself (Optional)</label>
                 <textarea name="about">Efficiently promote best-of-breed customer service after magnetic niche markets.</textarea>

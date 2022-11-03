@@ -42,7 +42,7 @@
             viewport: {
                 width: viewportWidth,
                 height: viewportHeight,
-                type: 'square' //circle  square
+                type: 'circle' //circle  square
             },
             boundary: {
                 width: boundaryWidth,
