@@ -13,6 +13,7 @@ class Team extends Component
     use LivewireAlert;
     public $first_name, $last_name, $email, $address, $ssn_or_tax, $insured, $contact_number, $name;
     public $updateMode = false;
+    public $toggleStatus = false;
 
 
     // public function mount()
@@ -33,6 +34,16 @@ class Team extends Component
             'ssn_or_tax' => 'required',
 
         ];
+    }
+
+    public function toggleShow()
+    {
+        $this->toggleStatus = true;
+    }
+
+    public function togglehidden()
+    {
+        $this->toggleStatus = false;
     }
 
     public function store()
