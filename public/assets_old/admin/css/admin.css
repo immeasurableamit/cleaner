@@ -1,0 +1,185 @@
+#admin-header {
+    background-color: #2677B1;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+.admin-header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+}
+.admin-right-header .admin-master-search {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding-left: 0px;
+    list-style: none;
+    justify-content: flex-end;
+    margin-bottom: 0px;
+}
+.admin-user-li .dropdown-toggle {
+    border: none;
+    background: transparent;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    padding: 0px;
+}
+.admin-user-li .dropdown-toggle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.admin-header-wrapper .dropdown-menu {
+    background: #FFFFFF;
+    box-shadow: 0px 15px 80px rgb(16 85 135 / 15%);
+    border-radius: 20px;
+    border: none;
+    left: initial !important;
+    padding: 15px !important;
+}
+.search-box input {
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 100px;
+    font-size: 16px;
+    color: #fff;
+    padding: 12px 25px;
+    font-weight: 400;
+    width: 100%;
+}
+.search-box input::placeholder {
+    color: #fff;
+}
+.admin-header-wrapper .admin-left-header {
+    width: 20%;
+    padding-right: 15px;
+}
+.admin-right-header {
+    width: 80%;
+}
+.admin-master-search .dropdown-toggle {
+    background-color: transparent;
+    border: none;
+}
+.admin-header-wrapper .icn {
+    color: #fff;
+    font-size: 24px;
+}
+.admin-master-search .dropdown-toggle::after{
+    display: none;
+}
+.admin-header-wrapper .indicators {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: #FF4D4D;
+    font-size: 10px;
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: -5px;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+}
+.search-box .admin-search-btn {
+    background: transparent;
+    border: none;
+    position: absolute;
+    right: 12px;
+    top: 9px;
+    cursor: pointer;
+    z-index: 9;
+}
+input:focus{
+    outline: none;
+}
+.admin-right-header .admin-master-search .search-box {
+    width: 35%;
+}
+.admin-header-wrapper {
+    padding: 17px 30px;
+}
+.admin-right-header .admin-master-search .search-box {
+    margin-right: 15px;
+}
+.admin-right-header .admin-master-search>.notification-li {
+    margin-right: 25px;
+}
+.admin-right-header .admin-master-search .admin-user-li {
+    padding-left: 28px;
+    margin-left: 30px;
+    border-left: 0.1px solid #fff;
+}
+#admin-sidebar {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background-color: #186AA5;
+    height: calc(100vh - 84px);
+    right: 0;
+    width: 100%;
+    max-width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: auto;
+    padding: 30px 0px;
+}
+#admin-sidebar li {
+    padding: 0px 15px;
+    margin-bottom: 5px;
+    position: relative;
+}
+#admin-sidebar li a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 400;
+    padding: 14px 15px;
+    border-radius: 10px;
+}
+#admin-sidebar li a img {
+    margin-right: 12px;
+}
+#admin-sidebar li.active a,#admin-sidebar li:hover a {
+    background: #F8D029;
+    color: #363636;
+    font-weight: 500;
+}
+#admin-sidebar li.active a img,#admin-sidebar li:hover a img {
+    filter: invert(1) brightness(0.9);
+}
+#admin-sidebar li.active::before {
+    content: '';
+    position: absolute;
+    left: -17px;
+    top: 25px;
+    bottom: 0;
+    background: #F8D029;
+    border-radius: 0px 0px 100px 100px;
+    transform: rotate(-90deg);
+    width: 40px;
+    height: 5px;
+}
+#admin-sidebar .admin-ul-scnd {
+    padding-top: 15px;
+    border-top: 1px solid #fff;
+    margin-bottom: 0px;
+}
+#admin-main-content.gredient-bg {
+    background: linear-gradient(102.29deg, rgba(0, 148, 255, 0.06) -0.73%, rgba(15, 148, 244, 0.09) 53.31%, rgba(254, 205, 4, 0.07) 100%);
+    min-height: 100vh;
+}
+#admin-main-content {
+    width: calc(100% - 250px);
+    margin-left: auto;
+    margin-top: 84px;
+    padding: 20px;
+}
