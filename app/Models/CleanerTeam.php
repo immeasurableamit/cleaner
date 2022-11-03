@@ -31,8 +31,5 @@ class CleanerTeam extends Model
     }
 
 
-    public function cleanerTeam()
-    {
-        return $this->hasOne(CleanerTeam::class, 'user_id', 'id');
-    }
+   
 }

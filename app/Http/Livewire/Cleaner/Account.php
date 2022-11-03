@@ -28,10 +28,10 @@ class Account extends Component
         }
 
         if ($action == 'address') {
-            $this->address = $user->details->address;
+            $this->address = $user->UserDetails->address;
         }
         if ($action == 'about') {
-            $this->about = $user->details->about;
+            $this->about = $user->UserDetails->about;
         }
 
         $this->image = $user->image;
@@ -51,7 +51,7 @@ class Account extends Component
 
         if ($this->userId) {
             $user = User::find($this->userId);
-            $userdetail = $user->details;
+            $userdetail = $user->UserDetails;
             if ($action == 'name') {
                 $name = explode(' ', $this->name);
                 $user->first_name = @$name[0];
@@ -81,6 +81,6 @@ class Account extends Component
     public function render()
     {
         $user = User::findOrFail(auth()->user()->id);
-        return view('livewire.cleaner.account', compact('user'));
+        return view('livewire.cleaner.account', ['user'=>$user]);
     }
 }

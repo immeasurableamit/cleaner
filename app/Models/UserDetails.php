@@ -26,10 +26,16 @@ class UserDetails extends Model
     public function State()
     {
         return $this->hasOne(State::class, 'id', 'states_id');
+    }
 
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
 
     }
+    public function cleanerTeam()
+    {
+        return $this->hasOne(CleanerTeam::class, 'user_id', 'id');
+    }
+    
 }
