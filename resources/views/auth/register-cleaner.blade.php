@@ -32,7 +32,7 @@
         <div class="row no-mrg">
           <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 no-padd">
             <div class="blue-bg-wrapper" id="uploaded" >
-              <div class="avatar-upload">
+              <div class="avatar-upload"> 
                 <div id="uploaded" class="avatar-edit">
                   <input type='file' name="image" id="upload" class= "file" accept="image/*" />
                   <label for="upload">Upload a profile pic</label>

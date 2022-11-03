@@ -77,7 +77,7 @@ class Account extends Component
         }
     }
     public function imageUpload($id)
-    {
+    { 
 
         if ($id) {
             $user = User::find($id);

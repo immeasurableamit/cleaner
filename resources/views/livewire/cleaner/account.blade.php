@@ -26,7 +26,7 @@
                                  
                                         <div class="customer-avatar-upload-div">
                                             <div class="customer-avatar-upload">
-                                                <div class="customer-avatar-edit">
+                                                <div class="customer-avatar-edit"> 
                                                     <input type='file' id="upload" accept=".png, .jpg, .jpeg" />
                                                     <label for="upload">Upload a profile pic</label>
                                                 </div>
