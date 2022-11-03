@@ -81,10 +81,10 @@ class Account extends Component
 
         if ($id) {
             $user = User::find($id);
-            dd($user->image);
+            // dd($user->image);
             if ($user->image && strpos($user->image, "data:") !== false) {
                 $this->image = $user->image;
-dd($this->image);
+// dd($this->image);
                 $folderPath = ('storage/images/');
                 if (!is_dir($folderPath)) {
                     mkdir($folderPath, 0775, true);
