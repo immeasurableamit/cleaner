@@ -579,6 +579,7 @@ class ComposerStaticInitf1a28350651a4ecdc440e99f6fcab8cc
         'App\\Http\\Responses\\RegisterResponse' => __DIR__ . '/../..' . '/app/Http/Responses/RegisterResponse.php',
         'App\\Models\\CleanerTeam' => __DIR__ . '/../..' . '/app/Models/CleanerTeam.php',
         'App\\Models\\State' => __DIR__ . '/../..' . '/app/Models/State.php',
+        'App\\Models\\Time_zone' => __DIR__ . '/../..' . '/app/Models/Time_zone.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\UserDetails' => __DIR__ . '/../..' . '/app/Models/UserDetails.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
