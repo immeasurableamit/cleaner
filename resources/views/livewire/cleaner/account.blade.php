@@ -141,6 +141,7 @@
 
                                                     <div class="time-zone-select-design">
                                                         <select wire:model="timezone" id="timezone-offset">
+                                                        
                                                             <option>{{$user->userDetails->timezone}} </option>
                                                             <option>Select Time Zone</option>
                                                         </select>
