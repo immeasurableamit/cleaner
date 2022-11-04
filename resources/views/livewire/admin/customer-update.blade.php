@@ -3,7 +3,7 @@
    <section class="table-layout-sec jobs">
     <div class="white-bg-wrapper">
       <div class="account-info-blocks">
-        <div class="row">
+        <div class="row no-mrg">
           <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
             <div class="detail-div-block">
             <h4>Customer account info</h4>
@@ -15,17 +15,19 @@
                     <li class="position-relative">
                       <div class="d-flex justify-content-spacebw three_column edit_frm">
                           <h6 class="title-label"><i class="fas fa-user"></i></h6>
-                          @if ($fieldStatus == true && $action == 'first_name')
+                          @if (@$fieldStatus == true && @$action == 'first_name')
                       
-                            <input type="text" value="{{@$user->first_name}}" wire:model="first_name" />
-                            <!-- <button class="save-icn-btn"><i class="fas fa-save"></i></button> -->
+                            <input type="text"  wire:model="first_name" />
+                            
                             <span class="edit"><a class="link-design-2" wire:click="updateData('first_name')"><i class="fas fa-save"></i></a></span>
+
                             <span class="cancel"><a href="javascript::void(0)" class="link-design-2" wire:click="cancle"><i class="fas fa-times"></i></a></span>
 
                           @else
-                          <p class="phone dsds"><a href="tel:+1 512-559-9582">{{@$user->first_name}}</a></p>
+                          
+                           <p class="name">{{@$userDetails->first_name}}</p>
                           <div class="action-block">
-                              <span class="edit"><a href="javascript::void(0)" wire:click="editData('{{@$user->id}}', 'first_name')">Edit</a></span>
+                              <span class="edit"><a href="javascript::void(0)" wire:click="editData('{{@$userDetails->id}}', 'first_name')">Edit</a></span>
                               <!-- <button class="edit">Edit</button> -->
                           </div>
                           @endif
@@ -33,9 +35,11 @@
                   
               
                     </li>
+
+                    {{--
                     <li class="position-relative">
                      <form class="d-flex">
-                  <h6 class="title-label"><i class="fas fa-home"></i></h6>
+                  <h6 class="title-label"><i class="fas fa-phone"></i></h6>
                   <input type="text" placeholder="Enter Address" style="display: none;">
                   <p>{{@$user->contact_number}}</p>
                   <div class="action-block">
@@ -174,6 +178,7 @@
           </table>
           </div>
         </div>
+        --}}
       <!--   <div class="tab-pane fade" id="scheduled">
           <div class="table-design">
             <table id="schedule-jobs-table" class="table dt-responsive nowrap" style="width:100%">
@@ -273,6 +278,8 @@
             </table>
             </div>
         </div> -->
+
+      
       </div>
       </div>
    </section>

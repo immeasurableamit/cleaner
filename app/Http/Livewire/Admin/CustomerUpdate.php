@@ -11,30 +11,41 @@ class CustomerUpdate extends Component
 {
     public $user, $first_name, $last_name, $address, $contact_number, $full_name;
 
-    public $fieldStatus = false, $action;
+    public $fieldStatus = false, $actions, $action;
 
+    //  private function resetInputFields(){
+    //     $this->first_name = '';
+    //     // $this->contact_number = '';
+    //     // $this->email = '';
+    //     // $this->address = '';
+    // }
 
     public function editData($userId, $action)
     {
 
-        $user = User::with('UserDetails')->find($userId);
-        $this->userId = $userId;
+        //dd($userId, $action);
+        $userData = User::findOrFail($userId);
+
+        //dd($userData, $action);
+        $this->userId = $userData->id;
         // $this->user = $user;
 
 
         if ($action == 'first_name') {
-            $this->first_name = $user->first_name;
-        }
-        if ($action == 'contact_number') {
-            $this->contact_number = $user->contact_number;
-        }
-        if ($action == 'email') {
-            $this->email = $user->email;
-        }
+            $this->first_name = $userData->first_name;
+            // $this->actions = 'first_name';
 
-        if ($action == 'address') {
-            $this->address = $user->UserDetails->address;
         }
+        // if ($action == 'contact_number') {
+        //     $this->contact_number = $user->contact_number;
+        // }
+        // if ($action == 'email') {
+        //     $this->email = $user->email;
+        // }
+
+        // if ($action == 'address') {
+        //     $this->address = $user->UserDetails->address;
+        // }
         // if ($action == 'about') {
         //     $this->about = $user->details->about;
         // }
@@ -47,14 +58,16 @@ class CustomerUpdate extends Component
     public function cancle()
     {
         $this->fieldStatus = false;
+        // $this->resetInputFields();
     }
 
     public function updateData($action)
     {
-
-        if ($this->userId) {
+        // if ($this->userId) {
 
             $user = User::with('UserDetails')->find($this->userId);
+        //dd($action, $this->userId);
+
             $userdetail = $user->UserDetails;
 
             if ($action == 'first_name') {
@@ -78,16 +91,18 @@ class CustomerUpdate extends Component
             // if ($action == 'about') {
             //     $userdetail->about = $this->about;
             // }
-            $userdetail->update();
+            $userdetail->save();
             $this->fieldStatus = false;
-        }
+        // }
     }
    
 
     public function render()
     {  
        
-        $this->user = User::with('UserDetails')->where('id', '=', request()->id)->first();
-        return view('livewire.admin.customer-update');
+        // $this->user = User::with('UserDetails')->where('id', '=', request()->id)->first();
+        $userDetail = User::findOrFail(request()->id);
+        
+        return view('livewire.admin.customer-update', ['userDetails'=>$userDetail]);
     }
 }
