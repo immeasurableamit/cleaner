@@ -102,11 +102,16 @@
                                 <div class="row">
                                     @foreach($user as $user)
                                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                        <div class="select-date-toggles overflow-hidden ">
 
-                                        <div class="select-date-toggles overflow-hidden">
-                                            <button class="service_toggle_s"></button>
+                                            <!-- @if($toggleStatus == true)
+                                            <button class="service_toggle_s" wire:click="togglehidden"></button>
+                                            @else
+                                            <button class="service_toggle_s" data-id="{{$user->id}}"></button>
+                                            @endif -->
+
+                                            <button class="service_toggle_s" data-id="{{$user->id}}"></button>
                                             <div class="service-main-service-column">
-
 
                                                 <div class="altrntive_rw">
                                                     <p class="appointment_label">Name</p>
@@ -212,4 +217,6 @@
         </div>
     </div>
     <!-- end updateModel -->
+
+   
 </div>
