@@ -4,8 +4,7 @@
 
 namespace Composer\Autoload;
 
-
-class ComposerStaticInit280f92c4f567839cc72dd3bdc4b07ca7
+class ComposerStaticInitf1a28350651a4ecdc440e99f6fcab8cc
 {
     public static $files = array (
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
@@ -28,45 +27,14 @@ class ComposerStaticInit280f92c4f567839cc72dd3bdc4b07ca7
         '35a6ad97d21e794e7e22a17d806652e4' => __DIR__ . '/..' . '/nunomaduro/termwind/src/Functions.php',
         '23c18046f52bef3eea034657bafda50f' => __DIR__ . '/..' . '/symfony/polyfill-php81/bootstrap.php',
         'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
-
-class ComposerStaticInit45ff7974aec00089b912c71b7b339a68
-{
-    public static $files = array (
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
-        'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
-        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
-        '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
-        '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
-        'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
-        '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
-        'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
-        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
-        '3bd81c9b8fcc150b69d8b63b4d2ccf23' => __DIR__ . '/..' . '/spatie/flare-client-php/src/helpers.php',
-        '23c18046f52bef3eea034657bafda50f' => __DIR__ . '/..' . '/symfony/polyfill-php81/bootstrap.php',
-        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
-        '09f6b20656683369174dd6fa83b7e5fb' => __DIR__ . '/..' . '/symfony/polyfill-uuid/bootstrap.php',
-        'a1105708a18b76903365ca1c4aa61b02' => __DIR__ . '/..' . '/symfony/translation/Resources/functions.php',
-        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
-        '40275907c8566c390185147049ef6e5d' => __DIR__ . '/..' . '/livewire/livewire/src/helpers.php',
-        '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
-        '35a6ad97d21e794e7e22a17d806652e4' => __DIR__ . '/..' . '/nunomaduro/termwind/src/Functions.php',
-        '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
-        'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
-        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
-
         '265b4faa2b3a9766332744949e83bf97' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Collections/helpers.php',
         'c7a3c339e7e14b60e06a2d7fcce9476b' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Events/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
-
         '3bd81c9b8fcc150b69d8b63b4d2ccf23' => __DIR__ . '/..' . '/spatie/flare-client-php/src/helpers.php',
         '40275907c8566c390185147049ef6e5d' => __DIR__ . '/..' . '/livewire/livewire/src/helpers.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
-        'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
-        'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
-
         '320163ac6b93aebe3dc25b60a0533d56' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/helpers.php',
     );
 
@@ -385,8 +353,8 @@ class ComposerStaticInit45ff7974aec00089b912c71b7b339a68
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -1392,9 +1360,6 @@ class ComposerStaticInit45ff7974aec00089b912c71b7b339a68
         'Faker\\Provider\\nl_BE\\Payment' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/nl_BE/Payment.php',
         'Faker\\Provider\\nl_BE\\Person' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/nl_BE/Person.php',
         'Faker\\Provider\\nl_BE\\PhoneNumber' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/nl_BE/PhoneNumber.php',
-
-        'Faker\\Provider\\nl_BE\\Text' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/nl_BE/Text.php',
-
         'Faker\\Provider\\nl_NL\\Address' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/nl_NL/Address.php',
         'Faker\\Provider\\nl_NL\\Color' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/nl_NL/Color.php',
         'Faker\\Provider\\nl_NL\\Company' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/nl_NL/Company.php',
@@ -5753,9 +5718,6 @@ class ComposerStaticInit45ff7974aec00089b912c71b7b339a68
         'Symfony\\Component\\Routing\\RequestContext' => __DIR__ . '/..' . '/symfony/routing/RequestContext.php',
         'Symfony\\Component\\Routing\\RequestContextAwareInterface' => __DIR__ . '/..' . '/symfony/routing/RequestContextAwareInterface.php',
         'Symfony\\Component\\Routing\\Requirement\\EnumRequirement' => __DIR__ . '/..' . '/symfony/routing/Requirement/EnumRequirement.php',
-
-        'Symfony\\Component\\Routing\\Requirement\\Requirement' => __DIR__ . '/..' . '/symfony/routing/Requirement/Requirement.php',
-
         'Symfony\\Component\\Routing\\Route' => __DIR__ . '/..' . '/symfony/routing/Route.php',
         'Symfony\\Component\\Routing\\RouteCollection' => __DIR__ . '/..' . '/symfony/routing/RouteCollection.php',
         'Symfony\\Component\\Routing\\RouteCompiler' => __DIR__ . '/..' . '/symfony/routing/RouteCompiler.php',
@@ -6056,17 +6018,10 @@ class ComposerStaticInit45ff7974aec00089b912c71b7b339a68
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-
-            $loader->prefixLengthsPsr4 = ComposerStaticInit280f92c4f567839cc72dd3bdc4b07ca7::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit280f92c4f567839cc72dd3bdc4b07ca7::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit280f92c4f567839cc72dd3bdc4b07ca7::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit280f92c4f567839cc72dd3bdc4b07ca7::$classMap;
-
-            $loader->prefixLengthsPsr4 = ComposerStaticInit45ff7974aec00089b912c71b7b339a68::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit45ff7974aec00089b912c71b7b339a68::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit45ff7974aec00089b912c71b7b339a68::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit45ff7974aec00089b912c71b7b339a68::$classMap;
-
+            $loader->prefixLengthsPsr4 = ComposerStaticInitf1a28350651a4ecdc440e99f6fcab8cc::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitf1a28350651a4ecdc440e99f6fcab8cc::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitf1a28350651a4ecdc440e99f6fcab8cc::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitf1a28350651a4ecdc440e99f6fcab8cc::$classMap;
 
         }, null, ClassLoader::class);
     }

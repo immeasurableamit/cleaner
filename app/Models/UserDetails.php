@@ -34,9 +34,9 @@ class UserDetails extends Model
 
     // }
 
-    }
+    
 
-    public function user()
+    public function User()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
 
