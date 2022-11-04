@@ -35,6 +35,7 @@ return array(
     'App\\Http\\Responses\\RegisterResponse' => $baseDir . '/app/Http/Responses/RegisterResponse.php',
     'App\\Models\\CleanerTeam' => $baseDir . '/app/Models/CleanerTeam.php',
     'App\\Models\\State' => $baseDir . '/app/Models/State.php',
+    'App\\Models\\Time_zone' => $baseDir . '/app/Models/Time_zone.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Models\\UserDetails' => $baseDir . '/app/Models/UserDetails.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',

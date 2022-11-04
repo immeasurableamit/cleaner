@@ -353,8 +353,8 @@ class ComposerStaticInit45ff7974aec00089b912c71b7b339a68
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -579,6 +579,7 @@ class ComposerStaticInit45ff7974aec00089b912c71b7b339a68
         'App\\Http\\Responses\\RegisterResponse' => __DIR__ . '/../..' . '/app/Http/Responses/RegisterResponse.php',
         'App\\Models\\CleanerTeam' => __DIR__ . '/../..' . '/app/Models/CleanerTeam.php',
         'App\\Models\\State' => __DIR__ . '/../..' . '/app/Models/State.php',
+        'App\\Models\\Time_zone' => __DIR__ . '/../..' . '/app/Models/Time_zone.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\UserDetails' => __DIR__ . '/../..' . '/app/Models/UserDetails.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',

@@ -31,9 +31,9 @@
         <input type="hidden" name="user_type" value="cleaner">
         <div class="row no-mrg">
           <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 no-padd">
-            <div class="blue-bg-wrapper" id="uploaded" >
-              <div class="avatar-upload"> 
-                <div id="uploaded" class="avatar-edit">
+            <div class="blue-bg-wrapper"  >
+              <div class="avatar-upload">
+                <div class="avatar-edit">
                   <input type='file' name="image" id="upload" class= "file" accept="image/*" />
                   <label for="upload">Upload a profile pic</label>
           
@@ -53,7 +53,7 @@
                 </div>
 
 
-                <div class="avatar-preview" id="uploaded">
+                <div class="avatar-preview">
                   <div id="imagePreview" style="background-image: url(assets/images/thumbnail.png);">
                     <!-- <button class="delete-btn"><img src="assets/images/icons/delete.svg"></button> -->
                   </div>
