@@ -53,7 +53,7 @@
             <!-- <a href="javascript:void(0)" class="link-design-2" wire:click="destroy()">Delete</a> -->
                 @foreach($users as $user)
               <tr>
-                  <td class="name"><a href="/update-account/{{$user->id}}">{{$user->first_name}}</a></td>
+                  <td class="name"><a href="/update-account/{{$user->id}}">{{$user->first_name}} {{$user->last_name}}</a></td>
                   <td>{{$user->email}}</td>
                   <td>12</td>
                   <td>2/14/22</td>

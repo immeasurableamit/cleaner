@@ -28,25 +28,23 @@ class UserDetails extends Model
     {
         return $this->hasOne(State::class, 'id', 'states_id');
 
-       } 
-    // public function user()
-    // {
-    //     return $this->belongsTo(User::class, 'user_id', 'id');
-
-    // }
-
-    
-
+    } 
+  
     public function User()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
 
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> a2142e41ed4df0ffec36a272ee6a2b4b3110b5af
     
     public function time_zone()
     {
         return $this->belongsTo(Time_zone::class, 'timezone', 'id');
     }
+
     
 
 }
