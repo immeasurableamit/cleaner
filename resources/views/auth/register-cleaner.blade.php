@@ -40,7 +40,6 @@
                 </div>
 
 
-
                 <div class="lawyer_profile-img mb-3">
                     <div class="circle" id="uploaded">
                         <img class="profile-pic" src="">

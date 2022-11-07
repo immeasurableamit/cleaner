@@ -23,7 +23,6 @@ class UserDetails extends Model
 
     ];
 
-
     public function State()
     {
         return $this->hasOne(State::class, 'id', 'states_id');
@@ -35,7 +34,7 @@ class UserDetails extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
 
     }
-    
+
     public function time_zone()
     {
         return $this->belongsTo(Time_zone::class, 'timezone', 'id');
