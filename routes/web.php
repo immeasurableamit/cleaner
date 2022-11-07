@@ -100,7 +100,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::get('/account', function () {
             $title = array(
-                'active' => 'customer-account',
+                'active' => 'customer.account',
             );
             return view('customer.account', compact('title'));
         })->name('customer.account');

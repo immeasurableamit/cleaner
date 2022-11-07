@@ -15,6 +15,7 @@ class Account extends Component
     public $oldEmail;
     public $fieldStatus = false, $action;
     use WithFileUploads;
+    protected $listeners = ['refresh-me' => '$refresh'];
 
     // public function rules()
     // {
@@ -103,20 +104,24 @@ class Account extends Component
         ]);
 
         $user = User::find($this->userId);
-        // dd($user);
+
         if ($action == 'email') {
             $oldEmail = $user->email;
-            // dd($oldEmail );
-            // $user->email = $this->email;
             if ($oldEmail != $this->email) {
                 $user->update([
                     'email_verified_at' => null
                 ]);
+
                 $user->sendEmailVerificationNotification();
             }
+
+            $user->email = $this->email;
+            $user->save();
+            // $this->emitself('refresh-me');
+            // return redirect('verification.notic');
         }
-        $user->update();
     }
+
 
     public function imageUpload($id)
     {
