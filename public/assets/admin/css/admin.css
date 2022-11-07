@@ -469,7 +469,7 @@ table.dataTable thead>tr>th.sorting:after, table.dataTable thead>tr>th.sorting_a
 
 
 
-.customer-account-information .title-label {
+/* .customer-account-information .title-label {
     font-weight: 300;
     font-size: 14px;
     color: #031624;
@@ -477,7 +477,7 @@ table.dataTable thead>tr>th.sorting:after, table.dataTable thead>tr>th.sorting_a
     line-height: 21px;
     width: 25px;
     text-align: center;
-}
+} */
 .customer-account-information li {
     padding-bottom: 10px;
 }

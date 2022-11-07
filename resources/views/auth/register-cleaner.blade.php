@@ -41,8 +41,10 @@
 
 
                 <div class="lawyer_profile-img mb-3">
-                    <div class="circle" id="uploaded">
-                        <img class="profile-pic" src="">
+                    <div class="circle avatar-preview" id="uploaded">
+                    <div id="imagePreview" class="profile-pic" style="background-image: url(assets/images/thumbnail.png);">
+                        <img class="profile-pic" id="imagePreview"  src="">
+                    </div>
                     </div>
                     <div class="p-image">
                         <!-- <span class="pencil_icon"><i class="fa-solid fa-pencil upload-button"></i></span> -->
@@ -52,11 +54,11 @@
                 </div>
 
 
-                <div class="avatar-preview">
-                  <div id="imagePreview" style="background-image: url(assets/images/thumbnail.png);">
-                    <!-- <button class="delete-btn"><img src="assets/images/icons/delete.svg"></button> -->
+                <!-- <div class="avatar-preview">
+                  <div id="imagePreview" class="profile-pic" style="background-image: url(assets/images/thumbnail.png);">
+                    <button class="delete-btn"><img src="assets/images/icons/delete.svg"></button>
                   </div>
-                </div>
+                </div> -->
               </div>
 
               <div class="form-grouph textarea-single-design">
@@ -74,7 +76,7 @@
                 </ul>
               </div>
               <div class="blue-logo-block text-center">
-                <a href="#"><img src="assets/images/logo/logo.svg"></a>
+                <a href="#"><img src="{{asset('assets/images/logo/logo.svg')}}"></a>
               </div>
             </div>
           </div>
@@ -213,7 +215,5 @@
 @endsection
 
 @section('script')
-
 @include('layouts.common.cropper')
-
 @endsection

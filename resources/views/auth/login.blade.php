@@ -13,7 +13,7 @@
               <p>To the future of cleaning. Simple. Affordable. The Best.</p>
             </div>
             <div class="blue-logo-block text-center">
-              <a href="#"><img src="assets/images/logo/logo.svg"></a>
+              <a href="#"><img src="{{asset('assets/images/logo/logo.svg')}}"></a>
             </div>
           </div>
         </div>

@@ -161,7 +161,7 @@ class Account extends Component
     public function render()
     {
         $user = User::findOrFail(auth()->user()->id);
-        //dd($user->userDetails->timezone);
+     
         $timezones = Time_zone::all();
         //  $this->timezone = $user->userDetails->timezone;
 

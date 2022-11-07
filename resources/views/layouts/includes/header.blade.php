@@ -27,7 +27,7 @@
                             </div>
                             <div class="search-input-design">
                                 <input type="text" placeholder="Enter location">
-                                <button class="search-btn"><a href="search-result.html" class=""><img src="assets/images/icons/search.svg"></a></button>
+                                <button class="search-btn"><a href="search-result.html" class=""><img src="{{asset('assets/images/icons/search.svg')}}"></a></button>
                             </div>
                         </div>
                     </div>
