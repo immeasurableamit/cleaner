@@ -1,7 +1,7 @@
 <footer id="footer">
         <div class="container">
             <div class="footer-logo">
-                <a href="#"><img src="assets/images/logo/footer-logo.svg"></a>
+                <a href="#"><img src="{{asset('assets/images/logo/footer-logo.svg')}}"></a>
             </div>
             <div class="footer-flex">
                 <div class="footer-widget footer-widget-first">

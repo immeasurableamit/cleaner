@@ -6,7 +6,7 @@
                 @else
                   <li class="account_dropdown">
                     
-                    <a href="#" class="nav-link active dropdown-toggle show" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account and Settings <img src="./assets/images/icons/drop-arrow.svg"></a>
+                    <a href="#" class="nav-link active dropdown-toggle show" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account and Settings <img src="{{asset('./assets/images/icons/drop-arrow.svg')}}"></a>
                   <ul class="dropdown_links dropdown-menu show" aria-labelledby="navbarDropdown">
                     <li><a href="{{route('cleaner.account')}}" class="active">View Account Info</a></li>
                     <li><a href="{{route('cleaner.team')}}" class="">Team</a></li>

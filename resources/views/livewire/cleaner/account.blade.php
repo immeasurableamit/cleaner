@@ -10,7 +10,7 @@
                             </div>
                             @include('layouts.common.sidebar')
                             <div class="blue-logo-block text-center max-width-100">
-                                <a href="#"><img src="assets/images/logo/logo.svg"></a>
+                                <a href="#"><img src="{{asset('assets/images/logo/logo.svg')}}"></a>
                             </div>
                         </div>
                     </div>
@@ -21,9 +21,6 @@
                                     <div class="form-headeing-second mb-4">
                                         <h3 class="border-bottom pb-3">Account Photo</h3>
                                     </div>
-
-
-
                                     <div class="customer-avatar-upload-div">
                                         <div class="customer-avatar-upload">
                                             <div class="customer-avatar-edit">
@@ -32,10 +29,8 @@
                                             </div>
                                             <div class="customer-avatar-preview position-relative">
                                                 <div id="uploaded" style="background-image: url('/storage/images/$user->image');">
-                                                    <img src="{{ asset('storage/images/'.$user->image) }}">
-
+                                                    <img src="{{ asset('storage/images/'.$user->image) }}" id="customerimagePreview">
                                                     <a href="javascript::void(0)" wire:click="imageUpload({{$user->id}})"><i class="fas fa-save"></i></a>
-
                                                 </div>
                                             </div>
 
@@ -72,7 +67,6 @@
                                                     @if (@$fieldStatus == true && $action == 'contact_number')
                                                     <!-- <input type="number" placeholder="Enter Phone number" value="{{$user->contact_number}}" wire:model="contact_number" style="display: none;"> -->
                                                     <input type="number" value="{{$user->contact_number}}" wire:model="contact_number" />
-                                                    <!-- <button class="save-icn-btn"><i class="fas fa-save"></i></button> -->
                                                     <span class="edit"><a class="link-design-2" wire:click="updateData('contact_number')"><i class="fas fa-save"></i></a></span>
                                                     <span class="cancel"><a href="javascript::void(0)" class="link-design-2" wire:click="cancle"><i class="fas fa-times"></i></a></span>
 
@@ -96,7 +90,7 @@
                                                     @else
                                                     <p class="mail">{{$user->email}}</p>
                                                     <div class="action-block">
-                                                    
+
                                                         <span class="edit"><a href="javascript::void(0)" class="link-design-2" wire:click="editData('{{auth()->user()->id}}', 'email')">Edit</a></span>
                                                     </div>
                                                     @endif
@@ -141,7 +135,7 @@
 
                                                     <div class="time-zone-select-design">
                                                         <select wire:model="timezone" id="timezone-offset">
-                                                        
+
                                                             <option>{{$user->userDetails->timezone}} </option>
                                                             <option>Select Time Zone</option>
                                                         </select>
