@@ -29,7 +29,6 @@
         @yield('content')
 
     </main>
-
     @include('layouts.includes.footer')
     @include('layouts.includes.script')
 @yield('script')
