@@ -69,15 +69,28 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('admin.cleaner');
     })->name('admin-cleaner');
 
+  //Cleaner Update
+    Route::get('/update-cleaner/{id}', function () {
+        $title = array(
+            'active' => 'admin-account',
+        );
+       return view('admin.cleaner-edit', ["id" => request()->id]);
+    })->name('update-cleaner');
+
+
+
     //Customer
     Route::get('/update-account/{id}', function () {
         $title = array(
             'active' => 'admin-account',
         );
+
+       return view('admin.customer-edit', ["id" => request()->id]);
+
         return view('admin.customer-edit');
+
     })->name('customer-update');
 
-    // Route::get('/customer-edit/{id}', \App\Http\Livewire\Admin\CustomerUpdate::class)->name('customer-edit');
 });
 
 // 

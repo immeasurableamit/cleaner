@@ -29,11 +29,6 @@
     </main>
     @include('layouts.admin.sidebar')
      @include('layouts.admin.script')
-
-<!-- <script>
-    window.livewire.on('exampleModal', ()=>{
-        $('#updateModal').modal('show');
-    })
-</script>  -->    
+   
 </body>
 </html>

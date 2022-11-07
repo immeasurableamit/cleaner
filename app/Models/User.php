@@ -18,10 +18,6 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
 
-   // protected $appends = ['full_name'];
-
-
-
     protected $fillable = [
         'role',
         'first_name',
@@ -69,14 +65,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(UserDetails::class, 'user_id', 'id');
     }
 
-//     public function getFullNameAttribute()
-// {
-//     return $this->first_name . ' ' . $this->last_name;
-// }
-
-    // public function getFullNameAttribute()
-    // {
-    //     return $this->first_name . ' ' . $this->last_name;
-    // }
-
+      public function cleanerTeam()
+    {
+        return $this->hasOne(CleanerTeam::class, 'user_id', 'id');
+    }
 }
