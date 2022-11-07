@@ -19,6 +19,9 @@
     window.livewire.on('close-modal', () => {
       $("#updateModalClose").click();
     });
+    // window.livewire.on('updateclosemodal', () => {
+    //   $("#updateModalClose").click();
+    // });
 
   });
 </script>

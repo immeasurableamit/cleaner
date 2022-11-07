@@ -27,6 +27,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'image',
         'contact_number',
         'status',
+        'email_verified_at',
 
     ];
 
@@ -65,8 +66,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(UserDetails::class, 'user_id', 'id');
     }
 
-      public function cleanerTeam()
+    public function cleanerTeam()
     {
         return $this->hasOne(CleanerTeam::class, 'user_id', 'id');
     }
+    
+
 }
