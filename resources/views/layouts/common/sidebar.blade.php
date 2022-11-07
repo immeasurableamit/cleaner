@@ -22,6 +22,6 @@
                   <li><a href="cleaner-appoitments.html">Appointments</a></li>
                   <li><a href="cleaner-billing.html" >Billing</a></li>
                   <li><a href="cleaner-notification.html">Notifications</a></li>
-                  <li><a href="cleaner-support-past-service.html">Support</a></li>
+                  <li><a href="{{route('support.service')}}">Support</a></li>
                 </ul>
               </div>
