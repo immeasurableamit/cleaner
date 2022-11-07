@@ -97,7 +97,9 @@ class Team extends Component
             ]);
             $this->emit('close-modal');
             $this->updateMode = false;
+            // $this->emitUp('updateclosemodal');
             $this->alert('success', 'Updated successfully');
+            
            
         }
     }

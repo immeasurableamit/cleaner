@@ -35,7 +35,10 @@ class UserDetails extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
 
     }
+<<<<<<< HEAD
+=======
 
+>>>>>>> a2142e41ed4df0ffec36a272ee6a2b4b3110b5af
     
     public function time_zone()
     {

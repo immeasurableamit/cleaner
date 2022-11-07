@@ -12,13 +12,19 @@ class Account extends Component
 {
 
     public $email, $timezone, $first_name, $last_name, $contact_number, $address, $about, $image;
-
+    public $oldEmail;
     public $fieldStatus = false, $action;
     use WithFileUploads;
 
+    // public function rules()
+    // {
+    //     return [
+    //         'email' =>'required|email',
+    //     ]
+    // }
     public function editData($userId, $action)
     {
-        
+
         $user = User::find($userId);
         $this->userId = $userId;
         if ($action == 'name') {
@@ -54,7 +60,7 @@ class Account extends Component
 
     public function updateData($action)
     {
-       
+
         if ($this->userId) {
             $user = User::find($this->userId);
             $userdetail = $user->UserDetails;
@@ -66,9 +72,9 @@ class Account extends Component
             if ($action == 'contact_number') {
                 $user->contact_number = $this->contact_number;
             }
-            if ($action == 'email') {
-                $user->email = $this->email;
-            }
+            // if ($action == 'email') {
+            //     $user->email = $this->email;
+            // }
 
             $user->update();
 
@@ -78,28 +84,51 @@ class Account extends Component
             if ($action == 'about') {
                 $userdetail->about = $this->about;
             }
-            
+
             if ($action == 'timezone') {
-              
-                $userdetail->timezone = $this->timezone; 
-            //   dd($userdetail->timezone );
+
+                $userdetail->timezone = $this->timezone;
+                //   dd($userdetail->timezone );
             }
 
             $userdetail->update();
             $this->fieldStatus = false;
         }
     }
+
+    public function emailupdate($action)
+    {
+        $validateData = $this->validate([
+            'email' => 'required|email'
+        ]);
+
+        $user = User::find($this->userId);
+        // dd($user);
+        if ($action == 'email') {
+            $oldEmail = $user->email;
+            // dd($oldEmail );
+            // $user->email = $this->email;
+            if ($oldEmail != $this->email) {
+                $user->update([
+                    'email_verified_at' => null
+                ]);
+                $user->sendEmailVerificationNotification();
+            }
+        }
+        $user->update();
+    }
+
     public function imageUpload($id)
     {
 
         if ($id) {
             $user = User::find($id);
-           
+
             // $image_base64 = base64_decode($this->image ?? null) ?? null;
             // dd($this->image, $image_base64);
-            $user->image=$this->image; 
+            $user->image = $this->image;
 
-            $this->image->store('users','storage/images');
+            $this->image->store('users', 'storage/images');
 
             // if ($user->image && strpos($user->image, "data:") !== false) {
             //     $this->image = $user->image;
@@ -128,9 +157,9 @@ class Account extends Component
     {
         $user = User::findOrFail(auth()->user()->id);
         //dd($user->userDetails->timezone);
-        $timezones =Time_zone::all();
+        $timezones = Time_zone::all();
         //  $this->timezone = $user->userDetails->timezone;
-  
-        return view('livewire.cleaner.account', ['user' => $user],['timezones' => $timezones]);
+
+        return view('livewire.cleaner.account', ['user' => $user], ['timezones' => $timezones]);
     }
 }
