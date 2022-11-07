@@ -18,7 +18,8 @@ class UserDetails extends Model
         'apt_or_unit',
         'city',
         'zip_code',
-        'payment_method'
+        'payment_method',
+        'timezone',
 
     ];
 
@@ -34,7 +35,13 @@ class UserDetails extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
 
     }
-  
+
+    
+    public function time_zone()
+    {
+        return $this->belongsTo(Time_zone::class, 'timezone', 'id');
+    }
+
     
 
 }

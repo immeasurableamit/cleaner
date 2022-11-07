@@ -70,7 +70,10 @@
                 type: 'canvas',
                 size: 'viewport'
             }).then(function(response) {
-
+                
+               // alert(response);
+            //    var data = btoa(response);
+            //    console.log(data, "hello")
                 $('#cropModal').modal('hide');
                 $('#uploaded img').attr('src', response);
                 $('#upload-img').attr('value', response);

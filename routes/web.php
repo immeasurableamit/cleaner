@@ -52,15 +52,16 @@ Route::get('signup-cleaner', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     //admin
+
     Route::get('/admin-customer', function () {
         $title = array(
             'active' => 'admin-account',
         );
         return view('admin.dashboard');
     })->name('admin-customer');
-    
-    
- //cleaner
+
+
+    //cleaner
     Route::get('/admin-cleaner', function () {
         $title = array(
             'active' => 'admin-cleaner',
@@ -83,35 +84,46 @@ Route::middleware(['auth', 'verified'])->group(function () {
         $title = array(
             'active' => 'admin-account',
         );
+
        return view('admin.customer-edit', ["id" => request()->id]);
+
+        return view('admin.customer-edit');
+
     })->name('customer-update');
 
 });
 
-
+// 
 Route::middleware(['auth', 'verified'])->group(function () {
-
-
     //customer
-    Route::get('/customer-account', function () {
-        $title = array(
-            'active' => 'customer-account',
-        );
-        return view('customer.account', compact('title'));
-    })->name('customer-account');
+    Route::prefix('customer')->group(function () {
+
+
+
+        Route::get('-account', function () {
+            $title = array(
+                'active' => 'customer-account',
+            );
+            return view('customer.account', compact('title'));
+        })->name('customer-account');
+    });
 
     //cleaner
-    Route::get('cleaner-account', function () {
-        $title = array(
-            'active' => 'cleaner-profile',
-        );
-        return view('cleaner.account', compact('title'));
-    })->name('cleaner-account');
+    Route::prefix('cleaner')->group(function () {
+        Route::get('/account', function () {
+            $title = array(
+                'title' => 'Account',
+                'active' => 'account',
+            );
+            return view('cleaner.account', compact('title'));
+        })->name('cleaner.account');
 
-    Route::get('cleaner-team', function () {
-        $title = array(
-            'active' => 'cleaner-profile',
-        );
-        return view('cleaner.team', compact('title'));
-    })->name('cleaner-team');
+        Route::get('/team', function () {
+            $title = array(
+                'title' => 'Team',
+                'active' => 'team',
+            );
+            return view('cleaner.team', compact('title'));
+        })->name('cleaner.team');
+    });
 });

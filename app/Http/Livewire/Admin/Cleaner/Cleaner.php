@@ -14,9 +14,6 @@ class Cleaner extends Component
     
     $users = User::with(['UserDetails','cleanerTeam','UserDetails.State'])->where('role', '=', 'cleaner')->get();
       
-        // echo "<pre>";
-        // print_r($users);
-        // die;
         return view('livewire.admin.cleaner.cleaner', compact('users'));
     }
 }
