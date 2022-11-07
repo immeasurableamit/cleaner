@@ -10,14 +10,15 @@ class RegisterResponse implements RegisterResponseContract {
      {		
 
 		$user = auth()->user();
+		
 		if($user->role == 'customer'){
 			
-			return redirect()->route('customer-account');
+			return redirect()->route('customer.account');
 			
 			
 		} elseif($user->role == 'cleaner')
 		{
-			return redirect()->route('cleaner-account');
+			return redirect()->route('cleaner.account');
 		}
 		
 	

@@ -80,19 +80,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Route::get('/customer-edit/{id}', \App\Http\Livewire\Admin\CustomerUpdate::class)->name('customer-edit');
 });
 
-// 
-Route::middleware(['auth', 'verified'])->group(function () {
     //customer
+Route::middleware(['auth', 'verified'])->group(function () {
+
     Route::prefix('customer')->group(function () {
 
-
-
-        Route::get('-account', function () {
+        Route::get('/account', function () {
             $title = array(
                 'active' => 'customer-account',
             );
             return view('customer.account', compact('title'));
-        })->name('customer-account');
+        })->name('customer.account');
     });
 
     //cleaner

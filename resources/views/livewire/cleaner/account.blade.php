@@ -90,13 +90,13 @@
                                                 <div class="d-flex justify-content-spacebw three_column edit_frm">
                                                     <h6 class="title-label">Email:</h6>
                                                     @if (@$fieldStatus == true && $action == 'email')
-                                                    <input type="email" placeholder="Enter Email" style="display: none;">
-                                                    <button class="save-icn-btn"><i class="fas fa-save"></i></button>
-                                                    <!-- <button class="cancel"><i class="fas fa-times"></i></button> -->
+                                                    <input type="email" value="{{$user->email}}" wire:model="email">
+                                                    <span class="edit"><a class="link-design-2" wire:click="emailupdate('email')"><i class="fas fa-save"></i></a></span>
                                                     <span class="cancel"><a href="javascript::void(0)" class="link-design-2" wire:click="cancle"><i class="fas fa-times"></i></a></span>
                                                     @else
                                                     <p class="mail">{{$user->email}}</p>
                                                     <div class="action-block">
+                                                    
                                                         <span class="edit"><a href="javascript::void(0)" class="link-design-2" wire:click="editData('{{auth()->user()->id}}', 'email')">Edit</a></span>
                                                     </div>
                                                     @endif
