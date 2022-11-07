@@ -35,5 +35,5 @@
 @yield('script')
 
 </body>
-<script src="../assets/admin/js/admin.js"></script>
+<!-- <script src="../assets/admin/js/admin.js"></script> -->
 </html>

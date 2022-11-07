@@ -1,23 +1,21 @@
 <?php
 
-namespace App\Http\Livewire\Admin;
+namespace App\Http\Livewire\Admin\Cleaner;
 
 use Livewire\Component;
 use App\Models\User;
 use App\Models\UserDetails;
 use DB;
 
-class CustomerUpdate extends Component
-{
-
-    public $user, $first_name, $last_name, $address, $contact_number, $full_name;
+class CleanerAccount extends Component
+{   
+     public $user, $first_name, $last_name, $address, $contact_number, $full_name;
     public $user_id;
 
     public $fieldStatus = false, $action;
 
-   
 
-    public function editData($action)
+     public function editData($action)
     {
     
 
@@ -36,12 +34,13 @@ class CustomerUpdate extends Component
         $this->fieldStatus = true;
     }
 
-    public function cancel()
+      public function cancel()
     {
         $this->fieldStatus = false;
     }
 
-    public function updateData($action)
+
+        public function updateData($action)
     {
 
         $userdetail = $this->user->UserDetails;
@@ -53,9 +52,6 @@ class CustomerUpdate extends Component
         if ($action == 'contact_number') {
             $this->user->contact_number = $this->contact_number;
         }
-        if ($action == 'email') {
-            $this->user->email = $this->email;
-        }
 
         $this->user->update();
 
@@ -63,16 +59,15 @@ class CustomerUpdate extends Component
             $userdetail->address = $this->address;
         }
     
-        $userdetail->update();
+       $userdetail->update();
         $this->fieldStatus = false;
 
     }
-   
 
     public function render()
-    {  
-        $this->user = User::with('UserDetails')->where('id', '=', $this->user_id)->first();
-     
-        return view('livewire.admin.customer-update');
+    {   
+         $this->user = User::with('UserDetails')->where('id', '=', $this->user_id)->first();
+        return view('livewire.admin.cleaner.cleaner-account');
     }
 }
+
