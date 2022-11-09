@@ -9,6 +9,24 @@
               <div class="customer-account-forms">
                 <div class="customer-account-information">
                   <ul class="list-unstyled">
+                @if($user->cleanerTeam)
+                <li class="position-relative">
+                <div class="d-flex justify-content-spacebw three_column edit_frm">
+                  <h6 class="title-label"><i class="fas fa-users"></i></h6>
+                  @if (@$fieldStatus && $action == 'Team_name')
+                    <input type="text" wire:model="Team_name"/>
+                    <span class="edit"><a class="link-design-2" wire:click.prevent="updateData('Team_name')"><i class="fas fa-save"></i></a></span>
+                    <span class="cancel"><a href="javascript::void(0)" class="link-design-2" wire:click.prevent="cancel"><i class="fas fa-times"></i></a></span>
+                  @else
+                    <p class="phone">{{$user->cleanerTeam->first_name}} {{$user->cleanerTeam->last_name}}</p>
+                    <div class="action-block">
+                      <span class="edit"><a href="javascript::void(0)" wire:click.prevent="editData('Team_name')">Edit</a></span>
+                    </div>
+                   
+                  @endif
+                </div>
+              </li>
+                     @endif
                      <li class="position-relative">
                 <div class="d-flex justify-content-spacebw three_column edit_frm">
                   <h6 class="title-label"><i class="fas fa-user"></i></h6>

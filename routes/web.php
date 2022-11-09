@@ -123,5 +123,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
             );
             return view('cleaner.team', compact('title'));
         })->name('cleaner.team');
-    });
+    }); 
+
+     Route::get('/support', function () {
+            $title = array(
+                'title' => 'Support',
+                'active' => 'support',
+            );
+            return view('cleaner.support');
+        })->name('support.service');
+
+
 });
