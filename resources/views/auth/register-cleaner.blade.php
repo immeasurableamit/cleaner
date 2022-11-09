@@ -31,31 +31,30 @@
         <input type="hidden" name="user_type" value="cleaner">
         <div class="row no-mrg">
           <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 no-padd">
-            <div class="blue-bg-wrapper"  >
+            <div class="blue-bg-wrapper">
               <div class="avatar-upload">
                 <div class="avatar-edit">
-                  <input type='file' name="image" id="upload" class= "file" accept="image/*" />
+                  <input type='file' id="upload" accept=".png, .jpg, .jpeg" />
                   <label for="upload">Upload a profile pic</label>
-          
+                  @error('image')<span class="text-danger">{{$message}}</span> @enderror
                 </div>
-
 
                 <div class="lawyer_profile-img mb-3">
-                    <div class="circle avatar-preview" id="uploaded">
+
+                  <div class="circle avatar-preview" id="uploaded">
                     <div id="imagePreview" class="profile-pic" style="background-image: url(assets/images/thumbnail.png);">
-                        <img class="profile-pic" id="imagePreview"  src="">
+                      <img class="profile-pic" id="imagePreview" src="">
                     </div>
-                    </div>
-                    <div class="p-image">
-                        <!-- <span class="pencil_icon"><i class="fa-solid fa-pencil upload-button"></i></span> -->
-                        <!-- <input class="file-upload" id="upload" type="file" accept="image/*" /> -->
-                        <input type="hidden" name="image" id="upload-img" />
-                    </div>
+                  </div>
+                  <div class="p-image">
+                    <!-- <span class="pencil_icon"><i class="fa-solid fa-pencil upload-button"></i></span> -->
+                    <!-- <input class="file-upload" id="upload" type="file" accept="image/*" /> -->
+                    <input type="hidden" name="image" id="upload-img" />
+                  </div>
                 </div>
 
-
                 <!-- <div class="avatar-preview">
-                  <div id="imagePreview" class="profile-pic" style="background-image: url(assets/images/thumbnail.png);">
+                  <div id="imagePreview" style="background-image: url(assets/images/thumbnail.png);">
                     <button class="delete-btn"><img src="assets/images/icons/delete.svg"></button>
                   </div>
                 </div> -->
