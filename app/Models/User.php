@@ -69,7 +69,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function cleanerTeam()
     {
-        return $this->hasOne(CleanerTeam::class, 'user_id', 'id');
+        return $this->hasMany(CleanerTeam::class, 'user_id', 'id');
     }
 
 

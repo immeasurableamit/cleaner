@@ -14,13 +14,8 @@ class Team extends Component
     public $first_name, $last_name, $email, $address, $ssn_or_tax, $insured, $contact_number, $name;
     public $updateMode = false;
     public $toggleStatus = false;
+    protected $listeners = ['delete'];
 
-
-    // public function mount()
-    // {
-    //     $user= CleanerTeam::first();
-    //     $this->first_name = $user->first_name;
-    // }
 
     public function rules()
     {
@@ -99,50 +94,44 @@ class Team extends Component
             $this->updateMode = false;
             // $this->emitUp('updateclosemodal');
             $this->alert('success', 'Updated successfully');
-            
-           
         }
     }
 
-    // public function deleteConfirm($iid)
-    // {
-      
-    //     $this->user_id = $iid;
-    //     $this->dispatchBrowserEvent('swal:confirm', [
-    //         'type' => 'warning',
-    //         'message' => 'Are you sure?',
-    //         'text' => 'If deleted, you will not be able to recover this imaginary file!',
-            
-    //     ]);
-    // }
-
-    // public function delete()
-    // {
-
-    //     if ($this->user_id ) {
-    //         // dd($this->user_id);
-    //         User::find($this->user_id )->delete();
-    //         $this->dispatchBrowserEvent('swal:modal', [
-    //             'type' => 'success',
-    //             'message' => 'User Delete Successfully!',
-    //             'text' => 'It will not list on users table soon.'
-    //         ]);
-    //     }
-    // }
-
-
-
-    public function destroy($id)
+    public function deleteConfirm($iid)
     {
-        CleanerTeam::find($id)->delete();
+        $this->user_id = $iid;
+        $this->dispatchBrowserEvent('swal:confirm', [
+            'type' => 'warning',
+            'message' => 'Are you sure?',
+            'text' => 'If deleted, you will not be able to recover this imaginary file!',
+
+        ]);
     }
+
+    public function delete()
+    {
+        if ($this->user_id) {
+            CleanerTeam::find($this->user_id)->delete();
+            // $this->dispatchBrowserEvent('swal:modal', [
+            //     'type' => 'success',
+            //     'message' => 'User Delete Successfully!',
+            //     'text' => 'It will not list on users table soon.'
+            // ]);
+        }
+        $this->alert('success', 'Deleted successfully');
+    }
+
+    // public function destroy($id)
+    // {
+    //     CleanerTeam::find($id)->delete();
+    // }
 
     public function render()
     {
         $teamCleaner = CleanerTeam::all()->count();
-        // dd($teamCleaner);
+
         $user = CleanerTeam::all();
-        
-        return view('livewire.cleaner.team', compact('user','teamCleaner'));
+
+        return view('livewire.cleaner.team', compact('user', 'teamCleaner'));
     }
 }

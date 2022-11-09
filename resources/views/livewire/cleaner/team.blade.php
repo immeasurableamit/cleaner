@@ -28,7 +28,7 @@
                                         <h3 class="mb-0">Team Info</h3>
 
                                         <span>Add additional team members below</span>
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#teamModal">
+                                        <button type="button" class="btn btn-primary" style="float:right;" data-bs-toggle="modal" data-bs-target="#teamModal">
                                             Add Team Members
                                         </button>
                                     </div>
@@ -143,7 +143,7 @@
                                             <div class="d-flex two-column justify-content-spacebw">
 
                                                 <a href="#" type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateModal" wire:click="edit({{$user->id}})" class="edit-member">Edit Member</a>
-                                                <a href="#" wire:click="destroy({{$user->id}})" class="red-bordered-full-btn remove-member">Remove Member</a>
+                                                <a href="#" wire:click="deleteConfirm({{$user->id}})" class="red-bordered-full-btn remove-member">Remove Member</a>
                                             </div>
                                         </div>
 

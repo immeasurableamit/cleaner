@@ -53,9 +53,6 @@
                     </div>
                 </div>
 
-
-
-
                 <!-- <div class="avatar-preview">
                   <div id="imagePreview" style="background-image: url(assets/images/thumbnail.png);">
                     <button class="delete-btn"><img src="assets/images/icons/delete.svg"></button>
@@ -96,7 +93,6 @@
                       <input type="text" placeholder="First name" name="first_name" value="{{old('first_name')}}">
                       @error('first_name')<span class="alert ">{{ $message }}</span>@enderror
                     </div>
-
 
                     <div class="form-grouph input-design mb-30">
                       <input type="text" placeholder="Last Name" name="last_name" value="{{old('last_name')}}">
