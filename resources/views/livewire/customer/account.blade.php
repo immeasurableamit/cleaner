@@ -34,10 +34,6 @@
                                                         <img src="{{ asset('storage/images/'.$user->image) }}" id="customerimagePreview">
                                                         <a href="javascript::void(0)" wire:click=""><i class="fas fa-save"></i></a>
                                                     </div>
-
-                                                    <!-- <div id="customerimagePreview" style="background-image: url(assets/images/thumbnail.png);">
-                                                        <button class="delete-btn"><img src="assets/images/icons/delete.svg"></button>
-                                                    </div> -->
                                                 </div>
                                             </div>
                                             <div class="h3-p-design">
@@ -55,13 +51,13 @@
                                                 <h6 class="title-label">Name:</h6>
                                                 <p class="name">{{$user->first_name}}</p>
                                             </li>
-                                            
+
                                             <li class="position-relative">
                                                 <form class="d-flex justify-content-spacebw three_column edit_frm">
                                                     <h6 class="title-label">Phone:</h6>
                                                     @if (@$fieldStatus == true && $action == 'contact_number')
                                                     <input type="number" value="{{$user->contact_number}}" wire:model="contact_number" />
-                      
+
                                                     <span class="edit"><a class="link-design-2" wire:click="update('contact_number')"><i class="fas fa-save"></i></a></span>
                                                     <span class="cancel"><a href="javascript::void(0)" class="link-design-2" wire:click="cancle"><i class="fas fa-times"></i></a></span>
                                                     @else
@@ -122,10 +118,7 @@
                                                     <span class="cancel"><a href="javascript::void(0)" class="link-design-2" wire:click="cancle"><i class="fas fa-times"></i></a></span>
                                                     @else
                                                     <div class="time-zone-select-design">
-                                                        <select wire:model="timezone" id="timezone-offset">
-                                                            <option>{{$user->userDetails->timezone}} </option>
-                                                            <option>Select Time Zone</option>
-                                                        </select>
+                                                        <input type="text" value="{{@$user->userDetails->timeZone->name}}" disabled />
                                                     </div>
                                                     <div class="action-block">
                                                         <span class="edit"><a href="javascript::void(0)" class="link-design-2" wire:click="edit('{{auth()->user()->id}}', 'timezone')">Edit</a></span>

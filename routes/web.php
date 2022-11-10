@@ -100,7 +100,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::get('/account', function () {
             $title = array(
-                'active' => 'customer.account',
+                'title' => 'account',
+                'active' => 'account',
             );
             return view('customer.account', compact('title'));
         })->name('customer.account');
@@ -110,7 +111,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('cleaner')->group(function () {
         Route::get('/account', function () {
             $title = array(
-                'title' => 'Account',
+                'title' => 'account',
                 'active' => 'account',
             );
             return view('cleaner.account', compact('title'));
@@ -118,7 +119,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::get('/team', function () {
             $title = array(
-                'title' => 'Team',
+                'title' => 'team',
                 'active' => 'team',
             );
             return view('cleaner.team', compact('title'));
@@ -127,11 +128,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
      Route::get('/support', function () {
             $title = array(
-                'title' => 'Support',
+                'title' => 'support',
                 'active' => 'support',
             );
             return view('cleaner.support');
         })->name('support.service');
-
 
 });

@@ -35,7 +35,7 @@ class UserDetails extends Model
 
     }
 
-    public function time_zone()
+    public function timeZone()
     {
         return $this->belongsTo(Time_zone::class, 'timezone', 'id');
     }

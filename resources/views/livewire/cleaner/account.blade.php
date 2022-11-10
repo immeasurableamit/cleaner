@@ -10,7 +10,7 @@
                             </div>
                             @include('layouts.common.sidebar')
                             <div class="blue-logo-block text-center max-width-100">
-                                <a href="#"><img src="{{asset('assets/images/logo/logo.svg')}}"></a>
+                                <a href="javascript::void(0)"><img src="{{asset('assets/images/logo/logo.svg')}}"></a>
                             </div>
                         </div>
                     </div>
@@ -126,10 +126,7 @@
                                                     <span class="cancel"><a href="javascript::void(0)" class="link-design-2" wire:click="cancle"><i class="fas fa-times"></i></a></span>
                                                     @else
                                                     <div class="time-zone-select-design">
-                                                        <select wire:model="timezone" id="timezone-offset">
-                                                            <option>{{$user->userDetails->timezone}} </option>
-                                                            <option>Select Time Zone</option>
-                                                        </select>
+                                                        <input type="text" value="{{@$user->userDetails->timeZone->name}}" disabled/>
                                                     </div>
                                                     <div class="action-block">
                                                         <span class="edit"><a href="javascript::void(0)" class="link-design-2" wire:click="editData('{{auth()->user()->id}}', 'timezone')">Edit</a></span>

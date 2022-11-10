@@ -14,8 +14,7 @@ class Team extends Component
     public $first_name, $last_name, $email, $address, $ssn_or_tax, $insured, $contact_number, $name;
     public $updateMode = false;
     public $toggleStatus = false;
-    protected $listeners = ['delete'];
-
+    protected $listeners = ['delete'] ;
 
     public function rules()
     {
@@ -43,7 +42,6 @@ class Team extends Component
 
     public function store()
     {
-
         $this->validate();
         $id = auth()->user()->id;
 
@@ -79,6 +77,13 @@ class Team extends Component
 
     public function update()
     {
+        $validateData = $this->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'contact_number' => 'required',
+            'address' => 'required',
+            'ssn_or_tax' => 'required'
+        ]);
         if ($this->user_id) {
 
             $user = CleanerTeam::find($this->user_id);
@@ -92,9 +97,9 @@ class Team extends Component
             ]);
             $this->emit('close-modal');
             $this->updateMode = false;
-            // $this->emitUp('updateclosemodal');
             $this->alert('success', 'Updated successfully');
         }
+        return redirect()->route('cleaner.team');
     }
 
     public function deleteConfirm($iid)
@@ -112,26 +117,16 @@ class Team extends Component
     {
         if ($this->user_id) {
             CleanerTeam::find($this->user_id)->delete();
-            // $this->dispatchBrowserEvent('swal:modal', [
-            //     'type' => 'success',
-            //     'message' => 'User Delete Successfully!',
-            //     'text' => 'It will not list on users table soon.'
-            // ]);
         }
         $this->alert('success', 'Deleted successfully');
     }
 
-    // public function destroy($id)
-    // {
-    //     CleanerTeam::find($id)->delete();
-    // }
-
     public function render()
     {
-        $teamCleaner = CleanerTeam::all()->count();
+        $teamMemberCounts = CleanerTeam::where('user_id', auth()->user()->id)->count();
 
-        $user = CleanerTeam::all();
-
-        return view('livewire.cleaner.team', compact('user', 'teamCleaner'));
+        $teamMembers = CleanerTeam::where('user_id', auth()->user()->id)->get();
+     
+        return view('livewire.cleaner.team', compact('teamMemberCounts', 'teamMembers'));
     }
 }
