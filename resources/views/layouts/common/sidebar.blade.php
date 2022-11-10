@@ -14,7 +14,7 @@
                     <li><a href="cleaner-set-service.html" class="">Set Services</a></li>
                     <li><a href="cleaner-set-location.html" class="">Set Locations Served</a></li>
                     <li><a href="cleaner-notification.html" class="">Notification Preferences</a></li>
-                    <li><a href="cleaner-reviews.html" class="">Reviews</a></li>
+                    <li><a href="{{route('cleaner.reviews')}}" class="">Reviews</a></li>
                   </ul>
                   </li>
                   @endif
