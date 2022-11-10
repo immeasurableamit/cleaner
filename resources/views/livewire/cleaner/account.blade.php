@@ -71,7 +71,7 @@
                                                     <p class="phone"><a href="tel:+1 512-559-9582">{{$user->contact_number}}</a></p>
                                                     <div class="action-block">
                                                         <span class="edit"><a href="javascript::void(0)" wire:click="editData('{{auth()->user()->id}}', 'contact_number')">Edit</a></span>
-                                                    
+
                                                     </div>
                                                     @endif
                                                 </div>
@@ -126,7 +126,7 @@
                                                     <span class="cancel"><a href="javascript::void(0)" class="link-design-2" wire:click="cancle"><i class="fas fa-times"></i></a></span>
                                                     @else
                                                     <div class="time-zone-select-design">
-                                                        <input type="text" value="{{@$user->userDetails->timeZone->name}}" disabled/>
+                                                        <input type="text" value="{{@$user->userDetails->timeZone->name}}" disabled />
                                                     </div>
                                                     <div class="action-block">
                                                         <span class="edit"><a href="javascript::void(0)" class="link-design-2" wire:click="editData('{{auth()->user()->id}}', 'timezone')">Edit</a></span>
