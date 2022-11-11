@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Admin\Cleaner;
 use Livewire\Component;
 use App\Models\User;
 use App\Models\UserDetails;
-use DB;
+
 
 class CleanerAccount extends Component
 {   
@@ -18,7 +18,7 @@ class CleanerAccount extends Component
      public function editData($action)
     {
         if ($action == 'Team_name') {
-            $this->Team_name = $this->user->cleanerTeam->first_name .' '.$this->user->cleanerTeam->last_name;
+            $this->Team_name = $this->user->first_name .' '.$this->user->last_name;
         }
 
         if ($action == 'first_name') {
@@ -43,15 +43,16 @@ class CleanerAccount extends Component
 
 
         public function updateData($action)
-    {
+    {   
 
         $userdetail = $this->user->UserDetails;
-        $cleanerTeam = $this->user->cleanerTeam;
+        //$cleanerTeam = $this->user->cleanerTeam;
+
 
         if ($action == 'Team_name') {
             $name = explode(' ', $this->Team_name);
-            $this->user->cleanerTeam->first_name = @$name[0];
-            $this->user->cleanerTeam->last_name = @$name[1];
+            $this->user->first_name = @$name[0];
+            $this->user->last_name = @$name[1];
         }
 
         if ($action == 'first_name') {
@@ -69,8 +70,12 @@ class CleanerAccount extends Component
             $userdetail->address = $this->address;
         }
     
-       $userdetail->update();
-       $cleanerTeam->update();
+        if($userdetail){
+            $userdetail->update();
+        }
+       // if($cleanerTeam){
+       // $cleanerTeam->update();
+        //}
         $this->fieldStatus = false;
 
     }
