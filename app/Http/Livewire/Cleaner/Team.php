@@ -22,8 +22,8 @@ class Team extends Component
             'first_name' => 'required',
             'last_name' => 'required',
             'insured' => 'required',
-            'contact_number' => 'required',
-            'email' => 'required',
+            'contact_number' => 'required|min:12',
+            'email' => 'required|email|unique:cleaner_teams',
             'address' => 'required',
             'ssn_or_tax' => 'required',
 

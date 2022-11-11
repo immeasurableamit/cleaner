@@ -21,10 +21,10 @@
                     <div class="quick-links">
                         <h5>Quick Links</h5>
                         <ul class="list-unstyled">
-                            <li><a href="index.htm">Home</a></li>
-                            <li><a href="signup-cleaner.html">Become a Cleaner</a></li>
-                            <li><a href="search-result.html">Browse Cleaners</a></li>
-                            <li><a href="help-center.html">Help</a></li>
+                            <li><a href="{{route('index')}}">Home</a></li>
+                            <li><a href="{{route('signup-cleaner')}}">Become a Cleaner</a></li>
+                            <li><a href="{{route('search-result')}}">Browse Cleaners</a></li>
+                            <li><a href="{{route('help-center')}}">Help</a></li>
                         </ul>
                     </div>
                 </div>

@@ -25,7 +25,7 @@ class UserDetails extends Model
 
     public function State()
     {
-        return $this->hasOne(State::class, 'id', 'states_id');
+        return $this->belongsTo(State::class, 'id', 'states_id');
 
     } 
   
