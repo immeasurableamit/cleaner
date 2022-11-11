@@ -8,22 +8,12 @@ use App\Models\User;
 
 class AdminController extends Controller
 {
-    public function edit($id){
 
-        $users = User::with('UserDetails')->findOrFail($id);
+    public function teamView($id){
 
-        return view("admin.customer.edit-customer", compact('users'));
-    }
 
-    public function view($id){
-         
-       $users = User::with('UserDetails')->where('id', '=', $id)->first();
-    
-       return view("livewire.admin.customer-update", compact('users'));
-
-    }
-
-    public function update(Request $request){
-
+        $members = User::with('cleanerTeam')->where('id', '=', $id)->get();
+     
+        return view("admin.TeamMember.teammember", compact('members'));
     }
 }

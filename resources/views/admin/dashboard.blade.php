@@ -1,7 +1,7 @@
 @extends('layouts.adminapp')
 @section('content')
  
-   @livewire('admin.customer')
+   @livewire('admin.customer.customer')
   
  @endsection  
 
