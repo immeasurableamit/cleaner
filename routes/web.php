@@ -8,6 +8,7 @@ use App\Models\UserDetails;
 use App\Http\Livewire\Customer;
 use App\Http\Livewire\CustomerUpdate;
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\Cleaner\CleanerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,6 +79,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('admin.cleaner');
 
 
+
   //Admin Cleaner Update
     Route::get('/updateCleaner/{id}', function () {
         $title = array(
@@ -87,6 +89,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('update.cleaner');
   
 
+
      //Admin Support
     Route::get('/admin/support', function () {
         $title = array(
@@ -95,18 +98,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('admin.support-service');
     })->name('admin.support');
 
-
+        return view('admin.customer-edit', ["id" => request()->id]);
+    })->name('customer-update');
 
 });
 
-    //customer
+//customer
 Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::prefix('customer')->group(function () {
 
         Route::get('/account', function () {
             $title = array(
-                'active' => 'customer-account',
+                'title' => 'account',
+                'active' => 'account',
             );
             return view('customer.account', compact('title'));
         })->name('customer.account');
@@ -116,7 +121,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('cleaner')->group(function () {
         Route::get('/account', function () {
             $title = array(
-                'title' => 'Account',
+                'title' => 'account',
                 'active' => 'account',
             );
             return view('cleaner.account', compact('title'));
@@ -124,20 +129,28 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::get('/team', function () {
             $title = array(
-                'title' => 'Team',
+                'title' => 'team',
                 'active' => 'team',
             );
             return view('cleaner.team', compact('title'));
         })->name('cleaner.team');
-    }); 
+        
+        Route::controller(CleanerController::class)->group(function () {
+            Route::get('/reviews', function () {
+                $title = array(
+                    'title' => 'reviews',
+                    'active' => 'reviews',
+                );
+                return view('cleaner.reviews', compact('title'));
+            })->name('cleaner.reviews');
+        });
+    });
 
-     Route::get('/support', function () {
-            $title = array(
-                'title' => 'Support',
-                'active' => 'support',
-            );
-            return view('cleaner.support');
-        })->name('support.service');
-
-
+    Route::get('/support', function () {
+        $title = array(
+            'title' => 'support',
+            'active' => 'support',
+        );
+        return view('cleaner.support');
+    })->name('support.service');
 });

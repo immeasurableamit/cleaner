@@ -7,14 +7,17 @@ use App\Models\User;
 use App\Models\UserDetails;
 use App\Models\Time_zone;
 use Livewire\WithFileUploads;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Account extends Component
 {
 
+    use LivewireAlert;
     public $email, $timezone, $first_name, $last_name, $contact_number, $address, $about, $image;
     public $oldEmail;
     public $fieldStatus = false, $action;
     use WithFileUploads;
+
 
     // public function rules()
     // {
@@ -27,9 +30,9 @@ class Account extends Component
 
         $user = User::find($userId);
         $this->userId = $userId;
-        if ($action == 'name') {
-            $this->name = $user->name;
-        }
+        // if ($action == 'name') {
+        //     $this->name = $user->name;
+        // }
         if ($action == 'contact_number') {
             $this->contact_number = $user->contact_number;
         }
@@ -64,11 +67,11 @@ class Account extends Component
         if ($this->userId) {
             $user = User::find($this->userId);
             $userdetail = $user->UserDetails;
-            if ($action == 'name') {
-                $name = explode(' ', $this->name);
-                $user->first_name = @$name[0];
-                $user->last_name = @$name[1];
-            }
+            // if ($action == 'name') {
+            //     $name = explode(' ', $this->name);
+            //     $user->first_name = @$name[0];
+            //     $user->last_name = @$name[1];
+            // }
             if ($action == 'contact_number') {
                 $user->contact_number = $this->contact_number;
             }
@@ -93,30 +96,31 @@ class Account extends Component
 
             $userdetail->update();
             $this->fieldStatus = false;
+            
         }
     }
 
     public function emailupdate($action)
     {
         $validateData = $this->validate([
-            'email' => 'required|email'
+            'email' => 'required|email|unique:users'
         ]);
 
         $user = User::find($this->userId);
-        // dd($user);
+
         if ($action == 'email') {
             $oldEmail = $user->email;
-            // dd($oldEmail );
-            // $user->email = $this->email;
             if ($oldEmail != $this->email) {
-                $user->update([
-                    'email_verified_at' => null
-                ]);
-                $user->sendEmailVerificationNotification();
-            }
+            $user->email_verified_at =  null;
+            $user->email = $this->email;
+            $user->save();
+            $user->sendEmailVerificationNotification();
+         
         }
-        $user->update();
+        return redirect()->route('cleaner.account');
+        }
     }
+
 
     public function imageUpload($id)
     {
@@ -156,7 +160,7 @@ class Account extends Component
     public function render()
     {
         $user = User::findOrFail(auth()->user()->id);
-        //dd($user->userDetails->timezone);
+     
         $timezones = Time_zone::all();
         //  $this->timezone = $user->userDetails->timezone;
 

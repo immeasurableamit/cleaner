@@ -31,7 +31,7 @@
     </main>
     @include('layouts.includes.footer')
     @include('layouts.includes.script')
-@yield('script')
+    
 
 </body>
 <!-- <script src="../assets/admin/js/admin.js"></script> -->

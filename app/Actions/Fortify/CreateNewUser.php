@@ -51,6 +51,7 @@ class CreateNewUser implements CreatesNewUsers
                     'apt_or_unit' => 'required',
                     'payment_method' => 'required',
                     'about' => 'required',
+                    'image' => 'required',
                 ],
 
                 [
@@ -67,27 +68,23 @@ class CreateNewUser implements CreatesNewUsers
             $user->password = Hash::make($input['password']);
             $user->role = $input['user_type'];
 
+            //...
+
             if ($input['image'] && strpos($input['image'] , "data:") !== false) {
                 $image = $input['image'];
-    
                 $folderPath = ('storage/images/');
                 if (!is_dir($folderPath)) {
                     mkdir($folderPath, 0775, true);
                     chown($folderPath, exec('whoami'));
                 }
-    
                 $image_parts = explode(";base64,", $image);
                 $image_type_aux = explode("image/", $image_parts[0]);
                 $image_base64 = base64_decode($image_parts[1] ?? null) ?? null;
                 $file_name = $user->id . '-' . md5(uniqid() . time()) . '.png';
                 $imageFullPath = $folderPath . $file_name;
                 file_put_contents($imageFullPath, $image_base64);
-    
-                //...
                 $user->image = $file_name;
             }
-
-
 
             $user->save();
 
@@ -102,9 +99,12 @@ class CreateNewUser implements CreatesNewUsers
             $userDetail->city = $input['city'];
             $userDetail->zip_code = $input['zip_code'];
             $userDetail->payment_method = $input['payment_method'];
+
+            $userDetail->latitude = $input['latitude'];
+            $userDetail->longitude = $input['longitude'];
+            
             $userDetail->save();
             return $user;
-
 
         } else {
            
@@ -130,6 +130,7 @@ class CreateNewUser implements CreatesNewUsers
                     'apt_or_unit' => 'required',
                     'payment_method' => 'required',
                     'about' => 'required',
+                    'image' => 'required',
                 ],
 
                 [
@@ -145,6 +146,22 @@ class CreateNewUser implements CreatesNewUsers
             $user->password = Hash::make($input['password']);
             $user->contact_number = $input['contact_number'];
             $user->role = $input['user_type'];
+
+            if ($input['image'] && strpos($input['image'] , "data:") !== false) {
+                $image = $input['image'];
+                $folderPath = ('storage/images/');
+                if (!is_dir($folderPath)) {
+                    mkdir($folderPath, 0775, true);
+                    chown($folderPath, exec('whoami'));
+                }
+                $image_parts = explode(";base64,", $image);
+                $image_type_aux = explode("image/", $image_parts[0]);
+                $image_base64 = base64_decode($image_parts[1] ?? null) ?? null;
+                $file_name = $user->id . '-' . md5(uniqid() . time()) . '.png';
+                $imageFullPath = $folderPath . $file_name;
+                file_put_contents($imageFullPath, $image_base64);
+                $user->image = $file_name;
+            }
             $user->save();
 
             $userDetail = new UserDetails();

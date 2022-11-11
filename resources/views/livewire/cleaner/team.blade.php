@@ -12,7 +12,7 @@
                             @include('layouts.common.sidebar')
 
                             <div class="blue-logo-block text-center max-width-100">
-                                <a href="#"><img src="assets/images/logo/logo.svg"></a>
+                                <a href="javascript::void(0)"><img src="{{asset('assets/images/logo/logo.svg')}}"></a>
                             </div>
                         </div>
                     </div>
@@ -22,13 +22,13 @@
                                 <div class="customer-account-forms pe-5">
                                     <div class="h4-design text-end">
 
-                                        <h4>Team Size: {{$teamCleaner}} </h4>
+                                        <h4>Team Size: {{$teamMemberCounts}} </h4>
                                     </div>
                                     <div class="form-headeing-second border-bottom pb-3">
                                         <h3 class="mb-0">Team Info</h3>
 
                                         <span>Add additional team members below</span>
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#teamModal">
+                                        <button type="button" class="btn btn-primary" style="float:right;" data-bs-toggle="modal" data-bs-target="#teamModal">
                                             Add Team Members
                                         </button>
                                     </div>
@@ -100,22 +100,17 @@
 
                             <div class="teams-table-layout-view">
                                 <div class="row">
-                                    @foreach($user as $user)
+                                    @foreach($teamMembers as $teamMember)
                                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                                         <div class="select-date-toggles overflow-hidden ">
 
-                                            <!-- @if($toggleStatus == true)
-                                            <button class="service_toggle_s" wire:click="togglehidden"></button>
-                                            @else
-                                            <button class="service_toggle_s" data-id="{{$user->id}}"></button>
-                                            @endif -->
 
-                                            <button class="service_toggle_s" data-id="{{$user->id}}"></button>
+                                            <button class="service_toggle_s" data-id="{{$teamMember->id}}"></button>
                                             <div class="service-main-service-column">
 
                                                 <div class="altrntive_rw">
                                                     <p class="appointment_label">Name</p>
-                                                    <p class="app-value">{{$user->name}}</p>
+                                                    <p class="app-value">{{$teamMember->name}}</p>
                                                     @error('name')<div class="alert ">{{ $message }}</div>@enderror
                                                 </div>
                                                 <div class="altrntive_rw">
@@ -124,26 +119,26 @@
                                                 </div>
                                                 <div class="altrntive_rw">
                                                     <p class="appointment_label">Phone</p>
-                                                    <p class="app-value"><a href="tel:512-558-5876">{{$user->contact_number}}</a></p>
+                                                    <p class="app-value"><a href="tel:512-558-5876">{{$teamMember->contact_number}}</a></p>
                                                 </div>
                                                 <div class="altrntive_rw">
                                                     <p class="appointment_label">Email</p>
-                                                    <p class="app-value"><a href="mailto:example@email.com">{{$user->email}}</a></p>
+                                                    <p class="app-value"><a href="mailto:example@email.com">{{$teamMember->email}}</a></p>
                                                 </div>
                                                 <div class="altrntive_rw">
                                                     <p class="appointment_label">Address</p>
-                                                    <p class="app-value location">{{$user->address}}</p>
+                                                    <p class="app-value location">{{$teamMember->address}}</p>
                                                 </div>
                                                 <div class="altrntive_rw">
                                                     <p class="appointment_label">SSN/TIN</p>
-                                                    <p class="app-value">{{$user->ssn_or_tax}}</p>
+                                                    <p class="app-value">{{$teamMember->ssn_or_tax}}</p>
                                                 </div>
 
                                             </div>
                                             <div class="d-flex two-column justify-content-spacebw">
 
-                                                <a href="#" type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateModal" wire:click="edit({{$user->id}})" class="edit-member">Edit Member</a>
-                                                <a href="#" wire:click="destroy({{$user->id}})" class="red-bordered-full-btn remove-member">Remove Member</a>
+                                                <a href="javascript::void(0)" type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateModal" wire:click="edit({{$teamMember->id}})" class="edit-member">Edit Member</a>
+                                                <a href="javascript::void(0)" wire:click="deleteConfirm({{$teamMember->id}})" class="red-bordered-full-btn remove-member">Remove Member</a>
                                             </div>
                                         </div>
 
@@ -208,9 +203,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <!-- <button type="submit" wire:click.prevent="update({{$user->id}})" class="btn btn-primary">Update</button> -->
 
-                        <a href="#" wire:click="update()" class="btn btn-primary">Update</a>
+                        <a href="javascript::void(0)" wire:click="update()" class="btn btn-primary">Update</a>
                     </div>
                 </div>
             </div>

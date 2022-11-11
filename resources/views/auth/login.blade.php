@@ -13,14 +13,14 @@
               <p>To the future of cleaning. Simple. Affordable. The Best.</p>
             </div>
             <div class="blue-logo-block text-center">
-              <a href="#"><img src="assets/images/logo/logo.svg"></a>
+              <a href="#"><img src="{{asset('assets/images/logo/logo.svg')}}"></a>
             </div>
           </div>
         </div>
         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
           <div class="d-flex height-100 align-items-center auth_form login">
-            <form class="form-design" method="post" action="{{route('login')}}">
-              @csrf
+          {!! Form::open(['route' => 'login', 'method'=>'post', 'class'=>'form-design']) !!}
+            
               <div class="social-buttons">
                 <button class="social-auth-btn"><img src="assets/images/icons/google.svg"> Continue with Google</button>
                 <button class="social-auth-btn"><img src="assets/images/icons/apple.svg"> Continue with Google</button>
@@ -29,11 +29,12 @@
                 <p>Or</p>
               </div>
               <div class="form-grouph input-design input-icon-left mb-25">
-                <input type="text" placeholder="Enter your email address" name="email">
-                <span class="input-icon"><img src="assets/images/icons/email.svg"></span>
+              <input type="text" name="email" placeholder="Enter your email address" class="form-control{!! ($errors->has('email') ? ' is-invalid' : '') !!}" />
+              {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
               </div>
               <div class="form-grouph input-design input-icon-left mb-25">
-                <input type="password" placeholder="Password" name="password">
+              <input type="password" name="password" placeholder="Password" class="form-control{!! ($errors->has('password') ? ' is-invalid' : '') !!}" />
+              {!! $errors->first('password', '<span class="help-block">:message</span>') !!}
                 <span class="input-icon"><img src="assets/images/icons/lock.svg"></span>
               </div>
               <div class="form-grouph forgot-rember-block d-flex justify-content-spacebw align-items-center mb-25">
@@ -52,7 +53,7 @@
               <div class="auth-bottom-text text-center">
                 <p>Not a member yet? <a href="{{route('signup')}}" class="link-design">Sign Up</a></p>
               </div>
-            </form>
+              {!! Form::close() !!}
           </div>
         </div>
       </div>

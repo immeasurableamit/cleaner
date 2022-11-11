@@ -70,6 +70,6 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(CleanerTeam::class, 'user_id', 'id');
     }
-    
+
 
 }

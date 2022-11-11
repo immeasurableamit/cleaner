@@ -27,7 +27,7 @@
                             </div>
                             <div class="search-input-design">
                                 <input type="text" placeholder="Enter location">
-                                <button class="search-btn"><a href="search-result.html" class=""><img src="assets/images/icons/search.svg"></a></button>
+                                <button class="search-btn"><a href="search-result.html" class=""><img src="{{asset('assets/images/icons/search.svg')}}"></a></button>
                             </div>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                         <li class="nav-item signin account-profile">
                             <div class="dropdown">
                                 <button type="button" class="btn dropdown-toggle position-relative btn-transparent" data-bs-toggle="dropdown">
-                                    <img src="{{asset('assets/images/icons/profile-circle.svg')}}">
+                                    <img src="{{asset('storage/images/'.auth()->user()->image)}}">
                                     <span class="name">{{auth()->user()->name}}</span>
                                 </button>
                                 <ul class="dropdown-menu">
