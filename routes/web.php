@@ -50,6 +50,33 @@ Route::get('signup-cleaner', function () {
     return view('auth.register-cleaner', compact('title', 'states'));
 })->name('signup-cleaner');
 
+Route::get('help', function () {
+    $title = array(
+        'active' => 'help',
+    );
+    return view('home.help-center', compact('title'));
+})->name('help-center');
+
+Route::get('search-result', function () {
+    $title = array(
+        'active' => 'search-result',
+    );
+    return view('home.search-result', compact('title'));
+})->name('search-result');
+
+Route::get('profile/{id}', function () {
+    $title = array(
+        'active' => 'profile',
+    );
+    return view('home.profile', compact('title'));
+})->name('profile');
+
+Route::get('terms-and-conditions', function () {
+    $title = array(
+        'active' => 'terms-and-conditions',
+    );
+    return view('home.terms-and-conditions', compact('title'));
+})->name('terms-and-conditions');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     //admin
@@ -143,3 +170,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('cleaner.support');
     })->name('support.service');
 });
+
+
+Route::get('search',[CleanerController::class,'index'])->name('search');

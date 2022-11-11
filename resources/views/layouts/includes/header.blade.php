@@ -4,7 +4,7 @@
             <div class="header-flex">
                 <div class="header-flex-item header-flex-item-1">
                     <div class="logo-wrapper">
-                        <a href="index.html"><img src="{{asset('assets/images/logo/logo.svg')}}"></a>
+                        <a href="{{route('index')}}"><img src="{{asset('assets/images/logo/logo.svg')}}"></a>
                     </div>
                 </div>
                 <div class="header-flex-item header-flex-item-2">
@@ -109,7 +109,7 @@
                         <a href="{{route('signup')}}" class="btn_sign_up"><img src="{{asset('assets/images/icons/user.svg')}}">Sign Up</a>
                         <a href="{{route('login')}}" class="btn_sign_in"><img src="{{asset('assets/images/icons/user.svg')}}">Sign in</a>
                     </div>
-                    <a href="signup-cleaner.html"><span class="b_cleaner">Become a Cleaner!</span></a>
+                    <a href="{{route('signup-cleaner')}}"><span class="b_cleaner">Become a Cleaner!</span></a>
                 </div>
                 <div class="toggle_menu d-block d-lg-none">
                     <img src="{{asset('assets/images/icons/toggle.svg')}}">
