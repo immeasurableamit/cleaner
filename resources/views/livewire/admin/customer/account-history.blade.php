@@ -1,4 +1,3 @@
-<div>
     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
         <div class="detail-div-block">
             <h4>Account history log</h4>
@@ -11,4 +10,3 @@
             </div>
         </div>
     </div>
-</div>

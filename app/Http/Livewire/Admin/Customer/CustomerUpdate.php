@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Livewire\Admin;
+namespace App\Http\Livewire\Admin\Customer;
 
 use Livewire\Component;
 use App\Models\User;
 use App\Models\UserDetails;
-use DB;
 
 class CustomerUpdate extends Component
 {
@@ -67,12 +66,10 @@ class CustomerUpdate extends Component
         $this->fieldStatus = false;
 
     }
-   
-
-    public function render()
-    {  
+       public function render()
+    {
         $this->user = User::with('UserDetails')->where('id', '=', $this->user_id)->first();
-     
-        return view('livewire.admin.customer-update');
+        return view('livewire.admin.customer.customer-update');
     }
+
 }

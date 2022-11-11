@@ -43,17 +43,16 @@
                   <th>Last Job</th>
                   <th>City</th>
                   <th>State</th>
-                  <!-- <th>Country</th> -->
                   <th>Join date</th>
                   <th>Total Spend</th>
                   <th>Status</th>
               </tr>
           </thead>
           <tbody>
-            <!-- <a href="javascript:void(0)" class="link-design-2" wire:click="destroy()">Delete</a> -->
+          
                 @foreach($users as $user)
               <tr>
-                  <td class="name"><a href="/update-account/{{$user->id}}">{{$user->first_name}} {{$user->last_name}}</a></td>
+                  <td class="name"><a href="/updateCustomer/{{$user->id}}">{{$user->first_name}} {{$user->last_name}}</a></td>
                   <td>{{$user->email}}</td>
                   <td>12</td>
                   <td>2/14/22</td>
@@ -152,12 +151,12 @@
  
 
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
     
 $(document).ready(function () {
-    $('#Customers').DataTable();
+    $('#all-customer-table').DataTable();
 });
-</script>
+</script> -->
 
