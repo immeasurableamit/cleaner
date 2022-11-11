@@ -67,6 +67,8 @@ class CreateNewUser implements CreatesNewUsers
             $user->password = Hash::make($input['password']);
             $user->role = $input['user_type'];
 
+            //...
+
             if ($input['image'] && strpos($input['image'] , "data:") !== false) {
                 $image = $input['image'];
                 $folderPath = ('storage/images/');
@@ -96,6 +98,10 @@ class CreateNewUser implements CreatesNewUsers
             $userDetail->city = $input['city'];
             $userDetail->zip_code = $input['zip_code'];
             $userDetail->payment_method = $input['payment_method'];
+
+            $userDetail->latitude = $input['latitude'];
+            $userDetail->longitude = $input['longitude'];
+            
             $userDetail->save();
             return $user;
 
