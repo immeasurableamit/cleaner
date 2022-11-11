@@ -35,8 +35,8 @@
               <div class="avatar-upload">
                 <div class="avatar-edit">
                   <input type='file' id="upload" accept=".png, .jpg, .jpeg" />
-                  <label for="upload">Upload a profile pic</label>
-                  @error('image')<span class="text-danger">{{$message}}</span> @enderror
+                  {!! Form::label('upload','Upload a profile pic', ['class' => 'form-label']) !!}
+                  {!! $errors->first('image', '<span class="help-block">:message</span>') !!}
                 </div>
 
                 <div class="lawyer_profile-img mb-3">
@@ -53,9 +53,6 @@
                     </div>
                 </div>
 
-
-
-
                 <!-- <div class="avatar-preview">
                   <div id="imagePreview" style="background-image: url(assets/images/thumbnail.png);">
                     <button class="delete-btn"><img src="assets/images/icons/delete.svg"></button>
@@ -63,9 +60,9 @@
                 </div> -->
               </div>
               <div class="form-grouph textarea-single-design">
-                <label>About yourself (Optional)</label>
-                <textarea name="about">Efficiently promote best-of-breed customer service after magnetic niche markets.</textarea>
-                @error('about')<span class="alert ">{{ $message }}</span>@enderror
+              {!! Form::label('about','About yourself (Optional)', ['class' => 'form-label']) !!}
+              <textarea name="about"> Effective</textarea>
+              {!! $errors->first('about', '<span class="help-block">:message</span>') !!}
               </div>
               <div class="folow-us">
                 <ul class="list-unstyled d-flex justify-content-center">
@@ -93,27 +90,26 @@
                 <div class="form-flex two-column">
                   <div class="form-left-block">
                     <div class="form-grouph input-design mb-30">
-                      <input type="text" placeholder="First name" name="first_name" value="{{old('first_name')}}">
-                      @error('first_name')<span class="alert ">{{ $message }}</span>@enderror
+                    {!! Form::text('first_name', request()->first_name ?? null, ['placeholder' => 'First name','class' => 'form-control'.($errors->has('first_name') ? ' is-invalid' : '')]) !!}
+                    {!! $errors->first('first_name', '<span class="alert">:message</span>') !!}
                     </div>
 
-
                     <div class="form-grouph input-design mb-30">
-                      <input type="text" placeholder="Last Name" name="last_name" value="{{old('last_name')}}">
-                      @error('last_name')<span class="alert ">{{ $message }}</span>@enderror
+                    {!! Form::text('last_name', request()->last_name ?? null, ['placeholder' => 'Last name','class' => 'form-control'.($errors->has('last_name') ? ' is-invalid' : '')]) !!}
+                    {!! $errors->first('last_name', '<span class="alert">:message</span>') !!}
                     </div>
                     <div class="form-grouph input-design mb-30">
-                      <input type="email" name="email" placeholder="Email (this will be your login)" value="{{old('email')}}">
-                      @error('email')<span class="alert ">{{ $message }}</span>@enderror
+                    {!! Form::email('email', request()->email ?? null, ['placeholder' => 'Email (this will be your login)','class' => 'form-control'.($errors->has('email') ? ' is-invalid' : '')]) !!}
+                    {!! $errors->first('email', '<span class="alert">:message</span>') !!}
                     </div>
                     <div class="form-grouph input-design mb-30">
-                      <input type="text" name="address" placeholder="Address" value="{{old('address')}}">
-                      @error('address')<span class="alert ">{{ $message }}</span>@enderror
+                    {!! Form::text('address', request()->address ?? null, ['placeholder' => 'Address','class' => 'form-control'.($errors->has('address') ? ' is-invalid' : '')]) !!}
+                    {!! $errors->first('address', '<span class="alert">:message</span>') !!}
                     </div>
                     <div class="form-grouph mb-30 input-select-abs">
                       <div class="inputs-box">
-                        <input type="text" name="city" placeholder="City" value="{{old('city')}}">
-                        @error('city')<span class="alert ">{{ $message }}</span>@enderror
+                      {!! Form::text('city', request()->city ?? null, ['placeholder' => 'City','class' => 'form-control'.($errors->has('city') ? ' is-invalid' : '')]) !!}
+                      {!! $errors->first('city', '<span class="alert">:message</span>') !!}
                       </div>
                       <div class="selecti-box">
                         <select class="select-custom-design" name="state" value="{{old('state')}}">
@@ -121,30 +117,30 @@
                           <option value='{{ $state->id }}'>{{$state->name}}</option>
                           @endforeach
                         </select>
-                        @error('state')<span class="alert ">{{ $message }}</span>@enderror
+                        {!! $errors->first('state', '<span class="alert">:message</span>') !!}
                       </div>
                     </div>
                   </div>
                   <div class="form-right-block">
                     <div class="form-grouph input-design mb-30">
-                      <input type="password" name="password" placeholder="Password" value="{{old('password')}}">
-                      @error('password')<span class="alert ">{{ $message }}</span>@enderror
+                    <input type="password" id="password" name="password" class="form-control{!! ($errors->has('password') ? ' is-invalid' : '') !!}" />
+                    {!! $errors->first('password', '<span class="alert">:message</span>') !!}
                     </div>
                     <div class="form-grouph input-design mb-30">
-                      <input type="password" name="password_confirmation" placeholder="password_confirmation" value="{{old('password_confirmation')}}">
-                      @error('password_confirmation')<span class="alert ">{{ $message }}</span>@enderror
+                    <input type="password" id="password_confirmation" name="password_confirmation" class="form-control{!! ($errors->has('password_confirmation') ? ' is-invalid' : '') !!}" />
+                    {!! $errors->first('password_confirmation', '<span class="alert">:message</span>') !!}
                     </div>
                     <div class="form-grouph input-design mb-30">
-                      <input type="number" name="contact_number" placeholder="Phone Number" value="{{old('contact_number')}}">
-                      @error('contact_number')<span class="alert ">{{ $message }}</span>@enderror
+                    {!! Form::number('contact_number', request()->contact_number ?? null, ['placeholder' => 'Phone Number','class' => 'form-control'.($errors->has('contact_number') ? ' is-invalid' : '')]) !!}
+                    {!! $errors->first('contact_number', '<span class="alert">:message</span>') !!}
                     </div>
                     <div class="form-grouph input-design mb-30">
-                      <input type="number" name="apt_or_unit" placeholder="Apt # or Unit #" value="{{old('apt_or_unit')}}">
-                      @error('apt_or_unit')<span class="alert ">{{ $message }}</span>@enderror
+                    {!! Form::number('apt_or_unit', request()->apt_or_unit ?? null, ['placeholder' => 'Apt # or Unit #','class' => 'form-control'.($errors->has('apt_or_unit') ? ' is-invalid' : '')]) !!}
+                    {!! $errors->first('apt_or_unit', '<span class="alert">:message</span>') !!}
                     </div>
                     <div class="form-grouph input-design mb-30">
-                      <input type="number" name="zip_code" placeholder="Zip" value="{{old('apt_or_unit')}}">
-                      @error('zip_code')<span class="alert ">{{ $message }}</span>@enderror
+                    {!! Form::number('zip_code', request()->zip_code ?? null, ['placeholder' => 'Zip','class' => 'form-control'.($errors->has('zip_code') ? ' is-invalid' : '')]) !!}
+                    {!! $errors->first('zip_code', '<span class="alert">:message</span>') !!}
                     </div>
                     <div class="form-grouph select-design mb-30">
                       <select class="select-custom-design" name="payment_method" value="{{old('payment_method')}}">
@@ -152,12 +148,12 @@
                         <option value="PayPal">PayPal</option>
                         <option value="Direct Deposit">Direct Deposit</option>
                       </select>
-                      @error('payment_method')<span class="alert ">{{ $message }}</span>@enderror
+                      {!! $errors->first('payment_method', '<span class="alert">:message</span>') !!}
                     </div>
                   </div>
                 </div>
                 <input type="checkbox" name="term">
-                @error('term')<span class="alert ">{{ $message }}</span>@enderror
+                {!! $errors->first('term', '<span class="alert">:message</span>') !!}
                 <div class="form-flex two-column">
                   <div class="form-left-block">
                     <div class="terms-text">

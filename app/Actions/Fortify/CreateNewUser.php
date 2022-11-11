@@ -51,6 +51,7 @@ class CreateNewUser implements CreatesNewUsers
                     'apt_or_unit' => 'required',
                     'payment_method' => 'required',
                     'about' => 'required',
+                    'image' => 'required',
                 ],
 
                 [
@@ -129,6 +130,7 @@ class CreateNewUser implements CreatesNewUsers
                     'apt_or_unit' => 'required',
                     'payment_method' => 'required',
                     'about' => 'required',
+                    'image' => 'required',
                 ],
 
                 [
