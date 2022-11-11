@@ -98,9 +98,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('admin.support-service');
     })->name('admin.support');
 
-        return view('admin.customer-edit', ["id" => request()->id]);
-    })->name('customer-update');
-
 });
 
 //customer
