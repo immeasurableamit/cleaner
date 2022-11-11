@@ -26,7 +26,23 @@
       </div>
     </div>
     <div class="authentication-form-wrapper">
-      {!! Form::open(['route' => 'register', 'method'=>'post', 'enctype' => 'multipart/form-data', 'class'=>'form-design']) !!}
+
+  {!! Form::open(['route' => 'register', 'method'=>'post', 'enctype' => 'multipart/form-data', 'class'=>'form-design']) !!}
+        @csrf
+        <input type="hidden" name="latitude">
+        <input type="hidden" name="longitude">
+
+        <input type="hidden" name="user_type" value="cleaner">
+        <div class="row no-mrg">
+          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 no-padd">
+            <div class="blue-bg-wrapper"  >
+              <div class="avatar-upload">
+                <div class="avatar-edit">
+                  <input type='file' name="image" id="upload" class= "file" accept="image/*" />
+                  <label for="upload">Upload a profile pic</label>
+          
+                </div>
+
 
       <input type="hidden" name="user_type" value="cleaner">
       <div class="row no-mrg">
@@ -105,7 +121,7 @@
                     {!! $errors->first('email', '<span class="alert">:message</span>') !!}
                   </div>
                   <div class="form-grouph input-design mb-30">
-                    {!! Form::text('address', request()->address ?? null, ['placeholder' => 'Address','class' => 'form-control'.($errors->has('address') ? ' is-invalid' : '')]) !!}
+                    {!! Form::text('address', request()->address ?? null, ['id'=>'address', 'placeholder' => 'Address','class' => 'form-control'.($errors->has('address') ? ' is-invalid' : '')]) !!}
                     {!! $errors->first('address', '<span class="alert">:message</span>') !!}
                   </div>
                   <div class="form-grouph mb-30 input-select-abs">
@@ -220,4 +236,58 @@
 
 @section('script')
 @include('layouts.common.cropper')
+
+<script async
+    src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initMap">
+</script>
+
+
+
+<script>
+    function getLocation(){
+      if ("geolocation" in navigator){ //check geolocation available 
+        //try to get user current location using getCurrentPosition() method
+        navigator.geolocation.getCurrentPosition(function(position){
+            $('input[name=latitude]').val(position.coords.latitude);
+            $('input[name=longitude]').val(position.coords.longitude);
+          });
+      }else{
+        console.log("Browser doesn't support geolocation!");
+      }
+    }
+
+    //getLocation();
+
+
+    function initMap(){
+
+        var autocomplete = new google.maps.places.Autocomplete($("#address")[0], {
+            types: ['geocode'],
+            componentRestrictions: {
+                country: "USA"
+            }
+        });
+
+        google.maps.event.addListener(autocomplete, 'place_changed', function() {
+            var place = autocomplete.getPlace();
+            //console.log(place.address_components);
+
+            $('input[name=latitude]').val(place.geometry.location.lat());
+            $('input[name=longitude]').val(place.geometry.location.lng());
+        });
+    }
+
+    /*var autocomplete = new google.maps.places.Autocomplete($("#address")[0], {});
+
+    google.maps.event.addListener(autocomplete, 'place_changed', function() {
+        var place = autocomplete.getPlace();
+        //console.log(place.address_components);
+
+        $('input[name=latitude]').val(near_place.geometry.location.lat());
+        $('input[name=longitude]').val(near_place.geometry.location.lng());
+
+    });*/
+
+  </script>
+
 @endsection
