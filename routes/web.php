@@ -98,6 +98,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('admin.support-service');
     })->name('admin.support');
 
+    Route::get('/teamMembers/{id}', [AdminController::class, 'teamView']);
+
 });
 
 //customer

@@ -1,3 +1,5 @@
+@extends('layouts.adminapp')
+@section('content')
 <div>
  <section class="table-layout-sec jobs">
     <div class="white-bg-wrapper">
@@ -34,30 +36,27 @@
               <tr>
                   <th>Name #</th>
                   <th>Email</th>
-                  <th>Order Number</th>
+                  <th>Insured</th>
                   <th>Phone</th>
-                  <th>Message</th>
                   <th>Status</th>
-                  <th>Action</th>
+                 
               </tr>
           </thead>
           <tbody>
-            <!-- <a href="javascript:void(0)" class="link-design-2" wire:click="destroy()">Delete</a> -->
-                @foreach($contacts as $contact)
-              <tr>
-                  <td class="name">{{$contact->name}}</td>
-                  <td>{{$contact->email}}</td>
-                  <td>{{$contact->order_number}}</td>
-                  <td>{{$contact->phone}}</td>
-                  <td>{{$contact->message}}</td>
-                  @if($contact->status == 0)
-                  <td><a href="javascript::void(0)" wire:click.prevent="statusClose({{$contact->id}})">Open</a></td>
-                  @else
-                  <td><a href="javascript::void(0)">Closed</a></td>
-                  @endif
-                  <td><a href="javascript::void(0)" wire:click.prevent="destroy({{$contact->id}})">Delete</a></td>
-              </tr>
-                 @endforeach
+            @foreach($members as $member)
+            @foreach($member->cleanerTeam as $mem)
+            
+            <tr>
+               <td>{{$mem->first_name}} {{$mem->last_name}}</td>
+               <td>{{$mem->email}}</td>
+               <td>{{$mem->insured}}</td>
+               <td>{{$mem->contact_number}}</td>
+                <td class="status">
+                    <span class="active">Active</span>
+                  </td>
+            </tr>
+           @endforeach
+           @endforeach
            
           </tbody>
         </table>
@@ -71,3 +70,4 @@
  
 
 </div>
+@endsection

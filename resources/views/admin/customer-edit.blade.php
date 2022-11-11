@@ -5,11 +5,11 @@
       <div class="white-bg-wrapper">
          <div class="account-info-blocks">
             <div class="row">
-               @livewire('admin.customer-update', ["user_id" => $id])
-               @livewire('admin.account-history')
+               @livewire('admin.customer.customer-update', ["user_id" => $id])
+               @livewire('admin.customer.account-history')
             </div>
          </div>
-         @livewire('admin.customer-booking')
+         @livewire('admin.customer.customer-booking')
       </div>
    </section>
 </div>
