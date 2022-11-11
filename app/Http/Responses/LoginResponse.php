@@ -11,7 +11,7 @@ class LoginResponse implements LoginResponseContract {
     public function toResponse($request) {		
 
 		$user = auth()->user();
-		dd($user, 'login');
+	
 		if($user->role=='customer'){
 			
 				return redirect()->route('customer.account');
@@ -24,7 +24,7 @@ class LoginResponse implements LoginResponseContract {
 		
 		elseif($user->role=='admin')
 		{
-			return redirect()->route('admin-customer');
+			return redirect()->route('admin.customer');
 		}
 	
 		

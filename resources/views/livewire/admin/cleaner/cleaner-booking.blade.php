@@ -1,5 +1,4 @@
-<div>
-       <div class="table-header-wrapper">
+     <div class="table-header-wrapper">
       <div class="table-tabs-wrap">
       <ul class="nav nav-tabs">
         <li class="nav-item">
@@ -725,4 +724,3 @@
             </div>
         </div>
       </div>
-</div>

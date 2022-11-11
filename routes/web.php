@@ -50,46 +50,52 @@ Route::get('signup-cleaner', function () {
 })->name('signup-cleaner');
 
 
+//Admin Section
 Route::middleware(['auth', 'verified'])->group(function () {
-    //admin
 
-    Route::get('/admin-customer', function () {
+    Route::get('/admin/customer', function () {
         $title = array(
             'active' => 'admin-account',
         );
         return view('admin.dashboard');
-    })->name('admin-customer');
+    })->name('admin.customer');
+
+      //Admin Customer
+    Route::get('/updateCustomer/{id}', function () {
+        $title = array(
+            'active' => 'admin-account',
+        );
+       return view('admin.customer-edit', ["id" => request()->id]);
+    })->name('customer-update');
 
 
-    //cleaner
-    Route::get('/admin-cleaner', function () {
+    //Admin cleaner
+    Route::get('/admin/cleaner', function () {
         $title = array(
             'active' => 'admin-cleaner',
         );
         return view('admin.cleaner');
-    })->name('admin-cleaner');
+    })->name('admin.cleaner');
 
-  //Cleaner Update
-    Route::get('/update-cleaner/{id}', function () {
+
+  //Admin Cleaner Update
+    Route::get('/updateCleaner/{id}', function () {
         $title = array(
             'active' => 'admin-account',
         );
        return view('admin.cleaner-edit', ["id" => request()->id]);
-    })->name('update-cleaner');
+    })->name('update.cleaner');
+  
 
-
-
-    //Customer
-    Route::get('/update-account/{id}', function () {
+     //Admin Support
+    Route::get('/admin/support', function () {
         $title = array(
-            'active' => 'admin-account',
+            'active' => 'admin-support',
         );
+        return view('admin.support-service');
+    })->name('admin.support');
 
-       return view('admin.customer-edit', ["id" => request()->id]);
 
-        return view('admin.customer-edit');
-
-    })->name('customer-update');
 
 });
 

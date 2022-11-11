@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '8fe0b5d93f42356a33ce1d90c351b174f976a857',
+    'reference' => '065d6a36adb8873145445c5cf07ef0b95c9c2081',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -60,6 +60,42 @@
       array (
       ),
       'reference' => '0992cc19268b259a39e86f296da5f0677841f42c',
+    ),
+    'doctrine/cache' => 
+    array (
+      'pretty_version' => '2.2.0',
+      'version' => '2.2.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '1ca8f21980e770095a31456042471a57bc4c68fb',
+    ),
+    'doctrine/dbal' => 
+    array (
+      'pretty_version' => '3.5.1',
+      'version' => '3.5.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'f38ee8aaca2d58ee88653cb34a6a3880c23f38a5',
+    ),
+    'doctrine/deprecations' => 
+    array (
+      'pretty_version' => 'v1.0.0',
+      'version' => '1.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '0e2a4f1f8cdfc7a92ec3b01c9334898c806b30de',
+    ),
+    'doctrine/event-manager' => 
+    array (
+      'pretty_version' => '2.0.0',
+      'version' => '2.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '750671534e0241a7c50ea5b43f67e23eb5c96f32',
     ),
     'doctrine/inflector' => 
     array (
@@ -443,7 +479,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '8fe0b5d93f42356a33ce1d90c351b174f976a857',
+      'reference' => '065d6a36adb8873145445c5cf07ef0b95c9c2081',
     ),
     'laravel/pint' => 
     array (
@@ -731,6 +767,15 @@
       ),
       'reference' => '80c3d801b31fe165f8fe99ea085e0a37834e1be3',
     ),
+    'psr/cache' => 
+    array (
+      'pretty_version' => '3.0.0',
+      'version' => '3.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'aa5030cfa5405eccfdcb1083ce040c2cb8d253bf',
+    ),
     'psr/container' => 
     array (
       'pretty_version' => '2.0.2',
@@ -824,8 +869,8 @@
     array (
       'provided' => 
       array (
-        0 => '1.0|2.0|3.0',
-        1 => '1.0.0 || 2.0.0 || 3.0.0',
+        0 => '1.0.0 || 2.0.0 || 3.0.0',
+        1 => '1.0|2.0|3.0',
       ),
     ),
     'psr/simple-cache' => 

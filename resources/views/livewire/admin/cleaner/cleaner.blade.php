@@ -51,13 +51,13 @@
                    @foreach($users as $user)
             
               <tr>
-                  @if($user->cleanerTeam)
-                     <td class="name">{{$user->cleanerTeam-> first_name}} {{$user->cleanerTeam-> last_name}}</td>
+                  @if($user)
+                     <td class="name"><a href="/teamMembers/{{$user->id}}">{{$user->first_name}} {{$user->last_name}}</a></td>
                    @else
                   <td></td>
                   @endif
               
-                  <td class="name"><a href="/update-cleaner/{{$user->id}}">{{$user->first_name}} {{$user->last_name}}</a></td>
+                  <td class="name"><a href="/updateCleaner/{{$user->id}}">{{$user->first_name}} {{$user->last_name}}</a></td>
                   <td>{{$user->email}}</td>
                   <td>729</td>
                   <td>3/19/2022</td>
@@ -83,7 +83,7 @@
         </table>
         </div>
       </div>
-      <div class="tab-pane fade" id="active">
+     <!--  <div class="tab-pane fade" id="active">
         <div class="table-design">
           <table id="active-cleaner-table" class="table dt-responsive nowrap" style="width:100%">
             <thead>
@@ -115,132 +115,7 @@
                       <span class="active">Active</span>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="name"><a href="cleaner-account-info.html">Jenny W.’s Team</a></td>
-                        <td class="name"><a href="cleaner-account-info.html">Jenny Wendel</a></td>
-                        <td>jjwendell42@gmail.com</td>
-                        <td>729</td>
-                        <td>3/19/2022</td>
-                        <td>New Orleans</td>
-                        <td>LA</td>
-                        <td>USA</td>
-                        <td>$182,695</td>
-                        <td class="status">
-                          <span class="active">Active</span>
-                        </td>
-                    </tr>
-                    <tr>
-                      <td class="name"><a href="cleaner-account-info.html">Jenny W.’s Team</a></td>
-                      <td class="name"><a href="cleaner-account-info.html">Jenny Wendel</a></td>
-                      <td>jjwendell42@gmail.com</td>
-                      <td>729</td>
-                      <td>3/19/2022</td>
-                      <td>New Orleans</td>
-                      <td>LA</td>
-                      <td>USA</td>
-                      <td>$182,695</td>
-                      <td class="status">
-                        <span class="active">Active</span>
-                      </td>
-                  </tr>
-                  <tr>
-                    <td class="name"><a href="cleaner-account-info.html">Jenny W.’s Team</a></td>
-                    <td class="name"><a href="cleaner-account-info.html">Jenny Wendel</a></td>
-                    <td>jjwendell42@gmail.com</td>
-                    <td>729</td>
-                    <td>3/19/2022</td>
-                    <td>New Orleans</td>
-                    <td>LA</td>
-                    <td>USA</td>
-                    <td>$182,695</td>
-                    <td class="status">
-                      <span class="active">Active</span>
-                    </td>
-                </tr>
-                <tr>
-                  <td class="name"><a href="cleaner-account-info.html">Jenny W.’s Team</a></td>
-                  <td class="name"><a href="cleaner-account-info.html">Jenny Wendel</a></td>
-                  <td>jjwendell42@gmail.com</td>
-                  <td>729</td>
-                  <td>3/19/2022</td>
-                  <td>New Orleans</td>
-                  <td>LA</td>
-                  <td>USA</td>
-                  <td>$182,695</td>
-                  <td class="status">
-                    <span class="active">Active</span>
-                  </td>
-              </tr>
-              <tr>
-                <td class="name"><a href="cleaner-account-info.html">Jenny W.’s Team</a></td>
-                <td class="name"><a href="cleaner-account-info.html">Jenny Wendel</a></td>
-                <td>jjwendell42@gmail.com</td>
-                <td>729</td>
-                <td>3/19/2022</td>
-                <td>New Orleans</td>
-                <td>LA</td>
-                <td>USA</td>
-                <td>$182,695</td>
-                <td class="status">
-                  <span class="active">Active</span>
-                </td>
-            </tr>
-            <tr>
-              <td class="name"><a href="cleaner-account-info.html">Jenny W.’s Team</a></td>
-              <td class="name"><a href="cleaner-account-info.html">Jenny Wendel</a></td>
-              <td>jjwendell42@gmail.com</td>
-              <td>729</td>
-              <td>3/19/2022</td>
-              <td>New Orleans</td>
-              <td>LA</td>
-              <td>USA</td>
-              <td>$182,695</td>
-              <td class="status">
-                <span class="active">Active</span>
-              </td>
-          </tr>
-          <tr>
-            <td class="name"><a href="cleaner-account-info.html">Jenny W.’s Team</a></td>
-            <td class="name"><a href="cleaner-account-info.html">Jenny Wendel</a></td>
-            <td>jjwendell42@gmail.com</td>
-            <td>729</td>
-            <td>3/19/2022</td>
-            <td>New Orleans</td>
-            <td>LA</td>
-            <td>USA</td>
-            <td>$182,695</td>
-            <td class="status">
-              <span class="active">Active</span>
-            </td>
-        </tr>
-        <tr>
-          <td class="name"><a href="cleaner-account-info.html">Jenny W.’s Team</a></td>
-          <td class="name"><a href="cleaner-account-info.html">Jenny Wendel</a></td>
-          <td>jjwendell42@gmail.com</td>
-          <td>729</td>
-          <td>3/19/2022</td>
-          <td>New Orleans</td>
-          <td>LA</td>
-          <td>USA</td>
-          <td>$182,695</td>
-          <td class="status">
-            <span class="active">Active</span>
-          </td>
-      </tr>
-      <tr>
-        <td class="name"><a href="cleaner-account-info.html">Jenny W.’s Team</a></td>
-        <td class="name"><a href="cleaner-account-info.html">Jenny Wendel</a></td>
-        <td>jjwendell42@gmail.com</td>
-        <td>729</td>
-        <td>3/19/2022</td>
-        <td>New Orleans</td>
-        <td>LA</td>
-        <td>USA</td>
-        <td>$182,695</td>
-        <td class="status">
-          <span class="active">Active</span>
-        </td>
-    </tr>
+             
     <tr>
       <td class="name"><a href="cleaner-account-info.html">Jenny W.’s Team</a></td>
       <td class="name"><a href="cleaner-account-info.html">Jenny Wendel</a></td>
@@ -258,8 +133,8 @@
             </tbody>
           </table>
           </div>
-      </div>
-      <div class="tab-pane fade" id="Inactive">
+      </div> -->
+      <!-- <div class="tab-pane fade" id="Inactive">
         <div class="table-design">
           <table id="inactive-cleaner-table" class="table dt-responsive nowrap" style="width:100%">
             <thead>
@@ -291,118 +166,11 @@
                   <span class="inactive">Inactive</span>
                 </td>
             </tr>
-            <tr>
-              <td class="name"><a href="cleaner-account-info.html">Jenny W.’s Team</a></td>
-              <td class="name"><a href="cleaner-account-info.html">Jenny Wendel</a></td>
-              <td>jjwendell42@gmail.com</td>
-              <td>729</td>
-              <td>3/19/2022</td>
-              <td>New Orleans</td>
-              <td>LA</td>
-              <td>USA</td>
-              <td>$182,695</td>
-              <td class="status">
-                <span class="inactive">Inactive</span>
-              </td>
-          </tr>
-          <tr>
-            <td class="name"><a href="cleaner-account-info.html">Jenny W.’s Team</a></td>
-            <td class="name"><a href="cleaner-account-info.html">Jenny Wendel</a></td>
-            <td>jjwendell42@gmail.com</td>
-            <td>729</td>
-            <td>3/19/2022</td>
-            <td>New Orleans</td>
-            <td>LA</td>
-            <td>USA</td>
-            <td>$182,695</td>
-            <td class="status">
-              <span class="inactive">Inactive</span>
-            </td>
-        </tr>
-        <tr>
-          <td class="name"><a href="cleaner-account-info.html">Jenny W.’s Team</a></td>
-          <td class="name"><a href="cleaner-account-info.html">Jenny Wendel</a></td>
-          <td>jjwendell42@gmail.com</td>
-          <td>729</td>
-          <td>3/19/2022</td>
-          <td>New Orleans</td>
-          <td>LA</td>
-          <td>USA</td>
-          <td>$182,695</td>
-          <td class="status">
-            <span class="inactive">Inactive</span>
-          </td>
-         </tr>
-         <tr>
-          <td class="name"><a href="cleaner-account-info.html">Jenny W.’s Team</a></td>
-          <td class="name"><a href="cleaner-account-info.html">Jenny Wendel</a></td>
-          <td>jjwendell42@gmail.com</td>
-          <td>729</td>
-          <td>3/19/2022</td>
-          <td>New Orleans</td>
-          <td>LA</td>
-          <td>USA</td>
-          <td>$182,695</td>
-          <td class="status">
-            <span class="inactive">Inactive</span>
-          </td>
-          </tr>
-          <tr>
-            <td class="name"><a href="cleaner-account-info.html">Jenny W.’s Team</a></td>
-            <td class="name"><a href="cleaner-account-info.html">Jenny Wendel</a></td>
-            <td>jjwendell42@gmail.com</td>
-            <td>729</td>
-            <td>3/19/2022</td>
-            <td>New Orleans</td>
-            <td>LA</td>
-            <td>USA</td>
-            <td>$182,695</td>
-            <td class="status">
-              <span class="inactive">Inactive</span>
-            </td>
-            </tr>
-            <tr>
-              <td class="name"><a href="cleaner-account-info.html">Jenny W.’s Team</a></td>
-              <td class="name"><a href="cleaner-account-info.html">Jenny Wendel</a></td>
-              <td>jjwendell42@gmail.com</td>
-              <td>729</td>
-              <td>3/19/2022</td>
-              <td>New Orleans</td>
-              <td>LA</td>
-              <td>USA</td>
-              <td>$182,695</td>
-              <td class="status">
-                <span class="inactive">Inactive</span>
-              </td>
-              </tr>
-              <tr>
-                <td class="name"><a href="cleaner-account-info.html">Jenny W.’s Team</a></td>
-                <td class="name"><a href="cleaner-account-info.html">Jenny Wendel</a></td>
-                <td>jjwendell42@gmail.com</td>
-                <td>729</td>
-                <td>3/19/2022</td>
-                <td>New Orleans</td>
-                <td>LA</td>
-                <td>USA</td>
-                <td>$182,695</td>
-                <td class="status">
-                  <span class="inactive">Inactive</span>
-                </td>
-                </tr>
-                <tr>
-                  <td class="name"><a href="cleaner-account-info.html">Jenny W.’s Team</a></td>
-                  <td class="name"><a href="cleaner-account-info.html">Jenny Wendel</a></td>
-                  <td>jjwendell42@gmail.com</td>
-                  <td>729</td>
-                  <td>3/19/2022</td>
-                  <td>New Orleans</td>
-                  <td>LA</td>
-                  <td>USA</td>
-                  <td>$182,695</td>
-                  <td class="status">
-                    <span class="inactive">Inactive</span>
-                  </td>
-                  </tr>
+            
+       
+      
+           
+                 
                   <tr>
                     <td class="name"><a href="cleaner-account-info.html">Jenny W.’s Team</a></td>
                     <td class="name"><a href="cleaner-account-info.html">Jenny Wendel</a></td>
@@ -420,19 +188,19 @@
             </tbody>
           </table>
           </div>
-      </div>
+      </div> -->
     </div>
     </div>
    </section>
  
 
 </div>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> -->
-<!-- <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script> -->
-<!-- <script type="text/javascript">
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
     
 $(document).ready(function () {
-    $('#Customers').DataTable();
+    $('#all-customer-table').DataTable();
 });
 </script> -->
 

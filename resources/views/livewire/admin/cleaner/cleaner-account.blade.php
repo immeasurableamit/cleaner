@@ -1,8 +1,4 @@
-<div>
-  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-
-
-
+<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
       <div class="detail-div-block">
             <h4>Customer account info</h4>
             <div class="inner-white-wrapper">
@@ -18,7 +14,7 @@
                     <span class="edit"><a class="link-design-2" wire:click.prevent="updateData('Team_name')"><i class="fas fa-save"></i></a></span>
                     <span class="cancel"><a href="javascript::void(0)" class="link-design-2" wire:click.prevent="cancel"><i class="fas fa-times"></i></a></span>
                   @else
-                    <p class="phone">{{$user->cleanerTeam->first_name}} {{$user->cleanerTeam->last_name}}</p>
+                    <p class="phone">{{$user->first_name}} {{$user->last_name}}</p>
                     <div class="action-block">
                       <span class="edit"><a href="javascript::void(0)" wire:click.prevent="editData('Team_name')">Edit</a></span>
                     </div>
@@ -142,7 +138,5 @@
             </div>
             </div>
 
+ </div>
 
-
-  </div>
-</div>
