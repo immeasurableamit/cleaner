@@ -21,22 +21,13 @@
 </head>
 
 <body class="light-theme">
-
     <?php echo $__env->make('layouts.includes.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-
     <main id="main-content">
-
         <?php echo $__env->yieldContent('content'); ?>
-
     </main>
     <?php echo $__env->make('layouts.includes.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php echo $__env->make('layouts.includes.script', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<<<<<<< HEAD
     <?php echo $__env->yieldContent('script'); ?>
-=======
-    
->>>>>>> f22a34c1d2f10e1ed709009e6060472c07d49a30
-
 </body>
 <!-- <script src="../assets/admin/js/admin.js"></script> -->
 
