@@ -9,6 +9,8 @@ class UserDetails extends Model
 {
     use HasFactory;
 
+    protected $with = ['State'];
+
     protected $fillable = [
         'states_id',
         'about',
@@ -25,7 +27,7 @@ class UserDetails extends Model
 
     public function State()
     {
-        return $this->belongsTo(State::class, 'id', 'states_id');
+        return $this->belongsTo(State::class, 'states_id', 'id');
 
     } 
   
