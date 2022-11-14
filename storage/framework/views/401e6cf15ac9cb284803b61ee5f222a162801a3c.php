@@ -50,16 +50,16 @@
           </thead>
           <tbody>
           
-                @foreach($users as $user)
+                <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                
 
               <tr>
-                  <td class="name"><a href="/updateCustomer/{{$user->id}}">{{$user->first_name}} {{$user->last_name}}</a></td>
-                  <td>{{$user->email}}</td>
+                  <td class="name"><a href="/updateCustomer/<?php echo e($user->id); ?>"><?php echo e($user->first_name); ?> <?php echo e($user->last_name); ?></a></td>
+                  <td><?php echo e($user->email); ?></td>
                   <td>12</td>
                   <td>2/14/22</td>
-                  <td>{{$user->UserDetails->city}}</td>
-                  <td>{{$user->UserDetails->State->code}}</td>
+                  <td><?php echo e($user->UserDetails->city); ?></td>
+                  <td><?php echo e($user->UserDetails->State->code); ?></td>
                   <!-- <td>USA</td> -->
                   <td>2/14/22</td>
                   <td>$2,555</td>
@@ -68,7 +68,7 @@
                   </td>
               </tr>
                 
-                  @endforeach
+                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
            
           </tbody>
         </table>
@@ -163,3 +163,4 @@ $(document).ready(function () {
 });
 </script> -->
 
+<?php /**PATH /var/www/html/cleaner/resources/views/livewire/admin/customer/customer.blade.php ENDPATH**/ ?>
