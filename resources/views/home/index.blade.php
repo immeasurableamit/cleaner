@@ -123,7 +123,7 @@
                                 <li>Savor the savings - our customers save up to 50% or more over traditional companies </li>
                                 <li>Enjoy the flexibility of reaching out to your Canary Cleaner directly</li>
                             </ul>
-                            <a href="search-result.html" class="btn_c mt-4">Browse Cleaners</a>
+                            <a href="{{route('search-result')}}" class="btn_c mt-4">Browse Cleaners</a>
                         </div>
 
                     </div>
@@ -185,14 +185,14 @@
                     <div class="card_cleaning_join">
                         <h3>Join Us</h3>
                         <p>Access more money, select more jobs. Canary Clean makes it easy to do more of what you love.</p>
-                        <a href="signup.html" class="btn_c">Join Now</a>
+                        <a href="{{route('signup')}}" class="btn_c">Join Now</a>
                     </div>
                 </div>
                 <div class="col-md-6 cleaning_services_div">
                     <div class="card_cleaning_join">
                         <h3>Need Cleaning Services?</h3>
                         <p>Theres no place better to find affordable cleaning providers. Simple, fast, clean. </p>
-                        <a href="search-result.html" class="btn_c">Browse Now</a>
+                        <a href="{{route('search-result')}}" class="btn_c">Browse Now</a>
                     </div>
                 </div>
             </div>

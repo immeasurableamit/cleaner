@@ -4,7 +4,7 @@
       <div class="header-flex">
         <div class="header-flex-item header-flex-item-1">
           <div class="logo-wrapper">
-            <a href="index.html"><img src="{{asset('assets/images/logo/logo.svg')}}"></a>
+            <a href="{{route('index')}}"><img src="{{asset('assets/images/logo/logo.svg')}}"></a>
           </div>
         </div>
         <div class="header-flex-item header-flex-item-3 cleaner_header_right">

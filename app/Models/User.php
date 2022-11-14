@@ -55,6 +55,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
     ];
 
+    protected $with = ['UserDetails'];
+
     public function getNameAttribute()
     {
         return $this->first_name . ' ' . $this->last_name;
