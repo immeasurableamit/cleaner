@@ -31,13 +31,8 @@
     </main>
     @include('layouts.includes.footer')
     @include('layouts.includes.script')
-<<<<<<< HEAD
-    @yield('script')
-=======
-    
->>>>>>> f22a34c1d2f10e1ed709009e6060472c07d49a30
+
 
 </body>
-<!-- <script src="../assets/admin/js/admin.js"></script> -->
 
 </html>
