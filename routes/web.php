@@ -139,10 +139,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::get('/account', function () {
             $title = array(
-                'title' => 'account',
                 'active' => 'account',
             );
-            return view('customer.account', compact('title'));
+            return view('customer.account.account', compact('title'));
         })->name('customer.account');
     });
 
@@ -150,32 +149,26 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('cleaner')->group(function () {
         Route::get('/account', function () {
             $title = array(
-                'title' => 'account',
                 'active' => 'account',
             );
-            return view('cleaner.account', compact('title'));
+            return view('cleaner.account.account', compact('title'));
         })->name('cleaner.account');
 
         Route::get('/team', function () {
             $title = array(
-                'title' => 'team',
                 'active' => 'team',
             );
-            return view('cleaner.team', compact('title'));
+            return view('cleaner.team.team', compact('title'));
         })->name('cleaner.team');
         
         Route::controller(CleanerController::class)->group(function () {
             Route::get('/reviews', function () {
                 $title = array(
-                    'title' => 'reviews',
                     'active' => 'reviews',
                 );
-                return view('cleaner.reviews', compact('title'));
+                return view('cleaner.reviews.reviews', compact('title'));
             })->name('cleaner.reviews');
         });
-
-
-
         //availability
         Route::prefix('availability')->group(function () {
             Route::controller(Cleaner\AvailabilityController::class)->group(function () {
@@ -185,14 +178,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::post('/time', 'time')->name('cleaner.availability.time');
             });
         });
-            
-
-
     });
 
     Route::get('/support', function () {
         $title = array(
-            'title' => 'support',
             'active' => 'support',
         );
         return view('cleaner.support.support');
@@ -200,4 +189,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 
-Route::get('search',[CleanerController::class,'index'])->name('search');
+// Route::get('search',[CleanerController::class,'index'])->name('search');

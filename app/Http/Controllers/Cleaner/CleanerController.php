@@ -9,6 +9,11 @@ use App\Models\User;
 class CleanerController extends Controller
 {
     
-
+// public function index()
+// {
+//     $user = User::find(auth()->user()->id);
+//     dd($user);
+//     return view('cleaner.account', compact('user'));
+// }
 
 }
