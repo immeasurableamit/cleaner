@@ -7,52 +7,52 @@
               <div class="customer-account-forms">
                 <div class="customer-account-information">
                   <ul class="list-unstyled">
-                @if($user->cleanerTeam)
+                <?php if($user->cleanerTeam): ?>
                 <li class="position-relative">
                 <div class="d-flex justify-content-spacebw three_column edit_frm">
                   <h6 class="title-label"><i class="fas fa-users"></i></h6>
-                  @if (@$fieldStatus && $action == 'Team_name')
+                  <?php if(@$fieldStatus && $action == 'Team_name'): ?>
                     <input type="text" wire:model="Team_name"/>
                     <span class="edit"><a class="link-design-2" wire:click.prevent="updateData('Team_name')"><i class="fas fa-save"></i></a></span>
                     <span class="cancel"><a href="javascript::void(0)" class="link-design-2" wire:click.prevent="cancel"><i class="fas fa-times"></i></a></span>
-                  @else
-                    <p class="phone">{{$user->first_name}} {{$user->last_name}}</p>
+                  <?php else: ?>
+                    <p class="phone"><?php echo e($user->first_name); ?> <?php echo e($user->last_name); ?></p>
                     <div class="action-block">
                       <span class="edit"><a href="javascript::void(0)" wire:click.prevent="editData('Team_name')">Edit</a></span>
                     </div>
                    
-                  @endif
+                  <?php endif; ?>
                 </div>
               </li>
-                     @endif
+                     <?php endif; ?>
                      <li class="position-relative">
                 <div class="d-flex justify-content-spacebw three_column edit_frm">
                   <h6 class="title-label"><i class="fas fa-user"></i></h6>
-                  @if (@$fieldStatus && $action == 'first_name')
+                  <?php if(@$fieldStatus && $action == 'first_name'): ?>
                     <input type="text" wire:model="first_name"/>
                     <span class="edit"><a class="link-design-2" wire:click.prevent="updateData('first_name')"><i class="fas fa-save"></i></a></span>
                     <span class="cancel"><a href="javascript::void(0)" class="link-design-2" wire:click.prevent="cancel"><i class="fas fa-times"></i></a></span>
-                  @else
-                    <p class="phone">{{$user->first_name}} {{$user->last_name}}</p>
+                  <?php else: ?>
+                    <p class="phone"><?php echo e($user->first_name); ?> <?php echo e($user->last_name); ?></p>
                     <div class="action-block">
                       <span class="edit"><a href="javascript::void(0)" wire:click.prevent="editData('first_name')">Edit</a></span>
                     </div>
-                  @endif
+                  <?php endif; ?>
                 </div>
               </li>
                  <li class="position-relative">
                 <div class="d-flex justify-content-spacebw three_column edit_frm">
                   <h6 class="title-label"><i class="fas fa-phone"></i></h6>
-                  @if (@$fieldStatus && $action == 'contact_number')
+                  <?php if(@$fieldStatus && $action == 'contact_number'): ?>
                     <input type="text" wire:model="contact_number"/>
                     <span class="edit"><a class="link-design-2" wire:click.prevent="updateData('contact_number')"><i class="fas fa-save"></i></a></span>
                     <span class="cancel"><a href="javascript::void(0)" class="link-design-2" wire:click.prevent="cancel"><i class="fas fa-times"></i></a></span>
-                  @else
-                    <p class="phone">{{$user->contact_number}}</p>
+                  <?php else: ?>
+                    <p class="phone"><?php echo e($user->contact_number); ?></p>
                     <div class="action-block">
                       <span class="edit"><a href="javascript::void(0)" wire:click.prevent="editData('contact_number')">Edit</a></span>
                     </div>
-                  @endif
+                  <?php endif; ?>
                 </div>
               </li>
                     
@@ -60,7 +60,7 @@
                 <form class="d-flex">
                   <h6 class="title-label"><i class="fas fa-envelope"></i></h6>
                   <input type="email" placeholder="Enter Email" style="display: none;">
-                  <p class="mail"><a href="mailto:{{$user->email}}">{{$user->email}}</a></p>
+                  <p class="mail"><a href="mailto:<?php echo e($user->email); ?>"><?php echo e($user->email); ?></a></p>
                  <!--  <div class="action-block">
                     <button class="edit">Edit</button>
                     <button class="save-icn-btn"><i class="fas fa-save"></i></button>
@@ -71,20 +71,20 @@
                   <li class="position-relative">
                 <div class="d-flex justify-content-spacebw three_column edit_frm">
                   <h6 class="title-label"><i class="fas fa-home"></i></h6>
-                  @if (@$fieldStatus && $action == 'address')
+                  <?php if(@$fieldStatus && $action == 'address'): ?>
                     <input type="text" wire:model="address"/>
                     <span class="edit"><a class="link-design-2" wire:click.prevent="updateData('address')"><i class="fas fa-save"></i></a></span>
                     <span class="cancel"><a href="javascript::void(0)" class="link-design-2" wire:click.prevent="cancel"><i class="fas fa-times"></i></a></span>
-                  @else
-                    @if($user->UserDetails)
-                    <p class="phone">{{$user->UserDetails->address}}</p>
-                    @else
+                  <?php else: ?>
+                    <?php if($user->UserDetails): ?>
+                    <p class="phone"><?php echo e($user->UserDetails->address); ?></p>
+                    <?php else: ?>
                     <p class="phone"></p>
-                    @endif
+                    <?php endif; ?>
                     <div class="action-block">
                       <span class="edit"><a href="javascript::void(0)" wire:click.prevent="editData('address')">Edit</a></span>
                     </div>
-                  @endif
+                  <?php endif; ?>
                 </div>
               </li>
                <li class="payment-methoud two-blocks d-flex position-relative">
@@ -113,7 +113,7 @@
               </li>
               <li class="position-relative">
                 <form class="d-flex">
-                <h6 class="title-label"><img src="{{ asset('assets/admin/images/icons/tin.svg') }}"></h6>
+                <h6 class="title-label"><img src="<?php echo e(asset('assets/admin/images/icons/tin.svg')); ?>"></h6>
                 <input type="number" placeholder="Enter Tin Number" style="display: none;">
                 <p>TIN: ****1164</p>
                 <div class="action-block">
@@ -124,15 +124,15 @@
                 </form>
              </li>
              <li class="d-flex position-relative">
-              <h6 class="title-label"><img src="{{ asset('assets/admin/images/icons/team-size.svg') }}"></h6>
+              <h6 class="title-label"><img src="<?php echo e(asset('assets/admin/images/icons/team-size.svg')); ?>"></h6>
               <p>Team Size: 3</p>
            </li>
            <li class="d-flex position-relative">
-            <h6 class="title-label"><img src="{{ asset('assets/admin/images/icons/insured.svg') }}"></h6>
+            <h6 class="title-label"><img src="<?php echo e(asset('assets/admin/images/icons/insured.svg')); ?>"></h6>
             <p>Insured: Yes</p>
             </li>
               <li class="reset-password">
-                <a href="#"><img src="{{ asset('assets/admin/images/icons/reset-password.svg') }}"> Reset Password</a>
+                <a href="#"><img src="<?php echo e(asset('assets/admin/images/icons/reset-password.svg')); ?>"> Reset Password</a>
               </li>
                   </ul>
                 </div>
@@ -143,3 +143,4 @@
  </div>
 </div>
 
+<?php /**PATH /var/www/html/cleaner/resources/views/livewire/admin/cleaner/cleaner-account.blade.php ENDPATH**/ ?>

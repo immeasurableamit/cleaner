@@ -79,55 +79,57 @@ Route::get('terms-and-conditions', function () {
     return view('home.terms-and-conditions', compact('title'));
 })->name('terms-and-conditions');
 
+
+
 //Admin Section
 Route::middleware(['auth', 'verified'])->group(function () {
 
-    Route::get('/admin/customer', function () {
+    Route::prefix('admin')->group(function () {
+
+    Route::get('/customer', function () {
         $title = array(
-            'active' => 'admin-account',
+            'active' => 'customer',
         );
-        return view('admin.dashboard');
+        return view('admin.customer.customer');
     })->name('admin.customer');
 
       //Admin Customer
-    Route::get('/admin/customer/{id}', function () {
+    Route::get('/customer/{id}', function () {
         $title = array(
-            'active' => 'admin-account',
+            'active' => 'customer-edit',
         );
-       return view('admin.customer-edit', ["id" => request()->id]);
+       return view('admin.customer.customer-edit', ["id" => request()->id]);
     })->name('admin.customer.show');
 
 
     //Admin cleaner
-    Route::get('/admin/cleaner', function () {
+    Route::get('/cleaner', function () {
         $title = array(
-            'active' => 'admin-cleaner',
+            'active' => 'cleaner',
         );
-        return view('admin.cleaner');
+        return view('admin.cleaner.cleaner');
     })->name('admin.cleaner');
 
 
-
   //Admin Cleaner Update
-    Route::get('/updateCleaner/{id}', function () {
+    Route::get('/cleaner/{id}', function () {
         $title = array(
             'active' => 'admin-account',
         );
-       return view('admin.cleaner-edit', ["id" => request()->id]);
-    })->name('update.cleaner');
+       return view('admin.cleaner.cleaner-edit', ["id" => request()->id]);
+    })->name('admin.cleaner.show');
   
-
-
-     //Admin Support
-    Route::get('/admin/support', function () {
+  //Admin Support
+    Route::get('/support', function () {
         $title = array(
             'active' => 'admin-support',
         );
-        return view('admin.support-service');
+        return view('admin.support.support');
     })->name('admin.support');
 
-    Route::get('/teamMembers/{id}', [AdminController::class, 'teamView']);
-
+  // Team Section  
+    Route::get('/cleaner/team/{id}', [AdminController::class, 'teamView'])->name('admin.cleaner.team');
+   });
 });
 
 //customer
@@ -193,7 +195,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             'title' => 'support',
             'active' => 'support',
         );
-        return view('cleaner.support');
+        return view('cleaner.support.support');
     })->name('support.service');
 });
 
