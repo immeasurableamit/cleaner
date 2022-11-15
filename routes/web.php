@@ -8,6 +8,7 @@ use App\Models\UserDetails;
 use App\Http\Livewire\Customer;
 use App\Http\Livewire\CustomerUpdate;
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\Cleaner;
 use App\Http\Controllers\Cleaner\CleanerController;
 
 /*
@@ -170,6 +171,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 return view('cleaner.reviews', compact('title'));
             })->name('cleaner.reviews');
         });
+
+
+
+        //availability
+        Route::prefix('availability')->group(function () {
+            Route::controller(Cleaner\AvailabilityController::class)->group(function () {
+                Route::get('/', 'index')->name('cleaner.availability.index');
+                Route::post('/jobs', 'jobs')->name('cleaner.availability.jobs');
+                Route::post('/buffer', 'buffer')->name('cleaner.availability.buffer');
+                Route::post('/time', 'time')->name('cleaner.availability.time');
+            });
+        });
+            
+
+
     });
 
     Route::get('/support', function () {
