@@ -13,4 +13,4 @@
               </div>
           </div>
 
-</div>
+</div><?php /**PATH /var/www/html/cleaner/resources/views/livewire/admin/cleaner/cleaner-history.blade.php ENDPATH**/ ?>

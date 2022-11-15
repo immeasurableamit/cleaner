@@ -1,5 +1,4 @@
-@extends('layouts.adminapp')
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div>
  <section class="table-layout-sec jobs">
     <div class="white-bg-wrapper">
@@ -15,7 +14,7 @@
     <div class="table-right-block">
       <div class="dropdown">
         <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-          All <img src="{{ asset('assets/admin/images/icons/all-filter.svg') }}">
+          All <img src="<?php echo e(asset('assets/admin/images/icons/all-filter.svg')); ?>">
         </button>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="#">Link 1</a></li>
@@ -43,20 +42,20 @@
               </tr>
           </thead>
           <tbody>
-            @foreach($members as $member)
-            @foreach($member->cleanerTeam as $mem)
+            <?php $__currentLoopData = $members; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $member): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <?php $__currentLoopData = $member->cleanerTeam; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $mem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             
             <tr>
-               <td>{{$mem->first_name}} {{$mem->last_name}}</td>
-               <td>{{$mem->email}}</td>
-               <td>{{$mem->insured}}</td>
-               <td>{{$mem->contact_number}}</td>
+               <td><?php echo e($mem->first_name); ?> <?php echo e($mem->last_name); ?></td>
+               <td><?php echo e($mem->email); ?></td>
+               <td><?php echo e($mem->insured); ?></td>
+               <td><?php echo e($mem->contact_number); ?></td>
                 <td class="status">
                     <span class="active">Active</span>
                   </td>
             </tr>
-           @endforeach
-           @endforeach
+           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
            
           </tbody>
         </table>
@@ -70,4 +69,5 @@
  
 
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.adminapp', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/cleaner/resources/views/admin/TeamMember/teammember.blade.php ENDPATH**/ ?>
