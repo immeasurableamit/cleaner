@@ -8,7 +8,7 @@
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
-    <link href="../assets/admin/css/admin.css" rel="stylesheet">
+    <link href="{{asset('assets/admin/css/admin.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/slick.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/main.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/croppie.css')}}" rel="stylesheet">
@@ -27,17 +27,8 @@
     </main>
     @include('layouts.includes.footer')
     @include('layouts.includes.script')
-<<<<<<< HEAD
-    @yield('script')
-=======
-
     @yield('script')
 
-    
-
-
->>>>>>> 0253219db974ba4cbd5baf5786d3b16c6706a033
-</body>
 <!-- <script src="../assets/admin/js/admin.js"></script> -->
 
 </html>

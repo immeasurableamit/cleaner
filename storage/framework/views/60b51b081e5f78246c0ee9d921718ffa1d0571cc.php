@@ -124,9 +124,7 @@ unset($__errorArgs, $__bag); ?>
 
         </div>
     </div>
-
     <!-- End Model-->
-
     <div class="teams-table-layout-view">
         <div class="row">
             <?php $__currentLoopData = $teamMembers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $teamMember): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -179,9 +177,7 @@ unset($__errorArgs, $__bag); ?>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
     </div>
-
     <!-- updateModel -->
-
     <div wire:ignore.self class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
         <div class="modal-dialog">
@@ -286,6 +282,4 @@ unset($__errorArgs, $__bag); ?>
         </div>
     </div>
     <!-- end updateModel -->
-
-</div>
-<?php /**PATH /var/www/html/projects/Amandeep Projects/working project/cleaner/cleaner/resources/views/livewire/cleaner/team/team.blade.php ENDPATH**/ ?>
+</div><?php /**PATH /var/www/html/projects/Amandeep Projects/working project/cleaner/cleaner/resources/views/livewire/cleaner/team/team.blade.php ENDPATH**/ ?>

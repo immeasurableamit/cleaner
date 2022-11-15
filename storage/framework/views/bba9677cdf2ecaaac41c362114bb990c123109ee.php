@@ -32,16 +32,16 @@
                     	 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 				<?php
 if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount('cleaner.support')->html();
-} elseif ($_instance->childHasBeenRendered('LSU3Dfu')) {
-    $componentId = $_instance->getRenderedChildComponentId('LSU3Dfu');
-    $componentTag = $_instance->getRenderedChildComponentTagName('LSU3Dfu');
+    $html = \Livewire\Livewire::mount('cleaner.support.support')->html();
+} elseif ($_instance->childHasBeenRendered('hOHvkS4')) {
+    $componentId = $_instance->getRenderedChildComponentId('hOHvkS4');
+    $componentTag = $_instance->getRenderedChildComponentTagName('hOHvkS4');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('LSU3Dfu');
+    $_instance->preserveRenderedChild('hOHvkS4');
 } else {
-    $response = \Livewire\Livewire::mount('cleaner.support');
+    $response = \Livewire\Livewire::mount('cleaner.support.support');
     $html = $response->html();
-    $_instance->logRenderedChild('LSU3Dfu', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('hOHvkS4', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -49,16 +49,16 @@ echo $html;
              <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">     
                <?php
 if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount('cleaner.support-contact')->html();
-} elseif ($_instance->childHasBeenRendered('kYPMQmA')) {
-    $componentId = $_instance->getRenderedChildComponentId('kYPMQmA');
-    $componentTag = $_instance->getRenderedChildComponentTagName('kYPMQmA');
+    $html = \Livewire\Livewire::mount('cleaner.support.support-contact')->html();
+} elseif ($_instance->childHasBeenRendered('0WYQ9Q6')) {
+    $componentId = $_instance->getRenderedChildComponentId('0WYQ9Q6');
+    $componentTag = $_instance->getRenderedChildComponentTagName('0WYQ9Q6');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('kYPMQmA');
+    $_instance->preserveRenderedChild('0WYQ9Q6');
 } else {
-    $response = \Livewire\Livewire::mount('cleaner.support-contact');
+    $response = \Livewire\Livewire::mount('cleaner.support.support-contact');
     $html = $response->html();
-    $_instance->logRenderedChild('kYPMQmA', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('0WYQ9Q6', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

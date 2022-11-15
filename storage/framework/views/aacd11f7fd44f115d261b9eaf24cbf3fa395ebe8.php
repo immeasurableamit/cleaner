@@ -8,7 +8,7 @@
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link href="<?php echo e(asset('assets/css/bootstrap.min.css')); ?>" rel="stylesheet">
     <link href="<?php echo e(asset('assets/css/style.css')); ?>" rel="stylesheet">
-    <link href="../assets/admin/css/admin.css" rel="stylesheet">
+    <link href="<?php echo e(asset('assets/admin/css/admin.css')); ?>" rel="stylesheet">
     <link href="<?php echo e(asset('assets/css/slick.css')); ?>" rel="stylesheet">
     <link href="<?php echo e(asset('assets/css/main.css')); ?>" rel="stylesheet">
     <link href="<?php echo e(asset('assets/css/croppie.css')); ?>" rel="stylesheet">
