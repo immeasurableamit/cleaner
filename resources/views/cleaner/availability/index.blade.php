@@ -41,3 +41,70 @@
     </div>
 </section>
 @endsection
+
+
+@section('script')
+<div class="layoutHours" style="display: none;">
+    <div class="time-input-addon layout layout-0key0">
+        {!! Form::time('day[0day0][data][0key0][from_time]', null, ['class' => ($errors->has('from_time') ? ' is-invalid' : '')]) !!}
+        {!! $errors->first('from_time', '<span class="help-block">:message</span>') !!}
+        <span class="d-none d-md-inline">-</span>
+        {!! Form::time('day[0day0][data][0key0][to_time]', null, ['class' => ($errors->has('to_time') ? ' is-invalid' : '')]) !!}
+        {!! $errors->first('to_time', '<span class="help-block">:message</span>') !!}
+        
+        <button type="button" class="border-0 bg-none btn-empty deleteDom" data-id="0key0" data-day="0day0">
+            <img src="{{ asset('assets/images/icons/delete_2.svg') }}">
+        </button>
+    </div>
+</div>
+
+
+<script>
+
+
+    $(document).on('click', '.form-switch', function(){
+        var day = $(this).attr('data-day');
+        $('.availbility_cover.'+day).toggleClass('show');
+    });
+
+
+    $('.add-time-slots').on('click', function (){
+        let day = $(this).attr('data-day');
+        layoutHoursBind(day);
+    });
+
+    function layoutHoursBind(day){
+
+        var countHour = $('.addNewHoursLayout.'+day+' .layout').length;
+        countHour = countHour + 1;
+        
+        var html = $('.layoutHours').html();
+        //...
+        html = html.replace(/0key0/g, countHour);
+        html = html.replace(/0day0/g, day);
+
+
+        //...
+        $('.addNewHoursLayout.'+day).append(html);
+
+    }
+
+    $('.deleteLayout').on('click', function (){
+        let day = $(this).attr('data-day');
+        let id = $(this).attr('data-id');
+
+        //...
+
+        $('.addNewHoursLayout.'+day+' .layout-'+id+' .delete').val('yes');
+        $('.addNewHoursLayout.'+day+' .layout-'+id).hide();
+    });
+
+
+    $(document).on('click', '.deleteDom', function (){
+        let day = $(this).attr('data-day');
+        let id = $(this).attr('data-id');
+
+        $('.addNewHoursLayout.'+day+' .layout-'+id).hide();
+    });
+</script>
+@endsection

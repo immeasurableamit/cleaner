@@ -32,9 +32,7 @@
 
     <?php echo $__env->make('layouts.includes.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php echo $__env->make('layouts.includes.script', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-    <?php echo $__env->yieldContent('script'); ?>
 
 </body>
-<!-- <script src="../assets/admin/js/admin.js"></script> -->
 
 </html><?php /**PATH /var/www/html/projects/Amandeep Projects/working project/cleaner/cleaner/resources/views/layouts/cleanerapp.blade.php ENDPATH**/ ?>

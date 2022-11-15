@@ -73,5 +73,15 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(CleanerTeam::class, 'user_id', 'id');
     }
 
+    public function cleanerHours()
+    {
+        return $this->hasMany(CleanerHours::class, 'users_id', 'id');
+    }
+
+
+    public static function getDays()
+    {
+        return ['Monday' => 'Monday', 'Tuesday' => 'Tuesday', 'Wednesday' => 'Wednesday', 'Thursday' => 'Thursday', 'Friday' => 'Friday', 'Saturday' => 'Saturday', 'Sunday' => 'Sunday'];
+    }
 
 }
