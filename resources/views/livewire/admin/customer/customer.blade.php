@@ -54,7 +54,7 @@
                
 
               <tr>
-                  <td class="name"><a href="/updateCustomer/{{$user->id}}">{{$user->first_name}} {{$user->last_name}}</a></td>
+                  <td class="name"><a href="{{ route('admin.customer.show', $user->id) }}">{{$user->first_name}} {{$user->last_name}}</a></td>
                   <td>{{$user->email}}</td>
                   <td>12</td>
                   <td>2/14/22</td>
