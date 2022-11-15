@@ -84,7 +84,7 @@
                         <span class="save-icn-btn"><a class="link-design-2" wire:click="updateData('address')"><i class="fas fa-save"></i></a></span>
                         <span class="cancel"><a href="javascript::void(0)" class="link-design-2" wire:click="cancle"><i class="fas fa-times"></i></a></span>
                         @else
-                        <p>{{$user->UserDetails->address}}</p>
+                        <p>{{@$user->UserDetails->address}}</p>
                         <div class="action-block">
                             <span class="edit"><a href="javascript::void(0)" class="link-design-2" wire:click="editData('{{auth()->user()->id}}', 'address')">Edit</a></span>
                         </div>
@@ -134,7 +134,7 @@
                         <span class="save-icn-btn"><a class="link-design-2" wire:click="updateData('about')"><i class="fas fa-save"></i></a></span>
                         <span class="cancel"><a href="javascript::void(0)" class="link-design-2" wire:click="cancle"><i class="fas fa-times"></i></a></span>
                         @else
-                        <p>{{$user->UserDetails->about}}</p>
+                        <p>{{@$user->UserDetails->about}}</p>
                         <div class="action-block">
                             <span class="edit"><a href="javascript::void(0)" class="link-design-2" wire:click="editData({{auth()->user()->id}}, 'about')">Edit</a></span>
                         </div>

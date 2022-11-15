@@ -1,20 +1,55 @@
 <?php $__env->startSection('content'); ?>
- 
+  <section class="table-layout-sec jobs">
+    <div class="white-bg-wrapper">
+    <div class="table-header-wrapper">
+    <div class="table-tabs-wrap">
+    <ul class="nav nav-tabs">
+    <!--   <li class="nav-item">
+        <a class="nav-link active" data-bs-toggle="tab" href="#all">All <span class="data-span"></span></a>
+      </li> -->
+     
+    </ul>
+    </div>
+    <div class="table-right-block">
+      <div class="dropdown">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+          All <img src="../assets/admin/images/icons/all-filter.svg">
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Link 1</a></li>
+          <li><a class="dropdown-item" href="#">Link 2</a></li>
+          <li><a class="dropdown-item" href="#">Link 3</a></li>
+        </ul>
+      </div>
+    </div>
+    </div>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div class="tab-pane active" id="all">
+        <div class="table-design">
    <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('admin.support.contact-service')->html();
-} elseif ($_instance->childHasBeenRendered('HF08zrx')) {
-    $componentId = $_instance->getRenderedChildComponentId('HF08zrx');
-    $componentTag = $_instance->getRenderedChildComponentTagName('HF08zrx');
+} elseif ($_instance->childHasBeenRendered('MRyBVEl')) {
+    $componentId = $_instance->getRenderedChildComponentId('MRyBVEl');
+    $componentTag = $_instance->getRenderedChildComponentTagName('MRyBVEl');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('HF08zrx');
+    $_instance->preserveRenderedChild('MRyBVEl');
 } else {
     $response = \Livewire\Livewire::mount('admin.support.contact-service');
     $html = $response->html();
-    $_instance->logRenderedChild('HF08zrx', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('MRyBVEl', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
+     </div>
+      </div>
+   
+    </div>
+    </div>
+   </section>
+ 
+
   
  <?php $__env->stopSection(); ?>
  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -34,4 +69,4 @@ echo $html;
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
-<?php echo $__env->make('layouts.adminapp', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/cleaner/resources/views/admin/support-service.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.adminapp', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/cleaner/resources/views/admin/support/support.blade.php ENDPATH**/ ?>

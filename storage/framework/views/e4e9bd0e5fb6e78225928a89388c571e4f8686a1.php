@@ -3,15 +3,15 @@
    <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('admin.cleaner.cleaner')->html();
-} elseif ($_instance->childHasBeenRendered('GNxHTtG')) {
-    $componentId = $_instance->getRenderedChildComponentId('GNxHTtG');
-    $componentTag = $_instance->getRenderedChildComponentTagName('GNxHTtG');
+} elseif ($_instance->childHasBeenRendered('TXprdKe')) {
+    $componentId = $_instance->getRenderedChildComponentId('TXprdKe');
+    $componentTag = $_instance->getRenderedChildComponentTagName('TXprdKe');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('GNxHTtG');
+    $_instance->preserveRenderedChild('TXprdKe');
 } else {
     $response = \Livewire\Livewire::mount('admin.cleaner.cleaner');
     $html = $response->html();
-    $_instance->logRenderedChild('GNxHTtG', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('TXprdKe', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

@@ -2,7 +2,7 @@
    <div class="admin-header-wrapper">
     <div class="admin-left-header">
       <div class="logo-wrapper">
-        <a href="index.html"><img src="../assets/images/logo/logo.svg"></a>
+        <a href="index.html"><img src="{{ asset('assets/images/logo/logo.svg') }}"></a>
        </div>
     </div>
 
@@ -11,7 +11,7 @@
           <li class="search-box position-relative">
           <form>
           <input type="search" placeholder="Search here...">
-          <button type="submit" class="admin-search-btn"><img src="../assets/images/icons/search.svg"></button>
+          <button type="submit" class="admin-search-btn"><img src="{{ asset('assets/images/icons/search.svg') }}"></button>
           </form>
           </li>
           <li class="notification-li">
@@ -34,7 +34,7 @@
           <li class="admin-user-li position-relative">
             <div class="dropdown">
               <button type="button" class="dropdown-toggle position-relative" data-bs-toggle="dropdown">
-                  <img src="../assets/images/thumbnail.png">
+                  <img src="{{ asset('assets/images/thumbnail.png') }}">
               </button>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="#">Link 1</a></li>

@@ -1,3 +1,5 @@
+<div>
+    
     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
         <div class="detail-div-block">
             <h4>Account history log</h4>
@@ -10,4 +12,5 @@
             </div>
         </div>
     </div>
-<?php /**PATH /var/www/html/cleaner/resources/views/livewire/admin/customer/account-history.blade.php ENDPATH**/ ?>
+
+</div><?php /**PATH /var/www/html/cleaner/resources/views/livewire/admin/customer/account-history.blade.php ENDPATH**/ ?>

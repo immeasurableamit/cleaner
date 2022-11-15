@@ -15,7 +15,7 @@
     <div class="table-right-block">
       <div class="dropdown">
         <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-          All <img src="../assets/admin/images/icons/all-filter.svg">
+          All <img src="{{ asset('assets/admin/images/icons/all-filter.svg') }}">
         </button>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="#">Link 1</a></li>

@@ -1,3 +1,5 @@
+<div>
+  
      <div class="table-header-wrapper">
       <div class="table-tabs-wrap">
       <ul class="nav nav-tabs">
@@ -724,4 +726,4 @@
             </div>
         </div>
       </div>
-<?php /**PATH /var/www/html/cleaner/resources/views/livewire/admin/cleaner/cleaner-booking.blade.php ENDPATH**/ ?>
+</div><?php /**PATH /var/www/html/cleaner/resources/views/livewire/admin/cleaner/cleaner-booking.blade.php ENDPATH**/ ?>
