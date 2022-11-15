@@ -8,6 +8,22 @@ use App\Models\UserDetails;
 
 class Cleaner extends Component
 {
+    public $cleanerStatus;
+
+    public function changeStatus($id)
+    {
+        $cleanerStatus = User::find($id);
+        if ($cleanerStatus->status == '1') {
+            $cleanerStatus->status = '0';
+            $cleanerStatus->save();
+        } else {
+            $cleanerStatus->status = '1';
+            $cleanerStatus->save();
+        }
+
+        $this->user = User::find($id);
+    }
+
     public function render()
     {
     

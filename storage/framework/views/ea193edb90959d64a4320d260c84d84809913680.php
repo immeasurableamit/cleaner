@@ -51,6 +51,8 @@
           <tbody>
           
                 <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+               
+
               <tr>
                   <td class="name"><a href="/updateCustomer/<?php echo e($user->id); ?>"><?php echo e($user->first_name); ?> <?php echo e($user->last_name); ?></a></td>
                   <td><?php echo e($user->email); ?></td>
@@ -65,6 +67,7 @@
                     <span class="active">Active</span>
                   </td>
               </tr>
+                
                   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
            
           </tbody>

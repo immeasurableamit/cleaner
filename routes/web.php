@@ -83,7 +83,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/admin/customer', function () {
         $title = array(
-            'active' => 'admin-account',
+            'active' => 'customers',
         );
         return view('admin.dashboard');
     })->name('admin.customer');
@@ -100,7 +100,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Admin cleaner
     Route::get('/admin/cleaner', function () {
         $title = array(
-            'active' => 'admin-cleaner',
+            'active' => 'cleaners',
         );
         return view('admin.cleaner');
     })->name('admin.cleaner');
