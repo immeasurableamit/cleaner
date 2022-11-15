@@ -90,12 +90,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('admin.customer');
 
       //Admin Customer
-    Route::get('/updateCustomer/{id}', function () {
+    Route::get('/admin/customer/{id}', function () {
         $title = array(
             'active' => 'admin-account',
         );
        return view('admin.customer-edit', ["id" => request()->id]);
-    })->name('customer-update');
+    })->name('admin.customer.show');
 
 
     //Admin cleaner
