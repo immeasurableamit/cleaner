@@ -1,3 +1,5 @@
+<div>
+  
 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
       <div class="detail-div-block">
             <h4>Customer account info</h4>
@@ -111,7 +113,7 @@
               </li>
               <li class="position-relative">
                 <form class="d-flex">
-                <h6 class="title-label"><img src="../assets/admin/images/icons/tin.svg"></h6>
+                <h6 class="title-label"><img src="{{ asset('assets/admin/images/icons/tin.svg') }}"></h6>
                 <input type="number" placeholder="Enter Tin Number" style="display: none;">
                 <p>TIN: ****1164</p>
                 <div class="action-block">
@@ -122,15 +124,15 @@
                 </form>
              </li>
              <li class="d-flex position-relative">
-              <h6 class="title-label"><img src="../assets/admin/images/icons/team-size.svg"></h6>
+              <h6 class="title-label"><img src="{{ asset('assets/admin/images/icons/team-size.svg') }}"></h6>
               <p>Team Size: 3</p>
            </li>
            <li class="d-flex position-relative">
-            <h6 class="title-label"><img src="../assets/admin/images/icons/insured.svg"></h6>
+            <h6 class="title-label"><img src="{{ asset('assets/admin/images/icons/insured.svg') }}"></h6>
             <p>Insured: Yes</p>
             </li>
               <li class="reset-password">
-                <a href="#"><img src="../assets/admin/images/icons/reset-password.svg"> Reset Password</a>
+                <a href="#"><img src="{{ asset('assets/admin/images/icons/reset-password.svg') }}"> Reset Password</a>
               </li>
                   </ul>
                 </div>
@@ -139,4 +141,5 @@
             </div>
 
  </div>
+</div>
 

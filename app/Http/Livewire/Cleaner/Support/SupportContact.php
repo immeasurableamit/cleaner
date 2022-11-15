@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Cleaner;
+namespace App\Http\Livewire\Cleaner\Support;
 
 use Livewire\Component;
 use App\Models\Contact;
@@ -8,7 +8,8 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class SupportContact extends Component
 {
-    use LivewireAlert;
+
+        use LivewireAlert;
 
     public $name, $order_number, $email, $phone, $message, $user_id;
 
@@ -53,6 +54,6 @@ class SupportContact extends Component
 
     public function render()
     {
-        return view('livewire.cleaner.support-contact');
+        return view('livewire.cleaner.support.support-contact');
     }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.adminapp')
 @section('content')
-<div>
+
    <section class="table-layout-sec jobs">
       <div class="white-bg-wrapper">
          <div class="account-info-blocks">
@@ -12,5 +12,5 @@
          @livewire('admin.customer.customer-booking')
       </div>
    </section>
-</div>
+
 @endsection

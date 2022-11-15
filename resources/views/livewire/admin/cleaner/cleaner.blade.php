@@ -1,4 +1,5 @@
 <div>
+<<<<<<< HEAD
   <section class="table-layout-sec jobs">
     <div class="white-bg-wrapper">
       <div class="table-header-wrapper">
@@ -35,6 +36,11 @@
             <table id="all-cleaner-table" class="table dt-responsive nowrap" style="width:100%">
               <thead>
                 <tr>
+=======
+    <table id="all-cleaner-table" class="table dt-responsive nowrap" style="width:100%">
+          <thead>
+              <tr>
+>>>>>>> 0253219db974ba4cbd5baf5786d3b16c6706a033
                   <th>Team Name</th>
                   <th>Main Cleaner</th>
                   <th>Email</th>
@@ -52,12 +58,21 @@
 
                 <tr>
                   @if($user)
+<<<<<<< HEAD
                   <td class="name"><a href="/teamMembers/{{$user->id}}">{{$user->first_name}} {{$user->last_name}}</a></td>
                   @else
                   <td></td>
                   @endif
 
                   <td class="name"><a href="/updateCleaner/{{$user->id}}">{{$user->first_name}} {{$user->last_name}}</a></td>
+=======
+                     <td class="name"><a href="{{ route('admin.cleaner.team', $user->id) }}">{{$user->first_name}} {{$user->last_name}}</a></td>
+                   @else
+                  <td></td>
+                  @endif
+              
+                  <td class="name"><a href="{{ route('admin.cleaner.show', $user->id) }}" >{{$user->first_name}} {{$user->last_name}}</a></td>
+>>>>>>> 0253219db974ba4cbd5baf5786d3b16c6706a033
                   <td>{{$user->email}}</td>
                   <td>729</td>
                   <td>3/19/2022</td>
@@ -81,6 +96,7 @@
                     <button type="submit" class="btn btn-danger" wire:click="changeStatus({{$user->id}})" value="1">Inactive</button>
                     @endif
                   </td>
+<<<<<<< HEAD
                 </tr>
                 @endforeach
 
@@ -150,3 +166,14 @@ $(document).ready(function () {
     $('#all-customer-table').DataTable();
 });
 </script> -->
+=======
+              </tr>
+              @endforeach
+          
+          </tbody>
+        </table>
+
+</div>
+
+
+>>>>>>> 0253219db974ba4cbd5baf5786d3b16c6706a033
