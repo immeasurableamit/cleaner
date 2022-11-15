@@ -22,22 +22,19 @@
 
 <body class="light-theme">
 
-    <?php echo $__env->make('layouts.includes.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('layouts.includes.cleanerHeader', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <main id="main-content">
 
         <?php echo $__env->yieldContent('content'); ?>
 
     </main>
+
     <?php echo $__env->make('layouts.includes.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php echo $__env->make('layouts.includes.script', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-
     <?php echo $__env->yieldContent('script'); ?>
-
-    
-
 
 </body>
 <!-- <script src="../assets/admin/js/admin.js"></script> -->
 
-</html><?php /**PATH /var/www/html/cleaner/resources/views/layouts/app.blade.php ENDPATH**/ ?>
+</html><?php /**PATH /var/www/html/cleaner/resources/views/layouts/cleanerapp.blade.php ENDPATH**/ ?>

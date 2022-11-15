@@ -195,7 +195,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             'title' => 'support',
             'active' => 'support',
         );
-        return view('cleaner.support');
+        return view('cleaner.support.support');
     })->name('support.service');
 });
 
