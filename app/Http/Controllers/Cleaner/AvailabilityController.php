@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\UserDetails;
+use App\Models\CleanerHours;
 
 
 class AvailabilityController extends Controller
@@ -18,7 +19,9 @@ class AvailabilityController extends Controller
             'active' => 'availability',
         );
 
-        return view('cleaner.availability.index', compact('title'));
+        $user = auth()->user();
+
+        return view('cleaner.availability.index', compact('title', 'user'));
     }
 
 
