@@ -86,49 +86,64 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::prefix('admin')->group(function () {
 
-    Route::get('/customer', function () {
-        $title = array(
-            'active' => 'customer',
-        );
-        return view('admin.customer.customer');
-    })->name('admin.customer');
+        Route::get('/customer', function () {
+            $title = array(
+                'active' => 'customer',
+            );
+            return view('admin.customer.customer');
+        })->name('admin.customer');
 
-      //Admin Customer
-    Route::get('/customer/{id}', function () {
-        $title = array(
-            'active' => 'customer-edit',
-        );
-       return view('admin.customer.customer-edit', ["id" => request()->id]);
-    })->name('admin.customer.show');
-
-
-    //Admin cleaner
-    Route::get('/cleaner', function () {
-        $title = array(
-            'active' => 'cleaner',
-        );
-        return view('admin.cleaner.cleaner');
-    })->name('admin.cleaner');
+          //Admin Customer
+        Route::get('/customer/{id}', function () {
+            $title = array(
+                'active' => 'customer-edit',
+            );
+           return view('admin.customer.customer-edit', ["id" => request()->id]);
+        })->name('admin.customer.show');
 
 
-  //Admin Cleaner Update
-    Route::get('/cleaner/{id}', function () {
-        $title = array(
-            'active' => 'admin-account',
-        );
-       return view('admin.cleaner.cleaner-edit', ["id" => request()->id]);
-    })->name('admin.cleaner.show');
-  
-  //Admin Support
-    Route::get('/support', function () {
-        $title = array(
-            'active' => 'admin-support',
-        );
-        return view('admin.support.support');
-    })->name('admin.support');
+        //Admin cleaner
+        Route::get('/cleaner', function () {
+            $title = array(
+                'active' => 'cleaner',
+            );
+            return view('admin.cleaner.cleaner');
+        })->name('admin.cleaner');
 
-  // Team Section  
-    Route::get('/cleaner/team/{id}', [AdminController::class, 'teamView'])->name('admin.cleaner.team');
+
+        //Admin Cleaner Update
+        Route::get('/cleaner/{id}', function () {
+            $title = array(
+                'active' => 'admin-account',
+            );
+           return view('admin.cleaner.cleaner-edit', ["id" => request()->id]);
+        })->name('admin.cleaner.show');
+
+        //Admin Support
+        Route::get('/support', function () {
+            $title = array(
+                'active' => 'admin-support',
+            );
+            return view('admin.support.support');
+        })->name('admin.support');
+
+        // Team Section  
+        Route::get('/cleaner/team/{id}', [AdminController::class, 'teamView'])->name('admin.cleaner.team');
+
+
+        //services
+        Route::prefix('services')->group(function () {
+            Route::get('/', function () {
+                $title = array(
+                    'title' => 'Services',
+                    'active' => 'services',
+                );
+                return view('admin.services.index', compact('title'));
+            })->name('admin.services.index');
+        });
+
+
+
    });
 });
 
@@ -176,6 +191,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::post('/jobs', 'jobs')->name('cleaner.availability.jobs');
                 Route::post('/buffer', 'buffer')->name('cleaner.availability.buffer');
                 Route::post('/time', 'time')->name('cleaner.availability.time');
+            });
+        });
+
+        //services
+        Route::prefix('services')->group(function () {
+            Route::controller(Cleaner\ServicesController::class)->group(function () {
+                Route::get('/', 'index')->name('cleaner.services.index');
             });
         });
     });
