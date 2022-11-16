@@ -6,7 +6,7 @@
 			<div class="tab-pane active" id="all">
 				<div class="table-design">
 
-					@livewire('admin.services.services')
+					@livewire('admin.services.service')
 
 				</div>
 			</div>
