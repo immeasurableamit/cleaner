@@ -86,50 +86,50 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::prefix('admin')->group(function () {
 
-    Route::get('/customer', function () {
-        $title = array(
-            'active' => 'customer',
-        );
-        return view('admin.customer.customer');
-    })->name('admin.customer');
+        Route::get('/customer', function () {
+            $title = array(
+                'active' => 'customer',
+            );
+            return view('admin.customer.customer');
+        })->name('admin.customer');
 
-      //Admin Customer
-    Route::get('/customer/{id}', function () {
-        $title = array(
-            'active' => 'customer-edit',
-        );
-       return view('admin.customer.customer-edit', ["id" => request()->id]);
-    })->name('admin.customer.show');
-
-
-    //Admin cleaner
-    Route::get('/cleaner', function () {
-        $title = array(
-            'active' => 'cleaner',
-        );
-        return view('admin.cleaner.cleaner');
-    })->name('admin.cleaner');
+        //Admin Customer
+        Route::get('/customer/{id}', function () {
+            $title = array(
+                'active' => 'customer-edit',
+            );
+            return view('admin.customer.customer-edit', ["id" => request()->id]);
+        })->name('admin.customer.show');
 
 
-  //Admin Cleaner Update
-    Route::get('/cleaner/{id}', function () {
-        $title = array(
-            'active' => 'admin-account',
-        );
-       return view('admin.cleaner.cleaner-edit', ["id" => request()->id]);
-    })->name('admin.cleaner.show');
-  
-  //Admin Support
-    Route::get('/support', function () {
-        $title = array(
-            'active' => 'admin-support',
-        );
-        return view('admin.support.support');
-    })->name('admin.support');
+        //Admin cleaner
+        Route::get('/cleaner', function () {
+            $title = array(
+                'active' => 'cleaner',
+            );
+            return view('admin.cleaner.cleaner');
+        })->name('admin.cleaner');
 
-  // Team Section  
-    Route::get('/cleaner/team/{id}', [AdminController::class, 'teamView'])->name('admin.cleaner.team');
-   });
+
+        //Admin Cleaner Update
+        Route::get('/cleaner/{id}', function () {
+            $title = array(
+                'active' => 'admin-account',
+            );
+            return view('admin.cleaner.cleaner-edit', ["id" => request()->id]);
+        })->name('admin.cleaner.show');
+
+        //Admin Support
+        Route::get('/support', function () {
+            $title = array(
+                'active' => 'admin-support',
+            );
+            return view('admin.support.support');
+        })->name('admin.support');
+
+        // Team Section  
+        Route::get('/cleaner/team/{id}', [AdminController::class, 'teamView'])->name('admin.cleaner.team');
+    });
 });
 
 //customer
@@ -160,7 +160,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             );
             return view('cleaner.team.team', compact('title'));
         })->name('cleaner.team');
-        
+
         Route::controller(CleanerController::class)->group(function () {
             Route::get('/reviews', function () {
                 $title = array(
@@ -178,14 +178,32 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::post('/time', 'time')->name('cleaner.availability.time');
             });
         });
-    });
+        //billing
+        Route::prefix('billing')->group(function () {
+            Route::controller(Cleaner\billing\BillingController::class)->group(function () {
+                Route::get('/', 'index')->name('cleaner.billing.billing');
+                Route::get('/accountdetails', 'bankAccount')->name('cleaner.billing.editBankAccount');
+                Route::get('/editpayment', 'editpayment')->name('cleaner.billing.editPaymentMethod');
+                // Route::post('/profile/bank-connect', 'connectedAccount')->name('cleaner.billing.bankconnect');
+                // Route::post('/profile/bankInfoStore', 'bankingInfoStore')->name('cleaner.billing.bankInfoStore');
+                // Route::post('/profile/bankInfoStore', 'createAccount')->name('cleaner.billing.createAccount');
 
-    Route::get('/support', function () {
-        $title = array(
-            'active' => 'support',
-        );
-        return view('cleaner.support.support');
-    })->name('support.service');
+                Route::post('/profile/bankInfoStore', 'connectAccount')->name('cleaner.billing.connectAccount');
+                // Route::get('/profile/bankInfoID', 'customerID')->name('cleaner.billing.customerID');
+
+            });
+        });
+
+
+        Route::get('/support', function () {
+            $title = array(
+                'active' => 'support',
+            );
+            return view('cleaner.support.support');
+        })->name('support.service');
+
+        
+    });
 });
 
 

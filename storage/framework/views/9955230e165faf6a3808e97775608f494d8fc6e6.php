@@ -179,15 +179,15 @@
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('home.rated-cleaners')->html();
-} elseif ($_instance->childHasBeenRendered('gMeJtum')) {
-    $componentId = $_instance->getRenderedChildComponentId('gMeJtum');
-    $componentTag = $_instance->getRenderedChildComponentTagName('gMeJtum');
+} elseif ($_instance->childHasBeenRendered('TVRRAno')) {
+    $componentId = $_instance->getRenderedChildComponentId('TVRRAno');
+    $componentTag = $_instance->getRenderedChildComponentTagName('TVRRAno');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('gMeJtum');
+    $_instance->preserveRenderedChild('TVRRAno');
 } else {
     $response = \Livewire\Livewire::mount('home.rated-cleaners');
     $html = $response->html();
-    $_instance->logRenderedChild('gMeJtum', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('TVRRAno', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

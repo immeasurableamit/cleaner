@@ -20,7 +20,7 @@
       <?php endif; ?>
 
       <li><a href="cleaner-appoitments.html">Appointments</a></li>
-      <li><a href="cleaner-billing.html" >Billing</a></li>
+      <li><a href="<?php echo e(route('cleaner.billing.billing')); ?>" class="<?php echo e(@$title['active']=='billing' ? 'active' : ''); ?>">Billing</a></li>
       <li><a href="cleaner-notification.html">Notifications</a></li>
       <li><a href="<?php echo e(route('support.service')); ?>" class="<?php echo e(@$title['active']=='support' ? 'active' : ''); ?>">Support</a></li>
     </ul>

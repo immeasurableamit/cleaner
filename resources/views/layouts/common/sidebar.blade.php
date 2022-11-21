@@ -20,7 +20,7 @@
       @endif
 
       <li><a href="cleaner-appoitments.html">Appointments</a></li>
-      <li><a href="cleaner-billing.html" >Billing</a></li>
+      <li><a href="{{route('cleaner.billing.billing')}}" class="{{ @$title['active']=='billing' ? 'active' : '' }}">Billing</a></li>
       <li><a href="cleaner-notification.html">Notifications</a></li>
       <li><a href="{{route('support.service')}}" class="{{ @$title['active']=='support' ? 'active' : '' }}">Support</a></li>
     </ul>
