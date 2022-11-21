@@ -79,8 +79,6 @@ Route::get('terms-and-conditions', function () {
     return view('home.terms-and-conditions', compact('title'));
 })->name('terms-and-conditions');
 
-
-
 //Admin Section
 Route::middleware(['auth', 'verified'])->group(function () {
 
@@ -93,14 +91,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
             return view('admin.customer.customer');
         })->name('admin.customer');
 
-        //Admin Customer
+          //Admin Customer
         Route::get('/customer/{id}', function () {
             $title = array(
                 'active' => 'customer-edit',
             );
-            return view('admin.customer.customer-edit', ["id" => request()->id]);
-        })->name('admin.customer.show');
 
+            return view('admin.customer.customer-edit', ["id" => request()->id]);
+
+        })->name('admin.customer.show');
 
         //Admin cleaner
         Route::get('/cleaner', function () {
@@ -110,13 +109,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
             return view('admin.cleaner.cleaner');
         })->name('admin.cleaner');
 
-
         //Admin Cleaner Update
         Route::get('/cleaner/{id}', function () {
             $title = array(
                 'active' => 'admin-account',
             );
-            return view('admin.cleaner.cleaner-edit', ["id" => request()->id]);
+           return view('admin.cleaner.cleaner-edit', ["id" => request()->id]);
         })->name('admin.cleaner.show');
 
         //Admin Support
@@ -129,8 +127,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         // Team Section  
         Route::get('/cleaner/team/{id}', [AdminController::class, 'teamView'])->name('admin.cleaner.team');
+
     });
-});
+        //services
+        Route::prefix('services')->group(function () {
+            Route::get('/', function () {
+                $title = array(
+                    'title' => 'Services',
+                    'active' => 'services',
+                );
+                return view('admin.services.index', compact('title'));
+            })->name('admin.services.index');
+        });
+   });
 
 //customer
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -191,20 +200,24 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::post('/profile/bankInfoStore', 'connectAccount')->name('cleaner.billing.connectAccount');
                 // Route::get('/profile/bankInfoID', 'customerID')->name('cleaner.billing.customerID');
 
+        //services
+        Route::prefix('services')->group(function () {
+            Route::controller(Cleaner\ServicesController::class)->group(function () {
+                Route::get('/', 'index')->name('cleaner.services.index');
             });
         });
+    });
 
-
-        Route::get('/support', function () {
-            $title = array(
-                'active' => 'support',
-            );
-            return view('cleaner.support.support');
-        })->name('support.service');
-
+    Route::get('/support', function () {
+        $title = array(
+            'active' => 'support',
+        );
+        return view('cleaner.support.support');
+    })->name('support.service');
+});
+       
         
     });
-});
 
 
 // Route::get('search',[CleanerController::class,'index'])->name('search');
