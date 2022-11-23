@@ -198,6 +198,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::prefix('services')->group(function () {
             Route::controller(Cleaner\ServicesController::class)->group(function () {
                 Route::get('/', 'index')->name('cleaner.services.index');
+                Route::post('/post', 'store')->name('cleaner.services.post');
             });
         });
     });

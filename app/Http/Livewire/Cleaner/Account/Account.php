@@ -110,13 +110,13 @@ class Account extends Component
         if ($action == 'email') {
             $oldEmail = $user->email;
             if ($oldEmail != $this->email) {
-            $user->email_verified_at =  null;
-            $user->email = $this->email;
-            $user->save();
-            $user->sendEmailVerificationNotification();
-         
-        }
-        return redirect()->route('cleaner.account');
+                $user->email_verified_at =  null;
+                $user->email = $this->email;
+                $user->save();
+                $user->sendEmailVerificationNotification();
+             
+            }
+            return redirect()->route('cleaner.account');
         }
     }
 
