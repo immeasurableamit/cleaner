@@ -51,13 +51,13 @@
          <div class="col-md-4 blue_right_card">
             <div class="card_b">
                <div class="fist_div">
-                  <img src="assets/images/logo/logo.svg"/>
+                  <img src="{{asset('assets/images/logo/logo.svg')}}"/>
                </div>
                <div class="scnd_div">
                   <p>Get in touch with us and our team will get back to you.</p>
                </div>
                <div class="thrd_div">
-                  <a href=""><img src="assets/images/icons/email.svg">support@canary.com</a>
+                  <a href=""><img src="{{asset('assets/images/icons/email.svg')}}">support@canary.com</a>
                </div>
             </div>
          </div>

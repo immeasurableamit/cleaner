@@ -60,7 +60,7 @@
                                     <div class="customer_profile-info">
                                         <div class="d-flex align-items-center position-relative">
                                             <div class="customer-pro-img">
-                                                <img src="<?php echo e(asset('assets/images/thumbnail.png')); ?>">
+                                                <img src="<?php echo e(asset('storage/images/'.auth()->user()->image)); ?>">
                                             </div>
                                             <div class="customer-pro-cntnt">
                                                 <h4><?php echo e(auth()->user()->name); ?></h4>
@@ -83,8 +83,8 @@
                                                 <li><a href="<?php echo e(route('cleaner.account')); ?>">Account</a></li>
                                                 <li><a href="customer-appoitments.html">Appointments</a></li>
                                                 <li><a href="<?php echo e(route('cleaner.billing.editBankAccount')); ?>">Billing</a></li>
-                                                <li><a href="customer-notification.html">Notifications</a></li>
-                                                <li><a href="customer-support-past-service.html">Support</a></li>
+                                                <li><a href="<?php echo e(route('cleaner.notification.index')); ?>">Notifications</a></li>
+                                                <li><a href="<?php echo e(route('cleaner.support.service')); ?>">Supports</a></li>
                                                 <?php endif; ?>
 
                                             </ul>

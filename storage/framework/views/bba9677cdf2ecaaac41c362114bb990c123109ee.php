@@ -1,79 +1,79 @@
 <?php $__env->startSection('content'); ?>
 
-  <section class="light-banner customer-account-page" style="background-image: url('assets/images/white-pattern.png')">
-     <div class="container">
-      <div class="customer-white-wrapper">
+<section class="light-banner customer-account-page" style="background-image: url('assets/images/white-pattern.png')">
+  <div class="container">
+    <div class="customer-white-wrapper">
       <div class="row no-mrg">
         <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 no-padd">
           <div class="blue-bg-wrapper bar_left">
             <div class="blue-bg-heading">
               <h4>Settings</h4>
             </div>
-          	<?php echo $__env->make('layouts.common.sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+            <?php echo $__env->make('layouts.common.sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             <div class="blue-logo-block text-center max-width-100">
               <a href="#"><img src="assets/images/logo/logo.svg"></a>
             </div>
-         </div>
+          </div>
         </div>
         <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 no-padd">
           <div class="row no-mrg">
-           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 no-padd">
-            <div class="customer-account-forms support_service_section pe-3">   
-              <div class="support_tabs">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 no-padd">
+              <div class="customer-account-forms support_service_section pe-3">
+                <div class="support_tabs">
                   <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                      <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Past services</button>
-                      </li>
-                      <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Contact Us</button>
-                      </li>
-                    </ul>
-                    <div class="tab-content" id="pills-tabContent">
-                    	 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-				<?php
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Past services</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Contact Us</button>
+                    </li>
+                  </ul>
+                  <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                      <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('cleaner.support.support')->html();
-} elseif ($_instance->childHasBeenRendered('pW14v40')) {
-    $componentId = $_instance->getRenderedChildComponentId('pW14v40');
-    $componentTag = $_instance->getRenderedChildComponentTagName('pW14v40');
+} elseif ($_instance->childHasBeenRendered('f94tUTH')) {
+    $componentId = $_instance->getRenderedChildComponentId('f94tUTH');
+    $componentTag = $_instance->getRenderedChildComponentTagName('f94tUTH');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('pW14v40');
+    $_instance->preserveRenderedChild('f94tUTH');
 } else {
     $response = \Livewire\Livewire::mount('cleaner.support.support');
     $html = $response->html();
-    $_instance->logRenderedChild('pW14v40', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('f94tUTH', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
-			</div>
-             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">     
-               <?php
+                    </div>
+                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                      <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('cleaner.support.support-contact')->html();
-} elseif ($_instance->childHasBeenRendered('7AyhchM')) {
-    $componentId = $_instance->getRenderedChildComponentId('7AyhchM');
-    $componentTag = $_instance->getRenderedChildComponentTagName('7AyhchM');
+} elseif ($_instance->childHasBeenRendered('8etFJ96')) {
+    $componentId = $_instance->getRenderedChildComponentId('8etFJ96');
+    $componentTag = $_instance->getRenderedChildComponentTagName('8etFJ96');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('7AyhchM');
+    $_instance->preserveRenderedChild('8etFJ96');
 } else {
     $response = \Livewire\Livewire::mount('cleaner.support.support-contact');
     $html = $response->html();
-    $_instance->logRenderedChild('7AyhchM', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('8etFJ96', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
-           </div>
-           </div>
+                    </div>
+                  </div>
+                </div>
+
               </div>
- 
-         </div>
-           </div>
-           </div>
+            </div>
+          </div>
         </div>
-       </div>   
-       </div>
-     </div>
-   </section>
+      </div>
+    </div>
+  </div>
+</section>
 
 
 <?php $__env->stopSection(); ?>

@@ -55,17 +55,17 @@
                           <ul class="dropdown_links">
                             <li><a href="{{route('cleaner.account')}}" class="active">View Account Info</a></li>
                             <li><a href="{{route('cleaner.team')}}" class="">Team</a></li>
-                            <li><a href="cleaner-set-availability.html" class="">Set Availability</a></li>
-                            <li><a href="cleaner-set-service.html" class="">Set Services</a></li>
+                            <li><a href="{{route('cleaner.availability.index')}}" class="">Set Availability</a></li>
+                            <li><a href="{{route('cleaner.services.index')}}" class="">Set Services</a></li>
                             <li><a href="cleaner-set-location.html" class="">Set Locations Served</a></li>
-                            <li><a href="cleaner-notification.html" class="">Notification Preferences</a></li>
+                            <li><a href="{{route('cleaner.notification.index')}}" class="">Notification Preferences</a></li>
                             <li><a href="{{route('cleaner.reviews')}}" class="">Reviews</a></li>
                           </ul>
                         </li>
                         <li><a href="cleaner-appoitments.html">Appointments</a></li>
-                        <li><a href="cleaner-billing.html">Billing</a></li>
-                        <li><a href="cleaner-notification.html">Notifications</a></li>
-                        <li><a href="cleaner-support-past-service.html">Support</a></li>
+                        <li><a href="{{route('cleaner.billing.editBankAccount')}}">Billing</a></li>
+                        <li><a href="{{route('cleaner.notification.index')}}">Notifications</a></li>
+                        <li><a href="{{route('cleaner.support.service')}}">Support</a></li>
                       </ul>
                     </div>
                     <div class="dropsown-logout-design">
