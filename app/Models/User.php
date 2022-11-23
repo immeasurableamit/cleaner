@@ -84,4 +84,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return ['Monday' => 'Monday', 'Tuesday' => 'Tuesday', 'Wednesday' => 'Wednesday', 'Thursday' => 'Thursday', 'Friday' => 'Friday', 'Saturday' => 'Saturday', 'Sunday' => 'Sunday'];
     }
 
+    public function bankInfo()
+    {
+        return $this->hasOne(BankInfo::class, 'users_id', 'id');
+    }
+
 }

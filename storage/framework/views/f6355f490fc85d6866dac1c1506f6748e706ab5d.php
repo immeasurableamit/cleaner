@@ -31,18 +31,6 @@
         <input type="hidden" name="latitude">
         <input type="hidden" name="longitude">
 
-        <input type="hidden" name="user_type" value="cleaner">
-        <div class="row no-mrg">
-          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 no-padd">
-            <div class="blue-bg-wrapper"  >
-              <div class="avatar-upload">
-                <div class="avatar-edit">
-                  <input type='file' name="image" id="upload" class= "file" accept="image/*" />
-                  <label for="upload">Upload a profile pic</label>
-          
-                </div>
-
-
       <input type="hidden" name="user_type" value="cleaner">
       <div class="row no-mrg">
         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 no-padd">

@@ -161,6 +161,7 @@ class CreateNewUser implements CreatesNewUsers
                 $imageFullPath = $folderPath . $file_name;
                 file_put_contents($imageFullPath, $image_base64);
                 $user->image = $file_name;
+               
             }
             $user->save();
 
