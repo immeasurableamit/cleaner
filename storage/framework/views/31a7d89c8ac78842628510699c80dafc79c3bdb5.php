@@ -13,7 +13,7 @@
         <li><a href="<?php echo e(route('cleaner.availability.index')); ?>" class="<?php echo e(@$title['active']=='availability' ? 'active' : ''); ?>">Set Availability</a></li>
         <li><a href="<?php echo e(route('cleaner.services.index')); ?>" class="<?php echo e(@$title['active']=='services' ? 'active' : ''); ?>">Set Services</a></li>
         <li><a href="cleaner-set-location.html" class="">Set Locations Served</a></li>
-        <li><a href="cleaner-notification.html" class="">Notification Preferences</a></li>
+        <li><a href="<?php echo e(route('cleaner.notification.index')); ?>" class="<?php echo e(@$title['active']=='notification' ? 'active' : ''); ?>">Notification Preferences</a></li>
         <li><a href="<?php echo e(route('cleaner.reviews')); ?>" class="<?php echo e(@$title['active']=='reviews' ? 'active' : ''); ?>">Reviews</a></li>
       </ul>
       </li>
@@ -21,7 +21,7 @@
 
       <li><a href="cleaner-appoitments.html">Appointments</a></li>
       <li><a href="<?php echo e(route('cleaner.billing.billing')); ?>" class="<?php echo e(@$title['active']=='billing' ? 'active' : ''); ?>">Billing</a></li>
-      <li><a href="cleaner-notification.html">Notifications</a></li>
-      <li><a href="<?php echo e(route('support.service')); ?>" class="<?php echo e(@$title['active']=='support' ? 'active' : ''); ?>">Support</a></li>
+      <li><a href="<?php echo e(route('cleaner.notification.index')); ?>" class="<?php echo e(@$title['active']=='notification' ? 'active' : ''); ?>">Notifications</a></li>
+      <li><a href="<?php echo e(route('cleaner.support.service')); ?>" class="<?php echo e(@$title['active']=='support' ? 'active' : ''); ?>">Support</a></li>
     </ul>
   </div><?php /**PATH /var/www/html/projects/Amandeep Projects/working project/cleaner/cleaner/resources/views/layouts/common/sidebar.blade.php ENDPATH**/ ?>

@@ -60,7 +60,7 @@
                                     <div class="customer_profile-info">
                                         <div class="d-flex align-items-center position-relative">
                                             <div class="customer-pro-img">
-                                                <img src="{{asset('assets/images/thumbnail.png')}}">
+                                                <img src="{{asset('storage/images/'.auth()->user()->image)}}">
                                             </div>
                                             <div class="customer-pro-cntnt">
                                                 <h4>{{auth()->user()->name}}</h4>
@@ -83,8 +83,8 @@
                                                 <li><a href="{{route('cleaner.account')}}">Account</a></li>
                                                 <li><a href="customer-appoitments.html">Appointments</a></li>
                                                 <li><a href="{{route('cleaner.billing.editBankAccount')}}">Billing</a></li>
-                                                <li><a href="customer-notification.html">Notifications</a></li>
-                                                <li><a href="customer-support-past-service.html">Support</a></li>
+                                                <li><a href="{{route('cleaner.notification.index')}}">Notifications</a></li>
+                                                <li><a href="{{route('cleaner.support.service')}}">Supports</a></li>
                                                 @endif
 
                                             </ul>
