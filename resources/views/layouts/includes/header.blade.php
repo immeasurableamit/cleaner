@@ -75,14 +75,14 @@
                                                 @if (Auth::user()->role=="customer")
                                                 <li><a href="{{route('customer.account')}}">Account</a></li>
                                                 <li><a href="customer-appoitments.html">Appointments</a></li>
-                                                <li><a href="billing-customer.html">Billing</a></li>
+                                                <li><a href="#">Billing</a></li>
                                                 <li><a href="customer-notification.html">Notifications</a></li>
                                                 <li><a href="customer-support-past-service.html">Support</a></li>
 
                                                 @else
                                                 <li><a href="{{route('cleaner.account')}}">Account</a></li>
                                                 <li><a href="customer-appoitments.html">Appointments</a></li>
-                                                <li><a href="billing-customer.html">Billing</a></li>
+                                                <li><a href="{{route('cleaner.billing.editBankAccount')}}">Billing</a></li>
                                                 <li><a href="customer-notification.html">Notifications</a></li>
                                                 <li><a href="customer-support-past-service.html">Support</a></li>
                                                 @endif

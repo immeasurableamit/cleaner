@@ -75,14 +75,14 @@
                                                 <?php if(Auth::user()->role=="customer"): ?>
                                                 <li><a href="<?php echo e(route('customer.account')); ?>">Account</a></li>
                                                 <li><a href="customer-appoitments.html">Appointments</a></li>
-                                                <li><a href="billing-customer.html">Billing</a></li>
+                                                <li><a href="#">Billing</a></li>
                                                 <li><a href="customer-notification.html">Notifications</a></li>
                                                 <li><a href="customer-support-past-service.html">Support</a></li>
 
                                                 <?php else: ?>
                                                 <li><a href="<?php echo e(route('cleaner.account')); ?>">Account</a></li>
                                                 <li><a href="customer-appoitments.html">Appointments</a></li>
-                                                <li><a href="billing-customer.html">Billing</a></li>
+                                                <li><a href="<?php echo e(route('cleaner.billing.editBankAccount')); ?>">Billing</a></li>
                                                 <li><a href="customer-notification.html">Notifications</a></li>
                                                 <li><a href="customer-support-past-service.html">Support</a></li>
                                                 <?php endif; ?>

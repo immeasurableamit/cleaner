@@ -11,7 +11,7 @@
         <li><a href="<?php echo e(route('cleaner.account')); ?>" class="<?php echo e(@$title['active']=='account' ? 'active' : ''); ?>">View Account Info</a></li>
         <li><a href="<?php echo e(route('cleaner.team')); ?>" class="<?php echo e(@$title['active']=='team' ? 'active' : ''); ?>">Team</a></li>
         <li><a href="<?php echo e(route('cleaner.availability.index')); ?>" class="<?php echo e(@$title['active']=='availability' ? 'active' : ''); ?>">Set Availability</a></li>
-        <li><a href="cleaner-set-service.html" class="">Set Services</a></li>
+        <li><a href="<?php echo e(route('cleaner.services.index')); ?>" class="<?php echo e(@$title['active']=='services' ? 'active' : ''); ?>">Set Services</a></li>
         <li><a href="cleaner-set-location.html" class="">Set Locations Served</a></li>
         <li><a href="cleaner-notification.html" class="">Notification Preferences</a></li>
         <li><a href="<?php echo e(route('cleaner.reviews')); ?>" class="<?php echo e(@$title['active']=='reviews' ? 'active' : ''); ?>">Reviews</a></li>

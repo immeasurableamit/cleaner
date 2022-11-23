@@ -8,6 +8,7 @@ use App\Models\Time_zone;
 use Livewire\WithFileUploads;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Illuminate\Support\Str;
+use App\Base64Image;
 
 use Livewire\Component;
 
@@ -19,13 +20,20 @@ class Account extends Component
     public $fieldStatus = false, $action;
     use WithFileUploads;
 
+    protected $listeners = ['imgUploaded' => 'storeUploadedImage'];
 
-    // public function rules()
-    // {
-    //     return [
-    //         'email' =>'required|email',
-    //     ]
-    // }
+
+    public function storeUploadedImage(array $data)
+    {
+        $image = $data['base64_string']; //bace64 image 
+        $id    = $data['user_id'];
+        $user      = User::find($id);
+        $folderPath = public_path('/storage/images');
+        $filename = (new Base64Image)->save($image, $folderPath);
+        $user->image = $filename;
+        $user->save();
+    }
+
     public function editData($userId, $action)
     {
 
@@ -127,88 +135,25 @@ class Account extends Component
         if ($id) {
             $user = User::find($id);
 
-            $image= $this->image;
+            $image = $this->image;
             // $user->image = $this->image;
-            // dd($image);
+            //     dd($image);
 
-            $folderPath = ('storage/images/');
-            if (!is_dir($folderPath)) {
-                mkdir($folderPath, 0775, true);
-                chown($folderPath, exec('whoami'));
-            }
-            $image_parts = explode(";base64,", $image);
-            $image_type_aux = explode("image/", $image_parts[0]);
-            $image_base64 = base64_decode($image_parts[1] ?? null) ?? null;
-            $file_name = '-' . md5(uniqid() . time()) . '.png';
-            $imageFullPath = $folderPath . $file_name;
-            file_put_contents($imageFullPath, $image_base64);
-            $user->image = $file_name;
-        // dd($user->image);
-        $user->save();
-
-
-
-
-
-//             $image = $user->image;  // your base64 encoded
-         
-
-//             $folderPath = ('storage/images/');
-//             if (!is_dir($folderPath)) {
-//                 mkdir($folderPath, 0775, true);
-//                 chown($folderPath, exec('whoami'));
-//             }
-
-//             $image_parts = explode(";base64,", $image);
-//             $image_type_aux = explode("image/", $image_parts[0]);
-//             $image_base64 = base64_decode($image_parts[1] ?? null) ?? null;
-          
-//             $file_name = $user->id . '-' . md5(uniqid() . time()) . '.png';
-
-//             $imageFullPath = $folderPath . $file_name;
-//             // dd($imageFullPath);
-//             file_put_contents($imageFullPath, $image_base64);
-
-//             //...
-//             $user->image = $file_name;
-// dd($user->image);
-
-
-
-            // $image = str_replace('data:image/png;base64,', '', $image);
-            // $image = str_replace(' ', '+', $image);
-
-            // $imageName = str_random(10).'.'.'png';
-            // dd($imageName);
-            // \File::put(storage_path('images'). '/' . $imageName, base64_decode($image));
-
-
-            // $image_base64 = base64_decode($this->image ?? null) ?? null;
-            // dd($this->image, $image_base64);
-            // $user->image = $this->image;
-
-            // $this->image->store('users', 'storage/images');
-
-            // if ($user->image && strpos($user->image, "data:") !== false) {
-            //     $this->image = $user->image;
-            //     dd($this->image);
             //     $folderPath = ('storage/images/');
             //     if (!is_dir($folderPath)) {
             //         mkdir($folderPath, 0775, true);
             //         chown($folderPath, exec('whoami'));
             //     }
-
             //     $image_parts = explode(";base64,", $image);
             //     $image_type_aux = explode("image/", $image_parts[0]);
             //     $image_base64 = base64_decode($image_parts[1] ?? null) ?? null;
-            //     $file_name = $user->id . '-' . md5(uniqid() . time()) . '.png';
+            //     $file_name = '-' . md5(uniqid() . time()) . '.png';
             //     $imageFullPath = $folderPath . $file_name;
             //     file_put_contents($imageFullPath, $image_base64);
-
-            //     //...
             //     $user->image = $file_name;
-            // }
+            // // dd($user->image);
             // $user->save();
+
         }
     }
     public function render()

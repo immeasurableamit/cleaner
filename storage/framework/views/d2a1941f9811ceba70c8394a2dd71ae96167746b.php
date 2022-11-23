@@ -57,6 +57,7 @@
                     url: event.target.result
                 }).then(function() {
                     console.log('jQuery bind complete');
+                    console.log('jsn herer');
                 });
             }
             reader.readAsDataURL(this.files[0]);

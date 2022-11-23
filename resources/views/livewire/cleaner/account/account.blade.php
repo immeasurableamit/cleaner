@@ -6,13 +6,13 @@
         <div class="customer-avatar-upload-div">
             <div class="customer-avatar-upload">
                 <div class="customer-avatar-edit">
-                    <input type='file' id="upload" accept=".png, .jpg, .jpeg" enctype="multipart/form-data" wire:model="image" />
+                    <input type='file' id="upload" accept=".png, .jpg, .jpeg" enctype="multipart/form-data"  />
                     <label for="upload">Upload a profile pic</label>
                 </div>
                 <div class="customer-avatar-preview position-relative">
                     <div id="uploaded" style="background-image: url('/storage/images/$user->image');">
                         <img src="{{ asset('storage/images/'.$user->image) }}" id="customerimagePreview">
-                        <a href="javascript::void(0)" wire:click="imageUpload({{$user->id}})"><i class="fas fa-save"></i></a>
+                        <a href="javascript::void(0)" onclick="uploadImgViaLivewire('{{ $user->id }}')"><i class="fas fa-save"></i></a>
                     </div>
                 </div>
 
@@ -23,7 +23,7 @@
                     <div class="p-image">
                         <!-- <span class="pencil_icon"><i class="fa-solid fa-pencil upload-button"></i></span> -->
                         <!-- <input class="file-upload" id="upload" type="file" accept="image/*" /> -->
-                        <input type="hidden" name="image" id="upload-img" />
+                        <input type="hidden" name="image" id="upload-img">
                     </div>
                 </div>
             </div>
@@ -148,6 +148,15 @@
 
 @section('script')
 
+<script>
+    function uploadImgViaLivewire(user_id)
+    {
+        var base64_string = $("#upload-img").val();
+        var data = { user_id, base64_string };
+        Livewire.emit('imgUploaded', data );
+    }
+    
+</script>
 @include('layouts.common.cropper')
 
 @endsection
