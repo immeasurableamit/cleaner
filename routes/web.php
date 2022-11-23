@@ -222,8 +222,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::controller(Cleaner\notification\NotificationController::class)->group(function () {
                     Route::get('/', 'index')->name('cleaner.notification.index');
                 });
-            });
-        });
+
 
         // Route::get('search',[CleanerController::class,'index'])->name('search');
     });

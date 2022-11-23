@@ -5,26 +5,32 @@ namespace App\Http\Livewire\Admin\Services;
 use Livewire\Component;
 use App\Models\Services as ServicesModel;
 use App\Models\ServicesItems;
+use App\Models\Types;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Service extends Component
 {
     use LivewireAlert;
 
-    public $title, $status='1';
+    public $title, $type, $status='1';
 
     public $itemTitle, $itemPrice, $itemDuration, $itemDescription, $itemStatus='1';
-
+    public $types = [];
 
     public $serviceId, $serviceItemId;
     protected $listeners = ['confirmedDelete', 'confirmedItemDelete'];
 
+
+    public function mount(){
+        $this->types = Types::all();
+    }
 
     public function store()
     {
         $this->validate(
             [
                 'title' => 'required|max:255',
+                'type' => 'required',
                 'status' => 'required',
             ]
         );
@@ -36,6 +42,7 @@ class Service extends Component
             $store->exists = true;
         }
         $store->title = $this->title;
+        $store->types_id = $this->type;
         $store->status = $this->status;
         $store->save();
 
@@ -60,9 +67,9 @@ class Service extends Component
         $this->validate(
             [
                 'itemTitle' => 'required|max:255',
-                'itemPrice' => 'nullable|max:255',
-                'itemDuration' => 'nullable|max:255',
-                'itemDescription' => 'nullable|max:255',
+                //'itemPrice' => 'nullable|max:255',
+                //'itemDuration' => 'nullable|max:255',
+                //'itemDescription' => 'nullable|max:255',
                 'itemStatus' => 'required',
             ],
             [
@@ -80,9 +87,9 @@ class Service extends Component
         }
         $store->services_id = $this->serviceId;
         $store->title = $this->itemTitle;
-        $store->price = $this->itemPrice;
-        $store->duration = $this->itemDuration;
-        $store->description = $this->itemDescription;
+        //$store->price = $this->itemPrice;
+        //$store->duration = $this->itemDuration;
+        //$store->description = $this->itemDescription;
         $store->status = $this->status;
         $store->save();
 
@@ -102,6 +109,7 @@ class Service extends Component
         //...
         $this->serviceId = $service->id;
         $this->title = $service->title;
+        $this->type = $service->types_id;
         $this->status = $service->status;
         
         $this->emit('serviceForm');
@@ -129,6 +137,7 @@ class Service extends Component
     private function resetInputFields()
     {
         $this->title = '';
+        $this->type = '';
         $this->status = '1';
         $this->serviceId = '';
     }
@@ -202,7 +211,7 @@ class Service extends Component
     public function render()
     {
 
-        $services = ServicesModel::with('items')->get();
+        $services = ServicesModel::with('items', 'type')->get();
 
         return view('livewire.admin.services.service', ['services'=>$services]);
     }

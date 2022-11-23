@@ -1,12 +1,15 @@
 <div>
 
+    {{--
     <button type="button" class="btn btn-success addService">Add Service</button>
+    --}}
 
     @foreach($services as $service)
     <table id="all-cleaner-table22" class="table dt-responsive nowrap" style="width:100%">
         <thead>
             <tr>
                 <th>Title</th>
+                <th>Type</th>
                 <th>Status</th>
                 <th>Action</th>
             </tr>
@@ -14,6 +17,7 @@
         <tbody>
             <tr>
                 <td>{{$service->title}}</td>
+                <td>{{@$service->type->title}}</td>
                 <td>{{ $service->status=='1'?'Active':'In-active' }}</td>
                 <td class="status">
                     <button type="button" class="btn btn-success" wire:click="edit({{$service->id}})">Edit</button>
@@ -30,9 +34,11 @@
                 <thead>
                     <tr>
                         <th>Title</th>
+                        {{--
                         <th>Price</th>
                         <th>Duration</th>
                         <th>Description</th>
+                        --}}
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -41,9 +47,11 @@
                     @foreach($service->items as $item)
                     <tr>
                         <td>{{$item->title}}</td>
+                        {{--
                         <td>{{$item->price}}</td>
                         <td>{{$item->duration}}</td>
                         <td>{{$item->description}}</td>
+                        --}}
                         <td>{{ $item->status=='1'?'Active':'In-active' }}</td>
                         <td class="status">
                             <button type="button" class="btn btn-success" wire:click="editItem({{$item->id}})">Edit</button>
@@ -74,6 +82,16 @@
                         <label>Title</label>
                         <input type="text" wire:model="title" class="form-control">
                         {!! $errors->first('title', '<span class="help-block">:message</span>') !!}
+                    </div>
+                    <div class="form-group">
+                        <label>Type</label>
+                        <select wire:model="type" class="form-control">
+                            <option>Select Type</option>
+                            @foreach($types as $type)
+                            <option value="{{$type->id}}">{{$type->title}}</option>
+                            @endforeach
+                        </select>
+                        {!! $errors->first('type', '<span class="help-block">:message</span>') !!}
                     </div>
                     <div class="form-group">
                         <label>Status</label></br>
@@ -112,6 +130,7 @@
                         <input type="text" wire:model="itemTitle" class="form-control">
                         {!! $errors->first('itemTitle', '<span class="help-block">:message</span>') !!}
                     </div>
+                    {{--
                     <div class="form-group">
                         <label>Price</label>
                         <input type="text" wire:model="itemPrice" class="form-control">
@@ -127,6 +146,7 @@
                         <input type="text" wire:model="itemDescription" class="form-control">
                         {!! $errors->first('itemDescription', '<span class="help-block">:message</span>') !!}
                     </div>
+                    --}}
                     <div class="form-group">
                         <label>Status</label></br>
                         <label class="container_radio">
