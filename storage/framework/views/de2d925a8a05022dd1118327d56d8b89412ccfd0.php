@@ -82,9 +82,9 @@
                                                 <?php else: ?>
                                                 <li><a href="<?php echo e(route('cleaner.account')); ?>">Account</a></li>
                                                 <li><a href="customer-appoitments.html">Appointments</a></li>
-                                                <li><a href="<?php echo e(route('cleaner.billing.editBankAccount')); ?>">Billing</a></li>
-                                                <li><a href="<?php echo e(route('cleaner.notification.index')); ?>">Notifications</a></li>
-                                                <li><a href="<?php echo e(route('cleaner.support.service')); ?>">Supports</a></li>
+                                                <li><a href="">Billing</a></li>
+                                                <li><a href="">Notifications</a></li>
+                                                <li><a href="">Supports</a></li>
                                                 <?php endif; ?>
 
                                             </ul>

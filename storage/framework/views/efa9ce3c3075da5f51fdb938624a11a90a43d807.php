@@ -10,7 +10,22 @@
         <div class="header-flex-item header-flex-item-3 cleaner_header_right">
           <p class="cleaner_text_top">Your profile is paused, click to go live!</p>
           <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDisabled" disabled>
+            <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('cleaner-header')->html();
+} elseif ($_instance->childHasBeenRendered('0KR9wnW')) {
+    $componentId = $_instance->getRenderedChildComponentId('0KR9wnW');
+    $componentTag = $_instance->getRenderedChildComponentTagName('0KR9wnW');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('0KR9wnW');
+} else {
+    $response = \Livewire\Livewire::mount('cleaner-header');
+    $html = $response->html();
+    $_instance->logRenderedChild('0KR9wnW', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
+           
           </div>
           <ul class="d-flex align-items-center">
             <li class="nav-item email-notification">

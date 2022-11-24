@@ -200,33 +200,43 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::get('/profile/connect-account', 'connectAccount')->name('cleaner.billing.connectAccount');
                 Route::get('/banking-info-error', 'bankingInfoError')->name('cleaner.billing.error');
                 Route::get('/banking-info-success', 'bankingInfoSuccess')->name('cleaner.billing.success');
-
-
-                //services
-                Route::prefix('services')->group(function () {
-                    Route::controller(Cleaner\ServicesController::class)->group(function () {
-                        Route::get('/', 'index')->name('cleaner.services.index');
-                    });
-                });
             });
-            //Support
-            Route::get('/support', function () {
-                $title = array(
-                    'title' => 'Support',
-                    'active' => 'support',
-                );
-                return view('cleaner.support.support', compact('title'));
-            })->name('cleaner.support.service');
+        });
 
-            Route::get('testemail',function() {
-                Mail::to(['greatjob@yopmail.com'])->send(new ContactMail);
-                });
+        //services
+        Route::prefix('services')->group(function () {
+            Route::controller(Cleaner\ServicesController::class)->group(function () {
+                Route::get('/', 'index')->name('cleaner.services.index');
+            });
+        });
 
-            // Notification
-            Route::prefix('notification')->group(function () {
-                Route::controller(Cleaner\notification\NotificationController::class)->group(function () {
-                    Route::get('/', 'index')->name('cleaner.notification.index');
-                });
+        //Support
+        Route::get('/support', function () {
+            $title = array(
+                'title' => 'Support',
+                'active' => 'support',
+            );
+            return view('cleaner.support.support', compact('title'));
+        })->name('cleaner.support.service');
+
+        Route::get('testemail', function () {
+            Mail::to(['greatjob@yopmail.com'])->send(new ContactMail);
+        });
+
+        // Notification
+        Route::prefix('notification')->group(function () {
+            Route::controller(Cleaner\notification\NotificationController::class)->group(function () {
+                Route::get('/', 'index')->name('cleaner.notification.index');
+            });
+        });
+
+        //jobs
+        Route::prefix('jobs')->group(function () {
+            Route::controller(Cleaner\jobs\JobsController::class)->group(function () {
+                Route::get('/', 'index')->name('cleaner.jobs.jobs');
+            });
+        });
+        
 
     });
 });
