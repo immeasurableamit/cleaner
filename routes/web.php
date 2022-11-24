@@ -222,15 +222,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Mail::to(['greatjob@yopmail.com'])->send(new ContactMail);
                 });
 
-
             // Notification
             Route::prefix('notification')->group(function () {
                 Route::controller(Cleaner\notification\NotificationController::class)->group(function () {
                     Route::get('/', 'index')->name('cleaner.notification.index');
                 });
-            });
-        });
 
-        // Route::get('search',[CleanerController::class,'index'])->name('search');
     });
 });

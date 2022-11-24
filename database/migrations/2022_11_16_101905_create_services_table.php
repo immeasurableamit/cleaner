@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->id();
+
+            $table->foreignId('types_id')->references('id')->on('types')->onDelete('cascade');
             
             $table->string('title');
             $table->enum('status', ['0', '1'])->default('0');

@@ -17,1237 +17,192 @@
                 </div>
                 <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 no-padd">
                     
-
                     <div class="row no-mrg">
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 no-padd cleaner_availability_section">
-              <div class="customer-account-forms ">
-                 <div class="form-headeing-second border-bottom pb-3 top_heading">
-                   <h3 class="mb-0">Your Services</h3>
-                 </div>
-  
-                 <div class="service_text border-0">
-                  <p>Canary Clean makes it easy to get started! Enter your price and time estimates below to help us give prospective customers an idea of your time and costs.<b>Prices and times are automatically scaled and can be adjusted at any time. </b>  </p>
-                  <p>Remember - you will still review any jobs before accepting them, having the chance to raise or lower the price or estimated duration. You can also reach out to the customer at anytime before or after accepting.</p>
-                 </div>
-                 <h5 class="bg_ylow_h5">Offer Services, Set Prices, and Durations</h5>
-                 <!-- home cleaning -->
-                 <div class="services-alternate-wrap-sec">
-                 <form>
-                <div class="alternative-service-block">
-                <div class="alternate-service-header">
-                 <div class="row">
-                  <div class="col-xl-6 col-md-6 col-sm-12">
-                    <div class="home_cleaning_div">
-                   <div class="card_header_tittle">
-                     <h3>Full Home Cleanings</h3>
-                       <p> enter your rate to match what you would charge 
-                        for 1,500 sq ft - prices will scale up or down from there</p>
-                   </div>
-                </div>
-                </div>
-                </div>
-                </div>
-                <!-- One Time Row -->
-                <div class="card_service_row">
-                <div class="row">
-                <div class="col-xl-6 col-md-6 col-sm-12">
-                <div class="btn_header_service py-3">
-                        <h4 class="mb-0 btn_blue">One Time Cleanings</h4>
-                        <div class="form-check form-switch heading-toggle active-toggle">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                          </div>
-                </div>
-                </div>
-                </div>
-                <div class="row">
-                        <div class="col-xl-6 col-md-6 col-sm-12">
-                            <div class="card_collapse_service common_card_service show show-2">
-                                <div class="heder_row">
-                                 <h3>Make Ready - Empty Home</h3>
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                </div>
-                                </div>
-                                <div class="card-edit-content">
-                                    <p class="price-area-text"><span class="price_span">$225</span> <span class="area_span">per 1,500 sq ft</span></p>
-                                    <p class="time">1:30 hrs</p>
-                                    <p class="card_toggle_s">Edit</p>
-                                </div>
-                                <div class="card-second-content">
-                                     <div class="card_row_3">
-                                    <span class="est">Price per sq ft (in USD)</span>
-                                    <div class="incremnt_decrmnt number for_alternative">
-                                    <span class="minus">-</span>
-                                    <input type="text" value="1">
-                                    <span class="plus">+</span>   
-                                </div>
-                                </div>
-                                <div class="card_row_3">
-                                <span class="est">Est Duration</span>
-                                <div class="incremnt_decrmnt number for_alternative">
-                                    <span class="minus">-</span>
-                                    <input type="text" value="1">
-                                    <span class="plus">+</span>   
-                                </div>
-                                </div>
-                                <div class="btn_text">
-                                <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p>
-                                <button class="btn_blue">Save</button>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-md-6 col-sm-12">
-                            <div class="card_collapse_service common_card_service show">
-                                <div class="heder_row">
-                                 <h3>Deep Clean - Occupied Home</h3>
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                </div>
-                                </div>
-                                <div class="card-edit-content">
-                                    <p class="price-area-text"><span class="price_span">$225</span> <span class="area_span">per 1,500 sq ft</span></p>
-                                    <p class="time">1:30 hrs</p>
-                                    <p class="card_toggle_s">Edit</p>
-                                </div>
-                                <div class="card-second-content">
-                                     <div class="card_row_3">
-                                    <span class="est">Price per sq ft (in USD)</span>
-                                    <div class="incremnt_decrmnt number for_alternative">
-                                    <span class="minus">-</span>
-                                    <input type="text" value="1">
-                                    <span class="plus">+</span>   
-                                </div>
-                                </div>
-                                <div class="card_row_3">
-                                <span class="est">Est Duration</span>
-                                <div class="incremnt_decrmnt number for_alternative">
-                                    <span class="minus">-</span>
-                                    <input type="text" value="1">
-                                    <span class="plus">+</span>   
-                                </div>
-                                </div>
-                                <div class="btn_text">
-                                <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p>
-                                <button class="btn_blue">Save</button>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-md-6 col-sm-12">
-                            <div class="card_collapse_service common_card_service">
-                                <div class="heder_row">
-                                 <h3>Construction Cleanup</h3>
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                </div>
-                                </div>
-                                <div class="card-edit-content">
-                                    <p class="price-area-text"><span class="price_span">$225</span> <span class="area_span">per 1,500 sq ft</span></p>
-                                    <p class="time">1:30 hrs</p>
-                                    <p class="card_toggle_s">Edit</p>
-                                </div>
-                                <div class="card-second-content">
-                                     <div class="card_row_3">
-                                    <span class="est">Price per sq ft (in USD)</span>
-                                    <div class="incremnt_decrmnt number for_alternative">
-                                    <span class="minus">-</span>
-                                    <input type="text" value="1">
-                                    <span class="plus">+</span>   
-                                </div>
-                                </div>
-                                <div class="card_row_3">
-                                <span class="est">Est Duration</span>
-                                <div class="incremnt_decrmnt number for_alternative">
-                                    <span class="minus">-</span>
-                                    <input type="text" value="1">
-                                    <span class="plus">+</span>   
-                                </div>
-                                </div>
-                                <div class="btn_text">
-                                <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p>
-                                <button class="btn_blue">Save</button>
-                                </div>
-                                </div>
-                            </div>
-                </div>
-                </div>
-                </div>
-                <!-- Recurring Cleaning Row -->
-                <div class="card_service_row">
-                  <div class="row">
-                  <div class="col-xl-6 col-md-6 col-sm-12">
-                  <div class="btn_header_service py-3">
-                          <h4 class="mb-0 btn_blue">Recurring Cleanings</h4>
-                          <div class="form-check form-switch heading-toggle active-toggle">
-                              <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                            </div>
-                  </div>
-                  </div>
-                  </div>
-                  <div class="row">
-                          <div class="col-xl-6 col-md-6 col-sm-12">
-                              <div class="card_collapse_service common_card_service show">
-                                  <div class="heder_row">
-                                   <h3>Routine - Weekly</h3>
-                                  <div class="form-check form-switch">
-                                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                  </div>
-                                  </div>
-                                  <div class="card-edit-content">
-                                      <p class="price-area-text"><span class="price_span">$225</span> <span class="area_span">per 1,500 sq ft</span></p>
-                                      <p class="time">1:30 hrs</p>
-                                      <p class="card_toggle_s">Edit</p>
-                                  </div>
-                                  <div class="card-second-content">
-                                     <div class="card_row_3">
-                                      <span class="est">Price per sq ft (in USD)</span>
-                                      <div class="incremnt_decrmnt number for_alternative">
-                                      <span class="minus">-</span>
-                                      <input type="text" value="1">
-                                      <span class="plus">+</span>   
-                                  </div>
-                                  </div>
-                                  <div class="card_row_3">
-                                  <span class="est">Est Duration</span>
-                                  <div class="incremnt_decrmnt number for_alternative">
-                                      <span class="minus">-</span>
-                                      <input type="text" value="1">
-                                      <span class="plus">+</span>   
-                                  </div>
-                                  </div>
-                                  <div class="btn_text">
-                                  <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p>
-                                  <button class="btn_blue">Save</button>
-                                  </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="col-xl-6 col-md-6 col-sm-12">
-                              <div class="card_collapse_service common_card_service show">
-                                  <div class="heder_row">
-                                   <h3>Routine - Every 2 Weeks</h3>
-                                  <div class="form-check form-switch">
-                                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                  </div>
-                                  </div>
-                                  <div class="card-edit-content">
-                                      <p class="price-area-text"><span class="price_span">$225</span> <span class="area_span">per 1,500 sq ft</span></p>
-                                      <p class="time">1:30 hrs</p>
-                                      <p class="card_toggle_s">Edit</p>
-                                  </div>
-                                  <div class="card-second-content">
-                                     <div class="card_row_3">
-                                      <span class="est">Price per sq ft (in USD)</span>
-                                      <div class="incremnt_decrmnt number for_alternative">
-                                      <span class="minus">-</span>
-                                      <input type="text" value="1">
-                                      <span class="plus">+</span>   
-                                  </div>
-                                  </div>
-                                  <div class="card_row_3">
-                                  <span class="est">Est Duration</span>
-                                  <div class="incremnt_decrmnt number for_alternative">
-                                      <span class="minus">-</span>
-                                      <input type="text" value="1">
-                                      <span class="plus">+</span>   
-                                  </div>
-                                  </div>
-                                  <div class="btn_text">
-                                  <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p>
-                                  <button class="btn_blue">Save</button>
-                                  </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="col-xl-6 col-md-6 col-sm-12">
-                              <div class="card_collapse_service common_card_service show">
-                                  <div class="heder_row">
-                                   <h3>Routine - Every 4 Weeks</h3>
-                                  <div class="form-check form-switch">
-                                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                  </div>
-                                  </div>
-                                  <div class="card-edit-content">
-                                      <p class="price-area-text"><span class="price_span">$225</span> <span class="area_span">per 1,500 sq ft</span></p>
-                                      <p class="time">1:30 hrs</p>
-                                      <p class="card_toggle_s">Edit</p>
-                                  </div>
-                                  <div class="card-second-content">
-                                     <div class="card_row_3">
-                                      <span class="est">Price per sq ft (in USD)</span>
-                                      <div class="incremnt_decrmnt number for_alternative">
-                                      <span class="minus">-</span>
-                                      <input type="text" value="1">
-                                      <span class="plus">+</span>   
-                                  </div>
-                                  </div>
-                                  <div class="card_row_3">
-                                  <span class="est">Est Duration</span>
-                                  <div class="incremnt_decrmnt number for_alternative">
-                                      <span class="minus">-</span>
-                                      <input type="text" value="1">
-                                      <span class="plus">+</span>   
-                                  </div>
-                                  </div>
-                                  <div class="btn_text">
-                                  <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p>
-                                  <button class="btn_blue">Save</button>
-                                  </div>
-                                  </div>
-                              </div>
-                         </div>
-                         <div class="col-xl-6 col-md-6 col-sm-12">
-                          <div class="card_collapse_service common_card_service show">
-                              <div class="heder_row">
-                               <h3>Routine - Every 8 Weeks</h3>
-                              <div class="form-check form-switch">
-                                  <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                              </div>
-                              </div>
-                              <div class="card-edit-content">
-                                  <p class="price-area-text"><span class="price_span">$225</span> <span class="area_span">per 1,500 sq ft</span></p>
-                                  <p class="time">1:30 hrs</p>
-                                  <p class="card_toggle_s">Edit</p>
-                              </div>
-                              <div class="card-second-content">
-                                 <div class="card_row_3">
-                                  <span class="est">Price per sq ft (in USD)</span>
-                                  <div class="incremnt_decrmnt number for_alternative">
-                                  <span class="minus">-</span>
-                                  <input type="text" value="1">
-                                  <span class="plus">+</span>   
-                              </div>
-                              </div>
-                              <div class="card_row_3">
-                              <span class="est">Est Duration</span>
-                              <div class="incremnt_decrmnt number for_alternative">
-                                  <span class="minus">-</span>
-                                  <input type="text" value="1">
-                                  <span class="plus">+</span>   
-                              </div>
-                              </div>
-                              <div class="btn_text">
-                              <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p>
-                              <button class="btn_blue">Save</button>
-                              </div>
-                              </div>
-                          </div>
-                         </div>
-                  </div>
-                </div>
-                <!-- Quotes Sec -->
-                <div class="home-quotes-sec">
-                   <div class="bigger-home-save-link">
-                    <a href="#" class="link-design-2 py-3"> Bigger homes save you time on travel and setup. We recommend offering sq ft discounts to large and extra-large sized homes. Standard discounts are 10% and 20%.</a> 
-                   </div>
-                   <div class="home-discount-counter">
-                    <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12">
-                      <div class="incremnt_input_div py-3">
-              
-                          <div class="incremnt_decrmnt number">
-                            <input type="text" value="1">
-                            <span class="plus">+</span>
-                            <span class="minus">-</span>
-                          </div>
-                          <h5>Large Home Discount (2,001-3,500 sq ft)</h5>
-                        </div>
-                        <div class="incremnt_input_div pb-3">
-              
-                          <div class="incremnt_decrmnt number">
-                            <input type="text" value="1">
-                            <span class="plus">+</span>
-                            <span class="minus">-</span>
-                          </div>
-                          <h5>XL Home Discount (3,501 and up sq ft)</h5>
-                        </div>
-                   </div>
-                   </div>
-                   <div class="btn_text_service">
-                    <p>A note about Est Durations: We recommend you start on the higher side and lower if you find you are completing jobs faster. Find a rule-of-thumb guide <a href="#" class="link-design-2">here.</a></p>
-                   </div>
-                </div>
-                <!-- Home Add Ons header -->
-                <div class="alternate-service-header">
-                  <div class="row">
-                   <div class="col-xl-6 col-md-6 col-sm-12">
-                     <div class="home_cleaning_div">
-                    <div class="card_header_tittle">
-                      <h3>Home Add-Ons</h3>
-                        <p> which add-ons you would like to offer with your full home cleanings</p>
-                    </div>
-                 </div>
-                 </div>
-                 </div>
-                </div>
-                  <!-- Home Add Ons Row -->
-                  <div class="card_service_row">
-                    <div class="row">
-                        <div class="col-xl-6 col-md-6 col-sm-12">
-                        <div class="btn_header_service py-3">
-                                <h4 class="mb-0 btn_blue">Your Home Add-Ons</h4>
-                                <div class="form-check form-switch heading-toggle active-toggle">
-                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                  </div>
-                        </div>
-                        </div>
-                        </div>
-                    <div class="row">
-                            <div class="col-xl-6 col-md-6 col-sm-12">
-                                <div class="card_collapse_service common_card_service show">
-                                    <div class="heder_row">
-                                     <h3>Garage - up to 2 car size - sweep only</h3>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                    </div>
-                                    </div>
-                                    <div class="card-edit-content">
-                                        <p class="price-area-text"><span class="price_span">$225</span> <span class="area_span">per 1,500 sq ft</span></p>
-                                        <p class="time">1:30 hrs</p>
-                                        <p class="card_toggle_s">Edit</p>
-                                    </div>
-                                    <div class="card-second-content">
-                                         <div class="card_row_3">
-                                        <span class="est">Price (in USD)</span>
-                                        <div class="incremnt_decrmnt number for_alternative">
-                                        <span class="minus">-</span>
-                                        <input type="text" value="1">
-                                        <span class="plus">+</span>   
-                                    </div>
-                                    </div>
-                                    <div class="card_row_3">
-                                    <span class="est">Est Duration</span>
-                                    <div class="incremnt_decrmnt number for_alternative">
-                                        <span class="minus">-</span>
-                                        <input type="text" value="1">
-                                        <span class="plus">+</span>   
-                                    </div>
-                                    </div>
-                                    <div class="btn_text">
-                                    <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p>
-                                    <button class="btn_blue">Save</button>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-md-6 col-sm-12">
-                                <div class="card_collapse_service common_card_service show">
-                                    <div class="heder_row">
-                                     <h3>Garage - up to 4 car size - sweep only</h3>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                    </div>
-                                    </div>
-                                    <div class="card-edit-content">
-                                        <p class="price-area-text"><span class="price_span">$225</span> <span class="area_span">per 1,500 sq ft</span></p>
-                                        <p class="time">1:30 hrs</p>
-                                        <p class="card_toggle_s">Edit</p>
-                                    </div>
-                                    <div class="card-second-content">
-                                         <div class="card_row_3">
-                                        <span class="est">Price (in USD)</span>
-                                        <div class="incremnt_decrmnt number for_alternative">
-                                        <span class="minus">-</span>
-                                        <input type="text" value="1">
-                                        <span class="plus">+</span>   
-                                    </div>
-                                    </div>
-                                    <div class="card_row_3">
-                                    <span class="est">Est Duration</span>
-                                    <div class="incremnt_decrmnt number for_alternative">
-                                        <span class="minus">-</span>
-                                        <input type="text" value="1">
-                                        <span class="plus">+</span>   
-                                    </div>
-                                    </div>
-                                    <div class="btn_text">
-                                    <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p>
-                                    <button class="btn_blue">Save</button>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-md-6 col-sm-12">
-                                <div class="card_collapse_service common_card_service show">
-                                    <div class="heder_row">
-                                     <h3>Patio/Porch - sweep and dust only</h3>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                    </div>
-                                    </div>
-                                    <div class="card-edit-content">
-                                        <p class="price-area-text"><span class="price_span">$225</span> <span class="area_span">per 1,500 sq ft</span></p>
-                                        <p class="time">1:30 hrs</p>
-                                        <p class="card_toggle_s">Edit</p>
-                                    </div>
-                                    <div class="card-second-content">
-                                         <div class="card_row_3">
-                                        <span class="est">Price (in USD)</span>
-                                        <div class="incremnt_decrmnt number for_alternative">
-                                        <span class="minus">-</span>
-                                        <input type="text" value="1">
-                                        <span class="plus">+</span>   
-                                    </div>
-                                    </div>
-                                    <div class="card_row_3">
-                                    <span class="est">Est Duration</span>
-                                    <div class="incremnt_decrmnt number for_alternative">
-                                        <span class="minus">-</span>
-                                        <input type="text" value="1">
-                                        <span class="plus">+</span>   
-                                    </div>
-                                    </div>
-                                    <div class="btn_text">
-                                    <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p>
-                                    <button class="btn_blue">Save</button>
-                                    </div>
-                                    </div>
-                                </div>
-                           </div>
-                           <div class="col-xl-6 col-md-6 col-sm-12">
-                            <div class="card_collapse_service common_card_service">
-                                <div class="heder_row">
-                                 <h3>Disinfecting Service</h3>
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                </div>
-                                </div>
-                                <div class="card-edit-content">
-                                    <p class="price-area-text"><span class="price_span">$225</span> <span class="area_span">per 1,500 sq ft</span></p>
-                                    <p class="time">1:30 hrs</p>
-                                    <p class="card_toggle_s">Edit</p>
-                                </div>
-                                <div class="card-second-content">
-                                     <div class="card_row_3">
-                                    <span class="est">Price (in USD)</span>
-                                    <div class="incremnt_decrmnt number for_alternative">
-                                    <span class="minus">-</span>
-                                    <input type="text" value="1">
-                                    <span class="plus">+</span>   
-                                </div>
-                                </div>
-                                <div class="card_row_3">
-                                <span class="est">Est Duration</span>
-                                <div class="incremnt_decrmnt number for_alternative">
-                                    <span class="minus">-</span>
-                                    <input type="text" value="1">
-                                    <span class="plus">+</span>   
-                                </div>
-                                </div>
-                                <div class="btn_text">
-                                <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p>
-                                <button class="btn_blue">Save</button>
-                                </div>
-                                </div>
-                            </div>
-                           </div>
-                           <div class="col-xl-6 col-md-6 col-sm-12">
-                            <div class="card_collapse_service common_card_service show">
-                                <div class="heder_row">
-                                 <h3>Appliance In/Out</h3>
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                </div>
-                                </div>
-                                <div class="card-edit-content">
-                                    <p class="price-area-text"><span class="price_span">$225</span> <span class="area_span">per 1,500 sq ft</span></p>
-                                    <p class="time">1:30 hrs</p>
-                                    <p class="card_toggle_s">Edit</p>
-                                </div>
-                                <div class="card-second-content">
-                                     <div class="card_row_3">
-                                    <span class="est">Price (in USD)</span>
-                                    <div class="incremnt_decrmnt number for_alternative">
-                                    <span class="minus">-</span>
-                                    <input type="text" value="1">
-                                    <span class="plus">+</span>   
-                                </div>
-                                </div>
-                                <div class="card_row_3">
-                                <span class="est">Est Duration</span>
-                                <div class="incremnt_decrmnt number for_alternative">
-                                    <span class="minus">-</span>
-                                    <input type="text" value="1">
-                                    <span class="plus">+</span>   
-                                </div>
-                                </div>
-                                <div class="btn_text">
-                                <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p>
-                                <button class="btn_blue">Save</button>
-                                </div>
-                                </div>
-                            </div>
-                           </div>
-                           <div class="col-xl-6 col-md-6 col-sm-12">
-                            <div class="card_collapse_service common_card_service show">
-                                <div class="heder_row">
-                                 <h3>Inside Windows - under 3,000 sq ft home</h3>
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                </div>
-                                </div>
-                                <div class="card-edit-content">
-                                    <p class="price-area-text"><span class="price_span">$225</span> <span class="area_span">per 1,500 sq ft</span></p>
-                                    <p class="time">1:30 hrs</p>
-                                    <p class="card_toggle_s">Edit</p>
-                                </div>
-                                <div class="card-second-content">
-                                     <div class="card_row_3">
-                                    <span class="est">Price (in USD)</span>
-                                    <div class="incremnt_decrmnt number for_alternative">
-                                    <span class="minus">-</span>
-                                    <input type="text" value="1">
-                                    <span class="plus">+</span>   
-                                </div>
-                                </div>
-                                <div class="card_row_3">
-                                <span class="est">Est Duration</span>
-                                <div class="incremnt_decrmnt number for_alternative">
-                                    <span class="minus">-</span>
-                                    <input type="text" value="1">
-                                    <span class="plus">+</span>   
-                                </div>
-                                </div>
-                                <div class="btn_text">
-                                <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p>
-                                <button class="btn_blue">Save</button>
-                                </div>
-                                </div>
-                            </div>
-                           </div>
-                           <div class="col-xl-6 col-md-6 col-sm-12">
-                            <div class="card_collapse_service common_card_service show">
-                                <div class="heder_row">
-                                 <h3>Inside Windows - over 3,000 sq ft home</h3>
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                </div>
-                                </div>
-                                <div class="card-edit-content">
-                                    <p class="price-area-text"><span class="price_span">$225</span> <span class="area_span">per 1,500 sq ft</span></p>
-                                    <p class="time">1:30 hrs</p>
-                                    <p class="card_toggle_s">Edit</p>
-                                </div>
-                                <div class="card-second-content">
-                                     <div class="card_row_3">
-                                    <span class="est">Price (in USD)</span>
-                                    <div class="incremnt_decrmnt number for_alternative">
-                                    <span class="minus">-</span>
-                                    <input type="text" value="1">
-                                    <span class="plus">+</span>   
-                                </div>
-                                </div>
-                                <div class="card_row_3">
-                                <span class="est">Est Duration</span>
-                                <div class="incremnt_decrmnt number for_alternative">
-                                    <span class="minus">-</span>
-                                    <input type="text" value="1">
-                                    <span class="plus">+</span>   
-                                </div>
-                                </div>
-                                <div class="btn_text">
-                                <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p>
-                                <button class="btn_blue">Save</button>
-                                </div>
-                                </div>
-                            </div>
-                           </div>
-                           <div class="col-xl-6 col-md-6 col-sm-12">
-                            <div class="card_collapse_service common_card_service">
-                                <div class="heder_row">
-                                 <h3>Handwash Dishes - per sink full</h3>
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                </div>
-                                </div>
-                                <div class="card-edit-content">
-                                    <p class="price-area-text"><span class="price_span">$225</span> <span class="area_span">per 1,500 sq ft</span></p>
-                                    <p class="time">1:30 hrs</p>
-                                    <p class="card_toggle_s">Edit</p>
-                                </div>
-                                <div class="card-second-content">
-                                     <div class="card_row_3">
-                                    <span class="est">Price (in USD)</span>
-                                    <div class="incremnt_decrmnt number for_alternative">
-                                    <span class="minus">-</span>
-                                    <input type="text" value="1">
-                                    <span class="plus">+</span>   
-                                </div>
-                                </div>
-                                <div class="card_row_3">
-                                <span class="est">Est Duration</span>
-                                <div class="incremnt_decrmnt number for_alternative">
-                                    <span class="minus">-</span>
-                                    <input type="text" value="1">
-                                    <span class="plus">+</span>   
-                                </div>
-                                </div>
-                                <div class="btn_text">
-                                <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p>
-                                <button class="btn_blue">Save</button>
-                                </div>
-                                </div>
-                            </div>
-                           </div>
-                           <div class="col-xl-6 col-md-6 col-sm-12">
-                            <div class="card_collapse_service common_card_service">
-                                <div class="heder_row">
-                                 <h3>Spot Wipe Walls - per wall</h3>
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                </div>
-                                </div>
-                                <div class="card-edit-content">
-                                    <p class="price-area-text"><span class="price_span">$225</span> <span class="area_span">per 1,500 sq ft</span></p>
-                                    <p class="time">1:30 hrs</p>
-                                    <p class="card_toggle_s">Edit</p>
-                                </div>
-                                <div class="card-second-content">
-                                     <div class="card_row_3">
-                                    <span class="est">Price (in USD)</span>
-                                    <div class="incremnt_decrmnt number for_alternative">
-                                    <span class="minus">-</span>
-                                    <input type="text" value="1">
-                                    <span class="plus">+</span>   
-                                </div>
-                                </div>
-                                <div class="card_row_3">
-                                <span class="est">Est Duration</span>
-                                <div class="incremnt_decrmnt number for_alternative">
-                                    <span class="minus">-</span>
-                                    <input type="text" value="1">
-                                    <span class="plus">+</span>   
-                                </div>
-                                </div>
-                                <div class="btn_text">
-                                <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p>
-                                <button class="btn_blue">Save</button>
-                                </div>
-                                </div>
-                            </div>
-                           </div>
-                    </div>
-                  </div>
-                   <!-- Non Standard Cleaning header -->
-                   <div class="alternate-service-header">
-                    <div class="row">
-                     <div class="col-xl-6 col-md-6 col-sm-12">
-                       <div class="home_cleaning_div">
-                      <div class="card_header_tittle">
-                        <h3>Non-Standard Cleanings</h3>
-                          <p>Add whatever other cleanings you would like to offer here. </p>
-                      </div>
-                   </div>
-                   </div>
-                   </div>
-                  </div>
-                     <!-- Non Standard Cleaning Row -->
-                     <div class="card_service_row">
-                      <div class="row">
-                        <div class="col-xl-6 col-md-6 col-sm-12">
-                        <div class="btn_header_service py-3">
-                                <h4 class="mb-0 btn_blue">Custom Offerings</h4>
-                                <div class="form-check form-switch heading-toggle active-toggle">
-                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                  </div>
-                        </div>
-                        </div>
-                        </div>
-                      <div class="row">
-                              <div class="col-xl-6 col-md-6 col-sm-12">
-                                  <div class="card_collapse_service common_card_service show">
-                                      <div class="heder_row">
-                                       <h3>Car - Interior</h3>
-                                      <div class="form-check form-switch">
-                                          <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                      </div>
-                                      </div>
-                                      <div class="card-edit-content">
-                                          <p class="price-area-text"><span class="price_span">$225</span> <span class="area_span">per 1,500 sq ft</span></p>
-                                          <p class="time">1:30 hrs</p>
-                                          <p class="card_toggle_s">Edit</p>
-                                      </div>
-                                      <div class="card-second-content">
-                                         <div class="card_row_3">
-                                          <span class="est">Price (in USD)</span>
-                                          <div class="incremnt_decrmnt number for_alternative">
-                                          <span class="minus">-</span>
-                                          <input type="text" value="1">
-                                          <span class="plus">+</span>   
-                                      </div>
-                                      </div>
-                                      <div class="card_row_3">
-                                      <span class="est">Est Duration</span>
-                                      <div class="incremnt_decrmnt number for_alternative">
-                                          <span class="minus">-</span>
-                                          <input type="text" value="1">
-                                          <span class="plus">+</span>   
-                                      </div>
-                                      </div>
-                                      <div class="btn_text">
-                                      <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p>
-                                      <button class="btn_blue">Save</button>
-                                      </div>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="col-xl-6 col-md-6 col-sm-12">
-                                  <div class="card_collapse_service common_card_service">
-                                      <div class="heder_row">
-                                       <h3>Car - Exterior</h3>
-                                      <div class="form-check form-switch">
-                                          <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                      </div>
-                                      </div>
-                                      <div class="card-edit-content">
-                                          <p class="price-area-text"><span class="price_span">$225</span> <span class="area_span">per 1,500 sq ft</span></p>
-                                          <p class="time">1:30 hrs</p>
-                                          <p class="card_toggle_s">Edit</p>
-                                      </div>
-                                      <div class="card-second-content">
-                                         <div class="card_row_3">
-                                          <span class="est">Price (in USD)</span>
-                                          <div class="incremnt_decrmnt number for_alternative">
-                                          <span class="minus">-</span>
-                                          <input type="text" value="1">
-                                          <span class="plus">+</span>   
-                                      </div>
-                                      </div>
-                                      <div class="card_row_3">
-                                      <span class="est">Est Duration</span>
-                                      <div class="incremnt_decrmnt number for_alternative">
-                                          <span class="minus">-</span>
-                                          <input type="text" value="1">
-                                          <span class="plus">+</span>   
-                                      </div>
-                                      </div>
-                                      <div class="btn_text">
-                                      <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p>
-                                      <button class="btn_blue">Save</button>
-                                      </div>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="col-xl-6 col-md-6 col-sm-12">
-                                  <div class="card_collapse_service common_card_service">
-                                      <div class="heder_row">
-                                       <h3>Car - Interior and Exterior</h3>
-                                      <div class="form-check form-switch">
-                                          <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                      </div>
-                                      </div>
-                                      <div class="card-edit-content">
-                                          <p class="price-area-text"><span class="price_span">$225</span> <span class="area_span">per 1,500 sq ft</span></p>
-                                          <p class="time">1:30 hrs</p>
-                                          <p class="card_toggle_s">Edit</p>
-                                      </div>
-                                      <div class="card-second-content">
-                                         <div class="card_row_3">
-                                          <span class="est">Price (in USD)</span>
-                                          <div class="incremnt_decrmnt number for_alternative">
-                                          <span class="minus">-</span>
-                                          <input type="text" value="1">
-                                          <span class="plus">+</span>   
-                                      </div>
-                                      </div>
-                                      <div class="card_row_3">
-                                      <span class="est">Est Duration</span>
-                                      <div class="incremnt_decrmnt number for_alternative">
-                                          <span class="minus">-</span>
-                                          <input type="text" value="1">
-                                          <span class="plus">+</span>   
-                                      </div>
-                                      </div>
-                                      <div class="btn_text">
-                                      <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p>
-                                      <button class="btn_blue">Save</button>
-                                      </div>
-                                      </div>
-                                  </div>
-                             </div>
-                             <div class="col-xl-6 col-md-6 col-sm-12">
-                              <div class="card_collapse_service common_card_service">
-                                  <div class="heder_row">
-                                   <h3>Truck/SUV - Interior</h3>
-                                  <div class="form-check form-switch">
-                                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                  </div>
-                                  </div>
-                                  <div class="card-edit-content">
-                                      <p class="price-area-text"><span class="price_span">$225</span> <span class="area_span">per 1,500 sq ft</span></p>
-                                      <p class="time">1:30 hrs</p>
-                                      <p class="card_toggle_s">Edit</p>
-                                  </div>
-                                  <div class="card-second-content">
-                                     <div class="card_row_3">
-                                      <span class="est">Price (in USD)</span>
-                                      <div class="incremnt_decrmnt number for_alternative">
-                                      <span class="minus">-</span>
-                                      <input type="text" value="1">
-                                      <span class="plus">+</span>   
-                                  </div>
-                                  </div>
-                                  <div class="card_row_3">
-                                  <span class="est">Est Duration</span>
-                                  <div class="incremnt_decrmnt number for_alternative">
-                                      <span class="minus">-</span>
-                                      <input type="text" value="1">
-                                      <span class="plus">+</span>   
-                                  </div>
-                                  </div>
-                                  <div class="btn_text">
-                                  <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p>
-                                  <button class="btn_blue">Save</button>
-                                  </div>
-                                  </div>
-                              </div>
-                             </div>
-                             <div class="col-xl-6 col-md-6 col-sm-12">
-                              <div class="card_collapse_service common_card_service">
-                                  <div class="heder_row">
-                                   <h3>Truck/SUV - Exterior</h3>
-                                  <div class="form-check form-switch">
-                                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                  </div>
-                                  </div>
-                                  <div class="card-edit-content">
-                                      <p class="price-area-text"><span class="price_span">$225</span> <span class="area_span">per 1,500 sq ft</span></p>
-                                      <p class="time">1:30 hrs</p>
-                                      <p class="card_toggle_s">Edit</p>
-                                  </div>
-                                  <div class="card-second-content">
-                                     <div class="card_row_3">
-                                      <span class="est">Price (in USD)</span>
-                                      <div class="incremnt_decrmnt number for_alternative">
-                                      <span class="minus">-</span>
-                                      <input type="text" value="1">
-                                      <span class="plus">+</span>   
-                                  </div>
-                                  </div>
-                                  <div class="card_row_3">
-                                  <span class="est">Est Duration</span>
-                                  <div class="incremnt_decrmnt number for_alternative">
-                                      <span class="minus">-</span>
-                                      <input type="text" value="1">
-                                      <span class="plus">+</span>   
-                                  </div>
-                                  </div>
-                                  <div class="btn_text">
-                                  <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p>
-                                  <button class="btn_blue">Save</button>
-                                  </div>
-                                  </div>
-                              </div>
-                             </div>
-                             <div class="col-xl-6 col-md-6 col-sm-12">
-                              <div class="card_collapse_service common_card_service">
-                                  <div class="heder_row">
-                                   <h3>Truck/SUV - Interior and Exterior</h3>
-                                  <div class="form-check form-switch">
-                                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                  </div>
-                                  </div>
-                                  <div class="card-edit-content">
-                                      <p class="price-area-text"><span class="price_span">$225</span> <span class="area_span">per 1,500 sq ft</span></p>
-                                      <p class="time">1:30 hrs</p>
-                                      <p class="card_toggle_s">Edit</p>
-                                  </div>
-                                  <div class="card-second-content">
-                                     <div class="card_row_3">
-                                      <span class="est">Price (in USD)</span>
-                                      <div class="incremnt_decrmnt number for_alternative">
-                                      <span class="minus">-</span>
-                                      <input type="text" value="1">
-                                      <span class="plus">+</span>   
-                                  </div>
-                                  </div>
-                                  <div class="card_row_3">
-                                  <span class="est">Est Duration</span>
-                                  <div class="incremnt_decrmnt number for_alternative">
-                                      <span class="minus">-</span>
-                                      <input type="text" value="1">
-                                      <span class="plus">+</span>   
-                                  </div>
-                                  </div>
-                                  <div class="btn_text">
-                                  <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p>
-                                  <button class="btn_blue">Save</button>
-                                  </div>
-                                  </div>
-                              </div>
-                             </div>
-                             <div class="col-xl-6 col-md-6 col-sm-12">
-                              <div class="card_collapse_service common_card_service show">
-                                  <div class="heder_row">
-                                   <h3>Floor Boards Only</h3>
-                                  <div class="form-check form-switch">
-                                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                  </div>
-                                  </div>
-                                  <div class="card-edit-content">
-                                      <p class="price-area-text"><span class="price_span">$225</span> <span class="area_span">per 1,500 sq ft</span></p>
-                                      <p class="time">1:30 hrs</p>
-                                      <p class="card_toggle_s">Edit</p>
-                                  </div>
-                                  <div class="card-second-content">
-                                     <div class="card_row_3">
-                                      <span class="est">Price (in USD)</span>
-                                      <div class="incremnt_decrmnt number for_alternative">
-                                      <span class="minus">-</span>
-                                      <input type="text" value="1">
-                                      <span class="plus">+</span>   
-                                  </div>
-                                  </div>
-                                  <div class="card_row_3">
-                                  <span class="est">Est Duration</span>
-                                  <div class="incremnt_decrmnt number for_alternative">
-                                      <span class="minus">-</span>
-                                      <input type="text" value="1">
-                                      <span class="plus">+</span>   
-                                  </div>
-                                  </div>
-                                  <div class="btn_text">
-                                  <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p>
-                                  <button class="btn_blue">Save</button>
-                                  </div>
-                                  </div>
-                              </div>
-                             </div>
-                             <div class="col-xl-6 col-md-6 col-sm-12">
-                              <div class="card_collapse_service common_card_service show">
-                                  <div class="heder_row">
-                                   <h3>Bathrooms Only - per each</h3>
-                                  <div class="form-check form-switch">
-                                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                  </div>
-                                  </div>
-                                  <div class="card-edit-content">
-                                      <p class="price-area-text"><span class="price_span">$225</span> <span class="area_span">per 1,500 sq ft</span></p>
-                                      <p class="time">1:30 hrs</p>
-                                      <p class="card_toggle_s">Edit</p>
-                                  </div>
-                                  <div class="card-second-content">
-                                     <div class="card_row_3">
-                                      <span class="est">Price (in USD)</span>
-                                      <div class="incremnt_decrmnt number for_alternative">
-                                      <span class="minus">-</span>
-                                      <input type="text" value="1">
-                                      <span class="plus">+</span>   
-                                  </div>
-                                  </div>
-                                  <div class="card_row_3">
-                                  <span class="est">Est Duration</span>
-                                  <div class="incremnt_decrmnt number for_alternative">
-                                      <span class="minus">-</span>
-                                      <input type="text" value="1">
-                                      <span class="plus">+</span>   
-                                  </div>
-                                  </div>
-                                  <div class="btn_text">
-                                  <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p>
-                                  <button class="btn_blue">Save</button>
-                                  </div>
-                                  </div>
-                              </div>
-                             </div>
-                             <div class="col-xl-6 col-md-6 col-sm-12">
-                              <div class="card_collapse_service common_card_service">
-                                  <div class="heder_row">
-                                   <h3>Half Bathrooms Only - per each</h3>
-                                  <div class="form-check form-switch">
-                                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                  </div>
-                                  </div>
-                                  <div class="card-edit-content">
-                                      <p class="price-area-text"><span class="price_span">$225</span> <span class="area_span">per 1,500 sq ft</span></p>
-                                      <p class="time">1:30 hrs</p>
-                                      <p class="card_toggle_s">Edit</p>
-                                  </div>
-                                  <div class="card-second-content">
-                                     <div class="card_row_3">
-                                      <span class="est">Price (in USD)</span>
-                                      <div class="incremnt_decrmnt number for_alternative">
-                                      <span class="minus">-</span>
-                                      <input type="text" value="1">
-                                      <span class="plus">+</span>   
-                                  </div>
-                                  </div>
-                                  <div class="card_row_3">
-                                  <span class="est">Est Duration</span>
-                                  <div class="incremnt_decrmnt number for_alternative">
-                                      <span class="minus">-</span>
-                                      <input type="text" value="1">
-                                      <span class="plus">+</span>   
-                                  </div>
-                                  </div>
-                                  <div class="btn_text">
-                                  <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p>
-                                  <button class="btn_blue">Save</button>
-                                  </div>
-                                  </div>
-                              </div>
-                             </div>
-                             <div class="col-xl-6 col-md-6 col-sm-12">
-                              <div class="card_collapse_service common_card_service show">
-                                  <div class="heder_row">
-                                   <h3>Organize Kids Bedroom - light</h3>
-                                  <div class="form-check form-switch">
-                                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                  </div>
-                                  </div>
-                                  <div class="card-edit-content">
-                                      <p class="price-area-text"><span class="price_span">$225</span> <span class="area_span">per 1,500 sq ft</span></p>
-                                      <p class="time">1:30 hrs</p>
-                                      <p class="card_toggle_s">Edit</p>
-                                  </div>
-                                  <div class="card-second-content">
-                                     <div class="card_row_3">
-                                      <span class="est">Price (in USD)</span>
-                                      <div class="incremnt_decrmnt number for_alternative">
-                                      <span class="minus">-</span>
-                                      <input type="text" value="1">
-                                      <span class="plus">+</span>   
-                                  </div>
-                                  </div>
-                                  <div class="card_row_3">
-                                  <span class="est">Est Duration</span>
-                                  <div class="incremnt_decrmnt number for_alternative">
-                                      <span class="minus">-</span>
-                                      <input type="text" value="1">
-                                      <span class="plus">+</span>   
-                                  </div>
-                                  </div>
-                                  <div class="btn_text">
-                                  <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p>
-                                  <button class="btn_blue">Save</button>
-                                  </div>
-                                  </div>
-                              </div>
-                             </div>
-                             <div class="col-xl-6 col-md-6 col-sm-12">
-                              <div class="card_collapse_service common_card_service">
-                                  <div class="heder_row">
-                                   <h3>Organize Bedroom - light</h3>
-                                  <div class="form-check form-switch">
-                                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                  </div>
-                                  </div>
-                                  <div class="card-edit-content">
-                                      <p class="price-area-text"><span class="price_span">$225</span> <span class="area_span">per 1,500 sq ft</span></p>
-                                      <p class="time">1:30 hrs</p>
-                                      <p class="card_toggle_s">Edit</p>
-                                  </div>
-                                  <div class="card-second-content">
-                                     <div class="card_row_3">
-                                      <span class="est">Price (in USD)</span>
-                                      <div class="incremnt_decrmnt number for_alternative">
-                                      <span class="minus">-</span>
-                                      <input type="text" value="1">
-                                      <span class="plus">+</span>   
-                                  </div>
-                                  </div>
-                                  <div class="card_row_3">
-                                  <span class="est">Est Duration</span>
-                                  <div class="incremnt_decrmnt number for_alternative">
-                                      <span class="minus">-</span>
-                                      <input type="text" value="1">
-                                      <span class="plus">+</span>   
-                                  </div>
-                                  </div>
-                                  <div class="btn_text">
-                                  <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p>
-                                  <button class="btn_blue">Save</button>
-                                  </div>
-                                  </div>
-                              </div>
-                             </div>
-                             <div class="col-xl-6 col-md-6 col-sm-12">
-                              <div class="card_collapse_service common_card_service">
-                                  <div class="heder_row">
-                                   <h3>Laundry - wash and dry - per load</h3>
-                                  <div class="form-check form-switch">
-                                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                  </div>
-                                  </div>
-                                  <div class="card-edit-content">
-                                      <p class="price-area-text"><span class="price_span">$225</span> <span class="area_span">per 1,500 sq ft</span></p>
-                                      <p class="time">1:30 hrs</p>
-                                      <p class="card_toggle_s">Edit</p>
-                                  </div>
-                                  <div class="card-second-content">
-                                     <div class="card_row_3">
-                                      <span class="est">Price (in USD)</span>
-                                      <div class="incremnt_decrmnt number for_alternative">
-                                      <span class="minus">-</span>
-                                      <input type="text" value="1">
-                                      <span class="plus">+</span>   
-                                  </div>
-                                  </div>
-                                  <div class="card_row_3">
-                                  <span class="est">Est Duration</span>
-                                  <div class="incremnt_decrmnt number for_alternative">
-                                      <span class="minus">-</span>
-                                      <input type="text" value="1">
-                                      <span class="plus">+</span>   
-                                  </div>
-                                  </div>
-                                  <div class="btn_text">
-                                  <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p>
-                                  <button class="btn_blue">Save</button>
-                                  </div>
-                                  </div>
-                              </div>
-                             </div>
-                             <div class="col-xl-6 col-md-6 col-sm-12">
-                              <div class="card_collapse_service common_card_service show show-2">
-                                  <div class="heder_row">
-                                   <h3>Make Ready - Empty Home</h3>
-                                  <div class="form-check form-switch">
-                                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                  </div>
-                                  </div>
-                                  <div class="card-edit-content">
-                                      <p class="price-area-text"><span class="price_span">$225</span> <span class="area_span">per 1,500 sq ft</span></p>
-                                      <p class="time">1:30 hrs</p>
-                                      <p class="card_toggle_s">Edit</p>
-                                  </div>
-                                  <div class="card-second-content">
-                                     <div class="card_row_3">
-                                      <span class="est">Price (in USD)</span>
-                                      <div class="incremnt_decrmnt number for_alternative">
-                                      <span class="minus">-</span>
-                                      <input type="text" value="1">
-                                      <span class="plus">+</span>   
-                                  </div>
-                                  </div>
-                                  <div class="card_row_3">
-                                  <span class="est">Est Duration</span>
-                                  <div class="incremnt_decrmnt number for_alternative">
-                                      <span class="minus">-</span>
-                                      <input type="text" value="1">
-                                      <span class="plus">+</span>   
-                                  </div>
-                                  </div>
-                                  <div class="btn_text">
-                                  <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p>
-                                  <button class="btn_blue">Save</button>
-                                  </div>
-                                  </div>
-                              </div>
-                             </div>
-                      </div>
-                    </div>
-                </div>
-              </form>
-                </div>
-              </div>
-           </div>
-        </div>
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 no-padd cleaner_availability_section">
+                            <div class="customer-account-forms ">
+                                <div class="form-headeing-second border-bottom pb-3 top_heading">
+                                    <h3 class="mb-0">Your Services</h3>
+                                </div>
+                                
+                                <div class="service_text border-0">
+                                    <p>Canary Clean makes it easy to get started! Enter your price and time estimates below to help us give prospective customers an idea of your time and costs.<b>Prices and times are automatically scaled and can be adjusted at any time. </b>  </p>
+                                    <p>Remember - you will still review any jobs before accepting them, having the chance to raise or lower the price or estimated duration. You can also reach out to the customer at anytime before or after accepting.</p>
+                                </div>
+                                <h5 class="bg_ylow_h5">Offer Services, Set Prices, and Durations</h5>
+                                <!-- home cleaning -->
+                                <div class="services-alternate-wrap-sec">
+                                    {!! Form::open(['route' => 'cleaner.services.post', 'method'=>'post']) !!}
+                                        <div class="alternative-service-block">
+                                            
+                                            @foreach($types as $type)
+                                            <div class="alternate-service-header">
+                                                <div class="row">
+                                                    <div class="col-xl-6 col-md-6 col-sm-12">
+                                                        <div class="home_cleaning_div">
+                                                            <div class="card_header_tittle">
+                                                                <h3>{{ $type->title }}</h3>
+                                                                <p> enter your rate to match what you would charge
+                                                                for 1,500 sq ft - prices will scale up or down from there</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- One Time Row -->
+                                            <div class="card_service_row type_{{$type->id}}">
+                                                <div class="row">
+                                                    @foreach($type->services as $service)
+                                                    <div class="col-xl-6 col-md-6 col-sm-12">
+                                                        <div class="btn_header_service py-3">
+                                                            <h4 class="mb-0 btn_blue">{{ $service->title }}</h4>
+                                                        </div>
+
+                                                        @if(in_array($service->id, $cservicesItems))
+                                                            <div class="form-check form-switch heading heading-toggle active-toggle service_{{$service->id}}" data-service="{{$service->id}}">
+                                                                <input class="check form-check-input" name="service[{{$service->id}}][checked]" type="checkbox" checked>
+                                                            </div>
+                                                        @else
+                                                            <div class="form-check form-switch heading heading-toggle service_{{$service->id}}" data-service="{{$service->id}}">
+                                                                <input class="check form-check-input" name="service[{{$service->id}}][checked]" type="checkbox">
+                                                            </div>
+                                                        @endif
+                                                        
+                                                    </div>
+                                                    <div class="row body_service_{{$service->id}}">
+                                                        <div class="col-md-6">
+                                                            @foreach($service->servicesItems as $i => $item)
+                                                                @foreach($cservices as $j => $cservice)
+                                                                    @if($j==$i)
+                                                                    @if($cservice->services_items_id == $item->id)
+                                                                    @include('cleaner.services.form', ['showClass'=>'show', 'cservice'=>$cservice])
+                                                                    @else
+                                                                    @include('cleaner.services.form')
+                                                                    @endif
+                                                                    @endif
+                                                                @endforeach
+                                                            @endforeach
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                        </div>
+                                                    </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                            @endforeach
 
 
+                                            <button type="submit" class="btn btn-success">Submit</button>
+
+                                        </div>
+                                    {!! Form::close() !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+@endsection
+
+
+@section('script')
+<script>
+    $(document).ready(function(){
+        $(".form-switch.heading").on('click', function(){
+
+            var service = $(this).attr('data-service');
+
+            $('.body_service_'+ service +' .common_card_service').removeClass("show-2");
+
+            if($(this).find('input').prop('checked') == true){
+                $('.heading-toggle.service_'+ service).addClass('active-toggle');
+                $('.body_service_'+ service +' .common_card_service').addClass("show");
+                $('.body_service_'+ service +' .common_card_service input.check').prop('checked', true);
+            }
+            else {
+                $('.heading-toggle.service_'+ service).removeClass('active-toggle');
+                $('.body_service_'+ service +' .common_card_service').removeClass("show");
+                $('.body_service_'+ service +' .common_card_service input.check').prop('checked', false);
+            }
+        });
+
+        $(".form-switch.body").on('click', function(){
+
+            var service = $(this).attr('data-service');
+            var item = $(this).attr('data-item');
+            
+            $('.item_'+ item +'.common_card_service').removeClass("show-2");
+
+            if($(this).find('input').prop('checked') == true){
+                $('.body_service_'+ service +' .common_card_service.item_'+item).addClass("show");
+
+                $('.heading-toggle.service_'+ service).addClass('active-toggle');
+                $('.heading-toggle.service_'+ service +' input.check').prop('checked', true);
+            }
+            else {
+                $('.item_'+ item +'.common_card_service').removeClass("show");
+
+                if (!$('.body_service_'+ service +' .common_card_service').hasClass('show')){
+                    $('.heading-toggle.service_'+ service).removeClass('active-toggle');
+                    $('.heading-toggle.service_'+ service +' input.check').prop('checked', false);
+                }
+            }
+        });
+
+
+        $(".card_toggle_s").on('click', function(){
+            var item = $(this).attr('data-item');
+
+            $('.common_card_service.item_'+item).toggleClass("show-2");
+        });
+
+
+       /* $('.heading-toggle').click(function() {
+            $(this).toggleClass('active-toggle');
+            if ($(this).parents('.card_service_row').find(".common_card_service").hasClass('show')){
+                $(this).parents('.card_service_row').find(".common_card_service").removeClass('show');  
+            } else {
+                $(this).parents('.card_service_row').find(".common_card_service").addClass('show'); 
+            }
+        });*/
+
+
+      /*$(".card_toggle_s").click(function(){
+        $(this).parents('.common_card_service').toggleClass("show-2");
+      });
+      $('.heading-toggle').click(function() {
+            $(this).toggleClass('active-toggle');
+            if ($(this).parents('.card_service_row').find(".common_card_service").hasClass('show')){
+                $(this).parents('.card_service_row').find(".common_card_service").removeClass('show');  
+            } else {
+                $(this).parents('.card_service_row').find(".common_card_service").addClass('show'); 
+            }
+        });
+        $('.heading-toggle').click(function() {
+            if ($(this).parents('.card_service_row').find(".common_card_service").hasClass('show-2')){
+                $(this).parents('.card_service_row').find(".common_card_service").removeClass('show-2');  
+            }
+        });*/
+
+
+        $(document).ready(function() {
+          $('.minus').click(function () {
+            var $input = $(this).parent().find('input');
+            var count = parseInt($input.val()) - 1;
+            count = count < 1 ? 1 : count;
+            $input.val(count);
+            $input.change();
+            return false;
+          });
+          $('.plus').click(function () {
+            var $input = $(this).parent().find('input');
+            $input.val(parseInt($input.val()) + 1);
+            $input.change();
+            return false;
+          });
+        });
+    });
+</script> 
 @endsection
