@@ -10,6 +10,7 @@ use App\Http\Livewire\CustomerUpdate;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\Cleaner;
 use App\Http\Controllers\Cleaner\CleanerController;
+use App\Mail\ContactMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -216,6 +217,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 );
                 return view('cleaner.support.support', compact('title'));
             })->name('cleaner.support.service');
+
+            Route::get('testemail',function() {
+                Mail::to(['greatjob@yopmail.com'])->send(new ContactMail);
+                });
+
 
             // Notification
             Route::prefix('notification')->group(function () {
