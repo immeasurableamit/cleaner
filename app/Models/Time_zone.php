@@ -9,6 +9,8 @@ class Time_zone extends Model
 {
     use HasFactory;
 
+    protected $table = 'time_zones';
+
     public function userdetails()
     {
         return $this->hasOne(UserDetails::class, 'timezone', 'id');

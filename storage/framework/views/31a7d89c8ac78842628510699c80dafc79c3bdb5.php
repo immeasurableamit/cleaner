@@ -20,6 +20,8 @@
       <?php endif; ?>
 
       <li><a href="cleaner-appoitments.html">Appointments</a></li>
+      <li><a href="<?php echo e(route('cleaner.jobs.jobs')); ?>" class="<?php echo e(@$title['active']=='jobs' ? 'active' : ''); ?>">Jobs</a></li>
+      <li><a href="cleaner-appoitments.html">Insurance and Badges </a></li>
       <li><a href="<?php echo e(route('cleaner.billing.billing')); ?>" class="<?php echo e(@$title['active']=='billing' ? 'active' : ''); ?>">Billing</a></li>
       <li><a href="<?php echo e(route('cleaner.notification.index')); ?>" class="<?php echo e(@$title['active']=='notification' ? 'active' : ''); ?>">Notifications</a></li>
       <li><a href="<?php echo e(route('cleaner.support.service')); ?>" class="<?php echo e(@$title['active']=='support' ? 'active' : ''); ?>">Support</a></li>

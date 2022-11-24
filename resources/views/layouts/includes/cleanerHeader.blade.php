@@ -10,7 +10,8 @@
         <div class="header-flex-item header-flex-item-3 cleaner_header_right">
           <p class="cleaner_text_top">Your profile is paused, click to go live!</p>
           <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDisabled" disabled>
+            @livewire('cleaner-header')
+           
           </div>
           <ul class="d-flex align-items-center">
             <li class="nav-item email-notification">

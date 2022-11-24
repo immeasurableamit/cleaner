@@ -33,15 +33,15 @@
                       <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('cleaner.support.support')->html();
-} elseif ($_instance->childHasBeenRendered('f94tUTH')) {
-    $componentId = $_instance->getRenderedChildComponentId('f94tUTH');
-    $componentTag = $_instance->getRenderedChildComponentTagName('f94tUTH');
+} elseif ($_instance->childHasBeenRendered('BtOBGbT')) {
+    $componentId = $_instance->getRenderedChildComponentId('BtOBGbT');
+    $componentTag = $_instance->getRenderedChildComponentTagName('BtOBGbT');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('f94tUTH');
+    $_instance->preserveRenderedChild('BtOBGbT');
 } else {
     $response = \Livewire\Livewire::mount('cleaner.support.support');
     $html = $response->html();
-    $_instance->logRenderedChild('f94tUTH', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('BtOBGbT', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -50,15 +50,15 @@ echo $html;
                       <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('cleaner.support.support-contact')->html();
-} elseif ($_instance->childHasBeenRendered('8etFJ96')) {
-    $componentId = $_instance->getRenderedChildComponentId('8etFJ96');
-    $componentTag = $_instance->getRenderedChildComponentTagName('8etFJ96');
+} elseif ($_instance->childHasBeenRendered('ZwrwBtm')) {
+    $componentId = $_instance->getRenderedChildComponentId('ZwrwBtm');
+    $componentTag = $_instance->getRenderedChildComponentTagName('ZwrwBtm');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('8etFJ96');
+    $_instance->preserveRenderedChild('ZwrwBtm');
 } else {
     $response = \Livewire\Livewire::mount('cleaner.support.support-contact');
     $html = $response->html();
-    $_instance->logRenderedChild('8etFJ96', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('ZwrwBtm', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -94,4 +94,4 @@ echo $html;
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
-<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/projects/Amandeep Projects/working project/cleaner/cleaner/resources/views/cleaner/support/support.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.cleanerapp', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/projects/Amandeep Projects/working project/cleaner/cleaner/resources/views/cleaner/support/support.blade.php ENDPATH**/ ?>
