@@ -211,8 +211,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
                         Route::get('/store', 'store')->name('cleaner.services.post');
                     });
                 });
-            });
-        });
+
 
         //Support
         Route::get('/support', function () {
