@@ -41,7 +41,12 @@
                       </div>
                       <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
                         <div class="time-zone-text">
+                          @if ($timezone)
                           <a href="cleaner-account.html">{{$timezone->name}}{{$timezone->current_utc_offset}}{{$timezone->is_currently_dst}}</a>
+                          @else
+                          <a href="cleaner-account.html">Time Zone:</a>  
+                          @endif
+                          
                         </div>
                       </div>
                       </div>
