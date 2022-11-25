@@ -123,10 +123,6 @@ class Account extends Component
                 $user->email = $this->email;
                 $user->save();
                 $user->sendEmailVerificationNotification();
-<<<<<<< HEAD
-=======
-             
->>>>>>> e2040e3 (services)
             }
             return redirect()->route('cleaner.account');
         }

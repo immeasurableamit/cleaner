@@ -3,7 +3,9 @@
 <section class="light-banner customer-account-page" style="background-image: url('assets/images/white-pattern.png')">
     <div class="container">
         <div class="profile_page_section">
-            @livewire('home.profile')
+            
+
+            @livewire('home.profile', ['cleanerId'=>request()->id])
 
             <div class="scheduled_div">
                 <form>
