@@ -128,34 +128,16 @@ class Account extends Component
         }
     }
 
+    // public function imageUpload($id)
+    // {
 
-    public function imageUpload($id)
-    {
+    //     if ($id) {
+    //         $user = User::find($id);
 
-        if ($id) {
-            $user = User::find($id);
+    //         $image = $this->image;
 
-            $image = $this->image;
-            // $user->image = $this->image;
-            //     dd($image);
-
-            //     $folderPath = ('storage/images/');
-            //     if (!is_dir($folderPath)) {
-            //         mkdir($folderPath, 0775, true);
-            //         chown($folderPath, exec('whoami'));
-            //     }
-            //     $image_parts = explode(";base64,", $image);
-            //     $image_type_aux = explode("image/", $image_parts[0]);
-            //     $image_base64 = base64_decode($image_parts[1] ?? null) ?? null;
-            //     $file_name = '-' . md5(uniqid() . time()) . '.png';
-            //     $imageFullPath = $folderPath . $file_name;
-            //     file_put_contents($imageFullPath, $image_base64);
-            //     $user->image = $file_name;
-            // // dd($user->image);
-            // $user->save();
-
-        }
-    }
+    //     }
+    // }
     public function render()
     {
         $user = User::findOrFail(auth()->user()->id);

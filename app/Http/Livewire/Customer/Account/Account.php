@@ -6,6 +6,7 @@ use App\Models\UserDetails;
 use App\Models\Time_zone;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
+use App\Base64Image;
 
 class Account extends Component
 {
@@ -13,6 +14,19 @@ class Account extends Component
     public $first_name, $contact_number, $userId, $email, $oldEmail, $address;
 
     public $fieldStatus = false, $action;
+
+    protected $listeners = ['imgUploaded' => 'storeUploadedImage'];
+
+    public function storeUploadedImage(array $data)
+    {
+        $image = $data['base64_string']; //bace64 image 
+        $id    = $data['user_id'];
+        $user      = User::find($id);
+        $folderPath = public_path('/storage/images');
+        $filename = (new Base64Image)->save($image, $folderPath);
+        $user->image = $filename;
+        $user->save();
+    }
 
     public function rules()
     {
@@ -96,6 +110,7 @@ class Account extends Component
         return redirect()->route('customer.account');
         }
     }
+    
     public function render()
     {
         $user = User::findOrFail(auth()->user()->id);

@@ -10,6 +10,7 @@ use App\Http\Livewire\CustomerUpdate;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\Cleaner;
 use App\Http\Controllers\Cleaner\CleanerController;
+use App\Mail\ContactMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -199,6 +200,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::get('/profile/connect-account', 'connectAccount')->name('cleaner.billing.connectAccount');
                 Route::get('/banking-info-error', 'bankingInfoError')->name('cleaner.billing.error');
                 Route::get('/banking-info-success', 'bankingInfoSuccess')->name('cleaner.billing.success');
+            });
+        });
 
 
                 //services
@@ -209,23 +212,36 @@ Route::middleware(['auth', 'verified'])->group(function () {
                     });
                 });
             });
-            //Support
-            Route::get('/support', function () {
-                $title = array(
-                    'title' => 'Support',
-                    'active' => 'support',
-                );
-                return view('cleaner.support.support', compact('title'));
-            })->name('cleaner.support.service');
+        });
 
-            // Notification
-            Route::prefix('notification')->group(function () {
-                Route::controller(Cleaner\notification\NotificationController::class)->group(function () {
-                    Route::get('/', 'index')->name('cleaner.notification.index');
-                });
+        //Support
+        Route::get('/support', function () {
+            $title = array(
+                'title' => 'Support',
+                'active' => 'support',
+            );
+            return view('cleaner.support.support', compact('title'));
+        })->name('cleaner.support.service');
+
+        Route::get('testemail', function () {
+            Mail::to(['greatjob@yopmail.com'])->send(new ContactMail);
+        });
+
+
+        // Notification
+        Route::prefix('notification')->group(function () {
+            Route::controller(Cleaner\notification\NotificationController::class)->group(function () {
+                Route::get('/', 'index')->name('cleaner.notification.index');
             });
         });
 
-        // Route::get('search',[CleanerController::class,'index'])->name('search');
+        //jobs
+        Route::prefix('jobs')->group(function () {
+            Route::controller(Cleaner\jobs\JobsController::class)->group(function () {
+                Route::get('/', 'index')->name('cleaner.jobs.jobs');
+            });
+        });
+        
+
     });
 });

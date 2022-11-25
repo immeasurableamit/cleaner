@@ -22,7 +22,6 @@ class Notification extends Component
     }
     public function emailMarketingStatus($id)
     {
-        // dd('jdfjk');
         $smsMarketing = UserDetails::find($id);
         if ($smsMarketing->email_marketing == '1') {
             $smsMarketing->email_marketing = '0';

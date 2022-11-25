@@ -5,15 +5,19 @@ namespace App\Http\Livewire\Cleaner\Support;
 use Livewire\Component;
 use App\Models\Contact;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use App\Mail\ContactMail;
+use Illuminate\Support\Facades\Mail;
 
 class SupportContact extends Component
+
 {
 
-        use LivewireAlert;
+    use LivewireAlert;
 
     public $name, $order_number, $email, $phone, $message, $user_id;
 
-     private function resetInputFields(){
+    private function resetInputFields()
+    {
         $this->name = '';
         $this->order_number = '';
         $this->email = '';
@@ -21,7 +25,7 @@ class SupportContact extends Component
         $this->message = '';
     }
 
-   public function rules()
+    public function rules()
     {
         return [
             'name' => 'required',
@@ -32,8 +36,8 @@ class SupportContact extends Component
         ];
     }
 
-    public function store(){
-
+    public function store()
+    {
         $this->validate();
         $id = auth()->user()->id;
 
@@ -45,9 +49,10 @@ class SupportContact extends Component
         $contact->email = $this->email;
         $contact->phone = $this->phone;
         $contact->message = $this->message;
-       
-
         $contact->save();
+
+        $adminEmail= env('ADMIN_EMAIL');
+        Mail::to($adminEmail)->send(new ContactMail($contact));
         $this->alert('success', 'Message sent');
         $this->resetInputFields();
     }
