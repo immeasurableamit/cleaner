@@ -32,6 +32,8 @@ class Account extends Component
         $filename = (new Base64Image)->save($image, $folderPath);
         $user->image = $filename;
         $user->save();
+
+        return redirect()->route('cleaner.account');
     }
 
     public function editData($userId, $action)
