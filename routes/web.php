@@ -127,16 +127,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         // Team Section  
         Route::get('/cleaner/team/{id}', [AdminController::class, 'teamView'])->name('admin.cleaner.team');
-    });
-    //services
-    Route::prefix('services')->group(function () {
-        Route::get('/', function () {
-            $title = array(
-                'title' => 'Services',
-                'active' => 'services',
-            );
-            return view('admin.services.index', compact('title'));
-        })->name('admin.services.index');
+
+
+
+        //services
+        Route::prefix('services')->group(function () {
+            Route::get('/', function () {
+                $title = array(
+                    'title' => 'Services',
+                    'active' => 'services',
+                );
+                return view('admin.services.index', compact('title'));
+            })->name('admin.services.index');
+        });
+        
     });
 });
 
@@ -204,13 +208,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
 
 
-                //services
-                Route::prefix('services')->group(function () {
-                    Route::controller(Cleaner\ServicesController::class)->group(function () {
-                        Route::get('/', 'index')->name('cleaner.services.index');
-                        Route::get('/store', 'store')->name('cleaner.services.post');
-                    });
-                });
+        //services
+        Route::prefix('services')->group(function () {
+            Route::controller(Cleaner\ServicesController::class)->group(function () {
+                Route::get('/', 'index')->name('cleaner.services.index');
+                Route::get('/store', 'store')->name('cleaner.services.post');
+            });
+        }); 
 
 
         //Support
