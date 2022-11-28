@@ -18,9 +18,24 @@ class Account extends Component
     public $email, $timezone, $first_name, $last_name, $contact_number, $address, $about, $image;
     public $oldEmail;
     public $fieldStatus = false, $action;
+
+    public $facebook, $twitter, $instagram, $linkedin;
+
+
+
     use WithFileUploads;
 
     protected $listeners = ['imgUploaded' => 'storeUploadedImage'];
+
+    public function mount()
+    {
+        $details = auth()->user()->UserDetails;
+        
+        $this->facebook = $details->facebook;
+        $this->twitter = $details->twitter;
+        $this->instagram = $details->instagram;
+        $this->linkedin = $details->linkedin;
+    }
 
 
     public function storeUploadedImage(array $data)
@@ -140,6 +155,24 @@ class Account extends Component
 
     //     }
     // }
+
+
+
+
+    public function socialInfo()
+    {
+        $details = auth()->user()->UserDetails;
+
+        $details->facebook = $this->facebook;
+        $details->twitter = $this->twitter;
+        $details->instagram = $this->instagram;
+        $details->linkedin = $this->linkedin;
+        $details->save();
+
+
+    }
+
+
     public function render()
     {
         $user = User::findOrFail(auth()->user()->id);

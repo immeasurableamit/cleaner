@@ -15,11 +15,10 @@
                         <a href="javascript::void(0)" onclick="uploadImgViaLivewire('{{ $user->id }}')"><i class="fas fa-save"></i></a>
                     </div>
                 </div>
-
                 <div class="lawyer_profile-img mb-3">
                     <!-- <div class="circle" id="uploaded">
-                                                        <img class="profile-pic" src="">
-                                                    </div> -->
+                        <img class="profile-pic" src="">
+                    </div> -->
                     <div class="p-image">
                         <!-- <span class="pencil_icon"><i class="fa-solid fa-pencil upload-button"></i></span> -->
                         <!-- <input class="file-upload" id="upload" type="file" accept="image/*" /> -->
@@ -32,7 +31,6 @@
                 <p>Upload a new profile photo.</p>
             </div>
         </div>
-
         <div class="h4-design">
             <h4>Account Information</h4>
         </div>
@@ -53,12 +51,10 @@
                         <p class="phone"><a href="tel:+1 512-559-9582">{{$user->contact_number}}</a></p>
                         <div class="action-block">
                             <span class="edit"><a href="javascript::void(0)" wire:click="editData('{{auth()->user()->id}}', 'contact_number')">Edit</a></span>
-
                         </div>
                         @endif
                     </div>
                 </li>
-
                 <li class="position-relative">
                     <div class="d-flex justify-content-spacebw three_column edit_frm">
                         <h6 class="title-label">Email:</h6>
@@ -75,7 +71,6 @@
                         @endif
                     </div>
                 </li>
-
                 <li class="position-relative">
                     <div class="d-flex justify-content-spacebw three_column edit_frm">
                         <h6 class="title-label">Service Address:</h6>
@@ -91,7 +86,6 @@
                         @endif
                     </div>
                 </li>
-
                 <li class="position-relative">
                     <form class="d-flex justify-content-spacebw three_column edit_frm">
                         <h6 class="title-label"> Timezone:</h6>
@@ -118,7 +112,6 @@
                 </li>
             </ul>
         </div>
-
         <div class="h4-design mt-4 padding-about-frm-right">
             <h4>About</h4>
         </div>
@@ -126,9 +119,7 @@
             <ul class="list-unstyled">
                 <li class="position-relative">
                     <div class="d-flex justify-content-spacebw three_column edit_frm">
-
                         @if (@$fieldStatus == true && $action == 'about')
-
                         <!-- <input type="text" value="{{$user->UserDetails->about}}" wire:model="about" /> -->
                         <textarea value="" wire:model="about"></textarea>
                         <span class="save-icn-btn"><a class="link-design-2" wire:click="updateData('about')"><i class="fas fa-save"></i></a></span>
@@ -143,11 +134,51 @@
                 </li>
             </ul>
         </div>
+
+
+
+        <div class="h4-design mt-4 padding-about-frm-right">
+            <h4>Social Information</h4>
+        </div>
+        <div class="customer-account-information cleaner_account_2 about-updation-wrap">
+            <form>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <button type="button" class="btn btn-danger">Facebook</button>
+                    </div>
+                    <input type="url" class="form-control" wire:model="facebook">
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <button type="button" class="btn btn-danger">Twitter</button>
+                    </div>
+                    <input type="url" class="form-control" wire:model="twitter">
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <button type="button" class="btn btn-danger">Instagram</button>
+                    </div>
+                    <input type="url" class="form-control" wire:model="instagram">
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <button type="button" class="btn btn-danger">Linkedin</button>
+                    </div>
+                    <input type="url" class="form-control" wire:model="linkedin">
+                </div>
+
+                <div class="form-group mb-3">
+                    <button type="button" class="btn btn-danger" wire:click="socialInfo">Save</button>
+                </div>
+            </form>
+        </div>
+
     </div>
 </div>
-
 @section('script')
-
 <script>
     function uploadImgViaLivewire(user_id)
     {
@@ -155,8 +186,6 @@
         var data = { user_id, base64_string };
         Livewire.emit('imgUploaded', data );
     }
-    
 </script>
 @include('layouts.common.cropper')
-
 @endsection
