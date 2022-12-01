@@ -9,6 +9,7 @@ use App\Models\ServicesItems;
 use App\Models\CleanerHours;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
+use Illuminate\Support\Facades\Crypt;
 
 class Profile extends Component
 {
@@ -29,8 +30,14 @@ class Profile extends Component
     public $todayDate, $dateFormat, $month_date;
 
 
-    public $selectDateTimeSlot;
-    
+    //public $selectDateTimeSlot;
+
+    public $selectedDetails = [
+        'service_item_id' => null,
+        'home_size' => null,
+        'add_on_id' => null,
+        'time' => null,
+    ];
 
     public function mount()
     {
@@ -161,7 +168,18 @@ class Profile extends Component
         $this->slotAvailability();
 
     }
+
     
+    public function redirectToCheckout()
+    {
+        $details = $this->selectedDetails;
+        $details['date']       = $this->selected_date;
+        $details['cleaner_id'] = $this->cleanerId;
+
+        $encryptedDetails = Crypt::encryptString( json_encode( $details) );
+
+        return redirect()->route('checkout', ['details' => $encryptedDetails ]);
+    }
 
 
     public function render()

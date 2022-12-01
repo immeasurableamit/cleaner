@@ -111,7 +111,7 @@
                                 <div class="selecti-box">
                                     
 
-                                    <select class="select-custom-design-group">
+                                    <select class="select-custom-design-group-wire-model-error-for-class" wire:model="selectedDetails.service_item_id">
                                         @foreach($services as $service)
                                         <optgroup label="{{ $service->title }}">
                                             @foreach($service->servicesItems as $item)
@@ -126,13 +126,14 @@
                             <div class="col-md-4">
                                 <div class=" input-design">
                                     <label>Home Size</label>
-                                    <input type="text" placeholder="Enter Square Feet">
+                                    <input type="text" wire:model="selectedDetails.home_size" placeholder="Enter Square Feet">
                                 </div>
                             </div>
+
                             <div class="col-md-4 select-design">
                                 <label>Add-Ons</label>
                                 <div class="selecti-box">
-                                    <select class="select-custom-design">
+                                    <select class="select-custom-design-wire-model-error-for-class"  wire:model="selectedDetails.add_on_id">
                                         @foreach($itemAddOns as $item)
                                         <option value="{{ $item->id }}">{{ $item->title }}</option>
                                         @endforeach
@@ -177,9 +178,9 @@
                 <div class="row block_start_time">
                     <div class="col-md-3 select-design">
                         <div class="selecti-box">
-                            <select class="select-custom-design" wire:model="selectDateTimeSlot">
+                            <select class="select-custom-design" wire:model="selectedDetails.time">
                                 @foreach($workingDatesTimeSlot as $key => $slot)
-                                <option value="{{ date('h:i A', strtotime($slot['time'])) }}" {{ $slot['is_free']=='no' ? 'disabled' : '' }}>{{date('h:i A', strtotime($slot['time']))}}</option>
+                                <option value="{{ date('H:i:s', strtotime($slot['time'])) }}" {{ $slot['is_free']=='no' ? 'disabled' : '' }}>{{date('h:i A', strtotime($slot['time']))}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -194,7 +195,7 @@
             </div>
             <div class="click_to_schedule">
                 <h4 class="h4_tittle"><span class="c_number">3</span>Click to schedule </h4>
-                <button class="btn_c"><a href="build-checkout.html">Let’s Go!</a></button>
+                <button class="btn_c" type="button" wire:click="redirectToCheckout">Let’s Go!</button>
                 <div class="date_show d-md-none d-block ">
                     <p>Future recurring cleanings will be scheduled in the nearest availabel time slot. Please contact your cleaner if you need to reschedule any cleanings.</p>
                 </div>
@@ -319,8 +320,6 @@
                 },
             });
         }
-
-        
     </script>
     @endpush
     
