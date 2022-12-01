@@ -11,6 +11,7 @@ use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\Cleaner;
 use App\Http\Controllers\Cleaner\CleanerController;
 use App\Mail\ContactMail;
+use Illuminate\Support\Facades\Crypt;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,6 +80,8 @@ Route::get('terms-and-conditions', function () {
     );
     return view('home.terms-and-conditions', compact('title'));
 })->name('terms-and-conditions');
+
+Route::get('/checkout/{details}', [ HomeController::class, 'checkout' ] )->name('checkout');
 
 //Admin Section
 Route::middleware(['auth', 'verified'])->group(function () {
