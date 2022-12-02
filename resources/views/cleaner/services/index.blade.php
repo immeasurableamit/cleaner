@@ -70,16 +70,23 @@
                                                     </div>
                                                     <div class="row body_service_{{$service->id}}">
                                                         <div class="col-md-6">
-                                                            @foreach($service->servicesItems as $i => $item)
-                                                                @foreach($cservices as $j => $cservice)
-                                                                    @if($j==$i)
-                                                                    @if($cservice->services_items_id == $item->id)
-                                                                    @include('cleaner.services.form', ['showClass'=>'show', 'cservice'=>$cservice])
-                                                                    @else
+                                                            @foreach ( $service->servicesItems as $item ) 
+
+                                                                @php $cservice = $cservices->where('services_items_id', $item->id )->first() @endphp
+
+                                                                @if ( ! $cservice ) 
+
                                                                     @include('cleaner.services.form')
-                                                                    @endif
-                                                                    @endif
-                                                                @endforeach
+                                                                    
+                                                                @elseif ( $cservice->status == '0' )
+
+                                                                    @include('cleaner.services.form', ['showClass' => '', 'cservice'  => $cservice])
+                                                                @else 
+                                                                    @include('cleaner.services.form', ['showClass' => 'show', 'cservice'  => $cservice])
+
+                                                                @endif
+                                                     
+                                                               
                                                             @endforeach
                                                         </div>
                                                         <div class="col-md-6">

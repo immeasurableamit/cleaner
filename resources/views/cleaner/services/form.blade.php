@@ -2,7 +2,12 @@
     <div class="heder_row">
         <h3>{{ $item->title }}</h3>
         <div class="form-check form-switch body heading-toggle" data-service="{{$service->id}}" data-item="{{$item->id}}">
-            <input class="check form-check-input" name="service[{{$service->id}}][item][{{$item->id}}][checked]" type="checkbox" {{@$cservice ? 'checked' : ''}}>
+
+        @if ( ! $cservice ) 
+            <input class="check form-check-input" name="service[{{$service->id}}][item][{{$item->id}}][checked]" type="checkbox">
+        @else
+            <input class="check form-check-input" name="service[{{$service->id}}][item][{{$item->id}}][checked]" type="checkbox" {{@$cservice->status == '1' ? 'checked' : ''}}>
+        @endif
             <input class="check form-check-input" name="service[{{$service->id}}][item][{{$item->id}}][id]" value="{{ $item->id }}" type="hidden">
         </div>
     </div>
