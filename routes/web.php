@@ -215,7 +215,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::prefix('services')->group(function () {
             Route::controller(Cleaner\ServicesController::class)->group(function () {
                 Route::get('/', 'index')->name('cleaner.services.index');
-                Route::get('/store', 'store')->name('cleaner.services.post');
+                Route::post('/store', 'store')->name('cleaner.services.post');
             });
         }); 
 

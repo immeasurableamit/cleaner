@@ -20,8 +20,8 @@
         <td>{{$user->email}}</td>
         <td>12</td>
         <td>2/14/22</td>
-        <td>{{$user->UserDetails->city}}</td>
-        <td>{{$user->UserDetails->State->code}}</td>
+        <td>{{@$user->UserDetails->city}}</td>
+        <td>{{@$user->UserDetails->State->code}}</td>
         <!-- <td>USA</td> -->
         <td>2/14/22</td>
         <td>$2,555</td>
