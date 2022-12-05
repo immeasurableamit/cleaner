@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\CleanerServices;
+
 /*
  * @param: array $services ( Received in store method of Cleaner\ServicesController)
  * 
@@ -21,7 +22,7 @@ function updateServicesOfCleaners($cleaner, $services)
             
             $item_data['status'] = isset($item_data['checked']) ? '1' : '0';
 
-            /* Update if service already existed */
+            /* Update if service item already existed */
             $cleanerService = $cleanerServices->where('services_items_id', $item_id)->first();
             if ($cleanerService) {
 
@@ -29,7 +30,7 @@ function updateServicesOfCleaners($cleaner, $services)
                 continue;
             }
 
-            /* Prepare to store if checked*/
+            /* Prepare to store service item if needs to get saved */
             if ($item_data['status'] == '1') {
 
                 $newCleanerService = generateCleanerServiceBlueprintForSaving($cleaner->id, $item_data);
@@ -73,7 +74,7 @@ function updateCleanerSerivce($cleanerService, $item_data)
 function generateCleanerServiceBlueprintForSaving($cleaner_id, $item_data)
 {
     $blueprint = [
-        'users_id' => $cleaner->id,
+        'users_id' => $cleaner_id,
         'services_items_id' => $item_data['id'],
         "price"    => $item_data['price'],
         "duration" => $item_data['duration'],

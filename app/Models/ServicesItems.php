@@ -14,4 +14,6 @@ class ServicesItems extends Model
     {
         return $this->belongsTo(Services::class, 'services_id', 'id');
     }
+
+ 
 }

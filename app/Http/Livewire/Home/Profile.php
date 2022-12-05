@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Services;
 use App\Models\ServicesItems;
 use App\Models\CleanerHours;
+use App\Models\CleanerServices;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\Crypt;
@@ -16,7 +17,7 @@ class Profile extends Component
     public $cleanerId;
     public $cleaner;
 
-    public $services;
+    public $services; 
     public $itemAddOns;
 
 
@@ -30,8 +31,20 @@ class Profile extends Component
     public $todayDate, $dateFormat, $month_date;
 
 
-    //public $selectDateTimeSlot;
 
+    public $servicesUnmodified;
+    public $servicesItems;
+    public $cleanerServices;
+
+    public $estimatedPrice;
+    public $estimatedTime;
+
+    public $homeSize;
+    public $time;
+    public $serviceItemId;
+    public $addOnIds = [];
+    
+    
     public $selectedDetails = [
         'service_item_id' => null,
         'home_size' => null,
@@ -39,25 +52,37 @@ class Profile extends Component
         'time' => null,
     ];
 
+    protected function prepareProps()
+    {
+        /* Get data */
+        $this->cleanerServices    = CleanerServices::where("users_id", $this->cleanerId )->where('status', '1' )->get();
+        $this->servicesItems      = ServicesItems::find( $this->cleanerServices->pluck('services_items_id') );
+        $this->servicesUnmodified = Services::find( $this->servicesItems->pluck('services_id') );
+
+        /* Prepare services object for blade */
+        $this->services = collect();
+        foreach ( $this->servicesUnmodified as $service ) {
+            $service->serviceItems = $this->servicesItems->whereIn('services_id', $service->id );
+            $this->services->push( $service );
+        }
+
+        // fetching first because there will always be only one service for add ons if cleaner opts in for that
+        $addOnService     = $this->services->where('types_id', 2 )->first();
+        $this->itemAddOns = is_null( $addOnService ) ? null : $addOnService->serviceItems;
+        
+        return true;
+    }
+
     public function mount()
     {
         $this->cleaner = User::findOrFail($this->cleanerId);
-
-        $this->services = Services::with('servicesItems')
-                            ->whereTypesId('1')
-                            ->whereStatus('1')
-                            ->get();
-
-        $this->itemAddOns = ServicesItems::whereStatus('1')
-                            ->whereHas('service', function($query){
-                                $query->where('types_id', '2');
-                            })
-                            ->get();
-
+        $this->prepareProps();
 
         $this->todayDate = Carbon::now();
 
         $this->getWorkingDays($this->todayDate);
+
+        //dd( $this->cleanerServices->pluck('services_items_id')->toArray() );
     }
 
 
@@ -148,10 +173,44 @@ class Profile extends Component
         }
     }
 
+    protected function updateEstimateTimeAndPrice()
+    {
+        $this->estimatedPrice = 0;
+        $this->estimatedTime  = 0;
+        if ( empty( $this->homeSize) ){
+            return null;
+        }
+        
+        /* Filter out selected services */
+        $selectedServices = $this->cleanerServices->where('services_items_id', $this->serviceItemId );
+        if ( ! empty( $this->addOnIds) ) {
+            $addOnServices    = $this->cleanerServices->whereIn('services_items_id', $this->addOnIds );
+            $selectedServices = $selectedServices->concat( $addOnServices );
+        }
 
+        
+        /* Sum of each service price against input square feet */
+        foreach ( $selectedServices as $serviceItem ) {
+            $this->estimatedPrice += $serviceItem->priceForSqFt( $this->homeSize );
+        }
 
+        $this->estimatedTime = $selectedServices->sum('duration');
+    }
 
+    public function updatingHomeSize($value)
+    {
+        $this->validate([
+            'serviceItemId' => 'required'
+        ]);
+    }
 
+    public function updated( $key, $value )
+    {
+        if ( in_array( $key, [ 'homeSize', 'serviceItemId', 'addOnIds' ]) ) {
+            $this->updateEstimateTimeAndPrice();
+        }
+
+    }
 
 
     public function updatedMonthDate()
@@ -163,27 +222,48 @@ class Profile extends Component
         $this->getWorkingDays($nDate);
     }
 
-
+ 
     public function updatedSelectedDate(){
         $this->slotAvailability();
 
     }
 
+    protected function checkoutRules()
+    {
+        $rules = [ 
+            'serviceItemId' => 'required',
+            'addOnIds'      => 'required|array',
+            'homeSize'      => 'required|numeric',
+            'selected_date' => 'required|date|date_format:Y-m-d',
+            'time'          => 'required',
+        ];
+
+        $messages = [
+            'serviceItemId.required' => "Please select any cleaning type"
+        ];
+
+        return [ $rules, $messages ];
+    }
     
     public function redirectToCheckout()
     {
-        $details = $this->selectedDetails;
-        $details['date']       = $this->selected_date;
-        $details['cleaner_id'] = $this->cleanerId;
 
-        $encryptedDetails = Crypt::encryptString( json_encode( $details) );
+        $validatedData = $this->validate(...$this->checkoutRules());
+        $validatedData['cleanerId'] = $this->cleanerId;
+        
+        $encryptedDetails = Crypt::encryptString( json_encode( $validatedData ) );
 
         return redirect()->route('checkout', ['details' => $encryptedDetails ]);
+        
     }
+
 
 
     public function render()
     {
+        $this->emit('componentRendered');
+
+        
         return view('livewire.home.profile');
     }
 }

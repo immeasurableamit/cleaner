@@ -98,7 +98,7 @@
                                             @endforeach
 
 
-                                            <button type="submit" class="btn btn-success">Submit</button>
+                                            <button type="submit" class="btn_blue ">Submit</button>
 
                                         </div>
                                     {!! Form::close() !!}
