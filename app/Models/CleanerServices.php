@@ -14,4 +14,14 @@ class CleanerServices extends Model
     {
         return $this->belongsTo(ServicesItems::class, 'services_items_id', 'id');
     }
+
+    public function priceForSqFt($sqFt)
+    {
+        return $this->price * $sqFt;
+    }
+
+    public function durationForSqFt($sqFt)
+    {
+        return $this->duration * $sqFt;
+    }
 }

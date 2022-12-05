@@ -22,13 +22,13 @@ class HomeController extends Controller
 	public function checkout(Request $req, $details)
 	{
 		$details = json_decode(Crypt::decryptString($details));
+		dd( $details );
 
-		$cleaner     = User::findOrFail( $details->cleaner_id );
-		$serviceItem = ServicesItems::find( $details->service_item_id );
+		$cleaner     = User::findOrFail( $details->cleanerId );
+		$serviceItem = ServicesItems::find( $details->serviceItemId );
 		$addOn       = ServicesItems::find( $details->add_on_id );
 		$datetime    = Carbon::createFromFormat("Y-m-d H:i:s", "$details->date $details->time")->toDayDateTimeString();
 		$homeSize    = $details->home_size;
-		//dd( $details );
 	
 		return view('home.checkout', compact(
 			'cleaner',
