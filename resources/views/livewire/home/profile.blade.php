@@ -190,9 +190,12 @@
                 <div class="row block_start_time">
                     <div class="col-md-3 select-design">
                         <div class="selecti-box">
-                            <select class="select-custom-design" wire:model="time">
+                            <select class="select-custom-design" id="time-selector">
+                                <option></option>
                                 @foreach($workingDatesTimeSlot as $key => $slot)
-                                <option value="{{ date('H:i:s', strtotime($slot['time'])) }}" {{ $slot['is_free']=='no' ? 'disabled' : '' }}>{{date('h:i A', strtotime($slot['time']))}}</option>
+                                
+                              <option value="{{ date('H:i:s', strtotime($slot['time'])) }}" {{ $slot['is_free']=='no' ? 'disabled' : '' }} {{ date("H:i:s", strtotime( $slot['time'] ) )  == $time ? 'selected' : ''  }}>{{date('h:i A', strtotime($slot['time']))}}</option> 
+                                {{-- <option value="{{ date('H:i:s', strtotime($slot['time'])) }}" {{ $slot['is_free']=='no' ? 'disabled' : '' }}>{{ $slot['time'] }}</option> --}}
                                 @endforeach
                             </select>
                         </div>
@@ -342,22 +345,34 @@
 
         function initSelectors() {
             console.log('init selector rand');
-            $("#select-service-selector").select2({
-                placeholder: 'Select Cleaning Type',
+            $("#time-selector").select2({
+                placeholder: 'Select Time'
             });
 
-            $("#select-service-selector").on('select2:select', function(e) {
-                var data = e.params.data;
-                @this.set('serviceItemId', data.id);
+            $("#select-service-selector").select2({
+                placeholder: 'Select Cleaning Type',
             });
 
             $("#addon-selector").select2({
                 placeholder: 'Select Addon'
             });
 
+
+            $("#select-service-selector").on('select2:select', function(e) {
+                var data = e.params.data;
+                @this.set('serviceItemId', data.id);
+            });
+
             $("#addon-selector").on('select2:select', function(e) {
                 @this.set('addOnIds', $("#addon-selector").val());
             });
+
+            $("#time-selector").on('select2:select', function(e) {
+                var data = e.params.data;
+                @this.set('time', data.id );
+                
+            });
+
         }
 
 
