@@ -20,16 +20,25 @@ class HomeController extends Controller
 	}
 
 	public function checkout(Request $req, $details)
-	{
-		$details = json_decode(Crypt::decryptString($details));
-		dd( $details );
+	{		
+		$details = json_decode(Crypt::decryptString($details), true);
+		
+		return view('home.checkout', compact('details') );
 
 		$cleaner     = User::findOrFail( $details->cleanerId );
-		$serviceItem = ServicesItems::find( $details->serviceItemId );
-		$addOn       = ServicesItems::find( $details->add_on_id );
 		$datetime    = Carbon::createFromFormat("Y-m-d H:i:s", "$details->date $details->time")->toDayDateTimeString();
-		$homeSize    = $details->home_size;
-	
+		$homeSize    = $details->homeSize;
+		
+		$selectedServicesIds = array_merge( [ $req->serviceItemId ], $details->addOnIds );
+		$selectedServices    = ServicesItems::find( $selectedServicesIds );
+
+		$estimatedDuration   = $selectedServices->sum('duration');
+
+		/* Put price attribute for each service in object */
+		foreach ( $selectedServices as $selectedService ) {
+			$selectedService->price = $selectedService->priceForSqFt($homeSize);
+		}
+		
 		return view('home.checkout', compact(
 			'cleaner',
 			'serviceItem',

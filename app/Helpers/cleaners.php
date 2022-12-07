@@ -7,7 +7,7 @@ use App\Models\CleanerServices;
  * 
  * @param: \App\Models\User $cleaner
  * 
- * @return: true
+ * @return: bool
  */
 
 function updateServicesOfCleaners($cleaner, $services)
