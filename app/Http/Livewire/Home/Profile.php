@@ -232,7 +232,7 @@ class Profile extends Component
     {
         $rules = [ 
             'serviceItemId' => 'required',
-            'addOnIds'      => 'required|array',
+            'addOnIds'      => 'present|array',
             'homeSize'      => 'required|numeric',
             'selected_date' => 'required|date|date_format:Y-m-d',
             'time'          => 'required',
