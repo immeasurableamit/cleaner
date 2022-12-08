@@ -12,6 +12,7 @@ class UserDetails extends Model
     protected $with = ['State'];
 
     protected $fillable = [
+        'user_id',
         'states_id',
         'about',
         'dob',

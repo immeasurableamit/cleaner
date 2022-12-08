@@ -1,13 +1,14 @@
 <div>
-    <form id="msform" class="step-form-design">
+    
         <!-- progressbar -->
         <ul id="progressbar">
             <li class="active">Account Setup</li>
-            <li>Social Profiles</li>
-            <li>Personal Details</li>
+            <li class="{{ $currentlyActiveStep ==  2 ? 'active' : '' }}">Social Profiles</li>
+            <li class="{{ $currentlyActiveStep ==  3 ? 'active' : '' }}">Personal Details</li>
         </ul>
         <!-- fieldsets -->
         @if ($currentlyActiveStep == 1)
+
             <fieldset>
                 <!-- 1 -->
 
@@ -22,7 +23,7 @@
                                 </div>
                             </div>
                             <div class="blue-logo-block text-center max-width-100">
-                                <a href="index.html"><img src="assets/images/logo/logo.svg" /></a>
+                                <a href="index.html"><img src="/assets/images/logo/logo.svg" /></a>
                             </div>
                         </div>
                     </div>
@@ -96,20 +97,27 @@
         @elseif ($currentlyActiveStep == 2)
 
         <!--Login Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" onclick="$('#loginModal').modal('hide')">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        ...
+        <form wire:submit.prevent="authenticateUser">
+            <input type="email"  wire:model.defer="email" placeholder="Email"/>
+            @error('email') <span class='text-danger'> {{ $message }} @enderror
+            <input type="password" wire:model.defer="password" placeholder="Password"/>
+            @error('password') <span class='text-danger'> {{ $message }} @enderror
+            <button class="btn_b mt-4">Login</button>
+        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" onclick="$('#loginModal').modal('hide')">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
@@ -130,7 +138,7 @@
                                     </div>
                                 </div>
                                 <div class="blue-logo-block text-center max-width-100">
-                                    <a href="#"><img src="assets/images/logo/logo.svg"></a>
+                                    <a href="#"><img src="/assets/images/logo/logo.svg"></a>
                                 </div>
                             </div>
                         </div>
@@ -141,22 +149,29 @@
                                 <div class="text-center link-design-2 pt-3 bold">You don't pay until cleaning day!</div>
                             </div>
                             <div class="built_text_div">
-                                <div class="provider_service">
-                                <div class="text-center link-design-2 pt-3 bold mb-3" data-toggle="modal" data-target="#exampleModal">Already a customer ?</div>
-                                    <div class="btn_right_cards text-center pb-5 border-bottom">
+                                <div class="provider_service pb-5 border-bottom  text-center">
+
+                                @if ( is_null( $user ) )
+                                <div class="text-center link-design-2 pt-3 bold mb-3" onclick="$('#loginModal').modal('show')">
+                                    Already a customer ?
+                                </div>
+                                @endif
+
+                                    <div class="btn_right_cards text-center ">
                                         <div class="check-pay-mathoud">
                                             <input type="radio" name="payment_method" id="gpay" value="google_pay" wire:model="paymentMethod"> 
-                                            <button><img src="assets/images/icons/google.svg" />Pay</button>
+                                            <button><img src="/assets/images/icons/google.svg" />Pay</button>
                                         </div>
                                         <div class="check-pay-mathoud">
                                             <input type="radio" name="payment_method" id="applepay" value="apple_pay" wire:model="paymentMethod">
-                                            <button><img src="assets/images/icons/apple.svg">Pay</button>
+                                            <button><img src="/assets/images/icons/apple.svg">Pay</button>
                                         </div>
                                         <div class="check-pay-mathoud">
                                             <input type="radio" name="payment_method" wire:model="paymentMethod" id="credit-card" value="credit_card" checked>
                                             <button>Credit card</button>
                                         </div>
                                     </div>
+                                    @error ('paymentMethod') <div class="mt-3"><span class="text-danger">PaymentMethod Field is required</span></div> @enderror
                                 </div>
                                 <div class="form-headeing-second">
                                     <h4 class="border-0 m-0 pt-4">Billing Name and Address</h4>
@@ -167,39 +182,56 @@
                                         <div class="col-md-6">
                                             <div class="form-grouph input-design mb-30">
                                                 <input type="text" name="first_name" wire:model="firstname" placeholder="First name">
+                                                @error ('firstname') <span class="text-danger">{{ $message }} </span> @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-grouph input-design mb-30">
                                                 <input type="text" name="last_name" wire:model="lastname" placeholder="Last Name">
+                                                @error ('lastname') <span class="text-danger">{{ $message }} </span> @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-grouph input-design mb-30">
                                                 <input type="email" name="email" wire:model="email" placeholder="Email">
+                                                @error ('email') <span class="text-danger">{{ $message }} </span> @enderror
                                             </div>
                                         </div>
+                                        <div class="col-md-6">
+                                            <div class="form-grouph input-design mb-30">
+                                                <input type="contact" name="contact" wire:model="contact" placeholder="Contact number">
+                                                @error ('contact') <span class="text-danger">{{ $message }} </span> @enderror
+                                            </div>
+                                        </div>
+
+                                        @if ( is_null( $user ) )
                                         <div class="col-md-6">
                                             <div class="form-grouph input-design mb-30">
                                                 <input type="password" name="password" wire:model="password" placeholder="Password">
+                                                @error ('password') <span class="text-danger">{{ $message }} </span> @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-grouph input-design mb-30">
-                                                <input type="confirm_password" wire:model="confirmPassword" name="confirm_password"
+                                                <input type="password" wire:model="confirmPassword" name="confirmPassword"
                                                     placeholder="Confirm Password">
+                                                    @error ('confirmPassword') <span class="text-danger">{{ $message }} </span> @enderror
                                             </div>
                                         </div>
+                                        @endif
 
                                         <div class="col-md-6">
                                             <div class="form-grouph input-design mb-30">
                                                 <input type="text" wire:model="address" name="address" placeholder="Address">
+                                                @error ('address') <span class="text-danger">{{ $message }} </span> @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-grouph input-design mb-30">
                                                 <input type="text" wire:model="aptOrUnit" name="apt_or_unit"
                                                     placeholder="Apt # or Unit #">
+
+                                                    @error ('aptOrUnit') <span class="text-danger">{{ $message }} </span> @enderror
                                             </div>
                                         </div>
 
@@ -213,19 +245,25 @@
                                                         id="state-selector">
                                                         <option></option>
                                                         @foreach ( $states as $state )
-                                                            <option value="{{ $state->id }}">{{ $state->name }}</option>
+                                                            <option value="{{ $state->id }}" {{ $state->id == $stateId ? 'selected' : ''}}>{{ $state->name }}</option>
                                                         @endforeach
                     
                                                     </select>
+                                                   
+                                                    
                                                 </div>
+                                                @error ('state') <span class="text-danger">{{ $message }} </span> @enderror
+                                                @error ('city') <br><span class="text-danger">{{ $message }} </span> @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-grouph input-design mb-30">
                                                 <input type="text" wire:model="zip" name="zip" placeholder="Zip">
+                                                @error ('zip') <span class="text-danger">{{ $message }} </span> @enderror
                                             </div>
                                         </div>
                                     </div>
+                                    @if ( $paymentMethod == "credit_card")
                                     <div class="card-details-sec show">
                                         <div class="form-headeing-second">
                                             <h4 class="border-0 mb-0">Card details</h4>
@@ -240,6 +278,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @endif
                                 </div>
                                 <div class="sub-totel-text">
                                     <div class="sub-totel-text-block">
@@ -292,7 +331,7 @@
                                     </div>
                                 </div>
                                 <div class="blue-logo-block text-center max-width-100">
-                                    <a href="#"><img src="assets/images/logo/logo.svg"></a>
+                                    <a href="#"><img src="/assets/images/logo/logo.svg"></a>
                                 </div>
                             </div>
                         </div>
@@ -304,57 +343,61 @@
                             <div class="built_text_div">
                                 <div class="schedule-bock-search-img">
                                     <div class="three_imgs text-center pb-2">
-                                        <img src="assets/images/3_step.png" class="img-fluid">
+                                        <img src="/assets/images/3_step.png" class="img-fluid">
                                     </div>
                                 </div>
                                 <div class="schedule-block-searccntnt">
                                     <div class="schduled-text-div">
                                         <p class="schedule_label">Provider</p>
-                                        <span class="schedule_value-text">Natasha L.’s Team</span>
+                                        <span class="schedule_value-text text-capitalize">{{ $cleaner->name }}</span>
                                     </div>
                                     <div class="schduled-text-div">
                                         <p class="schedule_label">Services Address</p>
-                                        <span class="schedule_value-text">12125 Canary Dr. #212, Austin, TX
-                                            78745</span>
+                                        <span class="schedule_value-text">{{ $order->address }}</span>
                                     </div>
                                     <div class="schduled-text-div">
                                         <p class="schedule_label">Service</p>
-                                        <span class="schedule_value-text">Recurring Clean - Routine Cleaning -
-                                            Biweekly</span>
+                                        <span class="schedule_value-text">{{ $cleanerService->first()->servicesItems->first()->service->title }}</span>
                                     </div>
+
+                                    @if ( $addOns->isNotEmpty() )
                                     <div class="schduled-text-div">
                                         <p class="schedule_label">Addons</p>
-                                        <span class="schedule_value-text">Disinfecting Service. Garage - 2 Car, Patio
-                                            Sweep</span>
+                                        <span class="schedule_value-text">
+                                        @foreach ( $addOns as $addOn )
+                                            {{ $addOn->servicesItems->first()->title }}
+                                        @endforeach
+                                        </span>
                                     </div>
+                                    @endif
                                     <div class="schduled-text-div">
                                         <p class="schedule_label">Start Date</p>
-                                        <span class="schedule_value-text">Thursday, February 22, 2022 - 10:30am</span>
+                                        <span class="schedule_value-text">{{ $datetime }}</span>
                                         <b class="link-design-2">Add to calendar</b>
                                     </div>
                                     <div class="schduled-text-div">
                                         <p class="schedule_label">Payment Method</p>
-                                        <span class="schedule_value-text">Apple Pay</span>
+                                        <span class="schedule_value-text text-capitalize">{{ str_replace( "_", " ", $order->payment_method ) }}</span>
                                     </div>
 
                                 </div>
                                 <div class="sub-totel-text">
                                     <div class="sub-totel-text-block">
                                         <p class="label">Subtotal</p>
-                                        <p class="price">$100.00</p>
+                                        <p class="price">${{ $order->subtotal }}</p>
                                     </div>
                                     <div class="sub-totel-text-block">
                                         <p class="label">Tax</p>
-                                        <p class="price">$8.25</p>
+                                        <p class="price">${{ $order->tax }}</p>
 
                                     </div>
                                     <div class="sub-totel-text-block">
                                         <p class="label">Transaction Fees</p>
-                                        <p class="price">$5.00</p>
+                                        <p class="price">${{ $order->transaction_fees }}</p>
                                     </div>
                                     <div class="sub-totel-text-block">
-                                        <p class="label"><strong>Totel</strong></p>
-                                        <p class="price"><strong>$113.25</strong></p>
+                                        <p class="label"><strong>Total</strong></p>
+                                        <p class="price"><strong>${{ $order->total }}</strong></p>
                                     </div>
                                 </div>
                                 <div class="third_textarea_div">
@@ -382,16 +425,27 @@
                     value="Next" />
             </fieldset>
         @endif
-    </form>
 
   
 
     <script>
+
+        function initStateSelector()
+        {
+            $("#state-selector").select2({placeholder: 'State'});
+                $("#state-selector").on('select2:select', function (e) {
+                    var data = e.params.data;
+                    @this.set('stateId', data.id);
+            });
+        }
+
         window.addEventListener('load', function() {
 
             window.livewire.on('componentRendered', step => {
                 
-                $("#state-selector").select2({placeholder: 'State'});
+                if ( step == 2 ) {
+                    initStateSelector();
+                }
             });
             
         });
