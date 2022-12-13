@@ -6,11 +6,8 @@
 <section class="light-banner build-checkout-page" style="background-image: url('assets/images/white-pattern.png')">
 <div class="container">
 
-<!-- Jsn -->
-
-<!-- Jsn end -->
 <!-- multistep form -->
-@livewire('home.checkout', [ 'details' => $details ])
+@livewire('home.checkout', [ 'details' => $details, 'currentlyActiveStep' => request()->input('step', 1 ) ])
       </div>
     </section>
 <!-- Checkout Page End -->
