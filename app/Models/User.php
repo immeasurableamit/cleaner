@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\BillingAddress;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -92,6 +93,16 @@ class User extends Authenticatable implements MustVerifyEmail
     public function bankInfo()
     {
         return $this->hasOne(BankInfo::class, 'users_id', 'id');
+    }
+
+    public function billing_address()
+    {
+        return $this->hasOne(BillingAddress::class);
+    }
+
+    public function card()
+    {
+        return $this->hasOne(UserCard::class, 'user_id', 'id');
     }
 
 }

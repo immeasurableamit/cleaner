@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\CleanerServices;
+use App\Models\BankInfo;
 
 /*
  * @param: array $services ( Received in store method of Cleaner\ServicesController)
@@ -82,4 +83,49 @@ function generateCleanerServiceBlueprintForSaving($cleaner_id, $item_data)
     ];
 
     return $blueprint;
+}
+
+/*
+ * @param App\Models\User $cleaner
+ * 
+ * @return App\Models\BankInfo 
+ * 
+ */
+function createBankInfoEntry($cleaner)
+{
+    $account = stripeCreateConnectedAccount( $cleaner->email );
+    
+    $bank = BankInfo::create([
+        'users_id'   => $cleaner->id,
+        'account_id' => $account->id,
+        'status'     => 'pending',
+    ]);
+
+    $bank->refresh();
+
+    return $bank;
+}
+
+/*
+ * @param: App\Models\BankInfo $bank
+ * 
+ * @param: array $accountDetails ( with keys: account_holder_name, account_number, routing_number ) 
+ * 
+ */
+function addAccountDetailsInBankInfo($bank, $accountDetails)
+{
+    $externalAccount = stripeCreateExternalAccount( $bank->account_id, $accountDetails );
+
+    $bank->account_holder_name = $accountDetails['account_holder_name'];
+    $bank->account_number      = $accountDetails['account_number'];
+    $bank->routing_number      = $accountDetails['routing_number'];
+    $bank->payouts_enabled     = 1;
+    $bank->status              = 'active';
+    $bank->save();
+
+    return $bank;
+}
+
+function jsn(){
+    return 'hello';
 }

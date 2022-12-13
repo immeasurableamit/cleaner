@@ -16,9 +16,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Request;
 
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+
 
 class Checkout extends Component
 {
+    use LivewireAlert;
+
     public $currentlyActiveStep, $currentPageUrl;
     public $details;
 
@@ -34,6 +38,12 @@ class Checkout extends Component
     public $confirmPassword, $address, $aptOrUnit;
     public $city, $stateId, $zip, $paymentMethod;
     public $contact;
+
+    /* Second step: Card details props */
+    public $number, $expMonthYear, $cvc;
+
+    /* Second step: Stripe card saving props */
+    public $stripe_customer_id, $expMonth, $expYear;
 
     /* Third Step */
     public $order, $notes;
@@ -89,7 +99,10 @@ class Checkout extends Component
 
         return true;
     }
-
+    /*
+     * Prepare properties to make the component work 
+     * 
+     */
     protected function prepare()
     {
         /* Add data to the props that are essential to make the component function */
@@ -119,6 +132,11 @@ class Checkout extends Component
         $this->prepare(); // preparing again because livewire removes the attributes from database collections
     }
 
+    /*
+     * Used for authenticating customers that are
+     * already have an account with us.
+     * 
+     */
     public function authenticateUser()
     {
         $this->validate([
@@ -140,6 +158,25 @@ class Checkout extends Component
         return redirect( $this->currentPageUrl."?step=2" );
     }
 
+    protected function passwordValidationRules()
+    {
+        return [ 
+            'password'  => 'required',
+            'confirmPassword' => 'required|same:password'
+        ];
+    }
+
+    protected function cardValidationRules()
+    {
+        return [
+            'number'       => 'required|numeric',
+            'expMonthYear' => 'required',
+            'cvc'          => 'required|numeric',
+            'expMonth'     => 'required|numeric',
+            'expYear'      => 'required|numeric'
+        ];
+    }
+
     protected function checkoutRules()
     {
         $rules = [
@@ -155,13 +192,12 @@ class Checkout extends Component
         ];
 
         if ( ! $this->user ) {
+            $rules          = array_merge( $rules, $this->passwordValidationRules() );
+            $rules['email'] = $rules['email']."|unique:users";
+        }
 
-            $passwordRules = [ 
-                'password'  => 'required',
-                'confirmPassword' => 'required|same:password'
-            ];
-
-            $rules = array_merge( $rules, $passwordRules );
+        if ( $this->paymentMethod == 'credit_card'){
+            $rules = array_merge( $rules, $this->cardValidationRules() );
         }
 
         /* Customize validation messages */
@@ -181,14 +217,21 @@ class Checkout extends Component
             'apt_or_unit' => $this->aptOrUnit,
             'city'        => $this->city,
             'zip_code'    => $this->zip,
-            'payment_method' => $this->paymentMethod            
+            'payment_method'     => $this->paymentMethod,
+            'stripe_customer_id' => $this->stripe_customer_id,
         ]);
+
 
         // TODO: store lat/lng 
 
         return $userDetails;
     }
 
+    /*
+     * 
+     * @return: object ( instance of App\Models\User )
+     * 
+     */
     protected function storeUserAsCustomer()
     {
         $user = User::create([
@@ -206,6 +249,12 @@ class Checkout extends Component
         return $user;
     }
 
+    /*
+     * @param: int $user_id ( primary key of App\Models\User )
+     * 
+     * @return: object ( instance of App\Models\Order )
+     * 
+     */
     protected function storeOrder($user_id)
     {
         $order = Order::create([
@@ -232,6 +281,11 @@ class Checkout extends Component
         return $order;
     }
 
+    /*
+     * @param: int $order_id ( primary key of App\Models\Order )
+     * 
+     * @return: int (number of items inserted in DB)
+     */
 
     protected function storeOrderItems($order_id)
     {
@@ -256,6 +310,42 @@ class Checkout extends Component
         return $result;
     }
 
+    protected function validateCardWithStripe()
+    {
+        $card = [
+            'number'    => $this->number,
+            'exp_month' => $this->expMonth,
+            'exp_year'  => $this->expYear,
+            'cvc'       => $this->cvc,
+        ];
+
+        $tokenResp = stripeGenerateCardToken($card);
+        return $tokenResp;
+    }
+
+    /*
+     * 1. Validate credit card
+     * 2. Store new customer in stripe along attaching the card with it
+     * 
+     * @return: array
+     */
+    protected function handleCreditCardPaymentMethodSelection()
+    {
+        $tokenResp = $this->validateCardWithStripe();
+
+        if ( $tokenResp['status']  == false ){
+            $this->addError('stripe_card_verification', $tokenResp['error_string']);
+            return [ 'status' => false, 'error' => $tokenResp['error_string'] ];
+        }
+
+        $name = "$this->firstname $this->lastname";
+
+        $customer = stripeCreateCustomerWithSource($name, $this->email, $tokenResp['token_string']);
+
+        $this->stripe_customer_id = $customer->id;
+        return ['status' => true, 'response' => $customer ];
+    }
+
     /*
      * Store order and data related to it in DB
      * 
@@ -264,23 +354,46 @@ class Checkout extends Component
      */
     protected function placeOrder()
     {
+        /* Handle credit card verification */
+        if ( $this->paymentMethod == 'credit_card') {
+            $result = $this->handleCreditCardPaymentMethodSelection();
+            if ( $result['status'] == false ) {
+                return false;    
+            }
+        }
+
+        /* Handle guest user */
         if ( is_null( $this->user ) ) {
             $this->user = $this->storeUserAsCustomer();
         }
 
+        /* Store order */
         $order      = $this->storeOrder($this->user->id);
         $orderItems = $this->storeOrderItems($order->id);
 
         $this->order = $order;
-
-        return $order;
+        return true;
     }   
 
     public function schedule()
     {
         $validatedData = $this->validate( ...$this->checkoutRules() );
-        $this->placeOrder();
-        $this->currentlyActiveStep++;
+        $status        = $this->placeOrder();
+
+        if ( $status ) {
+            $this->currentlyActiveStep++;
+        }        
+    }
+
+    public function saveOrderNotes()
+    {
+        $this->order->notes = $this->notes;
+        $this->order->save();
+        $this->alert('success', 'Notes Sent!');     
+    }
+
+    public function updatingExpMonthYear($value)
+    {
     }
 
     public function mount()

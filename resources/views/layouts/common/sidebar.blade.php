@@ -2,6 +2,8 @@
     <ul class="list-unstyled">
     @if (Auth::user()->role=="customer")
     <li><a class="nav-link {{ request()->routeIs('customer.account') ? ' active' : '' }}" href="{{ route('customer.account') }}">Account </a></li>
+    <li><a href="{{route('customer.billing.index')}}" class="{{ @$title['active']=='billing' ? 'active' : '' }}">Billing</a></li>
+    
 
     @elseif (Auth::user()->role=="cleaner")
       <li class="account_dropdown">
@@ -15,14 +17,15 @@
         <li><a href="cleaner-set-location.html" class="">Set Locations Served</a></li>
         <li><a href="{{route('cleaner.notification.index')}}" class="{{ @$title['active']=='notification' ? 'active' : '' }}">Notification Preferences</a></li>
         <li><a href="{{route('cleaner.reviews')}}" class="{{ @$title['active']=='reviews' ? 'active' : '' }}">Reviews</a></li>
+        <li><a href="{{route('cleaner.billing.billing')}}" class="{{ @$title['active']=='billing' ? 'active' : '' }}">Billing</a></li>
       </ul>
       </li>
-      @endif
+    @endif
 
       <li><a href="cleaner-appoitments.html">Appointments</a></li>
       <li><a href="{{route('cleaner.jobs.jobs')}}" class="{{ @$title['active']=='jobs' ? 'active' : '' }}">Jobs</a></li>
       <li><a href="cleaner-appoitments.html">Insurance and Badges </a></li>
-      <li><a href="{{route('cleaner.billing.billing')}}" class="{{ @$title['active']=='billing' ? 'active' : '' }}">Billing</a></li>
+      
       <li><a href="{{route('cleaner.notification.index')}}" class="{{ @$title['active']=='notification' ? 'active' : '' }}">Notifications</a></li>
       <li><a href="{{route('cleaner.support.service')}}" class="{{ @$title['active']=='support' ? 'active' : '' }}">Support</a></li>
     </ul>
