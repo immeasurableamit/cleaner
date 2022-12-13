@@ -23,6 +23,7 @@ class UserDetails extends Model
         'zip_code',
         'payment_method',
         'timezone',
+        'stripe_customer_id',
 
     ];
 

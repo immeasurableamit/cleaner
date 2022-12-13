@@ -10,6 +10,7 @@ use App\Http\Livewire\CustomerUpdate;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\Cleaner;
 use App\Http\Controllers\Cleaner\CleanerController;
+use App\Http\Controllers\Customer as CustomerControllers;
 use App\Mail\ContactMail;
 use Illuminate\Support\Facades\Crypt;
 
@@ -159,6 +160,25 @@ Route::middleware(['auth', 'verified'])->group(function () {
             );
             return view('customer.account.account', compact('title'));
         })->name('customer.account');
+
+        Route::prefix('billing')->group(function () {
+            Route::controller(CustomerControllers\BillingController::class)->group(function () {
+                Route::get('/', 'index')->name('customer.billing.index');
+                Route::get('/edit', 'edit')->name('customer.billing.edit');
+                Route::post('/update', 'update')->name('customer.billing.update');
+
+                /* 
+                Route::get('/stripe/connect', 'connectStripe')->name("cleaner.billing.stripeConnect");
+                Route::get('/banking-info-error', 'bankingInfoError')->name('cleaner.billing.error');
+                Route::get('/banking-info-success', 'bankingInfoSuccess')->name('cleaner.billing.success');
+
+                Route::get('/accountdetails', 'bankAccount')->name('cleaner.billing.editBankAccount');
+                Route::get('/editpayment', 'editpayment')->name('cleaner.billing.editPaymentMethod');
+                Route::post('/profile/bankInfoStore', 'bankingInfoStore')->name('cleaner.billing.bankInfoStore');
+                Route::get('/profile/connect-account', 'connectAccount')->name('cleaner.billing.connectAccount'); */
+               
+            }); 
+        });
     });
 
     //cleaner
@@ -201,12 +221,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::prefix('billing')->group(function () {
             Route::controller(Cleaner\billing\BillingController::class)->group(function () {
                 Route::get('/', 'index')->name('cleaner.billing.billing');
+                Route::get('/stripe/connect', 'connectStripe')->name("cleaner.billing.stripeConnect");
+                Route::get('/banking-info-error', 'bankingInfoError')->name('cleaner.billing.error');
+                Route::get('/banking-info-success', 'bankingInfoSuccess')->name('cleaner.billing.success');
+
                 Route::get('/accountdetails', 'bankAccount')->name('cleaner.billing.editBankAccount');
                 Route::get('/editpayment', 'editpayment')->name('cleaner.billing.editPaymentMethod');
                 Route::post('/profile/bankInfoStore', 'bankingInfoStore')->name('cleaner.billing.bankInfoStore');
                 Route::get('/profile/connect-account', 'connectAccount')->name('cleaner.billing.connectAccount');
-                Route::get('/banking-info-error', 'bankingInfoError')->name('cleaner.billing.error');
-                Route::get('/banking-info-success', 'bankingInfoSuccess')->name('cleaner.billing.success');
+               
             });
         });
 
@@ -251,3 +274,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     });
 });
+

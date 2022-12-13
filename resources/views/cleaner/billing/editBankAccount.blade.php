@@ -41,7 +41,7 @@
 
                                 <div class="biling_edit_form">
 
-                                    @if(@$record->status=='active')
+                                    @if(@$record->status == 0)
 
                                     @if(!$record->account_number)
                                     <p class="text-center pb-3">Please fill the bank account to complete your bank account verification.</p>

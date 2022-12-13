@@ -3,7 +3,7 @@
         <!-- progressbar -->
         <ul id="progressbar">
             <li class="active">Account Setup</li>
-            <li class="{{ $currentlyActiveStep ==  2 ? 'active' : '' }}">Social Profiles</li>
+            <li class="{{ in_array( $currentlyActiveStep, [2,3] ) ? 'active' : '' }}">Social Profiles</li>
             <li class="{{ $currentlyActiveStep ==  3 ? 'active' : '' }}">Personal Details</li>
         </ul>
         <!-- fieldsets -->
@@ -83,7 +83,7 @@
                                 </div>
                             @endif
                             <div class="btn_nxt_prs">
-                                <label for="back" class="btn_b ">Back</label>
+                                <label for="back" class="btn_b " onclick="history.back()">Back</label>
                                 <label for="next" class="btn_c">Next</label>
                             </div>
                         </div>
@@ -270,11 +270,19 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-12">
-                                                <div class="form-grouph mb-30 card_text_input">
-                                                    <input type="text" placeholder="Card number">
-                                                    <input type="text" placeholder="MM/YY" class="mm_input">
-                                                    <input type="text" placeholder="CVC" class="cvc">
+                                                <div class="form-grouph mb-3 card_text_input">
+                                                    <input type="text" wire:model="number" name="number" placeholder="Card number">
+                                                    <input type="text" id="exp_month_year" name="exp_month_year" placeholder="MM/YY" class="mm_input">
+                                                    <input type="text" wire:model="cvc" name="cvc" placeholder="CVC" class="cvc">
                                                 </div>
+                                               @error ('number') <div class="text-danger">{{ $message }} </div> @enderror
+                                               @error ('expMonth') <div class="text-danger">{{ $message }} </div> @enderror
+                                               @error ('expYear') <div class="text-danger">{{ $message }} </div> @enderror
+                                               
+                                          
+                                               @error ('cvc') <div class="text-danger">{{ $message }} </div> @enderror
+                                               @error ('stripe_card_verification') <div class="text-danger">Stripe: {{ $message }} </div> @enderror
+
                                             </div>
                                         </div>
                                     </div>
@@ -401,13 +409,11 @@
                                     </div>
                                 </div>
                                 <div class="third_textarea_div">
-                                    <textarea placeholder="Notes for cleaner (optional).." class=""></textarea>
+                                    <textarea placeholder="Notes for cleaner (optional).." class="" wire:model="notes"></textarea>
                                 </div>
 
                                 <div class="btn_nxt_prs">
-                                    <!-- <label for="back3" class="btn_b ">Back</label> -->
-                                    <label for="next3" class="btn_c"><a href="message.html">Send
-                                            Notes</a></label>
+                                    <label for="next3" class="btn_c" wire:click="saveOrderNotes"><a href="message.html">Send Notes</a></label>
                                 </div>
                                 <a href="#" class="link-design-2 d-block pb-3">Please inform your provider about
                                     any future changes or cancellations as soon as possible. </a>
@@ -426,6 +432,7 @@
             </fieldset>
         @endif
 
+   
   
 
     <script>
@@ -439,10 +446,43 @@
             });
         }
 
+        function addSlashes (element) {
+
+            console.log( 'adding slashes');
+            let ele = document.getElementById(element.id);
+            ele     = ele.value.split('/').join('');    // Remove slash (/) if mistakenly entered.
+
+            if(ele.length < 5 && ele.length > 0){
+                let finalVal = ele.match(/.{1,2}/g).join('/');
+                document.getElementById(element.id).value = finalVal;
+            }
+        }
+
+        function expMonthYearStringFormatter()
+        {
+            var element = document.getElementById('exp_month_year');
+            if ( ! element ) {
+                console.log('not exists');
+                return '';
+            }
+
+            element.addEventListener('keyup', () => {
+                addSlashes( element );
+                var monthYear = document.getElementById('exp_month_year').value;
+                var month, year;
+                [ month, year ] = monthYear.split('/');
+
+                @this.set( 'expMonthYear', monthYear);
+                @this.set('expMonth', month);
+                @this.set('expYear', "20"+year);                                
+            });
+        }
+
         window.addEventListener('load', function() {
 
             window.livewire.on('componentRendered', step => {
-                
+                expMonthYearStringFormatter();
+
                 if ( step == 2 ) {
                     initStateSelector();
                 }

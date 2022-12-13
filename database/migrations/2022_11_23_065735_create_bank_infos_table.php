@@ -18,7 +18,8 @@ return new class extends Migration
             $table->foreignId('users_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('account_id', 30);
             $table->string('status', 30);
-            $table->string('payouts_enabled', 30);
+	    $table->boolean('payouts_enabled')->default(false);
+	    $table->boolean('charges_enabled')->default(false);
             $table->string('account_holder_name', 50)->nullable();
             $table->string('account_number', 20)->nullable();
             $table->bigInteger('routing_number')->nullable();
