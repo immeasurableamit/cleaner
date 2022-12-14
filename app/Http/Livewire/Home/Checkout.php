@@ -275,6 +275,7 @@ class Checkout extends Component
             'home_size_sq_ft'  => $this->homeSize,
             'cleaning_datetime'        => Carbon::createFromFormat('Y-m-d H:i:s', $this->details['selected_date']." ".$this->details['time'] ),
             'estimated_duration_hours' => $this->estimatedDuration,
+            'cleaner_id'               => $this->cleaner->id
             
         ]);
 
