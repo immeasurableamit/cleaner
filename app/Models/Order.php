@@ -11,9 +11,19 @@ class Order extends Model
     use HasFactory;
 
     protected $guarded = [];
+    protected $appends = ['name'];
+
+    protected $casts = [
+	    'cleaning_datetime' => 'datetime',
+    ];
 
     public function items()
     {
         return $this->hasMany( OrderItem::class );
+    }
+
+    public function getNameAttribute()
+    {
+        return "$this->first_name $this->last_name";
     }
 }
