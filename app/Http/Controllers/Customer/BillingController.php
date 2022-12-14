@@ -9,21 +9,21 @@ use App\Http\Requests\CustomerBillingRequest;
 use App\Models\BillingAddress;
 use App\Models\UserCard;
 use App\Models\User;
-
+use Session;
 
 class BillingController extends Controller
 {
 
     public function index()
     {
-        $user = User::with(['card', 'billing_address'])->where("id", auth()->user()->id )->first();
+        $user = User::with(['card', 'billing_address'])->where("id", auth()->user()->id)->first();
         return view('customer.billing.index', compact('user'));
     }
 
     public function edit()
     {
         $states = State::all();
-        return view('customer.billing.edit', compact('states') );
+        return view('customer.billing.edit', compact('states'));
     }
 
     public function update(CustomerBillingRequest $request)
@@ -40,26 +40,25 @@ class BillingController extends Controller
 
         /* Verify card with stripe */
         $resp = stripeGenerateCardToken($card);
-        if ( $resp['status'] == false ) {
-            return redirect()->route('customer.billing.edit')->withErrors([ 'stripe_verification' =>  $resp['error_string'] ]);
+        if ($resp['status'] == false) {
+            return redirect()->route('customer.billing.edit')->withInput()->withErrors(['stripe_verification' =>  $resp['error_string']]);
         }
 
         /* Create or Update card in stripe */
-        if ( $user->userDetails->stripe_customer_id ) {
-            $updateSourceResponse = stripeUpdateCustomerSource( $user->userDetails->stripe_customer_id, $resp['token_string']);
-            if ( $updateSourceResponse['status'] == false ) {
-                return redirect()->route('customer.billing.edit')->withErrors([ 'stripe_verification' =>  $updateSourceResponse['error_string'] ]);
+        if ($user->userDetails->stripe_customer_id) {
+            $updateSourceResponse = stripeUpdateCustomerSource($user->userDetails->stripe_customer_id, $resp['token_string']);
+            if ($updateSourceResponse['status'] == false) {
+                return redirect()->route('customer.billing.edit')->withInput()->withErrors(['stripe_verification' =>  $updateSourceResponse['error_string']]);
             }
-            
         } else {
-            $stripeCustomer = stripeCreateCustomerWithSource( $user->name, $user->email, $resp['token_string']);
+            $stripeCustomer = stripeCreateCustomerWithSource($user->name, $user->email, $resp['token_string']);
             $user->userDetails->stripe_customer_id = $stripeCustomer->id;
             $user->userDetails->save();
         }
 
         /* Store/update card */
         $userCard = new UserCard;
-        if ( $user->card ){
+        if ($user->card) {
             $userCard->exists = true;
             $userCard->id     = $user->card->id;
         }
@@ -72,10 +71,10 @@ class BillingController extends Controller
         $userCard->save();
 
 
-        $existedBillingAddress = BillingAddress::where('user_id', $user->id )->first();
+        $existedBillingAddress = BillingAddress::where('user_id', $user->id)->first();
 
         $billingAdress = new BillingAddress;
-        if ( $existedBillingAddress ) {
+        if ($existedBillingAddress) {
             $billingAdress->exists = true;
             $billingAdress->id     = $existedBillingAddress->id;
         }
@@ -88,9 +87,10 @@ class BillingController extends Controller
         $billingAdress->zip         = $request->zip;
         $billingAdress->apt_or_unit = $request->apt_or_unit;
         $billingAdress->user_id     = $user->id;
+
         $billingAdress->save();
-        
-        
+
+
         return redirect()->route('customer.billing.index')->with('success', 'Billing Information Updated');
     }
 }
