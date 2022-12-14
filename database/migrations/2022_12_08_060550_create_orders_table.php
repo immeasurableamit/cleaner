@@ -14,10 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
+
             $table->id();
 
             /* Details */
-            $table->foreignId('user_id')->constrained()->restrictOnDelete();;
+            $table->foreignId('user_id')->constrained()->restrictOnDelete();
+            $table->foreignId('cleaner_id')->constrained('users')->restrictOnDelete();
+
+            $table->string('status')->default('pending');
             $table->string('home_size_sq_ft');            
             $table->dateTime('cleaning_datetime');
             $table->integer('estimated_duration_hours');
@@ -41,6 +45,14 @@ return new class extends Migration
             $table->decimal('transaction_fees', 18, 2 );
             $table->decimal('total', 18, 2 );
             $table->string('payment_method');
+
+            /* Paymnent Details */
+        
+            $table->boolean('is_paid_by_user')->default(0);
+            $table->boolean('is_paid_out_to_cleaner')->default(0);
+            $table->string('user_transaction_id')->nullable();
+            $table->string('cleaner_transaction_id')->nullable();
+
 
             $table->timestamps();
         });

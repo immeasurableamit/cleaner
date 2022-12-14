@@ -3,7 +3,7 @@
 @section('content')
 
 <section class="light-banner customer-account-page"
-      style="background-image: url('assets/images/white-pattern.png')">
+      style="background-image: url('/assets/images/white-pattern.png')">
       <div class="container">
         <div class="customer-white-wrapper">
           <div class="row no-mrg">
@@ -14,10 +14,13 @@
                 </div>
                 @include('layouts.common.sidebar')
                 <div class="blue-logo-block text-center max-width-100">
-                  <a href="#"><img src="assets/images/logo/logo.svg"></a>
+                  <a href="#"><img src="/assets/images/logo/logo.svg"></a>
                 </div>
              </div>
             </div>
+
+            @livewire ('customer.jobs')
+            {{--
             <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 no-padd">
               <div class="row no-mrg">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 no-padd cleaner_appoitments_section">
@@ -41,12 +44,7 @@
                       </div>
                       <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
                         <div class="time-zone-text">
-                          @if ($timezone)
-                          <a href="cleaner-account.html">{{$timezone->name}}{{$timezone->current_utc_offset}}{{$timezone->is_currently_dst}}</a>
-                          @else
-                          <a href="cleaner-account.html">Time Zone:</a>  
-                          @endif
-                          
+                          <a href="cleaner-account.html">Time Zone: -5:00 CST, current time 11:11am</a>
                         </div>
                       </div>
                       </div>
@@ -106,13 +104,13 @@
                                          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                            <li class="c_text">Contact information</li>
                                            <li><a href="tel:512-558-5876" class="link-design-2 mt-3"><img
-                                                 src="assets/images/icons/phone.svg">512-558-5876</a></li>
+                                                 src="/assets/images/icons/phone.svg">512-558-5876</a></li>
                                            <li><a href="mailto:example@mail.com" class="link-design-2"><img
-                                                 src="assets/images/icons/email.svg">example@mail.com</a></li>
-                                           <li><a href="#" class="link-design-2"><img src="assets/images/icons/home.svg">15648
+                                                 src="/assets/images/icons/email.svg">example@mail.com</a></li>
+                                           <li><a href="#" class="link-design-2"><img src="/assets/images/icons/home.svg">15648
                                                Maple St, Austin, TX 78744</a></li>
                                            <li class="chat_with_member"><a href="message.html" class="btn_chat_member">Chat With
-                                               Member<img src="assets/images/icons/email-2.svg" /></a></li>
+                                               Member<img src="/assets/images/icons/email-2.svg" /></a></li>
                                          </ul>
                                        </div>   
                                        <div class="altrntive_rw">
@@ -174,13 +172,13 @@
                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                          <li class="c_text">Contact information</li>
                                          <li><a href="tel:512-558-5876" class="link-design-2 mt-3"><img
-                                               src="assets/images/icons/phone.svg">512-558-5876</a></li>
+                                               src="/assets/images/icons/phone.svg">512-558-5876</a></li>
                                          <li><a href="mailto:example@mail.com" class="link-design-2"><img
-                                               src="assets/images/icons/email.svg">example@mail.com</a></li>
-                                         <li><a href="#" class="link-design-2"><img src="assets/images/icons/home.svg">15648
+                                               src="/assets/images/icons/email.svg">example@mail.com</a></li>
+                                         <li><a href="#" class="link-design-2"><img src="/assets/images/icons/home.svg">15648
                                              Maple St, Austin, TX 78744</a></li>
                                          <li class="chat_with_member"><a href="message.html" class="btn_chat_member">Chat With
-                                             Member<img src="assets/images/icons/email-2.svg" /></a></li>
+                                             Member<img src="/assets/images/icons/email-2.svg" /></a></li>
                                        </ul>
                                      </div>   
                                      <div class="altrntive_rw">
@@ -242,13 +240,13 @@
                                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                        <li class="c_text">Contact information</li>
                                        <li><a href="tel:512-558-5876" class="link-design-2 mt-3"><img
-                                             src="assets/images/icons/phone.svg">512-558-5876</a></li>
+                                             src="/assets/images/icons/phone.svg">512-558-5876</a></li>
                                        <li><a href="mailto:example@mail.com" class="link-design-2"><img
-                                             src="assets/images/icons/email.svg">example@mail.com</a></li>
-                                       <li><a href="#" class="link-design-2"><img src="assets/images/icons/home.svg">15648
+                                             src="/assets/images/icons/email.svg">example@mail.com</a></li>
+                                       <li><a href="#" class="link-design-2"><img src="/assets/images/icons/home.svg">15648
                                            Maple St, Austin, TX 78744</a></li>
                                        <li class="chat_with_member"><a href="message.html" class="btn_chat_member">Chat With
-                                           Member<img src="assets/images/icons/email-2.svg" /></a></li>
+                                           Member<img src="/assets/images/icons/email-2.svg" /></a></li>
                                      </ul>
                                    </div>   
                                    <div class="altrntive_rw">
@@ -310,13 +308,13 @@
                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                      <li class="c_text">Contact information</li>
                                      <li><a href="tel:512-558-5876" class="link-design-2 mt-3"><img
-                                           src="assets/images/icons/phone.svg">512-558-5876</a></li>
+                                           src="/assets/images/icons/phone.svg">512-558-5876</a></li>
                                      <li><a href="mailto:example@mail.com" class="link-design-2"><img
-                                           src="assets/images/icons/email.svg">example@mail.com</a></li>
-                                     <li><a href="#" class="link-design-2"><img src="assets/images/icons/home.svg">15648
+                                           src="/assets/images/icons/email.svg">example@mail.com</a></li>
+                                     <li><a href="#" class="link-design-2"><img src="/assets/images/icons/home.svg">15648
                                          Maple St, Austin, TX 78744</a></li>
                                      <li class="chat_with_member"><a href="message.html" class="btn_chat_member">Chat With
-                                         Member<img src="assets/images/icons/email-2.svg" /></a></li>
+                                         Member<img src="/assets/images/icons/email-2.svg" /></a></li>
                                    </ul>
                                  </div>   
                                  <div class="altrntive_rw">
@@ -378,13 +376,13 @@
                                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                        <li class="c_text">Contact information</li>
                                        <li><a href="tel:512-558-5876" class="link-design-2 mt-3"><img
-                                             src="assets/images/icons/phone.svg">512-558-5876</a></li>
+                                             src="/assets/images/icons/phone.svg">512-558-5876</a></li>
                                        <li><a href="mailto:example@mail.com" class="link-design-2"><img
-                                             src="assets/images/icons/email.svg">example@mail.com</a></li>
-                                       <li><a href="#" class="link-design-2"><img src="assets/images/icons/home.svg">15648
+                                             src="/assets/images/icons/email.svg">example@mail.com</a></li>
+                                       <li><a href="#" class="link-design-2"><img src="/assets/images/icons/home.svg">15648
                                            Maple St, Austin, TX 78744</a></li>
                                        <li class="chat_with_member"><a href="message.html" class="btn_chat_member">Chat With
-                                           Member<img src="assets/images/icons/email-2.svg" /></a></li>
+                                           Member<img src="/assets/images/icons/email-2.svg" /></a></li>
                                      </ul>
                                    </div>   
                                    <div class="altrntive_rw">
@@ -446,13 +444,13 @@
                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                      <li class="c_text">Contact information</li>
                                      <li><a href="tel:512-558-5876" class="link-design-2 mt-3"><img
-                                           src="assets/images/icons/phone.svg">512-558-5876</a></li>
+                                           src="/assets/images/icons/phone.svg">512-558-5876</a></li>
                                      <li><a href="mailto:example@mail.com" class="link-design-2"><img
-                                           src="assets/images/icons/email.svg">example@mail.com</a></li>
-                                     <li><a href="#" class="link-design-2"><img src="assets/images/icons/home.svg">15648
+                                           src="/assets/images/icons/email.svg">example@mail.com</a></li>
+                                     <li><a href="#" class="link-design-2"><img src="/assets/images/icons/home.svg">15648
                                          Maple St, Austin, TX 78744</a></li>
                                      <li class="chat_with_member"><a href="message.html" class="btn_chat_member">Chat With
-                                         Member<img src="assets/images/icons/email-2.svg" /></a></li>
+                                         Member<img src="/assets/images/icons/email-2.svg" /></a></li>
                                    </ul>
                                  </div>   
                                  <div class="altrntive_rw">
@@ -536,13 +534,13 @@
                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                  <li class="c_text">Contact information</li>
                                  <li><a href="tel:512-558-5876" class="link-design-2 mt-3"><img
-                                       src="assets/images/icons/phone.svg">512-558-5876</a></li>
+                                       src="/assets/images/icons/phone.svg">512-558-5876</a></li>
                                  <li><a href="mailto:example@mail.com" class="link-design-2"><img
-                                       src="assets/images/icons/email.svg">example@mail.com</a></li>
-                                 <li><a href="#" class="link-design-2"><img src="assets/images/icons/home.svg">15648
+                                       src="/assets/images/icons/email.svg">example@mail.com</a></li>
+                                 <li><a href="#" class="link-design-2"><img src="/assets/images/icons/home.svg">15648
                                      Maple St, Austin, TX 78744</a></li>
                                  <li class="chat_with_member"><a href="message.html" class="btn_chat_member">Chat With
-                                     Member<img src="assets/images/icons/email-2.svg" /></a></li>
+                                     Member<img src="/assets/images/icons/email-2.svg" /></a></li>
                                </ul>
                              </div>   
                              <div class="altrntive_rw">
@@ -604,13 +602,13 @@
                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                  <li class="c_text">Contact information</li>
                                  <li><a href="tel:512-558-5876" class="link-design-2 mt-3"><img
-                                       src="assets/images/icons/phone.svg">512-558-5876</a></li>
+                                       src="/assets/images/icons/phone.svg">512-558-5876</a></li>
                                  <li><a href="mailto:example@mail.com" class="link-design-2"><img
-                                       src="assets/images/icons/email.svg">example@mail.com</a></li>
-                                 <li><a href="#" class="link-design-2"><img src="assets/images/icons/home.svg">15648
+                                       src="/assets/images/icons/email.svg">example@mail.com</a></li>
+                                 <li><a href="#" class="link-design-2"><img src="/assets/images/icons/home.svg">15648
                                      Maple St, Austin, TX 78744</a></li>
                                  <li class="chat_with_member"><a href="message.html" class="btn_chat_member">Chat With
-                                     Member<img src="assets/images/icons/email-2.svg" /></a></li>
+                                     Member<img src="/assets/images/icons/email-2.svg" /></a></li>
                                </ul>
                              </div>   
                              <div class="altrntive_rw">
@@ -637,312 +635,119 @@
                           </div>
                         </div>
                       </div>
-                    </div>
-
-                    <!-- <div class="date_section">
-                      <div class="form-headeing-second">
-                        <h4 class="text-center">Select Date Above</h4>
-                      </div>
-                      <div class="date_show_v">
-                        <button> Date </button>
-                        <span>01/02/2022</span>
-                      </div>
-
-                      <div class="cleaner_appoitments_table common_table">
-                        <table role="table">
-                          <thead role="rowgroup">
-                            <tr role="row" class="">
-                              <th role="columnheader">Time</th>
-                              <th role="columnheader">Job</th>
-                              <th role="columnheader">Est. Duration</th>
-                              <th role="columnheader">Customer Contact Info</th>
-                              <th role="columnheader">Location</th>
-                              <th role="columnheader">Price</th>
-                              <th role="columnheader">Payment</th>
-                              <th role="columnheader">Change</th>
-                            </tr>
-                          </thead>
-                          <tbody role="rowgroup">
-                            <tr role="row" class="togler_row ">
-                              <td role="cell">6:00 am</td>
-                              <td role="cell" class="b_link"><b>Deep clean</b></td>
-                              <td role="cell">01:00 hrs</td>
-                              <td role="cell" class="contact_info view_dropdown">
-                                <div class="dropdown">
-                                  <span class="name_info">Brooklyn S.’s Team</span>
-                                  <button class="border-0 bg-none link-design-2 " type="button" id="dropdownMenu2"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="assets/images/icons/contact-card.png" />
-                                  </button>
-                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <li class="c_text">Contact information</li>
-                                    <li><a href="#" class="link-design-2 mt-3"><img
-                                          src="assets/images/icons/phone.svg">512-558-5876</a></li>
-                                    <li><a href="#" class="link-design-2"><img
-                                          src="assets/images/icons/email.svg">example@mail.com</a></li>
-                                    <li><a href="#" class="link-design-2"><img src="assets/images/icons/home.svg">15648
-                                        Maple St, Austin, TX 78744</a></li>
-                                    <li class="chat_with_member"><a href="#" class="btn_chat_member">Chat With
-                                        Member<img src="assets/images/icons/email-2.svg" /></a></li>
-                                  </ul>
-                                </div>
-                              </td>
-                              <td role="cell" class="b_link">22559 Bear Dr., Applev...</td>
-                              <td role="cell">$130</td>
-                              <td role="cell" class=""><a href="#" class="text-success ">Success</a></td>
-                              <td role="cell">
-                                <a href="#" class="btn_edit me-3"><img src="assets/images/icons/b_pen.svg" /></a>
-                                <a href="#" class="btn_delete"><img src="assets/images/icons/x.png" /></a>
-                              </td>
-                              <td class="d-md-none d-block toggle_r"></td>
-                            </tr>
-
-                            <tr role="row" class="togler_row ">
-                              <td role="cell">6:00 am</td>
-                              <td role="cell" class="b_link"><b>Deep clean</b></td>
-                              <td role="cell">01:00 hrs</td>
-                              <td role="cell" class="contact_info view_dropdown">
-                                <div class="dropdown">
-                                  <span class="name_info">Brooklyn S.’s Team</span>
-                                  <button class="border-0 bg-none link-design-2 " type="button" id="dropdownMenu2"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="assets/images/icons/contact-card.png" />
-                                  </button>
-                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <li class="c_text">Contact information</li>
-                                    <li><a href="#" class="link-design-2 mt-3"><img
-                                          src="assets/images/icons/phone.svg">512-558-5876</a></li>
-                                    <li><a href="#" class="link-design-2"><img
-                                          src="assets/images/icons/email.svg">example@mail.com</a></li>
-                                    <li><a href="#" class="link-design-2"><img src="assets/images/icons/home.svg">15648
-                                        Maple St, Austin, TX 78744</a></li>
-                                    <li class="chat_with_member"><a href="#" class="btn_chat_member">Chat With
-                                        Member<img src="assets/images/icons/email-2.svg" /></a></li>
-                                  </ul>
-                                </div>
-                              </td>
-                              <td role="cell" class="b_link">22559 Bear Dr., Applev...</td>
-                              <td role="cell">$130</td>
-                              <td role="cell" class=""><a href="#" class="text-danger ">Fail</a></td>
-                              <td role="cell">
-                                <a href="#" class="btn_edit me-3"><img src="assets/images/icons/b_pen.svg" /></a>
-                                <a href="#" class="btn_delete"><img src="assets/images/icons/x.png" /></a>
-                              </td>
-                              <td class="d-md-none d-block toggle_r"></td>
-                            </tr>
-
-                            <tr role="row" class="togler_row ">
-                              <td role="cell">6:00 am</td>
-                              <td role="cell" class="b_link"><b>Deep clean</b></td>
-                              <td role="cell">01:00 hrs</td>
-                              <td role="cell" class="contact_info view_dropdown">
-                                <div class="dropdown">
-                                  <span class="name_info">Brooklyn S.’s Team</span>
-                                  <button class="border-0 bg-none link-design-2 " type="button" id="dropdownMenu2"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="assets/images/icons/contact-card.png" />
-                                  </button>
-                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <li class="c_text">Contact information</li>
-                                    <li><a href="#" class="link-design-2 mt-3"><img
-                                          src="assets/images/icons/phone.svg">512-558-5876</a></li>
-                                    <li><a href="#" class="link-design-2"><img
-                                          src="assets/images/icons/email.svg">example@mail.com</a></li>
-                                    <li><a href="#" class="link-design-2"><img src="assets/images/icons/home.svg">15648
-                                        Maple St, Austin, TX 78744</a></li>
-                                    <li class="chat_with_member"><a href="#" class="btn_chat_member">Chat With
-                                        Member<img src="assets/images/icons/email-2.svg" /></a></li>
-                                  </ul>
-                                </div>
-                              </td>
-                              <td role="cell" class="b_link">22559 Bear Dr., Applev...</td>
-                              <td role="cell">$130</td>
-                              <td role="cell" class=""><a href="#" class="text-primary ">Charge</a></td>
-                              <td role="cell">
-                                <a href="#" class="btn_edit me-3"><img src="assets/images/icons/b_pen.svg" /></a>
-                                <a href="#" class="btn_delete"><img src="assets/images/icons/x.png" /></a>
-                              </td>
-                              <td class="d-md-none d-block toggle_r"></td>
-                            </tr>
-                            <tr role="row" class="togler_row ">
-                              <td role="cell">6:00 am</td>
-                              <td role="cell" class="b_link"><b>Deep clean</b></td>
-                              <td role="cell">01:00 hrs</td>
-                              <td role="cell" class="contact_info view_dropdown">
-                                <div class="dropdown">
-                                  <span class="name_info">Brooklyn S.’s Team</span>
-                                  <button class="border-0 bg-none link-design-2 " type="button" id="dropdownMenu2"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="assets/images/icons/contact-card.png" />
-                                  </button>
-                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <li class="c_text">Contact information</li>
-                                    <li><a href="#" class="link-design-2 mt-3"><img
-                                          src="assets/images/icons/phone.svg">512-558-5876</a></li>
-                                    <li><a href="#" class="link-design-2"><img
-                                          src="assets/images/icons/email.svg">example@mail.com</a></li>
-                                    <li><a href="#" class="link-design-2"><img src="assets/images/icons/home.svg">15648
-                                        Maple St, Austin, TX 78744</a></li>
-                                    <li class="chat_with_member"><a href="#" class="btn_chat_member">Chat With
-                                        Member<img src="assets/images/icons/email-2.svg" /></a></li>
-                                  </ul>
-                                </div>
-                              </td>
-                              <td role="cell" class="b_link">22559 Bear Dr., Applev...</td>
-                              <td role="cell">$130</td>
-                              <td role="cell" class=""><a href="#" class="text-primary ">Charge</a></td>
-                              <td role="cell">
-                                <a href="#" class="btn_edit me-3"><img src="assets/images/icons/b_pen.svg" /></a>
-                                <a href="#" class="btn_delete"><img src="assets/images/icons/x.png" /></a>
-                              </td>
-                              <td class="d-md-none d-block toggle_r"></td>
-                            </tr>
-                            <tr role="row" class="togler_row ">
-                              <td role="cell">6:00 am</td>
-                              <td role="cell" class="b_link"><b>Deep clean</b></td>
-                              <td role="cell">01:00 hrs</td>
-                              <td role="cell" class="contact_info view_dropdown">
-                                <div class="dropdown">
-                                  <span class="name_info">Brooklyn S.’s Team</span>
-                                  <button class="border-0 bg-none link-design-2 " type="button" id="dropdownMenu2"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="assets/images/icons/contact-card.png" />
-                                  </button>
-                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <li class="c_text">Contact information</li>
-                                    <li><a href="#" class="link-design-2 mt-3"><img
-                                          src="assets/images/icons/phone.svg">512-558-5876</a></li>
-                                    <li><a href="#" class="link-design-2"><img
-                                          src="assets/images/icons/email.svg">example@mail.com</a></li>
-                                    <li><a href="#" class="link-design-2"><img src="assets/images/icons/home.svg">15648
-                                        Maple St, Austin, TX 78744</a></li>
-                                    <li class="chat_with_member"><a href="#" class="btn_chat_member">Chat With
-                                        Member<img src="assets/images/icons/email-2.svg" /></a></li>
-                                  </ul>
-                                </div>
-                              </td>
-                              <td role="cell" class="b_link">22559 Bear Dr., Applev...</td>
-                              <td role="cell">$130</td>
-                              <td role="cell" class=""><a href="#" class="text-primary ">Charge</a></td>
-                              <td role="cell">
-                                <a href="#" class="btn_edit me-3"><img src="assets/images/icons/b_pen.svg" /></a>
-                                <a href="#" class="btn_delete"><img src="assets/images/icons/x.png" /></a>
-                              </td>
-                              <td class="d-md-none d-block toggle_r"></td>
-                            </tr>
-
-                            <tr role="row" class="togler_row ">
-                              <td role="cell">6:00 am</td>
-                              <td role="cell" class="b_link"><b>Deep clean</b></td>
-                              <td role="cell">01:00 hrs</td>
-                              <td role="cell" class="contact_info view_dropdown">
-                                <div class="dropdown">
-                                  <span class="name_info">Brooklyn S.’s Team</span>
-                                  <button class="border-0 bg-none link-design-2 " type="button" id="dropdownMenu2"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="assets/images/icons/contact-card.png" />
-                                  </button>
-                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <li class="c_text">Contact information</li>
-                                    <li><a href="#" class="link-design-2 mt-3"><img
-                                          src="assets/images/icons/phone.svg">512-558-5876</a></li>
-                                    <li><a href="#" class="link-design-2"><img
-                                          src="assets/images/icons/email.svg">example@mail.com</a></li>
-                                    <li><a href="#" class="link-design-2"><img src="assets/images/icons/home.svg">15648
-                                        Maple St, Austin, TX 78744</a></li>
-                                    <li class="chat_with_member"><a href="#" class="btn_chat_member">Chat With
-                                        Member<img src="assets/images/icons/email-2.svg" /></a></li>
-                                  </ul>
-                                </div>
-                              </td>
-                              <td role="cell" class="b_link">22559 Bear Dr., Applev...</td>
-                              <td role="cell">$130</td>
-                              <td role="cell" class=""><a href="#" class="text-primary ">Charge</a></td>
-                              <td role="cell">
-                                <a href="#" class="btn_edit me-3"><img src="assets/images/icons/b_pen.svg" /></a>
-                                <a href="#" class="btn_delete"><img src="assets/images/icons/x.png" /></a>
-                              </td>
-                              <td class="d-md-none d-block toggle_r"></td>
-                            </tr>
-
-                            <tr role="row" class="togler_row ">
-                              <td role="cell">6:00 am</td>
-                              <td role="cell" class="b_link"><b>Deep clean</b></td>
-                              <td role="cell">01:00 hrs</td>
-                              <td role="cell" class="contact_info view_dropdown">
-                                <div class="dropdown">
-                                  <span class="name_info">Brooklyn S.’s Team</span>
-                                  <button class="border-0 bg-none link-design-2 " type="button" id="dropdownMenu2"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="assets/images/icons/contact-card.png" />
-                                  </button>
-                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <li class="c_text">Contact information</li>
-                                    <li><a href="#" class="link-design-2 mt-3"><img
-                                          src="assets/images/icons/phone.svg">512-558-5876</a></li>
-                                    <li><a href="#" class="link-design-2"><img
-                                          src="assets/images/icons/email.svg">example@mail.com</a></li>
-                                    <li><a href="#" class="link-design-2"><img src="assets/images/icons/home.svg">15648
-                                        Maple St, Austin, TX 78744</a></li>
-                                    <li class="chat_with_member"><a href="#" class="btn_chat_member">Chat With
-                                        Member<img src="assets/images/icons/email-2.svg" /></a></li>
-                                  </ul>
-                                </div>
-                              </td>
-                              <td role="cell" class="b_link">22559 Bear Dr., Applev...</td>
-                              <td role="cell">$130</td>
-                              <td role="cell" class=""><a href="#" class="text-primary ">Charge</a></td>
-                              <td role="cell">
-                                <a href="#" class="btn_edit me-3"><img src="assets/images/icons/b_pen.svg" /></a>
-                                <a href="#" class="btn_delete"><img src="assets/images/icons/x.png" /></a>
-                              </td>
-                              <td class="d-md-none d-block toggle_r"></td>
-                            </tr>
-                            <tr role="row" class="togler_row ">
-                              <td role="cell">6:00 am</td>
-                              <td role="cell" class="b_link"><b>Deep clean</b></td>
-                              <td role="cell">01:00 hrs</td>
-                              <td role="cell" class="contact_info view_dropdown">
-                                <div class="dropdown">
-                                  <span class="name_info">Brooklyn S.’s Team</span>
-                                  <button class="border-0 bg-none link-design-2 " type="button" id="dropdownMenu2"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="assets/images/icons/contact-card.png" />
-                                  </button>
-                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <li class="c_text">Contact information</li>
-                                    <li><a href="#" class="link-design-2 mt-3"><img
-                                          src="assets/images/icons/phone.svg">512-558-5876</a></li>
-                                    <li><a href="#" class="link-design-2"><img
-                                          src="assets/images/icons/email.svg">example@mail.com</a></li>
-                                    <li><a href="#" class="link-design-2"><img src="assets/images/icons/home.svg">15648
-                                        Maple St, Austin, TX 78744</a></li>
-                                    <li class="chat_with_member"><a href="#" class="btn_chat_member">Chat With
-                                        Member<img src="assets/images/icons/email-2.svg" /></a></li>
-                                  </ul>
-                                </div>
-                              </td>
-                              <td role="cell" class="b_link">22559 Bear Dr., Applev...</td>
-                              <td role="cell">$130</td>
-                              <td role="cell" class=""><a href="#" class="text-primary ">Charge</a></td>
-                              <td role="cell">
-                                <a href="#" class="btn_edit me-3"><img src="assets/images/icons/b_pen.svg" /></a>
-                                <a href="#" class="btn_delete"><img src="assets/images/icons/x.png" /></a>
-                              </td>
-                              <td class="d-md-none d-block toggle_r"></td>
-                            </tr>
-
-                          </tbody>
-                        </table>
-                      </div>
-
-                    </div> -->
+                    </div>          
                   </div>
                 </div>
               </div>
             </div>
+          --}}
           </div>
         </div>
       </div>
     </section>
+
+  @push ('scripts')
+ {{--
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var calendarEl = document.getElementById('calendar');
+
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        headerToolbar: {
+          left: 'prev,next,today',
+          center: 'title',
+          right: ''
+        },
+        initialDate: '2020-09-12',
+        navLinks: false, // can click day/week names to navigate views
+        editable: true,
+        dayMaxEvents: true, // allow "more" link when too many events
+        events: [
+          {
+            title: 'All Day Event',
+            start: '2020-09-01'
+          },
+          {
+            title: 'Long Event',
+            start: '2020-09-07',
+            end: '2020-09-10'
+          },
+          {
+            groupId: 999,
+            title: 'Repeating Event',
+            start: '2020-09-09T16:00:00'
+          },
+          {
+            groupId: 999,
+            title: 'Repeating Event',
+            start: '2020-09-16T16:00:00'
+          },
+          {
+            title: 'Conference',
+            start: '2020-09-11',
+            end: '2020-09-13'
+          },
+          {
+            title: 'Meeting',
+            start: '2020-09-12T10:30:00',
+            end: '2020-09-12T12:30:00'
+          },
+          {
+            title: 'Lunch',
+            start: '2020-09-12T12:00:00'
+          },
+          {
+            title: 'Meeting',
+            start: '2020-09-12T14:30:00'
+          },
+          {
+            title: 'Happy Hour',
+            start: '2020-09-12T17:30:00'
+          },
+          {
+            title: 'Dinner',
+            start: '2020-09-12T20:00:00'
+          },
+          {
+            title: 'Birthday Party',
+            start: '2020-09-13T07:00:00'
+          },
+          {
+            title: 'Click for Google',
+            url: 'http://google.com/',
+            start: '2020-09-28'
+          }
+        ]
+      });
+
+      window.calendar = calendar;
+
+      calendar.render();
+    });
+  </script>
+  <script>
+
+    $(document).ready(function(){
+      $(".toggle_row").click(function(){
+        $(this).toggleClass("show_row arrow",1000);
+      });
+    });
+    </script>
+    <script>
+      $(document).ready(function(){
+        $(".toggle_menu").click(function(){
+          $(".bar_left").toggleClass("show");
+        });
+      });
+      </script>
+       <script>
+        $(document).ready(function(){
+          $(".toggle_r").click(function(){
+            $(this).toggleClass("show");
+            $(this).parent(".togler_row").toggleClass('show');
+          });
+        });
+        </script>
+  --}}
+  @endpush
 @endsection
