@@ -281,7 +281,7 @@
                                                
                                           
                                                @error ('cvc') <div class="text-danger">{{ $message }} </div> @enderror
-                                               @error ('stripe_card_verification') <div class="text-danger">Stripe: {{ $message }} </div> @enderror
+                                               @error ('stripe_card_verification') <div class="text-danger">{{ $message }} </div> @enderror
 
                                             </div>
                                         </div>
