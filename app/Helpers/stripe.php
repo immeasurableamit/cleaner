@@ -122,7 +122,15 @@ function stripeGenerateCardToken($card)
 function stripeCreateCustomer($options)
 {
     $stripe   = new StripeClient( config('services.stripe.secret') );
-    $customer = $stripe->customers->create( $options );
+
+    try {
+        $customer = $stripe->customers->create( $options );
+        return [ 'status' => true, 'resposne' => $customer ];
+        
+    } catch ( CardException $e ) {
+        return ['status' => false, 'error' => $e, 'error_string' => $e->getMessage() ];
+    }
+
     return $customer;
 }
 
@@ -156,4 +164,18 @@ function stripeCreateCustomerWithSource($name, $email, $source)
     $options  = compact('name', 'email', 'source');
     $customer = stripeCreateCustomer($options);
     return $customer;
+}
+
+// .........aman
+
+function stripChargeCustomer()
+{
+    $stripe = new StripeClient( config('services.stripe.secret') );
+ 
+      $stripe->charges->create([
+        'amount' => 2000,
+        'currency' => 'usd',
+        'source' => 'tok_amex',
+        'description' => 'My First Test Charge (created for API docs at https://www.stripe.com/docs/api)',
+      ]);
 }
