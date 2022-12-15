@@ -30,3 +30,8 @@
 	}
 
 	
+function convertAmountIntoCents($amount, $decimal_digits = 0)
+{
+	$cents = $amount * 100;
+	return number_format( $cents, $decimal_digits, '.', '');
+}

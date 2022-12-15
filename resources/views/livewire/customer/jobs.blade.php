@@ -56,7 +56,7 @@
                                         <div class="service-main-service-column">
                                             <div class="card-layout-showcase">
                                                 <div class="job-first-details four-column">
-                                                    <p class="job-d-info blue">Deep clean</p>
+                                                    <p class="job-d-info blue">{{ $order->service_item_titles }}</p>
                                                     <p class="job-d-info">
                                                         {{ $order->cleaning_datetime->format('h:i A') }}</p>
                                                     <p class="job-d-info">{{ $order->estimated_duration_hours }} hrs</p>
@@ -64,16 +64,27 @@
                                                 </div>
                                                 <div class="job-first-details two-column">
                                                     <p class="job-d-info">{{ $order->name }}</p>
-                                                    <p class="job-d-info address">22559 Bear Dr., Applev...</p>
+                                                    <p class="job-d-info address">{{ $order->address }}</p>
                                                 </div>
                                                 <div class="response-msg">
-                                                    <a href="#" class="accept-request-btn crd-btn">Accept
+                                                    @if ( $order->status == 'pending'  )
+                                                             <a href="javascript:void(0);" wire:click="acceptOrder( {{ $order->id }} )" class="accept-request-btn crd-btn">Accept
                                                         Request</a>
+                                                    @elseif ( $order->status == 'rejected' )
+                                                        <a href="#" class="refuse-request-btn crd-btn">Request Refused</a>
+                                                    @elseif ( $order->status == 'accepted')
+                                                        <a href="#" wire:click="completeOrder( {{ $order->id }} )" class="sucess-msg crd-btn">Mark as Completed</a>
+                                                    @elseif ( $order->status == 'completed')
+                                                        <a href="javascript:void(0);"  wire:click="collectPayment( {{ $order->id }} )"  class="collect_payment crd-btn">Collect Payment</a>
+                                                    @elseif ( $order->status == 'payment_collected')
+                                                        <a href="javascript:void(0);" class="btn_blue crd-btn">Payment collected!</a>
+
+                                                    @endif                                                                                               
                                                 </div>
                                             </div>
                                             <div class="altrntive_rw">
                                                 <p class="appointment_label">Job</p>
-                                                <p class="app-value blue"><strong>Deep clean</strong></p>
+                                                <p class="app-value blue"><strong>{{ $order->service_item_titles }}</strong></p>
                                             </div>
                                             <div class="altrntive_rw">
                                                 <p class="appointment_label">Time</p>
@@ -92,14 +103,13 @@
                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                                     <li class="c_text">Contact information</li>
                                                     <li><a href="tel:512-558-5876" class="link-design-2 mt-3"><img
-                                                                src="/assets/images/icons/phone.svg">512-558-5876</a>
+                                                                src="/assets/images/icons/phone.svg">{{ $order->user->contact_number }}</a>
                                                     </li>
                                                     <li><a href="mailto:example@mail.com" class="link-design-2"><img
-                                                                src="/assets/images/icons/email.svg">example@mail.com</a>
+                                                                src="/assets/images/icons/email.svg">{{ $order->user->email }}</a>
                                                     </li>
                                                     <li><a href="#" class="link-design-2"><img
-                                                                src="/assets/images/icons/home.svg">15648
-                                                            Maple St, Austin, TX 78744</a></li>
+                                                                src="/assets/images/icons/home.svg">{{ $order->address }}</a></li>
                                                     <li class="chat_with_member"><a href="message.html"
                                                             class="btn_chat_member">Chat With
                                                             Member<img src="/assets/images/icons/email-2.svg" /></a>
@@ -108,21 +118,43 @@
                                             </div>
                                             <div class="altrntive_rw">
                                                 <p class="appointment_label blue">Location</p>
-                                                <p class="app-value location blue">22559 Bear Dr., Applev...</p>
+                                                <p class="app-value location blue">{{ $order->address }}</p>
                                             </div>
                                             <div class="altrntive_rw">
                                                 <p class="appointment_label">Price</p>
                                                 <p class="app-value">${{ $order->total }} </p>
                                             </div>
+                                            @if ( $order->status == 'pending')
                                             <div class="altrntive_rw">
                                                 <p class="appointment_label">Change</p>
                                                 <a class="btn_q">Propose Change</a>
-                                                <a class="btn_x">Refuse Request</a>
+                                                <a class="btn_x" wire:click="rejectOrder( {{ $order->id }} )">Refuse Request</a>
                                             </div>
-                                        </div>
+                                            @endif
+                                        </div>                                    
                                         <div class="accept-request">
-                                            <a href="#" class="accept-request-btn crd-btn">Accept
-                                                Request</a>
+                                        @if ( $order->status == 'pending'  )
+                                                             <a href="javascript:void(0);" wire:click="acceptOrder( {{ $order->id }} )" class="accept-request-btn crd-btn">Accept
+                                                        Request</a>
+                                                    @elseif ( $order->status == 'rejected' )
+                                                        <a href="#" class="refuse-request-btn crd-btn">Request Refused</a>
+                                                    @elseif ( $order->status == 'accepted')
+                                                    <a href="#" wire:click="completeOrder( {{ $order->id }} )" class="sucess-msg crd-btn">Mark as Completed</a>
+
+                                                    
+                                                    @elseif ( $order->status == 'completed')
+                                                        <a href="javascript:void(0);"  wire:click="collectPayment( {{ $order->id }} )" class="collect_payment crd-btn">Collect Payment</a>
+                                                    @elseif ( $order->status == 'payment_collected')
+                                                        <a href="javascript:void(0);" class="btn_blue crd-btn">Payment collected!</a>
+
+
+                                        @endif
+                                        {{-- 
+                                            <button wire:click="acceptOrder( {{ $order->id }} )" class="accept-request-btn crd-btn">Accept
+                                                Request3
+                                         </button>
+--}}
+                                            
                                         </div>
                                     </div>
 
@@ -369,7 +401,7 @@
                                                 </div>
                                             </div>
                                             <div class="collect-payment">
-                                                <a href="#" class="collect_payment crd-btn">Collect Payment</a>
+                                                <a href="#" wire:click="collectPayment( {{ $order->id }} )" class="collect_payment crd-btn">Collect Payment</a>
                                             </div>
                                         </div>
 
@@ -692,7 +724,7 @@
                                                 <div class="altrntive_rw">
                                                     <p class="appointment_label">Change</p>
                                                     <a class="btn_q">Propose Change</a>
-                                                    <a class="btn_x">Refuse Request</a>
+                                                    <a class="btn_x" wire:click="rejectOrder( {{ $order->id }} )">Refuse Request</a>
                                                 </div>
                                             </div>
                                             <div class="accept-request">
@@ -793,6 +825,7 @@
 @push('scripts')
     <script>
         function renderCalendar(intialDate, events) {
+            console.log( events );
             var calendarEl = document.getElementById('calendar');
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -824,12 +857,15 @@
         }
 
         function makeBookingsCardToggalable() {
+            $(".service_toggle_s").unbind('click');
             $(".service_toggle_s").click(function() {
                 $(this).parent().toggleClass("show");
             });
         }
 
         window.addEventListener('renderCalendar', event => {
+            console.log('updating events');
+            window.calendarJsnEvents = event.detail.events;
             let date = "{{ $selectedDate }}";
             renderCalendar(date, event.detail.events);
         });
