@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Customer;
+namespace App\Http\Livewire\Cleaner;
 
 use App\Models\Order;
 use App\Models\Transaction;
@@ -269,6 +269,6 @@ class Jobs extends Component
 
     public function render()
     {
-        return view('livewire.customer.jobs');
+        return view('livewire.cleaner.jobs');
     }
 }
