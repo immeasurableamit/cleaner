@@ -157,3 +157,53 @@ function stripeCreateCustomerWithSource($name, $email, $source)
     $customer = stripeCreateCustomer($options);
     return $customer;
 }
+
+function stripeCharge( $options ) 
+{
+    $stripe = new StripeClient( config('services.stripe.secret') );
+
+    try { 
+        $charge = $stripe->charges->create( $options );
+        return ['status' => true, 'response' => $charge, 'charge_id' => $charge->id ];
+
+    } catch ( CardException $e ) {
+        return ['status' => false, 'error' => $e, 'error_string' => $e->getMessage() ];
+    }
+    
+    return [ 'status' => false, 'error_string' => 'unknown error'];
+}
+
+function stripeChargeCustomer($customer_id, $amount_in_cents, $description)
+{
+	$options = [
+        'customer' => $customer_id,
+        'amount'   => $amount_in_cents,
+        'description' => $description,
+        'currency'    => 'usd',
+
+	];
+
+    $charge  = stripeCharge( $options );
+    return $charge;
+}
+
+function stripeTransfer( $options ) 
+{
+    $stripe = new StripeClient( config('services.stripe.secret') );
+
+    $transfer = $stripe->transfers->create( $options );
+    return ['status' => true, 'response' => $transfer, 'transfer_id' => $transfer->id ];
+}
+
+function stripeTransferAmountToConnectedAccount($amount_in_cents, $account_id, $description)
+{
+    $options = [
+        'currency'    => 'usd',
+        'amount'      => $amount_in_cents,
+        'destination' => $account_id,
+        'description' => $description,
+    ];
+
+    $transferResp = stripeTransfer($options);
+    return $transferResp;
+}

@@ -5,6 +5,7 @@
                 <div class="prfl_img_1">
                     <img src="{{asset('storage/images/'.$cleaner->image)}}">
                 </div>
+              
                 <div class="folow-us">
                     <ul class="list-unstyled d-flex">
                         <li><span>Share Provider</span></li>

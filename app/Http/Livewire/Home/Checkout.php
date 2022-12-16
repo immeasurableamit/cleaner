@@ -275,6 +275,7 @@ class Checkout extends Component
             'home_size_sq_ft'  => $this->homeSize,
             'cleaning_datetime'        => Carbon::createFromFormat('Y-m-d H:i:s', $this->details['selected_date']." ".$this->details['time'] ),
             'estimated_duration_hours' => $this->estimatedDuration,
+            'cleaner_id'               => $this->cleaner->id
             
         ]);
 
@@ -295,7 +296,8 @@ class Checkout extends Component
         $orderItems = $cleanerServices->map( function($cleanerService, $key) use( $order_id ) {
             $orderItem = [
                 'order_id'           => $order_id,
-                'cleaner_service_id' => $cleanerService->id, 
+                'cleaner_service_id' => $cleanerService->id,
+                'service_item_id'    => $cleanerService->services_items_id,
                 'price_per_sq_ft'    => $cleanerService->priceForSqFt(1),
                 'created_at'         => now(),
                 'updated_at'         => now(),

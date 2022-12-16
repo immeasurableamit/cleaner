@@ -76,11 +76,7 @@ $(document).ready(function(){
             $(this).toggleClass('active');
         });
     });
-    $(document).ready(function(){
-        $(".service_toggle_s").click(function(){
-          $(this).parent().toggleClass("show");
-        });
-      });
+   
       $(document).ready(function(){
         $(".toggle_menu img").click(function(){
           $('.blue-bg-wrapper').addClass("show");

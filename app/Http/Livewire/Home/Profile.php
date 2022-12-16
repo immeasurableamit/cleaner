@@ -76,6 +76,7 @@ class Profile extends Component
     public function mount()
     {
         $this->cleaner = User::findOrFail($this->cleanerId);
+    
         $this->prepareProps();
 
         $this->todayDate = Carbon::now();
