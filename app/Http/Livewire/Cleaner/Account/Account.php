@@ -79,10 +79,16 @@ class Account extends Component
         }
         if ($action == 'facebook') {
             $this->facebook = $user->facebook;
-            dd($user->facebook);
         }
-
-
+        if ($action == 'twitter') {
+            $this->twitter = $user->twitter;
+        }
+        if ($action == 'instagram') {
+            $this->instagram = $user->instagram;
+        }
+        if ($action == 'linkedin') {
+            $this->linkedin = $user->linkedin;
+        }
 
         $this->action = $action;
 
@@ -122,9 +128,22 @@ class Account extends Component
             }
 
             if ($action == 'timezone') {
-
                 $userdetail->timezone = $this->timezone;
-                //   dd($userdetail->timezone );
+            }
+
+            if ($action == 'facebook') {
+                $userdetail->facebook = $this->facebook;
+            }
+            
+            if ($action == 'twitter') {
+                $userdetail->twitter = $this->twitter;
+            }
+            if ($action == 'instagram') {
+                $userdetail->instagram = $this->instagram;
+            }
+
+            if ($action == 'linkedin') {
+                $userdetail->linkedin = $this->linkedin;
             }
 
             $userdetail->update();
