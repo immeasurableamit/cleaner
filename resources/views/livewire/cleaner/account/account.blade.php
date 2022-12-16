@@ -143,22 +143,17 @@
 
         <div class="customer-account-information cleaner_account_2 mt-4">
             <ul class="list-unstyled">
-                <li class="d-flex justify-content-spacebw two_column">
-                    <h6 class="title-label">Facebook:</h6>
-                    <p class="name">{{$user->first_name}}</p>
-                </li>
-
 
                 <li class="position-relative">
                     <div class="d-flex justify-content-spacebw three_column edit_frm">
                         <h6 class="title-label">Facebook:</h6>
 
                         @if (@$fieldStatus == true && $action == 'facebook')
-                        <input type="number" value="{{$user->facebook}}" wire:model="facebook" />
-                        <span class="edit"><a class="link-design-2" wire:click="socialInfo('contact_number')"><i class="fas fa-save"></i></a></span>
+                        <input type="text" value="{{$user->UserDetails->facebook}}" wire:model="facebook" />
+                        <span class="edit"><a class="link-design-2" wire:click="updateData('facebook')"><i class="fas fa-save"></i></a></span>
                         <span class="cancel"><a href="javascript::void(0)" class="link-design-2" wire:click="cancle"><i class="fas fa-times"></i></a></span>
                         @else
-                        <p class="facebook"><a href="javascript::void(0)">{{$user->facebook}}</a></p>
+                        <p class="facebook"><a href="javascript::void(0)">{{$user->UserDetails->facebook}}</a></p>
                         <div class="action-block">
                             <span class="edit"><a href="javascript::void(0)" wire:click="editData('{{auth()->user()->id}}', 'facebook')">Edit</a></span>
                         </div>
@@ -166,13 +161,63 @@
                     </div>
                 </li>
 
+                <li class="position-relative">
+                    <div class="d-flex justify-content-spacebw three_column edit_frm">
+                        <h6 class="title-label">Twitter:</h6>
+
+                        @if (@$fieldStatus == true && $action == 'twitter')
+                        <input type="text" value="{{$user->UserDetails->twitter}}" wire:model="twitter" />
+                        <span class="edit"><a class="link-design-2" wire:click="updateData('twitter')"><i class="fas fa-save"></i></a></span>
+                        <span class="cancel"><a href="javascript::void(0)" class="link-design-2" wire:click="cancle"><i class="fas fa-times"></i></a></span>
+                        @else
+                        <p class="twitter"><a href="javascript::void(0)">{{$user->UserDetails->twitter}}</a></p>
+                        <div class="action-block">
+                            <span class="edit"><a href="javascript::void(0)" wire:click="editData('{{auth()->user()->id}}', 'twitter')">Edit</a></span>
+                        </div>
+                        @endif
+                    </div>
+                </li>
+
+                <li class="position-relative">
+                    <div class="d-flex justify-content-spacebw three_column edit_frm">
+                        <h6 class="title-label">Instagram:</h6>
+
+                        @if (@$fieldStatus == true && $action == 'instagram')
+                        <input type="text" value="{{$user->UserDetails->instagram}}" wire:model="instagram" />
+                        <span class="edit"><a class="link-design-2" wire:click="updateData('instagram')"><i class="fas fa-save"></i></a></span>
+                        <span class="cancel"><a href="javascript::void(0)" class="link-design-2" wire:click="cancle"><i class="fas fa-times"></i></a></span>
+                        @else
+                        <p class="instagram"><a href="javascript::void(0)">{{$user->UserDetails->instagram}}</a></p>
+                        <div class="action-block">
+                            <span class="edit"><a href="javascript::void(0)" wire:click="editData('{{auth()->user()->id}}', 'instagram')">Edit</a></span>
+                        </div>
+                        @endif
+                    </div>
+                </li>
+
+                <li class="position-relative">
+                    <div class="d-flex justify-content-spacebw three_column edit_frm">
+                        <h6 class="title-label">Linkedin:</h6>
+
+                        @if (@$fieldStatus == true && $action == 'linkedin')
+                        <input type="text" value="{{$user->UserDetails->linkedin}}" wire:model="linkedin" />
+                        <span class="edit"><a class="link-design-2" wire:click="updateData('linkedin')"><i class="fas fa-save"></i></a></span>
+                        <span class="cancel"><a href="javascript::void(0)" class="link-design-2" wire:click="cancle"><i class="fas fa-times"></i></a></span>
+                        @else
+                        <p class="linkedin"><a href="javascript::void(0)">{{$user->UserDetails->linkedin}}</a></p>
+                        <div class="action-block">
+                            <span class="edit"><a href="javascript::void(0)" wire:click="editData('{{auth()->user()->id}}', 'linkedin')">Edit</a></span>
+                        </div>
+                        @endif
+                    </div>
+                </li>
             </ul>
         </div>
 
 
 
 
-
+{{-- 
         <div class="customer-account-information cleaner_account_2 about-updation-wrap">
             <form>
                 <div class="input-group mb-3">
@@ -208,6 +253,7 @@
                 </div>
             </form>
         </div>
+        --}}
 
     </div>
 </div>
