@@ -292,22 +292,37 @@ class Jobs extends Component
             ],
             'allowOutsideClick' => false,
             'timer' => null,
-        ]);
-        
+        ]);        
     }
 
 
     public function cancelOrder( $data )
     {
         $order      = Order::find( $data['value'] );
+        /* Refund amount to customer */
         $refundResp = refundOrder( $order, "Canary Cleaner, cleaner cancelled the order #$order->id" );
         if ( $refundResp['status'] == false ) {
             $this->alert('error', 'Booking not cancelled');
             return false;
         }
 
+        /* Store refund transaction details in DB */
+        $transaction = storeRefundOrderTransaction(
+            $order->user_id,
+            $order->id,
+            $order->total,
+            $refundResp['refund_id']            
+        );
+
+        /* Update order */
         $order->is_refunded = 1;
-        $order->refund_transaction_id 
+        $order->refund_transaction_id  = $transaction->stripe_id;
+        $order->status = 'cancelled';
+        $order->save();
+
+        $this->alert('success','Booking cancelled');
+        $this->refreshSelectedTab();
+        return true;
     }
 
     public function render()

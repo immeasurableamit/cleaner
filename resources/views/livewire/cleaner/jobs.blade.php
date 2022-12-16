@@ -77,8 +77,9 @@
                                                     @elseif ( $order->status == 'completed')
                                                         <a href="javascript:void(0);"  wire:click="collectPayment( {{ $order->id }} )"  class="collect_payment crd-btn">Collect Payment</a>
                                                     @elseif ( $order->status == 'payment_collected')
-                                                        <a href="javascript:void(0);" class="btn_blue crd-btn">Payment collected!</a>
-
+                                                        <a href="javascript:void();" class="btn_blue crd-btn">Payment collected!</a>
+                                                    @elseif ( $order->status == 'cancelled')
+                                                        <a href="javascript:void();" class="refuse-request-btn crd-btn">Cancelled</a>
                                                     @endif                                                                                               
                                                 </div>
                                             </div>
@@ -135,6 +136,8 @@
                                                     <p class="appointment_label">Change</p>                                        
                                                     <a class="btn_x" wire:click="confirmCancelOrderAction( {{ $order->id }} )">Cancel Job</a>
                                                 </div>                                            
+                                            
+
                                             @endif
 
                                         </div>                                    
@@ -152,6 +155,8 @@
                                                         <a href="javascript:void(0);"  wire:click="collectPayment( {{ $order->id }} )" class="collect_payment crd-btn">Collect Payment</a>
                                                     @elseif ( $order->status == 'payment_collected')
                                                         <a href="javascript:void(0);" class="btn_blue crd-btn">Payment collected!</a>
+                                                    @elseif ( $order->status == 'cancelled')
+                                                        <a href="javascript:void();" class="refuse-request-btn crd-btn">Cancelled</a>
 
 
                                         @endif
