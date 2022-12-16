@@ -101,24 +101,27 @@
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" onclick="$('#loginModal').modal('hide')">
-          <span aria-hidden="true">&times;</span>
+      <div class="modal-header border border-bottom-0">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="close" onclick="$('#loginModal').modal('hide')" style="border: none; background: white;">
+            <i class="fa fa-times fa-xl" aria-hidden="true"></i>
         </button>
       </div>
       <div class="modal-body">
-        <form wire:submit.prevent="authenticateUser">
-            <input type="email"  wire:model.defer="email" placeholder="Email"/>
-            @error('email') <span class='text-danger'> {{ $message }} @enderror
-            <input type="password" wire:model.defer="password" placeholder="Password"/>
-            @error('password') <span class='text-danger'> {{ $message }} @enderror
-            <button class="btn_b mt-4">Login</button>
+        <form class="form-grouph input-design mb-30" wire:submit.prevent="authenticateUser">
+            <div class="mb-3">
+                <input type="email"  wire:model.defer="email" placeholder="Email"/>
+                @error('email') <span class='text-danger'> {{ $message }} @enderror
+            </div>        
+            <div class="mb-3">
+                <input type="password" wire:model.defer="password" placeholder="Password"/>
+                @error('password') <span class='text-danger'> {{ $message }} @enderror
+            </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" onclick="$('#loginModal').modal('hide')">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        
+        <button type="button" wire:click="authenticateUser" class="btn_blue">Login</button>
       </div>
     </div>
   </div>
@@ -157,6 +160,7 @@
                                 </div>
                                 @endif
 
+                                {{-- Remove payment method selection feature
                                     <div class="btn_right_cards text-center ">
                                         <div class="check-pay-mathoud">
                                             <input type="radio" name="payment_method" id="gpay" value="google_pay" wire:model="paymentMethod"> 
@@ -172,6 +176,7 @@
                                         </div>
                                     </div>
                                     @error ('paymentMethod') <div class="mt-3"><span class="text-danger">PaymentMethod Field is required</span></div> @enderror
+                                    --}}
                                 </div>
                                 <div class="form-headeing-second">
                                     <h4 class="border-0 m-0 pt-4">Billing Name and Address</h4>
@@ -271,9 +276,9 @@
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="form-grouph mb-3 card_text_input">
-                                                    <input type="text" wire:model="number" name="number" placeholder="Card number">
+                                                    <input type="text" wire:model="formattedNumber" name="formattedNumber" placeholder="Card number">
                                                     <input type="text" id="exp_month_year" name="exp_month_year" placeholder="MM/YY" class="mm_input">
-                                                    <input type="text" wire:model="cvc" name="cvc" placeholder="CVC" class="cvc">
+                                                    <input type="password" wire:model="cvc" name="cvc" placeholder="CVC" class="cvc">
                                                 </div>
                                                @error ('number') <div class="text-danger">{{ $message }} </div> @enderror
                                                @error ('expMonth') <div class="text-danger">{{ $message }} </div> @enderror

@@ -5,13 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\OrderItem;
+use App\Models\Transaction;
 
 class Order extends Model
 {
     use HasFactory;
 
+    
+
     protected $guarded = [];
     protected $appends = ['name'];
+
 
     protected $commissionPercentage = 2; // for owner
 
@@ -47,5 +51,15 @@ class Order extends Model
     public function cleanerFee()
     {
         return $this->total - $this->ownerCommission();
+    }
+
+    public function userTransaction()
+    {
+        return $this->hasOne( Transaction::class, 'user_id', 'user_id' );        
+    }
+
+    public function cleanerTransaction()
+    {
+        return $this->hasOne( Transaction::class, 'user_id', 'cleaner_id' );        
     }
 }

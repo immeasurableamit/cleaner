@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->restrictOnDelete();
             $table->decimal('amount', 18,2);
-            $table->enum('type', ['debit','credit']);
+	    $table->enum('type', ['debit','credit']);
+	    $table->string('action');
             $table->string('stripe_id');
             $table->integer('transactionable_id');
             $table->string('transactionable_type');

@@ -25,6 +25,10 @@ class Jobs extends Component
 
     protected $pendingOrderStatuses = ['pending', 'rejected'];
     
+    protected $listeners = [
+        'cancelOrder'
+    ];
+
     protected function getPendingOrders()
     {
         return $this->orders->whereIn('status', $this->pendingOrderStatuses );
@@ -137,6 +141,7 @@ class Jobs extends Component
         $transaction->user_id   = $user_id;
         $transaction->amount    = $amount;
         $transaction->type      = 'debit';
+        $transaction->action    = 'charge';
         $transaction->stripe_id = $stripe_charge_id;
         $transaction->transactionable_id   = $order_id;
         $transaction->transactionable_type = Order::class;
@@ -207,6 +212,7 @@ class Jobs extends Component
         $transaction->user_id   = $user_id;
         $transaction->amount    = $amount;
         $transaction->type      = 'credit';
+        $transaction->action    = 'transfer';
         $transaction->stripe_id = $stripe_transfer_id;
         $transaction->transactionable_id   = $order_id;
         $transaction->transactionable_type = Order::class;
@@ -265,6 +271,43 @@ class Jobs extends Component
         if ( $name == "selectedDate") {
             $this->renderOrders();
         }        
+    }
+
+    public function confirmCancelOrderAction( $orderId )
+    {
+        $this->alert('warning', 'Are you surely want to cancel the booking?', [
+            'position' => 'center',
+            'toast' => false,
+            'showConfirmButton' => true,
+            'onConfirmed' => 'cancelOrder',
+            'showCancelButton' => true,
+            'onDismissed' => '',
+            'confirmButtonText' => 'Yes',
+            'cancelButtonText' => 'No',
+            'width' => 500, // pixels
+            'input' => 'text',
+            'inputValue' => $orderId,
+            'inputAttributes' => [
+                'hidden' => true,
+            ],
+            'allowOutsideClick' => false,
+            'timer' => null,
+        ]);
+        
+    }
+
+
+    public function cancelOrder( $data )
+    {
+        $order      = Order::find( $data['value'] );
+        $refundResp = refundOrder( $order, "Canary Cleaner, cleaner cancelled the order #$order->id" );
+        if ( $refundResp['status'] == false ) {
+            $this->alert('error', 'Booking not cancelled');
+            return false;
+        }
+
+        $order->is_refunded = 1;
+        $order->refund_transaction_id 
     }
 
     public function render()
