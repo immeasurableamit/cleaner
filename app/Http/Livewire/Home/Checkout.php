@@ -45,7 +45,7 @@ class Checkout extends Component
     public $number, $formattedNumber, $expMonthYear, $cvc;
 
     /* Second step: Stripe card saving props */
-    public $stripe_customer_id, $expMonth, $expYear, $stripeTokenResp;
+    public $stripe_customer_id, $expMonth, $expYear, $stripeTokenResp, $tokenSave;
 
     /* Third Step */
     public $order, $notes, $billing, $userCard;
@@ -346,17 +346,17 @@ class Checkout extends Component
      */
     protected function storeUserCard($user_id)
     {
-        $brand = $this->tokenSave['token']->card->brand;
-        $last4_digits = $this->tokenSave['token']->card->brand;
-        $exp_month = $this->tokenSave['token']->card->exp_month;
-        $exp_year = $this->tokenSave['token']->card->exp_year;
+        // $brand = $this->tokenSave['token']->card->brand;
+        // $last4_digits = $this->tokenSave['token']->card->last4_digits;
+        // $exp_month = $this->tokenSave['token']->card->exp_month;
+        // $exp_year = $this->tokenSave['token']->card->exp_year;
 
         $userCard = UserCard::create([
             'user_id'     => $user_id,
-            'last4_digits'    => $last4_digits,
-            'brand'  => $brand,
-            'exp_month'   => $exp_month,
-            'exp_year' => $exp_year,
+            'last4_digits'    => isset($this->tokenSave['token']->card->last4_digits),
+            'brand'  => isset($this->tokenSave['token']->card->brand),
+            'exp_month'   => isset($this->tokenSave['token']->card->exp_month),
+            'exp_year' => isset($this->tokenSave['token']->card->exp_year),
 
         ]);
 
