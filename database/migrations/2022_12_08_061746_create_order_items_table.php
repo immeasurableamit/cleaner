@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('order_id')->constrained()->restrictOnDelete();
             $table->foreignId('cleaner_service_id')->constrained('cleaner_services')->restrictOnDelete();
+            $table->foreignId('service_item_id')->constrained('services_items')->restrictOnDelete();
             $table->decimal('price_per_sq_ft', 18, 2 );
             $table->timestamps();
         });

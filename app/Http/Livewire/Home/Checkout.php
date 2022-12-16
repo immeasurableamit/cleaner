@@ -298,6 +298,7 @@ class Checkout extends Component
             $orderItem = [
                 'order_id'           => $order_id,
                 'cleaner_service_id' => $cleanerService->id,
+                'service_item_id'    => $cleanerService->services_items_id,
                 'price_per_sq_ft'    => $cleanerService->priceForSqFt(1),
                 'created_at'         => now(),
                 'updated_at'         => now(),

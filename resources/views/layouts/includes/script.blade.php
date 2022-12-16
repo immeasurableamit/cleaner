@@ -10,10 +10,10 @@
 
 @livewireScripts
 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  
-  <x-livewire-alert::scripts />
+<x-livewire-alert::scripts />
+
   
 @yield('script')
 @stack('scripts')
