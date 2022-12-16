@@ -99,6 +99,7 @@ function createBankInfoEntry($cleaner)
         'users_id'   => $cleaner->id,
         'account_id' => $account->id,
         'status'     => 'pending',
+      
     ]);
 
     $bank->refresh();

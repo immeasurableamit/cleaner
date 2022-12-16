@@ -22,7 +22,7 @@
                         <div class="labels_div">
                             @foreach($service->servicesItems as $i => $item)
                             <label><input type="checkbox" wire:model="items.{{$item->id}}" value="{{$item->id}}" {{ in_array($item->id, $items) ? 'checked' : '' }}>
-                            <span class="label-selection-text">{{ @$item->title }}</span></label>
+                                <span class="label-selection-text">{{ @$item->title }}</span></label>
                             @endforeach
                         </div>
                         @endforeach
@@ -89,27 +89,27 @@
         </div>
 
 
-
-
-
-
-
-
         <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 car_right_div">
-            
+
             <div class="listing-row">
                 @foreach($cleaners as $cleaner)
                 <div class="listing-column lcd-4 lc-6">
                     <div class="card_search_result">
                         <div class="like_img">
                             <input type="checkbox" class="like_1">
-                            <img src="{{asset('storage/images/'.$cleaner->image)}}">
+                            <div id="imagePreview" class="profile-pic">
+                                @if($cleaner->image)
+                                <img src="{{asset('storage/images/'.$cleaner->image)}}"> 
+                                @else
+                                <img src="assets/images/iconshow.png"> 
+                               @endif
+                            </div>
                         </div>
                         <div class="bottom_card_text">
                             <div class="name_str">
                                 <a href="javascript::void(0)" class="name_s">{{$cleaner->name}}</a>
                                 <div class="m-hide">
-                                    <img src="assets/images/icons/star.svg">
+                                    <img src="{{asset('assets/images/icons/star.svg')}}">
                                     4.5<span> (211)</span>
                                 </div>
                             </div>
@@ -118,15 +118,15 @@
                                 <p class="font-medium">2,700 sq ft</p>
                                 <p class="font-regular">Est Time : 3 shours</p>
                                 <div class="badges_insurnce_img">
-                                    <img src="assets/images/badges.svg">
-                                    <img src="assets/images/insurance.svg">
+                                    <img src="{{asset('assets/images/badges.svg')}}">
+                                    <img src="{{asset('assets/images/insurance.svg')}}">
                                 </div>
                             </div>
                             <div class="btn_rate">
                                 <b>$150</b>
                                 <a href="{{route('profile',$cleaner->id)}}"><button class="btn_view d-none d-md-block">View</button></a>
                                 <div class="td-hide rating-mobile-listing-design">
-                                    <img src="assets/images/icons/star.svg">
+                                    <img src="{{asset('assets/images/icons/star.svg')}}">
                                     4.5<span> (211)</span>
                                 </div>
                             </div>

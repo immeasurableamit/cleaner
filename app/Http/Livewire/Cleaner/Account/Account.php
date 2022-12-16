@@ -30,7 +30,7 @@ class Account extends Component
     public function mount()
     {
         $details = auth()->user()->UserDetails;
-        
+
         $this->facebook = $details->facebook;
         $this->twitter = $details->twitter;
         $this->instagram = $details->instagram;
@@ -77,6 +77,13 @@ class Account extends Component
         if ($action == 'image') {
             $this->image = $user->image;
         }
+        if ($action == 'facebook') {
+            $this->facebook = $user->facebook;
+            dd($user->facebook);
+        }
+
+
+
         $this->action = $action;
 
         $this->fieldStatus = true;
@@ -159,17 +166,21 @@ class Account extends Component
 
 
 
-    public function socialInfo()
+    public function socialInfo($userId, $action)
     {
+        // dd($userId, $action);
         $details = auth()->user()->UserDetails;
 
-        $details->facebook = $this->facebook;
+        if ($action == 'facebook') {
+            $details->facebook = $this->facebook;
+        }
+
         $details->twitter = $this->twitter;
         $details->instagram = $this->instagram;
         $details->linkedin = $this->linkedin;
         $details->save();
 
-
+        $this->fieldStatus = true;
     }
 
 

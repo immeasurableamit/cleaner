@@ -6,7 +6,7 @@
         <div class="customer-avatar-upload-div">
             <div class="customer-avatar-upload">
                 <div class="customer-avatar-edit">
-                    <input type='file' id="upload" accept=".png, .jpg, .jpeg" enctype="multipart/form-data"  />
+                    <input type='file' id="upload" accept=".png, .jpg, .jpeg" enctype="multipart/form-data" />
                     <label for="upload">Upload a profile pic</label>
                 </div>
                 <div class="customer-avatar-preview position-relative">
@@ -140,6 +140,39 @@
         <div class="h4-design mt-4 padding-about-frm-right">
             <h4>Social Information</h4>
         </div>
+
+        <div class="customer-account-information cleaner_account_2 mt-4">
+            <ul class="list-unstyled">
+                <li class="d-flex justify-content-spacebw two_column">
+                    <h6 class="title-label">Facebook:</h6>
+                    <p class="name">{{$user->first_name}}</p>
+                </li>
+
+
+                <li class="position-relative">
+                    <div class="d-flex justify-content-spacebw three_column edit_frm">
+                        <h6 class="title-label">Facebook:</h6>
+
+                        @if (@$fieldStatus == true && $action == 'facebook')
+                        <input type="number" value="{{$user->facebook}}" wire:model="facebook" />
+                        <span class="edit"><a class="link-design-2" wire:click="socialInfo('contact_number')"><i class="fas fa-save"></i></a></span>
+                        <span class="cancel"><a href="javascript::void(0)" class="link-design-2" wire:click="cancle"><i class="fas fa-times"></i></a></span>
+                        @else
+                        <p class="facebook"><a href="javascript::void(0)">{{$user->facebook}}</a></p>
+                        <div class="action-block">
+                            <span class="edit"><a href="javascript::void(0)" wire:click="editData('{{auth()->user()->id}}', 'facebook')">Edit</a></span>
+                        </div>
+                        @endif
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+
+
+
+
+
         <div class="customer-account-information cleaner_account_2 about-updation-wrap">
             <form>
                 <div class="input-group mb-3">
@@ -180,11 +213,13 @@
 </div>
 @section('script')
 <script>
-    function uploadImgViaLivewire(user_id)
-    {
+    function uploadImgViaLivewire(user_id) {
         var base64_string = $("#upload-img").val();
-        var data = { user_id, base64_string };
-        Livewire.emit('imgUploaded', data );
+        var data = {
+            user_id,
+            base64_string
+        };
+        Livewire.emit('imgUploaded', data);
     }
 </script>
 @include('layouts.common.cropper')
