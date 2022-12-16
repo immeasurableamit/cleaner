@@ -72,7 +72,7 @@
                     <div class="dropsown-logout-design">
                       <form action="{{ route('logout') }}" method="post">
                         @csrf
-                        <button type="submit"><img src="{{asset('assets/images/icons/logout.svg')}}"> Logout</button>
+                        <button type="submit" style="border: none; background: transparent"><img src="{{asset('/assets/images/icons/logout.svg')}}"> Logout</button>
                       </form>
 
                     </div>

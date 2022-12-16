@@ -123,11 +123,11 @@
                   </div>
                   <div class="form-right-block">
                     <div class="form-grouph input-design mb-30">
-                    <input type="password" id="password" name="password" class="form-control{!! ($errors->has('password') ? ' is-invalid' : '') !!}" />
+                    <input type="password" id="password" name="password" class="form-control{!! ($errors->has('password') ? ' is-invalid' : '') !!}" placeholder="Password"/>
                     {!! $errors->first('password', '<span class="alert">:message</span>') !!}
                     </div>
                     <div class="form-grouph input-design mb-30">
-                    <input type="password" id="password_confirmation" name="password_confirmation" class="form-control{!! ($errors->has('password_confirmation') ? ' is-invalid' : '') !!}" />
+                    <input type="password" id="password_confirmation" name="password_confirmation" class="form-control{!! ($errors->has('password_confirmation') ? ' is-invalid' : '') !!}" placeholder="Confirm Password"/>
                     {!! $errors->first('password_confirmation', '<span class="alert">:message</span>') !!}
                     </div>
                     <div class="form-grouph input-design mb-30">

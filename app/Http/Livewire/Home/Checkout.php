@@ -42,7 +42,7 @@ class Checkout extends Component
     public $contact;
 
     /* Second step: Card details props */
-    public $number, $expMonthYear, $cvc;
+    public $number, $formattedNumber, $expMonthYear, $cvc;
 
     /* Second step: Stripe card saving props */
     public $stripe_customer_id, $expMonth, $expYear, $stripeTokenResp, $tokenSave;
@@ -460,6 +460,15 @@ class Checkout extends Component
     {
         $this->prepare();
         $this->handleLoggedInUser();
+
+        /* assigning default because we're removing apple and google pay */
+        $this->paymentMethod = 'credit_card'; 
+    }
+
+    public function updatedFormattedNumber($value)
+    {
+        $this->formattedNumber = wordwrap( $value, 4, " ", true); // add space after each 4 characters
+        $this->number = str_replace( " ", "", $this->formattedNumber); // set number for stripe verification
     }
 
     public function render()
