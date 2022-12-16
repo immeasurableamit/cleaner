@@ -52,7 +52,7 @@ class BillingController extends Controller
             }
         } else {
             $stripeCustomer = stripeCreateCustomerWithSource($user->name, $user->email, $resp['token_string']);
-            $user->userDetails->stripe_customer_id = $stripeCustomer->id;
+            $user->userDetails->stripe_customer_id = $stripeCustomer['resposne']->id;
             $user->userDetails->save();
         }
 

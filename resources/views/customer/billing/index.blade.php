@@ -71,15 +71,15 @@
                                         <ul class="list-unstyled">
                                             <li class="d-flex justify-content-spacebw two_column">
                                                 <h6 class="title-label">Card Number:</h6>
-                                                <p class="">*****{{ $user->card->last4_digits }}</p>
+                                                <p class="">*****{{ @$user->card->last4_digits }}</p>
                                             </li>
                                             <li class="d-flex justify-content-spacebw two_column">
                                                 <h6 class="title-label"> Card Type:</h6>
-                                                <p class="">{{ $user->card->brand }}</p>
+                                                <p class="">{{ @$user->card->brand }}</p>
                                             </li>
                                             <li class="d-flex justify-content-spacebw three_column">
                                                 <h6 class="title-label">Expiry Date:</h6>
-                                                <p class=""> {{ $user->card->exp_month."/".$user->card->exp_year }}</p>
+                                                <p class=""> {{ @$user->card->exp_month."/".@$user->card->exp_year }}</p>
                                                 <a href="{{ route('customer.billing.edit') }}"
                                                     class="link-design-2">Edit</a>
                                             </li>
