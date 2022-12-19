@@ -7,10 +7,17 @@
             </div>
             <div class="customer-avatar-preview position-relative">
 
-                <div id="uploaded" style="background-image: url('/storage/images/$user->image');">
+            @if ( $user->image )
+                <div id="uploaded" style='background-image: {{ url("/storage/images/$user->image") }}'>
                     <img src="{{ asset('storage/images/'.$user->image) }}" id="customerimagePreview">
                     <a href="javascript::void(0)" onclick="uploadImgViaLivewire('{{ $user->id }}')" ><i class="fas fa-save"></i></a>
                 </div>
+            @else
+                <div id="uploaded" style="background-image: {{ asset('/assets/images/iconshow.png') }}">
+                    <img src="{{ asset('/assets/images/iconshow.png') }}" id="customerimagePreview">
+                    <a href="javascript::void(0)" onclick="uploadImgViaLivewire('{{ $user->id }}')" ><i class="fas fa-save"></i></a>
+                </div>
+            @endif
             </div>
 
 

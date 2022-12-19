@@ -13,11 +13,17 @@
                                 <!-- <span class="close-search l-hide"><svg class="svg-inline--fa fa-xmark" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path></svg></span> -->
                                 <div class="search-form-wrapper select-design">
                                     <div class="select-search-design">
-                                        <select class="select-custom-design">
-                                            <option>Any service</option>
-                                            <option>Service</option>
-                                            <option>Service</option>
-                                        </select>
+                                <select class="select-custom-design-group" >
+                                        @foreach ( $services as $service )
+                                        <optgroup label="{{ $service->title }}">
+                                            @foreach ( $service->servicesItems as $serviceItem )
+                                            <option value="{{ $serviceItem->id }}">{{ $serviceItem->title }}</option>
+                                            @endforeach
+                                        </optgroup>
+
+                                 @endforeach
+                                </select>
+                                        
                                     </div>
                                     <div class="select-search-design">
                                         <select class="select-custom-design">
@@ -27,8 +33,9 @@
                                         </select>
                                     </div>
                                     <div class="search-input-design">
-                                        <input type="text" placeholder="Enter location">
-                                        <a class="search-btn" href="search-result.html"><img src="assets/images/icons/search.svg" class="me-2">Search</a>
+                                        <input type="text" id="address2" name="address" placeholder="Enter location">
+                                        <a class="search-btn" href="search-result.html"><img src="/assets/images/icons/search.svg" class="me-2">Search</a>
+                                        @include('includes.address-map', [ 'address_element_id' => 'address2'])
                                     </div>
                                 </div>
                             </form>
@@ -36,7 +43,7 @@
                     </div>
                     <div class="col-md-5">
                         <div class="cleaner_home_img">
-                            <img src="assets/images/home_cleaner.png">
+                            <img src="/assets/images/home_cleaner.png">
                         </div>
                     </div>
                 </div>
@@ -48,21 +55,21 @@
                 <div class="slider">
                     <div class="slides">
                         <div class="card_sliders">
-                            <img src="assets/images/icons/routine_cleanings.svg" />
+                            <img src="/assets/images/icons/routine_cleanings.svg" />
                             <h5>Routine Cleanings</h5>
                         </div>
                     </div>
 
                     <div class="slides">
                         <div class="card_sliders">
-                            <img src="assets/images/icons/routine_cleanings.svg" />
+                            <img src="/assets/images/icons/routine_cleanings.svg" />
                             <h5>Deep Cleans</h5>
                         </div>
                     </div>
 
                     <div class="slides">
                         <div class="card_sliders">
-                            <img src="assets/images/icons/custom_cleanings.svg" />
+                            <img src="/assets/images/icons/custom_cleanings.svg" />
                             <h5>Custom Cleanings</h5>
                         </div>
                     </div>
@@ -70,28 +77,28 @@
 
                     <div class="slides">
                         <div class="card_sliders">
-                            <img src="assets/images/icons/speciality_cleaning.svg" />
+                            <img src="/assets/images/icons/speciality_cleaning.svg" />
                             <h5>Specialty Cleanings</h5>
                         </div>
                     </div>
 
                     <div class="slides">
                         <div class="card_sliders">
-                            <img src="assets/images/icons/routine_cleanings.svg" />
+                            <img src="/assets/images/icons/routine_cleanings.svg" />
                             <h5>Routine Cleanings</h5>
                         </div>
                     </div>
 
                     <div class="slides">
                         <div class="card_sliders">
-                            <img src="assets/images/icons/routine_cleanings.svg" />
+                            <img src="/assets/images/icons/routine_cleanings.svg" />
                             <h5>Deep Cleans</h5>
                         </div>
                     </div>
 
                     <div class="slides">
                         <div class="card_sliders">
-                            <img src="assets/images/icons/custom_cleanings.svg" />
+                            <img src="/assets/images/icons/custom_cleanings.svg" />
                             <h5>Custom Cleanings</h5>
                         </div>
                     </div>
@@ -99,7 +106,7 @@
 
                     <div class="slides">
                         <div class="card_sliders">
-                            <img src="assets/images/icons/speciality_cleaning.svg" />
+                            <img src="/assets/images/icons/speciality_cleaning.svg" />
                             <h5>Specialty Cleanings</h5>
                         </div>
                     </div>
@@ -112,7 +119,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-5 p-0">
-                        <img src="assets/images/cannery_clean.jpg">
+                        <img src="/assets/images/cannery_clean.jpg">
                     </div>
                     <div class="col-md-7 p-0">
                         <div class="canary_text">
@@ -143,22 +150,22 @@
                             </div>
                             <div class="choose_list">
                                 <div class="card_why">
-                                    <img src="assets/images/icons/quick_service.svg">
+                                    <img src="/assets/images/icons/quick_service.svg">
                                     <h5>Quick service</h5>
                                     <p>All bookings are scheduled in a two-hour window - and many times you may find availability that same day!</p>
                                 </div>
                                 <div class="card_why">
-                                    <img src="assets/images/icons/booking_online.svg">
+                                    <img src="/assets/images/icons/booking_online.svg">
                                     <h5>Online booking</h5>
                                     <p>Start or stop service. Add a garage to your next cleaning. Change frquency. Pause. Anything you need to do related to cleaning you can do online! </p>
                                 </div>
                                 <div class="card_why">
-                                    <img src="assets/images/icons/trust.svg">
+                                    <img src="/assets/images/icons/trust.svg">
                                     <h5>Cleaners you can trust</h5>
                                     <p>Because we utilize a rating system, you can see a real track record for the cleaner as it relates to cleanings. Only paying customers can rate!</p>
                                 </div>
                                 <div class="card_why">
-                                    <img src="assets/images/icons/support.svg">
+                                    <img src="/assets/images/icons/support.svg">
                                     <h5>Top-Notch Support</h5>
                                     <p>You can message your Canary Clean team or individual directly! We also offer email support in case any other issues were to arsise - we always will do the right thing!</p>
                                 </div>
@@ -171,7 +178,7 @@
 
                             <p>Canary Clean was born from the need to provide customers with the best cleaners at the lowest cost, while letting cleaners keep more of what they own too! Its a win-win, and we love that!</p>
                         </div>
-                        <img src="assets/images/why_choose_us.png" />
+                        <img src="/assets/images/why_choose_us.png" />
                     </div>
                 </div>
             </div>
@@ -210,11 +217,11 @@
 
                             <div class="top_details">
                                 <div class="name_degination">
-                                    <img src="assets/images/pr_2.jpg">
+                                    <img src="/assets/images/pr_2.jpg">
                                     <h4 class="h4_design border-0 p-0 mb-2">Anna Sarnowska</h4>
                                     <span>dress salon</span>
                                 </div>
-                                <img src="assets/images/icons/quote.svg">
+                                <img src="/assets/images/icons/quote.svg">
                             </div>
 
 
@@ -228,11 +235,11 @@
 
                             <div class="top_details">
                                 <div class="name_degination">
-                                    <img src="assets/images/pr_2.jpg">
+                                    <img src="/assets/images/pr_2.jpg">
                                     <h4 class="h4_design border-0 p-0 mb-2">Anna Sarnowska</h4>
                                     <span>dress salon</span>
                                 </div>
-                                <img src="assets/images/icons/quote.svg">
+                                <img src="/assets/images/icons/quote.svg">
                             </div>
 
 
@@ -246,11 +253,11 @@
 
                             <div class="top_details">
                                 <div class="name_degination">
-                                    <img src="assets/images/pr_2.jpg">
+                                    <img src="/assets/images/pr_2.jpg">
                                     <h4 class="h4_design border-0 p-0 mb-2">Anna Sarnowska</h4>
                                     <span>dress salon</span>
                                 </div>
-                                <img src="assets/images/icons/quote.svg">
+                                <img src="/assets/images/icons/quote.svg">
                             </div>
 
 
@@ -264,11 +271,11 @@
 
                             <div class="top_details">
                                 <div class="name_degination">
-                                    <img src="assets/images/pr_2.jpg">
+                                    <img src="/assets/images/pr_2.jpg">
                                     <h4 class="h4_design border-0 p-0 mb-2">Anna Sarnowska</h4>
                                     <span>dress salon</span>
                                 </div>
-                                <img src="assets/images/icons/quote.svg">
+                                <img src="/assets/images/icons/quote.svg">
                             </div>
 
 
@@ -290,11 +297,11 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="card_rated">
-                            <img src="assets/images/update_1.jpg" class="clnr_img">
+                            <img src="/assets/images/update_1.jpg" class="clnr_img">
                             <div class="bottom_part">
                                 <div class="date_coments">
-                                    <p class="me-3"><img src="assets/images/icons/timer.svg">Jul 27 2023</p>
-                                    <p class=""><img src="assets/images/icons/comments.svg">24 Comments</p>
+                                    <p class="me-3"><img src="/assets/images/icons/timer.svg">Jul 27 2023</p>
+                                    <p class=""><img src="/assets/images/icons/comments.svg">24 Comments</p>
                                 </div>
                                 <h5>Fast and efficient cleaning services for everyone.</h5>
 
@@ -303,11 +310,11 @@
                     </div>
                     <div class="col-md-4">
                         <div class="card_rated">
-                            <img src="assets/images/update_2.jpg" class="clnr_img">
+                            <img src="/assets/images/update_2.jpg" class="clnr_img">
                             <div class="bottom_part">
                                 <div class="date_coments">
-                                    <p class="me-3"><img src="assets/images/icons/timer.svg">Jul 27 2023</p>
-                                    <p class=""><img src="assets/images/icons/comments.svg">24 Comments</p>
+                                    <p class="me-3"><img src="/assets/images/icons/timer.svg">Jul 27 2023</p>
+                                    <p class=""><img src="/assets/images/icons/comments.svg">24 Comments</p>
                                 </div>
                                 <h5>Home cleaning for any budget.</h5>
 
@@ -316,11 +323,11 @@
                     </div>
                     <div class="col-md-4">
                         <div class="card_rated">
-                            <img src="assets/images/update_3.jpg" class="clnr_img">
+                            <img src="/assets/images/update_3.jpg" class="clnr_img">
                             <div class="bottom_part">
                                 <div class="date_coments">
-                                    <p class="me-3"><img src="assets/images/icons/timer.svg">Jul 27 2023</p>
-                                    <p class=""><img src="assets/images/icons/comments.svg">24 Comments</p>
+                                    <p class="me-3"><img src="/assets/images/icons/timer.svg">Jul 27 2023</p>
+                                    <p class=""><img src="/assets/images/icons/comments.svg">24 Comments</p>
                                 </div>
                                 <h5>Stop paying twice as much for a cleaning company!</h5>
 
@@ -351,7 +358,7 @@
                                 </div>
                                 <div class="search-input-design">
                                     <input type="text" placeholder="Enter location">
-                                    <button class="search-btn"><a href="search-result.html" class=""><img src="assets/images/icons/search.svg"></a></button>
+                                    <button class="search-btn"><a href="search-result.html" class=""><img src="/assets/images/icons/search.svg"></a></button>
                                 </div>
                             </div>
                         </form>

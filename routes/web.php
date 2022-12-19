@@ -13,6 +13,7 @@ use App\Http\Controllers\Cleaner\CleanerController;
 use App\Http\Controllers\Customer as CustomerControllers;
 use App\Mail\ContactMail;
 use Illuminate\Support\Facades\Crypt;
+use App\Http\Controllers\Customer\PagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -178,6 +179,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::get('/profile/connect-account', 'connectAccount')->name('cleaner.billing.connectAccount'); */
                
             }); 
+        });
+
+        // customer appointments
+        Route::prefix('appointments')->group(function () {
+            Route::controller(PagesController::class)->group(function () {
+                Route::get('/', 'index')->name('customer.appointments');
+            });
         });
     });
 
