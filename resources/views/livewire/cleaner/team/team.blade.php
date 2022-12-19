@@ -9,7 +9,7 @@
                 <h3 class="mb-0">Team Info</h3>
 
                 <span>Add additional team members below</span>
-                <button type="button" class="btn btn-primary" style="float:right;" data-bs-toggle="modal" data-bs-target="#teamModal">
+                <button type="button" class="btn btn-primary form-grouph submit-design mb-30" style="float:right;" data-bs-toggle="modal" data-bs-target="#teamModal">
                     Add Team Members
                 </button>
             </div>
@@ -20,50 +20,50 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Add Team Members</h5>
+                            <h5 class="form-heading-h4 text-center" id="exampleModalLabel">Add Team Members</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" id="closeexample" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
 
-                            <div class="altrntive_rw">
+                            <div class="form-grouph input-design mb-30">
                                 <p class="appointment_label">First Name</p>
                                 <input type="text" wire:model="first_name" placeholder="Enter your First Name" />
                                 @error('first_name')<div class="alert ">{{ $message }}</div>@enderror
                             </div>
-                            <div class="altrntive_rw">
+                            <div class="form-grouph input-design mb-30">
                                 <p class="appointment_label">Last Name</p>
-                                <input type="text" wire:model="last_name" />
+                                <input type="text" wire:model="last_name" placeholder="Enter your Last Name" />
                                 @error('last_name')<div class="alert ">{{ $message }}</div>@enderror
                             </div>
-                            <div class="altrntive_rw">
+                            <div class="form-grouph input-design mb-30">
                                 <p class="appointment_label">Insured?</p>
-                                <input type="text" wire:model="insured" />
+                                <input type="text" wire:model="insured" placeholder="Insured"/>
                                 @error('insured')<div class="alert ">{{ $message }}</div>@enderror
 
                             </div>
-                            <div class="altrntive_rw">
+                            <div class="form-grouph input-design mb-30">
                                 <p class="appointment_label">Phone</p>
-                                <input type="number" wire:model="contact_number" />
+                                <input type="number" wire:model="contact_number" placeholder="Enter your Contact Name"/>
                                 @error('contact_number')<div class="alert ">{{ $message }}</div>@enderror
                             </div>
-                            <div class="altrntive_rw">
+                            <div class="form-grouph input-design mb-30">
                                 <p class="appointment_label">Email</p>
-                                <input type="email" wire:model="email" />
+                                <input type="email" wire:model="email" placeholder="Enter your Email"/>
                                 @error('email')<div class="alert ">{{ $message }}</div>@enderror
                             </div>
-                            <div class="altrntive_rw">
+                            <div class="form-grouph input-design mb-30">
                                 <p class="appointment_label">Address</p>
-                                <input type="address" wire:model="address" />
+                                <input type="address" wire:model="address" placeholder="Enter your Address"/>
                                 @error('address')<div class="alert ">{{ $message }}</div>@enderror
                             </div>
-                            <div class="altrntive_rw">
+                            <div class="form-grouph input-design mb-30">
                                 <p class="appointment_label">SSN/TIN</p>
-                                <input type="number" wire:model="ssn_or_tax" />
+                                <input type="number" wire:model="ssn_or_tax" placeholder="Enter your SSN/TIN" />
                                 @error('ssn_or_tax')<div class="alert ">{{ $message }}</div>@enderror
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button wire:click="store()" class="btn btn-primary">Save</button>
+                            <div class="modal-footer form-grouph submit-design mb-30" >
+                               {{--   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>  --}}
+                                <button wire:click="store()" class="subit-btn-2">Save</button>
                             </div>
 
                         </div>
@@ -127,50 +127,50 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Team Members</h5>
+                    <h5 class="form-heading-h4 text-center" id="exampleModalLabel">Add Team Members</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" id="updateModalClose" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="altrntive_rw">
+                    <div class="form-grouph input-design mb-30">
                         <p class="appointment_label">First Name</p>
                         <input type="text" wire:model="first_name" />
                         @error('first_name')<div class="alert ">{{ $message }}</div>@enderror
                     </div>
-                    <div class="altrntive_rw">
+                    <div class="form-grouph input-design mb-30">
                         <p class="appointment_label">Last Name</p>
                         <input type="text" wire:model="last_name" />
                         @error('last_name')<div class="alert ">{{ $message }}</div>@enderror
                     </div>
-                    <div class="altrntive_rw">
+                    <div class="form-grouph input-design mb-30">
                         <p class="appointment_label">Insured?</p>
                         <input type="text" wire:model="insured" />
                         @error('insured')<div class="alert ">{{ $message }}</div>@enderror
 
                     </div>
-                    <div class="altrntive_rw">
+                    <div class="form-grouph input-design mb-30">
                         <p class="appointment_label">Phone</p>
                         <input type="number" wire:model="contact_number" />
                         @error('contact_number')<div class="alert ">{{ $message }}</div>@enderror
                     </div>
-                    <div class="altrntive_rw">
+                    <div class="form-grouph input-design mb-30">
                         <p class="appointment_label">Email</p>
                         <input type="email" wire:model="email" disabled />
                         @error('email')<div class="alert ">{{ $message }}</div>@enderror
                     </div>
-                    <div class="altrntive_rw">
+                    <div class="form-grouph input-design mb-30">
                         <p class="appointment_label">Address</p>
                         <input type="address" wire:model="address" />
                         @error('address')<div class="alert ">{{ $message }}</div>@enderror
                     </div>
-                    <div class="altrntive_rw">
+                    <div class="form-grouph input-design mb-30">
                         <p class="appointment_label">SSN/TIN</p>
                         <input type="number" wire:model="ssn_or_tax" />
                         @error('ssn_or_tax')<div class="alert ">{{ $message }}</div>@enderror
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <div class="modal-footer form-grouph submit-design mb-30">
+                       {{--  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
 
-                        <a href="javascript::void(0)" wire:click="update()" class="btn btn-primary">Update</a>
+                        <a href="javascript::void(0)" wire:click="update()" class="subit-btn-2">Update</a>
                     </div>
                 </div>
             </div>

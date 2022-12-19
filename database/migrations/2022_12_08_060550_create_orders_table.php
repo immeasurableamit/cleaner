@@ -52,8 +52,9 @@ return new class extends Migration
             $table->boolean('is_paid_out_to_cleaner')->default(0);
             $table->string('user_transaction_id')->nullable();
             $table->string('cleaner_transaction_id')->nullable();
-
-
+            $table->boolean('is_refunded')->default(0);
+            $table->string('refund_transaction_id')->nullable();
+            
             $table->timestamps();
         });
     }

@@ -19,7 +19,7 @@
              </div>
             </div>
 
-            @livewire ('customer.jobs')
+            @livewire ('cleaner.jobs')
 
           </div>
         </div>

@@ -30,7 +30,7 @@ class Account extends Component
     public function mount()
     {
         $details = auth()->user()->UserDetails;
-        
+
         $this->facebook = $details->facebook;
         $this->twitter = $details->twitter;
         $this->instagram = $details->instagram;
@@ -77,6 +77,19 @@ class Account extends Component
         if ($action == 'image') {
             $this->image = $user->image;
         }
+        if ($action == 'facebook') {
+            $this->facebook = $user->facebook;
+        }
+        if ($action == 'twitter') {
+            $this->twitter = $user->twitter;
+        }
+        if ($action == 'instagram') {
+            $this->instagram = $user->instagram;
+        }
+        if ($action == 'linkedin') {
+            $this->linkedin = $user->linkedin;
+        }
+
         $this->action = $action;
 
         $this->fieldStatus = true;
@@ -115,9 +128,22 @@ class Account extends Component
             }
 
             if ($action == 'timezone') {
-
                 $userdetail->timezone = $this->timezone;
-                //   dd($userdetail->timezone );
+            }
+
+            if ($action == 'facebook') {
+                $userdetail->facebook = $this->facebook;
+            }
+            
+            if ($action == 'twitter') {
+                $userdetail->twitter = $this->twitter;
+            }
+            if ($action == 'instagram') {
+                $userdetail->instagram = $this->instagram;
+            }
+
+            if ($action == 'linkedin') {
+                $userdetail->linkedin = $this->linkedin;
             }
 
             $userdetail->update();
@@ -159,17 +185,21 @@ class Account extends Component
 
 
 
-    public function socialInfo()
+    public function socialInfo($userId, $action)
     {
+        // dd($userId, $action);
         $details = auth()->user()->UserDetails;
 
-        $details->facebook = $this->facebook;
+        if ($action == 'facebook') {
+            $details->facebook = $this->facebook;
+        }
+
         $details->twitter = $this->twitter;
         $details->instagram = $this->instagram;
         $details->linkedin = $this->linkedin;
         $details->save();
 
-
+        $this->fieldStatus = true;
     }
 
 

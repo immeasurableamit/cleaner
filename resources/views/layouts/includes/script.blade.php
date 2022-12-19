@@ -102,3 +102,10 @@
         });
     });
 </script>
+<script>
+    $(document).ready(function() {
+        $(".service_toggle_s").click(function() {
+            $(this).parent().toggleClass("show");
+        });
+    });
+</script>

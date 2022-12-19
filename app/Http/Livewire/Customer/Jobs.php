@@ -20,17 +20,19 @@ class Jobs extends Component
      * 2 means NewRequests tab
      */
     public $selectedTab  = 1;
-
+    
     public $selectedDate, $orders, $selectedDateOrders, $events;
+
+    protected $pendingOrderStatuses = ['pending', 'rejected'];
     
     protected function getPendingOrders()
     {
-        return $this->orders->whereIn('status', [ 'pending', 'rejected' ]);
+        return $this->orders->whereIn('status', $this->pendingOrderStatuses );
     }
 
     protected function getAcceptedOrders()
     {        
-        return $this->orders->where('status','!=', 'pending');
+        return $this->orders->whereNotIn('status', $this->pendingOrderStatuses );
     }
 
     protected function parseOrdersForCalendarEvents($orders)
@@ -257,6 +259,7 @@ class Jobs extends Component
     {
         if ( $name == "selectedTab" ) {
             $this->renderCalendar();
+            $this->renderOrders();
         }
 
         if ( $name == "selectedDate") {

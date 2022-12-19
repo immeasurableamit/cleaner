@@ -99,6 +99,7 @@ function createBankInfoEntry($cleaner)
         'users_id'   => $cleaner->id,
         'account_id' => $account->id,
         'status'     => 'pending',
+      
     ]);
 
     $bank->refresh();
@@ -126,6 +127,18 @@ function addAccountDetailsInBankInfo($bank, $accountDetails)
     return $bank;
 }
 
-function jsn(){
-    return 'hello';
+/*
+ * @param: \App\Models\Order $order
+ * 
+ * @return: array
+ */
+function refundOrder($order, $description )
+{
+    $stripeRefundOptions = [
+        'charge'   => $order->userTransaction->stripe_id,
+    ];
+
+    $resp = stripeRefund( $stripeRefundOptions );
+    return $resp;
 }
+

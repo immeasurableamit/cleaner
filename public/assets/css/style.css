@@ -7898,4 +7898,9 @@ tr.arrow:after {
     .news_update_section {
         padding: 50px 0px;
     }
+
+}
+a.subit-btn-2 {
+    text-align: center;
+    font-size: 19px;
 }

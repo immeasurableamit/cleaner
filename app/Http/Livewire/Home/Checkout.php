@@ -2,9 +2,11 @@
 
 namespace App\Http\Livewire\Home;
 
+use App\Models\BillingAddress;
 use App\Models\CleanerServices;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\UserCard;
 use App\Models\ServicesItems;
 use App\Models\State;
 use Livewire\Component;
@@ -40,31 +42,30 @@ class Checkout extends Component
     public $contact;
 
     /* Second step: Card details props */
-    public $number, $expMonthYear, $cvc;
+    public $number, $formattedNumber, $expMonthYear, $cvc;
 
     /* Second step: Stripe card saving props */
-    public $stripe_customer_id, $expMonth, $expYear;
+    public $stripe_customer_id, $expMonth, $expYear, $stripeTokenResp, $tokenSave;
 
     /* Third Step */
-    public $order, $notes;
-
+    public $order, $notes, $billing, $userCard;
 
 
     protected function prepareServiceAddOnsAndEstimatedDurationProps()
     {
         /* Fetch selected services from DB */
-        $cleanerServicesIds = array_merge( [ $this->details['serviceItemId'] ], $this->details['addOnIds'] );
-        $cleanerServices    = CleanerServices::with('servicesItems.service')->where('users_id', $this->cleaner->id )->whereIn('services_items_id', $cleanerServicesIds )->get();
+        $cleanerServicesIds = array_merge([$this->details['serviceItemId']], $this->details['addOnIds']);
+        $cleanerServices    = CleanerServices::with('servicesItems.service')->where('users_id', $this->cleaner->id)->whereIn('services_items_id', $cleanerServicesIds)->get();
 
         /* Add attributes for blade */
-        $cleanerServices->each( function($item, $key) {
-            $item->rate               = $item->priceForSqFt( $this->details['homeSize'] );
+        $cleanerServices->each(function ($item, $key) {
+            $item->rate               = $item->priceForSqFt($this->details['homeSize']);
             $item->service_item_title = $item->servicesItems->title;
             $item->service_title      = $item->servicesItems->service->title;
         });
 
         /* Set Props */
-        $this->cleanerService    = $cleanerServices->where('services_items_id', $this->details['serviceItemId'] );
+        $this->cleanerService    = $cleanerServices->where('services_items_id', $this->details['serviceItemId']);
         $this->addOns            = $cleanerServices->whereIn('services_items_id', $this->details['addOnIds']);
         $this->estimatedDuration = $cleanerServices->sum('duration');
     }
@@ -73,16 +74,16 @@ class Checkout extends Component
     {
         $this->subtotal = $this->cleanerService->first()->rate + $this->addOns->sum('rate');
         $this->tax      = 0; // TODO: make this dynamic
-        $this->transactionFees = ( $this->subtotal + $this->tax ) / 100 * 2; // TODO: transaction fees calculation formula needed. 2% for make it work
+        $this->transactionFees = ($this->subtotal + $this->tax) / 100 * 2; // TODO: transaction fees calculation formula needed. 2% for make it work
         $this->total    = $this->subtotal + $this->tax + $this->transactionFees;
     }
 
     protected function handleLoggedInUser()
     {
-        if ( ! Auth::check() ){
+        if (!Auth::check()) {
             /* This prop will help for redirecting to same page if user logs in while doing checkout */
             $this->currentPageUrl = request()->url();
-            return true;     
+            return true;
         }
 
         /* Assigning user object props to this component in order to fill the form values */
@@ -106,8 +107,8 @@ class Checkout extends Component
     protected function prepare()
     {
         /* Add data to the props that are essential to make the component function */
-        $this->cleaner      = User::find( $this->details['cleanerId'] );
-        $this->datetime     = Carbon::createFromFormat('Y-m-d H:i:s', $this->details['selected_date']." ".$this->details['time'] )->toDayDateTimeString();
+        $this->cleaner      = User::find($this->details['cleanerId']);
+        $this->datetime     = Carbon::createFromFormat('Y-m-d H:i:s', $this->details['selected_date'] . " " . $this->details['time'])->toDayDateTimeString();
         $this->homeSize     = $this->details['homeSize'];
         $this->states       = State::all();
 
@@ -123,7 +124,7 @@ class Checkout extends Component
 
     public function next()
     {
-        $this->currentlyActiveStep += 1;        
+        $this->currentlyActiveStep += 1;
     }
 
     public function previous()
@@ -140,27 +141,27 @@ class Checkout extends Component
     public function authenticateUser()
     {
         $this->validate([
-            'email' => 'required|exists:users,email', 
+            'email' => 'required|exists:users,email',
             'password' => 'required'
         ]);
 
 
-        $user = User::where('email', $this->email )->first();
+        $user = User::where('email', $this->email)->first();
 
-        if ( ! Hash::check( $this->password, $user->password ) ){
+        if (!Hash::check($this->password, $user->password)) {
             $this->addError('password', 'Input credentials are not matched in our records.');
-            return true; 
+            return true;
         }
 
         auth()->loginUsingId($user->id);
-        
+
         // redirecting to same page to change the design of header
-        return redirect( $this->currentPageUrl."?step=2" );
+        return redirect($this->currentPageUrl . "?step=2");
     }
 
     protected function passwordValidationRules()
     {
-        return [ 
+        return [
             'password'  => 'required',
             'confirmPassword' => 'required|same:password'
         ];
@@ -186,18 +187,18 @@ class Checkout extends Component
             'aptOrUnit' => 'required',
             'address'   => 'required',
             'city'      => 'required',
-            'stateId'     => 'required|exists:states,id',            
-            'zip'       => 'required', 
-            'paymentMethod' => 'required',           
+            'stateId'     => 'required|exists:states,id',
+            'zip'       => 'required',
+            'paymentMethod' => 'required',
         ];
 
-        if ( ! $this->user ) {
-            $rules          = array_merge( $rules, $this->passwordValidationRules() );
-            $rules['email'] = $rules['email']."|unique:users";
+        if (!$this->user) {
+            $rules          = array_merge($rules, $this->passwordValidationRules());
+            $rules['email'] = $rules['email'] . "|unique:users";
         }
 
-        if ( $this->paymentMethod == 'credit_card'){
-            $rules = array_merge( $rules, $this->cardValidationRules() );
+        if ($this->paymentMethod == 'credit_card') {
+            $rules = array_merge($rules, $this->cardValidationRules());
         }
 
         /* Customize validation messages */
@@ -205,7 +206,7 @@ class Checkout extends Component
             'firstname.required' => 'First name is required'
         ];
 
-        return [ $rules, $messages ];
+        return [$rules, $messages];
     }
 
     protected function storeUserDetails($user_id)
@@ -239,11 +240,11 @@ class Checkout extends Component
             'first_name' => $this->firstname,
             'last_name'  => $this->lastname,
             'email'      => $this->email,
-            'password'   => Hash::make( $this->password ),
+            'password'   => Hash::make($this->password),
             'status'     => '1',
             'contact_number' => $this->contact,
         ]);
-        
+
         $this->storeUserDetails($user->id);
 
         return $user;
@@ -264,7 +265,7 @@ class Checkout extends Component
             'address'     => $this->address,
             'apt_or_unit' => $this->aptOrUnit,
             'city'        => $this->city,
-            'zip'         => $this->zip,            
+            'zip'         => $this->zip,
             'first_name'  => $this->firstname,
             'last_name'   => $this->lastname,
             'tax'         => $this->tax,
@@ -273,10 +274,10 @@ class Checkout extends Component
             'total'            => $this->total,
             'payment_method'   => $this->paymentMethod,
             'home_size_sq_ft'  => $this->homeSize,
-            'cleaning_datetime'        => Carbon::createFromFormat('Y-m-d H:i:s', $this->details['selected_date']." ".$this->details['time'] ),
+            'cleaning_datetime'        => Carbon::createFromFormat('Y-m-d H:i:s', $this->details['selected_date'] . " " . $this->details['time']),
             'estimated_duration_hours' => $this->estimatedDuration,
             'cleaner_id'               => $this->cleaner->id
-            
+
         ]);
 
         return $order;
@@ -290,10 +291,10 @@ class Checkout extends Component
 
     protected function storeOrderItems($order_id)
     {
-        $cleanerServices = $this->cleanerService->concat( $this->addOns );
+        $cleanerServices = $this->cleanerService->concat($this->addOns);
 
         /* Make an array of order items that can be used to insert in table at once */
-        $orderItems = $cleanerServices->map( function($cleanerService, $key) use( $order_id ) {
+        $orderItems = $cleanerServices->map(function ($cleanerService, $key) use ($order_id) {
             $orderItem = [
                 'order_id'           => $order_id,
                 'cleaner_service_id' => $cleanerService->id,
@@ -307,10 +308,61 @@ class Checkout extends Component
         });
 
         /* Insert order items in table */
-        $result = OrderItem::insert( $orderItems->toArray() );
+        $result = OrderItem::insert($orderItems->toArray());
 
         return $result;
     }
+    // ......
+    /*
+     * @param: int $user_id ( primary key of App\Models\User )
+     * 
+     * @return: object ( instance of App\Models\BillingAddress )
+     * 
+     */
+    protected function storeBillingAddress($user_id)
+    {
+        // dd($user_id);
+        $billing = BillingAddress::create([
+            'user_id'     => $user_id,
+            'state_id'    => $this->stateId,
+            'first_name'  => $this->firstname,
+            'last_name'   => $this->lastname,
+            'apt_or_unit' => $this->aptOrUnit,
+            'address'     => $this->address,
+            'city'        => $this->city,
+            'zip'         => $this->zip,
+
+
+        ]);
+
+        return $billing;
+    }
+
+    /*
+     * @param: int $user_id ( primary key of App\Models\User )
+     * 
+     * @return: object ( instance of App\Models\UserCard )
+     * 
+     */
+    protected function storeUserCard($user_id)
+    {
+        // $brand = $this->tokenSave['token']->card->brand;
+        // $last4_digits = $this->tokenSave['token']->card->last4_digits;
+        // $exp_month = $this->tokenSave['token']->card->exp_month;
+        // $exp_year = $this->tokenSave['token']->card->exp_year;
+
+        $userCard = UserCard::create([
+            'user_id'     => $user_id,
+            'last4_digits'    => isset($this->tokenSave['token']->card->last4_digits),
+            'brand'  => isset($this->tokenSave['token']->card->brand),
+            'exp_month'   => isset($this->tokenSave['token']->card->exp_month),
+            'exp_year' => isset($this->tokenSave['token']->card->exp_year),
+
+        ]);
+
+        return $userCard;
+    }
+
 
     protected function validateCardWithStripe()
     {
@@ -322,6 +374,8 @@ class Checkout extends Component
         ];
 
         $tokenResp = stripeGenerateCardToken($card);
+
+        $this->stripeTokenResp = $tokenResp;
         return $tokenResp;
     }
 
@@ -335,17 +389,19 @@ class Checkout extends Component
     {
         $tokenResp = $this->validateCardWithStripe();
 
-        if ( $tokenResp['status']  == false ){
+        if ($tokenResp['status']  == false) {
             $this->addError('stripe_card_verification', $tokenResp['error_string']);
-            return [ 'status' => false, 'error' => $tokenResp['error_string'] ];
+            return ['status' => false, 'error' => $tokenResp['error_string']];
         }
 
         $name = "$this->firstname $this->lastname";
 
         $customer = stripeCreateCustomerWithSource($name, $this->email, $tokenResp['token_string']);
+        //    dd($customer);
+        $customer = $customer['resposne']->id;
+        $this->stripe_customer_id = $customer;
 
-        $this->stripe_customer_id = $customer->id;
-        return ['status' => true, 'response' => $customer ];
+        return ['status' => true, 'response' => $customer];
     }
 
     /*
@@ -357,41 +413,43 @@ class Checkout extends Component
     protected function placeOrder()
     {
         /* Handle credit card verification */
-        if ( $this->paymentMethod == 'credit_card') {
+        if ($this->paymentMethod == 'credit_card') {
             $result = $this->handleCreditCardPaymentMethodSelection();
-            if ( $result['status'] == false ) {
-                return false;    
+            if ($result['status'] == false) {
+                return false;
             }
         }
 
         /* Handle guest user */
-        if ( is_null( $this->user ) ) {
+        if (is_null($this->user)) {
             $this->user = $this->storeUserAsCustomer();
         }
 
         /* Store order */
         $order      = $this->storeOrder($this->user->id);
         $orderItems = $this->storeOrderItems($order->id);
+        $billing      = $this->storeBillingAddress($this->user->id);
+        $userCard      = $this->storeUserCard($this->user->id);
 
         $this->order = $order;
         return true;
-    }   
+    }
 
     public function schedule()
     {
-        $validatedData = $this->validate( ...$this->checkoutRules() );
+        $validatedData = $this->validate(...$this->checkoutRules());
         $status        = $this->placeOrder();
 
-        if ( $status ) {
+        if ($status) {
             $this->currentlyActiveStep++;
-        }        
+        }
     }
 
     public function saveOrderNotes()
     {
         $this->order->notes = $this->notes;
         $this->order->save();
-        $this->alert('success', 'Notes Sent!');     
+        $this->alert('success', 'Notes Sent!');
     }
 
     public function updatingExpMonthYear($value)
@@ -402,11 +460,20 @@ class Checkout extends Component
     {
         $this->prepare();
         $this->handleLoggedInUser();
+
+        /* assigning default because we're removing apple and google pay */
+        $this->paymentMethod = 'credit_card'; 
     }
-    
+
+    public function updatedFormattedNumber($value)
+    {
+        $this->formattedNumber = wordwrap( $value, 4, " ", true); // add space after each 4 characters
+        $this->number = str_replace( " ", "", $this->formattedNumber); // set number for stripe verification
+    }
+
     public function render()
     {
-        $this->emit('componentRendered', $this->currentlyActiveStep );
+        $this->emit('componentRendered', $this->currentlyActiveStep);
         return view('livewire.home.checkout');
     }
 }
