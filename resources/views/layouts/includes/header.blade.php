@@ -33,9 +33,10 @@
                                 </select>
                             </div>
                             <div class="search-input-design">
-                                <input type="text" placeholder="Enter location">
+                                <input type="text" id="address" name="address" placeholder="Enter location">
                                 <button class="search-btn"><a href="search-result.html" class=""><img src="{{asset('/assets/images/icons/search.svg')}}"></a></button>
                             </div>
+                            @include('includes.address-map')
                         </div>
                     </div>
                     <button class="search-toggle l-hide"><img src="{{asset('/assets/images/icons/search.svg')}}"></button>

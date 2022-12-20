@@ -7,6 +7,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use \App\Models\Services;
 
 class HomeController extends Controller
 {
@@ -16,7 +17,9 @@ class HomeController extends Controller
 			'active' => 'home',
 		);
 
-		return view('home.index', compact('title'));
+		$services = Services::with('servicesItems')->where('types_id',1)->get();
+
+		return view('home.index', compact('title','services'));
 	}
 
 	public function checkout(Request $req, $details)
