@@ -28,5 +28,12 @@
     @include('layouts.includes.footer')
     @include('layouts.includes.script')
     @yield('script')
+
+    <script>
+    window.addEventListener('load', () => {
+        var address_input_in_header = document.getElementById('address_in_header');
+        makeAddressInputAutocompletable( address_input_in_header, () => { return 'address in header rand';} )
+    });
+    </script>
 </body>
 </html>

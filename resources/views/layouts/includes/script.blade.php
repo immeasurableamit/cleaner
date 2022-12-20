@@ -11,8 +11,11 @@
 @livewireScripts
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_MAPS_API_KEY')}}&libraries=places" defer></script>
+
 
 <x-livewire-alert::scripts />
+
 
   
 @yield('script')
@@ -108,4 +111,46 @@
             $(this).parent().toggleClass("show");
         });
     });
+</script>
+
+<script>
+    
+function makeAddressInputAutocompletable( element, place_changed_callback){
+    var gmap_places = new google.maps.places.Autocomplete( element );
+
+    google.maps.event.addListener( gmap_places, 'place_changed', () => {
+        let selected_place = gmap_places.getPlace();
+        window.jsnPlace = selected_place;
+        place_changed_callback(selected_place);
+        
+    });
+}
+
+
+function parseGmapPlace(gmap_place)
+{
+    var address = {};
+    
+    for ( address_component of gmap_place.address_components) {
+
+        let types_map = {
+            locality: 'city',
+            neighborhood: 'city',
+            administrative_area_level_1: 'state',
+            postal_code: 'zip',
+            country: 'country',            
+        };
+
+        let component_type = address_component.types[0];
+        let address_key    = types_map[ component_type ];
+        if (  address_key ){
+            address[ address_key ] = address_component.long_name;
+        }
+    }
+
+    address.lat = gmap_place.geometry.location.lat();
+    address.lng = gmap_place.geometry.location.lng();
+
+    return address;
+}
 </script>

@@ -4,7 +4,7 @@
       <div class="header-flex">
         <div class="header-flex-item header-flex-item-1">
           <div class="logo-wrapper">
-            <a href="{{route('index')}}"><img src="{{asset('assets/images/logo/logo.svg')}}"></a>
+            <a href="{{route('index')}}"><img src="{{asset('/assets/images/logo/logo.svg')}}"></a>
           </div>
         </div>
         <div class="header-flex-item header-flex-item-3 cleaner_header_right">
@@ -17,7 +17,7 @@
             <li class="nav-item email-notification">
               <div class="dropdown">
                 <button type="button" class="btn dropdown-toggle position-relative btn-transparent" data-bs-toggle="dropdown">
-                  <img src="{{asset('assets/images/icons/email-2.svg')}}">
+                  <img src="{{asset('/assets/images/icons/email-2.svg')}}">
                   <span class="notification-indicators">11</span>
                 </button>
                 <ul class="dropdown-menu">
@@ -30,7 +30,7 @@
             <li class="nav-item signin account-profile">
               <div class="dropdown">
                 <button type="button" class="btn dropdown-toggle position-relative btn-transparent" data-bs-toggle="dropdown">
-                  <!-- <img src="{{asset('assets/images/icons/profile-circle.svg')}}"> -->
+                  <!-- <img src="{{asset('/assets/images/icons/profile-circle.svg')}}"> -->
                   <img src="{{asset('storage/images/'.auth()->user()->image)}}">
                   <span class="name">{{auth()->user()->name}}</span>
                 </button>
@@ -38,7 +38,7 @@
                   <div class="customer_profile-info">
                     <div class="d-flex align-items-center position-relative">
                       <div class="customer-pro-img">
-                        <img src="{{asset('assets/images/thumbnail.png')}}">
+                        <img src="{{asset('/assets/images/thumbnail.png')}}">
                       </div>
                       <div class="customer-pro-cntnt">
                      
@@ -46,19 +46,19 @@
                         <p>{{auth()->user()->role}}</p>
                       </div>
                       <div class="setting-div">
-                        <a href="#"><img src="{{asset('assets/images/icons/setting.svg')}}"></a>
+                        <a href="#"><img src="{{asset('/assets/images/icons/setting.svg')}}"></a>
                       </div>
                     </div>
                     <div class="dropdown-list-design">
                       <ul class="list-unstyled">
                         <li class="profile_drop_down account_dropdown">
-                          <a class="" href="#" class="">Account and Settings <img src="{{asset('./assets/images/icons/drop-arrow.svg')}}"></a>
+                          <a class="" href="#" class="">Account and Settings <img src="{{asset('/assets/images/icons/drop-arrow.svg')}}"></a>
                           <ul class="dropdown_links">
                             <li><a href="{{route('cleaner.account')}}" class="active">View Account Info</a></li>
                             <li><a href="{{route('cleaner.team')}}" class="">Team</a></li>
                             <li><a href="{{route('cleaner.availability.index')}}" class="">Set Availability</a></li>
                             <li><a href="{{route('cleaner.services.index')}}" class="">Set Services</a></li>
-                            <li><a href="cleaner-set-location.html" class="">Set Locations Served</a></li>
+                            <li><a href="{{route('cleaner.set-location')}}" class="">Set Locations Served</a></li>
                             <li><a href="{{route('cleaner.notification.index')}}" class="">Notification Preferences</a></li>
                             <li><a href="{{route('cleaner.reviews')}}" class="">Reviews</a></li>
                           </ul>
@@ -83,7 +83,7 @@
           </ul>
         </div>
         <div class="toggle_menu d-block d-md-none">
-          <img src="{{asset('assets/images/icons/toggle.svg')}}">
+          <img src="{{asset('/assets/images/icons/toggle.svg')}}">
         </div>
       </div>
     </div>

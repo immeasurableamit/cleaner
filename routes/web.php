@@ -26,13 +26,8 @@ use App\Http\Controllers\Customer\PagesController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-//Home
 Route::get('/', [HomeController::class, 'index'])->name('index');
-Route::get('sigup', function () {
+Route::get('signup', function () {
     $title = array(
         'active' => 'signup',
     );
@@ -85,9 +80,9 @@ Route::get('terms-and-conditions', function () {
 
 Route::get('/checkout/{details}', [ HomeController::class, 'checkout' ] )->name('checkout');
 
-//Admin Section
 Route::middleware(['auth', 'verified'])->group(function () {
 
+    // admin routes
     Route::prefix('admin')->group(function () {
 
         Route::get('/customer', function () {
@@ -149,9 +144,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 });
 
-//customer
 Route::middleware(['auth', 'verified'])->group(function () {
 
+    // customer routes
     Route::prefix('customer')->group(function () {
 
         Route::get('/account', function () {
@@ -189,8 +184,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
     });
 
-    //cleaner
+    //cleaner routes
     Route::prefix('cleaner')->group(function () {
+
+        Route::get('/set-location',[ CleanerController::class, 'setLocation'] )->name('cleaner.set-location');
         Route::get('/account', function () {
             $title = array(
                 'title' => 'Account',
@@ -277,7 +274,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::controller(Cleaner\jobs\JobsController::class)->group(function () {
                 Route::get('/', 'index')->name('cleaner.jobs.jobs');
             });
-        });
+        });     
         
 
     });

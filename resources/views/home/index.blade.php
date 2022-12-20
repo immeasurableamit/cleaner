@@ -33,9 +33,9 @@
                                         </select>
                                     </div>
                                     <div class="search-input-design">
-                                        <input type="text" id="address2" name="address" placeholder="Enter location">
+                                        <input type="text" id="address_in_banner" name="address" placeholder="Enter location">
                                         <a class="search-btn" href="search-result.html"><img src="/assets/images/icons/search.svg" class="me-2">Search</a>
-                                        @include('includes.address-map', [ 'address_element_id' => 'address2'])
+                                        {{-- @include('includes.address-map', [ 'address_element_id' => 'address2']) --}}
                                     </div>
                                 </div>
                             </form>
@@ -366,4 +366,13 @@
                 </div>
             </div>
         </div>
+
+        @push ( 'scripts')
+        <script>
+    window.addEventListener('load', () => {
+        var address_input_in_banner = document.getElementById('address_in_banner');
+        makeAddressInputAutocompletable( address_input_in_banner, () => {} )
+    });
+    </script>       
+        @endpush
    @endsection

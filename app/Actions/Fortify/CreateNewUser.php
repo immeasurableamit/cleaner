@@ -174,6 +174,8 @@ class CreateNewUser implements CreatesNewUsers
             $userDetail->apt_or_unit = $input['apt_or_unit'];
             $userDetail->payment_method = $input['payment_method'];
             $userDetail->about = $input['about'];
+            $userDetail->latitude = $input['latitude'];
+            $userDetail->longitude = $input['longitude'];
             $userDetail->save();
             return $user;
 

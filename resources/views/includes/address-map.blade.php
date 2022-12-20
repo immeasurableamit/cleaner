@@ -1,12 +1,5 @@
-<script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&libraries=places"></script>
-
-<style>
-    .pac-container.pac-logo {
-        z-index: 99999;
-    }
-</style>
-
 <script>
+    /*
    
     google.maps.event.addDomListener(window, 'load', function() {
 
@@ -18,13 +11,12 @@
             var address = place.formatted_address;
             var latitude = place.geometry.location.lat();
             var longitude = place.geometry.location.lng();
+            console.log( place );
             
             // console.log(latitude,longitude,'---------------->')
             var latlng = new google.maps.LatLng(latitude, longitude);
             var geocoder = geocoder = new google.maps.Geocoder();
-            geocoder.geocode({
-                'latLng': latlng
-            }, function(results, status) {
+            geocoder.geocode({ 'latLng': latlng }, function(results, status) {
                 console.log( results );
                 // console.log(status, "yes---------------", google.maps.GeocoderStatus.OK);
                 if (status == google.maps.GeocoderStatus.OK) {
@@ -72,4 +64,5 @@
             });
         });
     });
+    */
 </script>
