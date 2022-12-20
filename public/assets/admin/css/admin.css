@@ -486,7 +486,7 @@ table.dataTable thead>tr>th.sorting:after, table.dataTable thead>tr>th.sorting_a
 }
 .customer-account-forms li input {
     width: 50%;
-    border: none;
+    border: 1px solid black;
     padding: 0px;
     font-size: 14px;
     height: 22px;

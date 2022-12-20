@@ -59,7 +59,7 @@
                     <div class="d-flex justify-content-spacebw three_column edit_frm">
                         <h6 class="title-label">Email:</h6>
                         @if (@$fieldStatus == true && $action == 'email')
-                        <input type="email" value="{{$user->email}}" wire:model="email">
+                        <input type="email" value="{{$user->email}}" wire:model="email" >
                         <span style="color:red"> @error('email'){{$message}} @enderror </span>
                         <span class="edit"><a class="link-design-2" wire:click="emailupdate('email')"><i class="fas fa-save"></i></a></span>
                         <span class="cancel"><a href="javascript::void(0)" class="link-design-2" wire:click="cancle"><i class="fas fa-times"></i></a></span>
@@ -149,7 +149,7 @@
                         <h6 class="title-label">Facebook:</h6>
 
                         @if (@$fieldStatus == true && $action == 'facebook')
-                        <input type="text" value="{{$user->UserDetails->facebook}}" wire:model="facebook" />
+                        <input class="border-text" type="text" value="{{$user->UserDetails->facebook}}" wire:model="facebook" />
                         <span class="edit"><a class="link-design-2" wire:click="updateData('facebook')"><i class="fas fa-save"></i></a></span>
                         <span class="cancel"><a href="javascript::void(0)" class="link-design-2" wire:click="cancle"><i class="fas fa-times"></i></a></span>
                         @else
