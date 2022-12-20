@@ -20,11 +20,11 @@ class Jobs extends Component
      * 2 means NewRequests tab
      */
     public $selectedTab  = 1;
-    
+
     public $selectedDate, $orders, $selectedDateOrders, $events;
 
     protected $pendingOrderStatuses = ['pending', 'rejected'];
-    
+
     protected $listeners = [
         'cancelOrder'
     ];
@@ -35,7 +35,7 @@ class Jobs extends Component
     }
 
     protected function getAcceptedOrders()
-    {        
+    {
         return $this->orders->whereNotIn('status', $this->pendingOrderStatuses );
     }
 
@@ -48,7 +48,7 @@ class Jobs extends Component
                 'title' => $cleaningDateTime->format("h:m A"),
                 'start' => $cleaningDateTime->toDateString(),
             ];
-            return $event;  
+            return $event;
         })->values();
 
         return $events;
@@ -57,7 +57,7 @@ class Jobs extends Component
     protected function getOrdersForSelectedTab()
     {
         if ( $this->selectedTab == 1 ) {
-            $orders = $this->getAcceptedOrders();                        
+            $orders = $this->getAcceptedOrders();
         } else {
             $orders = $this->getPendingOrders();
         }
@@ -87,15 +87,15 @@ class Jobs extends Component
         return true;
     }
 
-    /* 
+    /*
      * This fetchs only needed data from database
      * that fasts the speed of page.
-     * 
+     *
      */
     protected function prepareOrdersProp()
     {
         $userRelation = ['user' => function ( $query ) {
-            $query->without('UserDetails')->select('id','email', 'contact_number');            
+            $query->without('UserDetails')->select('id','email', 'contact_number');
         }];
 
         $itemsRelation = ['items' => function ( $query ) {
@@ -115,7 +115,7 @@ class Jobs extends Component
             $order->service_item_titles = $order->items->map(function ($item) {
                 return $item->service_item->title;
             })->implode(', ');
-        });       
+        });
     }
 
     public function hydrate()
@@ -127,12 +127,12 @@ class Jobs extends Component
     {
         $this->selectedDate = $this->selectedDate ?? today()->toDateString();
         $this->refreshSelectedTab();
-        
+
     }
 
     public function mount()
     {
-        $this->prepare();        
+        $this->prepare();
     }
 
     protected function storeAcceptOrderTransaction($user_id, $order_id, $amount, $stripe_charge_id)
@@ -156,10 +156,10 @@ class Jobs extends Component
         $user  = $order->user;
 
         /* Charge customer */
-        $chargeResp = stripeChargeCustomer( 
+        $chargeResp = stripeChargeCustomer(
             $user->UserDetails->stripe_customer_id,
             $order->totalInCents(),
-            "CanaryCleaner charge for order #$order->id"            
+            "CanaryCleaner charge for order #$order->id"
         );
 
         /* Handle stripe charge error */
@@ -169,15 +169,15 @@ class Jobs extends Component
         }
 
         $transaction = $this->storeAcceptOrderTransaction(
-            $user->id, 
-            $order->id, 
+            $user->id,
+            $order->id,
             $order->total,
-            $chargeResp['charge_id'],            
+            $chargeResp['charge_id'],
         );
 
         /* Update order */
         $order->status              = 'accepted';
-        $order->is_paid_by_user     = 1;        
+        $order->is_paid_by_user     = 1;
         $order->user_transaction_id = $transaction->id;
         $order->save();
 
@@ -186,16 +186,16 @@ class Jobs extends Component
         return true;
     }
 
-    
+
 
     protected function refreshSelectedTab()
     {
-        $this->prepareOrdersProp();        
+        $this->prepareOrdersProp();
         $this->renderCalendar();
         $this->renderOrders();
     }
 
-    public function rejectOrder( $orderId ) 
+    public function rejectOrder( $orderId )
     {
         $order = Order::find($orderId);
         $order->status = 'rejected';
@@ -221,7 +221,7 @@ class Jobs extends Component
         return $transaction;
     }
 
-    
+
 
     public function collectPayment($orderId)
     {
@@ -230,16 +230,16 @@ class Jobs extends Component
 
         $transferResp = stripeTransferAmountToConnectedAccount(
             convertAmountIntoCents( $order->cleanerFee() ),
-            $cleaner->bankInfo->account_id,            
-            "CanaryCleaner payment for order #$order->id",        
+            $cleaner->bankInfo->account_id,
+            "CanaryCleaner payment for order #$order->id",
         );
 
         $transaction = $this->storeCollectPaymentTransaction(
-            $cleaner->id, 
-            $order->id, 
+            $cleaner->id,
+            $order->id,
             $order->cleanerFee(),
             $transferResp['transfer_id'],
-            
+
         );
 
         $order->is_paid_out_to_cleaner = 1;
@@ -247,18 +247,18 @@ class Jobs extends Component
         $order->status = 'payment_collected';
         $order->save();
 
-        $this->alert('success', 'Amount transffered');        
+        $this->alert('success', 'Amount transffered');
         return true;
     }
 
-    public function completeOrder( $orderId ) 
+    public function completeOrder( $orderId )
     {
         $order = Order::find($orderId);
         $order->status = 'completed';
         $order->save();
 
         $this->alert('success', 'Marked as completed');
-        $this->refreshSelectedTab();        
+        $this->refreshSelectedTab();
     }
 
     public function updated($name)
@@ -270,7 +270,7 @@ class Jobs extends Component
 
         if ( $name == "selectedDate") {
             $this->renderOrders();
-        }        
+        }
     }
 
     public function confirmCancelOrderAction( $orderId )
@@ -292,13 +292,14 @@ class Jobs extends Component
             ],
             'allowOutsideClick' => false,
             'timer' => null,
-        ]);        
+        ]);
     }
 
 
     public function cancelOrder( $data )
     {
         $order      = Order::find( $data['value'] );
+
         /* Refund amount to customer */
         $refundResp = refundOrder( $order, "Canary Cleaner, cleaner cancelled the order #$order->id" );
         if ( $refundResp['status'] == false ) {
@@ -311,7 +312,7 @@ class Jobs extends Component
             $order->user_id,
             $order->id,
             $order->total,
-            $refundResp['refund_id']            
+            $refundResp['refund_id']
         );
 
         /* Update order */

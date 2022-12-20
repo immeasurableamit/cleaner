@@ -17,7 +17,7 @@
 <x-livewire-alert::scripts />
 
 
-  
+
 @yield('script')
 @stack('scripts')
 <script>
@@ -114,15 +114,15 @@
 </script>
 
 <script>
-    
-function makeAddressInputAutocompletable( element, place_changed_callback){
-    var gmap_places = new google.maps.places.Autocomplete( element );
+
+function makeAddressInputAutocompletable( element, place_changed_callback, options = {}){
+    var gmap_places = new google.maps.places.Autocomplete( element, options );
 
     google.maps.event.addListener( gmap_places, 'place_changed', () => {
         let selected_place = gmap_places.getPlace();
         window.jsnPlace = selected_place;
         place_changed_callback(selected_place);
-        
+
     });
 }
 
@@ -130,7 +130,7 @@ function makeAddressInputAutocompletable( element, place_changed_callback){
 function parseGmapPlace(gmap_place)
 {
     var address = {};
-    
+
     for ( address_component of gmap_place.address_components) {
 
         let types_map = {
@@ -138,7 +138,7 @@ function parseGmapPlace(gmap_place)
             neighborhood: 'city',
             administrative_area_level_1: 'state',
             postal_code: 'zip',
-            country: 'country',            
+            country: 'country',
         };
 
         let component_type = address_component.types[0];
