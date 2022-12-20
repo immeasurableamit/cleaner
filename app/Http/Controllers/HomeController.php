@@ -28,4 +28,18 @@ class HomeController extends Controller
 		
 		return view('home.checkout', compact('details') );
 	}
+
+	public function searchResultParameters(Request $request)
+	{
+		$serviceItemId= $request->get('selectItem');
+		$location = $request->get('address');
+		$homeSize =$request->get('homeSize');
+	
+		$serviceItem = ServicesItems::findOrFail($serviceItemId);
+
+
+
+		return view('home.search-result', compact('serviceItem','location','homeSize') );
+
+	}
 }

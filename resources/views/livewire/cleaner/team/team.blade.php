@@ -17,39 +17,42 @@
             <!-- Modal -->
             <div wire:ignore.self class="modal fade" id="teamModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
-                <div class="modal-dialog">
+                <div class="modal-dialog pop-up-form">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="form-heading-h4 text-center" id="exampleModalLabel">Add Team Members</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" id="closeexample" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-
-                            <div class="form-grouph input-design mb-30">
+<div class="row">
+                            <div class="form-grouph input-design mb-30 col-md-6">
                                 <p class="appointment_label">First Name</p>
                                 <input type="text" wire:model="first_name" placeholder="Enter your First Name" />
                                 @error('first_name')<div class="alert ">{{ $message }}</div>@enderror
                             </div>
-                            <div class="form-grouph input-design mb-30">
+                            <div class="form-grouph input-design mb-30 col-md-6">
                                 <p class="appointment_label">Last Name</p>
                                 <input type="text" wire:model="last_name" placeholder="Enter your Last Name" />
                                 @error('last_name')<div class="alert ">{{ $message }}</div>@enderror
                             </div>
+</div>
                             <div class="form-grouph input-design mb-30">
                                 <p class="appointment_label">Insured?</p>
                                 <input type="text" wire:model="insured" placeholder="Insured"/>
                                 @error('insured')<div class="alert ">{{ $message }}</div>@enderror
 
                             </div>
-                            <div class="form-grouph input-design mb-30">
+                            <div class="row">
+                            <div class="form-grouph input-design mb-30 col-md-6">
                                 <p class="appointment_label">Phone</p>
                                 <input type="number" wire:model="contact_number" placeholder="Enter your Contact Name"/>
                                 @error('contact_number')<div class="alert ">{{ $message }}</div>@enderror
                             </div>
-                            <div class="form-grouph input-design mb-30">
+                            <div class="form-grouph input-design mb-30 col-md-6">
                                 <p class="appointment_label">Email</p>
                                 <input type="email" wire:model="email" placeholder="Enter your Email"/>
                                 @error('email')<div class="alert ">{{ $message }}</div>@enderror
+                            </div>
                             </div>
                             <div class="form-grouph input-design mb-30">
                                 <p class="appointment_label">Address</p>
@@ -124,33 +127,37 @@
     <!-- updateModel -->
     <div wire:ignore.self class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
-        <div class="modal-dialog">
+        <div class="modal-dialog pop-up-form">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="form-heading-h4 text-center" id="exampleModalLabel">Add Team Members</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" id="updateModalClose" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-grouph input-design mb-30">
+                    <div class="row">
+                    <div class="form-grouph input-design mb-30 col-md-6">
                         <p class="appointment_label">First Name</p>
                         <input type="text" wire:model="first_name" />
                         @error('first_name')<div class="alert ">{{ $message }}</div>@enderror
                     </div>
-                    <div class="form-grouph input-design mb-30">
+                    <div class="form-grouph input-design mb-30 col-md-6">
                         <p class="appointment_label">Last Name</p>
                         <input type="text" wire:model="last_name" />
                         @error('last_name')<div class="alert ">{{ $message }}</div>@enderror
                     </div>
-                    <div class="form-grouph input-design mb-30">
+                    </div>
+                    <div class="row">
+                    <div class="form-grouph input-design mb-30 col-md-6">
                         <p class="appointment_label">Insured?</p>
                         <input type="text" wire:model="insured" />
                         @error('insured')<div class="alert ">{{ $message }}</div>@enderror
 
                     </div>
-                    <div class="form-grouph input-design mb-30">
+                    <div class="form-grouph input-design mb-30 col-md-6">
                         <p class="appointment_label">Phone</p>
                         <input type="number" wire:model="contact_number" />
                         @error('contact_number')<div class="alert ">{{ $message }}</div>@enderror
+                    </div>
                     </div>
                     <div class="form-grouph input-design mb-30">
                         <p class="appointment_label">Email</p>

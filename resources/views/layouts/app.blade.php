@@ -32,7 +32,10 @@
     <script>
     window.addEventListener('load', () => {
         var address_input_in_header = document.getElementById('address_in_header');
-        makeAddressInputAutocompletable( address_input_in_header, () => { return 'address in header rand';} )
+        makeAddressInputAutocompletable( address_input_in_header, (gmap_place) => { 
+            document.getElementById('latitude_in_header').value = gmap_place.geometry.location.lat();
+            document.getElementById('longitude_in_header').value = gmap_place.geometry.location.lng();
+        });
     });
     </script>
 </body>
