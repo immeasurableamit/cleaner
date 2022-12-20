@@ -13,7 +13,7 @@ use App\Http\Controllers\Cleaner\CleanerController;
 use App\Http\Controllers\Customer as CustomerControllers;
 use App\Mail\ContactMail;
 use Illuminate\Support\Facades\Crypt;
-use App\Http\Controllers\Customer\PagesController;
+use App\Http\Controllers\Customer\AppointmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +32,12 @@ use App\Http\Controllers\Customer\PagesController;
 
 //Home
 Route::get('/', [HomeController::class, 'index'])->name('index');
+//......
+
+Route::get('/searchresult', [HomeController::class, 'searchResultParameters'])->name('home.search-result-parameters');
+
+
+
 Route::get('sigup', function () {
     $title = array(
         'active' => 'signup',
@@ -183,8 +189,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         // customer appointments
         Route::prefix('appointments')->group(function () {
-            Route::controller(PagesController::class)->group(function () {
-                Route::get('/', 'index')->name('customer.appointments');
+            Route::controller(AppointmentController::class)->group(function () {
+                Route::get('/', 'index')->name('customer.appointment.index');
             });
         });
     });

@@ -7,13 +7,19 @@
                         <a href="{{route('index')}}"><img src="{{asset('/assets/images/logo/logo.svg')}}"></a>
                     </div>
                 </div>
+
                 <div class="header-flex-item header-flex-item-2">
                     <div class="search-form">
                         <span class="close-search l-hide"><i class="fa-solid fa-xmark"></i></span>
-                        <div class="search-form-wrapper">
-                            <div class="select-search-design">
-                                @php $services = \App\Models\Services::with('servicesItems')->where('types_id',1)->get() @endphp
-                                <select class="select-custom-design-group" >
+
+                        <form action="{{ route('home.search-result-parameters') }}" method="get">
+
+                            <div class="search-form-wrapper">
+                                <div class="select-search-design">
+                                    @php $services = \App\Models\Services::with('servicesItems')->where('types_id',1)->get() @endphp
+
+
+                                    <select class="select-custom-design-group" name="selectItem">
                                         @foreach ( $services as $service )
                                         <optgroup label="{{ $service->title }}">
                                             @foreach ( $service->servicesItems as $serviceItem )
@@ -21,23 +27,34 @@
                                             @endforeach
                                         </optgroup>
 
-                                 @endforeach
-                                </select>                                
-                                
+                                        @endforeach
+                                    </select>
+
+
+                                </div>
+                                <div class="select-search-design">
+                                    <select class="select-custom-design-group" name="homeSize">
+                                        <option>Any size</option>
+                                        <option>1361 sqft</option>
+                                        <option>2178 sqft</option>
+                                        <option>2755 sqft</option>
+                                        <option>3267 sqft</option>
+                                    </select>
+                                </div>
+                                <div class="search-input-design">
+
+                                    <input type="text" id="address" name="address" placeholder="Enter location">
+                                    <input type="text" id="lat" name="lat" hidden>
+                                    <input type="text" id="long" name="long" hidden>
+                                    
+                                    <button class="search-btn"> <img src="{{asset('/assets/images/icons/search.svg')}}"></button>
+
+                                </div>
+                                @include('includes.address-map')
+
+
                             </div>
-                            <div class="select-search-design">
-                                <select class="select-custom-design-group">
-                                    <option>Any size</option>
-                                    <option>Service</option>
-                                    <option>Service</option>
-                                </select>
-                            </div>
-                            <div class="search-input-design">
-                                <input type="text" id="address" name="address" placeholder="Enter location">
-                                <button class="search-btn"><a href="search-result.html" class=""><img src="{{asset('/assets/images/icons/search.svg')}}"></a></button>
-                            </div>
-                            @include('includes.address-map')
-                        </div>
+                        </form>
                     </div>
                     <button class="search-toggle l-hide"><img src="{{asset('/assets/images/icons/search.svg')}}"></button>
                 </div>
