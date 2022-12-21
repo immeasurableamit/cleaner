@@ -12,7 +12,7 @@
                     <div class="search-form">
                         <span class="close-search l-hide"><i class="fa-solid fa-xmark"></i></span>
 
-                        <form action="{{ route('home.search-result-parameters') }}" method="get">
+                        <form action="{{ route('search-result') }}" method="GET">
 
                             <div class="search-form-wrapper">
                                 <div class="select-search-design">
@@ -39,10 +39,10 @@
                                 <div class="select-search-design">
                                     <select class="select-custom-design-group" name="homeSize">
                                         <option>Any size</option>
-                                        <option>1361 sqft</option>
-                                        <option>2178 sqft</option>
-                                        <option>2755 sqft</option>
-                                        <option>3267 sqft</option>
+                                        <option value="1361">1361 sqft</option>
+                                        <option value="2178">2178 sqft</option>
+                                        <option value="2755">2755 sqft</option>
+                                        <option value="3267">3267 sqft</option>
                                     </select>
                                 </div>
                                 <div class="search-input-design">

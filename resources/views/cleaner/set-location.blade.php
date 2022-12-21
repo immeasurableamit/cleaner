@@ -18,45 +18,49 @@
                     </div>
                     <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 no-padd">
                         <div class="row no-mrg">
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 no-padd cleaner_location_section">
-                                <div class="customer-account-forms ">
-                                    <div class="form-headeing-second border-bottom pb-3 ">
-                                        <h3 class="mb-0  d-none d-sm-block">Set your Service Area</h3>
-                                        <h4 class="mb-0 d-block d-sm-none border-0 pb-0">Set Availability</h4>
-                                    </div>
+                            <form method="POST" action="{{ route('cleaner.set-location') }}" id="location-form"
+                                class="row my-3">
+                                @csrf
 
-                                    <div class="form-headeing-second pt-3 ">
-                                        <h4 class="mb-0 border-0">Click or search a point on the map and adjust slider to
-                                            define service area </h4>
-                                    </div>
-                                    <div class="form-grouph input-design mb-30 col-md-6" style="position: relative;">
-                                        <input type="text" name="address" id="address" class="" placeholder="Enter address" />
-                                        <button class="search-btn"
-                                            style="position: absolute; top: 4px; right: 10px; width: 48px; height: 48px; background: var(--primary); border: none; border-radius: 50%; box-shadow: 0px 6px 4px rgba(55, 169, 251, 0.26); padding: 0px;">
-                                            <img src="http://cleaner.local:8000/assets/images/icons/search.svg"></button>
-                                    </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 no-padd cleaner_location_section">
+                                    <div class="customer-account-forms ">
+                                        <div class="form-headeing-second border-bottom pb-3 ">
+                                            <h3 class="mb-0  d-none d-sm-block">Set your Service Area</h3>
+                                            <h4 class="mb-0 d-block d-sm-none border-0 pb-0">Set Availability</h4>
+                                        </div>
 
-                                    <div id="map" class="" style="height: 400px; width: 100%;"></div>
+                                        <div class="form-headeing-second pt-3 ">
+                                            <h4 class="mb-0 border-0">Click or search a point on the map and adjust slider
+                                                to
+                                                define service area </h4>
+                                        </div>
+                                        <div class="form-grouph input-design mb-30 col-md-6" style="position: relative;">
+                                            <input type="text" name="address" id="address" class=""
+                                                placeholder="Search address" />
+                                            <button class="search-btn"
+                                                style="position: absolute; top: 4px; right: 10px; width: 48px; height: 48px; background: var(--primary); border: none; border-radius: 50%; box-shadow: 0px 6px 4px rgba(55, 169, 251, 0.26); padding: 0px;">
+                                                <img
+                                                    src="http://cleaner.local:8000/assets/images/icons/search.svg"></button>
+                                        </div>
 
-                                    <form method="POST" action="{{ route('cleaner.set-location') }}" id="location-form" class="row my-3">
-                                        @csrf
+                                        <div id="map" class="" style="height: 400px; width: 100%;"></div>
 
-                                        <input  type="hidden" id="radius-input" name="radius" />
-                                        <input  type="hidden" id="latitude" name="latitude" />
-                                        <input  type="hidden" id="longitude" name="longitude" />
+                                        <input type="hidden" id="radius-input" name="radius" />
+                                        <input type="hidden" id="latitude" name="latitude" />
+                                        <input type="hidden" id="longitude" name="longitude" />
 
-                                        <div class="co-md-12 mb-3">
-                                            <label for="customRange1" class="form-label">Area kms: <span id="radius-area-kms"></span></label>
-                                            <input id="radius_area_range_input" oninput="radiusChanged( this.value )" type="range" class="form-range" id="customRange1" min="10" max="300">
+                                        <div class="co-md-12 my-3">
+                                            <div id="miles_slider"></div>
                                         </div>
                                         <div class="col-md-12">
-                                            <button type="submit" class="btn_blue">Save</button>
+                                            <button type="submit"
+                                                class="btn_blue">{{ $serveLocationAlreadySet ? 'Update' : 'Save' }}</button>
                                         </div>
 
-                                    </form>
-
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
+
                         </div>
                     </div>
                 </div>
@@ -65,30 +69,24 @@
     </section>
 
     @push('scripts')
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.1/nouislider.min.js"
+            integrity="sha512-1mDhG//LAjM3pLXCJyaA+4c+h5qmMoTc7IuJyuNNPaakrWT9rVTxICK4tIizf7YwJsXgDC2JP74PGCc7qxLAHw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.1/nouislider.min.css"
+            integrity="sha512-qveKnGrvOChbSzAdtSs8p69eoLegyh+1hwOMbmpCViIwj7rn4oJjdmMvWOuyQlTOZgTlZA0N2PXA7iA8/2TUYA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <script>
-            var radiusInKms = 100;
-            function initMap() {
-                var new_york_lat_lng = {
-                    lat: 40.730610,
-                    lng: -73.935242,
-                };
+            var radiusInMiles = '{{ $radiusInMilesForMap }}';
 
-                /* Construct map  */
-                var myLatlng = @json($latLngForMap); // TODO: replace this with the user's lat/lng saved in DB
-                if ( myLatlng.length == 0 ) {
-                   myLatlng = new_york_lat_lng;
-                }
+            /* Helper function */
+            function convertMilesIntoMeters(miles) {
+                var meters_in_a_mile = 1609.344;
+                return Number(miles * meters_in_a_mile);
+            }
 
-                const map = new google.maps.Map(document.getElementById("map"), {
-                    zoom: 6,
-                    center: myLatlng,
-                });
 
-                window.setLocationMap = map;
-
-                /* Add circle in map */
-
+            function addCircleInMap(map, center, radius) {
                 const servedLocationCircle = new google.maps.Circle({
                     strokeColor: "#FF0000",
                     strokeOpacity: 0.8,
@@ -96,61 +94,111 @@
                     fillColor: "#FF0000",
                     fillOpacity: 0.35,
                     map,
-                    center: myLatlng,
-                    radius: radiusInKms * 1000,
-                    editable: false,
+                    center,
+                    radius,
                     draggable: true,
                 });
 
                 /* Refill radius input when circle get resized */
                 google.maps.event.addListener(servedLocationCircle, 'radius_changed', function() {
-                    setRadiusAndLatLngInInputs( servedLocationCircle );
+                    setRadiusAndLatLngInInputs(servedLocationCircle);
                 });
 
                 google.maps.event.addListener(servedLocationCircle, 'center_changed', function() {
-                    setRadiusAndLatLngInInputs( servedLocationCircle );
+                    setRadiusAndLatLngInInputs(servedLocationCircle);
                 });
 
-
                 window.servedLocationCircle = servedLocationCircle;
-                document.getElementById('radius-area-kms').innerText = radiusInKms;
-                document.getElementById('radius_area_range_input').value = radiusInKms;
-                setRadiusAndLatLngInInputs( servedLocationCircle );
+            }
+
+            function initMap() {
+                var new_york_lat_lng = {
+                    lat: 40.730610,
+                    lng: -73.935242,
+                };
+
+                /* Construct map  */
+                var myLatlng = @json($latLngForMap);
+                if (myLatlng.length == 0) {
+                    myLatlng = new_york_lat_lng;
+                }
+
+                const map = new google.maps.Map(document.getElementById("map"), {
+                    zoom: 7,
+                    center: myLatlng,
+                });
+
+                addCircleInMap(map, myLatlng, convertMilesIntoMeters(radiusInMiles));
+
+                window.setLocationMap = map;
             };
 
-            function setRadiusAndLatLngInInputs(servedLocationCircle)
-            {
-                document.getElementById('radius-input').value = servedLocationCircle.getRadius();
-                document.getElementById('latitude').value     = servedLocationCircle.center.lat();
-                document.getElementById('longitude').value    = servedLocationCircle.center.lng();
+            /*
+             * fill value in fields that are required
+             * to save the served location
+             *
+             */
+            function setRadiusAndLatLngInInputs(servedLocationCircle) {
+                document.getElementById('radius-input').value = servedLocationCircle.getRadius(); // in meters
+                document.getElementById('latitude').value = servedLocationCircle.center.lat();
+                document.getElementById('longitude').value = servedLocationCircle.center.lng();
             }
 
-            function radiusChanged(radiusInKms)
-            {
-                radius = Number( radiusInKms ) * 1000;
-                window.servedLocationCircle.setRadius(radius);
-                document.getElementById('radius-area-kms').innerText = radiusInKms;
 
-
-            }
-
-            function changeAddressInMap(gmap_place)
-            {
-                let parsed_gmap_place = parseGmapPlace( gmap_place );
+            /*
+             * This function is a callback for
+             * search address input field
+             */
+            function changeAddressInMap(gmap_place) {
+                let parsed_gmap_place = parseGmapPlace(gmap_place);
                 let myLatLng = {
                     lat: parsed_gmap_place.lat,
                     lng: parsed_gmap_place.lng,
                 };
 
-                window.setLocationMap.setCenter( myLatLng );
-                window.servedLocationCircle.setCenter( myLatLng );
+                window.setLocationMap.setCenter(myLatLng);
+                window.servedLocationCircle.setCenter(myLatLng);
+            }
+
+            function integrateNoUiSliderInMilesSlider() {
+                var slider = document.getElementById('miles_slider');
+                var range = {
+                    min: 10,
+                    max: 150,
+                };
+
+                var format = {
+                    from: (value) => parseInt(value),
+                    to: (value) => `${parseInt(value)} Miles`,
+                }
+
+                var sliderOptions = {
+                    start: [radiusInMiles],
+                    tooltips: true,
+                    range,
+                    format,
+                };
+
+                noUiSlider.create(slider, sliderOptions)
+
+                slider.noUiSlider.on('update', (formatted_value, handle, value) => {
+                    let miles = parseInt(value);
+                    window.servedLocationCircle.setRadius(convertMilesIntoMeters(miles));
+                });
             }
 
             window.addEventListener('load', function() {
                 initMap();
+                integrateNoUiSliderInMilesSlider();
+
+                /* address autocomplete */
                 var address_input = document.getElementById('address');
-                var map_options = { componentRestrictions: { country: ["us", "ca"] } }
-                makeAddressInputAutocompletable( address_input, changeAddressInMap, map_options);
+                var map_options = {
+                    componentRestrictions: {
+                        country: ["us", "ca"]
+                    }
+                }
+                makeAddressInputAutocompletable(address_input, changeAddressInMap);
             });
 
 

@@ -127,7 +127,6 @@ class Jobs extends Component
     {
         $this->selectedDate = $this->selectedDate ?? today()->toDateString();
         $this->refreshSelectedTab();
-
     }
 
     public function mount()
