@@ -23,5 +23,4 @@ class Services extends Model
     {
         return $this->hasMany(ServicesItems::class, 'services_id', 'id')->whereStatus('1');
     }
-
 }

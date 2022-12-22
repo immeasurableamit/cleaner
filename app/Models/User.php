@@ -110,4 +110,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMay(Order::class);
     }
 
+    public function hasCleanerSetHisServedLocations()
+    {
+        $userDetails = $this->UserDetails;
+        $result      = $userDetails->serve_center_lat &&  $userDetails->serve_center_lng && $userDetails->serve_radius_in_meters;
+        return $result;
+    }
 }

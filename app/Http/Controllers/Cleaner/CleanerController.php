@@ -14,14 +14,35 @@ class CleanerController extends Controller
 
     public function showSetLocationPage()
     {
-        $user = auth()->user();
-        $latLngForMap = [];
-        if ( $user->UserDetails->latitude and $user->UserDetails->longitude ) {
-            $latLngForMap['lat'] = (float) $user->UserDetails->latitude;
-            $latLngForMap['lng'] = (float) $user->UserDetails->longitude;
+        $user        = auth()->user();
+        $userDetails = $user->UserDetails;
+
+
+        /* Make lat/lng and radius ready for the map */
+        $latLngForMap        = [];
+        $radiusInMilesForMap = 25;
+
+        $serveLocationAlreadySet          = $userDetails->serve_center_lat &&  $userDetails->serve_center_lng && $userDetails->serve_radius_in_meters;
+        $userLocationCoordinatesAvailable = $userDetails->latitude && $userDetails->longitude;
+
+        if ( $serveLocationAlreadySet ) {
+
+            $latLngForMap['lat'] = (float) $userDetails->serve_center_lat;
+            $latLngForMap['lng'] = (float) $userDetails->serve_center_lng;
+            $radiusInMilesForMap = (int)   convertMetersIntoMiles( $userDetails->serve_radius_in_meters );
+
+        } elseif ( $userLocationCoordinatesAvailable ) {
+
+            $latLngForMap['lat'] = (float) $userDetails->latitude;
+            $latLngForMap['lng'] = (float) $userDetails->longitude;
+        } else {
+
+            /* New york's lat/lng will be used as default if there is not lat lng set */
+            $latLngForMap['lat'] = 40.730610;
+            $latLngForMap['lng'] = -73.935242;
         }
 
-        return view('cleaner.set-location', compact('user', 'latLngForMap') );
+        return view('cleaner.set-location', compact('user', 'latLngForMap', 'radiusInMilesForMap', 'serveLocationAlreadySet') );
     }
 
     public function setLocation(Request $request)

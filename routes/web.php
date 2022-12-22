@@ -28,7 +28,7 @@ use App\Http\Controllers\Customer\AppointmentController;
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
-Route::get('/searchresult', [HomeController::class, 'searchResultParameters'])->name('home.search-result-parameters');
+//Route::get('/searchresult', [HomeController::class, 'searchResultParameters'])->name('home.search-result-parameters');
 
 
 
@@ -62,12 +62,15 @@ Route::get('help', function () {
     return view('home.help-center', compact('title'));
 })->name('help-center');
 
+Route::get('/search-result', [HomeController::class, 'searchResultParameters'])->name('search-result');
+/*
 Route::get('search-result', function () {
     $title = array(
         'active' => 'search-result',
     );
     return view('home.search-result', compact('title'));
 })->name('search-result');
+*/
 
 Route::get('profile/{id}', function () {
     $title = array(
