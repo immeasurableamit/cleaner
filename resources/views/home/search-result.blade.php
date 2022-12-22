@@ -12,14 +12,14 @@
          <div class="row routine_service_div">
             <div class="col-xl-4 col-lg-4 col-md-12 p-0 yellow-bg">
              
-            <p><img src="assets/images/icons/2_weaks.svg" class="me-3">{{$serviceItem->title}}</p>
+            <p><img src="assets/images/icons/2_weaks.svg" class="me-3">{{@$serviceItem->title}}</p>
                <!-- <p><img src="assets/images/icons/2_weaks.svg" class="me-3">Routine Service - Every 2 Weeks</p> -->
             </div>
             <div class="col-xl-2 col-lg-4 col-md-12 p-0 yellow-bg t-width-auto border-left-sf">
-               <p><img src="assets/images/icons/s_feet.svg" class="me-3">{{$homeSize}}</p>
+               <p><img src="assets/images/icons/s_feet.svg" class="me-3">{{@$homeSize}}</p>
             </div>
             <div class="col-xl-6 col-lg-4 col-md-16 p-0 white-bordered">
-               <p><img src="assets/images/icons/location.svg" class="me-3">{{$location}}</p>
+               <p><img src="assets/images/icons/location.svg" class="me-3">{{@$location}}</p>
             </div>
          </div>
          <div class="window_garage py-3">
@@ -29,7 +29,7 @@
          </div>
          
          
-         @livewire('home.search-result', ['serviceItem' => $serviceItem])
+         @livewire('home.search-result', ['serviceItem' => @$serviceItem])
          
          
       </div>
