@@ -12,38 +12,17 @@
          {{--
          <div class="row routine_service_div">
             <div class="col-xl-4 col-lg-4 col-md-12 p-0 yellow-bg">
-<<<<<<< HEAD
-             
-            <p><img src="assets/images/icons/2_weaks.svg" class="me-3">{{@$serviceItem->title}}</p>
-               <!-- <p><img src="assets/images/icons/2_weaks.svg" class="me-3">Routine Service - Every 2 Weeks</p> -->
-            </div>
-            <div class="col-xl-2 col-lg-4 col-md-12 p-0 yellow-bg t-width-auto border-left-sf">
-               <p><img src="assets/images/icons/s_feet.svg" class="me-3">{{@$homeSize}}</p>
-=======
 
             <p><img src="assets/images/icons/2_weaks.svg" class="me-3">{{$serviceItem->title}}</p>
                <!-- <p><img src="assets/images/icons/2_weaks.svg" class="me-3">Routine Service - Every 2 Weeks</p> -->
             </div>
             <div class="col-xl-2 col-lg-4 col-md-12 p-0 yellow-bg t-width-auto border-left-sf">
                <p><img src="assets/images/icons/s_feet.svg" class="me-3">{{$homeSize}} sq. ft.</p>
->>>>>>> ec97dfc60ae3ff86173096bccda3623b08c66395
             </div>
             <div class="col-xl-6 col-lg-4 col-md-16 p-0 white-bordered">
                <p><img src="assets/images/icons/location.svg" class="me-3">{{@$location}}</p>
             </div>
          </div>
-<<<<<<< HEAD
-         <div class="window_garage py-3">
-            <a href="javascript:void(0)" class="link-design-2">(X) Window cleaning</a>
-            <span class=" link-design-2 px-2">|</span>
-            <a href="javascript:void(0)" class="link-design-2">(X) Garage Sweeping</a>
-         </div>
-         
-         
-         @livewire('home.search-result', ['serviceItem' => @$serviceItem])
-         
-         
-=======
          --}}
 
 
@@ -57,7 +36,6 @@
          ])
 
 
->>>>>>> ec97dfc60ae3ff86173096bccda3623b08c66395
       </div>
    </div>
 </section>

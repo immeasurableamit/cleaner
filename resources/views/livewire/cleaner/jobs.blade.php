@@ -234,8 +234,10 @@
 
             /* Calendar Events */
             let events = @json ($events);
+            // debugger;
             let date = "{{ $selectedDate }}";
             renderCalendar(date, events);
+          
             makeBookingsCardToggalable();
 
         });

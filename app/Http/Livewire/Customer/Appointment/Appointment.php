@@ -5,45 +5,55 @@ namespace App\Http\Livewire\Customer\Appointment;
 use Livewire\Component;
 use App\Models\Order;
 use App\Models\OrderItem;
+use \Carbon\Carbon;
 
 class Appointment extends Component
 {
-    public $selectedDate, $events;
+    public $selectedDate, $events, $selectedDateOrders;
     public $orders;
+
 
     public function mount()
     {
-        $this->orders = Order::where('user_id', auth()->user()->id)->first();
-        dd($this->orders);
-
-        $this->prepareOrdersPro();
         $this->prepare();
     }
 
+
     public function prepareOrdersPro()
     {
-        // $events= array();
-        $orders = Order::where('user_id',auth()->user()->id)->first();
+        $orders = Order::where('user_id', auth()->user()->id)->get();
+        // dd( $orders);
+        $this->orders = $orders;
 
-        // foreach($orders as $order)
-        // {
-        //     $events[] = [
-        //      'first_name' => $order->first_name,
-        //         'cleaning_datetime' => $order->cleaning_datetime,
-        //     ];
-        // }
-        // dd($this->orders->status);
-       $this->dispatchBrowserEvent('prepareOrdersPro', ['orders' => $orders]);
-        return true;
-  
+      
+        $this->dispatchBrowserEvent('prepareOrdersPro', ['orders' => $orders]);
+
+        return  true;
     }
+
+
+    protected function parseOrdersForCalendarEvents($orders)
+    {
+
+        $events = $orders->map(function ($order) {
+            $cleaningDateTime = Carbon::parse($order->cleaning_datetime);
+          
+            $event = [
+                'id'    => $order->id,
+                'title' => $cleaningDateTime->format("h:i A"),
+                'start' => $cleaningDateTime->toDateString(),
+            ];
+            return $event;
+        })->values();
+// dd($events);
+        return $events;
+    }
+
 
 
     public function prepare()
     {
         $this->selectedDate = $this->selectedDate ?? today()->toDateString();
-
-        // dd($this->selectedDate);
 
         $this->refreshSelectedTab();
     }
@@ -52,21 +62,21 @@ class Appointment extends Component
 
     public function renderCalendar()
     {
-        
-        $events =  $event = [
-            'id' => 'a',
-            'title' => 'my events',
-            'start' => '2018-09-01',
 
-        ];
+        $events = $this->parseOrdersForCalendarEvents($this->orders);
+        $this->events = $events;
+
+
         $this->dispatchBrowserEvent('renderCalendar', ['events' => $events]);
         return true;
     }
 
     protected function refreshSelectedTab()
     {
+        $this->prepareOrdersPro();
         $this->renderCalendar();
     }
+
 
 
     public function render()
