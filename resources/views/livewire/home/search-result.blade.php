@@ -1,7 +1,7 @@
 <div>
     <div class="row car_filter_div">
         <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 left_filter_div">
-            <form>
+        
                 <div class="btn_top">
                     <button class="btn_filter btn_filter_by me-3" type="button"><img src="{{ asset('assets/images/icons/filter_by.svg') }}" class="me-3">Filter by</button>
                     <button class="close-btn hide" type="button"><img src="{{ asset('assets/images/icons/close-circle.svg') }}"></button>
@@ -14,6 +14,7 @@
                         </select>
                     </div>
                 </div>
+               
                 <div class="filter_by_div">
                     <div class="card_filter">
                         <h5 class="main-title">Service</h5>
@@ -85,7 +86,6 @@
                         <a class="btn_next">Next</a>
                     </div>
                 </div>
-            </form>
         </div>
 
 

@@ -28,6 +28,8 @@
     <div class="authentication-form-wrapper">
       <form class="form-design" method="post" action="{{route('register')}}" enctype="multipart/form-data">
         @csrf
+        <input type="hidden" id="latitude" name="latitude" type="text"/>
+        <input type="hidden" id="longitude" name="longitude" type="text"/>
         <input type="hidden" name="user_type" value="customer">
         <div class="row no-mrg">
           <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 no-padd">
@@ -103,12 +105,12 @@
                     {!! $errors->first('email', '<span class="alert">:message</span>') !!}
                     </div>
                     <div class="form-grouph input-design mb-30">
-                    {!! Form::text('address', request()->address ?? null, ['placeholder' => 'Address','class' => 'form-control'.($errors->has('address') ? ' is-invalid' : '')]) !!}
+                    {!! Form::text('address', request()->address ?? null, ['id' => 'address', 'placeholder' => 'Address','class' => 'form-control'.($errors->has('address') ? ' is-invalid' : '')]) !!}
                     {!! $errors->first('address', '<span class="alert">:message</span>') !!}
                     </div>
                     <div class="form-grouph mb-30 input-select-abs">
                       <div class="inputs-box">
-                      {!! Form::text('city', request()->city ?? null, ['placeholder' => 'City','class' => 'form-control'.($errors->has('city') ? ' is-invalid' : '')]) !!}
+                      {!! Form::text('city', request()->city ?? null, ['id' => 'city', 'placeholder' => 'City','class' => 'form-control'.($errors->has('city') ? ' is-invalid' : '')]) !!}
                       {!! $errors->first('city', '<span class="alert">:message</span>') !!}
                       </div>
                       <div class="selecti-box">
@@ -139,7 +141,7 @@
                     {!! $errors->first('apt_or_unit', '<span class="alert">:message</span>') !!}
                     </div>
                     <div class="form-grouph input-design mb-30">
-                    {!! Form::number('zip_code', request()->zip_code ?? null, ['placeholder' => 'Zip','class' => 'form-control'.($errors->has('zip_code') ? ' is-invalid' : '')]) !!}
+                    {!! Form::number('zip_code', request()->zip_code ?? null, [ 'id' => 'zip', 'placeholder' => 'Zip','class' => 'form-control'.($errors->has('zip_code') ? ' is-invalid' : '')]) !!}
                     {!! $errors->first('zip_code', '<span class="alert">:message</span>') !!}
                     </div>
                     <div class="form-grouph select-design mb-30">
@@ -178,4 +180,50 @@
 
 @section('script')
 @include('layouts.common.cropper')
+@push ( 'scripts')
+
+<script>
+  /*
+    function getLocation(){
+      if ("geolocation" in navigator){ //check geolocation available 
+        //try to get user current location using getCurrentPosition() method
+        navigator.geolocation.getCurrentPosition(function(position){
+            $('input[name=latitude]').val(position.coords.latitude);
+            $('input[name=longitude]').val(position.coords.longitude);
+          });
+      }else{
+        console.log("Browser doesn't support geolocation!");
+      }
+    }
+    */
+
+    //getLocation();
+
+
+    function fillAddressFieldsInForm(gmap_place)
+    {
+      var parsed_gmap_place = parseGmapPlace( gmap_place );
+      console.log( parsed_gmap_place );
+
+      if ( parsed_gmap_place.city ) {
+        document.getElementById('city').value = parsed_gmap_place.city;
+      }
+
+      if ( parsed_gmap_place.zip ) {
+        document.getElementById('zip').value = parsed_gmap_place.zip;
+      }
+
+      document.getElementById('latitude').value  = parsed_gmap_place.lat;
+      document.getElementById('longitude').value = parsed_gmap_place.lng;
+      
+    }
+
+  
+    window.addEventListener('load', function() {
+      var address_input = document.getElementById('address');
+      makeAddressInputAutocompletable( address_input, fillAddressFieldsInForm );
+    });
+
+  </script>
+@endpush
 @endsection

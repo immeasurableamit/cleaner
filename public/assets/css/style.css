@@ -7904,3 +7904,12 @@ a.subit-btn-2 {
     text-align: center;
     font-size: 19px;
 }
+.pop-up-form{
+    max-width: 60% !important;
+}
+.pop-up-form  .modal-content {
+    padding: 30px;
+}
+.pop-up-form .subit-btn-2 {
+    width: 140px;
+}

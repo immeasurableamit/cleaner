@@ -10,7 +10,7 @@
             <img src="assets/images/customer.png">
           </div>
           <div class="select-signup-cntnt">
-            <p>I’m a Customer</p>
+            <p>I’m a Customer</p>signup
           </div>
           <a href="{{route('signup-customers')}}" class="link-overlay"></a>
         </div>
@@ -29,8 +29,8 @@
 
   {!! Form::open(['route' => 'register', 'method'=>'post', 'enctype' => 'multipart/form-data', 'class'=>'form-design']) !!}
         @csrf
-        <input type="hidden" name="latitude">
-        <input type="hidden" name="longitude">
+        <input type="hidden" id="latitude" name="latitude">
+        <input type="hidden" id="longitude" name="longitude">
 
       <input type="hidden" name="user_type" value="cleaner">
       <div class="row no-mrg">
@@ -114,7 +114,7 @@
                   </div>
                   <div class="form-grouph mb-30 input-select-abs">
                     <div class="inputs-box">
-                      {!! Form::text('city', request()->city ?? null, ['placeholder' => 'City','class' => 'form-control'.($errors->has('city') ? ' is-invalid' : '')]) !!}
+                      {!! Form::text('city', request()->city ?? null, ['id' => 'city', 'placeholder' => 'City','class' => 'form-control'.($errors->has('city') ? ' is-invalid' : '')]) !!}
                       {!! $errors->first('city', '<span class="alert">:message</span>') !!}
 
                     </div>
@@ -183,7 +183,7 @@
                     {!! $errors->first('apt_or_unit', '<span class="alert">:message</span>') !!}
                   </div>
                   <div class="form-grouph input-design mb-30">
-                    {!! Form::number('zip_code', request()->zip_code ?? null, ['placeholder' => 'Zip','class' => 'form-control'.($errors->has('zip_code') ? ' is-invalid' : '')]) !!}
+                    {!! Form::number('zip_code', request()->zip_code ?? null, ['id' => 'zip', 'placeholder' => 'Zip','class' => 'form-control'.($errors->has('zip_code') ? ' is-invalid' : '')]) !!}
                     {!! $errors->first('zip_code', '<span class="alert">:message</span>') !!}
                   </div>
                   <div class="form-grouph select-design mb-30">
@@ -225,13 +225,13 @@
 @section('script')
 @include('layouts.common.cropper')
 
-<script async
-    src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initMap">
-</script>
 
 
+
+@push ( 'scripts')
 
 <script>
+  /*
     function getLocation(){
       if ("geolocation" in navigator){ //check geolocation available 
         //try to get user current location using getCurrentPosition() method
@@ -243,39 +243,36 @@
         console.log("Browser doesn't support geolocation!");
       }
     }
+    */
 
     //getLocation();
 
 
-    function initMap(){
+    function fillAddressFieldsInForm(gmap_place)
+    {
+      var parsed_gmap_place = parseGmapPlace( gmap_place );
 
-        var autocomplete = new google.maps.places.Autocomplete($("#address")[0], {
-            types: ['geocode'],
-            componentRestrictions: {
-                country: "USA"
-            }
-        });
+      if ( parsed_gmap_place.city ) {
+        document.getElementById('city').value = parsed_gmap_place.city;
+      }
 
-        google.maps.event.addListener(autocomplete, 'place_changed', function() {
-            var place = autocomplete.getPlace();
-            //console.log(place.address_components);
+      if ( parsed_gmap_place.zip ) {
+        document.getElementById('zip').value = parsed_gmap_place.zip;
+      }
 
-            $('input[name=latitude]').val(place.geometry.location.lat());
-            $('input[name=longitude]').val(place.geometry.location.lng());
-        });
+      document.getElementById('latitude').value  = parsed_gmap_place.lat;
+      document.getElementById('longitude').value = parsed_gmap_place.lng;
+      
     }
 
-    /*var autocomplete = new google.maps.places.Autocomplete($("#address")[0], {});
-
-    google.maps.event.addListener(autocomplete, 'place_changed', function() {
-        var place = autocomplete.getPlace();
-        //console.log(place.address_components);
-
-        $('input[name=latitude]').val(near_place.geometry.location.lat());
-        $('input[name=longitude]').val(near_place.geometry.location.lng());
-
-    });*/
+  
+    window.addEventListener('load', function() {
+      var address_input = document.getElementById('address');
+      makeAddressInputAutocompletable( address_input, fillAddressFieldsInForm );
+    });
 
   </script>
+@endpush
+
 
 @endsection
