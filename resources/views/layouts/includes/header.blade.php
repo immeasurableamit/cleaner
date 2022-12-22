@@ -38,7 +38,6 @@
                                 </div>
                                 <div class="select-search-design">
                                     <select class="select-custom-design-group" name="homeSize">
-                                        <option>Any size</option>
                                         <option value="1361">1361 sqft</option>
                                         <option value="2178">2178 sqft</option>
                                         <option value="2755">2755 sqft</option>

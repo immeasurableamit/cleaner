@@ -37,7 +37,7 @@
                                         <div class="form-grouph input-design mb-30 col-md-6" style="position: relative;">
                                             <input type="text" name="address" id="address" class=""
                                                 placeholder="Search address" />
-                                            <button class="search-btn"
+                                            <button type="button" class="search-btn"
                                                 style="position: absolute; top: 4px; right: 10px; width: 48px; height: 48px; background: var(--primary); border: none; border-radius: 50%; box-shadow: 0px 6px 4px rgba(55, 169, 251, 0.26); padding: 0px;">
                                                 <img
                                                     src="http://cleaner.local:8000/assets/images/icons/search.svg"></button>
@@ -131,6 +131,33 @@
                 addCircleInMap(map, myLatlng, convertMilesIntoMeters(radiusInMiles));
 
                 window.setLocationMap = map;
+
+                /*
+                // Create the initial InfoWindow.
+                let infoWindow = new google.maps.InfoWindow({
+                    content: "Click the map to get Lat/Lng!",
+                    position: myLatlng,
+                });
+
+                infoWindow.open(map);
+                // Configure the click listener.
+                map.addListener("click", (mapsMouseEvent) => {
+                    console.log( mapsMouseEvent );
+
+                    console.log( JSON.stringify( mapsMouseEvent.latLng.toJSON() ) );
+                    window.jsnMouseEvent = mapsMouseEvent;
+                    // Close the current InfoWindow.
+                    infoWindow.close();
+                    // Create a new InfoWindow.
+                    infoWindow = new google.maps.InfoWindow({
+                        position: mapsMouseEvent.latLng,
+                    });
+                    infoWindow.setContent(
+                        JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
+                    );
+                    infoWindow.open(map);
+                });
+                */
             };
 
             /*

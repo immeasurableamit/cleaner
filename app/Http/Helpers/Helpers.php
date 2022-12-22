@@ -64,6 +64,24 @@ function convertMetersIntoMiles($meters)
     return $meters / $meters_in_a_mile;
 }
 
+function convertMeters( $meters, $unit = "mile" )
+{
+    if ( $meters == 0 ) return 0;
+
+    $unit = strtolower( $unit );
+    $meters_in_a_mile = 1609.34;
+    $meters_in_a_km  = 1000;
+
+    switch ( $unit ) {
+        case "km":
+            return $meters / $meters_in_a_km;
+
+        default: // miles
+            return $meters / $meters_in_a_mile;
+    }
+}
+
+
 function computeDistance($lat1, $lng1, $lat2, $lng2, $radius)
 {
     static $x = M_PI / 180;

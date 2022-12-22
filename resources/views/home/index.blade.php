@@ -27,7 +27,6 @@
                                     </div>
                                     <div class="select-search-design">
                                         <select class="select-custom-design">
-                                            <option>Any size</option>
                                             <option>Service</option>
                                             <option>Service</option>
                                         </select>
