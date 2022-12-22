@@ -42,17 +42,17 @@
                                                 <img
                                                     src="http://cleaner.local:8000/assets/images/icons/search.svg"></button>
                                         </div>
-
+                                        <div class="co-md-12 my-3">
+                                            <div id="miles_slider"></div>
+                                        </div>
                                         <div id="map" class="" style="height: 400px; width: 100%;"></div>
 
                                         <input type="hidden" id="radius-input" name="radius" />
                                         <input type="hidden" id="latitude" name="latitude" />
-                                        <input type="hidden" id="longitude" name="longitude" />
+                                         <input type="hidden" id="longitude" name="longitude" />
 
-                                        <div class="co-md-12 my-3">
-                                            <div id="miles_slider"></div>
-                                        </div>
-                                        <div class="col-md-12">
+
+                                        <div class="col-md-12 mt-3">
                                             <button type="submit"
                                                 class="btn_blue">{{ $serveLocationAlreadySet ? 'Update' : 'Save' }}</button>
                                         </div>

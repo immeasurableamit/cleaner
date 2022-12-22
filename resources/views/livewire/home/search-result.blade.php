@@ -51,6 +51,7 @@
                 <div class="card_filter">
                     <h5 class="pb-2">Home Size</h5>
                     <input type="text" placeholder="Update square feet" wire:model="homeSize">
+                    @error ('homeSize') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
                 <div class="card_filter">
                     <h5 class="pb-2">Location</h5>
@@ -112,7 +113,7 @@
         <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 car_right_div">
 
             @if ($filteredCleaners->isEmpty())
-                <p class="text-center"><strong>No cleaners found. Try changing filters.</strong></p>
+                <p class="text-center display-6"><strong>No cleaners found. Try changing filters.</strong></p>
             @else
                 <div class="listing-row">
                     @foreach ($filteredCleaners as $cleaner)
@@ -120,7 +121,7 @@
                             <div class="card_search_result">
                                 <div class="like_img">
                                     @if ($user)
-                                        <input type="checkbox" class="like_1">
+                                        <input type="checkbox" class="like_1" wire:click="toggleFavouriteCleaner({{ $cleaner->id }})" {{ $user->favourites->where('cleaner_id', $cleaner->id )->first() == null ?: 'checked' }}>
                                     @endif
                                     <div id="" class="profile-pic">
                                         @if ($cleaner->image)
@@ -143,7 +144,7 @@
                                         <p class="font-semibold"> {{ $selectedServiceItem->title }}</p>
                                         <p class="font-medium">{{ $homeSize }} sq. ft.</p>
                                         <p class="font-regular">Est Time : {{ $cleaner->duration_for_selected_service }}
-                                            {{-- $cleaner->cleanerServices->where('services_items_id', $selectedServiceItemId)->first()->duration --}}
+
                                             hours</p>
                                         <div class="badges_insurnce_img">
                                             <img src="{{ asset('assets/images/badges.svg') }}">
@@ -152,7 +153,7 @@
                                     </div>
                                     <div class="btn_rate">
                                         <b>$
-                                            {{-- $cleaner->cleanerServices->where('services_items_id', $selectedServiceItemId)->first()->priceForSqFt($homeSize) --}}
+
                                             {{ $cleaner->price_for_selected_service }}
                                         </b>
                                         <a href="{{ route('profile', $cleaner->id) }}"><button
@@ -231,6 +232,8 @@
             var element = document.getElementById('address');
             makeAddressInputAutocompletable(element, addressChanged);
         });
+
+        /*
         $(document).ready(function() {
             $(".btn_filter_by ").click(function() {
                 $(".filter_by_div").toggleClass('active');
@@ -241,5 +244,6 @@
                 $(this).parent().removeClass('active');
             });
         });
+        */
     </script>
 </div>

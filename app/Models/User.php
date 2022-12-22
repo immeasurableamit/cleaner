@@ -117,7 +117,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $result;
     }
 
-    /* Cleaner function */
+    /* Cleaner user function */
     public function isWithInRadius($lat, $lng)
     {
 
@@ -129,5 +129,11 @@ class User extends Authenticatable implements MustVerifyEmail
         );
 
         return $distanceInKm <= convertMeters( $this->serve_radius_in_meters, "km" );
+    }
+
+    /* Customer user function */
+    public function favourites()
+    {
+        return $this->hasMany(Favourite::class, 'user_id', 'id');
     }
 }
