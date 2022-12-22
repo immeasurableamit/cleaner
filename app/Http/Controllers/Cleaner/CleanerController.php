@@ -29,7 +29,7 @@ class CleanerController extends Controller
 
             $latLngForMap['lat'] = (float) $userDetails->serve_center_lat;
             $latLngForMap['lng'] = (float) $userDetails->serve_center_lng;
-            $radiusInMilesForMap = (int)   convertMetersIntoMiles( $userDetails->serve_radius_in_meters );
+            $radiusInMilesForMap = (int)   convertMeters( $userDetails->serve_radius_in_meters, "miles" );
 
         } elseif ( $userLocationCoordinatesAvailable ) {
 

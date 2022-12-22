@@ -25,7 +25,25 @@ function getLatLong($code){
 		return array('latitude'=>$lat,'longitude'=>$lng, 'address'=>$address);
 	}
 		else {
-		return false;
+		return [];
+	}
+}
+
+function getLatLngByAddress($address){
+
+	$mapsApiKey = env('GOOGLE_MAPS_API_KEY');
+	$query = "https://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($address)."&sensor=false&key=".$mapsApiKey;
+	$result_string = file_get_contents($query);
+	$result = json_decode($result_string, true);
+	//dd($result);
+	if(!empty($result['results'])){
+		$lat = $result['results'][0]['geometry']['location']['lat'];
+		$lng = $result['results'][0]['geometry']['location']['lng'];
+		$address = $result['results'][0]['formatted_address'];
+		return array('latitude'=>$lat,'longitude'=>$lng, 'address'=>$address);
+	}
+		else {
+		return [];
 	}
 }
 
@@ -55,21 +73,19 @@ function getDistance($latitude1, $longitude1, $latitude2, $longitude2) {
     return $d;
 }
 
-function convertMetersIntoMiles($meters)
+function convertMeters( $meters, $unit = "miles" )
 {
-    if( $meters == 0 ) return 0;
+    if ( $meters == 0 ) return 0;
 
+    $unit = strtolower( $unit );
     $meters_in_a_mile = 1609.34;
+    $meters_in_a_km  = 1000;
 
-    return $meters / $meters_in_a_mile;
-}
+    switch ( $unit ) {
+        case "km":
+            return $meters / $meters_in_a_km;
 
-function computeDistance($lat1, $lng1, $lat2, $lng2, $radius)
-{
-    static $x = M_PI / 180;
-    $lat1 *= $x; $lng1 *= $x;
-    $lat2 *= $x; $lng2 *= $x;
-    $distance = 2 * asin(sqrt(pow(sin(($lat1 - $lat2) / 2), 2) + cos($lat1) * cos($lat2) * pow(sin(($lng1 - $lng2) / 2), 2)));
-
-    return $distance * $radius;
+        default: // miles
+            return $meters / $meters_in_a_mile;
+    }
 }

@@ -8,9 +8,15 @@ use App\Models\Services;
 use App\Models\ServicesItems;
 use App\Models\CleanerHours;
 use App\Models\CleanerServices;
+use \Carbon\Carbon;
+use App\Models\Favourite;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+
 
 class SearchResult extends Component
 {
+
+    use LivewireAlert;
 
     /* parameters passed to this component while defining */
     public $selectedServiceItem, $address, $homeSize, $latitude, $longitude, $selectedServiceItemId;
@@ -21,46 +27,32 @@ class SearchResult extends Component
     public $user; // logged in user
 
     /* Additonal filter props */
-    public $minPrice, $maxPrice, $selectedAddonsIds = [], $dateStart, $dateEnd;
+    public $minPrice, $maxPrice, $selectedAddonsIds = [];
+    public $dateStart, $dateEnd, $selectedWeekDays, $sortBy, $skipFiltering = false;
 
 
+    protected $rules = [
+        'homeSize' => 'numeric|min:100'
+    ];
 
     public function mount()
     {
         $allServices    = Services::with('servicesItems')->whereStatus('1')->get();
         $this->services = $allServices->where('types_id', 1 );
         $this->addons   = $allServices->where('types_id', 2 );
-        $this->user     = auth()->user();
+        //$this->user     = auth()->user() != null ?: User::with('favourites')->where('id', auth()->user()->id )->first();
+
         $this->servicesItems = ServicesItems::all();
 
+        if ( auth()->user() ) {
+            $this->user = User::with('favourites')->where('id', auth()->user()->id )->first();
+        }
+
         $this->preapreEligibleCleaners();
-        //$this->addSelectedServicePropInEligibleCleaners();
         $this->filterCleaners();
     }
 
-    public function addSelectedServicePropInEligibleCleaners()
-    {
-        $this->eligibleCleaners = $this->eligibleCleaners->each ( function ( $cleaner ) {
-            $cleanerService = $cleaner->cleanerServices->where('services_items_id', $this->selectedServiceItem->id )->first();
 
-            if ( ! $cleanerService ) {
-                $selectedServiceDetails = [
-                    'title' => 'Jsn',
-                    'price' => '111',
-                    'duration' => '111',
-                ];
-            } else {
-                $selectedServiceDetails = [
-                    'title' => $this->selectedServiceItem->title,
-                    'price' => $cleanerService->priceForSqFt( $this->homeSize ),
-                    'duration' => $cleanerService->duration,
-                ];
-            }
-
-            $this->selectedServiceDetails = $selectedServiceDetails;
-        });
-        return true;
-    }
 
     /*
      * Eligble cleaners are those who have set
@@ -96,6 +88,14 @@ class SearchResult extends Component
         return true;
     }
 
+    protected function sortFilteredCleaners()
+    {
+        if ( $this->sortBy == "price_desc" ){
+            $this->filteredCleaners = $this->filteredCleaners->sortByDesc('price_for_selected_service');
+        } elseif ( $this->sortBy == "price_asc" ) {
+            $this->filteredCleaners = $this->filteredCleaners->sortBy('price_for_selected_service');
+        }
+    }
     /*
      * Filter cleaners according to customer needs.
      *
@@ -107,6 +107,11 @@ class SearchResult extends Component
             /* Service */
             $cleanerSelectedService = $cleaner->cleanerServices->where('status', '1')->where('services_items_id', $this->selectedServiceItemId )->first();
             if ( ! $cleanerSelectedService ){
+                return false;
+            }
+
+            /* Location */
+            if ( ! $cleaner->isWithinRadius($this->latitude, $this->longitude) ) {
                 return false;
             }
 
@@ -126,16 +131,77 @@ class SearchResult extends Component
 
             /* Addons offered */
             if ( $this->selectedAddonsIds ) {
-
                 $cleanerSelectedAddons = $cleaner->cleanerServices->where('status', '1')->whereIn('services_items_id', $this->selectedAddonsIds );
                 if ( $cleanerSelectedAddons->isEmpty() ){
                     return false;
                 }
             }
 
+            /* Availability */ // TODO: this filter should also check the max number of jobs
+            if ( $this->selectedWeekDays ) {
+                $cleanerWeekDays = $cleaner->cleanerHours->pluck('day')->unique()->map('strtolower')->toArray();
+                $matchedDays     = array_intersect( $this->selectedWeekDays, $cleanerWeekDays );
+                if ( ! $matchedDays ) {
+                    return false;
+                }
+            }
+
+            $cleaner->price_for_selected_service = $cleanerSelectedService->priceForSqFt( $this->homeSize );
+            $cleaner->duration_for_selected_service = $cleanerSelectedService->duration;
             return true;
         });
 
+        $this->sortFilteredCleaners();
+        return true;
+    }
+
+    function updateWeekDays()
+    {
+        if ( ! $this->dateStart || ! $this->dateEnd ) {
+            return [];
+        }
+
+        $period   = \Carbon\CarbonPeriod::create( $this->dateStart, $this->dateEnd );
+        $weekdays = [];
+        foreach ( $period as $periodDate ) {
+
+            $weekday = $periodDate->englishDayOfWeek;
+            array_push( $weekdays, $weekday );
+        }
+
+        $this->selectedWeekDays = array_unique( array_map('strtolower', $weekdays ) );
+        return true;
+    }
+
+    protected function filterCleanersIfNeeded($updatedPropName)
+    {
+        if ( $this->skipFiltering ) {
+            return false;
+        }
+
+        $filters = [
+            'minPrice',
+            'maxPrice',
+            'selectedAddonsIds',
+            'selectedServiceItemId',
+            'dateStart',
+            'dateEnd',
+            'latitude',
+            'longitude',
+            'homeSize',
+            'sortBy'
+        ];
+
+        if ( in_array( $updatedPropName, $filters) ){
+            $this->filterCleaners();
+        }
+
+        return true;
+    }
+
+    function updatingHomeSize()
+    {
+        $this->validate(['homeSize' => 'numeric|min:100']);
     }
 
     function updated( $name, $value )
@@ -144,13 +210,41 @@ class SearchResult extends Component
             $this->selectedServiceItem = $this->servicesItems->where('id', $value )->first();
         }
 
-        if ( in_array( $name, [ 'minPrice', 'maxPrice', 'selectedAddonsIds', 'selectedServiceItemId']) ){
-            $this->filterCleaners();
+        if ( $name == 'dateStart' ) {
+            $this->dateStart = Carbon::parse( $this->dateStart )->toDateString();
+            $this->updateWeekDays();
         }
 
-        if ( $name == 'dateStart') {
-            dd( $this->dateStart );
+        if ( $name == 'dateEnd' ) {
+            $this->dateEnd = Carbon::parse( $this->dateEnd )->toDateString();
+            $this->updateWeekDays();
         }
+
+        if ( $name == "homeSize") {
+            if ( $value < 100 ) {
+                $this->homeSize = 99;
+            }
+        }
+
+
+        $this->filterCleanersIfNeeded($name);
+    }
+
+    public function toggleFavouriteCleaner($cleanerId)
+    {
+        $favourite = Favourite::where('user_id', $this->user->id )->where('cleaner_id', $cleanerId )->first();
+        if ( $favourite ) {
+            $favourite->delete();
+            $this->alert('success', 'Removed from favourites');
+        } else {
+            $favourite = Favourite::create([
+                'user_id' => $this->user->id,
+                'cleaner_id' => $cleanerId,
+            ]);
+            $this->alert('success', 'Added to favourites');
+        }
+
+        return true;
     }
 
     public function render()

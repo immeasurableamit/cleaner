@@ -116,4 +116,24 @@ class User extends Authenticatable implements MustVerifyEmail
         $result      = $userDetails->serve_center_lat &&  $userDetails->serve_center_lng && $userDetails->serve_radius_in_meters;
         return $result;
     }
+
+    /* Cleaner user function */
+    public function isWithInRadius($lat, $lng)
+    {
+
+        $distanceInKm = getDistance(
+            (float) $lat,
+            (float) $lng,
+            (float) $this->UserDetails->serve_center_lat,
+            (float) $this->UserDetails->serve_center_lng,
+        );
+
+        return $distanceInKm <= convertMeters( $this->serve_radius_in_meters, "km" );
+    }
+
+    /* Customer user function */
+    public function favourites()
+    {
+        return $this->hasMany(Favourite::class, 'user_id', 'id');
+    }
 }
