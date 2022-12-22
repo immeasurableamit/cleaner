@@ -28,7 +28,7 @@ use App\Http\Controllers\Customer\AppointmentController;
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
-Route::get('/searchresult', [HomeController::class, 'searchResultParameters'])->name('home.search-result-parameters');
+//Route::get('/searchresult', [HomeController::class, 'searchResultParameters'])->name('home.search-result-parameters');
 
 
 
@@ -62,12 +62,15 @@ Route::get('help', function () {
     return view('home.help-center', compact('title'));
 })->name('help-center');
 
+Route::get('/search-result', [HomeController::class, 'searchResultParameters'])->name('search-result');
+/*
 Route::get('search-result', function () {
     $title = array(
         'active' => 'search-result',
     );
     return view('home.search-result', compact('title'));
 })->name('search-result');
+*/
 
 Route::get('profile/{id}', function () {
     $title = array(
@@ -130,7 +133,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             return view('admin.support.support');
         })->name('admin.support');
 
-        // Team Section  
+        // Team Section
         Route::get('/cleaner/team/{id}', [AdminController::class, 'teamView'])->name('admin.cleaner.team');
 
 
@@ -145,7 +148,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 return view('admin.services.index', compact('title'));
             })->name('admin.services.index');
         });
-        
+
     });
 });
 
@@ -168,7 +171,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::get('/edit', 'edit')->name('customer.billing.edit');
                 Route::post('/update', 'update')->name('customer.billing.update');
 
-                /* 
+                /*
                 Route::get('/stripe/connect', 'connectStripe')->name("cleaner.billing.stripeConnect");
                 Route::get('/banking-info-error', 'bankingInfoError')->name('cleaner.billing.error');
                 Route::get('/banking-info-success', 'bankingInfoSuccess')->name('cleaner.billing.success');
@@ -177,8 +180,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::get('/editpayment', 'editpayment')->name('cleaner.billing.editPaymentMethod');
                 Route::post('/profile/bankInfoStore', 'bankingInfoStore')->name('cleaner.billing.bankInfoStore');
                 Route::get('/profile/connect-account', 'connectAccount')->name('cleaner.billing.connectAccount'); */
-               
-            }); 
+
+            });
         });
 
         // customer appointments
@@ -192,7 +195,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //cleaner routes
     Route::prefix('cleaner')->group(function () {
 
-        Route::get('/set-location',[ CleanerController::class, 'setLocation'] )->name('cleaner.set-location');
+        Route::get('/set-location',[ CleanerController::class, 'showSetLocationPage'] )->name('cleaner.set-location-page');
+        Route::post('/set-location',[ CleanerController::class, 'setLocation'] )->name('cleaner.set-location');
         Route::get('/account', function () {
             $title = array(
                 'title' => 'Account',
@@ -239,7 +243,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::get('/editpayment', 'editpayment')->name('cleaner.billing.editPaymentMethod');
                 Route::post('/profile/bankInfoStore', 'bankingInfoStore')->name('cleaner.billing.bankInfoStore');
                 Route::get('/profile/connect-account', 'connectAccount')->name('cleaner.billing.connectAccount');
-               
+
             });
         });
 
@@ -250,7 +254,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::get('/', 'index')->name('cleaner.services.index');
                 Route::post('/store', 'store')->name('cleaner.services.post');
             });
-        }); 
+        });
 
 
         //Support
@@ -279,8 +283,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::controller(Cleaner\jobs\JobsController::class)->group(function () {
                 Route::get('/', 'index')->name('cleaner.jobs.jobs');
             });
-        });     
-        
+        });
+
 
     });
 });

@@ -23,23 +23,38 @@ class HomeController extends Controller
 	}
 
 	public function checkout(Request $req, $details)
-	{		
+	{
 		$details = json_decode(Crypt::decryptString($details), true);
-		
+
 		return view('home.checkout', compact('details') );
 	}
 
 	public function searchResultParameters(Request $request)
 	{
-		$serviceItemId= $request->get('selectItem');
-		$location = $request->get('address');
-		$homeSize =$request->get('homeSize');
-	
+        /*
+         * These default search paramters will be used
+         * when customer directly comes to search result page
+         * by clicking 'Browse now' button in home page.
+         *
+         */
+        $deafultSearch = [
+            'selectItem' => ServicesItems::first()->id,
+            'address'    => 'New York, NY, USA',
+            'lat'        => 40.7127753,
+            'lng'        => -74.0059728,
+            'homeSize'   => 2000,
+        ];
+
+        // TODO: if address is present then try to fetch lat/lng from google api
+		$serviceItemId = $request->get('selectItem') ?: $deafultSearch['selectItem'];
+		$address      = $request->get('address')     ?: $deafultSearch['address'];
+		$homeSize      = $request->get('homeSize')   ?: $deafultSearch['homeSize'];
+        $latitude      = $request->get('lat')        ?: $deafultSearch['lat'];
+        $longitude     = $request->get('lng')        ?: $deafultSearch['lng'];
+
 		$serviceItem = ServicesItems::findOrFail($serviceItemId);
 
-
-
-		return view('home.search-result', compact('serviceItem','location','homeSize') );
+		return view('home.search-result', compact('serviceItem','address','homeSize','latitude','longitude', 'serviceItemId') );
 
 	}
 }

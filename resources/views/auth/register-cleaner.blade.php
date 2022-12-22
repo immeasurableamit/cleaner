@@ -119,7 +119,7 @@
 
                     </div>
                     <div class="selecti-box">
-                      <select class="select-custom-design" name="state">
+                      <select class="select-custom-design" name="state" required>
                         <option>Select State</option>
                         @foreach ($states as $state)
                         <option value="{{ $state->id }}">{{ $state->name }}</option>
@@ -233,7 +233,7 @@
 <script>
   /*
     function getLocation(){
-      if ("geolocation" in navigator){ //check geolocation available 
+      if ("geolocation" in navigator){ //check geolocation available
         //try to get user current location using getCurrentPosition() method
         navigator.geolocation.getCurrentPosition(function(position){
             $('input[name=latitude]').val(position.coords.latitude);
@@ -262,10 +262,10 @@
 
       document.getElementById('latitude').value  = parsed_gmap_place.lat;
       document.getElementById('longitude').value = parsed_gmap_place.lng;
-      
+
     }
 
-  
+
     window.addEventListener('load', function() {
       var address_input = document.getElementById('address');
       makeAddressInputAutocompletable( address_input, fillAddressFieldsInForm );

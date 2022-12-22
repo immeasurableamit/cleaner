@@ -9,11 +9,15 @@
                     @foreach($cleaners as $cleaner)
                     <div class="col-md-4 col-6">
                         <div class="card_rated">
-                            <img src={{asset('storage/images/'.$cleaner->image)}} class="clnr_img">
+                            @if ( $cleaner->image )
+                                <img src={{asset('/storage/images/'.$cleaner->image)}} class="clnr_img">
+                            @else
+                                <img src={{ asset('/assets/images/iconshow.png') }} class="clnr_img">
+                            @endif
                             <div class="bottom_part">
                                 <h5>{{$cleaner->name}}</h5>
                                 <div class="star_rating">
-                                    <img src="assets/images/icons/star.svg">
+                                    <img src="/assets/images/icons/star.svg">
                                     <span>4.5 (211)</span>
                                 </div>
                             </div>
