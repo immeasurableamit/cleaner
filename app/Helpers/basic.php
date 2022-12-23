@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Transaction;
+use App\Models\ServicesItems;
 
 function storeRefundOrderTransaction($user_id, $order_id, $amount, $stripe_refund_id )
 {
@@ -17,5 +18,18 @@ function storeRefundOrderTransaction($user_id, $order_id, $amount, $stripe_refun
     return $transaction;
 }
 
+function getDefaultParametersForSearchPage()
+{
+    $serviceItem = ServicesItems::first();
 
-  
+    $deafultSearch = [
+        'serviceItem' => $serviceItem,
+        'address'    => 'New York, NY, USA',
+        'homeSize'   => 2000,
+        'latitude'   => 40.7127753,
+        'longitude'  => -74.0059728,
+        'serviceItemId' => $serviceItem->id,
+    ];
+
+    return $deafultSearch;
+}

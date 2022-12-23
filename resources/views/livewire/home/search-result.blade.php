@@ -24,11 +24,10 @@
                 <button class="close-btn hide" type="button"><img
                         src="{{ asset('assets/images/icons/close-circle.svg') }}"></button>
                 <div class="select-sort-design" wire:ignore>
-                    <select class="select-custom-design">
-                        <option>Sort by ( NA )</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
+                    <select id="sortBy" class="select-custom-design">
+                        <option value="">Sort by</option>
+                        <option value="price_asc">Price - Low to High</option>
+                        <option value="price_desc">Price - High to Low</option>
                     </select>
                 </div>
             </div>
@@ -52,10 +51,11 @@
                 <div class="card_filter">
                     <h5 class="pb-2">Home Size</h5>
                     <input type="text" placeholder="Update square feet" wire:model="homeSize">
+                    @error ('homeSize') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
                 <div class="card_filter">
                     <h5 class="pb-2">Location</h5>
-                    <input type="text" placeholder="Search by address" wire:model="address">
+                    <input type="text" placeholder="Search by address" id="address" value="{{ $address }}">
                 </div>
                 <div class="card_filter date-picker-design" wire:ignore>
                     <h5 class="pb-2">Start Date range</h5>
@@ -113,7 +113,7 @@
         <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 car_right_div">
 
             @if ($filteredCleaners->isEmpty())
-                <p class="text-center"><strong>No cleaners found. Try changing filters.</strong></p>
+                <p class="text-center display-6"><strong>No cleaners found. Try changing filters.</strong></p>
             @else
                 <div class="listing-row">
                     @foreach ($filteredCleaners as $cleaner)
@@ -121,7 +121,7 @@
                             <div class="card_search_result">
                                 <div class="like_img">
                                     @if ($user)
-                                        <input type="checkbox" class="like_1">
+                                        <input type="checkbox" class="like_1" wire:click="toggleFavouriteCleaner({{ $cleaner->id }})" {{ $user->favourites->where('cleaner_id', $cleaner->id )->first() == null ?: 'checked' }}>
                                     @endif
                                     <div id="" class="profile-pic">
                                         @if ($cleaner->image)
@@ -143,8 +143,8 @@
 
                                         <p class="font-semibold"> {{ $selectedServiceItem->title }}</p>
                                         <p class="font-medium">{{ $homeSize }} sq. ft.</p>
-                                        <p class="font-regular">Est Time :
-                                            {{ $cleaner->cleanerServices->where('services_items_id', $selectedServiceItemId)->first()->duration }}
+                                        <p class="font-regular">Est Time : {{ $cleaner->duration_for_selected_service }}
+
                                             hours</p>
                                         <div class="badges_insurnce_img">
                                             <img src="{{ asset('assets/images/badges.svg') }}">
@@ -153,7 +153,9 @@
                                     </div>
                                     <div class="btn_rate">
                                         <b>$
-                                            {{ $cleaner->cleanerServices->where('services_items_id', $selectedServiceItemId)->first()->priceForSqFt($homeSize) }}</b>
+
+                                            {{ $cleaner->price_for_selected_service }}
+                                        </b>
                                         <a href="{{ route('profile', $cleaner->id) }}"><button
                                                 class="btn_view d-none d-md-block">View</button></a>
                                         <div class="td-hide rating-mobile-listing-design">
@@ -188,22 +190,60 @@
 
                 setup: (picker) => {
                     picker.on('selected', (date1, date2) => {
-                        @this.set( 'dateStart', date1)
-                        @this.set( 'dateEnd', date2)
+                        @this.set('dateStart', formatDate(date1.dateInstance));
+                        @this.set('dateEnd', formatDate(date2.dateInstance))
 
                     })
                 }
             })
         }
 
+        function formatDate(dateInstance) {
+            let year = dateInstance.getFullYear();
+            let month = dateInstance.getMonth() + 1; // adding 1 because getMonth returns month from range 0 to 11
+            let day = dateInstance.getDate();
+            let date = `${year}-${month}-${day}`;
+            return date;
+        }
 
         function addOnSelectChanged(select_elem) {
             @this.set('selectedAddonsIds', $(select_elem).val());
         }
 
+        function addressChanged(gmap_place) {
+            console.log(gmap_place);
+            @this.set('address', gmap_place.formatted_address);
+            @this.set('latitude', gmap_place.geometry.location.lat());
+            @this.set('longitude', gmap_place.geometry.location.lng());
+        }
+
+        function addEventHandlerInSortByFilter() {
+            $("#sortBy").on('select2:select', function(e) {
+                var data = e.params.data;
+                console.log(data);
+                @this.set('sortBy', data.id);
+            });
+        }
+
         window.addEventListener('load', () => {
             addDatePickerInStartDateFilter();
+            addEventHandlerInSortByFilter();
 
+            var element = document.getElementById('address');
+            makeAddressInputAutocompletable(element, addressChanged);
         });
+
+        /*
+        $(document).ready(function() {
+            $(".btn_filter_by ").click(function() {
+                $(".filter_by_div").toggleClass('active');
+                $(this).parent().toggleClass('active');
+            });
+            $(".close-btn").click(function() {
+                $(".filter_by_div").removeClass('active');
+                $(this).parent().removeClass('active');
+            });
+        });
+        */
     </script>
 </div>

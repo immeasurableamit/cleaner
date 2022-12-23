@@ -122,7 +122,6 @@ function makeAddressInputAutocompletable( element, place_changed_callback, optio
         let selected_place = gmap_places.getPlace();
         window.jsnPlace = selected_place;
         place_changed_callback(selected_place);
-
     });
 }
 

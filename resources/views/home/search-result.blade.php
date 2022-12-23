@@ -20,7 +20,7 @@
                <p><img src="assets/images/icons/s_feet.svg" class="me-3">{{$homeSize}} sq. ft.</p>
             </div>
             <div class="col-xl-6 col-lg-4 col-md-16 p-0 white-bordered">
-               <p><img src="assets/images/icons/location.svg" class="me-3">{{$location}}</p>
+               <p><img src="assets/images/icons/location.svg" class="me-3">{{@$location}}</p>
             </div>
          </div>
          --}}

@@ -27,6 +27,16 @@ class Order extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function cleaner()
+    {
+        return $this->belongsTo(User::class, 'cleaner_id', 'id');
+    }
+
+    public function service_item()
+    {
+        return $this->belongsTo(ServicesItems::class);
+    }
+
 
     public function items()
     {

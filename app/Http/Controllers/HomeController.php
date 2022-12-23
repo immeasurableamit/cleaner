@@ -8,9 +8,13 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use \App\Models\Services;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+
 
 class HomeController extends Controller
 {
+    use LivewireAlert;
+
 	public function index()
 	{
 		$title = array(
@@ -31,30 +35,57 @@ class HomeController extends Controller
 
 	public function searchResultParameters(Request $request)
 	{
-        /*
-         * These default search paramters will be used
-         * when customer directly comes to search result page
-         * by clicking 'Browse now' button in home page.
-         *
+
+        /* default search paramters will be used when
+         * customer comes to search page by clicking browse
+         * now button etc.
          */
-        $deafultSearch = [
-            'selectItem' => ServicesItems::first()->id,
-            'address'    => 'New York, NY, USA',
-            'lat'        => 40.7127753,
-            'lng'        => -74.0059728,
-            'homeSize'   => 2000,
+        if ( empty( $request->query() ) ){
+            $defaultParameters = getDefaultParametersForSearchPage();
+            return view("home.search-result", $defaultParameters );
+        }
+
+        $rules = [
+            'selectItem' => 'required|exists:services_items,id|max:255',
+            'address'    => 'required|max:255',
+            'homeSize'   => 'required|numeric',
+            'latitude'   => 'present|max:255',
+            'longitude'  => 'present|max:255'
         ];
 
-        // TODO: if address is present then try to fetch lat/lng from google api
-		$serviceItemId = $request->get('selectItem') ?: $deafultSearch['selectItem'];
-		$address      = $request->get('address')     ?: $deafultSearch['address'];
-		$homeSize      = $request->get('homeSize')   ?: $deafultSearch['homeSize'];
-        $latitude      = $request->get('lat')        ?: $deafultSearch['lat'];
-        $longitude     = $request->get('lng')        ?: $deafultSearch['lng'];
+        $validated = $request->validate($rules);
 
-		$serviceItem = ServicesItems::findOrFail($serviceItemId);
+        /* ensure lat/lng existence */
+        if ( empty( $request->latitude ) || empty( $request->longitude ) ){
 
-		return view('home.search-result', compact('serviceItem','address','homeSize','latitude','longitude', 'serviceItemId') );
+            /* redirect back if lat/lng of address isn't found */
+            $response = getLatLngByAddress($request->address);
+            if ( empty( $response ) ){
+                $this->flash('error', 'Wrong address');
+                return redirect()->back();
+            }
+
+            /* update lat/lng props in request object with the fetched one */
+            $request->merge([
+                'latitude' => $response['latitude'],
+                'longitude'=> $response['longitude'],
+                'address'  => $response['address'],
+            ]);
+        }
+
+        $serviceItem = ServicesItems::findOrFail($request->selectItem);
+
+        $searchParamters = [
+            'serviceItem'   => $serviceItem,
+            'serviceItemId' => $serviceItem->id,
+            'address'       => $request->address,
+            'homeSize'      => $request->homeSize,
+            'latitude'      => $request->latitude,
+            'longitude'     => $request->longitude,
+
+        ];
+
+		return view('home.search-result', $searchParamters );
 
 	}
 }

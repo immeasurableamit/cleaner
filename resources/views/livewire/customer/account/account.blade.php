@@ -45,7 +45,7 @@
         <ul class="list-unstyled">
             <li class="d-flex justify-content-spacebw two_column">
                 <h6 class="title-label">Name:</h6>
-                <p class="name">{{$user->first_name}}</p>
+                <p class="name">{{@$user->first_name}}</p>
             </li>
 
             <li class="position-relative">
@@ -57,7 +57,7 @@
                     <span class="edit"><a class="link-design-2" wire:click="update('contact_number')"><i class="fas fa-save"></i></a></span>
                     <span class="cancel"><a href="javascript::void(0)" class="link-design-2" wire:click="cancle"><i class="fas fa-times"></i></a></span>
                     @else
-                    <p class="phone"><a href="tel:+1 512-559-9582">{{$user->contact_number}}</a></p>
+                    <p class="phone"><a href="tel:+1 512-559-9582">{{@$user->contact_number}}</a></p>
                     <div class="action-block">
                         <span class="edit"><a href="javascript::void(0)" wire:click="edit('{{auth()->user()->id}}', 'contact_number')">Edit</a></span>
                     </div>
@@ -92,7 +92,7 @@
                     <span class="save-icn-btn"><a class="link-design-2" wire:click="update('address')"><i class="fas fa-save"></i></a></span>
                     <span class="cancel"><a href="javascript::void(0)" class="link-design-2" wire:click="cancle"><i class="fas fa-times"></i></a></span>
                     @else
-                    <p>{{$user->UserDetails->address}}</p>
+                    <p>{{@$user->UserDetails->address}}</p>
                     <div class="action-block">
                         <span class="edit"><a href="javascript::void(0)" class="link-design-2" wire:click="edit('{{auth()->user()->id}}', 'address')">Edit</a></span>
                     </div>

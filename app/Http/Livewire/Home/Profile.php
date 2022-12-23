@@ -11,13 +11,15 @@ use App\Models\CleanerServices;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\Crypt;
+use App\Models\Order;
+use App\Models\CleanerTeam;
 
 class Profile extends Component
 {
     public $cleanerId;
     public $cleaner;
 
-    public $services; 
+    public $services;
     public $itemAddOns;
 
 
@@ -43,14 +45,16 @@ class Profile extends Component
     public $time;
     public $serviceItemId;
     public $addOnIds = [];
-    
-    
+
     public $selectedDetails = [
         'service_item_id' => null,
         'home_size' => null,
         'add_on_id' => null,
         'time' => null,
     ];
+
+    public $socialMediaSharingInfo, $cleanerAdditionalInfo;
+
 
     protected function prepareProps()
     {
@@ -69,14 +73,41 @@ class Profile extends Component
         // fetching first because there will always be only one service for add ons if cleaner opts in for that
         $addOnService     = $this->services->where('types_id', 2 )->first();
         $this->itemAddOns = is_null( $addOnService ) ? null : $addOnService->serviceItems;
-        
+
+        $this->fillSocialMediaShareInfo();
+        $this->fillCleanerAdditionalInfo();
+
         return true;
+    }
+
+    protected function fillCleanerAdditionalInfo()
+    {
+        $completedOrders = Order::where('cleaner_id', $this->cleanerId )->whereIn('status', ['payment_collected', 'completed'])->count();
+        $totalMembersOfCleanerTeam = CleanerTeam::where('user_id', $this->cleanerId )->count();
+        $this->cleanerAdditionalInfo = [
+            'rating' => 0,
+            'completed_orders' => $completedOrders,
+            'total_team'       => $totalMembersOfCleanerTeam,
+            'is_insured'       => true,
+            'is_organic'       => true,
+        ];
+
+        return true;
+    }
+
+    public function fillSocialMediaShareInfo()
+    {
+        $this->socialMediaSharingInfo = [
+            'title' => urlencode("CanaryCleaner ".$this->cleaner->name),
+            //'url'   => urlencode(request()->url()), // local links doesn't get share on social platforms
+            'url'     => urlencode("https://www.atxwebdesigns.com/how-to-build-a-recession-proof-small-business/"),
+        ];
     }
 
     public function mount()
     {
         $this->cleaner = User::findOrFail($this->cleanerId);
-    
+
         $this->prepareProps();
 
         $this->todayDate = Carbon::now();
@@ -99,7 +130,7 @@ class Profile extends Component
         $period = CarbonPeriod::create($fromDate, $toDate);
 
 
-        
+
         $lawyerHoursDayAll = CleanerHours::whereUsersId($this->cleaner->id)->get()->pluck('day')->toArray();
 
         $lawyerHoursDayArray = [];
@@ -143,7 +174,7 @@ class Profile extends Component
         ///,.....available current date
         if (@$hoursDayAll && $date >= date('Y-m-d')) {
 
-            
+
             $duration = '30';
 
             //...
@@ -181,7 +212,7 @@ class Profile extends Component
         if ( empty( $this->homeSize) ){
             return null;
         }
-        
+
         /* Filter out selected services */
         $selectedServices = $this->cleanerServices->where('services_items_id', $this->serviceItemId );
         if ( ! empty( $this->addOnIds) ) {
@@ -189,7 +220,7 @@ class Profile extends Component
             $selectedServices = $selectedServices->concat( $addOnServices );
         }
 
-        
+
         /* Sum of each service price against input square feet */
         foreach ( $selectedServices as $serviceItem ) {
             $this->estimatedPrice += $serviceItem->priceForSqFt( $this->homeSize );
@@ -223,7 +254,7 @@ class Profile extends Component
         $this->getWorkingDays($nDate);
     }
 
- 
+
     public function updatedSelectedDate(){
         $this->slotAvailability();
 
@@ -231,7 +262,7 @@ class Profile extends Component
 
     protected function checkoutRules()
     {
-        $rules = [ 
+        $rules = [
             'serviceItemId' => 'required',
             'addOnIds'      => 'present|array',
             'homeSize'      => 'required|numeric',
@@ -245,17 +276,17 @@ class Profile extends Component
 
         return [ $rules, $messages ];
     }
-    
+
     public function redirectToCheckout()
     {
 
         $validatedData = $this->validate(...$this->checkoutRules());
         $validatedData['cleanerId'] = $this->cleanerId;
-        
+
         $encryptedDetails = Crypt::encryptString( json_encode( $validatedData ) );
 
         return redirect()->route('checkout', ['details' => $encryptedDetails ]);
-        
+
     }
 
 
@@ -264,7 +295,7 @@ class Profile extends Component
     {
         $this->emit('componentRendered');
 
-        
+
         return view('livewire.home.profile');
     }
 }

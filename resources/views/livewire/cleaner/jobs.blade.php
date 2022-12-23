@@ -203,8 +203,8 @@
                 },
                 dateClick: function(info) {
                     console.log('date clicked');
+                 
                     @this.set('selectedDate', info.dateStr);
-
                 },
             });
 
@@ -221,6 +221,7 @@
         }
 
         window.addEventListener('renderCalendar', event => {
+      
             console.log('updating events');
             window.calendarJsnEvents = event.detail.events;
             let date = "{{ $selectedDate }}";
@@ -233,8 +234,10 @@
 
             /* Calendar Events */
             let events = @json ($events);
+            // debugger;
             let date = "{{ $selectedDate }}";
             renderCalendar(date, events);
+          
             makeBookingsCardToggalable();
 
         });

@@ -23,7 +23,7 @@
                                     @endphp
 
 
-                                    <select class="select-custom-design-group" name="selectItem">
+                                    <select class="select-custom-design-group" name="selectItem" required>
                                         @foreach ($services as $service)
                                             <optgroup label="{{ $service->title }}">
                                                 @foreach ($service->servicesItems as $serviceItem)
@@ -37,8 +37,7 @@
 
                                 </div>
                                 <div class="select-search-design">
-                                    <select class="select-custom-design-group" name="homeSize">
-                                        <option>Any size</option>
+                                    <select class="select-custom-design-group" name="homeSize" required>
                                         <option value="1361">1361 sqft</option>
                                         <option value="2178">2178 sqft</option>
                                         <option value="2755">2755 sqft</option>
@@ -48,16 +47,13 @@
                                 <div class="search-input-design">
 
                                     <input type="text" id="address_in_header" name="address"
-                                        placeholder="Enter location">
-                                    <input type="text" id="latitude_in_header" name="lat" hidden>
-                                    <input type="text" id="longitude_in_header" name="long" hidden>
+                                        placeholder="Enter location" required>
+                                    <input type="text" id="latitude_in_header" name="latitude" hidden>
+                                    <input type="text" id="longitude_in_header" name="longitude" hidden>
 
                                     <button class="search-btn"> <img
                                             src="{{ asset('/assets/images/icons/search.svg') }}"></button>
-
-                                </div>
-
-
+                                    </div>
                             </div>
                         </form>
                     </div>
