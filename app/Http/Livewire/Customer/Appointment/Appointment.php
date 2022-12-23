@@ -21,10 +21,9 @@ class Appointment extends Component
 
     public function prepareOrdersPro()
     {
-        $orders = Order::where('user_id', auth()->user()->id)->get();
+        $orders = Order::with('items.service_item')->where('user_id', auth()->user()->id)->get();
         // dd( $orders);
         $this->orders = $orders;
-
       
         $this->dispatchBrowserEvent('prepareOrdersPro', ['orders' => $orders]);
 
