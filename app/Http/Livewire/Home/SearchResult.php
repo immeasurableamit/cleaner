@@ -67,6 +67,7 @@ class SearchResult extends Component
     protected function preapreEligibleCleaners()
     {
         $cleaners  = User::where('role', 'cleaner')->with(['UserDetails', 'CleanerHours', 'CleanerServices'])->get(); // NOTE: can be optimized --jashan
+        dd($cleaners);
         $eligibleCleaners = $cleaners->filter(function( $cleaner ) {
 
             if ( $cleaner->hasCleanerSetHisServedLocations() === false ) {
