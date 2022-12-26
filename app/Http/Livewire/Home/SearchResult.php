@@ -31,16 +31,12 @@ class SearchResult extends Component
     public $dateStart, $dateEnd, $selectedWeekDays, $sortBy, $skipFiltering = false;
 
 
-    protected $rules = [
-        'homeSize' => 'numeric|min:100'
-    ];
 
     public function mount()
     {
         $allServices    = Services::with('servicesItems')->whereStatus('1')->get();
         $this->services = $allServices->where('types_id', 1 );
         $this->addons   = $allServices->where('types_id', 2 );
-        //$this->user     = auth()->user() != null ?: User::with('favourites')->where('id', auth()->user()->id )->first();
 
         $this->servicesItems = ServicesItems::all();
 
@@ -67,6 +63,7 @@ class SearchResult extends Component
     protected function preapreEligibleCleaners()
     {
         $cleaners  = User::where('role', 'cleaner')->with(['UserDetails', 'CleanerHours', 'CleanerServices'])->get(); // NOTE: can be optimized --jashan
+        dd($cleaners);
         $eligibleCleaners = $cleaners->filter(function( $cleaner ) {
 
             if ( $cleaner->hasCleanerSetHisServedLocations() === false ) {
@@ -97,7 +94,7 @@ class SearchResult extends Component
         }
     }
     /*
-     * Filter cleaners according to customer needs.
+     * Filter cleaners according to customer selected filters in page.
      *
      */
     protected function filterCleaners()
@@ -105,7 +102,8 @@ class SearchResult extends Component
         $this->filteredCleaners = $this->eligibleCleaners->filter( function( $cleaner) {
 
             /* Service */
-            $cleanerSelectedService = $cleaner->cleanerServices->where('status', '1')->where('services_items_id', $this->selectedServiceItemId )->first();
+            $cleanerSelectedService = $cleaner->cleanerServices->where('status', '1')
+                                        ->where('services_items_id', $this->selectedServiceItemId )->first();
             if ( ! $cleanerSelectedService ){
                 return false;
             }

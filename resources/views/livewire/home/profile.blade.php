@@ -60,7 +60,7 @@
                     </div>
                 </div>
                 <div class="btn_msg_cleaner">
-                    <a href="#" class="btn_msg">Message Cleaner <img src="{{ asset('assets/images/icons/email-2.svg') }}"> </a>
+                    <a href="{{ auth()->user() != null ? '#' : route('signup-customers') }}" class="btn_msg">Message Cleaner <img src="{{ asset('assets/images/icons/email-2.svg') }}"> </a>
                     <p>Ask a <b>question</b> or request a <b>custom proposal.</b></p>
                 </div>
             </div>

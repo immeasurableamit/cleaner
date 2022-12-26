@@ -31,8 +31,13 @@
                                         <p class="app-value">{{$order->cleaning_datetime->format('h:i A')}}</p>
                                     </div>
                                     <div class="altrntive_rw">
-                                        <p class="appointment_label">Job</p>
-                                        <p class="app-value blue"><strong>{{@$order->title}}</strong></p>
+                                       
+                                     
+                                        <p class="appointment_label"> Job </p>
+                                        @foreach($order->items as $item)
+                                        
+                                        <p class="app-value blue"><strong>{{@$item->service_item->title}}</strong></p>
+                                        @endforeach
                                     </div>
                                     <div class="altrntive_rw">
                                         <p class="appointment_label">Est Duration</p>
@@ -44,10 +49,10 @@
                                         <a href="#" class="btn_b" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">Contact </a>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                             <li class="c_text">Contact information</li>
-                                            <li><a href="tel:512-558-5876" class="link-design-2 mt-3"><img src="{{asset('assets/images/icons/phone.svg')}}">512-558-5876</a></li>
-                                            <li><a href="mailto:example@mail.com" class="link-design-2"><img src="{{asset('assets/images/icons/email.svg')}}">example@mail.com</a></li>
-                                            <li><a href="#" class="link-design-2"><img src="{{asset('assets/images/icons/home.svg')}}">15648
-                                                    Maple St, Austin, TX 78744</a></li>
+                                            <li><a href="tel:512-558-5876" class="link-design-2 mt-3"><img src="{{asset('assets/images/icons/phone.svg')}}">{{@$order->cleaner->contact_number}} </a></li>
+                                            <li><a href="mailto:example@mail.com" class="link-design-2"><img src="{{asset('assets/images/icons/email.svg')}}">{{@$order->cleaner->email}} </a></li>
+                                           {{--  <li><a href="#" class="link-design-2"><img src="{{asset('assets/images/icons/home.svg')}}">15648
+                                                    Maple St, Austin, TX 78744</a></li> --}}
                                             <li class="chat_with_member"><a href="message.html" class="btn_chat_member">Chat With
                                                     Member<img src="{{asset('assets/images/icons/email-2.svg')}}" /></a></li>
                                         </ul>

@@ -121,7 +121,7 @@
                             <div class="card_search_result">
                                 <div class="like_img">
                                     @if ($user)
-                                        <input type="checkbox" class="like_1" wire:click="toggleFavouriteCleaner({{ $cleaner->id }})" {{ $user->favourites->where('cleaner_id', $cleaner->id )->first() == null ?: 'checked' }}>
+                                        <input type="checkbox" class="like_1" wire:click="toggleFavouriteCleaner({{ $cleaner->id }})" {{ $user->favourites->where('cleaner_id', $cleaner->id )->first() == null ? '' : 'checked' }}>
                                     @endif
                                     <div id="" class="profile-pic">
                                         @if ($cleaner->image)
@@ -220,7 +220,6 @@
         function addEventHandlerInSortByFilter() {
             $("#sortBy").on('select2:select', function(e) {
                 var data = e.params.data;
-                console.log(data);
                 @this.set('sortBy', data.id);
             });
         }
@@ -232,18 +231,5 @@
             var element = document.getElementById('address');
             makeAddressInputAutocompletable(element, addressChanged);
         });
-
-        /*
-        $(document).ready(function() {
-            $(".btn_filter_by ").click(function() {
-                $(".filter_by_div").toggleClass('active');
-                $(this).parent().toggleClass('active');
-            });
-            $(".close-btn").click(function() {
-                $(".filter_by_div").removeClass('active');
-                $(this).parent().removeClass('active');
-            });
-        });
-        */
     </script>
 </div>
