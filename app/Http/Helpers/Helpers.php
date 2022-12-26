@@ -70,6 +70,7 @@ function getDistance($latitude1, $longitude1, $latitude2, $longitude2) {
     $c = 2 * asin(sqrt($a));
     $d = $earth_radius * $c;
 
+
     return $d;
 }
 
@@ -77,9 +78,9 @@ function convertMeters( $meters, $unit = "miles" )
 {
     if ( $meters == 0 ) return 0;
 
-    $unit = strtolower( $unit );
+    $unit             = strtolower( $unit );
     $meters_in_a_mile = 1609.34;
-    $meters_in_a_km  = 1000;
+    $meters_in_a_km   = 1000;
 
     switch ( $unit ) {
         case "km":

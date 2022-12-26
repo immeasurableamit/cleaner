@@ -14,7 +14,7 @@ $days = \App\Models\User::getDays();
                 </div>
                 <div class="form_availibility">
                     <div class="yellow_header_availibility">
-                        
+
                         <div class="y_text day_of_weak">
                             <span>Day of Week</span>
                         </div>
@@ -28,7 +28,7 @@ $days = \App\Models\User::getDays();
                         </div>
                     </div>
                     <div class="availability_sheet">
-                        
+
                         @foreach($days as $day)
                             @php
                             $hours = $user->cleanerHours()->where('day', $day)->get();
@@ -36,7 +36,7 @@ $days = \App\Models\User::getDays();
 
                         <div class="availbility_cover {{ $day }} {{ count($hours)>0 ? 'show' : '' }}">
                             <div class="availability_row">
-                                
+
                                 <div class="btn_switch">
                                     <div class="form-check form-switch form-design-switch-1" data-day="{{ $day }}">
                                         <input class="form-check-input" type="checkbox" name="day[{{$day}}][selected]" {{ count($hours)>0 ? 'checked' : '' }}>
@@ -48,7 +48,7 @@ $days = \App\Models\User::getDays();
 
                                 <div class="time_input">
                                     <div class="addNewHoursLayout {{ $day }}  time-schedule-addon">
-                                        
+
                                         @if(count($hours)>0)
                                         @foreach($hours as $i => $hour)
                                         @php
@@ -57,7 +57,7 @@ $days = \App\Models\User::getDays();
                                         <div class="time-input-addon layout layout-{{$j}}">
 
                                             {!! Form::hidden('day['.$day.'][data]['.$j.'][id]', @$hour->id) !!}
-                                            
+
                                             {!! Form::hidden('day['.$day.'][data]['.$j.'][delete]', 'no', ['class'=>'delete']) !!}
 
                                             {!! Form::time('day['.$day.'][data]['.$j.'][from_time]', @$hour->from_time ?? null, ['class' => ($errors->has('from_time') ? ' is-invalid' : '')]) !!}
@@ -84,18 +84,11 @@ $days = \App\Models\User::getDays();
                                 <div class="add_more">
                                     <button type="button" class="border-0 bg-none add-time-slots" data-day="{{ $day }}">+</button>
                                 </div>
-
-                                {{--
-                                <div class="unavailable_2">
-                                    <p>Unavailable</p>
-                                </div>
-                                --}}
                             </div>
                         </div>
                         @endforeach
-                        
+
                     </div>
-                    
                     <button type="submit" class="btn_blue mt-4">Save</button>
                 </div>
             </div>

@@ -37,8 +37,8 @@ class HomeController extends Controller
 	{
 
         /* default search paramters will be used when
-         * customer comes to search page by clicking browse
-         * now button etc.
+         * customer comes to search page directly ( by clicking browse cleaners )
+         *
          */
         if ( empty( $request->query() ) ){
             $defaultParameters = getDefaultParametersForSearchPage();
@@ -82,7 +82,6 @@ class HomeController extends Controller
             'homeSize'      => $request->homeSize,
             'latitude'      => $request->latitude,
             'longitude'     => $request->longitude,
-
         ];
 
 		return view('home.search-result', $searchParamters );

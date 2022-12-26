@@ -128,7 +128,9 @@ class User extends Authenticatable implements MustVerifyEmail
             (float) $this->UserDetails->serve_center_lng,
         );
 
-        return $distanceInKm <= convertMeters( $this->serve_radius_in_meters, "km" );
+
+        $radiusInKm = convertMeters( $this->UserDetails->serve_radius_in_meters, "km" );
+        return $distanceInKm <= $radiusInKm;
     }
 
     /* Customer user function */
