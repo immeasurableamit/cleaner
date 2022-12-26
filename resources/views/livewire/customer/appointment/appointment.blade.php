@@ -22,7 +22,7 @@
 
                     <div class="card_service_row appoitments-alternative-row row">
                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                            @foreach($orders as $order)
+                           @forelse($orders as $order)
                             <div class="select-date-toggles">
                                 <button class="service_toggle_s"></button>
                                 <div class="service-main-service-column">
@@ -31,11 +31,11 @@
                                         <p class="app-value">{{$order->cleaning_datetime->format('h:i A')}}</p>
                                     </div>
                                     <div class="altrntive_rw">
-                                       
-                                     
+
+
                                         <p class="appointment_label"> Job </p>
                                         @foreach($order->items as $item)
-                                        
+
                                         <p class="app-value blue"><strong>{{@$item->service_item->title}}</strong></p>
                                         @endforeach
                                     </div>
@@ -51,8 +51,8 @@
                                             <li class="c_text">Contact information</li>
                                             <li><a href="tel:512-558-5876" class="link-design-2 mt-3"><img src="{{asset('assets/images/icons/phone.svg')}}">{{@$order->cleaner->contact_number}} </a></li>
                                             <li><a href="mailto:example@mail.com" class="link-design-2"><img src="{{asset('assets/images/icons/email.svg')}}">{{@$order->cleaner->email}} </a></li>
-                                           {{--  <li><a href="#" class="link-design-2"><img src="{{asset('assets/images/icons/home.svg')}}">15648
-                                                    Maple St, Austin, TX 78744</a></li> --}}
+                                            {{-- <li><a href="#" class="link-design-2"><img src="{{asset('assets/images/icons/home.svg')}}">15648
+                                            Maple St, Austin, TX 78744</a></li> --}}
                                             <li class="chat_with_member"><a href="message.html" class="btn_chat_member">Chat With
                                                     Member<img src="{{asset('assets/images/icons/email-2.svg')}}" /></a></li>
                                         </ul>
@@ -79,12 +79,14 @@
                                     <a href="#">Make Payment Early</a>
                                 </div>
                             </div>
-                            @endforeach
+                          
+                            @empty
+                        <p>No bookings for selected date </p>
+                        @endforelse
 
                         </div>
 
-
-
+                       
                     </div>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 @php
 $days = \App\Models\User::getDays();
+
 @endphp
 
 

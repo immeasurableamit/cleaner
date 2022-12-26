@@ -38,7 +38,7 @@
                   <div class="customer_profile-info">
                     <div class="d-flex align-items-center position-relative">
                       <div class="customer-pro-img">
-                        <img src="{{asset('/assets/images/thumbnail.png')}}">
+                        <img src="{{asset('storage/images/'.auth()->user()->image)}}">
                       </div>
                       <div class="customer-pro-cntnt">
                      
