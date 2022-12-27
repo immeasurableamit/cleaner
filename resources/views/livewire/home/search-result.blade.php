@@ -225,6 +225,7 @@
         }
 
         window.addEventListener('load', () => {
+
             addDatePickerInStartDateFilter();
             addEventHandlerInSortByFilter();
 

@@ -11,8 +11,6 @@ class Order extends Model
 {
     use HasFactory;
 
-    
-
     protected $guarded = [];
     protected $appends = ['name'];
 
@@ -37,7 +35,7 @@ class Order extends Model
         return $this->belongsTo(ServicesItems::class);
     }
 
- 
+
     public function items()
     {
         return $this->hasMany( OrderItem::class );
@@ -65,11 +63,11 @@ class Order extends Model
 
     public function userTransaction()
     {
-        return $this->hasOne( Transaction::class, 'user_id', 'user_id' );        
+        return $this->hasOne( Transaction::class, 'user_id', 'user_id' );
     }
 
     public function cleanerTransaction()
     {
-        return $this->hasOne( Transaction::class, 'user_id', 'cleaner_id' );        
+        return $this->hasOne( Transaction::class, 'user_id', 'cleaner_id' );
     }
 }
