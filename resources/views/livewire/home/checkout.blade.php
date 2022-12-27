@@ -423,7 +423,7 @@
                                 <a href="#" class="link-design-2 d-block pb-3">Please inform your provider about
                                     any future changes or cancellations as soon as possible. </a>
                                 <div class="py-3 border-top cancel_order_div">
-                                    <p>Something Wrong? <span class="cancel-order_span"><a href="#">Cancel order
+                                    <p>Something Wrong? <span class="cancel-order_span"><a href="javascript::void(0)" wire:click="alertConfirm({{ $order->id }})">Cancel order
                                             </a> and start again.</span></p>
                                 </div>
                             </div>

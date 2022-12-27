@@ -71,6 +71,7 @@ class Account extends Component
           
             $user = User::find($this->userId);
             $userdetail = $user->UserDetails;
+
             if ($action == 'contact_number') {
                 $user->contact_number = $this->contact_number;
              
@@ -79,6 +80,10 @@ class Account extends Component
             if ($action == 'address') {
               
                 $userdetail->address = $this->address;
+            }
+            if ($action == 'timezone') {
+              
+                $userdetail->timezone = $this->timezone;
             }
             $userdetail->update();
             $this->fieldStatus = false;

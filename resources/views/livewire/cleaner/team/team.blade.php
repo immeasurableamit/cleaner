@@ -24,39 +24,39 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" id="closeexample" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-<div class="row">
-                            <div class="form-grouph input-design mb-30 col-md-6">
-                                <p class="appointment_label">First Name</p>
-                                <input type="text" wire:model="first_name" placeholder="Enter your First Name" />
-                                @error('first_name')<div class="alert ">{{ $message }}</div>@enderror
+                            <div class="row">
+                                <div class="form-grouph input-design mb-30 col-md-6">
+                                    <p class="appointment_label">First Name</p>
+                                    <input type="text" wire:model="first_name" placeholder="Enter your First Name" />
+                                    @error('first_name')<div class="alert ">{{ $message }}</div>@enderror
+                                </div>
+                                <div class="form-grouph input-design mb-30 col-md-6">
+                                    <p class="appointment_label">Last Name</p>
+                                    <input type="text" wire:model="last_name" placeholder="Enter your Last Name" />
+                                    @error('last_name')<div class="alert ">{{ $message }}</div>@enderror
+                                </div>
                             </div>
-                            <div class="form-grouph input-design mb-30 col-md-6">
-                                <p class="appointment_label">Last Name</p>
-                                <input type="text" wire:model="last_name" placeholder="Enter your Last Name" />
-                                @error('last_name')<div class="alert ">{{ $message }}</div>@enderror
-                            </div>
-</div>
                             <div class="form-grouph input-design mb-30">
                                 <p class="appointment_label">Insured?</p>
-                                <input type="text" wire:model="insured" placeholder="Insured"/>
+                                <input type="text" wire:model="insured" placeholder="Insured" />
                                 @error('insured')<div class="alert ">{{ $message }}</div>@enderror
 
                             </div>
                             <div class="row">
-                            <div class="form-grouph input-design mb-30 col-md-6">
-                                <p class="appointment_label">Phone</p>
-                                <input type="number" wire:model="contact_number" placeholder="Enter your Contact Name"/>
-                                @error('contact_number')<div class="alert ">{{ $message }}</div>@enderror
-                            </div>
-                            <div class="form-grouph input-design mb-30 col-md-6">
-                                <p class="appointment_label">Email</p>
-                                <input type="email" wire:model="email" placeholder="Enter your Email"/>
-                                @error('email')<div class="alert ">{{ $message }}</div>@enderror
-                            </div>
+                                <div class="form-grouph input-design mb-30 col-md-6">
+                                    <p class="appointment_label">Phone</p>
+                                    <input type="number" wire:model="contact_number" placeholder="Enter your Contact Name" />
+                                    @error('contact_number')<div class="alert ">{{ $message }}</div>@enderror
+                                </div>
+                                <div class="form-grouph input-design mb-30 col-md-6">
+                                    <p class="appointment_label">Email</p>
+                                    <input type="email" wire:model="email" placeholder="Enter your Email" />
+                                    @error('email')<div class="alert ">{{ $message }}</div>@enderror
+                                </div>
                             </div>
                             <div class="form-grouph input-design mb-30">
                                 <p class="appointment_label">Address</p>
-                                <input type="address" wire:model="address" placeholder="Enter your Address"/>
+                                <input type="address" id='address' wire:model="address" placeholder="Enter your Address" />
                                 @error('address')<div class="alert ">{{ $message }}</div>@enderror
                             </div>
                             <div class="form-grouph input-design mb-30">
@@ -64,8 +64,8 @@
                                 <input type="number" wire:model="ssn_or_tax" placeholder="Enter your SSN/TIN" />
                                 @error('ssn_or_tax')<div class="alert ">{{ $message }}</div>@enderror
                             </div>
-                            <div class="modal-footer form-grouph submit-design mb-30" >
-                               {{--   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>  --}}
+                            <div class="modal-footer form-grouph submit-design mb-30">
+                                {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>  --}}
                                 <button wire:click="store()" class="subit-btn-2">Save</button>
                             </div>
 
@@ -135,29 +135,29 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                    <div class="form-grouph input-design mb-30 col-md-6">
-                        <p class="appointment_label">First Name</p>
-                        <input type="text" wire:model="first_name" />
-                        @error('first_name')<div class="alert ">{{ $message }}</div>@enderror
-                    </div>
-                    <div class="form-grouph input-design mb-30 col-md-6">
-                        <p class="appointment_label">Last Name</p>
-                        <input type="text" wire:model="last_name" />
-                        @error('last_name')<div class="alert ">{{ $message }}</div>@enderror
-                    </div>
+                        <div class="form-grouph input-design mb-30 col-md-6">
+                            <p class="appointment_label">First Name</p>
+                            <input type="text" wire:model="first_name" />
+                            @error('first_name')<div class="alert ">{{ $message }}</div>@enderror
+                        </div>
+                        <div class="form-grouph input-design mb-30 col-md-6">
+                            <p class="appointment_label">Last Name</p>
+                            <input type="text" wire:model="last_name" />
+                            @error('last_name')<div class="alert ">{{ $message }}</div>@enderror
+                        </div>
                     </div>
                     <div class="row">
-                    <div class="form-grouph input-design mb-30 col-md-6">
-                        <p class="appointment_label">Insured?</p>
-                        <input type="text" wire:model="insured" />
-                        @error('insured')<div class="alert ">{{ $message }}</div>@enderror
+                        <div class="form-grouph input-design mb-30 col-md-6">
+                            <p class="appointment_label">Insured?</p>
+                            <input type="text" wire:model="insured" />
+                            @error('insured')<div class="alert ">{{ $message }}</div>@enderror
 
-                    </div>
-                    <div class="form-grouph input-design mb-30 col-md-6">
-                        <p class="appointment_label">Phone</p>
-                        <input type="number" wire:model="contact_number" />
-                        @error('contact_number')<div class="alert ">{{ $message }}</div>@enderror
-                    </div>
+                        </div>
+                        <div class="form-grouph input-design mb-30 col-md-6">
+                            <p class="appointment_label">Phone</p>
+                            <input type="number" wire:model="contact_number" />
+                            @error('contact_number')<div class="alert ">{{ $message }}</div>@enderror
+                        </div>
                     </div>
                     <div class="form-grouph input-design mb-30">
                         <p class="appointment_label">Email</p>
@@ -175,7 +175,7 @@
                         @error('ssn_or_tax')<div class="alert ">{{ $message }}</div>@enderror
                     </div>
                     <div class="modal-footer form-grouph submit-design mb-30">
-                       {{--  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
+                        {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
 
                         <a href="javascript::void(0)" wire:click="update()" class="subit-btn-2">Update</a>
                     </div>
@@ -184,4 +184,51 @@
         </div>
     </div>
     <!-- end updateModel -->
+
+
+
+    @push('scripts')
+    <script>
+        window.addEventListener('load', () => {
+            var address_input_in_banner = document.getElementById('address');
+           
+            makeAddressInputAutocompletable(address_input_in_banner, (gmap_place) => {
+                debugger;
+                document.getElementById('latitude').value = gmap_place.geometry.location.lat();
+                document.getElementById('longitude').value = gmap_place.geometry.location.lng();
+            })
+        });
+    </script>
+
+
+    <script>
+        // function fillAddressFieldsInForm(gmap_place)
+        //     {
+        //         debugger;
+        //       var parsed_gmap_place = parseGmapPlace( gmap_place );
+
+        //       if ( parsed_gmap_place.city ) {
+        //         document.getElementById('city').value = parsed_gmap_place.city;
+        //       }
+
+        //       if ( parsed_gmap_place.zip ) {
+        //         document.getElementById('zip').value = parsed_gmap_place.zip;
+        //       }
+
+        //       document.getElementById('latitude').value  = parsed_gmap_place.lat;
+        //       document.getElementById('longitude').value = parsed_gmap_place.lng;
+
+        //     }
+
+
+        // window.addEventListener('load', function() {
+
+        //       var address_input = document.getElementById('address');
+
+        //       makeAddressInputAutocompletable( address_input, fillAddressFieldsInForm );
+        //     //   debugger;
+        //     });
+    </script>
+    @endpush
+
 </div>

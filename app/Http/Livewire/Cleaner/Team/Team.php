@@ -105,12 +105,18 @@ class Team extends Component
     public function deleteConfirm($iid)
     {
         $this->user_id = $iid;
-        $this->dispatchBrowserEvent('swal:confirm', [
-            'type' => 'warning',
-            'message' => 'Are you sure?',
-            'text' => 'If deleted, you will not be able to recover this imaginary file!',
-
-        ]);
+        
+        $this->alert('warning', 'Are you sure do want to delete?', [
+			'toast' => false,
+			'position' => 'center',
+			'showCancelButton' => true,
+			'cancelButtonText' => 'Cancel',
+			'showConfirmButton' => true,
+			'confirmButtonText' => 'Delete it',
+			'onConfirmed' => 'delete',  
+			'timer' => null
+		]);
+        
     }
 
     public function delete()

@@ -49,7 +49,10 @@ class Checkout extends Component
 
     /* Third Step */
     public $order, $notes, $billing, $userCard;
+    // 
 
+    protected $listeners = ['cancelOrder'];
+    public $user_id, $getCleanerId;
 
     protected function prepareServiceAddOnsAndEstimatedDurationProps()
     {
@@ -462,14 +465,53 @@ class Checkout extends Component
         $this->handleLoggedInUser();
 
         /* assigning default because we're removing apple and google pay */
-        $this->paymentMethod = 'credit_card'; 
+        $this->paymentMethod = 'credit_card';
     }
 
     public function updatedFormattedNumber($value)
     {
-        $this->formattedNumber = wordwrap( $value, 4, " ", true); // add space after each 4 characters
-        $this->number = str_replace( " ", "", $this->formattedNumber); // set number for stripe verification
+        $this->formattedNumber = wordwrap($value, 4, " ", true); // add space after each 4 characters
+        $this->number = str_replace(" ", "", $this->formattedNumber); // set number for stripe verification
     }
+
+
+    // ... aman
+
+
+    public function alertConfirm($iid)
+    {
+        $this->user_id = $iid;
+    
+        $this->alert('warning', 'Are you sure do want to delete?', [
+			'toast' => false,
+			'position' => 'center',
+			'showCancelButton' => true,
+			'cancelButtonText' => 'Cancel',
+			'showConfirmButton' => true,
+			'confirmButtonText' => 'Delete it',
+			'onConfirmed' => 'cancelOrder',
+			'timer' => null
+		
+        ]);
+    }
+    public function cancelOrder()
+    {
+        if ($this->user_id) {
+            $orderCancelledByCustomer = Order::find($this->user_id)->first();
+            $this->getCleanerId = $orderCancelledByCustomer['cleaner_id'];
+            // dd($orderCancelledByCustomer);
+            // $orderCancelledByCustomer = $orderId['status'] = "cancelled_by_customer"; 
+            $orderCancelledByCustomer->update([
+                'status' => 'cancelled_by_customer',
+            ]);
+        }
+      
+        $this->alert('success', 'Your Order Cancelled successfully');
+
+        return redirect()->route('profile',$this->getCleanerId);
+    }
+
+
 
     public function render()
     {

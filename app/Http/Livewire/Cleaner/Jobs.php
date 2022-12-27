@@ -23,7 +23,7 @@ class Jobs extends Component
 
     public $selectedDate, $orders, $selectedDateOrders, $events;
 
-    protected $pendingOrderStatuses = ['pending', 'rejected'];
+    protected $pendingOrderStatuses = ['pending', 'rejected', 'cancelled_by_customer'];
 
     protected $listeners = [
         'cancelOrder'
@@ -81,10 +81,7 @@ class Jobs extends Component
 
     protected function renderOrders()
     {
-        $orders                   = $this->getOrdersForSelectedTab();
-
-
-        dd( $orders );
+        $orders = $this->getOrdersForSelectedTab();
         $this->selectedDateOrders = $orders->filter(function($order) {
             return $order->cleaning_datetime->startOfDay()->equalTo( $this->selectedDate );
         });
@@ -123,17 +120,14 @@ class Jobs extends Component
     {
         if ( $this->selectedTab == 1 ) {
             $orders = $this->getAcceptedOrders();
+
         } else {
             $orders = $this->getPendingOrders();
+
         }
 
         return $orders;
     }
-
-
-
-
-
 
 
     protected function addAttributesInOrders()
@@ -277,6 +271,7 @@ class Jobs extends Component
 
     public function updated($name)
     {
+
         if ( $name == "selectedTab" ) {
             $this->renderCalendar();
             $this->renderOrders();

@@ -6,11 +6,19 @@ use Livewire\Component;
 use App\Models\Order;
 use App\Models\OrderItem;
 use \Carbon\Carbon;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+
 
 class Appointment extends Component
 {
+
+    use LivewireAlert;
+
+    public $selectedTab  = 1;
     public $selectedDate, $events, $selectedDateOrders;
-    public $orders;
+    public $orders, $user_id;
+    protected $listeners = ['orderCanclledByCustomer'];
+    protected $pendingOrderStatuses = ['pending', 'rejected', 'cancelled_by_customer'];
 
 
     public function mount()
@@ -22,9 +30,9 @@ class Appointment extends Component
     public function prepareOrdersPro()
     {
         $orders = Order::with('items.service_item')->where('user_id', auth()->user()->id)->get();
-        // dd( $orders);
+
         $this->orders = $orders;
-      
+
         $this->dispatchBrowserEvent('prepareOrdersPro', ['orders' => $orders]);
 
         return  true;
@@ -36,7 +44,7 @@ class Appointment extends Component
 
         $events = $orders->map(function ($order) {
             $cleaningDateTime = Carbon::parse($order->cleaning_datetime);
-          
+
             $event = [
                 'id'    => $order->id,
                 'title' => $cleaningDateTime->format("h:i A"),
@@ -44,11 +52,9 @@ class Appointment extends Component
             ];
             return $event;
         })->values();
-// dd($events);
+
         return $events;
     }
-
-
 
     public function prepare()
     {
@@ -58,13 +64,10 @@ class Appointment extends Component
     }
 
 
-
     public function renderCalendar()
     {
-
         $events = $this->parseOrdersForCalendarEvents($this->orders);
         $this->events = $events;
-
 
         $this->dispatchBrowserEvent('renderCalendar', ['events' => $events]);
         return true;
@@ -74,9 +77,60 @@ class Appointment extends Component
     {
         $this->prepareOrdersPro();
         $this->renderCalendar();
+        $this->renderOrders();
     }
 
+    // 
 
+
+    public function updated($propertyname)
+    {
+
+        if ($propertyname == "selectedDate") {
+            $this->renderOrders();
+        }
+    }
+
+    public function renderOrders()
+    {
+        $this->selectedDateOrders = $this->orders->filter(function($order) {
+            return $order->cleaning_datetime->startOfDay()->equalTo( $this->selectedDate );
+        });
+
+        $this->dispatchBrowserEvent('renderOrders');
+        return true;
+    }
+
+    /* Order cancelled by customer */
+
+    public function cancleOrder($iid)
+    {
+        $this->user_id = $iid;
+
+        $this->alert('warning', 'Are you sure do want to delete?', [
+            'toast' => false,
+            'position' => 'center',
+            'showCancelButton' => true,
+            'cancelButtonText' => 'Cancel',
+            'showConfirmButton' => true,
+            'confirmButtonText' => 'Delete it',
+            'onConfirmed' => 'orderCanclledByCustomer',
+            'timer' => null
+        ]);
+    }
+
+    public function orderCanclledByCustomer()
+    {
+        if ($this->user_id) {
+            $orderCancelledByCustomer =  Order::find($this->user_id)->first();
+
+            $this->getCleanerId = $orderCancelledByCustomer['cleaner_id'];
+            $orderCancelledByCustomer->update([
+                'status' => 'cancelled_by_customer',
+            ]);
+        }
+        $this->alert('success', 'Your order Cancelled Successfully');
+    }
 
     public function render()
     {
