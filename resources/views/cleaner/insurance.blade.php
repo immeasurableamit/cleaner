@@ -49,7 +49,12 @@
 
                                     <div class="form-check form-switch form-design-switch-1">
                                       <img src="/assets/images/badges.svg">
-                                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" oninput="toggleOrganicService(this)">
+                                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" oninput="toggleOrganicService(this)"
+                                      @if ( $user->UserDetails->provide_organic_service == 1)
+                                        checked
+                                    @endif
+
+                                      >
                                       <label class="form-check-label" for="flexSwitchCheckChecked">Organic service offered upon Requred</label>
                                     </div>
                                  </div>

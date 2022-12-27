@@ -88,9 +88,10 @@ class Profile extends Component
             'rating' => 0,
             'completed_orders' => $completedOrders,
             'total_team'       => $totalMembersOfCleanerTeam,
-            'is_insured'       => true,
-            'is_organic'       => true,
+            'is_insured'       => $this->cleaner->UserDetails->is_insured == 1,
+            'is_organic'       => $this->cleaner->UserDetails->provide_organic_service == 1,
         ];
+
 
         return true;
     }

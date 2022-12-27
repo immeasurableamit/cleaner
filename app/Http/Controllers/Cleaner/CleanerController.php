@@ -64,7 +64,12 @@ class CleanerController extends Controller
         $user   = auth()->user();
         $policy = thimbleSearchPolicyByEmail( $user->email );
 
-        return view('cleaner.insurance', compact('policy')  );
+        if ( ! empty( $policy ) && $user->UserDetails->is_insured == 0 ){
+            $user->UserDetails->is_insured = 1;
+            $user->UserDetails->save();
+        }
+
+        return view('cleaner.insurance', compact('policy','user')  );
     }
 
     public function redirectToInsuranceProvider()
@@ -76,9 +81,10 @@ class CleanerController extends Controller
 
     public function toggleOrganicService()
     {
-        $user = auth()->user();
+        $user        = auth()->user();
         $userDetails = $user->UserDetails;
-        $userDetails->provide_organic_service = $UserDetails->provide_organic_service == 1 ? 0 : 1;
+
+        $userDetails->provide_organic_service = $userDetails->provide_organic_service == 1 ? 0 : 1;
         $userDetails->save();
         return response()->json(['succcess' => true]);
     }
