@@ -22,8 +22,8 @@ class CleanerController extends Controller
         $latLngForMap        = [];
         $radiusInMilesForMap = 25;
 
-        $serveLocationAlreadySet          = $userDetails->serve_center_lat &&  $userDetails->serve_center_lng && $userDetails->serve_radius_in_meters;
-        $userLocationCoordinatesAvailable = $userDetails->latitude && $userDetails->longitude;
+        $serveLocationAlreadySet                 = $userDetails->serve_center_lat &&  $userDetails->serve_center_lng && $userDetails->serve_radius_in_meters;
+        $userAddressLocationCoordinatesAvailable = $userDetails->latitude && $userDetails->longitude;
 
         if ( $serveLocationAlreadySet ) {
 
@@ -31,7 +31,7 @@ class CleanerController extends Controller
             $latLngForMap['lng'] = (float) $userDetails->serve_center_lng;
             $radiusInMilesForMap = (int)   convertMeters( $userDetails->serve_radius_in_meters, "miles" );
 
-        } elseif ( $userLocationCoordinatesAvailable ) {
+        } elseif ( $userAddressLocationCoordinatesAvailable ) {
 
             $latLngForMap['lat'] = (float) $userDetails->latitude;
             $latLngForMap['lng'] = (float) $userDetails->longitude;
@@ -59,4 +59,27 @@ class CleanerController extends Controller
         return redirect()->route('cleaner.set-location-page');
     }
 
+    public function showInsurancePage()
+    {
+        $user   = auth()->user();
+        $policy = thimbleSearchPolicyByEmail( $user->email );
+
+        return view('cleaner.insurance', compact('policy')  );
+    }
+
+    public function redirectToInsuranceProvider()
+    {
+        $user          = auth()->user();
+        $insuranceLink = thimbleGenerateBuyInsuranceLinkFor($user);
+        return redirect($insuranceLink);
+    }
+
+    public function toggleOrganicService()
+    {
+        $user = auth()->user();
+        $userDetails = $user->UserDetails;
+        $userDetails->provide_organic_service = $UserDetails->provide_organic_service == 1 ? 0 : 1;
+        $userDetails->save();
+        return response()->json(['succcess' => true]);
+    }
 }

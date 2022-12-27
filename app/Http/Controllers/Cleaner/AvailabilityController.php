@@ -67,13 +67,12 @@ class AvailabilityController extends Controller
         $daysArray = [];
         if ($request->day) {
             foreach ($request->day as $day => $daysData) {
-
                 if(@$daysData['selected']=='on' && @$daysData['data']) {
 
                     array_push($daysArray, $day);
                     //dd($daysData['data']);
                     foreach(@$daysData['data'] as $data){
-                        
+
                         if(@$data['delete']=='yes'){
                             $checkHour = CleanerHours::find($data['id']);
 
@@ -100,6 +99,8 @@ class AvailabilityController extends Controller
                             }
                         }
                     }
+                } else {
+
                 }
             }
         }

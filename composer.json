@@ -36,7 +36,8 @@
 	"files": [
 		"app/Helpers/cleaners.php",
 		"app/Helpers/stripe.php",
-		"app/Helpers/basic.php"
+		"app/Helpers/basic.php",
+        "app/Helpers/thimble.php"
 	]
     },
     "autoload-dev": {
