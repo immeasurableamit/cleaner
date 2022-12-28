@@ -64,7 +64,31 @@
 
     $(document).on('click', '.form-switch', function(){
         var day = $(this).attr('data-day');
-        $('.availbility_cover.'+day).toggleClass('show');
+		
+		var inpCheckbox = $(this).find('input.form-check-input');
+		
+		if($('.availbility_cover.'+day).hasClass('show')){
+			$('.availbility_cover.'+day).removeClass('show');
+			inpCheckbox.val('off');
+		}
+		else {
+			$('.availbility_cover.'+day).addClass('show');
+			inpCheckbox.val('on');
+		}
+		
+		
+		
+		
+		
+		/* if (inpCheckbox.prop('checked')==true){ 
+			//do something
+			inpCheckbox.val('on');
+		}
+		else {
+			inpCheckbox.val('off');
+		} */
+		
+        
     });
 
 
