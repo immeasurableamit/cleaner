@@ -38,7 +38,7 @@ $days = \App\Models\User::getDays();
 
                                 <div class="btn_switch">
                                     <div class="form-check form-switch form-design-switch-1" data-day="{{ $day }}">
-                                        <input class="form-check-input" type="checkbox" name="day[{{$day}}][selected]" {{ count($hours)>0 ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="day[{{$day}}][selected]" value="{{ count($hours)>0 ? 'on' : 'off' }}" {{ count($hours)>0 ? 'checked' : '' }}>
                                         <label class="form-check-label d-none d-md-block" for="">{{ $day }}</label>
                                         <label class="form-check-label d-block d-md-none" for="">{{ $day }}</label>
                                     </div>

@@ -63,41 +63,42 @@ class AvailabilityController extends Controller
         ]);
 
         $user = auth()->user();
-
+dd($request->day);
         $daysArray = [];
         if ($request->day) {
             foreach ($request->day as $day => $daysData) {
-                if(@$daysData['selected']=='on' && @$daysData['data']) {
+                if(@$daysData['selected']=='on') {
+					if(@$daysData['data']){
+						array_push($daysArray, $day);
+						//dd($daysData['data']);
+						foreach(@$daysData['data'] as $data){
 
-                    array_push($daysArray, $day);
-                    //dd($daysData['data']);
-                    foreach(@$daysData['data'] as $data){
+							if(@$data['delete']=='yes'){
+								$checkHour = CleanerHours::find($data['id']);
 
-                        if(@$data['delete']=='yes'){
-                            $checkHour = CleanerHours::find($data['id']);
+								if (@$checkHour) {
+									$checkHour->delete();
+								}
 
-                            if (@$checkHour) {
-                                $checkHour->delete();
-                            }
-
-                        }
-                        else {
-                            if (@$data['from_time'] && $data['to_time']) {
-                                $hour = new CleanerHours;
-                                if (@$data['id']) {
-                                    $checkHour = CleanerHours::find($data['id']);
-                                    if (@$checkHour) {
-                                        $hour->id = $checkHour->id;
-                                        $hour->exists = true;
-                                    }
-                                }
-                                $hour->users_id = $user->id;
-                                $hour->day = $day;
-                                $hour->from_time = $data['from_time'];
-                                $hour->to_time = $data['to_time'];
-                                $hour->save();
-                            }
-                        }
+							}
+							else {
+								if (@$data['from_time'] && $data['to_time']) {
+									$hour = new CleanerHours;
+									if (@$data['id']) {
+										$checkHour = CleanerHours::find($data['id']);
+										if (@$checkHour) {
+											$hour->id = $checkHour->id;
+											$hour->exists = true;
+										}
+									}
+									$hour->users_id = $user->id;
+									$hour->day = $day;
+									$hour->from_time = $data['from_time'];
+									$hour->to_time = $data['to_time'];
+									$hour->save();
+								}
+							}
+						}
                     }
                 } else {
 					$deleteDay = CleanerHours::where(['day'=>$day, 'users_id'=>$user->id])->get();
