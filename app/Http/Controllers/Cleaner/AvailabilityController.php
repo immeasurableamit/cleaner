@@ -100,19 +100,22 @@ class AvailabilityController extends Controller
                         }
                     }
                 } else {
-
+					$deleteDay = CleanerHours::where(['day'=>$day, 'users_id'=>$user->id])->get();
+					foreach($deleteDay as $delDays){
+						$delDays->delete();
+					}
                 }
             }
         }
 
-        if($daysArray){
+        /* if($daysArray){
             $deleteDay = CleanerHours::whereNotIn('day', $daysArray)
                         ->where('users_id', $user->id)
                         ->get();
             foreach($deleteDay as $delDays){
                 $delDays->delete();
             }
-        }
+        } */
 
 
         //...
