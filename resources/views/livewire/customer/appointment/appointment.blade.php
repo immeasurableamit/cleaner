@@ -21,7 +21,7 @@
 
                     <div class="card_service_row appoitments-alternative-row row">
                      {{--    @forelse($orders as $order)  --}}
-                       @forelse($selectedDateOrders as $order) 
+                       @forelse($selectedDateOrders as $order)
                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
 
                             <div class="select-date-toggles">
@@ -68,18 +68,23 @@
                                     </div>
                                     <div class="altrntive_rw">
                                         <p class="appointment_label">Status</p>
+                                        <div class="text-center align-center " style="margin-right: 3px;">
+                                            {{ $order->statusForCustomer() }}
+                                        </div>
                                         <a class="btn_q">Reschedule</a>
-                                        <a href="javascript::void(0)" class="btn_x" wire:click= "cancleOrder({{$order->id}})">Cancel</a> 
+                                        <a href="javascript::void(0)" class="btn_x" wire:click= "cancleOrder({{$order->id}})">Cancel</a>
                                     </div>
                                     <div class="altrntive_rw">
                                         <p class="appointment_label">Payment</p>
-                                        <p class="app-value">**2345 <a href="#" class="link-design-2">Edit</a></p>
+                                        <p class="app-value">**2345 <a href="#" clas  s="link-design-2">Edit</a></p>
                                     </div>
                                 </div>
+
+                                {{--
                                 <div class="make-payment-early">
                                 @if ( $order->status == 'rejected' )
                                         <a href="#" class="refuse-request-btn crd-btn">Request Refused</a>
-                                   
+
                                     @elseif ( $order->status == 'cancelled')
                                         <a href="javascript:void();" class="refuse-request-btn crd-btn">Cancelled</a>
                                         @elseif ( $order->status == ' cancelled_by_customer')
@@ -88,11 +93,11 @@
                                         <a href="#" wire:click="completeOrder( {{ $order->id }} )" class="sucess-msg crd-btn">Make Payment Early</a>
                                         @elseif ( $order->status == 'pending' )
                                         <a href="javascript:void();" class="refuse-request-btn crd-btn">Pending</a>
-                                       
+
                                         @endif
-                                   
-                                    {{-- <a href="#">Make Payment Early</a> --}}
+
                                 </div>
+                                --}}
                             </div>
 
                         </div>

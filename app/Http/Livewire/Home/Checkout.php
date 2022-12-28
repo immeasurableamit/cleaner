@@ -49,7 +49,7 @@ class Checkout extends Component
 
     /* Third Step */
     public $order, $notes, $billing, $userCard;
-    // 
+    //
 
     protected $listeners = ['cancelOrder'];
     public $user_id, $getCleanerId;
@@ -104,8 +104,8 @@ class Checkout extends Component
         return true;
     }
     /*
-     * Prepare properties to make the component work 
-     * 
+     * Prepare properties to make the component work
+     *
      */
     protected function prepare()
     {
@@ -139,7 +139,7 @@ class Checkout extends Component
     /*
      * Used for authenticating customers that are
      * already have an account with us.
-     * 
+     *
      */
     public function authenticateUser()
     {
@@ -226,15 +226,15 @@ class Checkout extends Component
         ]);
 
 
-        // TODO: store lat/lng 
+        // TODO: store lat/lng
 
         return $userDetails;
     }
 
     /*
-     * 
+     *
      * @return: object ( instance of App\Models\User )
-     * 
+     *
      */
     protected function storeUserAsCustomer()
     {
@@ -246,6 +246,7 @@ class Checkout extends Component
             'password'   => Hash::make($this->password),
             'status'     => '1',
             'contact_number' => $this->contact,
+            'email_verified_at' => now(),
         ]);
 
         $this->storeUserDetails($user->id);
@@ -255,9 +256,9 @@ class Checkout extends Component
 
     /*
      * @param: int $user_id ( primary key of App\Models\User )
-     * 
+     *
      * @return: object ( instance of App\Models\Order )
-     * 
+     *
      */
     protected function storeOrder($user_id)
     {
@@ -288,7 +289,7 @@ class Checkout extends Component
 
     /*
      * @param: int $order_id ( primary key of App\Models\Order )
-     * 
+     *
      * @return: int (number of items inserted in DB)
      */
 
@@ -318,9 +319,9 @@ class Checkout extends Component
     // ......
     /*
      * @param: int $user_id ( primary key of App\Models\User )
-     * 
+     *
      * @return: object ( instance of App\Models\BillingAddress )
-     * 
+     *
      */
     protected function storeBillingAddress($user_id)
     {
@@ -343,9 +344,9 @@ class Checkout extends Component
 
     /*
      * @param: int $user_id ( primary key of App\Models\User )
-     * 
+     *
      * @return: object ( instance of App\Models\UserCard )
-     * 
+     *
      */
     protected function storeUserCard($user_id)
     {
@@ -385,7 +386,7 @@ class Checkout extends Component
     /*
      * 1. Validate credit card
      * 2. Store new customer in stripe along attaching the card with it
-     * 
+     *
      * @return: array
      */
     protected function handleCreditCardPaymentMethodSelection()
@@ -409,9 +410,9 @@ class Checkout extends Component
 
     /*
      * Store order and data related to it in DB
-     * 
-     * @return: App\Models\Order 
-     * 
+     *
+     * @return: App\Models\Order
+     *
      */
     protected function placeOrder()
     {
@@ -481,7 +482,7 @@ class Checkout extends Component
     public function alertConfirm($iid)
     {
         $this->user_id = $iid;
-    
+
         $this->alert('warning', 'Are you sure do want to delete?', [
 			'toast' => false,
 			'position' => 'center',
@@ -491,7 +492,6 @@ class Checkout extends Component
 			'confirmButtonText' => 'Delete it',
 			'onConfirmed' => 'cancelOrder',
 			'timer' => null
-		
         ]);
     }
     public function cancelOrder()
@@ -500,12 +500,12 @@ class Checkout extends Component
             $orderCancelledByCustomer = Order::find($this->user_id)->first();
             $this->getCleanerId = $orderCancelledByCustomer['cleaner_id'];
             // dd($orderCancelledByCustomer);
-            // $orderCancelledByCustomer = $orderId['status'] = "cancelled_by_customer"; 
+            // $orderCancelledByCustomer = $orderId['status'] = "cancelled_by_customer";
             $orderCancelledByCustomer->update([
                 'status' => 'cancelled_by_customer',
             ]);
         }
-      
+
         $this->alert('success', 'Your Order Cancelled successfully');
 
         return redirect()->route('profile',$this->getCleanerId);

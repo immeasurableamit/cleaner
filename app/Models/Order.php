@@ -9,6 +9,8 @@ use App\Models\Transaction;
 
 class Order extends Model
 {
+
+
     use HasFactory;
 
     protected $guarded = [];
@@ -69,5 +71,47 @@ class Order extends Model
     public function cleanerTransaction()
     {
         return $this->hasOne( Transaction::class, 'user_id', 'cleaner_id' );
+    }
+
+    /*
+     * All statues:
+     *
+     * pending
+     * accepted
+     * rejected
+     * cancelled
+     * cancelled_by_customer
+     * completed
+     * payment_collected
+     *
+     */
+    public function statusForCleaner()
+    {
+        $statuses = [
+            'pending'   => 'Pending',
+            'accepted'  => 'Accepted',
+            'rejected'  => 'Refused',
+            'cancelled' => 'Cancelled',
+            'cancelled_by_customer' => 'Customer cancelled',
+            'completed' => 'Completed',
+            'payment_collected' => 'Payment collected',
+        ];
+
+        return $statuses[ $this->status ];
+    }
+
+    public function statusForCustomer()
+    {
+        $statuses = [
+            'pending'   => 'Pending',
+            'accepted'  => 'Accepted',
+            'rejected'  => 'Refused',
+            'cancelled' => 'Cleaner cancelled',
+            'cancelled_by_customer' => 'You cancelled',
+            'completed' => 'Completed',
+            'payment_collected' => 'Completed',
+        ];
+
+        return $statuses[ $this->status ];
     }
 }

@@ -17,7 +17,7 @@ class Appointment extends Component
     public $selectedTab  = 1;
     public $selectedDate, $events, $selectedDateOrders;
     public $orders, $user_id;
-    protected $listeners = ['orderCanclledByCustomer'];
+    protected $listeners = ['orderCancelledByCustomer'];
     protected $pendingOrderStatuses = ['pending', 'rejected', 'cancelled_by_customer'];
 
 
@@ -80,7 +80,7 @@ class Appointment extends Component
         $this->renderOrders();
     }
 
-    // 
+    //
 
 
     public function updated($propertyname)
@@ -114,12 +114,12 @@ class Appointment extends Component
             'cancelButtonText' => 'Cancel',
             'showConfirmButton' => true,
             'confirmButtonText' => 'Delete it',
-            'onConfirmed' => 'orderCanclledByCustomer',
+            'onConfirmed' => 'orderCancelledByCustomer',
             'timer' => null
         ]);
     }
 
-    public function orderCanclledByCustomer()
+    public function orderCancelledByCustomer()
     {
         if ($this->user_id) {
             $orderCancelledByCustomer =  Order::find($this->user_id)->first();
