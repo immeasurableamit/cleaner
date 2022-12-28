@@ -9,8 +9,8 @@
                 <div class="scheduling-calender-design clender-design" wire:ignore>
                     <div id='calendar'></div>
                 </div>
-
-                <div class="date_section">
+                <!-- Date section -->
+                <div id="date_section" class="date_section">
                     <div class="form-headeing-second">
                         <h4 class="text-center">Select Date Above</h4>
                     </div>
@@ -19,10 +19,11 @@
                         <span>{{ $selectedDate }}</span>
                     </div>
 
-
                     <div class="card_service_row appoitments-alternative-row row">
+                     {{--    @forelse($orders as $order)  --}}
+                       @forelse($selectedDateOrders as $order) 
                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                            @foreach($orders as $order)
+
                             <div class="select-date-toggles">
                                 <button class="service_toggle_s"></button>
                                 <div class="service-main-service-column">
@@ -31,11 +32,11 @@
                                         <p class="app-value">{{$order->cleaning_datetime->format('h:i A')}}</p>
                                     </div>
                                     <div class="altrntive_rw">
-                                       
-                                     
+
+
                                         <p class="appointment_label"> Job </p>
                                         @foreach($order->items as $item)
-                                        
+
                                         <p class="app-value blue"><strong>{{@$item->service_item->title}}</strong></p>
                                         @endforeach
                                     </div>
@@ -51,8 +52,8 @@
                                             <li class="c_text">Contact information</li>
                                             <li><a href="tel:512-558-5876" class="link-design-2 mt-3"><img src="{{asset('assets/images/icons/phone.svg')}}">{{@$order->cleaner->contact_number}} </a></li>
                                             <li><a href="mailto:example@mail.com" class="link-design-2"><img src="{{asset('assets/images/icons/email.svg')}}">{{@$order->cleaner->email}} </a></li>
-                                           {{--  <li><a href="#" class="link-design-2"><img src="{{asset('assets/images/icons/home.svg')}}">15648
-                                                    Maple St, Austin, TX 78744</a></li> --}}
+                                            {{-- <li><a href="#" class="link-design-2"><img src="{{asset('assets/images/icons/home.svg')}}">15648
+                                            Maple St, Austin, TX 78744</a></li> --}}
                                             <li class="chat_with_member"><a href="message.html" class="btn_chat_member">Chat With
                                                     Member<img src="{{asset('assets/images/icons/email-2.svg')}}" /></a></li>
                                         </ul>
@@ -68,7 +69,7 @@
                                     <div class="altrntive_rw">
                                         <p class="appointment_label">Status</p>
                                         <a class="btn_q">Reschedule</a>
-                                        <a class="btn_x">Cancel</a>
+                                        <a href="javascript::void(0)" class="btn_x" wire:click= "cancleOrder({{$order->id}})">Cancel</a> 
                                     </div>
                                     <div class="altrntive_rw">
                                         <p class="appointment_label">Payment</p>
@@ -76,14 +77,28 @@
                                     </div>
                                 </div>
                                 <div class="make-payment-early">
-                                    <a href="#">Make Payment Early</a>
+                                @if ( $order->status == 'rejected' )
+                                        <a href="#" class="refuse-request-btn crd-btn">Request Refused</a>
+                                   
+                                    @elseif ( $order->status == 'cancelled')
+                                        <a href="javascript:void();" class="refuse-request-btn crd-btn">Cancelled</a>
+                                        @elseif ( $order->status == ' cancelled_by_customer')
+                                        <a href="javascript:void();" class="refuse-request-btn crd-btn">Cancelled By Customer</a>
+                                        @elseif ( $order->status == 'accepted')
+                                        <a href="#" wire:click="completeOrder( {{ $order->id }} )" class="sucess-msg crd-btn">Make Payment Early</a>
+                                        @elseif ( $order->status == 'pending' )
+                                        <a href="javascript:void();" class="refuse-request-btn crd-btn">Pending</a>
+                                       
+                                        @endif
+                                   
+                                    {{-- <a href="#">Make Payment Early</a> --}}
                                 </div>
                             </div>
-                            @endforeach
 
                         </div>
-
-
+                        @empty
+                        <p>No bookings for selected date </p>
+                        @endforelse
 
                     </div>
                 </div>
@@ -94,6 +109,8 @@
 
 @push('scripts')
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.3.1/main.min.js'></script>
+
+
 <script>
     function renderCalendar(intialDate, events) {
         console.log(events);
@@ -120,7 +137,6 @@
                 console.log('date clicked');
                 @this.set('selectedDate', info.dateStr);
                 console.log(info.dateStr); //show clicked date
-
             },
 
         });
@@ -131,11 +147,15 @@
     }
 
     function makeBookingsCardToggalable() {
+
         $(".service_toggle_s").unbind('click');
+
         $(".service_toggle_s").click(function() {
+            // debugger;
             $(this).parent().toggleClass("show");
         });
     }
+
 
     window.addEventListener('renderCalendar', event => {
         // debugger;
@@ -152,22 +172,11 @@
         /* Calendar Events */
         let events = @json($events);
 
-        console.log(events);
         let date = "{{ $selectedDate }}";
 
         renderCalendar(date, events);
 
         makeBookingsCardToggalable();
-
-    });
-
-    window.addEventListener('load', () => {
-
-        /* Calendar Events */
-        let events = @json($events);
-
-        let date = "{{ $selectedDate }}";
-        renderCalendar(date, events);
 
     });
 </script>

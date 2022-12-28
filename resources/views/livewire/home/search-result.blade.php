@@ -92,12 +92,12 @@
                 <div class="card_filter">
                     <div class="h5_input_checkbox">
                         <h5 class="">Organic Cleaners Only<img src="assets/images/badges.svg" class="ms-3"></h5>
-                        <input type="checkbox">
+                        <input type="checkbox" wire:click="$toggle('organicOnly')">
                     </div>
                     <div class="h5_input_checkbox">
                         <h5 class="">Insured Cleaners Only<img src="assets/images/insurance.svg" class="ms-3">
                         </h5>
-                        <input type="checkbox">
+                        <input type="checkbox" wire:click="$toggle('insuredOnly')">
                     </div>
                 </div>
                 <div class="card_filter border-0">
@@ -147,8 +147,13 @@
 
                                             hours</p>
                                         <div class="badges_insurnce_img">
-                                            <img src="{{ asset('assets/images/badges.svg') }}">
-                                            <img src="{{ asset('assets/images/insurance.svg') }}">
+                                            @if ( $cleaner->UserDetails->provide_organic_service )
+                                                <img src="{{ asset('assets/images/badges.svg') }}">
+                                            @endif
+
+                                            @if ( $cleaner->UserDetails->is_insured )
+                                                <img src="{{ asset('assets/images/insurance.svg') }}">
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="btn_rate">

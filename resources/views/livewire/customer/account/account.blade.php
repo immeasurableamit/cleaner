@@ -114,6 +114,7 @@
                     <span class="save-icn-btn"><a class="link-design-2" wire:click="update('timezone')"><i class="fas fa-save"></i></a></span>
                     <span class="cancel"><a href="javascript::void(0)" class="link-design-2" wire:click="cancle"><i class="fas fa-times"></i></a></span>
                     @else
+                  
                     <div class="time-zone-select-design">
                         <input type="text" value="{{@$user->userDetails->timeZone->name}}" disabled />
                     </div>
@@ -121,6 +122,7 @@
                         <span class="edit"><a href="javascript::void(0)" class="link-design-2" wire:click="edit('{{auth()->user()->id}}', 'timezone')">Edit</a></span>
                     </div>
                     @endif
+
                 </form>
             </li>
         </ul>

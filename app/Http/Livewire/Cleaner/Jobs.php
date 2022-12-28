@@ -23,11 +23,73 @@ class Jobs extends Component
 
     public $selectedDate, $orders, $selectedDateOrders, $events;
 
-    protected $pendingOrderStatuses = ['pending', 'rejected'];
+    protected $pendingOrderStatuses = ['pending', 'rejected', 'cancelled_by_customer'];
 
     protected $listeners = [
         'cancelOrder'
     ];
+
+    public function mount()
+    {
+        $this->prepare();
+    }
+
+    public function prepare()
+    {
+        $this->selectedDate = $this->selectedDate ?? today()->toDateString();
+        $this->refreshSelectedTab();
+    }
+
+    protected function refreshSelectedTab()
+    {
+        $this->prepareOrdersProp();
+        $this->renderCalendar();
+        $this->renderOrders();
+    }
+
+    /*
+     * This fetchs only needed data from database
+     * that fasts the speed of page.
+     *
+     */
+    protected function prepareOrdersProp()
+    {
+        $userRelation = ['user' => function ( $query ) {
+            $query->without('UserDetails')->select('id','email', 'contact_number');
+        }];
+
+        $itemsRelation = ['items' => function ( $query ) {
+            $query->select('id','order_id', 'service_item_id')->with('service_item:id,title');
+        }];
+
+        $relations = array_merge( $userRelation, $itemsRelation );
+
+        $this->orders = Order::with($relations)->where('cleaner_id', auth()->user()->id )->get();
+        $this->addAttributesInOrders();
+
+    }
+
+    protected function renderCalendar()
+    {
+        $orders = $this->getOrdersForSelectedTab();
+        $events = $this->parseOrdersForCalendarEvents($orders);
+
+        $this->events = $events;
+        $this->dispatchBrowserEvent('renderCalendar', ['events' => $events]);
+        return true;
+    }
+
+    protected function renderOrders()
+    {
+        $orders = $this->getOrdersForSelectedTab();
+        $this->selectedDateOrders = $orders->filter(function($order) {
+            return $order->cleaning_datetime->startOfDay()->equalTo( $this->selectedDate );
+        });
+
+        $this->dispatchBrowserEvent('renderOrders');
+        return true;
+    }
+
 
     protected function getPendingOrders()
     {
@@ -58,56 +120,15 @@ class Jobs extends Component
     {
         if ( $this->selectedTab == 1 ) {
             $orders = $this->getAcceptedOrders();
+
         } else {
             $orders = $this->getPendingOrders();
+
         }
 
         return $orders;
     }
 
-    protected function renderOrders()
-    {
-        $orders                   = $this->getOrdersForSelectedTab();
-        $this->selectedDateOrders = $orders->filter(function($order) {
-            return $order->cleaning_datetime->startOfDay()->equalTo( $this->selectedDate );
-        });
-
-
-        $this->dispatchBrowserEvent('renderOrders');
-        return true;
-    }
-
-    protected function renderCalendar()
-    {
-        $orders = $this->getOrdersForSelectedTab();
-        $events = $this->parseOrdersForCalendarEvents($orders);
-
-        $this->events = $events;
-        $this->dispatchBrowserEvent('renderCalendar', ['events' => $events]);
-        return true;
-    }
-
-    /*
-     * This fetchs only needed data from database
-     * that fasts the speed of page.
-     *
-     */
-    protected function prepareOrdersProp()
-    {
-        $userRelation = ['user' => function ( $query ) {
-            $query->without('UserDetails')->select('id','email', 'contact_number');
-        }];
-
-        $itemsRelation = ['items' => function ( $query ) {
-            $query->select('id','order_id', 'service_item_id')->with('service_item:id,title');
-        }];
-
-        $relations = array_merge( $userRelation, $itemsRelation );
-
-        $this->orders = Order::with($relations)->where('cleaner_id', auth()->user()->id )->get();
-        $this->addAttributesInOrders();
-
-    }
 
     protected function addAttributesInOrders()
     {
@@ -123,16 +144,9 @@ class Jobs extends Component
         $this->addAttributesInOrders();
     }
 
-    public function prepare()
-    {
-        $this->selectedDate = $this->selectedDate ?? today()->toDateString();
-        $this->refreshSelectedTab();
-    }
 
-    public function mount()
-    {
-        $this->prepare();
-    }
+
+
 
     protected function storeAcceptOrderTransaction($user_id, $order_id, $amount, $stripe_charge_id)
     {
@@ -187,12 +201,7 @@ class Jobs extends Component
 
 
 
-    protected function refreshSelectedTab()
-    {
-        $this->prepareOrdersProp();
-        $this->renderCalendar();
-        $this->renderOrders();
-    }
+
 
     public function rejectOrder( $orderId )
     {
@@ -262,6 +271,7 @@ class Jobs extends Component
 
     public function updated($name)
     {
+
         if ( $name == "selectedTab" ) {
             $this->renderCalendar();
             $this->renderOrders();

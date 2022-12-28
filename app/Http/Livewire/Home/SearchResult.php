@@ -29,6 +29,7 @@ class SearchResult extends Component
     /* Additonal filter props */
     public $minPrice, $maxPrice, $selectedAddonsIds = [];
     public $dateStart, $dateEnd, $selectedWeekDays, $sortBy, $skipFiltering = false;
+    public $organicOnly = false, $insuredOnly = false;
 
 
 
@@ -143,6 +144,22 @@ class SearchResult extends Component
                 }
             }
 
+            /* Organic cleaners only */
+            if ( $this->organicOnly ) {
+                $doesNotProvideOrganicService = $cleaner->UserDetails->provide_organic_service != 1;
+                if ( $doesNotProvideOrganicService ) {
+                    return false;
+                }
+            }
+
+            /* Insured cleaners only */
+            if ( $this->insuredOnly ) {
+                $isNotInsured = $cleaner->UserDetails->is_insured != 1;
+                if ( $isNotInsured ){
+                    return false;
+                }
+            }
+
             $cleaner->price_for_selected_service = $cleanerSelectedService->priceForSqFt( $this->homeSize );
             $cleaner->duration_for_selected_service = $cleanerSelectedService->duration;
             return true;
@@ -186,7 +203,9 @@ class SearchResult extends Component
             'latitude',
             'longitude',
             'homeSize',
-            'sortBy'
+            'sortBy',
+            'organicOnly',
+            'insuredOnly'
         ];
 
         if ( in_array( $updatedPropName, $filters) ){
