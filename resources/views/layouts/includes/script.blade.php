@@ -115,6 +115,8 @@
 
 <script>
 
+
+
 function makeAddressInputAutocompletable( element, place_changed_callback, options = {}){
     var gmap_places = new google.maps.places.Autocomplete( element, options );
 
@@ -152,4 +154,24 @@ function parseGmapPlace(gmap_place)
 
     return address;
 }
+function initToastInstance()
+{
+    const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+});
+
+window.swalToast = Toast;
+}
+
+window.addEventListener('load', () => {
+    initToastInstance();
+})
 </script>

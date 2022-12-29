@@ -23,7 +23,7 @@ class Jobs extends Component
 
     public $selectedDate, $orders, $selectedDateOrders, $events;
 
-    protected $pendingOrderStatuses = ['pending', 'rejected', 'cancelled_by_customer'];
+    protected $pendingOrderStatuses = ['pending'];
 
     protected $listeners = [
         'cancelOrder'
@@ -82,9 +82,10 @@ class Jobs extends Component
     protected function renderOrders()
     {
         $orders = $this->getOrdersForSelectedTab();
+
         $this->selectedDateOrders = $orders->filter(function($order) {
             return $order->cleaning_datetime->startOfDay()->equalTo( $this->selectedDate );
-        });
+        })->sortByDesc('id');
 
         $this->dispatchBrowserEvent('renderOrders');
         return true;
@@ -145,10 +146,31 @@ class Jobs extends Component
     }
 
 
+    public function acceptOrder( $orderId )
+    {
+        $order = Order::find( $orderId );
+
+        /* Change status and return because we don't charge customer on accepting now */
+        $order->status = 'accepted';
+        $order->save();
+
+        $this->alert('success', 'Order accepted');
+        $this->refreshSelectedTab();
+        return true;
+    }
+
+    public function rejectOrder( $orderId )
+    {
+        $order = Order::find($orderId);
+        $order->status = 'rejected';
+        $order->save();
+
+        $this->alert('success', 'Booking rejected');
+        $this->refreshSelectedTab();
+    }
 
 
-
-    protected function storeAcceptOrderTransaction($user_id, $order_id, $amount, $stripe_charge_id)
+    protected function storeCollectPaymentTransaction($user_id, $order_id, $amount, $stripe_charge_id)
     {
         $transaction = new Transaction;
         $transaction->user_id   = $user_id;
@@ -163,13 +185,15 @@ class Jobs extends Component
         return $transaction;
     }
 
-    public function acceptOrder( $orderId )
+
+
+    public function collectPayment($orderId)
     {
         $order = Order::find( $orderId );
         $user  = $order->user;
 
-        /* Charge customer */
-        $chargeResp = stripeChargeCustomer(
+         /* Charge customer */
+         $chargeResp = stripeChargeCustomer(
             $user->UserDetails->stripe_customer_id,
             $order->totalInCents(),
             "CanaryCleaner charge for order #$order->id"
@@ -181,7 +205,7 @@ class Jobs extends Component
             return false;
         }
 
-        $transaction = $this->storeAcceptOrderTransaction(
+        $transaction = $this->storeCollectPaymentTransaction(
             $user->id,
             $order->id,
             $order->total,
@@ -189,84 +213,14 @@ class Jobs extends Component
         );
 
         /* Update order */
-        $order->status              = 'accepted';
+        $order->status              = 'payment_collected';
         $order->is_paid_by_user     = 1;
         $order->user_transaction_id = $transaction->id;
         $order->save();
 
-        $this->alert('success', 'Booking accepted');
+        $this->alert('success', 'Payment collected');
         $this->refreshSelectedTab();
         return true;
-    }
-
-
-
-
-
-    public function rejectOrder( $orderId )
-    {
-        $order = Order::find($orderId);
-        $order->status = 'rejected';
-        $order->save();
-
-        $this->alert('success', 'Booking rejected');
-        $this->refreshSelectedTab();
-    }
-
-
-    protected function storeCollectPaymentTransaction($user_id, $order_id, $amount, $stripe_transfer_id)
-    {
-        $transaction = new Transaction;
-        $transaction->user_id   = $user_id;
-        $transaction->amount    = $amount;
-        $transaction->type      = 'credit';
-        $transaction->action    = 'transfer';
-        $transaction->stripe_id = $stripe_transfer_id;
-        $transaction->transactionable_id   = $order_id;
-        $transaction->transactionable_type = Order::class;
-        $transaction->save();
-
-        return $transaction;
-    }
-
-
-
-    public function collectPayment($orderId)
-    {
-        $cleaner = auth()->user();
-        $order   = Order::find( $orderId );
-
-        $transferResp = stripeTransferAmountToConnectedAccount(
-            convertAmountIntoCents( $order->cleanerFee() ),
-            $cleaner->bankInfo->account_id,
-            "CanaryCleaner payment for order #$order->id",
-        );
-
-        $transaction = $this->storeCollectPaymentTransaction(
-            $cleaner->id,
-            $order->id,
-            $order->cleanerFee(),
-            $transferResp['transfer_id'],
-
-        );
-
-        $order->is_paid_out_to_cleaner = 1;
-        $order->cleaner_transaction_id = $transaction->id;
-        $order->status = 'payment_collected';
-        $order->save();
-
-        $this->alert('success', 'Amount transffered');
-        return true;
-    }
-
-    public function completeOrder( $orderId )
-    {
-        $order = Order::find($orderId);
-        $order->status = 'completed';
-        $order->save();
-
-        $this->alert('success', 'Marked as completed');
-        $this->refreshSelectedTab();
     }
 
     public function updated($name)
@@ -307,7 +261,16 @@ class Jobs extends Component
 
     public function cancelOrder( $data )
     {
-        $order      = Order::find( $data['value'] );
+        $order = Order::find( $data['value'] );
+
+        if ( $order->status != 'payment_collected' ) {
+            $order->status = 'cancelled';
+            $order->save();
+
+            $this->alert('success','Booking cancelled');
+            $this->refreshSelectedTab();
+            return true;
+        }
 
         /* Refund amount to customer */
         $refundResp = refundOrder( $order, "Canary Cleaner, cleaner cancelled the order #$order->id" );

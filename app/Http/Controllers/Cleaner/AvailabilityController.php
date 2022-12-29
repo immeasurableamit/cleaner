@@ -63,7 +63,6 @@ class AvailabilityController extends Controller
         ]);
 
         $user = auth()->user();
-dd($request->day);
         $daysArray = [];
         if ($request->day) {
             foreach ($request->day as $day => $daysData) {

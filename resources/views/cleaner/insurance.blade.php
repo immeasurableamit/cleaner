@@ -76,8 +76,10 @@
         let url = "{{ route('cleaner.toggle-organic-service') }}";
         console.log( url );
         $.get(url, function(data, status){
-            console.log( status );
-            console.log( data );
+            if ( data.success ) {
+                window.swalToast.fire({icon: 'success', title: data.text });
+            }
+
         })
     }
 
