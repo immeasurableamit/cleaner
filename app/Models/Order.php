@@ -88,13 +88,14 @@ class Order extends Model
     public function statusForCleaner()
     {
         $statuses = [
-            'pending'   => 'Pending',
-            'accepted'  => 'Accepted',
+            'pending'   => 'Accept order',
+            'accepted'  => 'Collect payment',
             'rejected'  => 'Refused',
             'cancelled' => 'Cancelled',
             'cancelled_by_customer' => 'Customer cancelled',
-            'completed' => 'Completed',
             'payment_collected' => 'Payment collected',
+            'completed' => 'Completed',
+
         ];
 
         return $statuses[ $this->status ];
@@ -105,11 +106,12 @@ class Order extends Model
         $statuses = [
             'pending'   => 'Pending',
             'accepted'  => 'Accepted',
-            'rejected'  => 'Refused',
-            'cancelled' => 'Cleaner cancelled',
-            'cancelled_by_customer' => 'You cancelled',
+            'rejected'  => 'Cancelled by cleaner',
+            'cancelled' => 'Cancelled by cleaner',
+            'cancelled_by_customer' => 'Cancelled by you',
+            'payment_collected' => 'Accepted',
             'completed' => 'Completed',
-            'payment_collected' => 'Completed',
+
         ];
 
         return $statuses[ $this->status ];

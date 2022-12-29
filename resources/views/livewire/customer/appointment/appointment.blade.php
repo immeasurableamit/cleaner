@@ -20,69 +20,173 @@
                     </div>
 
                     <div class="card_service_row appoitments-alternative-row row">
-                     {{--    @forelse($orders as $order)  --}}
-                       @forelse($selectedDateOrders as $order)
-                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                        {{--    @forelse($orders as $order)  --}}
+                        @forelse($selectedDateOrders as $order)
+                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
 
-                            <div class="select-date-toggles">
-                                <button class="service_toggle_s"></button>
-                                <div class="service-main-service-column">
-                                    <div class="altrntive_rw">
-                                        <p class="appointment_label">Time</p>
-                                        <p class="app-value">{{$order->cleaning_datetime->format('h:i A')}}</p>
-                                    </div>
-                                    <div class="altrntive_rw">
-
-
-                                        <p class="appointment_label"> Job </p>
-                                        @foreach($order->items as $item)
-
-                                        <p class="app-value blue"><strong>{{@$item->service_item->title}}</strong></p>
-                                        @endforeach
-                                    </div>
-                                    <div class="altrntive_rw">
-                                        <p class="appointment_label">Est Duration</p>
-                                        <p class="app-value">{{ $order->estimated_duration_hours }} hrs</p>
-                                    </div>
-                                    <div class="altrntive_rw">
-                                        <p class="appointment_label">Cleaner</p>
-                                        <p class="app-value">{{@$order->cleaner->name}}</p>
-                                        <a href="#" class="btn_b" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">Contact </a>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                            <li class="c_text">Contact information</li>
-                                            <li><a href="tel:512-558-5876" class="link-design-2 mt-3"><img src="{{asset('assets/images/icons/phone.svg')}}">{{@$order->cleaner->contact_number}} </a></li>
-                                            <li><a href="mailto:example@mail.com" class="link-design-2"><img src="{{asset('assets/images/icons/email.svg')}}">{{@$order->cleaner->email}} </a></li>
-                                            {{-- <li><a href="#" class="link-design-2"><img src="{{asset('assets/images/icons/home.svg')}}">15648
-                                            Maple St, Austin, TX 78744</a></li> --}}
-                                            <li class="chat_with_member"><a href="message.html" class="btn_chat_member">Chat With
-                                                    Member<img src="{{asset('assets/images/icons/email-2.svg')}}" /></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="altrntive_rw">
-                                        <p class="appointment_label blue">Location</p>
-                                        <p class="app-value location blue">{{$order->address}}</p>
-                                    </div>
-                                    <div class="altrntive_rw">
-                                        <p class="appointment_label">Price</p>
-                                        <p class="app-value">${{ $order->total }}</p>
-                                    </div>
-                                    <div class="altrntive_rw">
-                                        <p class="appointment_label">Status</p>
-                                        <div class="text-center align-center " style="margin-right: 3px;">
-                                            {{ $order->statusForCustomer() }}
+                                <div class="select-date-toggles">
+                                    <button class="service_toggle_s"></button>
+                                    <div class="service-main-service-column">
+                                        <div class="altrntive_rw">
+                                            <p class="appointment_label">Time</p>
+                                            <p class="app-value">{{ $order->cleaning_datetime->format('h:i A') }}</p>
                                         </div>
-                                        <a class="btn_q">Reschedule</a>
-                                        <a href="javascript::void(0)" class="btn_x" wire:click= "cancleOrder({{$order->id}})">Cancel</a>
-                                    </div>
+                                        <div class="altrntive_rw">
+
+                                            <p class="appointment_label"> Job </p>
+                                            @foreach ($order->items as $item)
+                                                <p class="app-value blue">
+                                                    <strong>{{ @$item->service_item->title }}</strong>
+                                                </p>
+                                            @endforeach
+                                        </div>
+                                        <div class="altrntive_rw">
+                                            <p class="appointment_label">Est Duration</p>
+                                            <p class="app-value">{{ $order->estimated_duration_hours }} hrs</p>
+                                        </div>
+                                        <div class="altrntive_rw">
+                                            <p class="appointment_label">Cleaner</p>
+                                            <p class="app-value">{{ @$order->cleaner->name }}</p>
+                                            <a href="#" class="btn_b" type="button" id="dropdownMenu2"
+                                                data-bs-toggle="dropdown" aria-expanded="false">Contact </a>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                <li class="c_text">Contact information</li>
+                                                <li><a href="tel:512-558-5876" class="link-design-2 mt-3"><img
+                                                            src="{{ asset('/assets/images/icons/phone.svg') }}">{{ @$order->cleaner->contact_number }}
+                                                    </a></li>
+                                                <li><a href="mailto:example@mail.com" class="link-design-2"><img
+                                                            src="{{ asset('/assets/images/icons/email.svg') }}">{{ @$order->cleaner->email }}
+                                                    </a></li>
+                                                {{-- <li><a href="#" class="link-design-2"><img src="{{asset('/assets/images/icons/home.svg')}}">15648
+                                            Maple St, Austin, TX 78744</a></li> --}}
+                                                <li class="chat_with_member"><a href="message.html"
+                                                        class="btn_chat_member">Chat With
+                                                        Member<img
+                                                            src="{{ asset('/assets/images/icons/email-2.svg') }}" /></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="altrntive_rw">
+                                            <p class="appointment_label blue">Location</p>
+                                            <p class="app-value location blue">{{ $order->address }}</p>
+                                        </div>
+                                        <div class="altrntive_rw">
+                                            <p class="appointment_label">Price</p>
+                                            <p class="app-value">${{ $order->total }}</p>
+                                        </div>
+                                        <div class="altrntive_rw">
+                                            <p class="appointment_label">Status</p>
+                                            <div class="text-center align-center complete-status"
+                                                style="margin-right: 5px;">
+                                                {{ $order->statusForCustomer() }}
+                                            </div>
+
+                                            @if ($order->status == 'pending')
+                                                <a class="btn_q">Reschedule</a>
+                                                <a href="javascript::void(0)" class="btn_x"
+                                                    wire:click="cancelOrder({{ $order->id }})">Cancel</a>
+                                            @endif
+                                        </div>
+                                        {{--
                                     <div class="altrntive_rw">
                                         <p class="appointment_label">Payment</p>
                                         <p class="app-value">**2345 <a href="#" clas  s="link-design-2">Edit</a></p>
                                     </div>
-                                </div>
+                                    --}}
+                                    </div>
 
-                                {{--
+                                    @if ($order->status == 'payment_collected' && now()->greaterThanOrEqualTo($order->cleaning_datetime))
+                                        <div class="custom-dropdown rate-cleaner-dropdown">
+                                            <button type="button" class="btn  custom-dropdown-btn">Rate
+                                                Cleaner</button>
+                                            <div class="custom-dropdown-block">
+                                                <div class="dropdown-header-list">
+                                                    <h4>Rate this job</h4>
+                                                    <button class="close"><img
+                                                            src="./assets/images/icons/x.svg"></button>
+                                                </div>
+                                                <div class="dropdown-header-cntnt">
+                                                    <form>
+                                                        <div class="star-rating">
+                                                            <input type="radio" id="5-stars" name="rating"
+                                                                value="5">
+                                                            <label for="5-stars" class="star"><svg
+                                                                    class="svg-inline--fa fa-star" aria-hidden="true"
+                                                                    focusable="false" data-prefix="far" data-icon="star"
+                                                                    role="img" xmlns="http://www.w3.org/2000/svg"
+                                                                    viewBox="0 0 576 512" data-fa-i2svg="">
+                                                                    <path fill="currentColor"
+                                                                        d="M287.9 0C297.1 0 305.5 5.25 309.5 13.52L378.1 154.8L531.4 177.5C540.4 178.8 547.8 185.1 550.7 193.7C553.5 202.4 551.2 211.9 544.8 218.2L433.6 328.4L459.9 483.9C461.4 492.9 457.7 502.1 450.2 507.4C442.8 512.7 432.1 513.4 424.9 509.1L287.9 435.9L150.1 509.1C142.9 513.4 133.1 512.7 125.6 507.4C118.2 502.1 114.5 492.9 115.1 483.9L142.2 328.4L31.11 218.2C24.65 211.9 22.36 202.4 25.2 193.7C28.03 185.1 35.5 178.8 44.49 177.5L197.7 154.8L266.3 13.52C270.4 5.249 278.7 0 287.9 0L287.9 0zM287.9 78.95L235.4 187.2C231.9 194.3 225.1 199.3 217.3 200.5L98.98 217.9L184.9 303C190.4 308.5 192.9 316.4 191.6 324.1L171.4 443.7L276.6 387.5C283.7 383.7 292.2 383.7 299.2 387.5L404.4 443.7L384.2 324.1C382.9 316.4 385.5 308.5 391 303L476.9 217.9L358.6 200.5C350.7 199.3 343.9 194.3 340.5 187.2L287.9 78.95z">
+                                                                    </path>
+                                                                </svg>
+                                                                <!-- <i class="far fa-star"></i> Font Awesome fontawesome.com --></label>
+                                                            <input type="radio" id="4-stars" name="rating"
+                                                                value="4">
+                                                            <label for="4-stars" class="star"><svg
+                                                                    class="svg-inline--fa fa-star" aria-hidden="true"
+                                                                    focusable="false" data-prefix="far" data-icon="star"
+                                                                    role="img" xmlns="http://www.w3.org/2000/svg"
+                                                                    viewBox="0 0 576 512" data-fa-i2svg="">
+                                                                    <path fill="currentColor"
+                                                                        d="M287.9 0C297.1 0 305.5 5.25 309.5 13.52L378.1 154.8L531.4 177.5C540.4 178.8 547.8 185.1 550.7 193.7C553.5 202.4 551.2 211.9 544.8 218.2L433.6 328.4L459.9 483.9C461.4 492.9 457.7 502.1 450.2 507.4C442.8 512.7 432.1 513.4 424.9 509.1L287.9 435.9L150.1 509.1C142.9 513.4 133.1 512.7 125.6 507.4C118.2 502.1 114.5 492.9 115.1 483.9L142.2 328.4L31.11 218.2C24.65 211.9 22.36 202.4 25.2 193.7C28.03 185.1 35.5 178.8 44.49 177.5L197.7 154.8L266.3 13.52C270.4 5.249 278.7 0 287.9 0L287.9 0zM287.9 78.95L235.4 187.2C231.9 194.3 225.1 199.3 217.3 200.5L98.98 217.9L184.9 303C190.4 308.5 192.9 316.4 191.6 324.1L171.4 443.7L276.6 387.5C283.7 383.7 292.2 383.7 299.2 387.5L404.4 443.7L384.2 324.1C382.9 316.4 385.5 308.5 391 303L476.9 217.9L358.6 200.5C350.7 199.3 343.9 194.3 340.5 187.2L287.9 78.95z">
+                                                                    </path>
+                                                                </svg>
+                                                                <!-- <i class="far fa-star"></i> Font Awesome fontawesome.com --></label>
+                                                            <input type="radio" id="3-stars" name="rating"
+                                                                value="3">
+                                                            <label for="3-stars" class="star"><svg
+                                                                    class="svg-inline--fa fa-star" aria-hidden="true"
+                                                                    focusable="false" data-prefix="far"
+                                                                    data-icon="star" role="img"
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    viewBox="0 0 576 512" data-fa-i2svg="">
+                                                                    <path fill="currentColor"
+                                                                        d="M287.9 0C297.1 0 305.5 5.25 309.5 13.52L378.1 154.8L531.4 177.5C540.4 178.8 547.8 185.1 550.7 193.7C553.5 202.4 551.2 211.9 544.8 218.2L433.6 328.4L459.9 483.9C461.4 492.9 457.7 502.1 450.2 507.4C442.8 512.7 432.1 513.4 424.9 509.1L287.9 435.9L150.1 509.1C142.9 513.4 133.1 512.7 125.6 507.4C118.2 502.1 114.5 492.9 115.1 483.9L142.2 328.4L31.11 218.2C24.65 211.9 22.36 202.4 25.2 193.7C28.03 185.1 35.5 178.8 44.49 177.5L197.7 154.8L266.3 13.52C270.4 5.249 278.7 0 287.9 0L287.9 0zM287.9 78.95L235.4 187.2C231.9 194.3 225.1 199.3 217.3 200.5L98.98 217.9L184.9 303C190.4 308.5 192.9 316.4 191.6 324.1L171.4 443.7L276.6 387.5C283.7 383.7 292.2 383.7 299.2 387.5L404.4 443.7L384.2 324.1C382.9 316.4 385.5 308.5 391 303L476.9 217.9L358.6 200.5C350.7 199.3 343.9 194.3 340.5 187.2L287.9 78.95z">
+                                                                    </path>
+                                                                </svg>
+                                                                <!-- <i class="far fa-star"></i> Font Awesome fontawesome.com --></label>
+                                                            <input type="radio" id="2-stars" name="rating"
+                                                                value="2">
+                                                            <label for="2-stars" class="star"><svg
+                                                                    class="svg-inline--fa fa-star" aria-hidden="true"
+                                                                    focusable="false" data-prefix="far"
+                                                                    data-icon="star" role="img"
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    viewBox="0 0 576 512" data-fa-i2svg="">
+                                                                    <path fill="currentColor"
+                                                                        d="M287.9 0C297.1 0 305.5 5.25 309.5 13.52L378.1 154.8L531.4 177.5C540.4 178.8 547.8 185.1 550.7 193.7C553.5 202.4 551.2 211.9 544.8 218.2L433.6 328.4L459.9 483.9C461.4 492.9 457.7 502.1 450.2 507.4C442.8 512.7 432.1 513.4 424.9 509.1L287.9 435.9L150.1 509.1C142.9 513.4 133.1 512.7 125.6 507.4C118.2 502.1 114.5 492.9 115.1 483.9L142.2 328.4L31.11 218.2C24.65 211.9 22.36 202.4 25.2 193.7C28.03 185.1 35.5 178.8 44.49 177.5L197.7 154.8L266.3 13.52C270.4 5.249 278.7 0 287.9 0L287.9 0zM287.9 78.95L235.4 187.2C231.9 194.3 225.1 199.3 217.3 200.5L98.98 217.9L184.9 303C190.4 308.5 192.9 316.4 191.6 324.1L171.4 443.7L276.6 387.5C283.7 383.7 292.2 383.7 299.2 387.5L404.4 443.7L384.2 324.1C382.9 316.4 385.5 308.5 391 303L476.9 217.9L358.6 200.5C350.7 199.3 343.9 194.3 340.5 187.2L287.9 78.95z">
+                                                                    </path>
+                                                                </svg>
+                                                                <!-- <i class="far fa-star"></i> Font Awesome fontawesome.com --></label>
+                                                            <input type="radio" id="1-star" name="rating"
+                                                                value="1">
+                                                            <label for="1-star" class="star"><svg
+                                                                    class="svg-inline--fa fa-star" aria-hidden="true"
+                                                                    focusable="false" data-prefix="far"
+                                                                    data-icon="star" role="img"
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    viewBox="0 0 576 512" data-fa-i2svg="">
+                                                                    <path fill="currentColor"
+                                                                        d="M287.9 0C297.1 0 305.5 5.25 309.5 13.52L378.1 154.8L531.4 177.5C540.4 178.8 547.8 185.1 550.7 193.7C553.5 202.4 551.2 211.9 544.8 218.2L433.6 328.4L459.9 483.9C461.4 492.9 457.7 502.1 450.2 507.4C442.8 512.7 432.1 513.4 424.9 509.1L287.9 435.9L150.1 509.1C142.9 513.4 133.1 512.7 125.6 507.4C118.2 502.1 114.5 492.9 115.1 483.9L142.2 328.4L31.11 218.2C24.65 211.9 22.36 202.4 25.2 193.7C28.03 185.1 35.5 178.8 44.49 177.5L197.7 154.8L266.3 13.52C270.4 5.249 278.7 0 287.9 0L287.9 0zM287.9 78.95L235.4 187.2C231.9 194.3 225.1 199.3 217.3 200.5L98.98 217.9L184.9 303C190.4 308.5 192.9 316.4 191.6 324.1L171.4 443.7L276.6 387.5C283.7 383.7 292.2 383.7 299.2 387.5L404.4 443.7L384.2 324.1C382.9 316.4 385.5 308.5 391 303L476.9 217.9L358.6 200.5C350.7 199.3 343.9 194.3 340.5 187.2L287.9 78.95z">
+                                                                    </path>
+                                                                </svg>
+                                                                <!-- <i class="far fa-star"></i> Font Awesome fontawesome.com --></label>
+                                                        </div>
+                                                        <div class="form-grouph review-textarea-design">
+                                                            <textarea placeholder="Enter review here"></textarea>
+                                                        </div>
+                                                        <div class="form-grouph submit-design">
+                                                            <input type="submit" value="Submit Rating">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    {{--
                                 <div class="make-payment-early">
-                                @if ( $order->status == 'rejected' )
+                                @if ($order->status == 'rejected')
                                         <a href="#" class="refuse-request-btn crd-btn">Request Refused</a>
 
                                     @elseif ( $order->status == 'cancelled')
@@ -98,11 +202,11 @@
 
                                 </div>
                                 --}}
-                            </div>
+                                </div>
 
-                        </div>
+                            </div>
                         @empty
-                        <p>No bookings for selected date </p>
+                            <p>No bookings for selected date </p>
                         @endforelse
 
                     </div>
@@ -113,101 +217,97 @@
 </div>
 
 @push('scripts')
-<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.3.1/main.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.3.1/main.min.js'></script>
+
+    <script>
+        function renderCalendar(intialDate, events) {
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                headerToolbar: {
+                    left: 'prev,next,today',
+                    center: 'title',
+                    right: ''
+                },
+                initialDate: intialDate,
+                navLinks: false, // can click day/week names to navigate views
+                editable: true,
+                dayMaxEvents: true, // allow "more" link when too many events
+                events: events,
+                selectable: true,
+                selectConstraint: {
+                    start: '00:01',
+                    end: '23:59',
+                },
+
+                dateClick: function(info) {
+                    @this.set('selectedDate', info.dateStr);
+                },
+
+            });
+
+            window.calendar = calendar;
+
+            calendar.render();
+        }
+
+        function makeBookingsCardToggalable() {
+
+            $(".service_toggle_s").unbind('click');
+
+            $(".service_toggle_s").click(function() {
+                $(this).parent().toggleClass("show");
+            });
+        }
 
 
-<script>
-    function renderCalendar(intialDate, events) {
-        console.log(events);
-        var calendarEl = document.getElementById('calendar');
-
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            headerToolbar: {
-                left: 'prev,next,today',
-                center: 'title',
-                right: ''
-            },
-            initialDate: intialDate,
-            navLinks: false, // can click day/week names to navigate views
-            editable: true,
-            dayMaxEvents: true, // allow "more" link when too many events
-            events: events,
-            selectable: true,
-            selectConstraint: {
-                start: '00:01',
-                end: '23:59',
-            },
-
-            dateClick: function(info) {
-                console.log('date clicked');
-                @this.set('selectedDate', info.dateStr);
-                console.log(info.dateStr); //show clicked date
-            },
-
+        window.addEventListener('renderCalendar', event => {
+            window.calendarJsnEvents = event.detail.events;
+            let date = "{{ $selectedDate }}";
+            renderCalendar(date, event.detail.events);
         });
 
-        window.calendar = calendar;
+        window.addEventListener('renderOrders', makeBookingsCardToggalable);
 
-        calendar.render();
-    }
+        window.addEventListener('load', () => {
 
-    function makeBookingsCardToggalable() {
+            /* Calendar Events */
+            let events = @json($events);
 
-        $(".service_toggle_s").unbind('click');
+            let date = "{{ $selectedDate }}";
 
-        $(".service_toggle_s").click(function() {
-            // debugger;
-            $(this).parent().toggleClass("show");
+            renderCalendar(date, events);
+
+            makeBookingsCardToggalable();
+
         });
-    }
+    </script>
 
+    <script>
+        $(document).ready(function() {
+            console.log('custom func ran');
+            $(".toggle_row").click(function() {
+                $(this).toggleClass("show_row arrow", 300);
+            });
 
-    window.addEventListener('renderCalendar', event => {
-        // debugger;
-        console.log('updating events');
-        window.calendarJsnEvents = event.detail.events;
-        let date = "{{ $selectedDate }}";
-        renderCalendar(date, event.detail.events);
-    });
+            $(".toggle_menu").click(function() {
+                $(".bar_left").toggleClass("show");
+            });
 
-    window.addEventListener('renderOrders', makeBookingsCardToggalable);
+            $(".toggle_r").click(function() {
+                $(this).toggleClass("show");
+                $(this).parent(".togler_row").toggleClass('show');
+            });
 
-    window.addEventListener('load', () => {
+            $(".custom-dropdown-btn").click(function() {
+                window.jsn = $(this);
+                $(this).parent().toggleClass("show");
+            });
 
-        /* Calendar Events */
-        let events = @json($events);
+            $(".close").click(function() {
+                $(this).parents('.custom-dropdown').removeClass("show");
+            });
 
-        let date = "{{ $selectedDate }}";
-
-        renderCalendar(date, events);
-
-        makeBookingsCardToggalable();
-
-    });
-</script>
-
-<script>
-    $(document).ready(function() {
-        $(".toggle_row").click(function() {
-            //$(this).toggleClass("show_row arrow",1000);
-            $(this).toggleClass("show_row arrow", 300);
         });
-    });
-</script>
-<script>
-    $(document).ready(function() {
-        $(".toggle_menu").click(function() {
-            $(".bar_left").toggleClass("show");
-        });
-    });
-</script>
-<script>
-    $(document).ready(function() {
-        $(".toggle_r").click(function() {
-            $(this).toggleClass("show");
-            $(this).parent(".togler_row").toggleClass('show');
-        });
-    });
-</script>
-<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.3.1/main.min.css' rel='stylesheet' />
+    </script>
 @endpush

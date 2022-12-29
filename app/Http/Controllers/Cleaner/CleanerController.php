@@ -74,9 +74,15 @@ class CleanerController extends Controller
 
     public function redirectToInsuranceProvider()
     {
-        $user          = auth()->user();
-        $insuranceLink = thimbleGenerateBuyInsuranceLinkFor($user);
-        return redirect($insuranceLink);
+        $user     = auth()->user();
+        $response = thimbleGenerateBuyInsuranceLinkFor($user);
+
+        if ( isset($response['purchase_link']) ){
+            return redirect( $response['purchase_link'] );
+        }
+
+        $this->flash('error', $response['quote_summary']['quote_result']);
+        return redirect()->route('cleaner.insurance');
     }
 
     public function toggleOrganicService()

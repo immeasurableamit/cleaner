@@ -16,7 +16,7 @@ class Appointment extends Component
 
     public $selectedTab  = 1;
     public $selectedDate, $events, $selectedDateOrders;
-    public $orders, $user_id;
+    public $orders;
     protected $listeners = ['orderCancelledByCustomer'];
     protected $pendingOrderStatuses = ['pending', 'rejected', 'cancelled_by_customer'];
 
@@ -103,9 +103,8 @@ class Appointment extends Component
 
     /* Order cancelled by customer */
 
-    public function cancleOrder($iid)
+    public function cancelOrder($orderId)
     {
-        $this->user_id = $iid;
 
         $this->alert('warning', 'Are you sure do want to delete?', [
             'toast' => false,
@@ -115,21 +114,21 @@ class Appointment extends Component
             'showConfirmButton' => true,
             'confirmButtonText' => 'Delete it',
             'onConfirmed' => 'orderCancelledByCustomer',
-            'timer' => null
+            'timer' => null,
+            'input' => 'text',
+            'inputValue' => $orderId,
+            'inputAttributes' => [
+                'hidden' => true,
+            ]
         ]);
     }
 
-    public function orderCancelledByCustomer()
+    public function orderCancelledByCustomer($data)
     {
-        if ($this->user_id) {
-            $orderCancelledByCustomer =  Order::find($this->user_id)->first();
-
-            $this->getCleanerId = $orderCancelledByCustomer['cleaner_id'];
-            $orderCancelledByCustomer->update([
-                'status' => 'cancelled_by_customer',
-            ]);
-        }
-        $this->alert('success', 'Your order Cancelled Successfully');
+        $orderId = $data['value'];
+        $order   = Order::where('id', $orderId )->update(['status' => 'cancelled_by_customer']);
+        $this->alert('success', 'Order cancelled');
+        $this->refreshSelectedTab();
     }
 
     public function render()

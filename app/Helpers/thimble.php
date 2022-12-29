@@ -19,7 +19,7 @@ function thimbleGenerateBuyInsuranceLinkFor($user)
     ];
 
     $response = thimbleQuote( $optionsForThimbel );
-    return $response['purchase_link'];
+    return $response->json();
 }
 
 
