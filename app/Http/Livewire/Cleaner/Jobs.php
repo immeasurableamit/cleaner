@@ -289,7 +289,7 @@ class Jobs extends Component
 
         /* Update order */
         $order->is_refunded = 1;
-        $order->refund_transaction_id  = $transaction->stripe_id;
+        $order->refund_transaction_id  = $transaction->id;
         $order->status = 'cancelled';
         $order->save();
 

@@ -2,6 +2,7 @@
 
 use App\Models\Transaction;
 use App\Models\ServicesItems;
+use App\Models\Order;
 
 function storeRefundOrderTransaction($user_id, $order_id, $amount, $stripe_refund_id )
 {
@@ -11,6 +12,21 @@ function storeRefundOrderTransaction($user_id, $order_id, $amount, $stripe_refun
     $transaction->type      = 'credit';
     $transaction->action    = 'refund';
     $transaction->stripe_id = $stripe_refund_id;
+    $transaction->transactionable_id   = $order_id;
+    $transaction->transactionable_type = Order::class;
+    $transaction->save();
+
+    return $transaction;
+}
+
+function storePayoutTransaction($user_id, $order_id, $amount, $stripe_transfer_id)
+{
+    $transaction = new Transaction;
+    $transaction->user_id   = $user_id;
+    $transaction->amount    = $amount;
+    $transaction->type      = 'debit';
+    $transaction->action    = 'transfer';
+    $transaction->stripe_id = $stripe_transfer_id;
     $transaction->transactionable_id   = $order_id;
     $transaction->transactionable_type = Order::class;
     $transaction->save();
@@ -32,4 +48,19 @@ function getDefaultParametersForSearchPage()
     ];
 
     return $deafultSearch;
+}
+
+
+function convertDollarsIntoCents($dollars)
+{
+    $cents = $dollars * 100;
+    return (float) number_format( $cents, 2, ".", "" ); // number, number of decimal points, seprator sign of decimal points, jsn
+}
+
+function convertCentsIntoDollars($cents)
+{
+    if ( $cents == 0 ) return 0;
+
+    $dollars = $cents / 100;
+    return (float) number_format( $cents, 2, ".", "" ); // number, number of decimal points, seprator sign of decimal points, jsn
 }

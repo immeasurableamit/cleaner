@@ -58,6 +58,7 @@ class AvailabilityController extends Controller
 
     public function time(Request $request)
     {
+
         $request->validate([
             'day' => 'required',
         ]);
@@ -69,7 +70,6 @@ class AvailabilityController extends Controller
                 if(@$daysData['selected']=='on') {
 					if(@$daysData['data']){
 						array_push($daysArray, $day);
-						//dd($daysData['data']);
 						foreach(@$daysData['data'] as $data){
 
 							if(@$data['delete']=='yes'){

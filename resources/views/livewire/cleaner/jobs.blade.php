@@ -115,6 +115,7 @@
                                             <p class="appointment_label">Price</p>
                                             <p class="app-value">${{ $order->total }} </p>
                                         </div>
+
                                         @if ( $order->status == 'pending')
                                         <div class="altrntive_rw">
                                             <p class="appointment_label">Change</p>
@@ -126,8 +127,11 @@
                                             <p class="appointment_label">Change</p>
                                             <a class="btn_x" wire:click="confirmCancelOrderAction( {{ $order->id }} )">Cancel Job</a>
                                         </div>
-
-
+                                        @elseif ( $order->status == 'payment_collected' && now()->lessThanOrEqualTo( $order->cleaning_datetime ) )
+                                        <div class="altrntive_rw">
+                                            <p class="appointment_label">Change</p>
+                                            <a class="btn_x" wire:click="confirmCancelOrderAction( {{ $order->id }} )">Cancel Job</a>
+                                        </div>
                                         @endif
 
                                     </div>

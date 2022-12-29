@@ -7,11 +7,14 @@ use Illuminate\Http\Request;
 use Stripe\Stripe;
 use App\Models\BankInfo;
 use App\Models\State;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+
 
 
 class BillingController extends Controller
 {
 
+    use LivewireAlert;
     public function __construct()
     {
         $stripe = new \Stripe\StripeClient(
@@ -54,7 +57,7 @@ class BillingController extends Controller
 
         if ( ! $bank->charges_enabled ) {
             $link = stripeCreateAccountOnboardingLink( $bank->account_id );
-            return redirect( $link );   
+            return redirect( $link );
         }
 
         return redirect()->route('cleaner.billing.billing')->with('error', 'Account already exists');
@@ -68,7 +71,7 @@ class BillingController extends Controller
 
     public function bankingInfoSuccess()
     {
-        
+
         $user    = auth()->user();
         $bank    = BankInfo::where(['users_id' => $user->id])->firstOrFail();
         $account = stripeRetrieveAccount( $bank->account_id );
@@ -76,10 +79,12 @@ class BillingController extends Controller
         if ( $account->charges_enabled ) {
             $bank->charges_enabled = 1;
             $bank->save();
-            return redirect()->route('cleaner.billing.billing')->with('success', 'Account verified');
+            $this->flash('success', 'Address verified');
+            return redirect()->route('cleaner.billing.billing');
         }
-        
-        return redirect()->route('cleaner.billing.billing')->with('error', 'Try Again!');
+
+        $this->flash('error', 'Try again!');
+        return redirect()->route('cleaner.billing.billing');
     }
 
 
@@ -95,9 +100,9 @@ class BillingController extends Controller
         $user = auth()->user();
         $bank = BankInfo::where(['users_id' => $user->id])->first();
 
-        $bank = addAccountDetailsInBankInfo( $bank, $request->all() );        
-        
-    
+        $bank = addAccountDetailsInBankInfo( $bank, $request->all() );
+
+
         return redirect()->route('cleaner.billing.billing')->with('success', 'Your bank details are added successfully');
     }
 }
