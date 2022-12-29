@@ -183,25 +183,6 @@
                                             </div>
                                         </div>
                                     @endif
-
-                                    {{--
-                                <div class="make-payment-early">
-                                @if ($order->status == 'rejected')
-                                        <a href="#" class="refuse-request-btn crd-btn">Request Refused</a>
-
-                                    @elseif ( $order->status == 'cancelled')
-                                        <a href="javascript:void();" class="refuse-request-btn crd-btn">Cancelled</a>
-                                        @elseif ( $order->status == ' cancelled_by_customer')
-                                        <a href="javascript:void();" class="refuse-request-btn crd-btn">Cancelled By Customer</a>
-                                        @elseif ( $order->status == 'accepted')
-                                        <a href="#" wire:click="completeOrder( {{ $order->id }} )" class="sucess-msg crd-btn">Make Payment Early</a>
-                                        @elseif ( $order->status == 'pending' )
-                                        <a href="javascript:void();" class="refuse-request-btn crd-btn">Pending</a>
-
-                                        @endif
-
-                                </div>
-                                --}}
                                 </div>
 
                             </div>

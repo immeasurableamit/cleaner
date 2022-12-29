@@ -2,12 +2,14 @@
 
 use App\Models\CleanerServices;
 use App\Models\BankInfo;
+use App\Models\Transaction;
+use App\Models\Order;
 
 /*
  * @param: array $services ( Received in store method of Cleaner\ServicesController)
- * 
+ *
  * @param: \App\Models\User $cleaner
- * 
+ *
  * @return: bool
  */
 
@@ -20,7 +22,7 @@ function updateServicesOfCleaners($cleaner, $services)
 
         foreach ($service_data['item'] as $item_id => $item_data) {
 
-            
+
             $item_data['status'] = isset($item_data['checked']) ? '1' : '0';
 
             /* Update if service item already existed */
@@ -50,9 +52,9 @@ function updateServicesOfCleaners($cleaner, $services)
 
 /*
  * @param: \App\Models\User $cleaner
- * 
+ *
  * @param: array $item_data ( with keys: price, duration, status )
- * 
+ *
  * @return: \App\Models\User $cleaner
  */
 function updateCleanerSerivce($cleanerService, $item_data)
@@ -65,11 +67,11 @@ function updateCleanerSerivce($cleanerService, $item_data)
     return $cleanerService;
 }
 
-/* 
+/*
  * @param: int $cleaner_id ( primary key of \App\Models\User instance )
- * 
+ *
  * @param: array $item_data ( with keys: id, price, duration, status)
- * 
+ *
  * @return: array
  */
 function generateCleanerServiceBlueprintForSaving($cleaner_id, $item_data)
@@ -87,19 +89,19 @@ function generateCleanerServiceBlueprintForSaving($cleaner_id, $item_data)
 
 /*
  * @param App\Models\User $cleaner
- * 
- * @return App\Models\BankInfo 
- * 
+ *
+ * @return App\Models\BankInfo
+ *
  */
 function createBankInfoEntry($cleaner)
 {
     $account = stripeCreateConnectedAccount( $cleaner->email );
-    
+
     $bank = BankInfo::create([
         'users_id'   => $cleaner->id,
         'account_id' => $account->id,
         'status'     => 'pending',
-      
+
     ]);
 
     $bank->refresh();
@@ -109,9 +111,9 @@ function createBankInfoEntry($cleaner)
 
 /*
  * @param: App\Models\BankInfo $bank
- * 
- * @param: array $accountDetails ( with keys: account_holder_name, account_number, routing_number ) 
- * 
+ *
+ * @param: array $accountDetails ( with keys: account_holder_name, account_number, routing_number )
+ *
  */
 function addAccountDetailsInBankInfo($bank, $accountDetails)
 {
@@ -129,7 +131,7 @@ function addAccountDetailsInBankInfo($bank, $accountDetails)
 
 /*
  * @param: \App\Models\Order $order
- * 
+ *
  * @return: array
  */
 function refundOrder($order, $description )
@@ -142,3 +144,16 @@ function refundOrder($order, $description )
     return $resp;
 }
 
+
+
+function sendPayoutOfOrder( $order )
+{
+
+    $amountInCents = convertDollarsIntoCents( $order->cleanerFee() );
+    $accountId     = $order->cleaner->bankInfo->account_id;
+    $description   = "CanaryClean, payout for order #$order->id";
+
+    $resp = stripeTransferAmountToConnectedAccount( $amountInCents, $accountId, $description );
+    return $resp;
+
+}

@@ -17,7 +17,7 @@ class Order extends Model
     protected $appends = ['name'];
 
 
-    protected $commissionPercentage = 2; // for owner
+    protected $commissionPercentage = 20; // for owner
 
     protected $casts = [
 	    'cleaning_datetime' => 'datetime',
@@ -65,12 +65,12 @@ class Order extends Model
 
     public function userTransaction()
     {
-        return $this->hasOne( Transaction::class, 'user_id', 'user_id' );
+        return $this->belongsTo( Transaction::class, 'user_transaction_id');
     }
 
     public function cleanerTransaction()
     {
-        return $this->hasOne( Transaction::class, 'user_id', 'cleaner_id' );
+        return $this->belongsTo( Transaction::class, 'cleaner_transaction_id' );
     }
 
     /*

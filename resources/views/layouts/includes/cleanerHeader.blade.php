@@ -31,14 +31,22 @@
               <div class="dropdown">
                 <button type="button" class="btn dropdown-toggle position-relative btn-transparent" data-bs-toggle="dropdown">
                   <!-- <img src="{{asset('/assets/images/icons/profile-circle.svg')}}"> -->
+                  @if(auth()->user()->image)
                   <img src="{{asset('storage/images/'.auth()->user()->image)}}">
+                  @else
+                  <img src="{{asset('/assets/images/icons/profile-circle.svg')}}">
+                  @endif
                   <span class="name">{{auth()->user()->name}}</span>
                 </button>
                 <ul class="dropdown-menu">
                   <div class="customer_profile-info">
                     <div class="d-flex align-items-center position-relative">
                       <div class="customer-pro-img">
+                      @if(auth()->user()->image)
                         <img src="{{asset('storage/images/'.auth()->user()->image)}}">
+                        @else
+                        <img src="{{asset('/assets/images/icons/profile-circle.svg')}}">
+                        @endif
                       </div>
                       <div class="customer-pro-cntnt">
                      

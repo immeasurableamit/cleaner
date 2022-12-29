@@ -58,12 +58,13 @@ class SearchResult extends Component
      * 1. Availability time
      * 2. Location they serve
      * 3. Services they offer
+     * 4. Connected bank account with stripe
      *
      *
      */
     protected function preapreEligibleCleaners()
     {
-        $cleaners  = User::where('role', 'cleaner')->with(['UserDetails', 'CleanerHours', 'CleanerServices'])->get(); // NOTE: can be optimized --jashan
+        $cleaners  = User::has('bankInfo')->where('role', 'cleaner')->with(['UserDetails', 'CleanerHours', 'CleanerServices'])->get(); // NOTE: can be optimized --jashan
         $eligibleCleaners = $cleaners->filter(function( $cleaner ) {
 
             if ( $cleaner->hasCleanerSetHisServedLocations() === false ) {
