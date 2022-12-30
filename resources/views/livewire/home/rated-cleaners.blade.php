@@ -18,7 +18,7 @@
                                 <h5>{{$cleaner->name}}</h5>
                                 <div class="star_rating">
                                     <img src="/assets/images/icons/star.svg">
-                                    <span>4.5 (211)</span>
+                                    <span>{{ formatAvgRating( $cleaner->cleanerReviews->avg('rating') ) }} ({{ $cleaner->cleanerReviews->count() }})</span>
                                 </div>
                             </div>
                         </div>

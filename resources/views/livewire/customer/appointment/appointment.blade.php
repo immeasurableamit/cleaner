@@ -24,7 +24,7 @@
                         @forelse($selectedDateOrders as $order)
                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
 
-                                <div class="select-date-toggles">
+                                <div class="select-date-toggles" wire:ignore.self>
                                     <button class="service_toggle_s"></button>
                                     <div class="service-main-service-column">
                                         <div class="altrntive_rw">
@@ -96,19 +96,19 @@
                                     </div>
 
                                     @if ($order->status == 'payment_collected' && now()->greaterThanOrEqualTo($order->cleaning_datetime))
-                                        <div class="custom-dropdown rate-cleaner-dropdown">
+                                        <div class="custom-dropdown rate-cleaner-dropdown" wire:ignore.self>
                                             <button type="button" class="btn  custom-dropdown-btn">Rate
                                                 Cleaner</button>
                                             <div class="custom-dropdown-block">
                                                 <div class="dropdown-header-list">
                                                     <h4>Rate this job</h4>
                                                     <button class="close"><img
-                                                            src="./assets/images/icons/x.svg"></button>
+                                                            src="/assets/images/icons/x.svg"></button>
                                                 </div>
                                                 <div class="dropdown-header-cntnt">
-                                                    <form>
+                                                    <form wire:submit.prevent="storeReview( {{ $order->id }})">
                                                         <div class="star-rating">
-                                                            <input type="radio" id="5-stars" name="rating"
+                                                            <input type="radio" id="5-stars" wire:model="rating" name="rating"
                                                                 value="5">
                                                             <label for="5-stars" class="star"><svg
                                                                     class="svg-inline--fa fa-star" aria-hidden="true"
@@ -120,7 +120,7 @@
                                                                     </path>
                                                                 </svg>
                                                                 <!-- <i class="far fa-star"></i> Font Awesome fontawesome.com --></label>
-                                                            <input type="radio" id="4-stars" name="rating"
+                                                            <input type="radio" id="4-stars" wire:model="rating" name="rating"
                                                                 value="4">
                                                             <label for="4-stars" class="star"><svg
                                                                     class="svg-inline--fa fa-star" aria-hidden="true"
@@ -132,7 +132,7 @@
                                                                     </path>
                                                                 </svg>
                                                                 <!-- <i class="far fa-star"></i> Font Awesome fontawesome.com --></label>
-                                                            <input type="radio" id="3-stars" name="rating"
+                                                            <input type="radio" id="3-stars" wire:model="rating" name="rating"
                                                                 value="3">
                                                             <label for="3-stars" class="star"><svg
                                                                     class="svg-inline--fa fa-star" aria-hidden="true"
@@ -145,7 +145,7 @@
                                                                     </path>
                                                                 </svg>
                                                                 <!-- <i class="far fa-star"></i> Font Awesome fontawesome.com --></label>
-                                                            <input type="radio" id="2-stars" name="rating"
+                                                            <input type="radio" id="2-stars" wire:model="rating" name="rating"
                                                                 value="2">
                                                             <label for="2-stars" class="star"><svg
                                                                     class="svg-inline--fa fa-star" aria-hidden="true"
@@ -158,7 +158,7 @@
                                                                     </path>
                                                                 </svg>
                                                                 <!-- <i class="far fa-star"></i> Font Awesome fontawesome.com --></label>
-                                                            <input type="radio" id="1-star" name="rating"
+                                                            <input type="radio" id="1-star" wire:model="rating" name="rating"
                                                                 value="1">
                                                             <label for="1-star" class="star"><svg
                                                                     class="svg-inline--fa fa-star" aria-hidden="true"
@@ -172,9 +172,19 @@
                                                                 </svg>
                                                                 <!-- <i class="far fa-star"></i> Font Awesome fontawesome.com --></label>
                                                         </div>
+
+                                                        @if ( $reviewOrderId == $order->id && $errors->has('rating'))
+
+                                                                <div class="text-center">
+                                                                    <span class="text-danger">{{ $errors->first('rating') }}</span>
+                                                                </div>
+                                                        @endif
                                                         <div class="form-grouph review-textarea-design">
-                                                            <textarea placeholder="Enter review here"></textarea>
+                                                            <textarea name="review" wire:model="review" placeholder="Enter review here"></textarea>
                                                         </div>
+                                                        @if ( $reviewOrderId == $order->id && $errors->has('review'))
+                                                            <span class="text-danger">{{ $errors->first('review') }}</span>
+                                                        @endif
                                                         <div class="form-grouph submit-design">
                                                             <input type="submit" value="Submit Rating">
                                                         </div>
@@ -241,6 +251,27 @@
             });
         }
 
+        function addClickHandlerForRatingButtons()
+        {
+            $('.custom-dropdown-btn').unbind('click');
+            $(".close").unbind('click');
+
+            $(".custom-dropdown-btn").click(function() {
+                $(this).parent().toggleClass("show");
+            });
+
+            $(".close").click(function() {
+                $(this).parents('.custom-dropdown').removeClass("show");
+            });
+        }
+
+        function onRenderOrders()
+        {
+            makeBookingsCardToggalable();
+            addClickHandlerForRatingButtons();
+
+        }
+
 
         window.addEventListener('renderCalendar', event => {
             window.calendarJsnEvents = event.detail.events;
@@ -248,7 +279,8 @@
             renderCalendar(date, event.detail.events);
         });
 
-        window.addEventListener('renderOrders', makeBookingsCardToggalable);
+        window.addEventListener('renderOrders', onRenderOrders);
+
 
         window.addEventListener('load', () => {
 
@@ -260,13 +292,13 @@
             renderCalendar(date, events);
 
             makeBookingsCardToggalable();
+            addClickHandlerForRatingButtons();
 
         });
     </script>
 
     <script>
         $(document).ready(function() {
-            console.log('custom func ran');
             $(".toggle_row").click(function() {
                 $(this).toggleClass("show_row arrow", 300);
             });
@@ -279,16 +311,6 @@
                 $(this).toggleClass("show");
                 $(this).parent(".togler_row").toggleClass('show');
             });
-
-            $(".custom-dropdown-btn").click(function() {
-                window.jsn = $(this);
-                $(this).parent().toggleClass("show");
-            });
-
-            $(".close").click(function() {
-                $(this).parents('.custom-dropdown').removeClass("show");
-            });
-
         });
     </script>
 @endpush

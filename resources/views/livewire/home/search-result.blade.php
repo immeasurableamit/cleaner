@@ -71,11 +71,11 @@
                 <div class="card_filter select-design">
                     <h5 class="pb-2">Rating</h5>
                     <div class="selecti-box" wire:ignore>
-                        <select class="select-custom-design">
+                        <select class="select-custom-design" id="ratingFilter">
                             <option>Select</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
+                            @foreach ( range(1,5) as $i)
+                            <option value="{{ $i }}">{{ $i }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -136,7 +136,7 @@
                                         <a href="javascript::void(0)" class="name_s">{{ $cleaner->name }}</a>
                                         <div class="m-hide">
                                             <img src="{{ asset('assets/images/icons/star.svg') }}">
-                                            0<span> (0)</span>
+                                            {{ formatAvgRating( $cleaner->avg_rating ) }}<span> ({{ $cleaner->cleanerReviews->count() }})</span>
                                         </div>
                                     </div>
                                     <div class="routine_text">
@@ -229,10 +229,25 @@
             });
         }
 
+        function addEventHandlerInRatingFilter()
+        {
+            $("#ratingFilter").on('select2:select', (e) => {
+                var data = e.params.data;
+                @this.set('rating', data.id)
+            })
+        }
+
+        function addEventHandlers()
+        {
+            addEventHandlerInSortByFilter();
+            addEventHandlerInRatingFilter();
+        }
+
         window.addEventListener('load', () => {
 
             addDatePickerInStartDateFilter();
-            addEventHandlerInSortByFilter();
+            addEventHandlers();
+
 
             var element = document.getElementById('address');
             makeAddressInputAutocompletable(element, addressChanged);

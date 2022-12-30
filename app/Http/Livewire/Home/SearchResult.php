@@ -29,7 +29,7 @@ class SearchResult extends Component
     /* Additonal filter props */
     public $minPrice, $maxPrice, $selectedAddonsIds = [];
     public $dateStart, $dateEnd, $selectedWeekDays, $sortBy, $skipFiltering = false;
-    public $organicOnly = false, $insuredOnly = false;
+    public $organicOnly = false, $insuredOnly = false, $rating;
 
 
 
@@ -64,7 +64,7 @@ class SearchResult extends Component
      */
     protected function preapreEligibleCleaners()
     {
-        $cleaners  = User::has('bankInfo')->where('role', 'cleaner')->with(['UserDetails', 'CleanerHours', 'CleanerServices'])->get(); // NOTE: can be optimized --jashan
+        $cleaners  = User::has('bankInfo')->where('role', 'cleaner')->with(['UserDetails', 'CleanerHours', 'CleanerServices', 'cleanerReviews'])->get(); // NOTE: can be optimized --jashan
         $eligibleCleaners = $cleaners->filter(function( $cleaner ) {
 
             if ( $cleaner->hasCleanerSetHisServedLocations() === false ) {
@@ -161,8 +161,17 @@ class SearchResult extends Component
                 }
             }
 
-            $cleaner->price_for_selected_service = $cleanerSelectedService->priceForSqFt( $this->homeSize );
+            /* Rating */
+            if ( $this->rating ) {
+                $avgRating =  $cleaner->cleanerReviews->avg('rating');
+                if ( $avgRating < $this->rating   ) {
+                    return false;
+                }
+            }
+
+            $cleaner->price_for_selected_service    = $cleanerSelectedService->priceForSqFt( $this->homeSize );
             $cleaner->duration_for_selected_service = $cleanerSelectedService->duration;
+            $cleaner->avg_rating                    = $cleaner->cleanerReviews->avg('rating');
             return true;
         });
 
@@ -206,7 +215,8 @@ class SearchResult extends Component
             'homeSize',
             'sortBy',
             'organicOnly',
-            'insuredOnly'
+            'insuredOnly',
+            'rating'
         ];
 
         if ( in_array( $updatedPropName, $filters) ){
@@ -242,7 +252,6 @@ class SearchResult extends Component
                 $this->homeSize = 99;
             }
         }
-
 
         $this->filterCleanersIfNeeded($name);
     }

@@ -37,6 +37,10 @@ class Order extends Model
         return $this->belongsTo(ServicesItems::class);
     }
 
+    public function review()
+    {
+        return $this->hasOne(Review::class);
+    }
 
     public function items()
     {
@@ -73,18 +77,8 @@ class Order extends Model
         return $this->belongsTo( Transaction::class, 'cleaner_transaction_id' );
     }
 
-    /*
-     * All statues:
-     *
-     * pending
-     * accepted
-     * rejected
-     * cancelled
-     * cancelled_by_customer
-     * completed
-     * payment_collected
-     *
-     */
+
+
     public function statusForCleaner()
     {
         $statuses = [
@@ -95,6 +89,7 @@ class Order extends Model
             'cancelled_by_customer' => 'Customer cancelled',
             'payment_collected' => 'Payment collected',
             'completed' => 'Completed',
+            'reviewed'  => 'Completed and Reviewed'
 
         ];
 
@@ -111,7 +106,7 @@ class Order extends Model
             'cancelled_by_customer' => 'Cancelled by you',
             'payment_collected' => 'Accepted',
             'completed' => 'Completed',
-
+            'reviewed'  => 'Completed'
         ];
 
         return $statuses[ $this->status ];

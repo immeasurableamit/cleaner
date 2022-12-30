@@ -9,8 +9,8 @@ class RatedCleaners extends Component
 {
     public function render()
     {
-        $cleaners = User::where('role','cleaner')->get();
-    
+        $cleaners = User::with('cleanerReviews')->where('role','cleaner')->latest()->get();
+
         return view('livewire.home.rated-cleaners',['cleaners'=> $cleaners]);
     }
 }
