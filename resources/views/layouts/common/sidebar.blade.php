@@ -5,6 +5,7 @@
     <li><a href="{{route('customer.appointment.index')}}" class="{{ @$title['active']=='appoinment' ? 'active' : '' }}">Appoinments</a></li>
     <li><a href="{{route('customer.billing.index')}}" class="{{ @$title['active']=='billing' ? 'active' : '' }}">Billing</a></li>
     <li><a href="#" >Notification</a></li>
+    <li><a href="{{route('customer.favourite.index')}}" class="{{ @$title['active']=='favourite' ? 'active' : '' }}">Favourite</a></li>
     <li><a href="#">Support</a></li>
 
 

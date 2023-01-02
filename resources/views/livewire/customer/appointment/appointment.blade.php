@@ -82,7 +82,7 @@
                                             </div>
 
                                             @if ($order->status == 'pending')
-                                                <a class="btn_q">Reschedule</a>
+                                                <a href= "{{route('customer.appointment.rescheduleAppointment',$order->id)}}" class="btn_q">Reschedule</a>
                                                 <a href="javascript::void(0)" class="btn_x"
                                                     wire:click="cancelOrder({{ $order->id }})">Cancel</a>
                                             @endif

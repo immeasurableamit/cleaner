@@ -14,6 +14,7 @@ use App\Http\Controllers\Customer as CustomerControllers;
 use App\Mail\ContactMail;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\Customer\AppointmentController;
+use App\Http\Controllers\Customer\FavouriteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -188,8 +189,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::prefix('appointments')->group(function () {
             Route::controller(AppointmentController::class)->group(function () {
                 Route::get('/', 'index')->name('customer.appointment.index');
+                Route::get('/reschedule-appointment/{id}', 'rescheduleAppointment')->name('customer.appointment.rescheduleAppointment');
+                Route::get('/updateschedule-appointment', 'updateScheduleAppointment')->name('customer.appointment.updateScheduleAppointment');
             });
         });
+
+//customer Favourite
+
+Route::prefix('favourite')->group(function() {
+ Route::controller(FavouriteController::class)->group(function(){
+    Route::get('/','index')->name('customer.favourite.index');
+    Route::get('/delete/{id}', 'deleteFavouriteCleaner')->name('customer.favourite.deleteFavouriteCleaner');
+ });
+});
+
+
     });
 
     //cleaner routes
