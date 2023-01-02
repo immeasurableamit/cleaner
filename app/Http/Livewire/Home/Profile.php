@@ -107,7 +107,7 @@ class Profile extends Component
 
     public function mount()
     {
-        $this->cleaner = User::findOrFail($this->cleanerId);
+        $this->cleaner = User::with('cleanerReviews')->findOrFail($this->cleanerId);
 
         $this->prepareProps();
 

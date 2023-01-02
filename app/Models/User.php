@@ -138,4 +138,17 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Favourite::class, 'user_id', 'id');
     }
+
+    /* Cleaner user function */
+
+    public function cleanerReviews()
+    {
+        return $this->hasMany(Review::class, 'cleaner_id');
+    }
+
+    /* Customer user function */
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'user_id');
+    }
 }

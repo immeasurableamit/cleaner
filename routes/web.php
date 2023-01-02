@@ -219,6 +219,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         })->name('cleaner.team');
 
         Route::controller(CleanerController::class)->group(function () {
+
+            Route::get('/reviews', 'reviews')->name('cleaner.reviews');
+            /*
             Route::get('/reviews', function () {
                 $title = array(
                     'title' => 'Reviews',
@@ -226,6 +229,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 );
                 return view('cleaner.reviews.reviews', compact('title'));
             })->name('cleaner.reviews');
+            */
         });
         //availability
         Route::prefix('availability')->group(function () {

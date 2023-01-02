@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use \Carbon\Carbon;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use App\Models\Review;
 
 
 class Appointment extends Component
@@ -20,10 +21,17 @@ class Appointment extends Component
     protected $listeners = ['orderCancelledByCustomer'];
     protected $pendingOrderStatuses = ['pending', 'rejected', 'cancelled_by_customer'];
 
+    /* review order props */
+    public $rating, $review, $reviewOrderId;
 
     public function mount()
     {
         $this->prepare();
+    }
+
+    public function hydrate()
+    {
+        $this->resetErrorBag();
     }
 
 
@@ -129,6 +137,36 @@ class Appointment extends Component
         $order   = Order::where('id', $orderId )->update(['status' => 'cancelled_by_customer']);
         $this->alert('success', 'Order cancelled');
         $this->refreshSelectedTab();
+    }
+
+    public function storeReview($orderId)
+    {
+        /* validate review data */
+        $this->reviewOrderId = $orderId;
+        $validatedData = $this->validate([
+            'reviewOrderId' => 'required|exists:orders,id',
+            'rating'        => 'required|numeric|digits_between:1,5',
+            'review'        => 'required'
+        ]);
+
+        $order  = Order::find( $orderId );
+
+        /* create review */
+        $review = new Review;
+        $review->rating   = $this->rating;
+        $review->review   = $this->review;
+        $review->order_id = $order->id;
+        $review->user_id  = auth()->user()->id;
+        $review->cleaner_id = $order->cleaner_id;
+        $review->save();
+
+        /* Update order */
+        $order->status = 'reviewed';
+        $order->save();
+
+        $this->alert('success', 'Review submitted');
+        $this->refreshSelectedTab();
+        return true;
     }
 
     public function render()

@@ -69,7 +69,7 @@
                                                 @elseif ( $order->status == 'accepted' && now()->greaterThanOrEqualTo( $order->cleaning_datetime->copy()->subDay() ) ) {{-- if status is accepted and the order is tomorrow --}}
                                                  <a href="javascript:void(0);" wire:click="collectPayment( {{ $order->id }} )" class="collect_payment crd-btn">{{ $order->statusForCleaner() }}</a>
 
-                                                @elseif ( $order->status == 'payment_collected')
+                                                @elseif ( $order->status == 'payment_collected' || $order->status == 'reviewed' )
                                                     <a href="javascript:void();" class="btn_blue crd-btn">{{ $order->statusForCleaner() }}</a>
                                                 @elseif ( $order->status == 'cancelled')
                                                 <a href="javascript:void();" class="refuse-request-btn crd-btn">{{ $order->statusForCleaner() }}</a>
@@ -146,13 +146,12 @@
                                         @elseif ( $order->status == 'accepted' && now()->greaterThanOrEqualTo( $order->cleaning_datetime->copy()->subDay() ) ) {{-- if status is accepted and the order is tomorrow --}}
                                             <a href="javascript:void(0);" wire:click="collectPayment( {{ $order->id }} )" class="collect_payment crd-btn">{{ $order->statusForCleaner() }}</a>
 
-                                        @elseif ( $order->status == 'payment_collected')
+                                        @elseif ( $order->status == 'payment_collected' || $order->status == 'reviewed')
                                             <a href="javascript:void(0);" class="btn_blue crd-btn">{{ $order->statusForCleaner() }}</a>
                                         @elseif ( $order->status == 'cancelled')
                                         <a href="javascript:void();" class="refuse-request-btn crd-btn">{{ $order->statusForCleaner() }}</a>
                                         @elseif ( $order->status == 'cancelled_by_customer')
                                                 <a href="javascript:void();" class="refuse-request-btn crd-btn">{{ $order->statusForCleaner() }}</a>
-
                                         @endif
 
                                     </div>

@@ -205,81 +205,47 @@
             </div>
         </form>
     </div>
+
+    @if ( $cleaner->cleanerReviews->isNotEmpty() )
     <div class=" row mx-0 feedback_reviews_section profile_feedback_div">
         <h4 class="h4_tittle text-center">Customer Feedback</h4>
-        <div class="card_reviews col-md-7">
+
+        @foreach ( $cleaner->cleanerReviews as $review)
+        <div class="card_reviews">
             <div class="name_img_star">
-                <img src="{{ asset('assets/images/reviewr_1.png') }}" class="pr_img" />
-                <h5>Jenny Wilson</h5>
+                @if ($review->user->image)
+                <img src="{{ asset('storage/images/' . $review->user->image) }}"  class="pr_img">
+            @else
+                <img src="/assets/images/iconshow.png" class="pr_img">
+            @endif
+
+                <h5 class="text-capitalize">{{ $review->user->name }}</h5>
                 <div class="star_2">
                     <div class="input_star me-3">
-                        <img src="{{ asset('assets/images/star.svg') }}">
-                        <img src="{{ asset('assets/images/star.svg') }}">
-                        <img src="{{ asset('assets/images/star.svg') }}">
-                        <img src="{{ asset('assets/images/star.svg') }}">
-                        <img src="{{ asset('assets/images/e_star.svg') }}">
+                        @foreach ( range(1,5) as $i )
+
+                            @if ( $i <= $review->rating )
+                            <img src="{{ asset('assets/images/star.svg') }}">
+                            @else
+                            <img src="{{ asset('assets/images/e_star.svg') }}">
+                            @endif
+                        @endforeach
                     </div>
-                    <span class="me-3">4 out of 5</span>
-                    <span class="r_date">30 Aug 2021</span>
+                    <span class="me-3">{{ $review->rating}} out of 5</span>
+                    <span class="r_date">{{ $review->created_at->toFormattedDateString() }}</span>
                 </div>
             </div>
-            <p class="msg_reviewr">Vitae auctor habitasse viverra tincidunt sed faucibus. Donec nisi, scelerisque sed eget nibh ut vestibulum augue non. Integer faucibus aliquam morbi aliquam justo, bibendum nunc et. Dolor eu euismod luctus amet odio est. Vitae lobortis sed augue ut in integer augue massa.
+            <p class="msg_reviewr">
+                {{ $review->review }}
             </p>
-            <div class="likes_div">
-                <input type="checkbox" class="like_b">
-                <span class="ms-3"><b>2 </b>Likes</span>
-            </div>
         </div>
-        <div class="card_reviews col-md-7">
-            <div class="name_img_star">
-                <img src="{{ asset('assets/images/reviewr_1.png') }}" class="pr_img" />
-                <h5>Jenny Wilson</h5>
-                <div class="star_2">
-                    <div class="input_star me-3">
-                        <img src="{{ asset('assets/images/star.svg') }}">
-                        <img src="{{ asset('assets/images/star.svg') }}">
-                        <img src="{{ asset('assets/images/star.svg') }}">
-                        <img src="{{ asset('assets/images/star.svg') }}">
-                        <img src="{{ asset('assets/images/e_star.svg') }}">
-                    </div>
-                    <span class="me-3">4 out of 5</span>
-                    <span class="r_date">30 Aug 2021</span>
-                </div>
-            </div>
-            <p class="msg_reviewr">Vitae auctor habitasse viverra tincidunt sed faucibus. Donec nisi, scelerisque sed eget nibh ut vestibulum augue non. Integer faucibus aliquam morbi aliquam justo, bibendum nunc et. Dolor eu euismod luctus amet odio est. Vitae lobortis sed augue ut in integer augue massa.
-            </p>
-            <div class="likes_div">
-                <input type="checkbox" class="like_b">
-                <span class="ms-3"><b>2 </b>Likes</span>
-            </div>
-        </div>
-        <div class="card_reviews col-md-7">
-            <div class="name_img_star">
-                <img src="{{ asset('assets/images/reviewr_1.png') }}" class="pr_img" />
-                <h5>Jenny Wilson</h5>
-                <div class="star_2">
-                    <div class="input_star me-3">
-                        <img src="{{ asset('assets/images/star.svg') }}">
-                        <img src="{{ asset('assets/images/star.svg') }}">
-                        <img src="{{ asset('assets/images/star.svg') }}">
-                        <img src="{{ asset('assets/images/star.svg') }}">
-                        <img src="{{ asset('assets/images/e_star.svg') }}">
-                    </div>
-                    <span class="me-3">4 out of 5</span>
-                    <span class="r_date">30 Aug 2021</span>
-                </div>
-            </div>
-            <p class="msg_reviewr">Vitae auctor habitasse viverra tincidunt sed faucibus. Donec nisi, scelerisque sed eget nibh ut vestibulum augue non. Integer faucibus aliquam morbi aliquam justo, bibendum nunc et. Dolor eu euismod luctus amet odio est. Vitae lobortis sed augue ut in integer augue massa.
-            </p>
-            <div class="likes_div">
-                <input type="checkbox" class="like_b">
-                <span class="ms-3"><b>2 </b>Likes</span>
-            </div>
-        </div>
+        @endforeach
         <div class="btn_show_more">
             <a href="#" class="">Show more</a>
         </div>
+
     </div>
+    @endif
 
 
     @push('scripts')
@@ -329,7 +295,7 @@
         }
 
         function initSelectors() {
-            console.log('init selector rand');
+
             $("#time-selector").select2({
                 placeholder: 'Select Time'
             });

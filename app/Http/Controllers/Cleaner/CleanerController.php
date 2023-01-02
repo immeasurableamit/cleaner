@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Cleaner;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Review;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 
@@ -100,5 +101,17 @@ class CleanerController extends Controller
             'success' => true,
             'text' => $responseText,
         ]);
+    }
+
+    public function reviews()
+    {
+        $title = array(
+            'title' => 'Reviews',
+            'active' => 'reviews',
+        );
+
+        $reviews = Review::with('user')->where('cleaner_id', auth()->user()->id )->get();
+
+        return view('cleaner.reviews.reviews', compact('title','reviews'));
     }
 }

@@ -64,3 +64,21 @@ function convertCentsIntoDollars($cents)
     $dollars = $cents / 100;
     return (float) number_format( $cents, 2, ".", "" ); // number, number of decimal points, seprator sign of decimal points, jsn
 }
+
+function formatNumberToDecimalPoints($number, $decimalPointsLimit = 2)
+{
+    return (float) number_format( $number, $decimalPointsLimit, ".", "" );
+}
+
+function formatAvgRating( $avgRating )
+{
+    $doesHaveDecimalPoints = isset( explode( ".", $avgRating )[1] );
+    if (  $doesHaveDecimalPoints ){
+        return formatNumberToDecimalPoints( $avgRating, 2 );
+    }
+
+    return $avgRating;
+}
+
+
+
