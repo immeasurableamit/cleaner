@@ -104,21 +104,21 @@
                                         </div>
                                         <div class="dropdown-list-design">
                                             <ul class="list-unstyled">
-                                                @if (Auth::user()->role == 'customer')
-                                                <li><a href="{{ route('customer.account') }}">Account</a></li>
-                                                <li><a href="customer-appoitments.html">Appointments</a></li>
-                                                <li><a href="#">Billing</a></li>
-                                                <li><a href="customer-notification.html">Notifications</a></li>
-                                                <li><a href="customer-support-past-service.html">Support</a>
+                                            @if (Auth::user()->role == 'customer')
+                                                <li><a href="{{ route('customer.account') }}" class="{{ @$title['active']=='account' ? 'active' : '' }}">Account</a></li>
+                                                <li><a href="{{route('customer.appointment.index')}}" class="{{ @$title['active']=='appointments' ? 'active' : '' }}">Appointments</a></li>
+                                                <li><a href="{{route('customer.billing.index')}}" class="{{ @$title['active']=='billing' ? 'active' : '' }}">Billing</a></li>
+                                                <li><a href="#">Notifications</a></li>
+                                                <li><a href="#">Support</a>
                                                 </li>
                                                 @else
-                                                <li><a href="{{ route('cleaner.account') }}">Account</a></li>
-                                                <li><a href="customer-appoitments.html">Appointments</a></li>
-                                                <li><a href="{{ route('cleaner.billing.editBankAccount') }}">Billing</a>
+                                                <li><a href="{{route('cleaner.account')}}" class="{{ @$title['active']=='account' ? 'active' : '' }}">Account</a></li>
+                                                <li><a href="{{route('cleaner.jobs.jobs')}}" class="{{ @$title['active']=='jobs' ? 'active' : '' }}">Jobs</a></li>
+                                                <li><a href="{{route('cleaner.billing.billing')}}" class="{{ @$title['active']=='billing' ? 'active' : '' }}">Billing</a>
                                                 </li>
-                                                <li><a href="{{ route('cleaner.notification.index') }}">Notifications</a>
+                                                <li><a href="{{route('cleaner.notification.index')}}" class="{{ @$title['active']=='notification' ? 'active' : '' }}">Notifications</a>
                                                 </li>
-                                                <li><a href="{{ route('cleaner.support.service') }}">Supports</a>
+                                                <li><a href="{{route('cleaner.support.service')}}" class="{{ @$title['active']=='support' ? 'active' : '' }}">Supports</a>
                                                 </li>
                                                 @endif
 

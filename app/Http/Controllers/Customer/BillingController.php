@@ -16,8 +16,13 @@ class BillingController extends Controller
 
     public function index()
     {
+        $title = array(
+			'active' => 'billing',
+            'title' => 'billing'
+		);
+
         $user = User::with(['card', 'billing_address'])->where("id", auth()->user()->id)->first();
-        return view('customer.billing.index', compact('user'));
+        return view('customer.billing.index', compact('title','user'));
     }
 
     public function edit()

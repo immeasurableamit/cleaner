@@ -11,9 +11,10 @@ class AppointmentController extends Controller
     public function index()
     {
         $title = array(
-			'active' => 'appointment',
-            'title' => 'title'
+			'active' => 'appointments',
+            'title' => 'appointments'
 		);
+
         return view('customer.appointments.index', compact('title'));        
     }
 
