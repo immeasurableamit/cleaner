@@ -372,15 +372,17 @@ const Chatpanel = () => {
 	           		<h4 className="h4_design border-0">Message</h4>
 
 	           		{userList.length > 0 &&
-						userList.map(function (user, index) {
+						userList.filter(user => user.name.toLowerCase().match(search)).map(function (user, index) {
 							return (
 				            <div className={`card_chat ${isActive==user.id ? 'active' : ''}`} key={'user_'+user.id}>
 				            	<a className="nav-link getmsgs" href="javascript:void(0);" onClick={()=>loadChats(user.id)} >
 					                <img src={user.profile_pic} />
 					                {/*<span className="r_time">15:26</span>*/}
 					                <h4>{user.name}</h4>
-					                {/*<span className="number">Last seen yestarday 10:25am</span>*/}
-                					
+					                {user.last_active_at &&
+					                <span className="number">{user.online=='1' ? 'online' : 'Last seen '+ user.online_date }</span>
+                					}
+
                 					{user?.unread>0 &&
                 					<span className="msg_number">{user.unread}</span>
                 					}
@@ -411,7 +413,27 @@ const Chatpanel = () => {
 	                 <div className="card_chat">
 	                  <img src={activeUser.profile_pic} />
 	                  <h4>{activeUser.name}</h4>
-	                  {/*<span className="number">Last seen yestarday 10:25am</span>*/}
+	                  {activeUser.last_active_at &&
+		                <span className="number">{activeUser.online=='1' ? 'online' : 'Last seen '+ activeUser.online_date }</span>
+						}
+	                 </div>
+
+	                 <div class="bar_header_search d-none d-sm-flex">
+	                  <input type="search" placeholder="Search" class="me-3" />
+	                  <div class="dropdown msg_notification d-none d-sm-block">
+	                    <button class="dropdown-toggle border-0 me-3" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+	                     <img src="assets/images/icons/notification.svg" />
+	                     <span class="red_dot"></span>
+	                    </button>
+	                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+	                      <li><a class="dropdown-item" href="#">Action</a></li>
+	                      <li><a class="dropdown-item" href="#">Another action</a></li>
+	                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+	                    </ul>
+	                  </div>
+	                  <div class="three_dots">
+	                     <span>...</span>
+	                  </div>
 	                 </div>
 	             </div>
 	                             
@@ -423,16 +445,31 @@ const Chatpanel = () => {
 					{msgList.length > 0 &&
 						msgList.map(function (msgs, index) {
 							let classNa = 'reciver_msg';
+							let profile_pic = activeUser.profile_pic;
+							let name = activeUser.name;
 							if(msgs.sender_id===currentUser?.id){
 								classNa = 'sender_msg';
+								profile_pic = currentUser.profile_pic;
+								name = currentUser.name;
+							}
+
+							let dateFrom = Moment().subtract(6,'d').format('YYYY-MM-DD');
+							let ndateFrom = Moment(msgs.created_at).format('YYYY-MM-DD');
+							console.log('dateFrom', dateFrom);
+
+							let timeFor = Moment(msgs.created_at).format('L LT');
+							if(ndateFrom >= dateFrom){
+								timeFor = Moment(msgs.created_at).format('dddd LT');
 							}
 
 							return (
 								<div className={classNa} key={index}>
 				                  <div className="s_r_msg">
+                      					<img src={profile_pic} />
 				                     <div className="name_l_seen">
+				                     	<h5 class="m_name">{name}</h5>
 				                     	{msgs.created_at &&
-				                     	<span className="l_seen">{Moment(msgs.created_at).format('L LT')}</span>
+				                     	<span className="l_seen">{timeFor}</span>
 				                     	}
 				                     </div>
 

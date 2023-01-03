@@ -29,6 +29,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'contact_number',
         'status',
         'email_verified_at',
+        'last_active_at'
 
     ];
 
@@ -53,7 +54,7 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     protected $appends = [
-        'name', 'profile_pic', 'unread_messages'
+        'name', 'profile_pic', 'unread_messages', 'online', 'online_date'
     ];
 
     protected $with = ['UserDetails'];
@@ -61,6 +62,32 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getNameAttribute()
     {
         return $this->first_name . ' ' . $this->last_name;
+    }
+
+    public function getOnlineAttribute()
+    {
+        $newTime = \Carbon\Carbon::now()->subMinutes(10)->timestamp;
+        
+        $userLast = strtotime($this->last_active_at);
+        
+        if($userLast > $newTime){
+            return 1;
+        }
+        return 0;
+    }
+
+    public function getOnlineDateAttribute()
+    {
+        $date = date('Y-m-d', strtotime($this->last_active_at));
+        $dateDay = date('l', strtotime($this->last_active_at));
+        $time = date('h:ma', strtotime($this->last_active_at));
+
+        $newDate = \Carbon\Carbon::now()->subDays(6)->format('Y-m-d');
+        
+        if($date >= $newDate){
+            return $dateDay.' '.$time;
+        }
+        return $date.' '.$time;
     }
 
 

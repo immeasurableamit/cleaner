@@ -89,7 +89,7 @@ Route::get('terms-and-conditions', function () {
 
 Route::get('/checkout/{details}', [ HomeController::class, 'checkout' ] )->name('checkout');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified', 'trackLastActiveAt'])->group(function () {
 
     Route::controller(ChatController::class)->group(function () {
         Route::get('/messages', 'index')->name('messages');
