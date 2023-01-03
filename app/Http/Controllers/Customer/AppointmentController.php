@@ -24,6 +24,7 @@ class AppointmentController extends Controller
     {
 
         $getcustomerOrders = Order::where('id', $orderId)->first();
+        // dd($getcustomerOrders);
         $cleanerID = $getcustomerOrders->cleaner_id;
 
         $getTimeSlotOfCleaner = CleanerHours::where('users_id', $cleanerID)->pluck('day')->toArray();

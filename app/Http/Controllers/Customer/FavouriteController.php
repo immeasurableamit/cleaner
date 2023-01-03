@@ -7,6 +7,7 @@ use App\Models\Favourite;
 use App\Models\User;
 use App\Models\UserDetails;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class FavouriteController extends Controller
 {
@@ -27,12 +28,14 @@ class FavouriteController extends Controller
 
 
 
-    public function deleteFavouriteCleaner($cleaner_id)
+    public function deleteFavouriteCleaner($id)
     {
-        if ($cleaner_id) {
-            Favourite::find($cleaner_id)->delete();
+        if ($id) {
+            Favourite::find($id)->delete();
         }
 
-        return redirect()->route('customer.favourite.index');
+        return response()->json(['status' => 'Category Deleted Successfully']);
     }
+
+    
 }
