@@ -4,6 +4,8 @@
 <head>
     <title>CanaryClean</title>
     <meta charset="utf-8">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="site-url" content="{{ url('/') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -32,6 +34,45 @@
 
     @include('layouts.includes.footer')
     @include('layouts.includes.script')
+
+
+    <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+        <script src="{{ asset('js/app.js') }}" defer></script>
+
+        <script>
+            let user = {
+                id:{{ auth()->check() ? auth()->user()->id : '' }}
+            }
+
+
+            let a_tok = document.querySelector('meta[name="csrf-token"]').content;
+        </script>
+        <script>
+
+            //suscribing to pusher channel
+            //Pusher.logToConsole = true;
+            var pusher = new Pusher('{{config("broadcasting.connections.pusher.key")}}', {
+                cluster: 'ap2',
+                authEndpoint:'/broadcasting/auth',
+                auth:{
+                    headers:{
+                        'X-CSRF-TOKEN':a_tok
+                    }
+                }
+            });
+
+            /*
+            //.....
+            var notificationsCountElem   = $('.notification-indicators');
+
+            // Subscribe to the channel we specified in our Laravel Event
+            var channel = pusher.subscribe('private-chat-count-'+user.id);
+
+            channel.bind('App\\Events\\MessageCount', function(data) {
+                notificationsCountElem.html(data.messageCount);
+            }.bind(this));
+            */
+        </script>
 
 </body>
 

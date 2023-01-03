@@ -60,7 +60,13 @@
                     </div>
                 </div>
                 <div class="btn_msg_cleaner">
-                    <a href="{{ auth()->user() != null ? '#' : route('signup-customers') }}" class="btn_msg">Message Cleaner <img src="{{ asset('assets/images/icons/email-2.svg') }}"> </a>
+                    @php
+                    $messageUrl = route('signup-customers');
+                    if(auth()->check()) {
+                        $messageUrl = route('messages', ['user'=>$cleaner->id]);
+                    }
+                    @endphp
+                    <a href="{{ $messageUrl }}" class="btn_msg">Message Cleaner <img src="{{ asset('assets/images/icons/email-2.svg') }}"> </a>
                     <p>Ask a <b>question</b> or request a <b>custom proposal.</b></p>
                 </div>
             </div>

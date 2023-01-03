@@ -14,6 +14,7 @@ use App\Http\Controllers\Customer as CustomerControllers;
 use App\Mail\ContactMail;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\Customer\AppointmentController;
+use App\Http\Controllers\ChatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,6 +91,16 @@ Route::get('/checkout/{details}', [ HomeController::class, 'checkout' ] )->name(
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
+    Route::controller(ChatController::class)->group(function () {
+        Route::get('/messages', 'index')->name('messages');
+        //Route::get('/chat/{id}', 'show')->name('chat.show');
+        Route::post('/chat/users', 'fetchUsers');
+        Route::post('/chat/messages', 'fetchMessages');
+        Route::post('/chat/messages/send', 'sendMessage');
+        Route::post('/files-upload', 'fileUpload');
+    });
+
+    
     // admin routes
     Route::prefix('admin')->group(function () {
 
