@@ -5774,7 +5774,9 @@ var Chatpanel = function Chatpanel() {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
             className: "h4_design border-0",
             children: "Message"
-          }), userList.length > 0 && userList.map(function (user, index) {
+          }), userList.length > 0 && userList.filter(function (user) {
+            return user.name.toLowerCase().match(search);
+          }).map(function (user, index) {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
               className: "card_chat ".concat(isActive == user.id ? 'active' : ''),
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("a", {
@@ -5787,6 +5789,9 @@ var Chatpanel = function Chatpanel() {
                   src: user.profile_pic
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
                   children: user.name
+                }), user.last_active_at && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+                  className: "number",
+                  children: user.online == '1' ? 'online' : 'Last seen ' + user.online_date
                 }), (user === null || user === void 0 ? void 0 : user.unread) > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
                   className: "msg_number",
                   children: user.unread
@@ -5801,16 +5806,67 @@ var Chatpanel = function Chatpanel() {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
         className: "messages_right_section",
         children: isActive && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
             className: "msg_right_header",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
               className: "card_chat",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
                 src: activeUser.profile_pic
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
                 children: activeUser.name
+              }), activeUser.last_active_at && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+                className: "number",
+                children: activeUser.online == '1' ? 'online' : 'Last seen ' + activeUser.online_date
               })]
-            })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+              "class": "bar_header_search d-none d-sm-flex",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
+                type: "search",
+                placeholder: "Search",
+                "class": "me-3"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+                "class": "dropdown msg_notification d-none d-sm-block",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("button", {
+                  "class": "dropdown-toggle border-0 me-3",
+                  type: "button",
+                  id: "dropdownMenuButton1",
+                  "data-bs-toggle": "dropdown",
+                  "aria-expanded": "false",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
+                    src: "assets/images/icons/notification.svg"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+                    "class": "red_dot"
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("ul", {
+                  "class": "dropdown-menu",
+                  "aria-labelledby": "dropdownMenuButton1",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("a", {
+                      "class": "dropdown-item",
+                      href: "#",
+                      children: "Action"
+                    })
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("a", {
+                      "class": "dropdown-item",
+                      href: "#",
+                      children: "Another action"
+                    })
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("a", {
+                      "class": "dropdown-item",
+                      href: "#",
+                      children: "Something else here"
+                    })
+                  })]
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                "class": "three_dots",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+                  children: "..."
+                })
+              })]
+            })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
             className: "right_chat",
             children: [page < lastPage && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
@@ -5822,19 +5878,35 @@ var Chatpanel = function Chatpanel() {
             }), msgList.length > 0 && msgList.map(function (msgs, index) {
               var _msgs$files;
               var classNa = 'reciver_msg';
+              var profile_pic = activeUser.profile_pic;
+              var name = activeUser.name;
               if (msgs.sender_id === (currentUser === null || currentUser === void 0 ? void 0 : currentUser.id)) {
                 classNa = 'sender_msg';
+                profile_pic = currentUser.profile_pic;
+                name = currentUser.name;
+              }
+              var dateFrom = moment__WEBPACK_IMPORTED_MODULE_3___default()().subtract(6, 'd').format('YYYY-MM-DD');
+              var ndateFrom = moment__WEBPACK_IMPORTED_MODULE_3___default()(msgs.created_at).format('YYYY-MM-DD');
+              console.log('dateFrom', dateFrom);
+              var timeFor = moment__WEBPACK_IMPORTED_MODULE_3___default()(msgs.created_at).format('L LT');
+              if (ndateFrom >= dateFrom) {
+                timeFor = moment__WEBPACK_IMPORTED_MODULE_3___default()(msgs.created_at).format('dddd LT');
               }
               return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
                 className: classNa,
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
                   className: "s_r_msg",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
+                    src: profile_pic
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
                     className: "name_l_seen",
-                    children: msgs.created_at && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h5", {
+                      "class": "m_name",
+                      children: name
+                    }), msgs.created_at && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
                       className: "l_seen",
-                      children: moment__WEBPACK_IMPORTED_MODULE_3___default()(msgs.created_at).format('L LT')
-                    })
+                      children: timeFor
+                    })]
                   }), msgs.message && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
                     className: "msg_p",
                     children: msgs.message
