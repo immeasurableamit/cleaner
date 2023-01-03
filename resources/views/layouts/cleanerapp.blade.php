@@ -20,20 +20,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     @livewireStyles
-</head>
 
-<body class="light-theme">
 
-    @include('layouts.includes.cleanerHeader')
-
-    <main id="main-content">
-
-        @yield('content')
-
-    </main>
-
-    @include('layouts.includes.footer')
-    @include('layouts.includes.script')
+    <script src="{{asset('assets/js/jquery-3.6.0.js')}}"></script>
 
 
     <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
@@ -52,7 +41,7 @@
             //suscribing to pusher channel
             //Pusher.logToConsole = true;
             var pusher = new Pusher('{{config("broadcasting.connections.pusher.key")}}', {
-                cluster: 'ap2',
+                cluster: '{{env('PUSHER_APP_CLUSTER')}}',
                 authEndpoint:'/broadcasting/auth',
                 auth:{
                     headers:{
@@ -73,6 +62,24 @@
             }.bind(this));
             */
         </script>
+        
+</head>
+
+<body class="light-theme">
+
+    @include('layouts.includes.cleanerHeader')
+
+    <main id="main-content">
+
+        @yield('content')
+
+    </main>
+
+    @include('layouts.includes.footer')
+    @include('layouts.includes.script')
+
+
+    
 
 </body>
 

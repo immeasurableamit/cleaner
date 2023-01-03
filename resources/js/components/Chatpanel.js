@@ -189,7 +189,7 @@ const Chatpanel = () => {
 
 
 	function handleOnEnter(text) {
-		console.log("enter", text);
+		//console.log("enter", text);
 		formSubmit();
 	}
 
@@ -222,7 +222,7 @@ const Chatpanel = () => {
 			data['rec_id'] = activeUser.id;
 			data['files_attached'] = filesArray;
 
-			console.log('data', data);
+			//console.log('data', data);
 
 			//axios.post("/chat/messages/send", JSON.stringify(data))
 			axios.post("/chat/messages/send", {
@@ -257,7 +257,7 @@ const Chatpanel = () => {
 
 		channel.bind('App\\Events\\MessageEvent', function(d) {
 
-			loadUsers();
+			//loadUsers();
 
 			//console.log(d)
 			let active_user = JSON.parse(localStorage.getItem('active_user'));
@@ -356,22 +356,6 @@ const Chatpanel = () => {
 	                  <h4>{currentUser.name}</h4>
 		                <span className="number">555555555</span>
 	               </div>
-	               <div className="d-flex">
-	                <div className="dropdown msg_notification d-block d-sm-none">
-	                  <button className="dropdown-toggle border-0 me-3" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-	                   <img src="assets/images/icons/notification.svg" />
-	                   <span className="red_dot"></span>
-	                  </button>
-	                  <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-	                    <li><a className="dropdown-item" href="#">Action</a></li>
-	                    <li><a className="dropdown-item" href="#">Another action</a></li>
-	                    <li><a className="dropdow n-item" href="#">Something else here</a></li>
-	                  </ul>
-	                </div>
-	               <div className="three_dots">
-		                <span>...</span>
-		             </div>
-		            </div>
 	           	</div>
 
 
@@ -392,9 +376,9 @@ const Chatpanel = () => {
 							return (
 				            <div className={`card_chat ${isActive==user.id ? 'active' : ''}`} key={'user_'+user.id}>
 				            	<a className="nav-link getmsgs" href="javascript:void(0);" onClick={()=>loadChats(user.id)} >
-					                <img src={user.profile_pic}/>
+					                <img src={user.profile_pic} />
 					                {/*<span className="r_time">15:26</span>*/}
-					                <h4>{user.name} <span>(View Jobs)</span></h4>
+					                <h4>{user.name}</h4>
 					                {/*<span className="number">Last seen yestarday 10:25am</span>*/}
                 					
                 					{user?.unread>0 &&
@@ -407,9 +391,9 @@ const Chatpanel = () => {
 					}
 
 					{!(userList.length > 0) &&
-						<li className="nav-item ml-3">
+						<div className="no-user">
 							No user found
-						</li>
+						</div>
 					}
 
 	           </div>
@@ -425,26 +409,9 @@ const Chatpanel = () => {
 			<>
 	             <div className="msg_right_header">
 	                 <div className="card_chat">
-	                  <img src={activeUser.profile_pic}/>
+	                  <img src={activeUser.profile_pic} />
 	                  <h4>{activeUser.name}</h4>
 	                  {/*<span className="number">Last seen yestarday 10:25am</span>*/}
-	                 </div>
-	                 <div className="bar_header_search d-none d-sm-flex">
-	                  <input type="search" placeholder="Search" className="me-3"/>
-	                  <div className="dropdown msg_notification d-none d-sm-block">
-	                    <button className="dropdown-toggle border-0 me-3" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-	                     <img src="assets/images/icons/notification.svg"/>
-	                     <span className="red_dot"></span>
-	                    </button>
-	                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-	                      <li><a className="dropdown-item" href="#">Action</a></li>
-	                      <li><a className="dropdown-item" href="#">Another action</a></li>
-	                      <li><a className="dropdown-item" href="#">Something else here</a></li>
-	                    </ul>
-	                  </div>
-	                  <div className="three_dots">
-	                     <span>...</span>
-	                  </div>
 	                 </div>
 	             </div>
 	                             
@@ -462,7 +429,7 @@ const Chatpanel = () => {
 
 							return (
 								<div className={classNa} key={index}>
-				                  <div className="s_r_msg ">
+				                  <div className="s_r_msg">
 				                     <div className="name_l_seen">
 				                     	{msgs.created_at &&
 				                     	<span className="l_seen">{Moment(msgs.created_at).format('L LT')}</span>
@@ -501,32 +468,32 @@ const Chatpanel = () => {
 					{error &&
 						<span className="red">{error}</span>
 					}
-	             <div className="msg_send_input_div">
+		             <div className="msg_send_input_div">
 
-	              	<InputEmoji
-								value={text}
-								onChange={setText}
-								cleanOnEnter
-								onEnter={handleOnEnter}
-								placeholder="Type a message"
-								/>
+		              	<InputEmoji
+									value={text}
+									onChange={setText}
+									cleanOnEnter
+									onEnter={handleOnEnter}
+									placeholder="Type a message"
+									/>
 
-					<div className="galery_div">
-		                <input
-									type="file"
-									name="image"
-									onChange={(e)=>handleFileUpload(e)}
-									id="msg_file"
-								/>
+						<div className="galery_div">
+			                <input
+										type="file"
+										name="image"
+										onChange={(e)=>handleFileUpload(e)}
+										id="msg_file"
+									/>
 
-		                <label htmlFor="msg_file" className="me-3"><img src="assets/images/gallery.svg"/></label>
-		              </div>
+			                <label htmlFor="msg_file" className="me-3"><img src="assets/images/gallery.svg"/></label>
+			              </div>
 
-	               <button type="submit" className="btn_send_msg" disabled={sending ? true : false}>
-						{sending && <i className="fa fa-spin fa-spinner"></i>}{' '}<span className="d-none d-sm-inline">Send</span><img src="assets/images/paper.svg"/>
-					</button>
+		               <button type="submit" className="btn_send_msg" disabled={sending ? true : false}>
+							{/*{sending && <i className="fa fa-spin fa-spinner"></i>}{' '}*/}Send
+						</button>
 
-	             </div>
+		             </div>
 	             </form>
 
 
