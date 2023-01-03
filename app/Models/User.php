@@ -53,7 +53,7 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     protected $appends = [
-        'name',
+        'name', 'profile_pic', 'unread_messages'
     ];
 
     protected $with = ['UserDetails'];
@@ -62,6 +62,32 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->first_name . ' ' . $this->last_name;
     }
+
+
+    public function getProfilePicAttribute(){
+        if($this->image){
+            return asset('storage/logo/'.$this->image);
+        }
+
+        return asset('no-user.jpg');
+    }
+
+    public function getUnreadMessagesAttribute(){
+        return $this->messages()->where('read', '0')->count();
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class, 'rec_id', 'id'); 
+    }
+
+    public function messagesSender()
+    {
+        return $this->hasMany(Message::class, 'sender_id', 'id'); 
+    }
+
+
+
 
     public function UserDetails()
 
