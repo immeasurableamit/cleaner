@@ -189,6 +189,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::get('/', 'index')->name('customer.appointment.index');
                 Route::get('/reschedule-appointment/{id}', 'rescheduleAppointment')->name('customer.appointment.rescheduleAppointment');
                 Route::get('/updateschedule-appointment', 'updateScheduleAppointment')->name('customer.appointment.updateScheduleAppointment');
+                Route::post('/slotAvailable', 'slotAvailable')->name('customer.appointment.slotAvailable');
             });
         });
 
