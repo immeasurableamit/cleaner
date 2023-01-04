@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use App\Mail\OrderConfirmedMail;
 
 class OrderConfirmed extends Notification
 {
@@ -15,7 +16,7 @@ class OrderConfirmed extends Notification
 
     /**
      * Create a new notification instance.
-     *
+     *e
      * @return void
      */
     public function __construct($order)
@@ -42,9 +43,9 @@ class OrderConfirmed extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-                    ->greeting("Hello, ".$this->order->user->name )
-                    ->line("Your order #".$this->order->id." has confirmed by cleaner");
+
+        $mailable = new OrderConfirmedMail($notifiable, $this->order);
+        return $mailable->to($notifiable->email);
     }
 
     /**
