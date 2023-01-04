@@ -63,15 +63,12 @@
                     <ul class="d-flex align-items-center">
                         <li class="nav-item email-notification">
                             <div class="dropdown">
-                                <button type="button" class="btn dropdown-toggle position-relative btn-transparent" data-bs-toggle="dropdown">
+                                <a href="{{ route('messages') }}" class="btn dropdown-toggle position-relative btn-transparent">
                                     <img src="{{ asset('/assets/images/icons/email-2.svg') }}">
+                                    {{--
                                     <span class="notification-indicators">11</span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="message.html">Link 1</a></li>
-                                    <li><a class="dropdown-item" href="message.html">Link 2</a></li>
-                                    <li><a class="dropdown-item" href="message.html">Link 3</a></li>
-                                </ul>
+                                    --}}
+                                </a>
                             </div>
                         </li>
                         <li class="nav-item signin account-profile">
