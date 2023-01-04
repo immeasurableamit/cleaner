@@ -35,7 +35,7 @@
         </div>
         @error ('time') <span class="help-block text-danger">{{ $message }}</span> @enderror
     </div>
-{{-- @endif  --}}
+    {{-- @endif  --}}
 
     <div class="d-flex two-column justify-content-spacebw">
         <a href="{{route('customer.appointment.updateScheduleAppointment')}}" class="btn btn-primary"> Update</a>
@@ -47,10 +47,9 @@
 
 
 
-
-
-
 <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
     function init() {
         // debugger;
@@ -77,8 +76,21 @@
             setup: (picker) => {
 
                 picker.on('selected', (date) => {
+                    var getDate = date.format('YYYY-MM-DD');
 
-                    console.log(date, 'aman');
+                    var data = {
+                        "_token": "{{ csrf_token() }}",
+                        "date": getDate
+                    };
+                    console.log(data, "rrrr");
+                    $.ajax({
+							type: "POST",
+							url: '/customer/appointments/slotAvailable/',
+							data: data,
+							success: function() {
+								console.log("Valueadded");
+							}
+						});
 
                 });
             },

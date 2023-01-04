@@ -357,12 +357,14 @@ class Checkout extends Component
 
         $userCard = UserCard::create([
             'user_id'     => $user_id,
-            'last4_digits'    => isset($this->tokenSave['token']->card->last4_digits),
-            'brand'  => isset($this->tokenSave['token']->card->brand),
-            'exp_month'   => isset($this->tokenSave['token']->card->exp_month),
-            'exp_year' => isset($this->tokenSave['token']->card->exp_year),
+            'brand'  => $this->stripeTokenResp['token']->card->brand,
+            'last4_digits' =>$this->stripeTokenResp['token']->card->last4,
+            'exp_month'   => $this->stripeTokenResp['token']->card->exp_month,
+            'exp_year' => $this->stripeTokenResp['token']->card->exp_year,
+
 
         ]);
+        // dd($userCard);
 
         return $userCard;
     }
@@ -380,6 +382,8 @@ class Checkout extends Component
         $tokenResp = stripeGenerateCardToken($card);
 
         $this->stripeTokenResp = $tokenResp;
+
+        // dd($this->stripeTokenResp['token']->card);
         return $tokenResp;
     }
 
@@ -476,12 +480,10 @@ class Checkout extends Component
     }
 
 
-    // ... aman
-
 
     public function alertConfirm($iid)
     {
-        $this->user_id = $iid;
+        $this->order_id = $iid;
 
         $this->alert('warning', 'Are you sure do want to delete?', [
 			'toast' => false,
@@ -496,8 +498,8 @@ class Checkout extends Component
     }
     public function cancelOrder()
     {
-        if ($this->user_id) {
-            $orderCancelledByCustomer = Order::find($this->user_id)->first();
+        if ($this->order_id) {
+            $orderCancelledByCustomer = Order::find($this->order_id)->first();
             $this->getCleanerId = $orderCancelledByCustomer['cleaner_id'];
             // dd($orderCancelledByCustomer);
             // $orderCancelledByCustomer = $orderId['status'] = "cancelled_by_customer";

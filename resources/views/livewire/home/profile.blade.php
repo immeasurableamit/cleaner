@@ -185,7 +185,7 @@
                                 <option></option>
                                 @foreach($workingDatesTimeSlot as $key => $slot)
 
-                              <option value="{{ date('H:i:s', strtotime($slot['time'])) }}" {{ $slot['is_free']=='no' ? 'disabled' : '' }} {{ date("H:i:s", strtotime( $slot['time'] ) )  == $time ? 'selected' : ''  }}>{{date('h:i A', strtotime($slot['time']))}}</option>
+                              <option value="{{ date('H:i:s', strtotime($slot['time'])) }}" {{ $slot['is_free']=='no' ? 'disabled' : '' }} {{ date("H:i:s", strtotime( $slot['time'] ) )  == $time ? 'selected' : ''  }}>{{date('h:i A', strtotime($slot['time']))}} </option>
                                 {{-- <option value="{{ date('H:i:s', strtotime($slot['time'])) }}" {{ $slot['is_free']=='no' ? 'disabled' : '' }}>{{ $slot['time'] }}</option> --}}
                                 @endforeach
                             </select>
@@ -285,7 +285,7 @@
                     picker.on('selected', (date) => {
                         @this.set('selected_date', date.format('YYYY-MM-DD'));
                     });
-
+                   
                     picker.on('change:month', (date, calendarIdx) => {
                         // some action
                         @this.set('month_date', date.format('YYYY-MM-DD'));
