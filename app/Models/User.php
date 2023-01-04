@@ -151,4 +151,23 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Review::class, 'user_id');
     }
+
+    /* cleaner user function */
+
+    public function isEligibleForListing()
+    {
+        if ( $this->hasCleanerSetHisServedLocations() === false ) {
+            return false;
+        }
+
+        if ( $this->cleanerHours->isEmpty() ){
+            return false;
+        }
+
+        if ( $this->cleanerServices->where('status', '1')->isEmpty() ){
+            return false;
+        }
+
+        return true;
+    }
 }
