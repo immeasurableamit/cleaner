@@ -10,8 +10,8 @@ body *:not(html):not(style):not(br):not(tr):not(code) {
 
 body {
     -webkit-text-size-adjust: none;
-    background-color: #2a5ae07e;
-    color: #216ad6;
+    background-color: #ffffff;
+    color: #718096;
     height: 100%;
     line-height: 1.4;
     margin: 0;
@@ -67,7 +67,7 @@ p {
 }
 
 p.sub {
-    font-size: 20px;
+    font-size: 12px;
 }
 
 img {
@@ -103,7 +103,7 @@ img {
 }
 
 .header a {
-    color: #1275d1;
+    color: #3d4852;
     font-size: 19px;
     font-weight: bold;
     text-decoration: none;
@@ -123,7 +123,7 @@ img {
     -premailer-cellpadding: 0;
     -premailer-cellspacing: 0;
     -premailer-width: 100%;
-    background-color: #257cd3;
+    background-color: #edf2f7;
     border-bottom: 1px solid #edf2f7;
     border-top: 1px solid #edf2f7;
     margin: 0;
