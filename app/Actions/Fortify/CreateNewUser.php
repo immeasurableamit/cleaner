@@ -104,7 +104,6 @@ class CreateNewUser implements CreatesNewUsers
             $userDetail->longitude = $input['longitude'];
 
             $userDetail->save();
-            return $user;
 
         } else {
 
@@ -177,10 +176,12 @@ class CreateNewUser implements CreatesNewUsers
             $userDetail->latitude = $input['latitude'];
             $userDetail->longitude = $input['longitude'];
             $userDetail->save();
-            return $user;
 
 
         }
+
+        Mail::to( $user )->send(new WelcomeMail($user));
+        return $user;
     }
 
 

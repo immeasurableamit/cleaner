@@ -19,6 +19,7 @@ class HomeController extends Controller
 	{
 		$title = array(
 			'active' => 'home',
+            'title' =>'home'
 		);
 
 		$services = Services::with('servicesItems')->where('types_id',1)->get();

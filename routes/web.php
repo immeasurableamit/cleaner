@@ -15,6 +15,7 @@ use App\Mail\ContactMail;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\Customer\AppointmentController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\Customer\FavouriteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,7 +88,7 @@ Route::get('terms-and-conditions', function () {
     return view('home.terms-and-conditions', compact('title'));
 })->name('terms-and-conditions');
 
-Route::get('/checkout/{details}', [ HomeController::class, 'checkout' ] )->name('checkout');
+Route::get('/checkout/{details}', [HomeController::class, 'checkout'])->name('checkout');
 
 Route::middleware(['auth', 'verified', 'trackLastActiveAt'])->group(function () {
 
@@ -100,7 +101,7 @@ Route::middleware(['auth', 'verified', 'trackLastActiveAt'])->group(function () 
         Route::post('/files-upload', 'fileUpload');
     });
 
-    
+
     // admin routes
     Route::prefix('admin')->group(function () {
 
@@ -159,7 +160,6 @@ Route::middleware(['auth', 'verified', 'trackLastActiveAt'])->group(function () 
                 return view('admin.services.index', compact('title'));
             })->name('admin.services.index');
         });
-
     });
 });
 
@@ -191,7 +191,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::get('/editpayment', 'editpayment')->name('cleaner.billing.editPaymentMethod');
                 Route::post('/profile/bankInfoStore', 'bankingInfoStore')->name('cleaner.billing.bankInfoStore');
                 Route::get('/profile/connect-account', 'connectAccount')->name('cleaner.billing.connectAccount'); */
-
             });
         });
 
@@ -199,6 +198,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::prefix('appointments')->group(function () {
             Route::controller(AppointmentController::class)->group(function () {
                 Route::get('/', 'index')->name('customer.appointment.index');
+                Route::get('/reschedule-appointment/{id}', 'rescheduleAppointment')->name('customer.appointment.rescheduleAppointment');
+                Route::get('/updateschedule-appointment', 'updateScheduleAppointment')->name('customer.appointment.updateScheduleAppointment');
+            });
+        });
+
+        //customer Favourite
+
+        Route::prefix('favourite')->group(function () {
+            Route::controller(FavouriteController::class)->group(function () {
+                Route::get('/', 'index')->name('customer.favourite.index');
+                Route::delete('/delete/{id}', 'deleteFavouriteCleaner')->name('customer.favourite.deleteFavouriteCleaner');
             });
         });
     });
@@ -206,12 +216,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //cleaner routes
     Route::prefix('cleaner')->group(function () {
 
-        Route::get('/set-location',[ CleanerController::class, 'showSetLocationPage'] )->name('cleaner.set-location-page');
-        Route::post('/set-location',[ CleanerController::class, 'setLocation'] )->name('cleaner.set-location');
+        Route::get('/set-location', [CleanerController::class, 'showSetLocationPage'])->name('cleaner.set-location-page');
+        Route::post('/set-location', [CleanerController::class, 'setLocation'])->name('cleaner.set-location');
 
-        Route::get('/insurance', [ CleanerController::class, 'showInsurancePage'])->name('cleaner.insurance');
-        Route::get('/insurance-provider', [ CleanerController::class, 'redirectToInsuranceProvider'])->name('cleaner.insurance-provider');
-        Route::get('/toggle-organic-service', [ CleanerController::class, 'toggleOrganicService'])->name('cleaner.toggle-organic-service');
+        Route::get('/insurance', [CleanerController::class, 'showInsurancePage'])->name('cleaner.insurance');
+        Route::get('/insurance-provider', [CleanerController::class, 'redirectToInsuranceProvider'])->name('cleaner.insurance-provider');
+        Route::get('/toggle-organic-service', [CleanerController::class, 'toggleOrganicService'])->name('cleaner.toggle-organic-service');
 
         Route::get('/account', function () {
             $title = array(
@@ -263,7 +273,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::get('/editpayment', 'editpayment')->name('cleaner.billing.editPaymentMethod');
                 Route::post('/profile/bankInfoStore', 'bankingInfoStore')->name('cleaner.billing.bankInfoStore');
                 Route::get('/profile/connect-account', 'connectAccount')->name('cleaner.billing.connectAccount');
-
             });
         });
 
@@ -304,8 +313,5 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::get('/', 'index')->name('cleaner.jobs.jobs');
             });
         });
-
-
     });
 });
-
