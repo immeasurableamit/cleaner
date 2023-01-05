@@ -49,15 +49,13 @@ class CleanerController extends Controller
     public function setLocation(Request $request)
     {
         $cleaner = auth()->user();
-
         $cleanerUserDetails = $cleaner->UserDetails;
         $cleanerUserDetails->serve_radius_in_meters = $request->radius;
         $cleanerUserDetails->serve_center_lat       = $request->latitude;
         $cleanerUserDetails->serve_center_lng       = $request->longitude;
         $cleanerUserDetails->save();
 
-        $this->flash('success', 'Location set');
-        return redirect()->route('cleaner.set-location-page');
+        return response()->json(['success' => true, 'message' => 'Location set']);
     }
 
     public function showInsurancePage()

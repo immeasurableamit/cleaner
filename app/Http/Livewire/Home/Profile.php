@@ -165,11 +165,12 @@ class Profile extends Component
     public function slotAvailability()
     {
         $selectDate = Carbon::parse($this->selected_date);
+        
         $date = $selectDate->format('Y-m-d');
         $dateDay = $selectDate->format("l");
 
         $hoursDayAll = CleanerHours::whereUsersId($this->cleaner->id)->where('day', $dateDay)->get();
-
+// dd($hoursDayAll);
         $getLeaves = [];
 
         ///,.....available current date
