@@ -3,6 +3,7 @@
 use App\Models\Transaction;
 use App\Models\ServicesItems;
 use App\Models\Order;
+use \Carbon\Carbon;
 
 function storeRefundOrderTransaction($user_id, $order_id, $amount, $stripe_refund_id )
 {
@@ -78,6 +79,24 @@ function formatAvgRating( $avgRating )
     }
 
     return $avgRating;
+}
+
+/*
+ * @param array $namesOfWeekdays ( example: [ 'monday', 'tuesday' ] )
+ *
+ * @return array ( example [ 1,2 ] )
+ *
+ */
+function parseWeekdaysNameIntoWeekDaysNumber(array $namesOfWeekdays): array
+{
+    $weekdaysInNumbers = [];
+    foreach ( $namesOfWeekdays as $weekdayName ){
+
+        $weekdayNumber = Carbon::parse( $weekdayName )->dayOfWeek;
+        array_push( $weekdaysInNumbers, $weekdayNumber );
+    }
+
+    return $weekdaysInNumbers;
 }
 
 
