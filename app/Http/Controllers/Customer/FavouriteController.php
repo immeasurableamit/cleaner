@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Favourite;
 use App\Models\User;
 use App\Models\UserDetails;
+use App\Models\Review;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -20,12 +22,10 @@ class FavouriteController extends Controller
         );
 
         $user_id = auth()->user()->id;
+        $favourites = Favourite::where('user_id', $user_id )->with('cleaner.cleanerReviews')->get();
 
-        $customerFavouriteRecord = Favourite::with('cleaner')->get();
-
-        return view('customer.favourite.index', compact('title', 'customerFavouriteRecord'));
+        return view('customer.favourite.index', compact('favourites') );
     }
-
 
 
     public function deleteFavouriteCleaner($id)
@@ -37,5 +37,9 @@ class FavouriteController extends Controller
         return response()->json(['status' => 'Category Deleted Successfully']);
     }
 
-    
+    public function cleanerRating()
+    {
+
+    }
+
 }

@@ -404,6 +404,13 @@ class Checkout extends Component
 
         $name = "$this->firstname $this->lastname";
 
+        // TODO:
+        // if the customer is already logged in,
+        // then check is he saved in stripe,
+        // if yes, update his source
+        // if no, create customer with source
+        // and update his id in DB
+
         $customer = stripeCreateCustomerWithSource($name, $this->email, $tokenResp['token_string']);
         //    dd($customer);
         $customer = $customer['resposne']->id;

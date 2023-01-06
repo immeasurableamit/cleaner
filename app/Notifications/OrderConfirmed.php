@@ -43,8 +43,12 @@ class OrderConfirmed extends Notification
      */
     public function toMail($notifiable)
     {
-
         $mailable = new OrderConfirmedMail($notifiable, $this->order);
+        // return (new MailMessage)
+        //             ->line('The introduction to the notification.' . $this->order->name)
+        //             ->action('Notification Action', url('/'))
+        //             ->line('Thank you ,Your Order Confirmed!');
+
         return $mailable->to($notifiable->email);
     }
 

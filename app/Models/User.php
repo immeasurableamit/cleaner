@@ -67,9 +67,9 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getOnlineAttribute()
     {
         $newTime = \Carbon\Carbon::now()->subMinutes(10)->timestamp;
-        
+
         $userLast = strtotime($this->last_active_at);
-        
+
         if($userLast > $newTime){
             return 1;
         }
@@ -83,7 +83,7 @@ class User extends Authenticatable implements MustVerifyEmail
         $time = date('h:ma', strtotime($this->last_active_at));
 
         $newDate = \Carbon\Carbon::now()->subDays(6)->format('Y-m-d');
-        
+
         if($date >= $newDate){
             return $dateDay.' '.$time;
         }
@@ -105,12 +105,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function messages()
     {
-        return $this->hasMany(Message::class, 'rec_id', 'id'); 
+        return $this->hasMany(Message::class, 'rec_id', 'id');
     }
 
     public function messagesSender()
     {
-        return $this->hasMany(Message::class, 'sender_id', 'id'); 
+        return $this->hasMany(Message::class, 'sender_id', 'id');
     }
 
 
@@ -161,6 +161,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function ordersReview()
+    {
+        return $this->hasMany(Order::class, 'cleaner_id');
     }
 
     public function hasCleanerSetHisServedLocations()
