@@ -13,6 +13,7 @@ use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\Order;
 use App\Models\CleanerTeam;
+use App\Models\Favourite;
 
 class Profile extends Component
 {
@@ -43,6 +44,7 @@ class Profile extends Component
 
     public $homeSize;
     public $time;
+    public $title;
     public $serviceItemId;
     public $addOnIds = [];
 
@@ -107,6 +109,7 @@ class Profile extends Component
 
     public function mount()
     {
+
         $this->cleaner = User::with('cleanerReviews')->findOrFail($this->cleanerId);
 
         $this->prepareProps();
@@ -165,12 +168,12 @@ class Profile extends Component
     public function slotAvailability()
     {
         $selectDate = Carbon::parse($this->selected_date);
-        
+
         $date = $selectDate->format('Y-m-d');
         $dateDay = $selectDate->format("l");
 
         $hoursDayAll = CleanerHours::whereUsersId($this->cleaner->id)->where('day', $dateDay)->get();
-// dd($hoursDayAll);
+
         $getLeaves = [];
 
         ///,.....available current date
@@ -281,7 +284,6 @@ class Profile extends Component
 
     public function redirectToCheckout()
     {
-
         $validatedData = $this->validate(...$this->checkoutRules());
         $validatedData['cleanerId'] = $this->cleanerId;
 
@@ -290,8 +292,6 @@ class Profile extends Component
         return redirect()->route('checkout', ['details' => $encryptedDetails ]);
 
     }
-
-
 
     public function render()
     {

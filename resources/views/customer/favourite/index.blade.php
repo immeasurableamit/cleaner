@@ -23,7 +23,7 @@
                     <div class="listing-row">
                         @foreach($favourites as $favourite)
                         <div class="listing-column lcd-4 lc-6">
-                            <div class="card_search_result">
+                            <div class="card_search_result pro-card">
                                 <div class="like_img">
                                     <input type="hidden" class="senddelete_val_id" value="{{$favourite->id}}">
                                     <div id="" class="profile-pic">
@@ -41,22 +41,24 @@
                                         <a href="javascript::void(0)" class="name_s">{{$favourite->cleaner->name}}</a>
                                         <div class="m-hide">
 
-                                            <img src="{{ asset('assets/images/icons/star.svg') }}"><h6>{{ $favourite->cleaner->cleanerReviews->avg('rating') }}</h6>
-
+                                            <img src="{{ asset('assets/images/icons/star.svg') }}">
+                                            {{ formatAvgRating($favourite->cleaner->cleanerReviews->avg('rating') ) }}<span> ({{ $favourite->cleaner->cleanerReviews->count() }})</span>
                                         </div>
                                     </div>
-                                  <div class="routine_text">
+                                  {{-- <div class="routine_text">
 
                                         <p class="font-semibold"> title</p>
-                                        <p class="font-medium">homeSize sq. ft.</p>
-                                        <p class="font-regular">Est Time : 1hr hours</p>
-                                        <p class="font-medium"><b>356$</b></p>
+                                        <p class="font-medium">{{$favourite->home_size}} sq. ft.</p>
+                                        <p class="font-regular">{{$favourite->estimated_time}}Est Time : 1hr hours</p>
+                                        <p class="font-medium"><b>{{$favourite->price}}356$</b></p>
 
                                         <div class="badges_insurnce_img">
 
-                                        </div>
+                                        </div> --}}
                                     </div>
-                                    <div class="position-relative">
+                                    <div class="position-relative bottom-btn">
+                                        <a href="{{ route('profile',$favourite->cleaner->id) }}"><button
+                                            class="btn_view d-none d-md-block">View</button></a>
 
                                         <form method="POST" action="{{route('customer.favourite.deleteFavouriteCleaner',$favourite->id)}}">
                                             @csrf
