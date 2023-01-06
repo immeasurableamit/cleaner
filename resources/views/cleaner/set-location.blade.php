@@ -49,12 +49,11 @@
 
                                         <input type="hidden" id="radius-input" name="radius" />
                                         <input type="hidden" id="latitude" name="latitude" />
-                                         <input type="hidden" id="longitude" name="longitude" />
-
+                                        <input type="hidden" id="longitude" name="longitude" />
 
                                         <div class="col-md-12 mt-3">
-                                            <button type="submit"
-                                                class="btn_blue">{{ $serveLocationAlreadySet ? 'Update' : 'Save' }}</button>
+                                            <button type="button" class="btn_blue"
+                                                onclick="handleSetLocationSubmit(this)">{{ $serveLocationAlreadySet ? 'Update' : 'Save' }}</button>
                                         </div>
 
                                     </div>
@@ -212,6 +211,32 @@
                     let miles = parseInt(value);
                     window.servedLocationCircle.setRadius(convertMilesIntoMeters(miles));
                 });
+            }
+
+            function handleSetLocationSubmit(button) {
+                button.innerText = 'Submitting...';
+                let url = "{{ route('cleaner.set-location') }}";
+                let token = document.querySelector('meta[name="csrf-token"]').content;
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    headers: {
+                        X_CSRF_TOKEN: token,
+                        'Accept': 'application/json'
+                    },
+                    data: $("#location-form").serialize(),
+                    success: (data) => {
+                        console.log(data);
+                        button.innerText = 'Update';
+                        window.swalToast.fire({
+                            icon: 'success',
+                            title: 'Location set'
+                        });
+                    },
+
+                });
+
             }
 
             window.addEventListener('load', function() {
