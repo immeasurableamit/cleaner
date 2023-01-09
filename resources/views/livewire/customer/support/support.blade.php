@@ -122,9 +122,5 @@
         });
     </script>
 
-    @if ( $errors->any() )
-    <script> console.log(  "{{  json_encode( $errors->all() ) }}" ) </script>
-    <script> console.log(  @json( $errors->all() ) ) </script>
-    @endif
 </div>
 

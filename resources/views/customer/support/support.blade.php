@@ -1,4 +1,4 @@
-@extends('layouts.cleanerapp')
+@extends('layouts.app')
 
 @section('content')
 
@@ -32,10 +32,10 @@
                   </ul>
                   <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                      @livewire('cleaner.support.support')
+                      @livewire('customer.support.support')
                     </div>
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                      @livewire('cleaner.support.support-contact')
+                      @livewire('customer.support.support-contact')
                     </div>
                   </div>
                 </div>

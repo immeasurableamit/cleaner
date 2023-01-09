@@ -187,16 +187,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::get('/', 'index')->name('customer.billing.index');
                 Route::get('/edit', 'edit')->name('customer.billing.edit');
                 Route::post('/update', 'update')->name('customer.billing.update');
-
-                /*
-                Route::get('/stripe/connect', 'connectStripe')->name("cleaner.billing.stripeConnect");
-                Route::get('/banking-info-error', 'bankingInfoError')->name('cleaner.billing.error');
-                Route::get('/banking-info-success', 'bankingInfoSuccess')->name('cleaner.billing.success');
-
-                Route::get('/accountdetails', 'bankAccount')->name('cleaner.billing.editBankAccount');
-                Route::get('/editpayment', 'editpayment')->name('cleaner.billing.editPaymentMethod');
-                Route::post('/profile/bankInfoStore', 'bankingInfoStore')->name('cleaner.billing.bankInfoStore');
-                Route::get('/profile/connect-account', 'connectAccount')->name('cleaner.billing.connectAccount'); */
             });
         });
 
@@ -218,6 +208,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::delete('/delete/{id}', 'deleteFavouriteCleaner')->name('customer.favourite.deleteFavouriteCleaner');
             });
         });
+
+
+        // customer support
+        Route::get('/support', function () {
+            $title = array(
+                'title' => 'Support',
+                'active' => 'support',
+            );
+            return view('customer.support.support', compact('title'));
+        })->name('customer.support.service');
     });
 
     //cleaner routes
@@ -226,9 +226,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/set-location', [CleanerController::class, 'showSetLocationPage'])->name('cleaner.set-location-page');
         Route::post('/set-location', [CleanerController::class, 'setLocation'])->name('cleaner.set-location');
 
-        Route::get('/insurance', [CleanerController::class, 'showInsurancePage'])->name('cleaner.insurance');
-        Route::get('/insurance-provider', [CleanerController::class, 'redirectToInsuranceProvider'])->name('cleaner.insurance-provider');
-        Route::get('/toggle-organic-service', [CleanerController::class, 'toggleOrganicService'])->name('cleaner.toggle-organic-service');
+
+        Route::prefix('insurance')->controller( CleanerController::class )->group(function(){
+            Route::get('/', 'showInsurancePage')->name('cleaner.insurance');
+            Route::get('/provider', 'redirectToInsuranceProvider')->name('cleaner.insurance-provider');
+            Route::get('/toggle-organic-service', 'toggleOrganicService')->name('cleaner.toggle-organic-service');
+        });
 
         Route::get('/account', function () {
             $title = array(
@@ -293,7 +296,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
 
 
-        //Support
+        // cleaner support
         Route::get('/support', function () {
             $title = array(
                 'title' => 'Support',
