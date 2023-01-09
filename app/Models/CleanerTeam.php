@@ -9,7 +9,7 @@ class CleanerTeam extends Model
 {
     use HasFactory;
     protected $fillable = [
-        
+
         'first_name',
         'last_name',
         'email',
@@ -17,7 +17,7 @@ class CleanerTeam extends Model
         'insured',
         'address',
         'ssn_or_tax',
-     
+
     ];
 
 
@@ -31,5 +31,4 @@ class CleanerTeam extends Model
     }
 
 
-   
 }
