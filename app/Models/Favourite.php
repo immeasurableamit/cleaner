@@ -23,4 +23,14 @@ class Favourite extends Model
     {
         return $this->belongsTo(User::class, 'cleaner_id', 'id');
     }
+
+    public function review()
+    {
+        return $this->hasMany(Review::class,'cleaner_id','id');
+    }
+
+    public function order()
+    {
+        return $this->hasMany(Order::class, 'cleaner_id','id');
+    }
 }

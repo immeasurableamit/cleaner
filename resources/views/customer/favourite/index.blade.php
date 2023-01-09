@@ -21,14 +21,14 @@
                 <div id="data_Table" class="col-xl-9 col-lg-9 col-md-12 col-sm-12 car_right_div">
 
                     <div class="listing-row">
-                        @foreach($customerFavouriteRecord as $cleaner)
+                        @foreach($favourites as $favourite)
                         <div class="listing-column lcd-4 lc-6">
-                            <div class="card_search_result">
+                            <div class="card_search_result pro-card">
                                 <div class="like_img">
-                                    <input type="hidden" class="senddelete_val_id" value="{{$cleaner->id}}">
+                                    <input type="hidden" class="senddelete_val_id" value="{{$favourite->id}}">
                                     <div id="" class="profile-pic">
-                                        @if ($cleaner->cleaner->image)
-                                        <img src="{{ asset('storage/images/' . $cleaner->cleaner->image) }}">
+                                        @if ($favourite->cleaner->image)
+                                        <img src="{{ asset('storage/images/' . $favourite->cleaner->image) }}">
                                         @else
                                         <img src="assets/images/iconshow.png">
                                         @endif
@@ -38,29 +38,32 @@
                                 </div>
                                 <div class="bottom_card_text">
                                     <div class="name_str">
-                                        <a href="javascript::void(0)" class="name_s">{{$cleaner->cleaner->name}}</a>
+                                        <a href="javascript::void(0)" class="name_s">{{$favourite->cleaner->name}}</a>
                                         <div class="m-hide">
+
                                             <img src="{{ asset('assets/images/icons/star.svg') }}">
-                                          
+                                            {{ formatAvgRating($favourite->cleaner->cleanerReviews->avg('rating') ) }}<span> ({{ $favourite->cleaner->cleanerReviews->count() }})</span>
                                         </div>
                                     </div>
-                                    <!-- <div class="routine_text">
+                                  {{-- <div class="routine_text">
 
                                         <p class="font-semibold"> title</p>
-                                        <p class="font-medium">homeSize sq. ft.</p>
-                                        <p class="font-regular">Est Time : 
+                                        <p class="font-medium">{{$favourite->home_size}} sq. ft.</p>
+                                        <p class="font-regular">{{$favourite->estimated_time}}Est Time : 1hr hours</p>
+                                        <p class="font-medium"><b>{{$favourite->price}}356$</b></p>
 
-                                            hours</p>
                                         <div class="badges_insurnce_img">
-                                           
-                                        </div>
-                                    </div> -->
-                                    <div class="position-relative">
 
-                                        <form method="POST" action="{{route('customer.favourite.deleteFavouriteCleaner',$cleaner->id)}}">
+                                        </div> --}}
+                                    </div>
+                                    <div class="position-relative bottom-btn">
+                                        <a href="{{ route('profile',$favourite->cleaner->id) }}"><button
+                                            class="btn_view d-none d-md-block">View</button></a>
+
+                                        <form method="POST" action="{{route('customer.favourite.deleteFavouriteCleaner',$favourite->id)}}">
                                             @csrf
 
-                                            <button class="btn btn-danger servideletebtn" data-id="{{$cleaner->id}}">Delete</button>
+                                            <button class="btn btn-danger servideletebtn" data-id="{{$favourite->id}}">Delete</button>
                                         </form>
                                     </div>
                                 </div>
@@ -91,19 +94,19 @@
 		});
 		$('.servideletebtn').click(function(e){
 			e.preventDefault();
-			
-			
+
+
             var delete_id = $(this).attr('data-id');
             // alert(delete_id);
 			swal({
-				
+
 				title: "Are you sure want to delete ?",
-				
+
 				icon: "warning",
 				buttons: true,
 				dangerMode: true,
 			})
-			
+
 			.then((willDelete) => {
 				if (willDelete) {
 					var data = {
@@ -115,7 +118,7 @@
 						'type': "DELETE",
 						url: '/customer/favourite/delete/'+delete_id,
 						data: data,
-						
+
 						success: function(response){
                             console.log(response, "res");
 							swal(response.status, {
@@ -126,14 +129,14 @@
 							});
 						}
 					});
-					
-				} 
-				
+
+				}
+
 			});
-			
+
 		});
 	});
-</script> 
+</script>
 
 
 @endsection

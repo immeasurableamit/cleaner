@@ -77,7 +77,10 @@ class Order extends Model
         return $this->belongsTo( Transaction::class, 'cleaner_transaction_id' );
     }
 
-
+public function favourite()
+{
+    return $this->belongsTo(Favourite::class, 'cleaner_id', 'id');
+}
 
     public function statusForCleaner()
     {

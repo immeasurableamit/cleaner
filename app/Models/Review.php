@@ -24,4 +24,8 @@ class Review extends Model
         return $this->belongsTo(User::class, 'cleaner_id');
     }
 
+    public function favourite()
+    {
+        return $this->belongTo(Favourite::class, 'cleaner_id', 'cleaner_id');
+    }
 }

@@ -273,6 +273,25 @@ class SearchResult extends Component
         return true;
     }
 
+
+
+
+    // public function storeInfoInFavourite()
+    // {
+    //     $cleanerService = new Favourite;
+    //     $cleanerService->user_id = auth()->user()->id;
+    //     $cleanerService->cleaner_id = $this->cleanerId;
+    //     $cleanerService->home_size = $this->homeSize;
+    //     $cleanerService->estimated_time = $this->estimatedTime;
+    //     $cleanerService->price = $this->estimatedPrice;
+    //     $cleanerService->cleaning_type = $this->title;
+
+    //     dd( $cleanerService->cleaning_type);
+
+    //     $cleanerService->save();
+
+    // }
+
     public function render()
     {
         return view('livewire.home.search-result');
