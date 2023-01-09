@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Cleaner\Support;
+namespace App\Http\Livewire\Customer\Support;
 
 use Livewire\Component;
 use App\Models\Order;
@@ -12,16 +12,16 @@ class Support extends Component
 
     use LivewireAlert;
 
-    public $completedOrders, $cleaner, $count = 1, $issues, $resolutions;
+    public $completedOrders, $user, $issues, $resolutions;
 
     public $selectedOrderId, $issue, $requestedResolution, $description, $otherIssueExplaination;
 
     public function mount()
     {
-        $this->cleaner = auth()->user();
-        $this->completedOrders = Order::with([ 'cleaner', 'items.service_item.service'])->where('cleaner_id', $this->cleaner->id )->get(); //whereIn('status', ['payment_collected', 'reviewed'])->get();
-        $this->issues          = SupportRequest::issuesForCleaner();
-        $this->resolutions     = SupportRequest::resolutionsForCleaner();
+        $this->user = auth()->user();
+        $this->completedOrders = Order::with([ 'user', 'items.service_item.service'])->where('user_id', $this->user->id )->get(); //whereIn('status', ['payment_collected', 'reviewed'])->get();
+        $this->issues          = SupportRequest::issuesForUser();
+        $this->resolutions     = SupportRequest::resolutionsForUser();
 
         $this->addCustomAttributesInCompletedOrdersProp();
     }
@@ -37,7 +37,7 @@ class Support extends Component
         $this->completedOrders->each( function($order) {
 
             $formattedDateTime = $order->cleaning_datetime->format('m/d/y');
-            $order->title = "$formattedDateTime - ".$order->service()->title." - ".$order->cleaner->name;
+            $order->title = "$formattedDateTime - ".$order->service()->title." - ".$order->user->name;
         });
     }
 
@@ -79,8 +79,9 @@ class Support extends Component
             'requested_resolution'       => $this->resolutions[ $this->requestedResolution ],
             'description'                => $this->description,
             'explanation_for_other_type' => $this->otherIssueExplaination,
-            'user_id' => $this->cleaner->id,
+            'user_id'                     => $this->user->id,
         ]);
+
 
         $this->resetFormFields();
 
@@ -90,8 +91,9 @@ class Support extends Component
         return true;
     }
 
+
     public function render()
     {
-        return view('livewire.cleaner.support.support');
+        return view('livewire.customer.support.support');
     }
 }

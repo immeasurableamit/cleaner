@@ -6,7 +6,7 @@
     <li><a href="{{route('customer.billing.index')}}" class="{{ @$title['active']=='billing' ? 'active' : '' }}">Billing</a></li>
     <li><a href="#" >Notification</a></li>
     <li><a href="{{route('customer.favourite.index')}}" class="{{ @$title['active']=='favourite' ? 'active' : '' }}">Favourite</a></li>
-    <li><a href="#">Support</a></li>
+    <li><a href="{{ route('customer.support.service') }}">Support</a></li>
 
 
     @elseif (Auth::user()->role=="cleaner")
