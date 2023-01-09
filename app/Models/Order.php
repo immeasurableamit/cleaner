@@ -111,4 +111,9 @@ class Order extends Model
 
         return $statuses[ $this->status ];
     }
+
+    public function service()
+    {
+        return $this->items->pluck('service_item')->flatten()->pluck('service')->where('types_id',1)->first();
+    }
 }

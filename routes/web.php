@@ -220,9 +220,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/set-location', [CleanerController::class, 'showSetLocationPage'])->name('cleaner.set-location-page');
         Route::post('/set-location', [CleanerController::class, 'setLocation'])->name('cleaner.set-location');
 
-        Route::get('/insurance', [CleanerController::class, 'showInsurancePage'])->name('cleaner.insurance');
-        Route::get('/insurance-provider', [CleanerController::class, 'redirectToInsuranceProvider'])->name('cleaner.insurance-provider');
-        Route::get('/toggle-organic-service', [CleanerController::class, 'toggleOrganicService'])->name('cleaner.toggle-organic-service');
+
+        Route::prefix('insurance')->controller( CleanerController::class )->group(function(){
+            Route::get('/', 'showInsurancePage')->name('cleaner.insurance');
+            Route::get('/provider', 'redirectToInsuranceProvider')->name('cleaner.insurance-provider');
+            Route::get('/toggle-organic-service', 'toggleOrganicService')->name('cleaner.toggle-organic-service');
+        });
 
         Route::get('/account', function () {
             $title = array(
