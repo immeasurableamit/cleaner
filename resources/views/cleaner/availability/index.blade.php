@@ -26,7 +26,8 @@
 
                                 @include('cleaner.availability.jobs')
 
-                                @include('cleaner.availability.time')
+                                {{--@include('cleaner.availability.time')--}}
+                                @livewire('cleaner.account.availability')
 
                                 @include('cleaner.availability.buffer')
                                 
