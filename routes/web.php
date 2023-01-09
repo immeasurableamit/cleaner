@@ -34,6 +34,12 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 
 
 
+//flush cache
+Route::get('/cache-clear', function() {
+    Artisan::call('optimize:clear');
+    return "Cache is cleared";
+});
+
 Route::get('signup', function () {
     $title = array(
         'active' => 'signup',

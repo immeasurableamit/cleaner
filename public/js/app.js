@@ -5926,6 +5926,8 @@ var Chatpanel = function Chatpanel() {
                   })]
                 })
               }, index);
+            }), !loadMore && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+              ref: messagesEndRef
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("form", {
             onSubmit: handleSubmit(onSubmit),
@@ -5987,8 +5989,6 @@ var Chatpanel = function Chatpanel() {
                 })]
               }, j);
             })
-          }), !loadMore && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-            ref: messagesEndRef
           })]
         })
       })]
