@@ -495,6 +495,12 @@ const Chatpanel = () => {
 							)
 						})
 					}
+
+
+					{!loadMore &&
+						<div ref={messagesEndRef}></div>
+					}
+					
 	                
 	             </div>
 
@@ -554,9 +560,7 @@ const Chatpanel = () => {
 							</div>
 						}
 
-				{!loadMore &&
-					<div ref={messagesEndRef}></div>
-				}
+				
              </>
          	}
           </div>
