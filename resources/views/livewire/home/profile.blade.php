@@ -102,16 +102,18 @@
                                 <div class="selecti-box">
 
 
-                                    <select class="select-custom-design-group" id="select-service-selector">
-                                        <option ></option>
+                                    <select class="select-custom-design-group" id="select-service-selector" >
+
+                                        <option></option>
                                         @foreach ( $services->where('types_id', '1') as $service )
-                                        <optgroup label="{{ $service['title'] }}">
+                                        <optgroup label="{{ $service['title'] }}" >
                                             @foreach ( $service['serviceItems'] as $serviceItem )
                                             <option value="{{ $serviceItem['id'] }}" @if ( $serviceItemId == $serviceItem['id'] ) selected @endif>{{ $serviceItem['title'] }}</option>
                                             @endforeach
                                         </optgroup>
 
                                         @endforeach
+
                                     </select>
 
                                     @error('serviceItemId') <span class="help-block text-danger"> {{ $message }} </span> @enderror
@@ -137,7 +139,7 @@
                             <div class="col-md-4">
                                 <div class=" input-design">
                                     <label>Home Size</label>
-                                    <input type="number" wire:model="homeSize" placeholder="Enter Square Feet">
+                                    <input type="number" placeholder="Enter Square Feet">
                                     @error('homeSize') <span class="help-block text-danger"> {{ $message }} </span> @enderror
                                 </div>
                             </div>
@@ -148,7 +150,7 @@
                 <div class="time_price_div" >
                     <div class="p_t_text">
                         <span class="bg_yellow">Estimated Time:</span>
-                        <span class="rate">{{ $estimatedTime }} hrs</span>
+                        <span class="rate" >{{ $estimatedTime }} hrs</span>
                     </div>
                     <div class="p_t_text">
                         <span class="bg_yellow">Provider’s Price:</span>
@@ -285,7 +287,7 @@
                     picker.on('selected', (date) => {
                         @this.set('selected_date', date.format('YYYY-MM-DD'));
                     });
-                   
+
                     picker.on('change:month', (date, calendarIdx) => {
                         // some action
                         @this.set('month_date', date.format('YYYY-MM-DD'));

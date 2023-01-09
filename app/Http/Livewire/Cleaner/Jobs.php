@@ -7,12 +7,16 @@ use App\Models\Transaction;
 use Livewire\Component;
 use \Carbon\Carbon;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-
+// use App\Http\Livewire\Cleaner\Notification\Notification;
+use Illuminate\Notifications\Notifiable;
+use App\Notifications\OrderConfirmed;
+use Illuminate\Support\Facades\Notification;
 
 class Jobs extends Component
 {
 
     use LivewireAlert;
+    use Notifiable;
 
     /*
      * @var: selectedTab
@@ -22,6 +26,7 @@ class Jobs extends Component
     public $selectedTab  = 1;
 
     public $selectedDate, $orders, $selectedDateOrders, $events;
+    public $email, $user, $order;
 
     protected $pendingOrderStatuses = ['pending'];
 
@@ -153,7 +158,8 @@ class Jobs extends Component
         /* Change status and return because we don't charge customer on accepting now */
         $order->status = 'accepted';
         $order->save();
-
+        Notification::route('mail', $this->email)->notify(new OrderConfirmed($order));
+        // dd('done');
         $this->alert('success', 'Order accepted');
         $this->refreshSelectedTab();
         return true;
@@ -191,7 +197,6 @@ class Jobs extends Component
     {
         $order = Order::find( $orderId );
         $user  = $order->user;
-
          /* Charge customer */
          $chargeResp = stripeChargeCustomer(
             $user->UserDetails->stripe_customer_id,

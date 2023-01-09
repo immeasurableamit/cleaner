@@ -38,11 +38,8 @@ class AppointmentController extends Controller
         $getTimeSlotOfCleaner = CleanerHours::where('users_id', $cleanerID)->pluck('day')->toArray();
 
         // dd($getTimeSlotOfCleaner);
-//         $getTimeFromDay = CleanerHours::whereUsersId($cleanerID)->where('day',$getTimeSlotOfCleaner)->first();
+        //         $getTimeFromDay = CleanerHours::whereUsersId($cleanerID)->where('day',$getTimeSlotOfCleaner)->first();
 
-
-
-// ....
 
         $dayArray = [];
 
@@ -59,7 +56,7 @@ class AppointmentController extends Controller
         $date = $selectDate->format('Y-m-d');
         $dateDay = $selectDate->format("l");
         $getLeaves = [];
-// need a dateDay to execute this command
+        // need a dateDay to execute this command
         $hoursDayAll = CleanerHours::whereUsersId($cleanerID)->where('day', $dateDay)->get();
         // dd($hoursDayAll);
 
@@ -108,10 +105,4 @@ class AppointmentController extends Controller
        }
 
 
-    // public function updateScheduleAppointment()
-    // {
-    //     dd('update day, frome_time, to_time');
-
-
-    // }
 }
