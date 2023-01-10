@@ -28,8 +28,8 @@
                   <td><a href="javascript::void(0)" wire:click.prevent="destroy({{$contact->id}})">Delete</a></td>
               </tr>
                  @endforeach
-           
+
           </tbody>
         </table>
-             
+
 </div>

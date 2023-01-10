@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Livewire\Admin\Support\SupportService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\OrderItem;
@@ -123,5 +124,11 @@ public function favourite()
     public function service()
     {
         return $this->items->pluck('service_item')->flatten()->pluck('service')->where('types_id',1)->first();
+    }
+
+
+    public function supportService()
+    {
+        return $this->hasMany( SupportService::class );
     }
 }
