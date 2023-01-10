@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Time_zone;
 
 class UserDetails extends Model
 {
@@ -31,8 +32,8 @@ class UserDetails extends Model
     {
         return $this->belongsTo(State::class, 'states_id', 'id');
 
-    } 
-  
+    }
+
     public function User()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
@@ -44,6 +45,6 @@ class UserDetails extends Model
         return $this->belongsTo(Time_zone::class, 'timezone', 'id');
     }
 
-    
+
 
 }

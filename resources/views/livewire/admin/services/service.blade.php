@@ -104,8 +104,8 @@
                         {!! $errors->first('status', '<span class="help-block">:message</span>') !!}
                     </div>
                 </div>
-                <div class="text-center mb-3">  
-                
+                <div class="text-center mb-3">
+
                     <button type="submit" class="btn_s" wire:click="store" wire:loading.attr="disabled">
                         {{--<i wire:loading wire:target="store" class="fa fa-spin fa-spinner"></i>--}} Save
                     </button>
@@ -158,8 +158,8 @@
                         {!! $errors->first('itemStatus', '<span class="help-block">:message</span>') !!}
                     </div>
                 </div>
-                <div class="text-center mb-3">  
-                
+                <div class="text-center mb-3">
+
                     <button type="submit" class="btn_s" wire:click="storeItem" wire:loading.attr="disabled">
                         {{--<i wire:loading wire:target="storeItem" class="fa fa-spin fa-spinner"></i>--}} Save
                     </button>
@@ -187,8 +187,8 @@
                 $('#serviceItemsForm').modal('hide');
             });
         });
-        
-        
+
+
         $(document).on('click', '.addService', function (e) {
             $('#serviceForm').modal('show');
         });

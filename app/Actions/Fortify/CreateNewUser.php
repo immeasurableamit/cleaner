@@ -54,6 +54,7 @@ class CreateNewUser implements CreatesNewUsers
                     'payment_method' => 'required',
                     'about' => 'required',
                     'image' => 'required',
+                    'term'=>'required'
                 ],
 
                 [
