@@ -1,4 +1,4 @@
-<div>
+<div wire:ignore>
   <table id="all-customer-table22" class="table dt-responsive nowrap" style="width:100%">
     <thead>
       <tr>

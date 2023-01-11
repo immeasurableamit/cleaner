@@ -139,7 +139,7 @@
                             <div class="col-md-4">
                                 <div class=" input-design">
                                     <label>Home Size</label>
-                                    <input type="number" placeholder="Enter Square Feet">
+                                    <input type="number" placeholder="Enter Square Feet" wire:model="homeSize">
                                     @error('homeSize') <span class="help-block text-danger"> {{ $message }} </span> @enderror
                                 </div>
                             </div>
