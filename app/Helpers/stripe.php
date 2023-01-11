@@ -25,6 +25,7 @@ function stripeCreateConnectedAccount($email)
 
     $account = $stripe->accounts->create($options);
 
+    info("[STRIPE CREATE CONNECTED ACCOUNT][EMAIL $email] account object: ".json_encode($account));
     return $account;
 }
 
@@ -32,7 +33,7 @@ function stripeCreateConnectedAccount($email)
  * @param string $account_id
  *
  * @return string
- */
+
 function stripeCreateAccountOnboardingLink($account_id)
 {
     $stripe = new StripeClient( config('services.stripe.secret') );
@@ -45,9 +46,25 @@ function stripeCreateAccountOnboardingLink($account_id)
     ];
 
     $link = $stripe->accountLinks->create( $options );
-
     return $link->url;
 }
+
+ */
+function stripeCreateAccountLink( $account_id, $type = "account_onboarding")
+{
+    $stripe = new StripeClient( config('services.stripe.secret') );
+
+    $options = [
+        'account'     => $account_id,
+        'refresh_url' => url('/cleaner/billing/banking-info-error'),
+        'return_url'  => url('/cleaner/billing/banking-info-success'),
+        'type'        => $type,
+    ];
+
+    $link = $stripe->accountLinks->create( $options );
+    return $link->url;
+}
+
 
 
 /*

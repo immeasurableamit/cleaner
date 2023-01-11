@@ -438,6 +438,7 @@ class Checkout extends Component
         /* Handle guest user */
         if (is_null($this->user)) {
             $this->user = $this->storeUserAsCustomer();
+            auth()->loginUsingId( $this->user->id );
         }
 
         /* Store order */
@@ -456,15 +457,8 @@ class Checkout extends Component
         $status        = $this->placeOrder();
 
         if ($status) {
-            $this->currentlyActiveStep++;
+            return redirect()->route('customer.appointment.thanks', [ 'order_id' => $this->order->id ]);
         }
-    }
-
-    public function saveOrderNotes()
-    {
-        $this->order->notes = $this->notes;
-        $this->order->save();
-        $this->alert('success', 'Notes Sent!');
     }
 
     public function updatingExpMonthYear($value)

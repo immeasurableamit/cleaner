@@ -226,6 +226,10 @@ class User extends Authenticatable implements MustVerifyEmail
             return false;
         }
 
+        if ( ! $this->bankInfo ){
+            return false;
+        }
+
         return true;
     }
 }

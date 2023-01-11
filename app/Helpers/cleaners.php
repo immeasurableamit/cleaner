@@ -101,7 +101,6 @@ function createBankInfoEntry($cleaner)
         'users_id'   => $cleaner->id,
         'account_id' => $account->id,
         'status'     => 'pending',
-
     ]);
 
     $bank->refresh();
@@ -122,8 +121,6 @@ function addAccountDetailsInBankInfo($bank, $accountDetails)
     $bank->account_holder_name = $accountDetails['account_holder_name'];
     $bank->account_number      = $accountDetails['account_number'];
     $bank->routing_number      = $accountDetails['routing_number'];
-    $bank->payouts_enabled     = 1;
-    $bank->status              = 'active';
     $bank->save();
 
     return $bank;

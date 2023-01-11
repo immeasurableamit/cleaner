@@ -25,6 +25,18 @@ class BillingController extends Controller
     public function index()
     {
         $bank = BankInfo::where('users_id', auth()->user()->id)->first();
+
+        if ( $bank ){
+
+            $account = stripeRetrieveAccount($bank->account_id);
+            if ( $account->payouts_enabled ){
+                $bank->status = 'active';
+                $bank->payouts_enabled = 1;
+                $bank->save();
+                $bank->refresh();
+            }
+        }
+
         $title = array(
             'title' => 'Billing',
             'active' => 'billing',
@@ -49,18 +61,9 @@ class BillingController extends Controller
     public function connectStripe()
     {
         $cleaner = auth()->user();
-        $bank    = BankInfo::where('users_id', $cleaner->id)->first();
-
-        if ( ! $bank ) {
-            $bank = createBankInfoEntry($cleaner);
-        }
-
-        if ( ! $bank->charges_enabled ) {
-            $link = stripeCreateAccountOnboardingLink( $bank->account_id );
-            return redirect( $link );
-        }
-
-        return redirect()->route('cleaner.billing.billing')->with('error', 'Account already exists');
+        $bank    = createBankInfoEntry($cleaner);
+        $link    = stripeCreateAccountLink( $bank->account_id );
+        return redirect( $link );
     }
 
     public function bankingInfoError()
@@ -73,17 +76,8 @@ class BillingController extends Controller
     {
 
         $user    = auth()->user();
-        $bank    = BankInfo::where(['users_id' => $user->id])->firstOrFail();
-        $account = stripeRetrieveAccount( $bank->account_id );
+        //$bank    = BankInfo::where(['users_id' => $user->id])->firstOrFail();
 
-        if ( $account->charges_enabled ) {
-            $bank->charges_enabled = 1;
-            $bank->save();
-            $this->flash('success', 'Address verified');
-            return redirect()->route('cleaner.billing.billing');
-        }
-
-        $this->flash('error', 'Try again!');
         return redirect()->route('cleaner.billing.billing');
     }
 
@@ -104,5 +98,41 @@ class BillingController extends Controller
 
 
         return redirect()->route('cleaner.billing.billing')->with('success', 'Your bank details are added successfully');
+    }
+
+    public function updateConnectAccountStripe()
+    {
+        $user    = auth()->user();
+
+        $bank = BankInfo::where(['users_id' => $user->id])->firstOrFail();
+        $account = stripeRetrieveAccount( $bank->account_id );
+
+
+        if ( $bank->payouts_enabled == 0 ){
+            if ( ! $account->payouts_enabled ) {
+                $link = stripeCreateAccountLink($bank->account_id, 'account_update');
+                return redirect( $link );
+            }
+
+            $bank->payouts_enabled = 1;
+            $bank->status = 'active';
+            $bank->save();
+        }
+
+
+        $this->flash('success', 'Payouts are enabled for your account');
+        return redirect()->route('cleaner.billing.billing');
+    }
+
+    public function deleteConnectAccount()
+    {
+        $user    = auth()->user();
+        $bank = BankInfo::where(['users_id' => $user->id])->firstOrFail();
+
+
+        $bank->delete();
+
+        $this->flash('success', 'Account deleted');
+        return redirect()->route('cleaner.billing.billing');
     }
 }
