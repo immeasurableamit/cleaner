@@ -137,13 +137,21 @@ Route::middleware(['auth', 'verified', 'trackLastActiveAt'])->group(function () 
             return view('admin.cleaner.cleaner-edit', ["id" => request()->id]);
         })->name('admin.cleaner.show');
 
-        //Admin Support
+        //Admin Support Services
         Route::get('/support', function () {
             $title = array(
                 'active' => 'admin-support',
             );
+            return view('admin.support.support_service');
+        })->name('admin.support.service');
+
+         //Admin Support-contact us
+         Route::get('/contactus', function () {
+            $title = array(
+                'active' => 'admin-contact-us',
+            );
             return view('admin.support.support');
-        })->name('admin.support');
+        })->name('admin.support.contactus');
 
         // Team Section
         Route::get('/cleaner/team/{id}', [AdminController::class, 'teamView'])->name('admin.cleaner.team');

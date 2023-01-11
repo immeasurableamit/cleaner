@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Livewire\Admin\Support\SupportService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\OrderItem;
@@ -146,5 +147,10 @@ public function favourite()
         })->values();
 
         return $items;
+    }
+
+    public function supportService()
+    {
+        return $this->hasMany( SupportService::class );
     }
 }
