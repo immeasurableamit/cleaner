@@ -13,34 +13,35 @@ use App\Models\Order;
  * @return: bool
  */
 
-function updateServicesOfCleaners($cleaner, $services)
+function updateServicesOfCleaners($cleaner, $types)
 {
-    $cleanerServices   = CleanerServices::where('users_id', $cleaner->id)->get();
+    $cleanerServices = CleanerServices::where('users_id', $cleaner->id)->get();
     $newCleanerServies = [];
 
-    foreach ($services as $service_id => $service_data) {
+    foreach ($types as $type) {
+        foreach ($type['services'] as $service_data) {
 
-        foreach ($service_data['item'] as $item_id => $item_data) {
+            foreach ($service_data['items'] as $item_data) {
 
+                $item_data['status'] = $item_data['checked'] ? '1' : '0';
 
-            $item_data['status'] = isset($item_data['checked']) ? '1' : '0';
+                /* Update if service item already existed */
+                $cleanerService = $cleanerServices->where('services_items_id', $item_data['id'])->first();
+                if ($cleanerService) {
 
-            /* Update if service item already existed */
-            $cleanerService = $cleanerServices->where('services_items_id', $item_id)->first();
-            if ($cleanerService) {
+                    updateCleanerSerivce($cleanerService, $item_data);
+                    continue;
+                }
 
-                updateCleanerSerivce($cleanerService, $item_data);
-                continue;
+                /* Prepare to store service item if needs to get saved */
+                if ($item_data['status'] == '1') {
+
+                    $newCleanerService = generateCleanerServiceBlueprintForSaving($cleaner->id, $item_data);
+                    array_push($newCleanerServies, $newCleanerService);
+                }
+
+                /* Ignore those items which are neither existed nor checked */
             }
-
-            /* Prepare to store service item if needs to get saved */
-            if ($item_data['status'] == '1') {
-
-                $newCleanerService = generateCleanerServiceBlueprintForSaving($cleaner->id, $item_data);
-                array_push($newCleanerServies, $newCleanerService);
-            }
-
-            /* Ignore those items which are neither existed nor checked */
         }
     }
 
