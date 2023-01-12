@@ -30,6 +30,10 @@ class Jobs extends Component
 
     protected $pendingOrderStatuses = ['pending'];
 
+    protected $queryString = [
+        'selectedDate' => [ 'except' => ''],
+    ];
+
     protected $listeners = [
         'cancelOrder'
     ];

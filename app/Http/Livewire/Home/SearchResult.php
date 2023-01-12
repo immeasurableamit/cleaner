@@ -226,11 +226,6 @@ class SearchResult extends Component
         return true;
     }
 
-    function updatingHomeSize()
-    {
-        $this->validate(['homeSize' => 'numeric|min:100']);
-    }
-
     function updated( $name, $value )
     {
         if ( $name == 'selectedServiceItemId' ) {
@@ -248,9 +243,8 @@ class SearchResult extends Component
         }
 
         if ( $name == "homeSize") {
-            if ( $value < 100 ) {
-                $this->homeSize = 99;
-            }
+            $this->validate(['homeSize' => 'numeric|min:100']);
+            $this->homeSize = empty( $value ) ? null : $value;
         }
 
         $this->filterCleanersIfNeeded($name);

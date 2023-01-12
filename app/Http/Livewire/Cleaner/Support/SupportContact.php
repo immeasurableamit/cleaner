@@ -38,6 +38,7 @@ class SupportContact extends Component
 
     public function store()
     {
+       // sleep(4);
         $this->validate();
         $id = auth()->user()->id;
 
@@ -52,7 +53,7 @@ class SupportContact extends Component
         $contact->save();
 
         $adminEmail= env('ADMIN_EMAIL');
-        Mail::to($adminEmail)->send(new ContactMail($contact));
+        Mail::to($adminEmail)->queue(new ContactMail($contact));
         $this->alert('success', 'Message sent');
         $this->resetInputFields();
     }

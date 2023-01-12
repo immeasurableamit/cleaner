@@ -153,4 +153,9 @@ public function favourite()
     {
         return $this->hasMany( SupportService::class );
     }
+
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
 }

@@ -17,7 +17,8 @@ class Kernel extends ConsoleKernel
     {
 	//    $schedule->command('inspire')->everyMinute();
 
-        $schedule->command('payouts:send')->everyFiveMinutes();
+	    $schedule->command('payouts:send')->everyFiveMinutes();
+	    $schedule->command('queue:work --stop-when-empty')->everyMinute()->withoutOverlapping();
     }
 
     /**
