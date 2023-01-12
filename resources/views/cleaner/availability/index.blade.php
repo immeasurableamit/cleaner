@@ -24,14 +24,18 @@
                                     <a href="#" class="link-design-2">Time Zone: -5:00 CST, current time 11:11am</a>
                                 </div>
 
+                                {{--
                                 @include('cleaner.availability.jobs')
-
-                                {{--@include('cleaner.availability.time')--}}
-                                @livewire('cleaner.account.availability')
-
+                                @include('cleaner.availability.time')
                                 @include('cleaner.availability.buffer')
-                                
                                 @include('cleaner.availability.prescheduled')
+                                --}}
+
+                                @livewire('cleaner.account.same-time')
+                                @livewire('cleaner.account.availability')
+                                @livewire('cleaner.account.buffer')
+                                @livewire('cleaner.account.prescheduled')
+
 
                             </div>
                         </div>
