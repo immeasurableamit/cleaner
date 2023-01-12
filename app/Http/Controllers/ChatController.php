@@ -7,6 +7,7 @@ use App\Events\MessageEvent;
 use App\Events\MessageCount;
 
 use App\Models\User;
+use App\Models\Order;
 use App\Models\Message;
 use Illuminate\Support\Facades\Validator;
 
@@ -32,12 +33,21 @@ class ChatController extends Controller
             $usersArray = array($request->user);
         }
         else {
-            $sender = Message::where('sender_id', $user->id)->select('rec_id')->groupBY('rec_id')->get()->toArray();
+            /*$sender = Message::where('sender_id', $user->id)->select('rec_id')->groupBY('rec_id')->get()->toArray();
             $rec = Message::where('rec_id', $user->id)->select('sender_id')->groupBY('sender_id')->get()->toArray();
+            $usersArray = array_merge($sender, $rec);*/
 
-            $usersArray = array_merge($sender, $rec);
+            if($user->role=='cleaner'){
+                $usersArray = Order::where('cleaner_id', $user->id)->pluck('user_id')->toArray();
+            }
+
+            if($user->role=='customer'){
+               $usersArray =  Order::where('user_id', $user->id)->pluck('cleaner_id')->toArray();
+            }
         }
         
+        
+        $usersArray = array_unique($usersArray);
 
         $users_list = User::whereIn('id', $usersArray)
                     //->whereStatus('1')

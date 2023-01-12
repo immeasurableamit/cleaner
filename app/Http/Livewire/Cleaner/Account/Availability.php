@@ -47,6 +47,7 @@ class Availability extends Component
                 $hoursData = [];
                 $hoursData['from_time'] = '';
                 $hoursData['to_time'] = '';
+                $hoursData['delete'] = 'no';
                 array_push($hoursArray, $hoursData);
 
                 $dayArray[$day]['data'] = $hoursArray;
@@ -64,6 +65,7 @@ class Availability extends Component
         $hoursData = [];
         $hoursData['from_time'] = '';
         $hoursData['to_time'] = '';
+        $hoursData['delete'] = 'no';
         array_push($hoursArray, $hoursData);
 
         //...
@@ -73,7 +75,7 @@ class Availability extends Component
 
     public function deleteLayout($day, $index){        
         
-        unset($this->days[$day]['data'][$index]);
+        $this->days[$day]['data'][$index]['delete'] = 'yes';
     }
 
     public function store(){
@@ -86,8 +88,6 @@ class Availability extends Component
                 'days.*.data.*.to_time.required_if' => 'To date is required.',
             ]
         );
-
-
 
         $user = auth()->user();
         $daysArray = [];
