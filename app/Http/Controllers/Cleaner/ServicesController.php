@@ -19,16 +19,16 @@ class ServicesController extends Controller
             'active' => 'services',
         );
 
-        $user = auth()->user();
+        /*$user = auth()->user();
 
         $types = Types::with(['services', 'services.servicesItems'])->get();
         $cservices = CleanerServices::with('servicesItems')->where('users_id', $user->id)->get();
         
 
         $cservicesItems = $cservices->where('status', 1 )->pluck('servicesItems.services_id')->toArray();
-        $cservicesItems = array_unique($cservicesItems); 
+        $cservicesItems = array_unique($cservicesItems); */
         
-        return view('cleaner.services.index', compact('title', 'user', 'types', 'cservices', 'cservicesItems'));
+        return view('cleaner.services.index', compact('title'));
     }
 
 
