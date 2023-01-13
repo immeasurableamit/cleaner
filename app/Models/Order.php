@@ -37,6 +37,12 @@ class Order extends Model
         return $this->belongsTo(ServicesItems::class);
     }
 
+     public function state()
+    {
+        return $this->belongsTo(State::class);
+
+    }
+
     public function review()
     {
         return $this->hasOne(Review::class);
@@ -112,6 +118,22 @@ public function favourite()
             'rejected'  => 'Cancelled by cleaner',
             'cancelled' => 'Cancelled by cleaner',
             'cancelled_by_customer' => 'Cancelled by you',
+            'payment_collected' => 'Accepted',
+            'completed' => 'Completed',
+            'reviewed'  => 'Completed'
+        ];
+
+        return $statuses[ $this->status ];
+    }
+
+     public function statusForAdmin()
+    {
+        $statuses = [
+            'pending'   => 'Pending',
+            'accepted'  => 'Accepted',
+            'rejected'  => 'Cancelled by cleaner',
+            'cancelled' => 'Cancelled by cleaner',
+            'cancelled_by_customer' => 'Cancelled by customer',
             'payment_collected' => 'Accepted',
             'completed' => 'Completed',
             'reviewed'  => 'Completed'

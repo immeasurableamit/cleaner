@@ -151,6 +151,25 @@ Route::middleware(['auth', 'verified', 'trackLastActiveAt'])->group(function () 
             return view('admin.support.support');
         })->name('admin.support');
 
+
+        //Admin Jobs
+        Route::get('/jobs', function () {
+            $title = array(
+                'active' => 'admin-jobs',
+            );
+            return view('admin.jobs.jobs');
+        })->name('admin.jobs');
+
+        //Admin Jobs View
+                Route::get('/jobs/{id}', function () {
+                    $title = array(
+                        'active' => 'jobs-view',
+                    );
+
+                    return view('admin.jobs.jobs-view', ["id" => request()->id]);
+                })->name('admin.jobs.view');
+
+
         // Team Section
         Route::get('/cleaner/team/{id}', [AdminController::class, 'teamView'])->name('admin.cleaner.team');
 

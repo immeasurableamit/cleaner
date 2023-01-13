@@ -469,7 +469,7 @@ table.dataTable thead>tr>th.sorting:after, table.dataTable thead>tr>th.sorting_a
 
 
 
-/* .customer-account-information .title-label {
+.customer-account-information .title-label {
     font-weight: 300;
     font-size: 14px;
     color: #031624;
@@ -477,7 +477,7 @@ table.dataTable thead>tr>th.sorting:after, table.dataTable thead>tr>th.sorting_a
     line-height: 21px;
     width: 25px;
     text-align: center;
-} */
+}
 .customer-account-information li {
     padding-bottom: 10px;
 }
@@ -486,7 +486,7 @@ table.dataTable thead>tr>th.sorting:after, table.dataTable thead>tr>th.sorting_a
 }
 .customer-account-forms li input {
     width: 50%;
-    border: 1px solid black;
+    border: none;
     padding: 0px;
     font-size: 14px;
     height: 22px;
@@ -661,8 +661,201 @@ input[type=number] {
 
 
 
+/* job view css here */
+.job_id h5{
+    font-weight: 700;
+font-size: 20px;
+text-transform: capitalize;
+color: #2677B1;
+}
+.job_card {
+    padding: 13px 13px 13px 20px;
+    background: #FFFFFF;
+    box-shadow: 0px 15px 80px rgb(16 85 135 / 15%);
+    border-radius: 20px;
+}
+.job_lists {
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+}
+.job_lists h3,.job_lists p{
+    margin-bottom: 0px;
+}
+.job_lists h3 {
+    font-weight: 700;
+    font-size: 15px;
+    text-transform: capitalize;
+    color: #031624;
+    width: 45%;
+}
+.job_lists p {
+    font-weight: 400;
+    font-size: 14px;
+    color: #363636;
+    width: 40%;
+}
+.job_lists a.cancel_r{
+    color: #AF2727;
+    font-size: 14px;
+    text-decoration: none;
+    width: 15%;
+    text-align: right;
+}
+.job_lists a.edit_r{
+    color: #37A9FB;
+    font-size: 14px;
+    text-decoration: none;
+    width: 15%;
+    text-align: right;
+}
+.row.job_row .col-md-4 {
+    width: 35%;
+}
+.row.job_row .col-md-3 {
+    width: 30%;
+}
+.col-md-3.service_adres .job_lists p {
+    width: 55%;
+}
+.col-md-4.job_history p {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    color: #363636;
+}
+.col-md-4.job_history p .text-success{
+    font-weight: 500;
+}
+.col-md-4.job_history .job_card {
+    height: 220px;
+    overflow: auto;
+}
+.row.job_row h4 {
+    font-weight: 500;
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #363636;
+}
+.tittle_job_tabel h5{
+    font-weight: 700;
+font-size: 16px;
+text-transform: capitalize;
+color: #2677B1;
+}
+.dropdown.refund_div .refund_link {
+border: 0px;
+background: transparent;
+font-weight: 700;
+font-size: 14px;
+line-height: 19px;
+color: #2677B1;
+}
+.dropdown.refund_div .refund_link:after {
+display: none;
+}
+.dropdown.refund_div .dropdown-menu.show {
+padding: 25px;
+box-shadow: 0px 15px 80px rgb(16 85 135 / 15%);
+border-radius: 10px;
+background-color: #2677B1;
+}
+.full_partail {
+display: flex;
+gap: 10px;
+}
+.full_partail input{
+padding: 10px 15px;
+font-weight: 700;
+font-size: 14px;
+box-shadow: 0px 15px 80px rgba(16, 85, 135, 0.15);
+border-radius: 10px;
+color: #FFFFFF;
+margin-bottom: 13px;
+}
+.full_partail .full_1 {
+width: 49%;
+text-align: right;
+}
+.full_partail .partial_1 {
+width: 49%;
+}
+.full_partail h6 {
+text-align: center;
+font-weight: 400;
+font-size: 16px;
+text-decoration-line: underline;
+text-transform: capitalize;
+color: #FFFFFF;
+}
+.btn_refund {
+    background: #F8D029;
+    border-radius: 15px;
+    padding: 15px 25px;
+    text-decoration: none;
+    width: 100%;
+    display: block;
+    text-align: center;
+    font-weight: 500;
+font-size: 14px;
+color: #031624;
+}
+.btn_refund  img{
+    margin-left: 15px;
+}
+.bg_r{
+    padding: 13px 13px 13px 20px;
+    background: #FFFFFF;
+    box-shadow: 0px 15px 80px rgb(16 85 135 / 15%);
+    border-radius: 20px;
+}
+h3.h3_refunds {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 160%;
+    text-transform: capitalize;
+    color: #2677B1;
+}
+tr.refunds_tr {
+    border-top: 1px solid;
+}
 
-
+tr.refunds_tr td {
+    vertical-align: bottom;
+}
+tr.final_invoice_tr {
+    border-top: 1px solid;
+}
+tr.final_invoice_tr td.pdf {
+    width: 155px;
+}
+a.pdf_r {
+    text-decoration: none;
+}
+.view_link {
+    font-weight: 700;
+    font-size: 14px;
+    color: #3F9BBF;
+    text-decoration: none;
+}
+.full_1 input[type="text"] {
+    background-color: transparent;
+    background: #2677B1;
+    border: 1px solid #F8D029;
+    border-radius: 10px;
+    color: #fff;
+}
+.full_1 input[type="text"]::placeholder{
+    color: #fff;
+}
+.partial_1 input[type="text"] {
+    border-color: transparent;
+    color: #84ABC7;
+}
+.partial_1 input[type="text"]::placeholder{
+    color: #84ABC7;
+}
+/* job view css here */
 
 @media (min-width: 1200px){
     .table-design .dataTables_length {
@@ -675,7 +868,7 @@ input[type=number] {
         max-width: 100%;
     }
     .table-design .dataTables_wrapper>.row:last-child .pagination {
-        justify-content: center; 
+        justify-content: center;
     }
     .table-design .dataTables_info {
         position: relative;
