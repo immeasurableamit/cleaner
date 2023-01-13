@@ -27,7 +27,7 @@
                   <div class="alert ">{{ $message }}</div>
                   @enderror
                </div>
-              </div> 
+              </div>
                <div class="col-md-6">
                   <div class="form-grouph input-design mb-30">
                      <input type="number" placeholder="Phone" wire:model="phone">
@@ -43,11 +43,14 @@
                   @enderror
                </div>
                <div class="col-md-12 pt-3">
-                  <button class="btn_c d-block w-100" wire:click.prevent="store">Submit</button>
+                  <button class="btn_c d-block w-100" wire:click.prevent="store" wire:loading.attr="disabled" wire:target="store">
+                    <span wire:loading.remove wire:target="store">Submit</span>
+                    <span wire:loading wire:target="store"><i class="fa-solid fa-spinner fa-spin"></i></span>
+                </button>
                </div>
-            
+
          </div>
-        </div> 
+        </div>
          <div class="col-md-4 blue_right_card">
             <div class="card_b">
                <div class="fist_div">
@@ -62,5 +65,5 @@
             </div>
          </div>
       </div>
-  
+
 </div>

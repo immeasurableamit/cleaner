@@ -6,6 +6,8 @@ use Livewire\Component;
 use App\Models\Order;
 use App\Models\SupportRequest;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SupportRequestMail;
 
 class Support extends Component
 {
@@ -84,7 +86,7 @@ class Support extends Component
 
         $this->resetFormFields();
 
-        // TODO: send email to admin
+        Mail::to( env("ADMIN_EMAIL") )->send( new SupportRequestMail( $supportRequest ))->queue();
         $this->alert('success', 'Support request submitted');
         $this->dispatchBrowserEvent('cleaerSelectionsInSelectors');
         return true;

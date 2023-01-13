@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\Customer\AppointmentController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\Customer\FavouriteController;
+use App\Http\Livewire\Customer\Appointment\Thanks as ThanksComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,14 +72,7 @@ Route::get('help', function () {
 })->name('help-center');
 
 Route::get('/search-result', [HomeController::class, 'searchResultParameters'])->name('search-result');
-/*
-Route::get('search-result', function () {
-    $title = array(
-        'active' => 'search-result',
-    );
-    return view('home.search-result', compact('title'));
-})->name('search-result');
-*/
+
 
 Route::get('profile/{id}', function () {
     $title = array(
@@ -143,13 +137,21 @@ Route::middleware(['auth', 'verified', 'trackLastActiveAt'])->group(function () 
             return view('admin.cleaner.cleaner-edit', ["id" => request()->id]);
         })->name('admin.cleaner.show');
 
-        //Admin Support
+        //Admin Support Services
         Route::get('/support', function () {
             $title = array(
                 'active' => 'admin-support',
             );
+            return view('admin.support.support_service');
+        })->name('admin.support.service');
+
+         //Admin Support-contact us
+         Route::get('/contactus', function () {
+            $title = array(
+                'active' => 'admin-contact-us',
+            );
             return view('admin.support.support');
-        })->name('admin.support');
+        })->name('admin.support.contactus');
 
 
         //Admin Jobs
@@ -193,6 +195,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // customer routes
     Route::prefix('customer')->group(function () {
 
+        // customer notification
+        Route::get('/notification', [ CustomerControllers\NotificationController::class, 'index'])->name('customer.notification.index');
+
         Route::get('/account', function () {
             $title = array(
                 'title' => 'Account',
@@ -216,7 +221,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::get('/reschedule-appointment/{id}', 'rescheduleAppointment')->name('customer.appointment.rescheduleAppointment');
                 Route::get('/updateschedule-appointment', 'updateScheduleAppointment')->name('customer.appointment.updateScheduleAppointment');
                 Route::post('/slotAvailable', 'slotAvailable')->name('customer.appointment.slotAvailable');
+
             });
+
+            Route::get('/{order_id}/thanks', ThanksComponent::class)->name('customer.appointment.thanks');
         });
 
         //customer Favourite
@@ -237,6 +245,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
             );
             return view('customer.support.support', compact('title'));
         })->name('customer.support.service');
+
+
     });
 
     //cleaner routes
@@ -271,15 +281,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::controller(CleanerController::class)->group(function () {
 
             Route::get('/reviews', 'reviews')->name('cleaner.reviews');
-            /*
-            Route::get('/reviews', function () {
-                $title = array(
-                    'title' => 'Reviews',
-                    'active' => 'reviews',
-                );
-                return view('cleaner.reviews.reviews', compact('title'));
-            })->name('cleaner.reviews');
-            */
+
         });
         //availability
         Route::prefix('availability')->group(function () {
@@ -290,13 +292,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::post('/time', 'time')->name('cleaner.availability.time');
             });
         });
-        //billing
+        // cleaner billing
         Route::prefix('billing')->group(function () {
             Route::controller(Cleaner\billing\BillingController::class)->group(function () {
                 Route::get('/', 'index')->name('cleaner.billing.billing');
-                Route::get('/stripe/connect', 'connectStripe')->name("cleaner.billing.stripeConnect");
+                Route::get('/stripe/connect/create', 'connectStripe')->name("cleaner.billing.stripeConnect");
+                Route::get('/stripe/connect/update', 'updateConnectAccountStripe')->name("cleaner.billing.stripeConnectUpdate");
                 Route::get('/banking-info-error', 'bankingInfoError')->name('cleaner.billing.error');
                 Route::get('/banking-info-success', 'bankingInfoSuccess')->name('cleaner.billing.success');
+                Route::get('/stripe/connect/delete', 'deleteConnectAccount')->name('cleaner.billing.delete');
+             //   Route::get('/stripe/connect/attach-bank', 'showAttachBankPage')->name("cleaner.billing.stripeAttachBank");
 
                 Route::get('/accountdetails', 'bankAccount')->name('cleaner.billing.editBankAccount');
                 Route::get('/editpayment', 'editpayment')->name('cleaner.billing.editPaymentMethod');
@@ -329,7 +334,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
 
 
-        // Notification
+        // cleaner notification
         Route::prefix('notification')->group(function () {
             Route::controller(Cleaner\notification\NotificationController::class)->group(function () {
                 Route::get('/', 'index')->name('cleaner.notification.index');

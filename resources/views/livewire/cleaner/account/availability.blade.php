@@ -43,6 +43,8 @@
                                         <div class="time-schedule-addon">
 
                                             @foreach($dat['data'] as $i => $data)
+
+                                            @if(@$data['delete']=='no')
                                             <div class="time-input-addon">
                                                 <input type="time" wire:model="days.{{$day}}.data.{{$i}}.from_time">
                                                 @error('days.'.$day.'.data.'.$i.'.from_time')<div class="alert ">{{ $message }}</div>@enderror
@@ -56,6 +58,7 @@
                                                 </button>
                                                 @endif
                                             </div>
+                                            @endif
                                             @endforeach
                                         </div>
                                     </div>

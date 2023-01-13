@@ -47,6 +47,7 @@ class Availability extends Component
                 $hoursData = [];
                 $hoursData['from_time'] = '';
                 $hoursData['to_time'] = '';
+                $hoursData['delete'] = 'no';
                 array_push($hoursArray, $hoursData);
 
                 $dayArray[$day]['data'] = $hoursArray;
@@ -64,6 +65,7 @@ class Availability extends Component
         $hoursData = [];
         $hoursData['from_time'] = '';
         $hoursData['to_time'] = '';
+        $hoursData['delete'] = 'no';
         array_push($hoursArray, $hoursData);
 
         //...
@@ -73,7 +75,13 @@ class Availability extends Component
 
     public function deleteLayout($day, $index){        
         
-        unset($this->days[$day]['data'][$index]);
+        if(@$this->days[$day]['data'][$index]['id']){
+            $this->days[$day]['data'][$index]['delete'] = 'yes';
+        }
+        else {
+            unset($this->days[$day]['data'][$index]);
+        }
+        
     }
 
     public function store(){
@@ -87,7 +95,7 @@ class Availability extends Component
             ]
         );
 
-
+        //dd($this->days);
 
         $user = auth()->user();
         $daysArray = [];
@@ -98,7 +106,7 @@ class Availability extends Component
                         array_push($daysArray, $day);
                         foreach(@$daysData['data'] as $data){
 
-                            if(@$data['delete']=='yes'){
+                            if(@$data['delete']=='yes' && @$data['id']){
                                 $checkHour = CleanerHours::find($data['id']);
 
                                 if (@$checkHour) {

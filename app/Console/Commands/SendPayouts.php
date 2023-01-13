@@ -12,7 +12,7 @@ class SendPayouts extends Command
      *
      * @var string
      */
-    protected $signature = 'payouts:send';
+    protected $signature = 'send:payouts';
 
     /**
      * The console command description.
@@ -54,6 +54,7 @@ class SendPayouts extends Command
             );
 
             /* update order */
+            $order->status = 'completed';
             $order->is_paid_out_to_cleaner = 1;
             $order->cleaner_transaction_id = $transaction->id;
             $order->save();

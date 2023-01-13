@@ -7,10 +7,23 @@ use App\Models\User;
 
 class RatedCleaners extends Component
 {
+
+    public $cleaners;
+
+    public function mount()
+    {
+        $this->cleaners = User::has('cleanerReviews')->where('role','cleaner')->latest()->get();
+
+        $this->cleaners = $cleaners->filter( function($cleaner) {
+
+            if ( $cleaner->avgRating() > 3 ){
+                return true;
+            }
+        });
+    }
+
     public function render()
     {
-        $cleaners = User::with('cleanerReviews')->where('role','cleaner')->latest()->get();
-
-        return view('livewire.home.rated-cleaners',['cleaners'=> $cleaners]);
+        return view('livewire.home.rated-cleaners');
     }
 }

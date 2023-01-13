@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Http\Controllers\Customer;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+class NotificationController extends Controller
+{
+    public function index()
+    {
+        $title = array(
+            'title' => 'Notification',
+            'active' => 'notification',
+        );
+
+        return view('customer.notification', compact('title'));
+    }
+}

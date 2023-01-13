@@ -1,7 +1,10 @@
 <div class="biling_edit_form">
-    <div class="alert alert-warning" role="alert"> 
-        Fill bank details to <strong>Enable Payouts</strong>
+
+    @if ( $bank->payouts_enabled == 0 )
+    <div class="alert alert-warning" role="alert">
+      Payouts are not enabled for your account
     </div>
+    @endif
     <form action="{{ route('cleaner.billing.bankInfoStore') }}" method="POST">
         @csrf
 
@@ -12,7 +15,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-grouph input-design mb-30">
-                    <input type="text" placeholder="Account Holder Name" name="account_holder_name">
+                    <input type="text" placeholder="Account Holder Name" value="{{ $bank->account_holder_name }}" name="account_holder_name">
                     @error('account_holder_name')
                         <div class="help-block">{{ $message }}</div>
                     @enderror
@@ -20,7 +23,7 @@
             </div>
             <div class="col-md-6">
             <div class="form-grouph input-design mb-30">
-                <input type="text" placeholder="Account Number" name="account_number">
+                <input type="text" placeholder="Account Number" name="account_number" value="{{ $bank->account_number }}">
                 @error('account_number')
                     <div class="help-block">{{ $message }}</div>
                 @enderror
@@ -28,7 +31,7 @@
         </div>
         <div class="col-md-6">
             <div class="form-grouph input-design mb-30">
-                <input type="text" placeholder="Routing Number" name="routing_number">
+                <input type="text" placeholder="Routing Number" name="routing_number" value="{{ $bank->routing_number }}">
                 @error('routing_number')
                     <div class="help-block">{{ $message }}</div>
                 @enderror
@@ -36,10 +39,14 @@
         </div>
         </div>
 
-       
+
         <div class="text-center">
 
-            <button class="btn_c" type="submit">Save</button>
+            @if ( $bank->account_number )
+                <a href="{{ route('cleaner.billing.delete') }}">Delete bank account</a>
+            @else
+                <button class="btn_c" type="submit">Save</button>
+            @endif
         </div>
     </form>
 </div>

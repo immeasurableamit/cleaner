@@ -16,9 +16,9 @@ class NotificationController extends Controller
         );
 
         $user = auth()->user();
-        
+
         return view('cleaner.notification.notification', compact('title', 'user'));
     }
 
-    
+
 }

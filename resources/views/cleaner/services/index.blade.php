@@ -30,79 +30,11 @@
                                 </div>
                                 <h5 class="bg_ylow_h5">Offer Services, Set Prices, and Durations</h5>
                                 <!-- home cleaning -->
-                                <div class="services-alternate-wrap-sec">
-                                    {!! Form::open(['route' => 'cleaner.services.post', 'method'=>'post']) !!}
-                                        <div class="alternative-service-block">
-                                            
-                                            @foreach($types as $type)
-                                            <div class="alternate-service-header">
-                                                <div class="row">
-                                                    <div class="col-xl-6 col-md-6 col-sm-12">
-                                                        <div class="home_cleaning_div">
-                                                            <div class="card_header_tittle">
-                                                                <h3>{{ $type->title }}</h3>
-                                                                <p> enter your rate to match what you would charge
-                                                                for 1,500 sq ft - prices will scale up or down from there</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- One Time Row -->
-                                            <div class="card_service_row type_{{$type->id}}">
-                                                <div class="row">
-                                                    @foreach($type->services as $service)
-                                                    <div class="col-xl-6 col-md-6 col-sm-12">
-                                                        <div class="btn_header_service py-3">
-                                                            <h4 class="mb-0 btn_blue">{{ $service->title }}</h4>
-                                                        </div>
-
-                                                        @if(in_array($service->id, $cservicesItems))
-                                                            <div class="form-check form-switch heading heading-toggle active-toggle service_{{$service->id}}" data-service="{{$service->id}}">
-                                                                <input class="check form-check-input" name="service[{{$service->id}}][checked]" type="checkbox" checked>
-                                                            </div>
-                                                        @else
-                                                            <div class="form-check form-switch heading heading-toggle service_{{$service->id}}" data-service="{{$service->id}}">
-                                                                <input class="check form-check-input" name="service[{{$service->id}}][checked]" type="checkbox">
-                                                            </div>
-                                                        @endif
-                                                        
-                                                    </div>
-                                                    <div class="row body_service_{{$service->id}}">
-                                                        <div class="col-md-6">
-                                                            @foreach ( $service->servicesItems as $item ) 
-
-                                                                @php $cservice = $cservices->where('services_items_id', $item->id )->first() @endphp
-
-                                                                @if ( ! $cservice ) 
-
-                                                                    @include('cleaner.services.form')
-                                                                    
-                                                                @elseif ( $cservice->status == '0' )
-
-                                                                    @include('cleaner.services.form', ['showClass' => '', 'cservice'  => $cservice])
-                                                                @else 
-                                                                    @include('cleaner.services.form', ['showClass' => 'show', 'cservice'  => $cservice])
-
-                                                                @endif
-                                                     
-                                                               
-                                                            @endforeach
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                        </div>
-                                                    </div>
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                            @endforeach
 
 
-                                            <button type="submit" class="btn_blue ">Submit</button>
 
-                                        </div>
-                                    {!! Form::close() !!}
-                                </div>
+                                @livewire('cleaner.account.services')
+                                
                             </div>
                         </div>
                     </div>
@@ -114,6 +46,8 @@
 @endsection
 
 
+
+{{--
 @section('script')
 <script>
     $(document).ready(function(){
@@ -213,3 +147,4 @@
     });
 </script> 
 @endsection
+--}}

@@ -10,7 +10,7 @@ class Notification extends Component
 
     public function smsMarketingStatus($id)
     {
-       
+
         $smsMarketing = UserDetails::find($id);
         if ($smsMarketing->sms_marketing == '1') {
             $smsMarketing->sms_marketing = '0';
@@ -34,7 +34,7 @@ class Notification extends Component
     public function render()
     {
         $cleanerDetails = UserDetails::where('user_id', auth()->user()->id)->first();
-        
+
         // dd($cleanerDetails);
         return view('livewire.cleaner.notification.notification', ['cleanerDetail' => $cleanerDetails]);
     }
