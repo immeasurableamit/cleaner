@@ -25,8 +25,21 @@ function updateServicesOfCleaners($cleaner, $types)
 
                 $item_data['status'] = $item_data['checked'] ? '1' : '0';
 
+                if($item_data['custom']){
+                    $item_data['title'] = @$item_data['title'];
+                    $item_data['is_recurring'] = $item_data['is_recurring'] ? '1' : '0';
+                    $item_data['is_custom'] = '1';
+                }
+
+
+
                 /* Update if service item already existed */
-                $cleanerService = $cleanerServices->where('services_items_id', $item_data['id'])->first();
+                if($item_data['custom']){
+                    $cleanerService = $cleanerServices->where('services_id', $item_data['id'])->first();
+                }
+                else {
+                    $cleanerService = $cleanerServices->where('services_items_id', $item_data['id'])->first();
+                }
                 if ($cleanerService) {
 
                     updateCleanerSerivce($cleanerService, $item_data);
@@ -63,6 +76,13 @@ function updateCleanerSerivce($cleanerService, $item_data)
     $cleanerService->price    = $item_data['price'];
     $cleanerService->duration = $item_data['duration'];
     $cleanerService->status   = $item_data['status'];
+
+    if(@$item_data['is_custom']){
+        $cleanerService->title   = $item_data['title'];
+        $cleanerService->is_recurring   = $item_data['is_recurring'];
+        $cleanerService->is_custom   = $item_data['is_custom'];
+    }
+
     $cleanerService->save();
 
     return $cleanerService;
@@ -77,13 +97,36 @@ function updateCleanerSerivce($cleanerService, $item_data)
  */
 function generateCleanerServiceBlueprintForSaving($cleaner_id, $item_data)
 {
-    $blueprint = [
+    /*$blueprint = [
         'users_id' => $cleaner_id,
         'services_items_id' => $item_data['id'],
         "price"    => $item_data['price'],
         "duration" => $item_data['duration'],
         "status"   => $item_data['status'],
-    ];
+
+        "title"   => $item_data['title'] ?? null,
+        "is_recurring"   => $item_data['is_recurring'] ?? '0',
+        "is_custom"   => $item_data['is_custom'] ?? '0',
+    ];*/
+
+    $blueprint = [];
+    $blueprint['users_id'] = $cleaner_id;
+
+    if($item_data['custom']){
+        $blueprint['services_id'] = $item_data['id'];
+    }
+    else {
+        $blueprint['services_items_id'] = $item_data['id'];  
+    }
+    
+
+    $blueprint['price'] = $item_data['price'];
+    $blueprint['duration'] = $item_data['duration'];
+    $blueprint['status'] = $item_data['status'];
+
+    $blueprint['title'] = $item_data['title'] ?? null;
+    $blueprint['is_recurring'] = $item_data['is_recurring'] ?? '0';
+    $blueprint['is_custom'] = $item_data['is_custom'] ?? '0';
 
     return $blueprint;
 }
