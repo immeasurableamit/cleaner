@@ -30,6 +30,10 @@ class Jobs extends Component
 
     protected $pendingOrderStatuses = ['pending'];
 
+    protected $queryString = [
+        'selectedDate' => [ 'except' => ''],
+    ];
+
     protected $listeners = [
         'cancelOrder'
     ];
@@ -158,8 +162,9 @@ class Jobs extends Component
         /* Change status and return because we don't charge customer on accepting now */
         $order->status = 'accepted';
         $order->save();
-        Notification::route('mail', $this->email)->notify(new OrderConfirmed($order));
-        // dd('done');
+
+
+        $order->user->notify(new OrderConfirmed($order));
         $this->alert('success', 'Order accepted');
         $this->refreshSelectedTab();
         return true;

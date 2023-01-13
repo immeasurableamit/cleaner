@@ -11,7 +11,6 @@ use App\Models\Transaction;
 class Order extends Model
 {
 
-
     use HasFactory;
 
     protected $guarded = [];
@@ -31,11 +30,6 @@ class Order extends Model
     public function cleaner()
     {
         return $this->belongsTo(User::class, 'cleaner_id', 'id');
-    }
-
-    public function service_item()
-    {
-        return $this->belongsTo(ServicesItems::class);
     }
 
     public function review()
@@ -99,7 +93,6 @@ public function favourite()
             'payment_collected' => 'Payment collected',
             'completed' => 'Completed',
             'reviewed'  => 'Completed and Reviewed'
-
         ];
 
         return $statuses[ $this->status ];
@@ -121,14 +114,46 @@ public function favourite()
         return $statuses[ $this->status ];
     }
 
+    /* to use this function following relationship should be loaded, example: Order::with('items.service_item.service') */
     public function service()
     {
         return $this->items->pluck('service_item')->flatten()->pluck('service')->where('types_id',1)->first();
     }
 
+    /*
+     * An order has one order_item that is the main
+     * service rest of them are addons.
+     *
+     * This function returns that specific order_item.
+     *
+     */
+    public function serviceOrderItem()
+    {
+        $item = $this->items->first( function( $item ) {
+            return $item->service_item->service->types_id == 1;
+        });
+
+        return $item;
+    }
+
+
+    /* To use this function following relationship should be loaded, example: Order::with('items.service_item.service') */
+    public function addonsOrderItems()
+    {
+        $items = $this->items->filter(function($order_item){
+            return $order_item->service_item->service->types_id == 2; // type id 2 means addon
+        })->values();
+
+        return $items;
+    }
 
     public function supportService()
     {
         return $this->hasMany( SupportService::class );
+    }
+
+    public function state()
+    {
+        return $this->belongsTo(State::class);
     }
 }

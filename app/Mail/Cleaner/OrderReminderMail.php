@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Mail;
+namespace App\Mail\Cleaner;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -8,23 +8,22 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use App\Models\Order;
 
-class OrderConfirmedMail extends Mailable implements ShouldQueue
+class OrderReminderMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
-    public $user;
+
     public $order;
-
-
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($user, $order)
+    public function __construct(Order $order)
     {
-        $this->user  = $user;
+        $this->afterCommit(); // after db transactions have been done
         $this->order = $order;
     }
 
@@ -36,7 +35,7 @@ class OrderConfirmedMail extends Mailable implements ShouldQueue
     public function envelope()
     {
         return new Envelope(
-            subject: 'Order Confirmed Mail',
+            subject: 'Canary Clean - Booking Reminder',
         );
     }
 
@@ -48,12 +47,10 @@ class OrderConfirmedMail extends Mailable implements ShouldQueue
     public function content()
     {
         return new Content(
-            markdown: 'email.order_confirmed',
-            with: [
-                'user'    => $this->user,
-                'order'   => $this->order,
-                'message' => "Your order #".$this->order->id." has confirmed by cleaner"
-            ],
+		markdown: 'email.cleaner.order-reminder',
+		with: [
+			'order' => $this->order,
+		],
         );
     }
 

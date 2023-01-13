@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Cleaner\notification;
+namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 
 class NotificationController extends Controller
 {
@@ -15,10 +14,6 @@ class NotificationController extends Controller
             'active' => 'notification',
         );
 
-        $user = auth()->user();
-
-        return view('cleaner.notification.notification', compact('title', 'user'));
+        return view('customer.notification', compact('title'));
     }
-
-
 }

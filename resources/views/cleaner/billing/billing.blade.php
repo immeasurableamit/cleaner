@@ -27,13 +27,18 @@
 
 
                 @if ( empty( $bank ) )
-                  
-                  <div><a href="{{ route('cleaner.billing.stripeConnect') }}" class="btn_blue">Connect Bank Account </a></div>
-                @elseif ( ! $bank->charges_enabled )
-                  <div><a href="{{ route('cleaner.billing.stripeConnect') }}" class="btn_blue">Continue connecting process</a></div>
 
+                  <div><a href="{{ route('cleaner.billing.stripeConnect') }}" class="btn_blue">Connect Bank Account </a></div>
+                @else
+
+                    @include('cleaner.billing.includes.addBankAccount')
+
+                @endif
+
+                 {{--  <div><a href="{{ route('cleaner.billing.stripeConnectUpdate') }}" class="btn_blue">Update Bank Account</a></div> --}}
+{{--
                 @elseif ( ! $bank->payouts_enabled)
-                    @include('cleaner.billing.includes.addBankAccount') 
+
                 @else
 
                   Account Number: {{ $bank->account_number }}
@@ -41,6 +46,7 @@
                   Holder Name: {{ $bank->account_holder_name }}
                   <br>
                   Routing Number: {{ $bank->routing_number }}
+                  --}}
 
                 {{--
                 <div class="customer-account-information">
@@ -85,7 +91,6 @@
                   </ul>
                 </div>
                 --}}
-                @endif
 
               </div>
             </div>

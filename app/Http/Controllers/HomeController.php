@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use \App\Models\Services;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 
 class HomeController extends Controller
@@ -88,4 +89,17 @@ class HomeController extends Controller
 		return view('home.search-result', $searchParamters );
 
 	}
+
+    public function checkoutCompleted(Request $request, $encrypted_order_id)
+    {
+        try {
+            $orderId = Crypt::decryptString($encrypted_order_id);
+        } catch (DecryptException $e) {
+            abort(403);
+        };
+
+        $order = Order::find( $orderId );
+
+        return view('home.checkout-completed');
+    }
 }

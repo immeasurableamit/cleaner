@@ -1,8 +1,7 @@
 <div>
 
-    {{--
     <button type="button" class="btn btn-success addService">Add Service</button>
-    --}}
+
 
     @foreach($services as $service)
     <table id="all-cleaner-table22" class="table dt-responsive nowrap" style="width:100%">

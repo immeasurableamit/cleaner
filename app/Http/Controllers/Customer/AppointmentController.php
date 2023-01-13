@@ -104,5 +104,11 @@ class AppointmentController extends Controller
 
        }
 
+       public function thanksPage(Request $req, $order_id )
+       {
 
+        $order = Order::find( $order_id );
+
+        return view('customer.appointments.thanks', compact('order'));
+       }
 }

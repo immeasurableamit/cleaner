@@ -226,6 +226,16 @@ class User extends Authenticatable implements MustVerifyEmail
             return false;
         }
 
+        if ( ! $this->bankInfo ){
+            return false;
+        }
+
         return true;
+    }
+
+    // cleaner user function
+    public function avgRating()
+    {
+        return $this->cleanerReviews->avg('rating');
     }
 }
