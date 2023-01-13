@@ -7,9 +7,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Models\Order;
-use App\Mail\Cleaner\NewBookingMail;
+use App\Mail\Cleaner\OrderReminderMail;
 
-class NewBooking extends Notification implements ShouldQueue
+class OrderReminder extends Notification
 {
     use Queueable;
 
@@ -44,8 +44,8 @@ class NewBooking extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-	    $mailable = new NewBookingMail( $this->order );
-	    return $mailable->to( $notifiable->email );
+        $mailable = new  OrderReminderMail($this->order);
+        return $mailable->to( $notifiable->email );
     }
 
     /**

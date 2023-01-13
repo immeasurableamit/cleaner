@@ -19,7 +19,7 @@ class Appointment extends Component
     public $selectedDate, $events, $selectedDateOrders;
     public $orders;
     protected $listeners = ['orderCancelledByCustomer'];
-    protected $pendingOrderStatuses = ['pending', 'rejected', 'cancelled_by_customer'];
+    protected $pendingOrderStatuses = ['pending'];
 
     /* review order props */
     public $rating, $review, $reviewOrderId;
@@ -172,7 +172,8 @@ class Appointment extends Component
         $review->save();
 
         /* Update order */
-        $order->status = 'reviewed';
+        //$order->status = 'reviewed';
+        $order->is_reviewed = 1;
         $order->save();
 
         $this->alert('success', 'Review submitted');

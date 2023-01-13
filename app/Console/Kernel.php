@@ -15,10 +15,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-	//    $schedule->command('inspire')->everyMinute();
 
-	    $schedule->command('payouts:send')->everyFiveMinutes();
-	    $schedule->command('queue:work --stop-when-empty')->everyMinute()->withoutOverlapping();
+	    $schedule->command('send:payouts')->everyFiveMinutes();
+        $schedule->command('send:order-reminders')->hourly();
+	    $schedule->command('queue:work --tries=2 --stop-when-empty')->everyMinute()->withoutOverlapping();
     }
 
     /**
@@ -33,3 +33,4 @@ class Kernel extends ConsoleKernel
         require base_path('routes/console.php');
     }
 }
+

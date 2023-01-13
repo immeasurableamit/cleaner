@@ -11,7 +11,6 @@ use App\Models\Transaction;
 class Order extends Model
 {
 
-
     use HasFactory;
 
     protected $guarded = [];
@@ -94,7 +93,6 @@ public function favourite()
             'payment_collected' => 'Payment collected',
             'completed' => 'Completed',
             'reviewed'  => 'Completed and Reviewed'
-
         ];
 
         return $statuses[ $this->status ];

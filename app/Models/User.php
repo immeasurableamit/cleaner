@@ -232,4 +232,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
         return true;
     }
+
+    // cleaner user function
+    public function avgRating()
+    {
+        return $this->cleanerReviews->avg('rating');
+    }
 }

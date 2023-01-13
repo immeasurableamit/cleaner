@@ -176,6 +176,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // customer routes
     Route::prefix('customer')->group(function () {
 
+        // customer notification
+        Route::get('/notification', [ CustomerControllers\NotificationController::class, 'index'])->name('customer.notification.index');
+
         Route::get('/account', function () {
             $title = array(
                 'title' => 'Account',
@@ -312,7 +315,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
 
 
-        // Notification
+        // cleaner notification
         Route::prefix('notification')->group(function () {
             Route::controller(Cleaner\notification\NotificationController::class)->group(function () {
                 Route::get('/', 'index')->name('cleaner.notification.index');

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Cleaner\Notification;
+namespace App\Http\Livewire\Customer\Notification;
 
 use Livewire\Component;
 use App\Models\UserDetails;
@@ -36,6 +36,6 @@ class Notification extends Component
         $cleanerDetails = UserDetails::where('user_id', auth()->user()->id)->first();
 
         // dd($cleanerDetails);
-        return view('livewire.cleaner.notification.notification', ['cleanerDetail' => $cleanerDetails]);
+        return view('livewire.customer.notification.notification', ['cleanerDetail' => $cleanerDetails]);
     }
 }

@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Request;
 
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use App\Notifications\Cleaner\NewBooking;
+
 
 
 class Checkout extends Component
@@ -457,6 +459,7 @@ class Checkout extends Component
         $status        = $this->placeOrder();
 
         if ($status) {
+            $this->cleaner->notify(new NewBooking($this->order));
             return redirect()->route('customer.appointment.thanks', [ 'order_id' => $this->order->id ]);
         }
     }
