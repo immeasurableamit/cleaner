@@ -32,6 +32,16 @@ class Order extends Model
         return $this->belongsTo(User::class, 'cleaner_id', 'id');
     }
 
+    public function service_item()
+    {
+        return $this->belongsTo(ServicesItems::class);
+    }
+
+     public function state()
+    {
+        return $this->belongsTo(State::class);
+
+    }
     public function review()
     {
         return $this->hasOne(Review::class);
@@ -114,7 +124,26 @@ public function favourite()
         return $statuses[ $this->status ];
     }
 
+
+     public function statusForAdmin()
+    {
+        $statuses = [
+            'pending'   => 'Pending',
+            'accepted'  => 'Accepted',
+            'rejected'  => 'Cancelled by cleaner',
+            'cancelled' => 'Cancelled by cleaner',
+            'cancelled_by_customer' => 'Cancelled by customer',
+            'payment_collected' => 'Accepted',
+            'completed' => 'Completed',
+            'reviewed'  => 'Completed'
+        ];
+
+        return $statuses[ $this->status ];
+    }
+
+
     /* to use this function following relationship should be loaded, example: Order::with('items.service_item.service') */
+
     public function service()
     {
         return $this->items->pluck('service_item')->flatten()->pluck('service')->where('types_id',1)->first();

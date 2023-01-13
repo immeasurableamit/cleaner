@@ -2,7 +2,7 @@
    <div class="admin-header-wrapper">
     <div class="admin-left-header">
       <div class="logo-wrapper">
-        <a href="index.html"><img src="{{ asset('assets/images/logo/logo.svg') }}"></a>
+        <a href="#"><img src="{{ asset('assets/images/logo/logo.svg') }}"></a>
        </div>
     </div>
 
