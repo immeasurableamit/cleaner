@@ -33,13 +33,49 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            @foreach($service['items'] as $i => $item) 
+                            @if(@$service['items'])
+                            @foreach($service['items'] as $i => $item)
 
                                 @include('cleaner.services.livewireform')
                                
                             @endforeach
+                            @endif
+
+                            @if($service['home_discount']=='1')
+
+                                @if($discounts)
+                                @foreach($discounts as $discount)
+                                <div class="card_row_3">
+                                    <span class="est">{{$discount->title}}</span>
+                                    <div class="incremnt_decrmnt number for_alternative">
+                                        <span class="minus" wire:click="discountAction({{$discount->id}}, 'minus')">-</span>
+                                        <input type="text" wire:model="discountData.{{$discount->id}}.discount">
+                                        <span class="plus" wire:click="discountAction({{$discount->id}}, 'plus')">+</span>
+                                    </div>
+                                    @error ('discountAction.'.$discount->id.'.discount') <span class="text-danger">{{ $message }}</span> @enderror
+                                </div>
+                                @endforeach
+                                <button class="btn btn-success btn-sm" wire:click="discountStore">Save</button>
+                                @endif
+                            @endif
+
+                            @if($service['title']=='Custom Offerings')
+                                <button type="button" wire:click="addServices({{$t}}, {{$s}})">+ Add Services</button>
+                            @endif
                         </div>
                         <div class="col-md-6">
+
+                            <div class="card_header_tittle">
+                                <h3>Edit "What's Included"</h3>
+                            </div>
+
+                            <div class="form-grouph textarea-design mb-2">
+                                <textarea wire:model="included.{{$service['id']}}.data" placeholder="Describe what's included"></textarea>
+                                @error ('included.'.$service["id"].'.data') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+
+                            <button class="btn btn-success btn-sm" wire:click="storeIncluded">Save</button>
+
                         </div>
                     </div>
                     @endforeach

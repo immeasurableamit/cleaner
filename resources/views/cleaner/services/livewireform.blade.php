@@ -1,6 +1,17 @@
 <div class="card_collapse_service common_card_service {{$item['checked']?'show':''}} {{ $item['toogle'] ? 'show-2' : '' }}">
     <div class="heder_row">
+        @if($item['custom'])
+            @if($item['toogle'])
+            <div class="form-grouph input-design mb-2">
+                <input wire:model="serviceData.{{$t}}.services.{{$s}}.items.{{$i}}.title" placeholder="Enter Service Name">
+            </div>
+            @else
+            <h3>{{ $item['title'] }}</h3>
+            @endif
+        @else
         <h3>{{ $item['title'] }}</h3>
+        @endif
+
         <div class="form-check form-switch body heading-toggle {{$item['checked']?'active-toggle':''}}">
 
         	<input class="check form-check-input" wire:model="serviceData.{{$t}}.services.{{$s}}.items.{{$i}}.checked" type="checkbox">
@@ -29,6 +40,18 @@
                 <span class="plus" wire:click="serviceDuration({{$t}}, {{$s}}, {{$i}}, 'plus')">+</span>
             </div>
         </div>
+        @if($item['custom'])
+        <div class="card_row_3">
+            <span class="est">Frequency</span>
+            <div class="incremnt_decrmnt number for_alternative">
+                Allow recurring job?
+                
+                <div class="form-check form-switch body heading-toggle {{$item['is_recurring']?'active-toggle':''}}">
+                    <input class="check form-check-input" wire:model="serviceData.{{$t}}.services.{{$s}}.items.{{$i}}.is_recurring" type="checkbox">
+                </div>
+            </div>
+        </div>
+        @endif
         <div class="btn_text">
             <button type="button" class="btn_blue" wire:click="saveData">Save</button>
         </div>

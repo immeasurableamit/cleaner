@@ -75,7 +75,13 @@ class Availability extends Component
 
     public function deleteLayout($day, $index){        
         
-        $this->days[$day]['data'][$index]['delete'] = 'yes';
+        if(@$this->days[$day]['data'][$index]['id']){
+            $this->days[$day]['data'][$index]['delete'] = 'yes';
+        }
+        else {
+            unset($this->days[$day]['data'][$index]);
+        }
+        
     }
 
     public function store(){
@@ -89,6 +95,8 @@ class Availability extends Component
             ]
         );
 
+        //dd($this->days);
+
         $user = auth()->user();
         $daysArray = [];
         if ($this->days) {
@@ -98,7 +106,7 @@ class Availability extends Component
                         array_push($daysArray, $day);
                         foreach(@$daysData['data'] as $data){
 
-                            if(@$data['delete']=='yes'){
+                            if(@$data['delete']=='yes' && @$data['id']){
                                 $checkHour = CleanerHours::find($data['id']);
 
                                 if (@$checkHour) {
