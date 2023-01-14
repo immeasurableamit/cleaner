@@ -6,10 +6,10 @@
          <div class="account-info-blocks">
             <div class="row">
                @livewire('admin.customer.customer-update', ["user_id" => $id])
-               @livewire('admin.customer.account-history')
+               @livewire('admin.customer.account-history', ["userId" => $id])
             </div>
          </div>
-         @livewire('admin.customer.customer-booking')
+         @livewire('admin.customer.customer-booking', ["userId" => $id])
       </div>
    </section>
 

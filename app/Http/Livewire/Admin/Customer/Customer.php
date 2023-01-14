@@ -12,7 +12,29 @@ class Customer extends Component
 {
     use LivewireAlert;
     public $userId;
+    public $allCount, $activeCount, $inactiveCount;
+    public $tab = 'all';
     protected $listeners = ['changeStatus'];
+
+    public function mount()
+    {
+        $this->countUsers();
+    }
+
+    public function countUsers()
+    {
+        $this->allCount = User::whereRole('customer')->count();
+        $this->activeCount = User::whereRole('customer')->whereStatus('1')->count();
+        $this->inactiveCount = User::whereRole('customer')->whereStatus('0')->count();
+    }
+
+
+    public function setTab($tab)
+    {
+        $this->tab = $tab;
+    }
+
+    
 
     public function confirmStatus($iid)
     {
@@ -32,22 +54,33 @@ class Customer extends Component
     public function changeStatus($id)
     {
         if($this->userId){
-        $cleanerStatus = User::find($this->userId);
-    
-        if ($cleanerStatus->status == '1') {
-            $cleanerStatus->status = '0';
-            $cleanerStatus->save();
-        } else {
-            $cleanerStatus->status = '1';
-            $cleanerStatus->save();
+            $cleanerStatus = User::find($this->userId);
+        
+            if ($cleanerStatus->status == '1') {
+                $cleanerStatus->status = '0';
+                $cleanerStatus->save();
+            } else {
+                $cleanerStatus->status = '1';
+                $cleanerStatus->save();
+            }
+            $this->alert('success', 'Status changed successfully');
+
+            $this->countUsers();
         }
-        $this->alert('success', 'Status changed successfully');
     }
-}
 
     public function render()
     {
-         $users = User::where('role', '=', 'customer')->get();
+        $users = User::whereRole('customer')
+                ->where(function ($query){
+                    if($this->tab=='active'){
+                        $query->whereStatus('1');
+                    }
+                    if($this->tab=='inactive'){
+                        $query->whereStatus('0');
+                    }
+                })
+                ->get();
          
          return view('livewire.admin.customer.customer', compact('users'));
     }
