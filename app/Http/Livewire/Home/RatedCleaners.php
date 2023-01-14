@@ -14,7 +14,7 @@ class RatedCleaners extends Component
     {
         $this->cleaners = User::has('cleanerReviews')->where('role','cleaner')->latest()->get();
 
-        $this->cleaners = $cleaners->filter( function($cleaner) {
+        $this->cleaners = $this->cleaners->filter( function($cleaner) {
 
             if ( $cleaner->avgRating() > 3 ){
                 return true;

@@ -11,9 +11,27 @@ class Cleaner extends Component
 {
     use LivewireAlert;
     public $cleanerStatus, $userId;
+    public $allCount, $activeCount, $inactiveCount;
+    public $tab = 'all';
     protected $listeners = ['changeStatus'];
 
-    
+    public function mount()
+    {
+        $this->countUsers();
+    }
+
+    public function countUsers()
+    {
+        $this->allCount = User::whereRole('cleaner')->count();
+        $this->activeCount = User::whereRole('cleaner')->whereStatus('1')->count();
+        $this->inactiveCount = User::whereRole('cleaner')->whereStatus('0')->count();
+    }
+
+
+    public function setTab($tab)
+    {
+        $this->tab = $tab;
+    }
 
     public function confirmStatus($iid)
     {
@@ -43,14 +61,23 @@ class Cleaner extends Component
             $cleanerStatus->save();
         }
         $this->alert('success', 'Status changed successfully');
+        $this->countUsers();
     }
 }
 
     public function render()
     {
     
-    $users = User::where('role', '=', 'cleaner')->get();
-
+        $users = User::whereRole('cleaner')
+                ->where(function ($query){
+                    if($this->tab=='active'){
+                        $query->whereStatus('1');
+                    }
+                    if($this->tab=='inactive'){
+                        $query->whereStatus('0');
+                    }
+                })
+                ->get();
       
         return view('livewire.admin.cleaner.cleaner', compact('users'));
     }
