@@ -101,8 +101,10 @@ public function favourite()
             'cancelled' => 'Cancelled',
             'cancelled_by_customer' => 'Customer cancelled',
             'payment_collected' => 'Payment collected',
+            'payment_failed'    => 'Payment failed',
             'completed' => 'Completed',
-            'reviewed'  => 'Completed and Reviewed'
+            'reviewed'  => 'Completed and Reviewed',
+
         ];
 
         return $statuses[ $this->status ];
@@ -117,8 +119,10 @@ public function favourite()
             'cancelled' => 'Cancelled by cleaner',
             'cancelled_by_customer' => 'Cancelled by you',
             'payment_collected' => 'Accepted',
+            'payment_failed'    => 'Payment failed',
             'completed' => 'Completed',
             'reviewed'  => 'Completed'
+
         ];
 
         return $statuses[ $this->status ];
