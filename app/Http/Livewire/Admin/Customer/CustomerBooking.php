@@ -39,7 +39,7 @@ class CustomerBooking extends Component
     public function render()
     {
         if($this->tab=='all'){
-            $bookings = $this->allData;
+            $orders = $this->allData;
         }
         else {
             $statusArray = [];
@@ -58,10 +58,10 @@ class CustomerBooking extends Component
                 $statusArray[] = 'cancelled_by_customer';
             }
 
-            $bookings = $this->allData->whereIn('status', $statusArray);
+            $orders = $this->allData->whereIn('status', $statusArray);
         }
         
 
-        return view('livewire.admin.customer.customer-booking', compact('bookings'));
+        return view('livewire.admin.customer.customer-booking', compact('orders'));
     }
 }
