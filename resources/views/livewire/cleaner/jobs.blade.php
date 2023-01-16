@@ -62,6 +62,7 @@
                                                 <p class="job-d-info address">{{ $order->address }}</p>
                                             </div>
                                             <div class="response-msg">
+
                                                 @if ( $order->status == 'pending' )
                                                 <button wire:loading.attr="disabled" wire:target="acceptOrder" wire:click="acceptOrder( {{ $order->id }} )" class="accept-request-btn crd-btn">
                                                     <span wire:loading.remove wire:target="acceptOrder">{{ $order->statusForCleaner() }}</span>
@@ -69,11 +70,13 @@
                                                 </button>
                                                 @elseif ( $order->status == 'rejected' )
                                                 <a href="#" class="refuse-request-btn crd-btn">{{ $order->statusForCleaner() }}</a>
-                                                @elseif ( $order->status == 'accepted' && now()->greaterThanOrEqualTo( $order->cleaning_datetime->copy()->subDay() ) ) {{-- if status is accepted and the order is tomorrow --}}
+                                                @elseif ( $order->status == 'accepted' && now()->greaterThanOrEqualTo( $order->cleaning_datetime->copy()->subDay() ) ) {{-- if status is accepted and the order is 24 hours ahead of the current time  --}}
                                                  <a href="javascript:void(0);" wire:loading.attr="disabled" wire:target="collectPayment" wire:click="collectPayment( {{ $order->id }} )" class="collect_payment crd-btn">
                                                     <span wire:loading.remove wire:target="collectPayment">{{ $order->statusForCleaner() }}</span>
                                                     <span wire:target="collectPayment" wire:loading><i class="fa-solid fa-spinner fa-spin"></i></span>
                                                 </a>
+                                                @elseif ($order->status == 'payment_failed')
+                                                    <a href="#" class="failed-msg crd-btn">{{ $order->statusForCleaner() }}</a>
 
                                                 @elseif ( $order->status == 'payment_collected' || $order->status == 'reviewed' )
                                                     <a href="javascript:void();" class="btn_blue crd-btn">{{ $order->statusForCleaner() }}</a>
@@ -81,6 +84,7 @@
                                                 <a href="javascript:void();" class="refuse-request-btn crd-btn">{{ $order->statusForCleaner() }}</a>
                                                 @elseif ( $order->status == 'cancelled_by_customer')
                                                 <a href="javascript:void();" class="refuse-request-btn crd-btn">{{ $order->statusForCleaner() }}</a>
+
                                                 @endif
                                             </div>
                                         </div>
@@ -155,6 +159,9 @@
 
                                         @elseif ( $order->status == 'accepted' && now()->greaterThanOrEqualTo( $order->cleaning_datetime->copy()->subDay() ) ) {{-- if status is accepted and the order is tomorrow --}}
                                             <a href="javascript:void(0);" wire:click="collectPayment( {{ $order->id }} )" class="collect_payment crd-btn">{{ $order->statusForCleaner() }}</a>
+
+                                            @elseif ($order->status == 'payment_failed')
+                                            <a href="#" class="failed-msg crd-btn">{{ $order->statusForCleaner() }}</a>
 
                                         @elseif ( $order->status == 'payment_collected' || $order->status == 'reviewed')
                                             <a href="javascript:void(0);" class="btn_blue crd-btn">{{ $order->statusForCleaner() }}</a>
