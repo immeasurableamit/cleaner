@@ -27,7 +27,7 @@
                 <table id="all-jobs-table" class="table dt-responsive nowrap" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Job #</th>
+                            <th>#</th>
                             <th>Date</th>
                             <th>Status</th>
                             <th>Amount</th>
@@ -37,15 +37,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($bookings as $booking)
+                        @foreach($orders as $order)
                         <tr>
-                            <td class="job-number">{{ $booking->id }}</td>
-                            <td>{{ $booking->cleaning_datetime }}</td>
-                            <td><span class="scheduled">{{ $booking->status }}</span></td>
-                            <td>${{ $booking->total }}</td>
+                            <td>{{ $order->id }}</td>
+                            <td>{{ $order->cleaning_datetime }}</td>
+                            <td><span class="scheduled">{{ $order->statusForAdmin() }}</span></td>
+                            <td>${{ $order->total }}</td>
                             <td>One time</td>
                             <td>Deep Clean</td>
-                            <td><span class="name cleaner">{{ $booking->cleaner->name }}</span></td>
+                            <td><a href="{{ route('admin.cleaner.show', $order->cleaner->id) }}" class="name cleaner">{{ $order->cleaner->name }}</a></td>
                         </tr>
                         @endforeach
                     </tbody>
