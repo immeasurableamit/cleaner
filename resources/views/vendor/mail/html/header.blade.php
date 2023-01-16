@@ -1,6 +1,6 @@
 <tr>
 <td class="header">
-<a href="{{ $url }}" style="display: inline-block;">
+<a href="{{ $url }}" style="display: inline-block; background-color: #37A9FB;padding: 9px;border-radius: 15px;">
 	
 {{--
 @if (trim($slot) === 'Laravel')
@@ -10,7 +10,7 @@
 @endif
 --}}
 
-<img src="{{ asset('assets/images/logo/logo.png') }}" class="logo" alt="{{ $slot }}" style="width:100%; height:56px">
+<img src="{{ url('assets/images/logo/logo.svg') }}" class="logo" alt="{{ $slot }}" style="width:100%; height:56px">
 
 </a>
 </td>
