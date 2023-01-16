@@ -16,3 +16,7 @@ yarn-error.log
 /.idea
 /.vscode
 .htaccess
+/backupold/
+.ftpquota
+/public/error_log
+/public/adminer.php
