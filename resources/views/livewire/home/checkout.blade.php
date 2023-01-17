@@ -137,7 +137,7 @@
             <div class="pay-method">
                 <div class="row no-mrg">
                     <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 no-padd">
-                        <div class="blue-bg-wrapper">
+                        <div class="blue-bg-wrapper checkout_bg">
                             <div class="checkout_div">
                                 <div>
                                     <h4>Checkout</h4>

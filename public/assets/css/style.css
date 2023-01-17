@@ -1639,7 +1639,7 @@ li.profile_drop_down.account_dropdown .dropdown_links li a:hover,li.account_drop
 li.profile_drop_down.account_dropdown .dropdown_links li {
     margin-bottom: 5px;
 }
-.cleaner_account_2.customer-account-information p{
+.cleaner_account_2.customer-account-information ul li p{
 width: 50%;
 cursor: pointer;
 white-space: nowrap;
@@ -5898,9 +5898,25 @@ input[type="time"] {
     bottom: -30px;
     color: red;
 }
+.checkout_div {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+fieldset .row.no-mrg .checkout_div h4{
+    font-size: 55px;
+    font-weight: 700;
+}
+.banner_text .search-form-wrapper.select-design {
+    border: 1px solid #D7D7D7;
+}
+.banner_text .search-form-wrapper.select-design button.search-btn {
+    box-shadow: none;
+}
 
-
-
+.customer-account-information.cleaner_account_2.mt-4 li.position-relative .time-zone-select-design {
+    padding-left: 8px;
+}
    /* css  full_home_cleaning_table end here */
 	@media
 	  only screen
