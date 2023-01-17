@@ -39,7 +39,7 @@ class CreateNewUser implements CreatesNewUsers
                         'max:150',
                         Rule::unique(User::class),
                     ],
-                    'password' => 'required',
+                    'password' => 'required|min:8',
                     'password_confirmation' => 'required|same:password',
                     'contact_number' => 'required',
                     'address' => 'required',
@@ -122,7 +122,7 @@ class CreateNewUser implements CreatesNewUsers
                         'max:150',
                         Rule::unique(User::class),
                     ],
-                    'password' => 'required',
+                    'password' => 'required|min:8',
                     'password_confirmation' => 'required|same:password',
                     'contact_number' => 'required',
                     'address' => 'required',
@@ -133,6 +133,7 @@ class CreateNewUser implements CreatesNewUsers
                     'payment_method' => 'required',
                     'about' => 'required',
                     'image' => 'required',
+                    'term'=>'required'
                 ],
 
                 [

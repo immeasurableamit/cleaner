@@ -29,6 +29,8 @@ use App\Http\Livewire\Customer\Appointment\Thanks as ThanksComponent;
 |
 */
 
+
+Route::get('/home', [ HomeController::class, 'redirectUserToAccountPage'] )->middleware('auth');
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
 //Route::get('/searchresult', [HomeController::class, 'searchResultParameters'])->name('home.search-result-parameters');

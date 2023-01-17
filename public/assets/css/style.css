@@ -7952,3 +7952,8 @@ a.subit-btn-2 {
 .pro-card {
 padding-bottom: 13px;
 }
+
+
+span.alert, span.help-block {
+    color: red;
+}

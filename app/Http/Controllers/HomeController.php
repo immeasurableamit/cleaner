@@ -102,4 +102,17 @@ class HomeController extends Controller
 
         return view('home.checkout-completed');
     }
+
+    public function redirectUserToAccountPage(Request $req)
+    {
+        $user = $req->user();
+        $routeNamesForEachUserRole = [
+            'admin'    => 'admin.customer',
+            'customer' => 'customer.account',
+            'cleaner'  => 'cleaner.account',
+        ];
+
+        $routeName = $routeNamesForEachUserRole[strtolower($user->role)];
+        return redirect()->route($routeName);
+    }
 }
