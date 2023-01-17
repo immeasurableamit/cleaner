@@ -5733,8 +5733,12 @@ input[type="time"] {
 }
 
 
-
-
+.avatar-edit span.help-block {
+    position: absolute;
+    left: 25%;
+    bottom: -30px;
+    color: red;
+}
 
 
    /* css  full_home_cleaning_table end here */

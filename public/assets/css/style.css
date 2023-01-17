@@ -79,7 +79,7 @@ input,select,textarea,form,p,span{
     color: var(--Darkblue);
     font-size: 16px;
     font-weight: 400;
-    padding: 10px;
+    padding: 10px 25px 10px 10px;
     background-image: url('../images/dropdown.png');
     background-repeat: no-repeat;
     background-position: 96%;
@@ -5891,8 +5891,13 @@ input[type="time"] {
     margin: 20px 0px;
 }
 
-
-
+/* start here css */
+.avatar-edit span.help-block {
+    position: absolute;
+    left: 25%;
+    bottom: -30px;
+    color: red;
+}
 
 
 

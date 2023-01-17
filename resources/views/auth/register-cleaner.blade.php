@@ -10,7 +10,7 @@
             <img src="assets/images/customer.png">
           </div>
           <div class="select-signup-cntnt">
-            <p>I’m a Customer</p>signup
+            <p>I’m a Customer</p>
           </div>
           <a href="{{route('signup-customers')}}" class="link-overlay"></a>
         </div>

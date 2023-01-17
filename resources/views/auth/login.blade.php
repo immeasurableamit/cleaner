@@ -22,8 +22,8 @@
           {!! Form::open(['route' => 'login', 'method'=>'post', 'class'=>'form-design']) !!}
             
               <div class="social-buttons">
-                <button class="social-auth-btn"><img src="assets/images/icons/google.svg"> Continue with Google</button>
-                <button class="social-auth-btn"><img src="assets/images/icons/apple.svg"> Continue with Google</button>
+                <button class="social-auth-btn"><img src="assets/images/icons/google.svg"> Continue With Google</button>
+                <button class="social-auth-btn"><img src="assets/images/icons/apple.svg"> Continue With Apple</button>
               </div>
               <div class="or-block">
                 <p>Or</p>
