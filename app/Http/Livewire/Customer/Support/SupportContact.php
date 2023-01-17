@@ -27,7 +27,7 @@ class SupportContact extends Component
     {
         return [
             'name' => 'required',
-            'order_number' => 'required',
+       //     'order_number' => 'required',
             'email' => 'required',
             'phone' => 'required',
             'message' => 'required',

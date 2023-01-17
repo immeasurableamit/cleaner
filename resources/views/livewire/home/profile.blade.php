@@ -137,9 +137,9 @@
                             </div>
                             @endif
                             <div class="col-md-4">
-                                <div class=" input-design">
+                                <div class="input-design">
                                     <label>Home Size</label>
-                                    <input type="number" wire:model="homeSize" placeholder="Enter Square Feet">
+                                    <input type="number" wire:model.debounce.500ms="homeSize" placeholder="Enter Square Feet">
                                     @error('homeSize') <span class="help-block text-danger"> {{ $message }} </span> @enderror
                                 </div>
                             </div>
