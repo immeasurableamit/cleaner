@@ -115,9 +115,8 @@
                   <div class="form-grouph mb-30 input-select-abs">
                     <div class="inputs-box">
                       {!! Form::text('city', request()->city ?? null, ['id' => 'city', 'placeholder' => 'City','class' => 'form-control'.($errors->has('city') ? ' is-invalid' : '')]) !!}
-                      {!! $errors->first('city', '<span class="alert">:message</span>') !!}
-
                     </div>
+                    {!! $errors->first('city', '<span class="alert">:message</span>') !!}
                     <div class="selecti-box">
                       <select class="select-custom-design" name="state" required>
                         <option>Select State</option>
