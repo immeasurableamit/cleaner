@@ -110,9 +110,9 @@
                     </div>
                     <div class="form-grouph mb-30 input-select-abs">
                       <div class="inputs-box">
-                      {!! Form::text('city', request()->city ?? null, ['id' => 'city', 'placeholder' => 'City','class' => 'form-control'.($errors->has('city') ? ' is-invalid' : '')]) !!}
-                      {!! $errors->first('city', '<span class="alert">:message</span>') !!}
+                      {!! Form::text('city', request()->city ?? null, ['id' => 'city', 'placeholder' => 'City','class' => 'form-control'.($errors->has('city') ? ' is-invalid' : '')]) !!}    
                       </div>
+                      {!! $errors->first('city', '<span class="alert">:message</span>') !!}
                       <div class="selecti-box">
                         <select class="select-custom-design" name="state" value="{{old('state')}}">
                           @foreach ($states as $state )
@@ -121,6 +121,13 @@
                         </select>
                         {!! $errors->first('state', '<span class="alert">:message</span>') !!}
                       </div>
+                    </div>
+                    <div>
+                    <input type="checkbox" name="term">
+                {!! $errors->first('term', '<span class="alert">:message</span>') !!}
+                    <div class="terms-text">
+                      <p>By clicking “Create My Account”, you agree with all Canary Clean’s <a href="#" class="link-design-2">terms and conditions</a> and <a href="#" class="link-design-2">privacy policy</a></p>
+                    </div>
                     </div>
                   </div>
                   <div class="form-right-block">
@@ -154,13 +161,10 @@
                     </div>
                   </div>
                 </div>
-                <input type="checkbox" name="term">
-                {!! $errors->first('term', '<span class="alert">:message</span>') !!}
+            
                 <div class="form-flex two-column">
                   <div class="form-left-block">
-                    <div class="terms-text">
-                      <p>By clicking “Create My Account”, you agree with all Canary Clean’s <a href="#" class="link-design-2">terms and conditions</a> and <a href="#" class="link-design-2">privacy policy</a></p>
-                    </div>
+                   
                   </div>
                   <div class="form-right-block">
                     <div class="form-grouph submit-design mb-30">

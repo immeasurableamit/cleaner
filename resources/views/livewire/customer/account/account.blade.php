@@ -46,6 +46,8 @@
             <li class="d-flex justify-content-spacebw two_column">
                 <h6 class="title-label">Name:</h6>
                 <p class="name">{{@$user->first_name}}</p>
+                <div class="action-block">
+                </div>
             </li>
 
             <li class="position-relative">
@@ -59,7 +61,7 @@
                     @else
                     <p class="phone"><a href="tel:+1 512-559-9582">{{@$user->contact_number}}</a></p>
                     <div class="action-block">
-                        <span class="edit"><a href="javascript::void(0)" wire:click="edit('{{auth()->user()->id}}', 'contact_number')">Edit</a></span>
+                        <span class="edit"><a href="javascript::void(0)" wire:click="edit('{{auth()->user()->id}}', 'contact_number')" class="link-design-2">Edit</a></span>
                     </div>
                     @endif
                 </form>
