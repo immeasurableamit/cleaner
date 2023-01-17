@@ -8,7 +8,7 @@
                 <div class="form-grouph input-design mb-30">
                    <input type="text" placeholder="Name" wire:model="name">
                    @error('name')
-                   <div class="alert ">{{ $message }}</div>
+                   <span class="alert ">{{ $message }}</span>
                    @enderror
                 </div>
              </div>
@@ -16,7 +16,7 @@
                 <div class="form-grouph input-design mb-30">
                    <input type="text" placeholder="Order Number (if applicable)" wire:model="order_number">
                    @error('order_number')
-                   <div class="alert ">{{ $message }}</div>
+                   <span class="alert ">{{ $message }}</span>
                    @enderror
                 </div>
              </div>
@@ -24,7 +24,7 @@
                 <div class="form-grouph input-design mb-30">
                    <input type="email" placeholder="Email" wire:model="email">
                    @error('email')
-                   <div class="alert ">{{ $message }}</div>
+                   <span class="alert ">{{ $message }}</span>
                    @enderror
                 </div>
                </div>
@@ -32,14 +32,14 @@
                    <div class="form-grouph input-design mb-30">
                       <input type="number" placeholder="Phone" wire:model="phone">
                       @error('phone')
-                      <div class="alert ">{{ $message }}</div>
+                      <span class="alert ">{{ $message }}</span>
                       @enderror
                    </div>
                 </div>
                 <div class="col-md-12">
                    <textarea placeholder="Write your message here" wire:model="message"></textarea>
                    @error('message')
-                   <div class="alert ">{{ $message }}</div>
+                   <span class="alert ">{{ $message }}</span>
                    @enderror
                 </div>
                 <div class="col-md-12 pt-3">

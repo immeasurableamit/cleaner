@@ -92,6 +92,10 @@ class SearchResult extends Component
             $this->filteredCleaners = $this->filteredCleaners->sortByDesc('price_for_selected_service');
         } elseif ( $this->sortBy == "price_asc" ) {
             $this->filteredCleaners = $this->filteredCleaners->sortBy('price_for_selected_service');
+        } elseif ( $this->sortBy == 'rating_desc' ) {
+            $this->filteredCleaners = $this->filteredCleaners->sortByDesc('avg_rating');
+        } elseif ( $this->sortBy == 'rating_asc'){
+            $this->filteredCleaners = $this->filteredCleaners->sortBy('avg_rating');
         }
     }
     /*
@@ -264,6 +268,7 @@ class SearchResult extends Component
             $this->alert('success', 'Added to favourites');
         }
 
+        $this->user->refresh();
         return true;
     }
 

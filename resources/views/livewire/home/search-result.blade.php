@@ -28,6 +28,9 @@
                         <option value="">Sort by</option>
                         <option value="price_asc">Price - Low to High</option>
                         <option value="price_desc">Price - High to Low</option>
+                        <option value="rating_desc">Rating - High to Low</option>
+                        <option value="rating_asc">Rating - Low to High</option>
+
                     </select>
                 </div>
             </div>
@@ -185,6 +188,8 @@
             new Litepicker({
                 element: document.getElementById('datepicker'),
                 singleMode: false,
+                minDate: new Date(),
+                format: 'MM-DD-YYYY',
                 tooltipText: {
                     one: 'Start Date',
                     other: 'End Date'
