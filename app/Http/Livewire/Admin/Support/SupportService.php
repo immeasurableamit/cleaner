@@ -5,18 +5,19 @@ namespace App\Http\Livewire\Admin\Support;
 use App\Models\SupportRequest;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\WithPagination;
 
 class SupportService extends Component
 {
     use LivewireAlert;
+    use WithPagination;
     public $user_id, $userId, $userStatus;
-    public $status;
+    public $status, $searchRecord;
     protected $listeners = ['destroy', 'changeStatus'];
 
-    public function confirmStatus($iid)
+    public function confirmStatus($id)
     {
-        $this->userId = $iid;
-        // dd( $this->userId);
+        $this->userId = $id;
         $this->alert('warning', 'Are you sure do you want to change status?', [
             'toast' => false,
             'position' => 'center',
@@ -31,24 +32,23 @@ class SupportService extends Component
 
     public function changeStatus($id)
     {
-        if ($this->userId) {
-            $userStatus = SupportRequest::find($id);
-dd($userStatus);
-            if ($userStatus->status == '1') {
 
+        if ($this->userId) {
+            $userStatus = SupportRequest::find($this->userId);
+            if ($userStatus->status == '1') {
                 $userStatus->status = '0';
                 $userStatus->save();
             } else {
                 $userStatus->status = '1';
                 $userStatus->save();
             }
+            $this->alert('success', 'Status changed successfully');
         }
     }
 
     public function deleteConfirm($id)
     {
         $this->user_id = $id;
-        dd($this->user_id);
         $this->alert('warning', 'Are you sure do want to delete?', [
             'toast' => false,
             'position' => 'center',
@@ -71,7 +71,20 @@ dd($userStatus);
 
     public function render()
     {
-        $supportServices = SupportRequest::with('order.user')->get();
+        $searchRecord = '%' . $this->searchRecord . '%';
+
+        $supportServices = SupportRequest::where(function ($query) use ($searchRecord) {
+            $query->where('order_id', 'LIKE', $searchRecord)
+                ->orWhere('description', 'LIKE', $searchRecord)
+                ->orWhere('requested_resolution', 'like', '%' . $searchRecord . '%')
+                ->orWhere('issue', 'like', '%' . $searchRecord . '%');
+        })
+
+            ->with(['order.user' => function ($query) use ($searchRecord) {
+                $query->where('email', 'like', '%' . $searchRecord . '%')
+                    ->orWhere('first_name', 'like', '%' . $searchRecord . '%')
+                    ->orWhere('last_name', 'like', '%' . $searchRecord . '%');
+            }])->paginate(1);
 
         return view('livewire.admin.support.support-service', compact('supportServices'));
     }
