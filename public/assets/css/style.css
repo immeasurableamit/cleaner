@@ -5917,6 +5917,40 @@ fieldset .row.no-mrg .checkout_div h4{
 .customer-account-information.cleaner_account_2.mt-4 li.position-relative .time-zone-select-design {
     padding-left: 8px;
 }
+.form-grouph.mb-30.input-select-abs input#city {
+    border-radius: 0px;
+}
+.select_state .selecti-box {
+    top: 20px !important;
+    bottom: auto;
+}
+.form_availibility .availability_row {
+    justify-content: initial;
+    align-items: flex-start;
+    position: relative;
+}
+.form_availibility .availability_row .time_input {
+    width: 55%;
+ 
+}
+.form_availibility .time-schedule-addon .time-input-addon {
+    position: relative;
+    padding-bottom: 10px;
+}
+.form_availibility .time-schedule-addon .time-input-addon button.border-0.bg-none.btn_deleter {
+    position: absolute;
+    right: -35%;
+    top: 10px;
+}
+.form_availibility .availbility_cover {
+    max-height: 230px;
+    overflow: auto;
+}
+/* doc changes here */
+footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {
+    display: none;
+}
+/* doc changes here */
    /* css  full_home_cleaning_table end here */
 	@media
 	  only screen

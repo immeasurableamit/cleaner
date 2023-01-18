@@ -2,9 +2,9 @@
 
     <!-- progressbar -->
     <ul id="progressbar">
-        <li class="active">Account Setup</li>
-        <li class="{{ in_array($currentlyActiveStep, [2, 3]) ? 'active' : '' }}">Social Profiles</li>
-        <li class="{{ $currentlyActiveStep == 3 ? 'active' : '' }}">Personal Details</li>
+        <li class="active">Service</li>
+        <li class="{{ in_array($currentlyActiveStep, [2, 3]) ? 'active' : '' }}">Payment</li>
+        <li class="{{ $currentlyActiveStep == 3 ? 'active' : '' }}">Success</li>
     </ul>
     <!-- fieldsets -->
     @if ($currentlyActiveStep == 1)
@@ -269,7 +269,7 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <div class="form-grouph mb-30 input-select-abs">
+                                        <div class="form-grouph mb-30 input-select-abs select_state">
                                             <div class="inputs-box">
                                                 <input type="text" wire:model="city" name="city"
                                                     placeholder="City">
