@@ -40,6 +40,15 @@ function getDefaultParametersForSearchPage()
     $serviceItem = ServicesItems::first();
 
     $deafultSearch = [
+        'selectItem' => $serviceItem->id,
+        'address'    => 'New York, NY, USA',
+        'homeSize'   => 2000,
+        'latitude'   => 40.7127753,
+        'longitude'  => -74.0059728,
+    ];
+
+    /*
+    $deafultSearch = [
         'serviceItem' => $serviceItem,
         'address'    => 'New York, NY, USA',
         'homeSize'   => 2000,
@@ -47,6 +56,7 @@ function getDefaultParametersForSearchPage()
         'longitude'  => -74.0059728,
         'serviceItemId' => $serviceItem->id,
     ];
+    */
 
     return $deafultSearch;
 }

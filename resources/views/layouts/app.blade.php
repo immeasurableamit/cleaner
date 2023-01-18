@@ -40,6 +40,15 @@
                 document.getElementById('latitude_in_header').value = gmap_place.geometry.location.lat();
                 document.getElementById('longitude_in_header').value = gmap_place.geometry.location.lng();
             });
+
+
+            $(".search-bar.select-service").select2({
+                    placeholder: 'Any Service'
+            });
+
+            $(".search-bar.select-homesize").select2({
+                    placeholder: 'Any Size'
+            });
         });
     </script>
 
