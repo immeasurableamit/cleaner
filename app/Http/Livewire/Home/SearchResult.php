@@ -31,7 +31,13 @@ class SearchResult extends Component
     public $dateStart, $dateEnd, $selectedWeekDays, $sortBy, $skipFiltering = false;
     public $organicOnly = false, $insuredOnly = false, $rating;
 
-
+    protected $queryString = [
+        'selectedServiceItemId' => ['as' => 'selectItem'],
+        'latitude',
+        'longitude',
+        'homeSize',
+        'address',
+    ];
 
     public function mount()
     {
@@ -88,16 +94,24 @@ class SearchResult extends Component
 
     protected function sortFilteredCleaners()
     {
-        if ( $this->sortBy == "price_desc" ){
-            $this->filteredCleaners = $this->filteredCleaners->sortByDesc('price_for_selected_service');
-        } elseif ( $this->sortBy == "price_asc" ) {
-            $this->filteredCleaners = $this->filteredCleaners->sortBy('price_for_selected_service');
-        } elseif ( $this->sortBy == 'rating_desc' ) {
-            $this->filteredCleaners = $this->filteredCleaners->sortByDesc('avg_rating');
-        } elseif ( $this->sortBy == 'rating_asc'){
-            $this->filteredCleaners = $this->filteredCleaners->sortBy('avg_rating');
+        $sortFilterMap = [
+            'price_desc'    => [ 'column' => 'price_for_selected_service', 'direction'    => 'desc'],
+            'price_asc'     => [ 'column' => 'price_for_selected_service', 'direction' => 'asc'],
+            'rating_desc'   => [ 'column' => 'avg_rating', 'direction' => 'desc'  ],
+            'rating_asc'    => [ 'column' => 'avg_rating', 'direction' => 'asc'],
+            'duration_asc'  => [ 'column' => 'duration_for_selected_service', 'direction' => 'asc'],
+            'duration_desc' => [ 'column' => 'duration_for_selected_service', 'direction' => 'desc'],
+        ];
+
+        if ( $this->sortBy ) {
+            $sortFilterMetaData = $sortFilterMap[$this->sortBy];
+
+            $this->filteredCleaners = $this->filteredCleaners->sortBy([
+                [ $sortFilterMetaData['column'], $sortFilterMetaData['direction'] ]
+            ]);
         }
     }
+
     /*
      * Filter cleaners according to customer selected filters in page.
      *

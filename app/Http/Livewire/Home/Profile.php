@@ -132,6 +132,7 @@ class Profile extends Component
 
         $dates = [];
         $period = CarbonPeriod::create($fromDate, $toDate);
+        //dd( $period->toArray() );
 
 
 
@@ -236,17 +237,22 @@ class Profile extends Component
 
     public function updatingHomeSize($value)
     {
-        $this->validate([
-            'serviceItemId' => 'required'
-        ]);
+/*         $this->validate([
+            'serviceItemId' => 'required',
+            'homeSize' => 'present|numeric|min:100'
+        ]); */
     }
 
     public function updated( $key, $value )
     {
+
+        if ( $key == "homeSize" ){
+            $this->validate(['homeSize' => 'numeric|min:100','serviceItemId' => 'required']);
+        }
+
         if ( in_array( $key, [ 'homeSize', 'serviceItemId', 'addOnIds' ]) ) {
             $this->updateEstimateTimeAndPrice();
         }
-
     }
 
 
@@ -270,7 +276,7 @@ class Profile extends Component
         $rules = [
             'serviceItemId' => 'required',
             'addOnIds'      => 'present|array',
-            'homeSize'      => 'required|numeric',
+            'homeSize'      => 'required|numeric|min:100',
             'selected_date' => 'required|date|date_format:Y-m-d',
             'time'          => 'required',
         ];
@@ -293,8 +299,14 @@ class Profile extends Component
 
     }
 
+    public function hydrate()
+    {
+        $this->resetErrorBag();
+
+    }
     public function render()
     {
+
         $this->emit('componentRendered');
 
 

@@ -2,9 +2,9 @@
 
     <!-- progressbar -->
     <ul id="progressbar">
-        <li class="active">Account Setup</li>
-        <li class="{{ in_array($currentlyActiveStep, [2, 3]) ? 'active' : '' }}">Social Profiles</li>
-        <li class="{{ $currentlyActiveStep == 3 ? 'active' : '' }}">Personal Details</li>
+        <li class="active">Service</li>
+        <li class="{{ in_array($currentlyActiveStep, [2, 3]) ? 'active' : '' }}">Payment</li>
+        <li class="{{ $currentlyActiveStep == 3 ? 'active' : '' }}">Success</li>
     </ul>
     <!-- fieldsets -->
     @if ($currentlyActiveStep == 1)
@@ -157,14 +157,14 @@
                             <div class="text-center link-design-2 pt-3 bold">You don't pay until cleaning day!</div>
                         </div>
                         <div class="built_text_div">
+                            @if (is_null($user))
+
                             <div class="provider_service pb-5 border-bottom  text-center">
 
-                                @if (is_null($user))
                                     <div class="text-center link-design-2 pt-3 bold mb-3"
                                         onclick="$('#loginModal').modal('show')">
                                         Already a customer ?
                                     </div>
-                                @endif
 
                                 {{-- Remove payment method selection feature
                                     <div class="btn_right_cards text-center ">
@@ -184,6 +184,8 @@
                                     @error('paymentMethod') <div class="mt-3"><span class="text-danger">PaymentMethod Field is required</span></div> @enderror
                                     --}}
                             </div>
+                            @endif
+
                             <div class="form-headeing-second">
                                 <h4 class="border-0 m-0 pt-4">Billing Name and Address</h4>
                             </div>
@@ -269,7 +271,7 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <div class="form-grouph mb-30 input-select-abs">
+                                        <div class="form-grouph mb-30 input-select-abs select_state">
                                             <div class="inputs-box">
                                                 <input type="text" wire:model="city" name="city"
                                                     placeholder="City">
