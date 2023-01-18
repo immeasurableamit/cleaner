@@ -23,7 +23,8 @@
                                     @endphp
 
 
-                                    <select class="select-custom-design-group" name="selectItem" required>
+                                    <select class="select-custom-design-group search-bar select-service" name="selectItem" required>
+                                        <option></option>
                                         @foreach ($services as $service)
                                         <optgroup label="{{ $service->title }}">
                                             @foreach ($service->servicesItems as $serviceItem)
@@ -37,7 +38,8 @@
 
                                 </div>
                                 <div class="select-search-design">
-                                    <select class="select-custom-design-group" name="homeSize" required>
+                                    <select class="select-custom-design-group search-bar select-homesize" name="homeSize" required>
+                                        <option></option>
                                         <option value="1361">1361 sqft</option>
                                         <option value="2178">2178 sqft</option>
                                         <option value="2755">2755 sqft</option>
