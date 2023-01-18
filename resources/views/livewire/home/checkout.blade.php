@@ -157,14 +157,14 @@
                             <div class="text-center link-design-2 pt-3 bold">You don't pay until cleaning day!</div>
                         </div>
                         <div class="built_text_div">
+                            @if (is_null($user))
+
                             <div class="provider_service pb-5 border-bottom  text-center">
 
-                                @if (is_null($user))
                                     <div class="text-center link-design-2 pt-3 bold mb-3"
                                         onclick="$('#loginModal').modal('show')">
                                         Already a customer ?
                                     </div>
-                                @endif
 
                                 {{-- Remove payment method selection feature
                                     <div class="btn_right_cards text-center ">
@@ -184,6 +184,8 @@
                                     @error('paymentMethod') <div class="mt-3"><span class="text-danger">PaymentMethod Field is required</span></div> @enderror
                                     --}}
                             </div>
+                            @endif
+
                             <div class="form-headeing-second">
                                 <h4 class="border-0 m-0 pt-4">Billing Name and Address</h4>
                             </div>
