@@ -1,7 +1,7 @@
 <div>
     <div class="customer-account-forms">
         <div class="form-headeing-second mb-4">
-            <h3 class="border-bottom pb-3">Account Photo</h3>
+            <h3 class="border-bottom pb-3">Account Info</h3>
         </div>
         <div class="customer-avatar-upload-div">
             <div class="customer-avatar-upload">
@@ -217,7 +217,7 @@
 
 
 
-{{-- 
+{{--
         <div class="customer-account-information cleaner_account_2 about-updation-wrap">
             <form>
                 <div class="input-group mb-3">

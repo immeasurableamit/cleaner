@@ -17,31 +17,40 @@ class Account extends Component
 
     protected $listeners = ['imgUploaded' => 'storeUploadedImage'];
 
-    public function storeUploadedImage(array $data)
-    {
-        $image = $data['base64_string']; //bace64 image 
-        $id    = $data['user_id'];
-        $user      = User::find($id);
-        $folderPath = public_path('/storage/images');
-        $filename = (new Base64Image)->save($image, $folderPath);
-        $user->image = $filename;
-        $user->save();
-        return redirect()->route('customer.account');
-    }
-
     public function rules()
     {
         return [
-            'contact_number' => 'required|max:10',
+            'email' => 'required',
             'address' => 'required',
-            // 'timezone' => 'required',
-            // 'image' => 'required',
+            // 'image' =>'required',
+            'contact_number' => 'required|max:10',
 
         ];
     }
 
+    public function storeUploadedImage(array $data)
+    {
+        // dd($data['base64_string']);
+        if($data['base64_string']){
+            $image = $data['base64_string']; //bace64 image
+            $id    = $data['user_id'];
+            $user      = User::find($id);
+            $folderPath = public_path('/storage/images');
+            $filename = (new Base64Image)->save($image, $folderPath);
+            $user->image = $filename;
+            $user->save();
+            return redirect()->route('customer.account');
+
+        }else{
+            return $this->alert("error", "Please select Image");
+        }
+
+    }
+
+
     public function edit($userId, $action)
     {
+
         $user = User::find($userId);
         $this->userId = $userId;
         if ($action == 'contact_number') {
@@ -53,9 +62,9 @@ class Account extends Component
         if ($action == 'address') {
             $this->address = $user->UserDetails->address;
         }
-        if ($action == 'timezone') {
-            $this->timezone = $user->UserDetails->timezone;
-        }
+        // if ($action == 'timezone') {
+        //     $this->timezone = $user->UserDetails->timezone;
+        // }
         if ($action == 'image') {
             $this->image = $user->image;
         }
@@ -66,29 +75,30 @@ class Account extends Component
     }
 
     public function update($action)
-    { 
+    {
+        $this->validate();
         if ($this->userId) {
-          
+
             $user = User::find($this->userId);
             $userdetail = $user->UserDetails;
 
             if ($action == 'contact_number') {
                 $user->contact_number = $this->contact_number;
-             
+
             }
             $user->update();
             if ($action == 'address') {
-              
+
                 $userdetail->address = $this->address;
             }
-            if ($action == 'timezone') {
-              
-                $userdetail->timezone = $this->timezone;
-            }
+            // if ($action == 'timezone') {
+
+            //     $userdetail->timezone = $this->timezone;
+            // }
             $userdetail->update();
             $this->fieldStatus = false;
         }
-        
+
     }
 
     public function cancle()
@@ -103,7 +113,7 @@ class Account extends Component
         ]);
 
         $user = User::find($this->userId);
-      
+
         if ($action == 'email') {
             $oldEmail = $user->email;
             if ($oldEmail != $this->email) {
@@ -111,12 +121,12 @@ class Account extends Component
             $user->email = $this->email;
             $user->save();
             $user->sendEmailVerificationNotification();
-         
+
         }
         return redirect()->route('customer.account');
         }
     }
-    
+
     public function render()
     {
         $user = User::findOrFail(auth()->user()->id);

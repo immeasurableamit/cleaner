@@ -20,7 +20,7 @@ class Base64Image {
 		];
 
 	}
-	
+
 	protected function putSlashAtEndIfNotPresent( $path )
 	{
 		return substr( $path, -1 ) == "/" ?: $path .= "/";
@@ -39,7 +39,7 @@ class Base64Image {
 		$dir_path  = $this->putSlashAtEndIfNotPresent( $dir_path );
 		$file_path = $dir_path.$file_name;
 
-	
+
 		file_put_contents( $file_path, $decoded_result['decoded_base64_image'] );
 		return $file_name;
 	}
