@@ -103,7 +103,7 @@
 
                             <div class="btn_nxt_prs">
                                 <label for="next3" class="btn_c" wire:click="saveOrderNotes"><a
-                                        href="message.html">Send Notes</a></label>
+                                        href="message.html">Message Provider</a></label>
                             </div>
                             <a href="#" class="link-design-2 d-block pb-3">Please inform your provider about
                                 any future changes or cancellations as soon as possible. </a>
