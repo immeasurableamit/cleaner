@@ -66,7 +66,7 @@
 
             <div class="form-grouph textarea-single-design">
               {!! Form::label('about','About yourself (Optional)', ['class' => 'form-label']) !!}
-              <textarea name="about"> Effective</textarea>
+              <textarea name="about" placeholder="Write something about your self"> </textarea>
               {!! $errors->first('about', '<span class="help-block">:message</span>') !!}
             </div>
             <div class="folow-us">

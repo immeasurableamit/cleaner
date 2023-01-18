@@ -10,7 +10,9 @@
             @if ( $user->image )
                 <div id="uploaded" style='background-image: {{ url("/storage/images/$user->image") }}'>
                     <img src="{{ asset('storage/images/'.$user->image) }}" id="customerimagePreview">
+
                     <a href="javascript::void(0)" onclick="uploadImgViaLivewire('{{ $user->id }}')" ><i class="fas fa-save"></i></a>
+
                 </div>
             @else
                 <div id="uploaded" style="background-image: {{ asset('/assets/images/iconshow.png') }}">
@@ -101,7 +103,7 @@
                     @endif
                 </form>
             </li>
-            <li class="position-relative">
+          {{--  <li class="position-relative">
                 <form class="d-flex justify-content-spacebw three_column edit_frm">
                     <h6 class="title-label"> Timezone:</h6>
                     @if (@$fieldStatus == true && $action == 'timezone')
@@ -116,7 +118,7 @@
                     <span class="save-icn-btn"><a class="link-design-2" wire:click="update('timezone')"><i class="fas fa-save"></i></a></span>
                     <span class="cancel"><a href="javascript::void(0)" class="link-design-2" wire:click="cancle"><i class="fas fa-times"></i></a></span>
                     @else
-                  
+
                     <div class="time-zone-select-design">
                         <input type="text" value="{{@$user->userDetails->timeZone->name}}" disabled />
                     </div>
@@ -126,7 +128,7 @@
                     @endif
 
                 </form>
-            </li>
+            </li> --}}
         </ul>
     </div>
 </div>
@@ -135,11 +137,13 @@
 <script>
     function uploadImgViaLivewire(user_id)
     {
+
         var base64_string = $("#upload-img").val();
+        console.log(base64_string, "rudra");
         var data = { user_id, base64_string };
         Livewire.emit('imgUploaded', data );
     }
-    
+
 </script>
 @include('layouts.common.cropper')
 

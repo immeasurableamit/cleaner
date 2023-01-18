@@ -435,8 +435,12 @@
                                 @endif
                                 <div class="schduled-text-div">
                                     <p class="schedule_label">Start Date</p>
+
                                     <span class="schedule_value-text">{{ $datetime }}</span>
-                                    <b class="link-design-2">Add to calendar</b>
+
+                                    <b class="link-design-2">
+                                         Add to calendar
+                                    </b>
                                 </div>
                                 <div class="schduled-text-div">
                                     <p class="schedule_label">Payment Method</p>

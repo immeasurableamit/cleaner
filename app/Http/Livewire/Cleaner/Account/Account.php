@@ -37,18 +37,33 @@ class Account extends Component
         $this->linkedin = $details->linkedin;
     }
 
+    public function rules()
+    {
+        return [
+            'email' => 'required',
+            'address' => 'required',
+            'about' => 'required',
+            'contact_number' => 'required|max:10',
+
+        ];
+    }
+
 
     public function storeUploadedImage(array $data)
     {
-        $image = $data['base64_string']; //bace64 image 
-        $id    = $data['user_id'];
-        $user      = User::find($id);
-        $folderPath = public_path('/storage/images');
-        $filename = (new Base64Image)->save($image, $folderPath);
-        $user->image = $filename;
-        $user->save();
+        if ($data['base64_string']) {
+            $image = $data['base64_string']; //bace64 image
+            $id    = $data['user_id'];
+            $user      = User::find($id);
+            $folderPath = public_path('/storage/images');
+            $filename = (new Base64Image)->save($image, $folderPath);
+            $user->image = $filename;
+            $user->save();
 
-        return redirect()->route('cleaner.account');
+            return redirect()->route('cleaner.account');
+        } else {
+            return $this->alert("error", "Please select Image");
+        }
     }
 
     public function editData($userId, $action)
@@ -102,7 +117,7 @@ class Account extends Component
 
     public function updateData($action)
     {
-
+        $this->validate();
         if ($this->userId) {
             $user = User::find($this->userId);
             $userdetail = $user->UserDetails;
@@ -134,7 +149,7 @@ class Account extends Component
             if ($action == 'facebook') {
                 $userdetail->facebook = $this->facebook;
             }
-            
+
             if ($action == 'twitter') {
                 $userdetail->twitter = $this->twitter;
             }
