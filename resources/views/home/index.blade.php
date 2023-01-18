@@ -394,6 +394,7 @@
         <script>
             window.addEventListener('load', () => {
                 var address_input_in_banner = document.getElementById('address_in_banner');
+
                 makeAddressInputAutocompletable(address_input_in_banner, (gmap_place) => {
                     document.getElementById('latitude').value = gmap_place.geometry.location.lat();
                     document.getElementById('longitude').value = gmap_place.geometry.location.lng();

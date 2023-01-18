@@ -18,6 +18,7 @@
         "laravelcollective/html": "^6.3",
         "livewire/livewire": "^2.10",
         "pusher/pusher-php-server": "^7.2",
+        "spatie/calendar-links": "^1.8",
         "stripe/stripe-php": "^10.0"
     },
     "require-dev": {
