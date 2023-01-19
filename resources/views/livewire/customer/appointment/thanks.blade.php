@@ -73,10 +73,18 @@
                                     <p class="schedule_label">Start Date</p>
                                     <span
                                         class="schedule_value-text">{{ $order->cleaning_datetime->toDayDateTimeString() }}</span>
+<<<<<<< HEAD
                                     <b class="link-design-2 no-hover"> Add to calendar
 
                                         <a   class="link-design-2" href="{{ $link->google() }}" ><i
                                                 class="fa-brands fa-google"></i></a>
+=======
+                                    <b class="link-design-2">
+                                           {{--
+                                           <a> Add to calendar </a>
+
+                                        <a href="javascript::void(0)" wire:click="generateCalendarLinks()">>Google</a>
+>>>>>>> 088abe15ee3a9d73c65e3f4a378bed29d1dad983
 
                                        <a href="{{ $link->webOffice() }}"> <i
                                                 class="fa-brands fa-microsoft"></i></a>
