@@ -46,6 +46,9 @@
                         <h6 class="title-label">Phone:</h6>
                         @if (@$fieldStatus == true && $action == 'contact_number')
                             <input type="number" value="{{ $user->contact_number }}" wire:model="contact_number" />
+                                <span style="color:red"> @error('contact_number')
+                                    {{ $message }}
+                                @enderror </span>
                             <span class="edit"><a class="link-design-2" wire:click="updateData('contact_number')"><i
                                         class="fas fa-save"></i></a></span>
                             <span class="cancel"><a href="javascript::void(0)" class="link-design-2"
