@@ -96,16 +96,24 @@ class Team extends Component
 
             ]);
             $this->emit('close-modal');
+            $this->emit('postAdded', $this->user_id, 'success');
             $this->updateMode = false;
             $this->alert('success', 'Updated successfully');
         }
-        return redirect()->route('cleaner.team');
+        // return redirect()->route('cleaner.team');
+    }
+
+    public function showHide($id)
+    {
+        // dd($id);
+        $this->emit('postAdded', $id, 'success');
+
     }
 
     public function deleteConfirm($iid)
     {
         $this->user_id = $iid;
-        
+
         $this->alert('warning', 'Are you sure do want to delete?', [
 			'toast' => false,
 			'position' => 'center',
@@ -113,10 +121,10 @@ class Team extends Component
 			'cancelButtonText' => 'Cancel',
 			'showConfirmButton' => true,
 			'confirmButtonText' => 'Delete it',
-			'onConfirmed' => 'delete',  
+			'onConfirmed' => 'delete',
 			'timer' => null
 		]);
-        
+
     }
 
     public function delete()
