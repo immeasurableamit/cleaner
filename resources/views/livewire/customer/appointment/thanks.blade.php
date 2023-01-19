@@ -76,11 +76,11 @@
                                     <b class="link-design-2">
                                            <a> Add to calendar </a>
 
-                                           <a href="javascript::void(0)" wire:click="generateCalendarLinks()">>Google</a>
+                                         {{--   <a href="javascript::void(0)" wire:click="generateCalendarLinks()">>Google</a>
 
                                             <a href="https://outlook.live.com/owa/calendar/00000000-0000-0000-0000-000000000000/cc3e564f-da07-40f6-ad66-6ef95dbf24f8/cid-A4325673DE0DAAEA/index.html"> <i class="fa-brands fa-microsoft"></i></a>
                                             <a href="https://calendar.google.com/calendar/u/0?cid=aXR4YW1hbmRlZXBrYXVyQGdtYWlsLmNvbQ"><i class="fa-brands fa-google"></i></a>
-                                            <a><i class="fa-brands fa-apple"></i> </a>
+                                            <a><i class="fa-brands fa-apple"></i> </a> --}}
                                     </b>
                                 </div>
                                 <div class="schduled-text-div">
