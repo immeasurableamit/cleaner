@@ -11,7 +11,6 @@ use App\Models\CleanerHours;
 
 class AvailabilityController extends Controller
 {
-    //
     public function index()
     {
         $title = array(

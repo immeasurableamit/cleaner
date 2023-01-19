@@ -8,25 +8,24 @@
           </div>
         </div>
         <div class="header-flex-item header-flex-item-3 cleaner_header_right">
-          <p class="cleaner_text_top">Your profile is paused, click to go live!</p>
+          {{-- <p class="cleaner_text_top">Your profile is paused, click to go live!</p> --}}
           <div class="form-check form-switch">
             @livewire('cleaner-header')
-           
+
           </div>
           <ul class="d-flex align-items-center">
             <li class="nav-item email-notification">
                 <div class="dropdown">
                     <a href="{{ route('messages') }}" class="btn dropdown-toggle position-relative btn-transparent">
                         <img src="{{ asset('/assets/images/icons/email-2.svg') }}">
-                        {{--
-                        <span class="notification-indicators">11</span>
-                        --}}
+
                     </a>
                 </div>
             </li>
             <li class="nav-item signin account-profile">
+
               <div class="dropdown">
-                <button type="button" class="btn dropdown-toggle position-relative btn-transparent" data-bs-toggle="dropdown">
+                <button type="button" class="btn dropdown-toggle position-relative btn-transparent" data-bs-toggle="dropdown" id="header-profile-dropdown-btn">
                   <!-- <img src="{{asset('/assets/images/icons/profile-circle.svg')}}"> -->
                   @if(auth()->user()->image)
                   <img src="{{asset('storage/images/'.auth()->user()->image)}}">
@@ -35,7 +34,7 @@
                   @endif
                   <span class="name">{{auth()->user()->name}}</span>
                 </button>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu" id="header-profile-dropdown-menu">
                   <div class="customer_profile-info">
                     <div class="d-flex align-items-center position-relative">
                       <div class="customer-pro-img">
@@ -46,7 +45,7 @@
                         @endif
                       </div>
                       <div class="customer-pro-cntnt">
-                     
+
                         <h4>{{auth()->user()->name}}</h4>
                         <p>{{auth()->user()->role}}</p>
                       </div>
@@ -84,6 +83,7 @@
                   </div>
                 </ul>
               </div>
+
             </li>
           </ul>
         </div>
