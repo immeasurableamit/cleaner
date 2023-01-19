@@ -103,8 +103,8 @@
         <div class="row">
             @foreach ($teamMembers as $teamMember)
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                    <div class="select-date-toggles overflow-hidden ">
-                        <button class="service_toggle_s" data-id="{{ $teamMember->id }}"></button>
+                    <div class="select-date-toggles overflow-hidden teamCard-{{$teamMember->id}}">
+                        <button class="service_toggle_s" data-id="{{ $teamMember->id }}" ></button>
                         <div class="service-main-service-column">
 
                             <div class="altrntive_rw">
@@ -271,6 +271,15 @@
             //       makeAddressInputAutocompletable( address_input, fillAddressFieldsInForm );
             //     //   debugger;
             //     });
+        </script>
+
+        <script>
+            window.livewire.on('postAdded', (id, action) => {
+                var id = id;
+                if(action == 'success'){
+                    location.reload();
+                }
+        });
         </script>
     @endpush
     <style>

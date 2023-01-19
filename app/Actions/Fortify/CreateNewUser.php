@@ -52,7 +52,6 @@ class CreateNewUser implements CreatesNewUsers
                     'ssn_or_tax' => 'required',
                     'apt_or_unit' => 'required',
                     'payment_method' => 'required',
-                    'about' => 'required',
                     'image' => 'required',
                     'term'=>'required'
                 ],
@@ -131,7 +130,6 @@ class CreateNewUser implements CreatesNewUsers
                     'zip_code' => 'required',
                     'apt_or_unit' => 'required',
                     'payment_method' => 'required',
-                    'about' => 'required',
                     'image' => 'required',
                     'term'=>'required'
                 ],

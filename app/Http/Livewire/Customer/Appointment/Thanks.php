@@ -8,6 +8,7 @@ use DateTime;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Link as InlineLink;
 use Spatie\CalendarLinks\Link;
+use Illuminate\Support\Carbon;
 
 class Thanks extends Component
 {
@@ -18,30 +19,12 @@ class Thanks extends Component
     protected $listeners = ['cancelOrder'];
 
 
+
     public function mount($order_id)
     {
         $this->order = Order::with(['cleaner', 'items.service_item.service'])->find($order_id);
+
     }
-
-    // public function generateCalendarLinks()
-    // {
-
-    //     $from = DateTime::createFromFormat('Y-m-d H:i', '2018-02-01 09:00');
-    //     $to = DateTime::createFromFormat('Y-m-d H:i', '2018-02-01 18:00');
-
-    //     $link = Link::create('Canary Cleaner Appointment', $from, $to)
-    //         ->description('Cookies & cocktails!')
-    //         ->address('Kruikstraat 22, 2018 Antwerpen');
-
-    //         $googleCalendarLink =  $link->google();
-    //         // dd($googleCalendarLink );
-    //         // $iCal = $link->ics();    //Generate a data uri for an ics file (for iCal & Outlook)
-    //         // Generate a link to create an event on outlook.live.com calendar
-    //         // $microsoftCal = $link->webOutlook();
-
-    //         return redirect($googleCalendarLink);
-
-    // }
 
     public function saveOrderNotes()
     {
@@ -77,8 +60,21 @@ class Thanks extends Component
         return redirect()->route('profile', $this->order->cleaner_id);
     }
 
+    public function generateCalendarLinks()
+    {
+        $from = DateTime::createFromFormat('Y-m-d H:i:s', $this->order->cleaning_datetime);
+
+        $to = DateTime::createFromFormat('Y-m-d H:i:s', $this->order->cleaning_datetime);
+
+        $link = Link::create('Canary Cleaner Appointments', $from, $to);
+        return $link;
+    }
+
     public function render()
     {
-        return view('livewire.customer.appointment.thanks')->extends('layouts.app')->section('content');
+        $link = $this->generateCalendarLinks();
+        return view('livewire.customer.appointment.thanks', [
+            'link' => $link
+        ])->extends('layouts.app')->section('content');
     }
 }

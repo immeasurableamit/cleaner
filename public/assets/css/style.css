@@ -5931,7 +5931,7 @@ fieldset .row.no-mrg .checkout_div h4{
 }
 .form_availibility .availability_row .time_input {
     width: 55%;
- 
+
 }
 .form_availibility .time-schedule-addon .time-input-addon {
     position: relative;
@@ -5951,6 +5951,10 @@ footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter 
     display: none;
 }
 /* doc changes here */
+.add_calender button{
+  border:0px !important;
+  padding: 0px !important;
+}
    /* css  full_home_cleaning_table end here */
 	@media
 	  only screen

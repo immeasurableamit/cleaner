@@ -68,7 +68,11 @@
             }.bind(this));
             */
         </script>
-
+<style>
+    .help-block{
+        color:red;
+     }
+      </style>
 </head>
 
 <body class="light-theme">
