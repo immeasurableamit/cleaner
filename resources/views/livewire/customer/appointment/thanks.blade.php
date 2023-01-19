@@ -73,14 +73,16 @@
                                     <p class="schedule_label">Start Date</p>
                                     <span
                                         class="schedule_value-text">{{ $order->cleaning_datetime->toDayDateTimeString() }}</span>
-                                    <b class="link-design-2">
-                                           <a> Add to calendar </a>
+                                    <b class="link-design-2 no-hover"> Add to calendar
 
-                                         {{--   <a href="javascript::void(0)" wire:click="generateCalendarLinks()">>Google</a>
+                                        <a   class="link-design-2" href="{{ $link->google() }}" ><i
+                                                class="fa-brands fa-google"></i></a>
 
-                                            <a href="https://outlook.live.com/owa/calendar/00000000-0000-0000-0000-000000000000/cc3e564f-da07-40f6-ad66-6ef95dbf24f8/cid-A4325673DE0DAAEA/index.html"> <i class="fa-brands fa-microsoft"></i></a>
-                                            <a href="https://calendar.google.com/calendar/u/0?cid=aXR4YW1hbmRlZXBrYXVyQGdtYWlsLmNvbQ"><i class="fa-brands fa-google"></i></a>
-                                            <a><i class="fa-brands fa-apple"></i> </a> --}}
+                                       <a href="{{ $link->webOffice() }}"> <i
+                                                class="fa-brands fa-microsoft"></i></a>
+
+                                        <a href="{{ $link->ics() }}"><i
+                                                class="fa-brands fa-apple"></i> </a>
                                     </b>
                                 </div>
                                 <div class="schduled-text-div">

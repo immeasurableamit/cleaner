@@ -12,8 +12,8 @@
                 <div class="customer-avatar-preview position-relative">
                     <div id="uploaded" style="background-image: url('/storage/images/$user->image');">
                         <img src="{{ asset('storage/images/' . $user->image) }}" id="customerimagePreview">
-                        <a href="javascript::void(0)" onclick="uploadImgViaLivewire('{{ $user->id }}')"><i
-                                class="fas fa-save"></i></a>
+                        <a href="javascript::void(0)" onclick="uploadImgViaLivewire('{{ $user->id }}')">
+                            <i class="fas fa-save"></i></a>
                     </div>
                 </div>
                 <div class="lawyer_profile-img mb-3">
