@@ -23,13 +23,8 @@ class Thanks extends Component
     public function mount($order_id)
     {
         $this->order = Order::with(['cleaner', 'items.service_item.service'])->find($order_id);
-        // dd($this->order->cleaning_datetime);
-
-
 
     }
-
-
 
     public function saveOrderNotes()
     {

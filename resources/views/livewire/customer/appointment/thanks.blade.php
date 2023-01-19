@@ -73,26 +73,25 @@
                                     <p class="schedule_label">Start Date</p>
                                     <span
                                         class="schedule_value-text">{{ $order->cleaning_datetime->toDayDateTimeString() }}</span>
-<<<<<<< HEAD
-                                    <b class="link-design-2 no-hover"> Add to calendar
 
-                                        <a   class="link-design-2" href="{{ $link->google() }}" ><i
-                                                class="fa-brands fa-google"></i></a>
-=======
-                                    <b class="link-design-2">
-                                           {{--
-                                           <a> Add to calendar </a>
+                                    <div class="dropdown add_calender">
+                                        <button class="bg-none dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            <b class="link-design-2 no-hover"> Add to calendar</b>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <a class="link-design-2" href="{{ $link->google() }}"><i
+                                                    class="fa-brands fa-google"></i></a>
 
-                                        <a href="javascript::void(0)" wire:click="generateCalendarLinks()">>Google</a>
->>>>>>> 088abe15ee3a9d73c65e3f4a378bed29d1dad983
+                                            <a class="link-design-2" href="{{ $link->webOffice() }}"> <i
+                                                    class="fa-brands fa-microsoft"></i></a>
 
-                                       <a href="{{ $link->webOffice() }}"> <i
-                                                class="fa-brands fa-microsoft"></i></a>
-
-                                        <a href="{{ $link->ics() }}"><i
-                                                class="fa-brands fa-apple"></i> </a>
-                                    </b>
+                                            <a class="link-design-2" href="{{ $link->ics() }}"><i
+                                                    class="fa-brands fa-apple"></i> </a>
+                                        </div>
+                                    </div>
                                 </div>
+
                                 <div class="schduled-text-div">
                                     <p class="schedule_label">Payment Method</p>
                                     <span
