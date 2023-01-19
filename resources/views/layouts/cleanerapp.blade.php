@@ -8,7 +8,9 @@
         <meta name="site-url" content="{{ url('/') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet"> --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/admin/css/admin.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/slick.css') }}" rel="stylesheet">
@@ -66,7 +68,7 @@
             }.bind(this));
             */
         </script>
-        
+
 </head>
 
 <body class="light-theme">
@@ -108,7 +110,7 @@
     @include('layouts.includes.script')
 
 
-    
+
 
 </body>
 

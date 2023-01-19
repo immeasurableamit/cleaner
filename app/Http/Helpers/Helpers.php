@@ -90,3 +90,20 @@ function convertMeters( $meters, $unit = "miles" )
             return $meters / $meters_in_a_mile;
     }
 }
+
+function formatDateTimeForUser($datetime, $preset = null, $format = 'm-d-Y h:i A')
+{
+    $presetFormats = [
+        'date' => 'm-d-Y',
+        'time' => 'h:i A',
+        'datetime' => 'm-d-Y h:i A',
+    ];
+
+    if ( $preset ){
+        $format = $presetFormats[$preset];
+    }
+
+    $datetime  = \Carbon\Carbon::parse( $datetime );
+    $formatted = $datetime->format( $format );
+    return $formatted;
+}

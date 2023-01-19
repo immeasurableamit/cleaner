@@ -72,19 +72,18 @@ $(document).ready(function(){
         });
       });
       $(document).ready(function() {
+        /*
         $("#sidebar-account-dropdown").click(() => {
             $(this).find('#sidebar-account-dropdown-menu').toggleClass('show');
         });
+        */
 
         $('.account_dropdown>a').click(function(){
             $(this).toggleClass('active');
         });
 
 
-        $("#header-profile-dropdown-btn").click(() => {
-            console.log('jsn');
-            $('#header-profile-dropdown-btn').next('.dropdown-menu').toggleClass('show');
-        })
+
 
     });
 

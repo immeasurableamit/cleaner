@@ -212,9 +212,4 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
-
-    'user_date_format' => 'm-d-Y',
-    'user_time_format' => 'h:i A',
-    'user_datetime_format' => 'm-d-Y h:i A',
-
 ];
