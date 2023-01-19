@@ -11,6 +11,10 @@ class SameTime extends Component
     public $user;
     public $jobs;
 
+    protected $rules = [
+        'jobs' => 'numeric|min:1'
+    ];
+
     public function mount()
     {
         $this->user = auth()->user();
@@ -21,6 +25,8 @@ class SameTime extends Component
 
     public function action($action)
     {
+        $this->validate();
+
         if($action=='plus'){
             $this->jobs = $this->jobs + 1;
         }

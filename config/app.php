@@ -213,6 +213,8 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
-    /* Percentage of the commision that admin holds from the service of cleaner */
-    'admin_commission_percentage' => env("ADMIN_COMMISSION_PERCENTAGE", '20'),
+    'user_date_format' => 'm-d-Y',
+    'user_time_format' => 'h:i A',
+    'user_datetime_format' => 'm-d-Y h:i A',
+
 ];

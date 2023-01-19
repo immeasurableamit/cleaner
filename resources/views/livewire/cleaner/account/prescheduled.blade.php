@@ -2,7 +2,7 @@
     <div class="prescheduled_section">
         <div class="form-headeing-second py-3">
             <h4 class="border-0">Prescheduled Off-Time</h4>
-            <a href="#" class="link-design-2">View common holidays around the world</a>
+            {{-- <a href="#" class="link-design-2">View common holidays around the world</a> --}}
             </div>
 
           <div class="row ">
@@ -23,7 +23,7 @@
 
                 <div class="prescheduled_off-time">
                 @foreach($dataArray as $i => $data)
-              
+
                 <div class="append_row_preschduled row pb-2">
                     <div class="col-md-4 col-sm-12">
                         <div class="input-design">
@@ -47,14 +47,14 @@
                         </div>
                     </div>
                 </div>
-               
+
                 @endforeach
                 </div>
 
 
 
             </div>
-            
+
           </div>
           <button class="btn_blue mt-4" type="button" wire:click="store">Save</button>
      </div>
