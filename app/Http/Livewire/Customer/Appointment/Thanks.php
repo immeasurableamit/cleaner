@@ -23,25 +23,25 @@ class Thanks extends Component
         $this->order = Order::with(['cleaner', 'items.service_item.service'])->find($order_id);
     }
 
-    public function generateCalendarLinks()
-    {
+    // public function generateCalendarLinks()
+    // {
 
-        $from = DateTime::createFromFormat('Y-m-d H:i', '2018-02-01 09:00');
-        $to = DateTime::createFromFormat('Y-m-d H:i', '2018-02-01 18:00');
+    //     $from = DateTime::createFromFormat('Y-m-d H:i', '2018-02-01 09:00');
+    //     $to = DateTime::createFromFormat('Y-m-d H:i', '2018-02-01 18:00');
 
-        $link = Link::create('Sebastian’s birthday', $from, $to)
-            ->description('Cookies & cocktails!')
-            ->address('Kruikstraat 22, 2018 Antwerpen');
+    //     $link = Link::create('Canary Cleaner Appointment', $from, $to)
+    //         ->description('Cookies & cocktails!')
+    //         ->address('Kruikstraat 22, 2018 Antwerpen');
 
-            $googleCalendarLink =  $link->google();
-            // dd($googleCalendarLink );
-            // $iCal = $link->ics();    //Generate a data uri for an ics file (for iCal & Outlook)
-            // Generate a link to create an event on outlook.live.com calendar
-            // $microsoftCal = $link->webOutlook();
+    //         $googleCalendarLink =  $link->google();
+    //         // dd($googleCalendarLink );
+    //         // $iCal = $link->ics();    //Generate a data uri for an ics file (for iCal & Outlook)
+    //         // Generate a link to create an event on outlook.live.com calendar
+    //         // $microsoftCal = $link->webOutlook();
 
-            return redirect($googleCalendarLink);
+    //         return redirect($googleCalendarLink);
 
-    }
+    // }
 
     public function saveOrderNotes()
     {
