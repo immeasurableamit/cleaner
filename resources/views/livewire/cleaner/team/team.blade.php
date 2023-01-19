@@ -1,6 +1,6 @@
-<div>
+<div class="team_row">
     <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 no-padd cleaner_team_section">
-        <div class="customer-account-forms pe-5">
+        <div class="customer-account-forms pe-5 pb-2">
             <div class="h4-design text-end">
 
                 <h4>Team Size: {{ $teamMemberCounts }} </h4>
@@ -9,99 +9,19 @@
                 <h3 class="mb-0">Team Info</h3>
 
                 <span>Add additional team members below</span>
-                <div>
-                    <button type="button" class="btn btn-primary form-grouph submit-design mb-30" style="float:right;"
-                        data-bs-toggle="modal" data-bs-target="#teamModal">
-                        Add Team Members
-                    </button>
-                </div>
+                
             </div>
 
             <!-- Modal -->
-            <div wire:ignore.self class="modal fade" id="teamModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-
-                <div class="modal-dialog pop-up-form">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="form-heading-h4 text-center" id="exampleModalLabel">Add Team Members</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" id="closeexample"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="form-grouph input-design mb-30 col-md-6">
-                                    <p class="appointment_label">First Name</p>
-                                    <input type="text" wire:model="first_name" placeholder="Enter your First Name" />
-                                    @error('first_name')
-                                        <div class="alert ">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="form-grouph input-design mb-30 col-md-6">
-                                    <p class="appointment_label">Last Name</p>
-                                    <input type="text" wire:model="last_name" placeholder="Enter your Last Name" />
-                                    @error('last_name')
-                                        <div class="alert ">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="form-grouph input-design mb-30">
-                                <p class="appointment_label">Insured?</p>
-                                <input type="text" wire:model="insured" placeholder="Insured" />
-                                @error('insured')
-                                    <div class="alert ">{{ $message }}</div>
-                                @enderror
-
-                            </div>
-                            <div class="row">
-                                <div class="form-grouph input-design mb-30 col-md-6">
-                                    <p class="appointment_label">Phone</p>
-                                    <input type="number" wire:model="contact_number" placeholder="Contact Name" />
-                                    @error('contact_number')
-                                        <div class="alert ">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="form-grouph input-design mb-30 col-md-6">
-                                    <p class="appointment_label">Email</p>
-                                    <input type="email" wire:model="email" placeholder="Enter your Email" />
-                                    @error('email')
-                                        <div class="alert ">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="form-grouph input-design mb-30">
-                                <p class="appointment_label">Address</p>
-                                <input type="address" id='address' wire:model="address"
-                                    placeholder="Enter your Address" />
-                                @error('address')
-                                    <div class="alert ">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-grouph input-design mb-30">
-                                <p class="appointment_label">SSN/TIN</p>
-                                <input type="number" wire:model="ssn_or_tax" placeholder="Enter your SSN/TIN" />
-                                @error('ssn_or_tax')
-                                    <div class="alert ">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="modal-footer form-grouph submit-design mb-30">
-                                {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>  --}}
-                                <button wire:click="store()" class="subit-btn-2">Save</button>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
+           
 
         </div>
     </div>
     <!-- End Model-->
     <div class="teams-table-layout-view">
-        <div class="row">
+   
             @foreach ($teamMembers as $teamMember)
+            <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <div class="select-date-toggles overflow-hidden ">
                         <button class="service_toggle_s" data-id="{{ $teamMember->id }}"></button>
@@ -148,9 +68,16 @@
                         </div>
                     </div>
                 </div>
+                </div>
             @endforeach
-        </div>
+            <div class="">
+                    <button type="button" class="submit-design mb-30 btn_blue" style="background-color:var(--secondary);"
+                        data-bs-toggle="modal" data-bs-target="#teamModal">
+                        Add Team Members
+                    </button>
+                </div>
     </div>
+      
     <!-- updateModel -->
     <div wire:ignore.self class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -228,7 +155,83 @@
     </div>
     <!-- end updateModel -->
 
+    <div wire:ignore.self class="modal fade" id="teamModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
 
+                <div class="modal-dialog pop-up-form">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="form-heading-h4 text-center" id="exampleModalLabel">Add Team Members</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" id="closeexample"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="form-grouph input-design mb-30 col-md-6">
+                                    <p class="appointment_label">First Name</p>
+                                    <input type="text" wire:model="first_name" placeholder="Enter your First Name" />
+                                    @error('first_name')
+                                        <div class="alert ">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-grouph input-design mb-30 col-md-6">
+                                    <p class="appointment_label">Last Name</p>
+                                    <input type="text" wire:model="last_name" placeholder="Enter your Last Name" />
+                                    @error('last_name')
+                                        <div class="alert ">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-grouph input-design mb-30">
+                                <p class="appointment_label">Insured?</p>
+                                <input type="text" wire:model="insured" placeholder="Insured" />
+                                @error('insured')
+                                    <div class="alert ">{{ $message }}</div>
+                                @enderror
+
+                            </div>
+                            <div class="row">
+                                <div class="form-grouph input-design mb-30 col-md-6">
+                                    <p class="appointment_label">Phone</p>
+                                    <input type="number" wire:model="contact_number" placeholder="Contact Name" />
+                                    @error('contact_number')
+                                        <div class="alert ">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-grouph input-design mb-30 col-md-6">
+                                    <p class="appointment_label">Email</p>
+                                    <input type="email" wire:model="email" placeholder="Enter your Email" />
+                                    @error('email')
+                                        <div class="alert ">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-grouph input-design mb-30">
+                                <p class="appointment_label">Address</p>
+                                <input type="address" id='address' wire:model="address"
+                                    placeholder="Enter your Address" />
+                                @error('address')
+                                    <div class="alert ">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-grouph input-design mb-30">
+                                <p class="appointment_label">SSN/TIN</p>
+                                <input type="number" wire:model="ssn_or_tax" placeholder="Enter your SSN/TIN" />
+                                @error('ssn_or_tax')
+                                    <div class="alert ">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="modal-footer form-grouph submit-design mb-30">
+                                {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>  --}}
+                                <button wire:click="store()" class="subit-btn-2">Save</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
 
     @push('scripts')
         <script>
