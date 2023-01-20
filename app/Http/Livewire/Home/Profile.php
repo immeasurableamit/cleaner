@@ -170,40 +170,59 @@ class Profile extends Component
 
     public function slotAvailability()
     {
+        /* Get selecte date and weekday */
         $selectDate = Carbon::parse($this->selected_date);
-
         $date = $selectDate->format('Y-m-d');
-        $dateDay = $selectDate->format("l");
+        $dateDay = $selectDate->format("l"); // weekday
 
+        /* Get cleaner hours for selected weekday */
         $hoursDayAll = CleanerHours::whereUsersId($this->cleaner->id)->where('day', $dateDay)->get();
-
         $getLeaves = [];
 
-        ///,.....available current date
+         /*
+          * If cleaner hours exists for selected weekday
+          * and selected date is greater than or equal to current date
+          */
         if (@$hoursDayAll && $date >= date('Y-m-d')) {
 
 
-            $duration = '30';
+            $duration = '30'; // duration for what?
 
-            //...
             $time_slots = array();
-            $add_mins  = $duration * 60;
+            $add_mins  = $duration * 60; // 30 * 60 = 180
 
-            foreach ($hoursDayAll as $hour) {
-                $startTime = strtotime($hour->from_time);
-                $endTime = strtotime($hour->to_time);
+            /* loop over each time slot, of selected weekday, set by cleaner */
+            foreach($hoursDayAll as $hour){
+
+                $startTime = strtotime($hour->from_time); // for example: 08:00
+                $endTime = strtotime($hour->to_time); // for example: 20:00
+
+                /* while start time is lower than or equal to end time */
                 while ($startTime <= $endTime) {
                     $timeSlot = [];
-                    if (in_array(date("H:i:s", $startTime), $getLeaves)) {
+
+                    if(in_array(date("H:i:s", $startTime), $getLeaves)) {
                         $timeSlot['is_free'] = 'no';
                     } else {
                         $timeSlot['is_free'] = 'yes';
                     }
 
-
                     $timeSlot['time'] = date("H:i", $startTime);
-                    $time_slots[] = $timeSlot;
 
+
+
+                    $currentDate = date('Y-m-d');
+                    if ( $date == $currentDate ) {
+
+                        $timeAfterTwoHours = date("H:i", strtotime("+2hour") );
+
+                        if ( $timeSlot['time'] <= $timeAfterTwoHours ){
+                            $startTime += $add_mins;
+                            continue;
+                        }
+                    }
+
+                    $time_slots[] = $timeSlot;
                     $startTime += $add_mins;
                 }
             }
@@ -235,15 +254,7 @@ class Profile extends Component
         $this->estimatedTime = $selectedServices->sum('duration');
     }
 
-    public function updatingHomeSize($value)
-    {
-        /*         $this->validate([
-            'serviceItemId' => 'required',
-            'homeSize' => 'present|numeric|min:100'
-        ]); */
-    }
-
-    public function updated($key, $value)
+    public function updated( $key, $value )
     {
 
         if ($key == "homeSize") {

@@ -1811,9 +1811,9 @@ a.btn_chat_member img {
     text-align: center;
 }
 /* .y_text.delete ,.y_text.add{
-    width: 20%;
-    text-align: right;
-} */
+ *     width: 20%;
+ *         text-align: right;
+ *         } */
 .availability_row .btn_delete {
     width: 8%;
 }
@@ -2103,13 +2103,13 @@ margin-bottom: 0px;
     border-radius: 10px;
 }
 /* .bg_l_blue{
-           background: rgba(55, 169, 251, 0.2);
-                        border-radius: 10px;
-}
-.bg_l_blue .btn_buy{
-    background-color: var(--primary);
-    color: #fff;
-} */
+ *            background: rgba(55, 169, 251, 0.2);
+ *                                    border-radius: 10px;
+ *                                    }
+ *                                    .bg_l_blue .btn_buy{
+ *                                        background-color: var(--primary);
+ *                                            color: #fff;
+ *                                            } */
 .row.boosted_cards  .b_card:hover{
     background: rgba(55, 169, 251, 0.2);
                         border-radius: 10px;
@@ -4583,8 +4583,8 @@ td.contact_info img.profile_img {
 }
 /* css table   here */
 /*
-	Max width before this PARTICULAR table gets nasty. This query will take effect for any screen smaller than 760px and also iPads specifically.
-	*/
+ * 	Max width before this PARTICULAR table gets nasty. This query will take effect for any screen smaller than 760px and also iPads specifically.
+ * 		*/
       /* css  full_home_cleaning_table */
   .full_home_cleaning_table table{
     width: 100%;
@@ -5931,7 +5931,7 @@ fieldset .row.no-mrg .checkout_div h4{
 }
 .form_availibility .availability_row .time_input {
     width: 55%;
-
+ 
 }
 .form_availibility .time-schedule-addon .time-input-addon {
     position: relative;
@@ -5972,10 +5972,6 @@ footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter 
     display: none;
 }
 /* doc changes here */
-.add_calender button{
-  border:0px !important;
-  padding: 0px !important;
-}
    /* css  full_home_cleaning_table end here */
 	@media
 	  only screen
@@ -6001,8 +5997,8 @@ footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter 
     }
 
     /* .appoitments_table  tr:nth-child(odd),.common_table tr:nth-child(odd) {
-      background: #ccc;
-    } */
+ *       background: #ccc;
+ *           } */
     .common_table tr{
         position: relative;
         border-radius: 10px;
@@ -6047,9 +6043,9 @@ footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter 
             padding: 20px 5px;
         }
 		/*
-		Label the data
-    You could also use a data-* attribute and content for this. That way "bloats" the HTML, this way means you need to keep HTML and CSS in sync. Lea Verou has a clever way to handle with text-shadow.
-		*/
+ * 		Label the data
+ * 		    You could also use a data-* attribute and content for this. That way "bloats" the HTML, this way means you need to keep HTML and CSS in sync. Lea Verou has a clever way to handle with text-shadow.
+ * 		    		*/
 		.appoitments_table td:nth-of-type(1):before { content: "Cleaner Contact Info"; }
 		.appoitments_table td:nth-of-type(2):before { content: "Date"; }
 		.appoitments_table td:nth-of-type(3):before { content: "Time"; }
@@ -6990,8 +6986,8 @@ footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter 
             right: 13px;
         }
         /* .availability_row .time_input {
-            width: 35%;
-        } */
+ *             width: 35%;
+ *                     } */
         .availability_row .btn_switch {
             width: 28%;
         }
@@ -7578,8 +7574,8 @@ tr.arrow:after {
       display: block;
     }
     /* .signup_all_container .row.no-mrg {
-        flex-direction: column-reverse;
-    } */
+ *         flex-direction: column-reverse;
+ *             } */
     .signup_all_container .account-header-heading{
              padding-top: 20px;
     }

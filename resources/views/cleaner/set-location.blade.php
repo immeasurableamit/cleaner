@@ -40,7 +40,7 @@
                                             <button type="button" class="search-btn"
                                                 style="position: absolute; top: 4px; right: 10px; width: 48px; height: 48px; background: var(--primary); border: none; border-radius: 50%; box-shadow: 0px 6px 4px rgba(55, 169, 251, 0.26); padding: 0px;">
                                                 <img
-                                                    src="http://cleaner.local:8000/assets/images/icons/search.svg"></button>
+                                                    src="/assets/images/icons/search.svg"></button>
                                         </div>
                                         <div class="co-md-12 my-3">
                                             <div id="miles_slider"></div>
