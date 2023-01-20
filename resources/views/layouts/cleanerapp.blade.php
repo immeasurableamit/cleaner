@@ -82,7 +82,7 @@
     @if (auth()->user()->role == 'cleaner' &&
         auth()->user()->isEligibleForListing() == false)
         <div class="container" id="requirements-alert-container">
-            <div class="alert alert-success alert-dismissible fade show mx-5 mt-3" role="alert">
+            <div class="alert alert-success alert-dismissible fade show mx-5 mt-3 customer-white-wrapper" role="alert" style="border-color: #36a7f8;">
                 <div class="d-flex justify-content-between">
                     <h4 class="alert-heading">Attention!</h4>
                 <button type="button" class="close bg-none border-0" data-dismiss="alert" aria-label="Close" onclick="document.getElementById('requirements-alert-container').remove()">
