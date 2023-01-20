@@ -113,6 +113,8 @@
                                                                     @php $selectedState = old('state_id') @endphp
                                                                 @elseif( $billingAddress )
                                                                     @php $selectedState = $billingAddress->state_id @endphp
+                                                                @else 
+                                                                    @php $selectedState = null @endphp
                                                                 @endif
 
                                                                 @foreach ($states as $state)
