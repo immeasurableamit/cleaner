@@ -27,17 +27,17 @@ input,select,textarea,form,p,span{
   }
   /* Track */
   ::-webkit-scrollbar-track {
-    background: #F4F3F7; 
+    background: #F4F3F7;
   }
-   
+
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: var(--bgformbody); 
+    background: var(--bgformbody);
   }
-  
+
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #555; 
+    background: #555;
   }
   .header-wrapper {
     background: var( --primary);
@@ -920,7 +920,7 @@ img {
 .select2-dropdown .select2-results__option:hover{
     background: #E3F3FF;
     border-radius: 10px 10px 0px 0px !important;
-    color: #363636; 
+    color: #363636;
 }
 .select2-container--default .select2-results__option--highlighted.select2-results__option--selectable::before {
     background-color: var(--primary);
@@ -1146,7 +1146,7 @@ padding-right: 15px;
 }
 button:focus, input:focus, select:focus, textarea:focus{
     outline: none !important;
-} 
+}
 .account-profile .name {
     color: #fff;
     font-weight: 600;
@@ -1633,7 +1633,7 @@ li.account_dropdown .dropdown_links li a:hover,li.account_dropdown .dropdown_lin
 }
 li.profile_drop_down.account_dropdown .dropdown_links li a:hover,li.account_dropdown.profile_drop_down .dropdown_links li a.active{
    color: var(--primary);
-    background: #d7eefe; 
+    background: #d7eefe;
     border-radius: 10px;
 }
 li.profile_drop_down.account_dropdown .dropdown_links li {
@@ -2222,7 +2222,7 @@ margin-bottom: 0px;
     left: 0px;
 }
 .card_chat h4{
-    font-size: 14px; 
+    font-size: 14px;
     text-transform: capitalize;
     font-weight: 600;
     color: #161A1E;
@@ -2366,7 +2366,7 @@ margin-bottom: 0px;
     padding-left: 50px;
     display: flex;
     width: 50%;
-    flex-direction: column;    
+    flex-direction: column;
 }
 .sender_msg .s_r_msg{
     position: relative;
@@ -2697,7 +2697,7 @@ h2.h2_tittle {
     opacity: 1;
 }
 .slider_section .slick-dots li button:before{
-    font-size: 20px; 
+    font-size: 20px;
     color: var(--secondary);
     opacity: 1;
 }
@@ -3015,7 +3015,7 @@ display: none !important;
 .card_cleaning_join h3 {
     color: var(--primary);
     font-weight: 700;
-    font-size: 35px;  
+    font-size: 35px;
 }
 .result_text {
     padding: 35px 55px 10px 55px;
@@ -3126,7 +3126,7 @@ button.btn_filter.btn_filter_by {
     border-radius: 15px;
     color: #fff;
     font-size: 18px;
-   
+
 }
 .btn_reset img{
     filter: brightness(0)invert(1);
@@ -3305,7 +3305,7 @@ button.btn_filter.btn_filter_by {
     font-weight: 600;
     font-size: 16px;
     text-align: center;
-    
+
 }
 .card_search_result .bottom_card_text .btn_rate button.btn_view:hover{
     background-color: var(--primary);
@@ -3650,7 +3650,7 @@ button.btn_filter.btn_filter_by {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 }
 #progressbar li:first-child:after {
-	content: none; 
+	content: none;
 }
 /*marking active/completed steps green*/
 /*The number of the step and the connector before it = green*/
@@ -3869,7 +3869,7 @@ form#msform .blue-bg-wrapper {
         background-color:#2677B1 ;
         position: relative;
         box-shadow: 0px 15px 80px rgba(16, 85, 135, 0.15);
-        
+
         border-radius: 10px;
         color: #fff;
     }
@@ -4081,7 +4081,7 @@ font-size: 20px;
         border-left: 0px;
         color: #fff;
     }
-    .incremnt_decrmnt.number.for_alternative span.minus {  
+    .incremnt_decrmnt.number.for_alternative span.minus {
         left: 0px;
     }
     .incremnt_decrmnt.number.for_alternative span.plus{
@@ -4497,7 +4497,7 @@ td.contact_info img.profile_img {
   .bg_yellow_row th:first-child{
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-}      
+}
 .bg_yellow_row th:last-child{
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -5117,11 +5117,11 @@ input[type="month"]::-webkit-calendar-picker-indicator {
     color:#ccc;
     cursor:pointer;
   }
-  
+
   .star-rating :checked ~ label {
     color:#f90;
   }
-  
+
   .star-rating label:hover,
   .star-rating label:hover ~ label {
     color:#fc0;
@@ -5176,7 +5176,7 @@ input[type="month"]::-webkit-calendar-picker-indicator {
 }
 
   /* explanation */
-  
+
   article {
     background-color:#ffe;
     box-shadow:0 0 1em 1px rgba(0,0,0,.25);
@@ -5743,13 +5743,13 @@ input[type="time"] {
 
    /* css  full_home_cleaning_table end here */
 	@media
-	  only screen 
-    and (max-width: 760px), (min-device-width: 768px) 
+	  only screen
+    and (max-width: 760px), (min-device-width: 768px)
     and (max-device-width: 1024px)  {
 
 		/* Force table to not be like tables anymore */
 	.appoitments_table table,.appoitments_table thead,.appoitments_table tbody, .appoitments_table th, .appoitments_table td,.appoitments_table tr,
-    .common_table table,.common_table thead,.common_table tbody, .common_table th, .common_table td,.common_table tr 
+    .common_table table,.common_table thead,.common_table tbody, .common_table th, .common_table td,.common_table tr
      {
 			display: block;
 		}
@@ -5764,7 +5764,7 @@ input[type="time"] {
         .appoitments_table  tr ,.common_table tr{
       margin: 0 0 1rem 0;
     }
-      
+
     /* .appoitments_table  tr:nth-child(odd),.common_table tr:nth-child(odd) {
       background: #ccc;
     } */
@@ -5833,7 +5833,7 @@ input[type="time"] {
 		.cleaner_appoitments_table td:nth-of-type(6):before { content: " Price"; }
 		.cleaner_appoitments_table td:nth-of-type(7):before { content: "Payment"; }
 		.cleaner_appoitments_table td:nth-of-type(8):before { content: " Change"; }
-        
+
 
 		.past_service_table td:nth-of-type(1):before { content: "Profile"; }
 		.past_service_table td:nth-of-type(2):before { content: "Date"; }
@@ -5841,16 +5841,16 @@ input[type="time"] {
 		.past_service_table td:nth-of-type(4):before { content: "Invoice"; }
 		.past_service_table td:nth-of-type(5):before { content: "PDF"; }
 		.past_service_table td:nth-of-type(6):before { content: "Report Issue"; }
- 
+
         .cleaner_team_table td:nth-of-type(1):before { content: "Name"; }
 		.cleaner_team_table td:nth-of-type(2):before { content: "Contact info"; }
 		.cleaner_team_table td:nth-of-type(3):before { content: "SSN/TIN"; }
 		.cleaner_team_table td:nth-of-type(4):before { content: "Covered by your insurance?"; }
 		.cleaner_team_table td:nth-of-type(5):before { content: "Make a Change"; }
-        
+
 	}
   /* css  full_home_cleaning_table */
-  
+
 /* css table here */
 
 @media (min-width: 1200px){
@@ -6249,7 +6249,7 @@ input[type="time"] {
         font-size: 17px;
         line-height: normal;
     }
-    .news_update_section .card_rated 
+    .news_update_section .card_rated
  .date_coments {
     padding-bottom: 10px;
 }
@@ -6995,7 +6995,7 @@ tr.arrow:after {
         margin-bottom: 20px;
         transition: 0.3s;
         transition: max-height 0.5s ease-in;
-    }  
+    }
     .card_terms_conditions{
         padding: 15px;
     }
@@ -7136,10 +7136,10 @@ tr.arrow:after {
     .window_garage {
         padding-left: 15px;
     }
-    
+
     .col-md-3.left_filter_div .btn_top{
         padding-left: 0px;
-    }    
+    }
     .window_garage.py-3 a.link-design-2 {
         font-size: 14px;
     }
@@ -7396,7 +7396,7 @@ tr.arrow:after {
         overflow: hidden;
         transition: max-height 0.2s ease;
     }
-    
+
     td.d-md-none.d-block.toggle_r {
         border: solid var(--primary);
         color: var(--primary);

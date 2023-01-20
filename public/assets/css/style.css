@@ -269,7 +269,7 @@ input:focus,select:focus,textarea:focus{
     border-radius: 10px;
     border: none;
     width: 100%;
-    padding: 19px;
+    padding:14px 19px;
     font-weight: 400;
     font-size: 14px;
     color: #363636;
@@ -3324,6 +3324,8 @@ button.btn_filter.btn_filter_by {
   right:35px;
   top: 15px;
 }
+
+
 .card_search_result .like_img input[type="checkbox"].like_1::before{
     position: absolute;
     content: '';
@@ -3338,6 +3340,8 @@ button.btn_filter.btn_filter_by {
 }
 .card_search_result .like_img img{
     width: 100%;
+    height: 230px;
+    object-fit: cover;
 }
 .card_search_result {
     background: #FFFFFF;
@@ -5165,7 +5169,7 @@ input[type="month"]::-webkit-calendar-picker-indicator {
     background-color: #f8d048;
     color: #fff;
 }
-.select-date-toggles.show {
+..show {
     max-height: 100%;
     overflow: visible;
 }
@@ -5945,6 +5949,7 @@ fieldset .row.no-mrg .checkout_div h4{
 .form_availibility .availbility_cover {
     max-height: 230px;
     overflow: auto;
+    margin-bottom: 15px;
 }
 .profile_id span.select2-selection.select2-selection--single {
     background-color: inherit !important;
@@ -5966,6 +5971,19 @@ fieldset .row.no-mrg .checkout_div h4{
 }
 .team_row .teams-table-layout-view {
     padding-left: 55px;
+}
+.form_availibility .availbility_cover .btn_switch,.form_availibility .availbility_cover .add_more {
+    position: sticky;
+    top: 0px;
+}
+.team_services .btn_header_service.py-3 {
+    padding-right: 28px;
+}
+.what_included {
+    margin-top: -50px;
+}
+.clean_house_section button.search-btn {
+    top: 0px;
 }
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {
@@ -8025,6 +8043,8 @@ padding-bottom: 13px;
 }
 
 
-span.alert, span.help-block {
+span.alert, span.help-block,div.alert {
     color: red;
+    /* display: inline;
+    font-size: 13px; */
 }

@@ -36,19 +36,19 @@
 @section('script')
 
 <script>
-  $(document).ready(function() {
-    window.livewire.on('close-modal', () => {
-      $("#closeexample").click();
-    });
+//   $(document).ready(function() {
+//     window.livewire.on('close-modal', () => {
+//       $("#closeexample").click();
+//     });
 
-    window.livewire.on('close-modal', () => {
-      $("#updateModalClose").click();
-    });
+//     window.livewire.on('close-modal', () => {
+//       $("#updateModalClose").click();
+//     });
     // window.livewire.on('updateclosemodal', () => {
     //   $("#updateModalClose").click();
     // });
 
-  });
+//   });
 </script>
 @endsection
 

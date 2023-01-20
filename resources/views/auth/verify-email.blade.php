@@ -4,23 +4,25 @@
 <div class="row justify-content-center my-5">
 	<div class="col-md-8 verifyemail">
 
-		<div class="card-header">{{ __('Verify Your Email Address') }}</div>
+		<div class="bold">{{ __('Verify Your Email Address') }}</div>
 
-		<div class="card-body">
+		<div class="py-3">
 
 
 			@if (session('status'))
-			<div class="alert alert-success" role="alert">
+			<div class="card p-3" role="alert">
 				{{ __('A fresh verification link has been sent to your email address.') }}
 			</div>
 			@endif
 
-			{{ __('Before proceeding, please check your email for a verification link.') }}
+			<div class="pt-3">
+				{{ __('Before proceeding, please check your email for a verification link.') }}
 			{{ __('If you did not receive the email') }},
-			<form class="d-inline" method="POST" action="{{ route('verification.send') }}">
+			</div>
+			<form class="d-inline pt-3 d-block" method="POST" action="{{ route('verification.send') }}">
 				@csrf
-				<button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>
-				.
+				<button type="submit" class="btn_blue  m-0 align-baseline">{{ __('click here to request another') }}</button>
+				
 			</form>
 		</div>
 

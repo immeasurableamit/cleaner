@@ -158,15 +158,14 @@
                         </div>
                         <div class="built_text_div">
                             @if (is_null($user))
-
-                            <div class="provider_service pb-5 border-bottom  text-center">
+                                <div class="provider_service pb-5 border-bottom  text-center">
 
                                     <div class="text-center link-design-2 pt-3 bold mb-3"
                                         onclick="$('#loginModal').modal('show')">
                                         Already a customer ?
                                     </div>
 
-                                {{-- Remove payment method selection feature
+                                    {{-- Remove payment method selection feature
                                     <div class="btn_right_cards text-center ">
                                         <div class="check-pay-mathoud">
                                             <input type="radio" name="payment_method" id="gpay" value="google_pay" wire:model="paymentMethod">
@@ -183,7 +182,7 @@
                                     </div>
                                     @error('paymentMethod') <div class="mt-3"><span class="text-danger">PaymentMethod Field is required</span></div> @enderror
                                     --}}
-                            </div>
+                                </div>
                             @endif
 
                             <div class="form-headeing-second">
@@ -317,7 +316,9 @@
                                             <div class="col-12">
                                                 <div class="form-grouph mb-3 card_text_input">
                                                     <input type="text" wire:model="formattedNumber"
-                                                        name="formattedNumber" placeholder="Card number">
+                                                        id="formattedNumber" name="formattedNumber"
+                                                        placeholder="Card number">
+
                                                     <input type="text" id="exp_month_year" name="exp_month_year"
                                                         placeholder="MM/YY" class="mm_input">
                                                     <input type="password" wire:model="cvc" name="cvc"
@@ -441,7 +442,7 @@
                                     <span class="schedule_value-text">{{ $datetime }}</span>
 
                                     <b class="link-design-2">
-                                         Add to calendar
+                                        Add to calendar
                                     </b>
                                 </div>
                                 <div class="schduled-text-div">
@@ -510,6 +511,7 @@
 
             console.log('adding slashes');
             let ele = document.getElementById(element.id);
+
             ele = ele.value.split('/').join(''); // Remove slash (/) if mistakenly entered.
 
             if (ele.length < 5 && ele.length > 0) {
@@ -539,13 +541,48 @@
 
         window.addEventListener('load', function() {
 
+
             window.livewire.on('componentRendered', step => {
                 expMonthYearStringFormatter();
+
 
                 if (step == 2) {
                     initStateSelector();
                 }
+
             });
+
+
+
+            //     formatCardNumber();
+
+            // function formatCardNumber() {
+
+            //     $('#formattedNumber').on('input focusout', function() {
+            //         var p = $(this).val();
+
+
+            //         p = p.replace(/[^0-9]/g, '');
+            //         p = p.replace(/(\d{4})(\d{4})(\d{4})(\d{4})/, "$1 $2 $3 $4");
+            //         $(this).val(p);
+            //     });
+
+                /*
+                var p = $("#formattedNumber").val();
+
+                p = p.replace(/[^0-9]/g, '');
+                p = p.replace(/(\d{4})(\d{4})(\d{4})(\d{4})/, "$1 $2 $3 $4");
+                $("#formattedNumber").val(p);
+                */
+
+                // @this.set('number', p);
+
+               // @this.set('number', p);
+                //console.log(p, 'card number');
+
+            // }
+
+
 
         });
     </script>
