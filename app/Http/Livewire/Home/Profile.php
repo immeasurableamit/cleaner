@@ -290,9 +290,9 @@ class Profile extends Component
 
     public function redirectToCheckout()
     {
-        // $user = auth()->user()->role;
+        $user = auth()->user()->role ?? null;
 
-        if (auth()->user()->role == 'cleaner') {
+        if ($user == 'cleaner') {
             return $this->alert("error", "Cleaner don't have permission");
         } else {
             $validatedData = $this->validate(...$this->checkoutRules());
