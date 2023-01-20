@@ -480,6 +480,7 @@ class Checkout extends Component
     public function updatedFormattedNumber($value)
     {
         $this->formattedNumber = wordwrap($value, 4, " ", true); // add space after each 4 characters
+
         $this->number = str_replace(" ", "", $this->formattedNumber); // set number for stripe verification
     }
 

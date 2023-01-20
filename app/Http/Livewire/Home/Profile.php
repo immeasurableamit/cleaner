@@ -14,9 +14,11 @@ use Illuminate\Support\Facades\Crypt;
 use App\Models\Order;
 use App\Models\CleanerTeam;
 use App\Models\Favourite;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Profile extends Component
 {
+    use LivewireAlert;
     public $cleanerId;
     public $cleaner;
 
@@ -61,20 +63,20 @@ class Profile extends Component
     protected function prepareProps()
     {
         /* Get data */
-        $this->cleanerServices    = CleanerServices::where("users_id", $this->cleanerId )->where('status', '1' )->get();
-        $this->servicesItems      = ServicesItems::find( $this->cleanerServices->pluck('services_items_id') );
-        $this->servicesUnmodified = Services::find( $this->servicesItems->pluck('services_id') );
+        $this->cleanerServices    = CleanerServices::where("users_id", $this->cleanerId)->where('status', '1')->get();
+        $this->servicesItems      = ServicesItems::find($this->cleanerServices->pluck('services_items_id'));
+        $this->servicesUnmodified = Services::find($this->servicesItems->pluck('services_id'));
 
         /* Prepare services object for blade */
         $this->services = collect();
-        foreach ( $this->servicesUnmodified as $service ) {
-            $service->serviceItems = $this->servicesItems->whereIn('services_id', $service->id );
-            $this->services->push( $service );
+        foreach ($this->servicesUnmodified as $service) {
+            $service->serviceItems = $this->servicesItems->whereIn('services_id', $service->id);
+            $this->services->push($service);
         }
 
         // fetching first because there will always be only one service for add ons if cleaner opts in for that
-        $addOnService     = $this->services->where('types_id', 2 )->first();
-        $this->itemAddOns = is_null( $addOnService ) ? null : $addOnService->serviceItems;
+        $addOnService     = $this->services->where('types_id', 2)->first();
+        $this->itemAddOns = is_null($addOnService) ? null : $addOnService->serviceItems;
 
         $this->fillSocialMediaShareInfo();
         $this->fillCleanerAdditionalInfo();
@@ -84,8 +86,8 @@ class Profile extends Component
 
     protected function fillCleanerAdditionalInfo()
     {
-        $completedOrders = Order::where('cleaner_id', $this->cleanerId )->whereIn('status', ['payment_collected', 'completed'])->count();
-        $totalMembersOfCleanerTeam = CleanerTeam::where('user_id', $this->cleanerId )->count();
+        $completedOrders = Order::where('cleaner_id', $this->cleanerId)->whereIn('status', ['payment_collected', 'completed'])->count();
+        $totalMembersOfCleanerTeam = CleanerTeam::where('user_id', $this->cleanerId)->count();
         $this->cleanerAdditionalInfo = [
             'rating' => 0,
             'completed_orders' => $completedOrders,
@@ -101,7 +103,7 @@ class Profile extends Component
     public function fillSocialMediaShareInfo()
     {
         $this->socialMediaSharingInfo = [
-            'title' => urlencode("CanaryCleaner ".$this->cleaner->name),
+            'title' => urlencode("CanaryCleaner " . $this->cleaner->name),
             //'url'   => urlencode(request()->url()), // local links doesn't get share on social platforms
             'url'     => urlencode("https://www.atxwebdesigns.com/how-to-build-a-recession-proof-small-business/"),
         ];
@@ -139,7 +141,7 @@ class Profile extends Component
         $lawyerHoursDayAll = CleanerHours::whereUsersId($this->cleaner->id)->get()->pluck('day')->toArray();
 
         $lawyerHoursDayArray = [];
-        foreach($lawyerHoursDayAll as $day){
+        foreach ($lawyerHoursDayAll as $day) {
             array_push($lawyerHoursDayArray, $day);
         }
 
@@ -187,15 +189,14 @@ class Profile extends Component
             $time_slots = array();
             $add_mins  = $duration * 60;
 
-            foreach($hoursDayAll as $hour){
+            foreach ($hoursDayAll as $hour) {
                 $startTime = strtotime($hour->from_time);
                 $endTime = strtotime($hour->to_time);
                 while ($startTime <= $endTime) {
                     $timeSlot = [];
-                    if(in_array(date("H:i:s", $startTime), $getLeaves)) {
+                    if (in_array(date("H:i:s", $startTime), $getLeaves)) {
                         $timeSlot['is_free'] = 'no';
-                    }
-                    else {
+                    } else {
                         $timeSlot['is_free'] = 'yes';
                     }
 
@@ -204,7 +205,6 @@ class Profile extends Component
                     $time_slots[] = $timeSlot;
 
                     $startTime += $add_mins;
-
                 }
             }
             $this->workingDatesTimeSlot = $time_slots;
@@ -215,21 +215,21 @@ class Profile extends Component
     {
         $this->estimatedPrice = 0;
         $this->estimatedTime  = 0;
-        if ( empty( $this->homeSize) ){
+        if (empty($this->homeSize)) {
             return null;
         }
 
         /* Filter out selected services */
-        $selectedServices = $this->cleanerServices->where('services_items_id', $this->serviceItemId );
-        if ( ! empty( $this->addOnIds) ) {
-            $addOnServices    = $this->cleanerServices->whereIn('services_items_id', $this->addOnIds );
-            $selectedServices = $selectedServices->concat( $addOnServices );
+        $selectedServices = $this->cleanerServices->where('services_items_id', $this->serviceItemId);
+        if (!empty($this->addOnIds)) {
+            $addOnServices    = $this->cleanerServices->whereIn('services_items_id', $this->addOnIds);
+            $selectedServices = $selectedServices->concat($addOnServices);
         }
 
 
         /* Sum of each service price against input square feet */
-        foreach ( $selectedServices as $serviceItem ) {
-            $this->estimatedPrice += $serviceItem->priceForSqFt( $this->homeSize );
+        foreach ($selectedServices as $serviceItem) {
+            $this->estimatedPrice += $serviceItem->priceForSqFt($this->homeSize);
         }
 
         $this->estimatedTime = $selectedServices->sum('duration');
@@ -237,20 +237,20 @@ class Profile extends Component
 
     public function updatingHomeSize($value)
     {
-/*         $this->validate([
+        /*         $this->validate([
             'serviceItemId' => 'required',
             'homeSize' => 'present|numeric|min:100'
         ]); */
     }
 
-    public function updated( $key, $value )
+    public function updated($key, $value)
     {
 
-        if ( $key == "homeSize" ){
-            $this->validate(['homeSize' => 'numeric|min:100','serviceItemId' => 'required']);
+        if ($key == "homeSize") {
+            $this->validate(['homeSize' => 'numeric|min:100', 'serviceItemId' => 'required']);
         }
 
-        if ( in_array( $key, [ 'homeSize', 'serviceItemId', 'addOnIds' ]) ) {
+        if (in_array($key, ['homeSize', 'serviceItemId', 'addOnIds'])) {
             $this->updateEstimateTimeAndPrice();
         }
     }
@@ -266,9 +266,9 @@ class Profile extends Component
     }
 
 
-    public function updatedSelectedDate(){
+    public function updatedSelectedDate()
+    {
         $this->slotAvailability();
-
     }
 
     protected function checkoutRules()
@@ -285,24 +285,28 @@ class Profile extends Component
             'serviceItemId.required' => "Please select any cleaning type"
         ];
 
-        return [ $rules, $messages ];
+        return [$rules, $messages];
     }
 
     public function redirectToCheckout()
     {
-        $validatedData = $this->validate(...$this->checkoutRules());
-        $validatedData['cleanerId'] = $this->cleanerId;
+        // $user = auth()->user()->role;
 
-        $encryptedDetails = Crypt::encryptString( json_encode( $validatedData ) );
+        if (auth()->user()->role == 'cleaner') {
+            return $this->alert("error", "Cleaner don't have permission");
+        } else {
+            $validatedData = $this->validate(...$this->checkoutRules());
+            $validatedData['cleanerId'] = $this->cleanerId;
 
-        return redirect()->route('checkout', ['details' => $encryptedDetails ]);
+            $encryptedDetails = Crypt::encryptString(json_encode($validatedData));
 
+            return redirect()->route('checkout', ['details' => $encryptedDetails]);
+        }
     }
 
     public function hydrate()
     {
         $this->resetErrorBag();
-
     }
     public function render()
     {
