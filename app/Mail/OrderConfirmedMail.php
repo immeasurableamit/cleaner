@@ -36,7 +36,7 @@ class OrderConfirmedMail extends Mailable implements ShouldQueue
     public function envelope()
     {
         return new Envelope(
-            subject: 'Order Confirmed Mail',
+            subject: 'CanaryClean Appointment Confirmed',
         );
     }
 
@@ -52,7 +52,7 @@ class OrderConfirmedMail extends Mailable implements ShouldQueue
             with: [
                 'user'    => $this->user,
                 'order'   => $this->order,
-                'message' => "Your order #".$this->order->id." has confirmed by cleaner"
+                //'message' => "Your order #".$this->order->id." has confirmed by cleaner"
             ],
         );
     }
