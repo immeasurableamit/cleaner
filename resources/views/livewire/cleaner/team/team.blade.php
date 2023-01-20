@@ -9,22 +9,22 @@
                 <h3 class="mb-0">Team Info</h3>
 
                 <span>Add additional team members below</span>
-                
+
             </div>
 
             <!-- Modal -->
-           
+
 
         </div>
     </div>
     <!-- End Model-->
     <div class="teams-table-layout-view">
-   
+
             @foreach ($teamMembers as $teamMember)
             <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <div class="select-date-toggles overflow-hidden teamCard-{{$teamMember->id}}">
-                        <button class="service_toggle_s" data-id="{{ $teamMember->id }}" ></button>
+                        <button class="service_toggle_s removeCard-{{$teamMember->id}}" data-id="{{ $teamMember->id }}" ></button>
                         <div class="service-main-service-column">
 
                             <div class="altrntive_rw">
@@ -77,7 +77,7 @@
                     </button>
                 </div>
     </div>
-      
+
     <!-- updateModel -->
     <div wire:ignore.self class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -277,12 +277,20 @@
         </script>
 
         <script>
-            window.livewire.on('postAdded', (id, action) => {
+            window.livewire.on('close-modal', (id, action) => {
                 var id = id;
+                // console.log("hellooooooooooooooooooooooooooooooooooo");
+                $("#updateModalClose").click();
+                $('.removeCard-'+id).unbind();
                 if(action == 'success'){
                     location.reload();
                 }
         });
+
+        // window.livewire.on('close-modal', () => {
+
+        // });
+
         </script>
     @endpush
     <style>

@@ -5169,7 +5169,7 @@ input[type="month"]::-webkit-calendar-picker-indicator {
     background-color: #f8d048;
     color: #fff;
 }
-.select-date-toggles.show {
+..show {
     max-height: 100%;
     overflow: visible;
 }
