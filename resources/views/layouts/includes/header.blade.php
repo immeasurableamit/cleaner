@@ -67,7 +67,7 @@
                             <div class="dropdown">
                                 <a href="{{ route('messages') }}" class="btn dropdown-toggle position-relative btn-transparent">
                                     <img src="{{ asset('/assets/images/icons/email-2.svg') }}">
-                                    <span class="notification-indicators"></span>
+                                    <span class="notification-alert"></span>
                                 </a>
                             </div>
                         </li>
