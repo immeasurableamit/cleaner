@@ -715,7 +715,7 @@ color: var(--secondary);
     background-image: url('../images/icons/drop-arrpw.svg');
     background-size: auto;
     background-repeat: no-repeat;
-    background-position: 92% 50%;
+    background-position: 92% 23px;
 }
 .select2-selection__arrow {
     display: none !important;
@@ -5945,6 +5945,27 @@ fieldset .row.no-mrg .checkout_div h4{
 .form_availibility .availbility_cover {
     max-height: 230px;
     overflow: auto;
+}
+.profile_id span.select2-selection.select2-selection--single {
+    background-color: inherit !important;
+}
+.profile_id ul#select2-addon-selector-container {
+    padding: 0px !important;
+}
+.profile_id span.select2-selection.select2-selection--multiple {
+    max-height: 95px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+.final-steps-sec .something_amazing_div h3 {
+    font-size: 35px;
+    font-weight: 700;
+}
+.final-steps-sec h3 span {
+    font-family: 'Poppins', sans-serif;
+}
+.team_row .teams-table-layout-view {
+    padding-left: 55px;
 }
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {
