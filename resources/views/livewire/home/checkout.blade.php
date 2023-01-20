@@ -293,7 +293,9 @@
                                                 <span class="text-danger">{{ $message }} </span>
                                             @enderror
                                             @error('city')
-                                                <br><span class="text-danger">{{ $message }} </span>
+                                                <div>
+                                                    <span class="text-danger">{{ $message }} </span>
+                                                </div>
                                             @enderror
                                         </div>
                                     </div>

@@ -30,8 +30,6 @@
 
 
     <script src="{{asset('assets/js/jquery-3.6.0.js')}}"></script>
-
-
     <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
         <script src="{{ asset('js/app.js') }}" defer></script>
 
@@ -57,7 +55,7 @@
                 }
             });
 
-            /*
+        
             //.....
             var notificationsCountElem   = $('.notification-indicators');
 
@@ -67,8 +65,10 @@
             channel.bind('App\\Events\\MessageCount', function(data) {
                 notificationsCountElem.html(data.messageCount);
             }.bind(this));
-            */
+            
         </script>
+
+
 <style>
     .help-block{
         color:red;
@@ -83,7 +83,7 @@
     @if (auth()->user()->role == 'cleaner' &&
         auth()->user()->isEligibleForListing() == false)
         <div class="container" id="requirements-alert-container">
-            <div class="alert alert-success alert-dismissible fade show mx-5 mt-3" role="alert">
+            <div class="alert alert-success alert-dismissible fade show mx-5 mt-3 customer-white-wrapper" role="alert" style="border-color: #36a7f8;">
                 <div class="d-flex justify-content-between">
                     <h4 class="alert-heading">Attention!</h4>
                 <button type="button" class="close bg-none border-0" data-dismiss="alert" aria-label="Close" onclick="document.getElementById('requirements-alert-container').remove()">
