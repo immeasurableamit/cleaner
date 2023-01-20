@@ -40,6 +40,9 @@
                 <li class="d-flex justify-content-spacebw two_column">
                     <h6 class="title-label">Name:</h6>
                     <p class="name">{{ $user->first_name }}</p>
+                    <div class="action-block">
+                                <span class="edit"></span>
+                            </div>
                 </li>
                 <li class="position-relative">
                     <div class="d-flex justify-content-spacebw three_column edit_frm">
