@@ -29,9 +29,9 @@
 
 
     <script src="{{asset('assets/js/jquery-3.6.0.js')}}"></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
-        <script src="{{ asset('js/app.js') }}" defer></script>
-
+        
         <script>
             let user = {
                 id:{{ auth()->check() ? auth()->user()->id : '' }}
@@ -56,13 +56,14 @@
 
         
             //.....
-            var notificationsCountElem   = $('.notification-indicators');
+            var notificationsCountElem   = $('.notification-alert');
 
             // Subscribe to the channel we specified in our Laravel Event
             var channel = pusher.subscribe('private-chat-count-'+user.id);
 
             channel.bind('App\\Events\\MessageCount', function(data) {
-                notificationsCountElem.html(data.messageCount);
+                let htm = '<span class="notification-indicators">'+data.messageCount+'</span>';
+                notificationsCountElem.html(htm);
             }.bind(this));
             
         </script>
@@ -114,7 +115,7 @@
     @include('layouts.includes.script')
 
 
-
+    
 
 </body>
 
