@@ -1,7 +1,7 @@
-@extends('layouts.cleanerapp')
+@extends($layout)
 @section('content')
 
-<section class="light-banner customer-account-page" style="background-image: url(`{{asset('assets/images/white-pattern.png')}}`">
+<section class="light-banner customer-account-page" style="background-image: url('assets/images/white-pattern.png')">
 	<div class="container">
 		<div class="customer-white-wrapper" id="root">
 			

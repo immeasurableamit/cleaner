@@ -29,8 +29,6 @@
 
 
     <script src="{{asset('assets/js/jquery-3.6.0.js')}}"></script>
-
-
     <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
         <script src="{{ asset('js/app.js') }}" defer></script>
 
@@ -56,7 +54,7 @@
                 }
             });
 
-            /*
+        
             //.....
             var notificationsCountElem   = $('.notification-indicators');
 
@@ -66,8 +64,10 @@
             channel.bind('App\\Events\\MessageCount', function(data) {
                 notificationsCountElem.html(data.messageCount);
             }.bind(this));
-            */
+            
         </script>
+
+
 <style>
     .help-block{
         color:red;
