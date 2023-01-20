@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\BillingAddress;
+use App\Notifications\VerifyEmail;
+
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -238,4 +240,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->cleanerReviews->avg('rating');
     }
+
+/**
+ * Send the email verification notification.
+ *
+ * @return void
+ */
+public function sendEmailVerificationNotification()
+{
+    $this->notify(new VerifyEmail); // my notification
+}
 }
