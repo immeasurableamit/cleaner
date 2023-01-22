@@ -470,6 +470,7 @@ class Checkout extends Component
 
     public function mount()
     {
+        // dd($this->number);
         $this->prepare();
         $this->handleLoggedInUser();
 

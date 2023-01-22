@@ -312,8 +312,8 @@
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="form-grouph mb-3 card_text_input">
-                                                    <input type="text" wire:model="formattedNumber"
-                                                        name="formattedNumber" placeholder="Card number">
+                                                    <input type="text" 
+                                                        name="formattedNumber" id="formattedNumber" placeholder="Card number">
                                                     <input type="text" id="exp_month_year" name="exp_month_year"
                                                         placeholder="MM/YY" class="mm_input">
                                                     <input type="password" wire:model="cvc" name="cvc"
@@ -540,6 +540,38 @@
             });
 
         });
+
+// try work
+
+// function cc_format(value) {
+//   var v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '')
+//   var matches = v.match(/\d{4,16}/g);
+//   var match = matches && matches[0] || ''
+//   var parts = []
+//   for (i=0, len=match.length; i<len; i+=4) {
+//     parts.push(match.substring(i, i+4))
+//   }
+//   if (parts.length) {
+//     return parts.join(' ')
+//   } else {
+//     return value
+//   }
+// }
+$("#formattedNumber").keyup(function() {
+    // debugger;
+var foo = $(this).val().replace(/\s+/g, "").replace(/[^0-9]/gi, ""); // remove non numeric
+foo = foo.split(" ").join(""); // remove spaces
+if (foo.length > 0) {
+foo = foo.match(new RegExp(".{1,4}", "g")).join(" ").slice(-23); // max 23 chars
+}
+$(this).val(foo);
+console.log(foo);
+// @this.set('number',foo);
+var number = foo.replace(/\s/g,'');
+@this.set('number',number);
+console.log(number);
+});
+
     </script>
 
 </div>
