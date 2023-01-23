@@ -139,7 +139,8 @@ public function favourite()
             'cancelled_by_customer' => 'Cancelled by customer',
             'payment_collected' => 'Accepted',
             'completed' => 'Completed',
-            'reviewed'  => 'Completed'
+            'reviewed'  => 'Completed',
+            'payment_failed'    => 'Payment failed',
         ];
 
         return $statuses[ $this->status ];
