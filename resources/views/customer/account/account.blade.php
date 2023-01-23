@@ -12,6 +12,9 @@
                      <h4>Settings</h4>
                   </div>
                   @include('layouts.common.sidebar')
+                  <div class="blue-logo-block text-center max-width-100">
+                    <a href="#"><img src="/assets/images/logo/logo.svg"></a>
+                </div>
                </div>
             </div>
             <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 no-padd">
