@@ -204,13 +204,16 @@
                   </div>
                 </div>
               </div>
-              <input type="checkbox" name="term">
-              {!! $errors->first('term', '<span class="alert">:message</span>') !!}
+              
+           
               <div class="form-flex two-column">
-                <div class="form-left-block">
-                  <div class="terms-text">
+                <div class="form-left-block ">
+                
+                  <div class="terms-text terms_r">
+                  <input type="checkbox" name="term">
                     <p>By clicking “Create My Account”, you agree with all Canary Clean’s <a href="#" class="link-design-2">terms and conditions</a> and <a href="#" class="link-design-2">privacy policy</a></p>
                   </div>
+                  {!! $errors->first('term', '<span class="alert">:message</span>') !!}
                 </div>
                 <div class="form-right-block">
                   <div class="form-grouph submit-design mb-30">

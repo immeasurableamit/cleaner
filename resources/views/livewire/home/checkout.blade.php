@@ -97,12 +97,13 @@
     <!-- Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
         <div class="modal-dialog" role="document">
+        <button type="button" class="close btn_close" onclick="$('#loginModal').modal('hide')" style="border: none; background: transparent;">
+                        <i class="fa fa-times fa-xl" aria-hidden="true"></i>
+                    </button>
             <div class="modal-content">
                 <div class="modal-header border border-bottom-0">
                     <h5 class="modal-title" id="exampleModalLabel"></h5>
-                    <button type="button" class="close" onclick="$('#loginModal').modal('hide')" style="border: none; background: white;">
-                        <i class="fa fa-times fa-xl" aria-hidden="true"></i>
-                    </button>
+                    
                 </div>
                 <div class="modal-body">
                     <form class="form-grouph input-design mb-30" wire:submit.prevent="authenticateUser">
@@ -120,7 +121,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
+                <div class="py-3 text-center">
 
                     <button type="button" wire:click="authenticateUser" class="btn_blue">Login</button>
                 </div>

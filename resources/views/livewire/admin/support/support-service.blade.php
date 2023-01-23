@@ -3,6 +3,13 @@
         nav svg {
             max-height: 20px;
         }
+            .pagi_links .flex.justify-between.flex-1.sm\:hidden {
+        display: none;
+    }
+    .pagi_links span.relative.z-0.inline-flex.rounded-md.shadow-sm button {
+        width: 38px;
+        height: 40px;
+}
     </style>
     <div class="col-md-4">
         <input type="text" class="form-control" placeholder="Search..." wire:model="searchRecord" />
@@ -50,5 +57,8 @@
 
         </tbody>
     </table>
-    {{$supportServices->links()}}
+ 
+ <div class="pagi_links">
+   {{$supportServices->links()}}
+   </div> 
 </div>

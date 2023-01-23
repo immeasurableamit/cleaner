@@ -1,7 +1,7 @@
 <div>
-
-    <button type="button" class="btn btn-success addService">Add Service</button>
-
+    <div class="pb-3 text-end">
+    <button type="button" class="btn_blue px-3 py-2 addService">Add Service</button>
+    </div>
 
     @foreach($services as $service)
     <table id="all-cleaner-table22" class="table dt-responsive nowrap" style="width:100%">
@@ -21,7 +21,7 @@
                 <td class="status">
                     <button type="button" class="btn btn-success" wire:click="edit({{$service->id}})">Edit</button>
 
-                    <button type="button" class="btn btn-success" wire:click="deleteService({{$service->id}})">Delete</button>
+                    <button type="button" class="btn btn-danger" wire:click="deleteService({{$service->id}})">Delete</button>
 
                     <button type="button" class="btn btn-success" wire:click="storeServiceItem({{$service->id}})">Add Items</button>
                 </td>
@@ -55,7 +55,7 @@
                         <td class="status">
                             <button type="button" class="btn btn-success" wire:click="editItem({{$item->id}})">Edit</button>
 
-                            <button type="button" class="btn btn-success" wire:click="deleteItem({{$item->id}})">Delete</button>
+                            <button type="button" class="btn btn-danger" wire:click="deleteItem({{$item->id}})">Delete</button>
                         </td>
                     </tr>
                     @endforeach
@@ -71,7 +71,7 @@
 
     <div wire:ignore.self class="modal fade show in" id="serviceForm" tabindex="-1" role="dialog" aria-labelledby="serviceForm" aria-hidden="true">
         <div class="modal-dialog modal_style">
-        <button type="button" class="btn btn-default serviceFormClose"><span aria-hidden="true">×</span></button>
+        <button type="button" class="btn btn_close serviceFormClose"><span aria-hidden="true">×</span></button>
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">@if(!empty($serviceId)) Edit @else Add @endif Service</h4>
@@ -105,7 +105,7 @@
                 </div>
                 <div class="text-center mb-3">
 
-                    <button type="submit" class="btn_s" wire:click="store" wire:loading.attr="disabled">
+                    <button type="submit" class="btn_blue" wire:click="store" wire:loading.attr="disabled">
                         {{--<i wire:loading wire:target="store" class="fa fa-spin fa-spinner"></i>--}} Save
                     </button>
                 </div>
@@ -118,7 +118,7 @@
 
     <div wire:ignore.self class="modal fade show in" id="serviceItemsForm" tabindex="-1" role="dialog" aria-labelledby="serviceItemsForm" aria-hidden="true">
         <div class="modal-dialog modal_style">
-        <button type="button" class="btn btn-default serviceFormClose"><span aria-hidden="true">×</span></button>
+        <button type="button" class="btn btn_close serviceFormClose"><span aria-hidden="true">×</span></button>
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">@if(!empty($serviceId)) Edit @else Add @endif Service Items</h4>
@@ -159,7 +159,7 @@
                 </div>
                 <div class="text-center mb-3">
 
-                    <button type="submit" class="btn_s" wire:click="storeItem" wire:loading.attr="disabled">
+                    <button type="submit" class="btn_blue " wire:click="storeItem" wire:loading.attr="disabled">
                         {{--<i wire:loading wire:target="storeItem" class="fa fa-spin fa-spinner"></i>--}} Save
                     </button>
                 </div>
