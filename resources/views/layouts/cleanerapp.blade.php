@@ -12,7 +12,7 @@
 
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/admin/css/admin.css') }}" rel="stylesheet">
+    <!-- <link href="{{ asset('assets/admin/css/admin.css') }}" rel="stylesheet"> -->
     <link href="{{ asset('assets/css/slick.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/croppie.css') }}" rel="stylesheet">

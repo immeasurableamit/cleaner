@@ -1114,7 +1114,7 @@ padding-right: 15px;
 }
 .navigation-tab-desing li a {
     display: block;
-    color: #fff;
+    color: #fff !important;
     text-decoration: none;
     font-weight: 400;
     font-size: 16px;
@@ -1219,6 +1219,7 @@ button:focus, input:focus, select:focus, textarea:focus{
     font-size: 14px;
     font-weight: 400;
     margin-bottom: 0px;
+    text-transform: capitalize;
 }
 .customer_profile-info>.d-flex {
     padding-right: 40px;
@@ -5169,7 +5170,7 @@ input[type="month"]::-webkit-calendar-picker-indicator {
     background-color: #f8d048;
     color: #fff;
 }
-..show {
+.select-date-toggles.show {
     max-height: 100%;
     overflow: visible;
 }
@@ -5984,6 +5985,27 @@ fieldset .row.no-mrg .checkout_div h4{
 }
 .clean_house_section button.search-btn {
     top: 0px;
+}
+.terms_r{
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+.terms_r input[type="checkbox"] {
+    position: relative;
+    top: 3px;
+}
+.biling_form .customer-account-information li.three_column>p {
+    width: 63%;
+    font-weight: 400;
+}
+.btn_close{
+    position: absolute;
+    right: 0px;
+    top: -30px;
+    cursor: pointer;
+    z-index: 2;
+    color: #fff;
 }
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {
