@@ -39,8 +39,8 @@
                                       <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
                                       @if ($policy) checked @endif
                                       disabled>
-                                      <label class="form-check-label" for="flexSwitchCheckChecked">(I certify that I and/or my Team are fully covered)</label>
-                                      <span class="learn-more-link" data-bs-toggle="modal" data-bs-target="#learn-more-badge" type="button">Learn More</span>
+                                      <label class="form-check-label" for="flexSwitchCheckChecked">(toggle locked to status of insurance)</label>
+                                      {{-- <span class="learn-more-link" data-bs-toggle="modal" data-bs-target="#learn-more-badge" type="button">Learn More</span> --}}
                                     </div>
 
                                     <div class="form-headeing-second  mt-3 ">
@@ -55,7 +55,7 @@
                                     @endif
 
                                       >
-                                      <label class="form-check-label" for="flexSwitchCheckChecked">Organic service offered upon Requred</label>
+                                      <label class="form-check-label" for="flexSwitchCheckChecked">Organic service offered upon Required</label>
                                     </div>
                                  </div>
 
