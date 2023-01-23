@@ -2,7 +2,7 @@
     <ul class="list-unstyled">
     @if (Auth::user()->role=="customer")
     <li><a class="nav-link {{ request()->routeIs('customer.account') ? ' active' : '' }}" href="{{ route('customer.account') }}">Account </a></li>
-    <li><a href="{{route('customer.appointment.index')}}" class="{{ @$title['active']=='appoinment' ? 'active' : '' }}">Appoinments</a></li>
+    <li><a href="{{route('customer.appointment.index')}}" class="{{ @$title['active']=='appoinment' ? 'active' : '' }}">Appointments</a></li>
     <li><a href="{{route('customer.billing.index')}}" class="{{ @$title['active']=='billing' ? 'active' : '' }}">Billing</a></li>
     <li><a href="{{ route('customer.notification.index') }}" class="{{ @$title['active'] == 'notification' ? 'active' : '' }}">Notification</a></li>
     <li><a href="{{route('customer.favourite.index') }}" class="{{ @$title['active']=='favourite' ? 'active' : '' }}">Favourite</a></li>
@@ -10,10 +10,10 @@
 
 
     @elseif (Auth::user()->role=="cleaner")
-      <li class="account_dropdown">
+    <li class="account_dropdown"  id="sidebar-account-dropdown">
 
         <a href="#" class="nav-link active dropdown-toggle show" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account and Settings <img src="{{asset('./assets/images/icons/drop-arrow.svg')}}"></a>
-      <ul class="dropdown_links dropdown-menu show" aria-labelledby="navbarDropdown">
+      <ul class="dropdown_links dropdown-menu show" aria-labelledby="navbarDropdown" id="sidebar-account-dropdown-menu">
         <li><a href="{{route('cleaner.account')}}" class="{{ @$title['active']=='account' ? 'active' : '' }}">View Account Info</a></li>
         <li><a href="{{route('cleaner.team')}}" class="{{ @$title['active']=='team' ? 'active' : '' }}">Team</a></li>
         <li><a href="{{route('cleaner.availability.index')}}" class="{{ @$title['active']=='availability' ? 'active' : '' }}">Set Availability</a></li>

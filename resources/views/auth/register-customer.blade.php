@@ -63,7 +63,7 @@
               </div>
               <div class="form-grouph textarea-single-design">
               {!! Form::label('about','About yourself (Optional)', ['class' => 'form-label']) !!}
-              <textarea name="about"> Effective</textarea>
+              <textarea name="about" placeholder="Write something about your self"> </textarea>
               {!! $errors->first('about', '<span class="help-block">:message</span>') !!}
               </div>
               <div class="folow-us">
@@ -111,8 +111,8 @@
                     <div class="form-grouph mb-30 input-select-abs">
                       <div class="inputs-box">
                       {!! Form::text('city', request()->city ?? null, ['id' => 'city', 'placeholder' => 'City','class' => 'form-control'.($errors->has('city') ? ' is-invalid' : '')]) !!}
-                      {!! $errors->first('city', '<span class="alert">:message</span>') !!}
                       </div>
+                      {!! $errors->first('city', '<span class="alert">:message</span>') !!}
                       <div class="selecti-box">
                         <select class="select-custom-design" name="state" value="{{old('state')}}">
                           @foreach ($states as $state )
@@ -121,6 +121,13 @@
                         </select>
                         {!! $errors->first('state', '<span class="alert">:message</span>') !!}
                       </div>
+                    </div>
+                    <div>
+                    <input type="checkbox" name="term">
+                {!! $errors->first('term', '<span class="alert">:message</span>') !!}
+                    <div class="terms-text">
+                      <p>By clicking “Create My Account”, you agree with all Canary Clean’s <a href="#" class="link-design-2">terms and conditions</a> and <a href="#" class="link-design-2">privacy policy</a></p>
+                    </div>
                     </div>
                   </div>
                   <div class="form-right-block">
@@ -154,13 +161,10 @@
                     </div>
                   </div>
                 </div>
-                <input type="checkbox" name="term">
-                {!! $errors->first('term', '<span class="alert">:message</span>') !!}
+
                 <div class="form-flex two-column">
                   <div class="form-left-block">
-                    <div class="terms-text">
-                      <p>By clicking “Create My Account”, you agree with all Canary Clean’s <a href="#" class="link-design-2">terms and conditions</a> and <a href="#" class="link-design-2">privacy policy</a></p>
-                    </div>
+
                   </div>
                   <div class="form-right-block">
                     <div class="form-grouph submit-design mb-30">
@@ -185,7 +189,7 @@
 <script>
   /*
     function getLocation(){
-      if ("geolocation" in navigator){ //check geolocation available 
+      if ("geolocation" in navigator){ //check geolocation available
         //try to get user current location using getCurrentPosition() method
         navigator.geolocation.getCurrentPosition(function(position){
             $('input[name=latitude]').val(position.coords.latitude);
@@ -215,10 +219,10 @@
 
       document.getElementById('latitude').value  = parsed_gmap_place.lat;
       document.getElementById('longitude').value = parsed_gmap_place.lng;
-      
+
     }
 
-  
+
     window.addEventListener('load', function() {
       var address_input = document.getElementById('address');
       makeAddressInputAutocompletable( address_input, fillAddressFieldsInForm );

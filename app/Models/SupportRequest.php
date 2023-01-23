@@ -40,8 +40,9 @@ class SupportRequest extends Model
     public static function issuesForUser()
     {
         return [
-            'abusive' => 'Report Customer - Abusive',
-            'not_matched_quote' => 'Report Customer - Home did not match quote',
+            'not_satisfied' => 'Job not done Satisfactory',
+            'job_not_started' => 'Job wasn’t Started',
+            'report_provider' => 'Report Provider (explain in notes)',
             'other' => 'Other'
         ];
     }
@@ -49,7 +50,9 @@ class SupportRequest extends Model
     public static function resolutionsForUser()
     {
         return [
-            'block_customer' => 'Block Customer from my account',
+            'correct_issue' => 'Give cleaner chance to correct the issue',
+            'block_cleaner' => 'Remove future cleanings with cleaner',
+            'refund'         => 'Request refund',
             'other' => 'Other',
         ];
     }

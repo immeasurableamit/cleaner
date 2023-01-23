@@ -55,7 +55,7 @@ class Team extends Component
         $user->ssn_or_tax = $this->ssn_or_tax;
 
         $user->save();
-        $this->emit('close-modal');
+        // $this->emit('close-modal');
         $this->alert('success', 'Save successfully');
         return redirect()->route('cleaner.team');
     }
@@ -73,6 +73,8 @@ class Team extends Component
         $this->email = $user->email;
         $this->address = $user->address;
         $this->ssn_or_tax = $user->ssn_or_tax;
+
+        $this->dispatchBrowserEvent('openModal');
     }
 
     public function update()
@@ -95,17 +97,28 @@ class Team extends Component
                 'ssn_or_tax' => $this->ssn_or_tax,
 
             ]);
-            $this->emit('close-modal');
+            $this->emit('close-modal', $this->user_id, 'success');
+            // $this->emit('close-modal');
+            // $this->emit('closeModal');
+
             $this->updateMode = false;
-            $this->alert('success', 'Updated successfully');
+
         }
-        return redirect()->route('cleaner.team');
+        // return redirect()->route('cleaner.team');
+        $this->alert('success', 'Updated successfully');
     }
+
+    // public function showHide($id)
+    // {
+
+    //     $this->emit('postAdded', $id, 'success');
+
+    // }
 
     public function deleteConfirm($iid)
     {
         $this->user_id = $iid;
-        
+
         $this->alert('warning', 'Are you sure do want to delete?', [
 			'toast' => false,
 			'position' => 'center',
@@ -113,10 +126,10 @@ class Team extends Component
 			'cancelButtonText' => 'Cancel',
 			'showConfirmButton' => true,
 			'confirmButtonText' => 'Delete it',
-			'onConfirmed' => 'delete',  
+			'onConfirmed' => 'delete',
 			'timer' => null
 		]);
-        
+
     }
 
     public function delete()

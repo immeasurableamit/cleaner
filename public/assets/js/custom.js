@@ -52,31 +52,41 @@ $(document).ready(function(){
     //     $(".edit").click(function(){
     //         $(this).parents('li').toggleClass("edit-active");
     //         if ($(this).parents('li').hasClass('edit-active')){
-    //                 $(this).parent('form').addClass('edit-on');  
+    //                 $(this).parent('form').addClass('edit-on');
     //             } else {
-    //                 $(this).parent('form').removeClass('edit-on'); 
+    //                 $(this).parent('form').removeClass('edit-on');
     //             }
     //       });
     // });
-    
-     
+
+
     $(document).ready(function(){
         $(".card_reviews").slice(0,3).show();
         $(".btn_show_more").click(function(e){
           e.preventDefault();
           $(".card_reviews:hidden").slice(0,3).fadeIn("slow");
-          
+
           if($(".card_reviews:hidden").length == 0){
              $(".btn_show_more").fadeOut("slow");
             }
         });
       });
       $(document).ready(function() {
+        /*
+        $("#sidebar-account-dropdown").click(() => {
+            $(this).find('#sidebar-account-dropdown-menu').toggleClass('show');
+        });
+        */
+
         $('.account_dropdown>a').click(function(){
             $(this).toggleClass('active');
         });
+
+
+
+
     });
-   
+
       $(document).ready(function(){
         $(".toggle_menu img").click(function(){
           $('.blue-bg-wrapper').addClass("show");

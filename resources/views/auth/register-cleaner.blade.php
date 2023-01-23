@@ -10,7 +10,7 @@
             <img src="assets/images/customer.png">
           </div>
           <div class="select-signup-cntnt">
-            <p>I’m a Customer</p>signup
+            <p>I’m a Customer</p>
           </div>
           <a href="{{route('signup-customers')}}" class="link-overlay"></a>
         </div>
@@ -66,7 +66,7 @@
 
             <div class="form-grouph textarea-single-design">
               {!! Form::label('about','About yourself (Optional)', ['class' => 'form-label']) !!}
-              <textarea name="about"> Effective</textarea>
+              <textarea name="about" placeholder="Write something about your self"> </textarea>
               {!! $errors->first('about', '<span class="help-block">:message</span>') !!}
             </div>
             <div class="folow-us">
@@ -112,12 +112,13 @@
                     {!! Form::text('address', request()->address ?? null, ['id'=>'address', 'placeholder' => 'Address','class' => 'form-control'.($errors->has('address') ? ' is-invalid' : '')]) !!}
                     {!! $errors->first('address', '<span class="alert">:message</span>') !!}
                   </div>
-                  <div class="form-grouph mb-30 input-select-abs">
+                  <div class="form-grouph mb-30 input-select-abs select_state">
                     <div class="inputs-box">
                       {!! Form::text('city', request()->city ?? null, ['id' => 'city', 'placeholder' => 'City','class' => 'form-control'.($errors->has('city') ? ' is-invalid' : '')]) !!}
-                      {!! $errors->first('city', '<span class="alert">:message</span>') !!}
-
                     </div>
+                    {!! $errors->first('city', '<span class="alert">:message</span>') !!}
+                  <div>  {!! $errors->first('state', '<span class="alert">:message</span>') !!}
+                  </div>
                     <div class="selecti-box">
                       <select class="select-custom-design" name="state" required>
                         <option>Select State</option>
@@ -125,7 +126,7 @@
                         <option value="{{ $state->id }}">{{ $state->name }}</option>
                         @endforeach
                       </select>
-                      {!! $errors->first('state', '<span class="alert">:message</span>') !!}
+                     
                     </div>
                   </div>
                   <div class="form-grouph mb-30">
@@ -137,9 +138,10 @@
                           @for($i = 1; $i <=12; $i++) <option value="{{old('month') ?? $i<=9 ? '0'.$i : $i }}">{{ date('F', mktime(0,0,0,$i)) }}</option>
                             @endfor
                         </select>
-                        {!! $errors->first('month', '<span class="alert">:message</span>') !!}
-
+                      
                       </div>
+                      
+
                       <div class="select-box-design-first">
                         <select class="select-custom-design" name="day" value="{{old('day')}}">
                           <option value="" disabled selected>Day</option>
@@ -147,18 +149,22 @@
                           <option value="{{old('day') ?? $d}}">{{$d}}</option>
                           @endforeach
                         </select>
-                        {!! $errors->first('day', '<span class="alert">:message</span>') !!}
+                    
                       </div>
+                  
                       <div class="select-box-design-first">
                         <select class="select-custom-design" name="year">
                           <option value="" disabled selected>Year</option>
                           @foreach(range(date('Y')-16, date('Y')-70) as $y)
                           <option value="{{old('year') ?? $y }}">{{$y}}</option>
                           @endforeach
-                        </select>
-                        {!! $errors->first('year', '<span class="alert">:message</span>') !!}
+                        </select>    
                       </div>
+                    
                     </div>
+                    {!! $errors->first('month', '<span class="alert d-block m-0 p-0">:message</span>') !!}
+                    {!! $errors->first('day', '<span class="alert d-block m-0 p-0">:message</span>') !!}
+                    {!! $errors->first('year', '<span class="alert d-block m-0 p-0">:message</span>') !!}
                   </div>
                   <div class="form-grouph input-design mb-30">
                     {!! Form::number('ssn_or_tax', request()->ssn_or_tax ?? null, ['placeholder' => '9 Digit SSN or Tax ID','class' => 'form-control'.($errors->has('ssn_or_tax') ? ' is-invalid' : '')]) !!}

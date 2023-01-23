@@ -17,7 +17,7 @@ class Account extends Component
     use LivewireAlert;
     public $email, $timezone, $first_name, $last_name, $contact_number, $address, $about, $image;
     public $oldEmail;
-    public $fieldStatus = false, $action;
+    public $fieldStatus = false, $action, $actionData;
 
     public $facebook, $twitter, $instagram, $linkedin;
 
@@ -37,18 +37,32 @@ class Account extends Component
         $this->linkedin = $details->linkedin;
     }
 
+    public function rules()
+    {
+        // dd($this->actionData);
+        return [
+            'address' => 'required',
+            'contact_number' => 'required|max:10',
+
+        ];
+    }
+
 
     public function storeUploadedImage(array $data)
     {
-        $image = $data['base64_string']; //bace64 image 
-        $id    = $data['user_id'];
-        $user      = User::find($id);
-        $folderPath = public_path('/storage/images');
-        $filename = (new Base64Image)->save($image, $folderPath);
-        $user->image = $filename;
-        $user->save();
+        if ($data['base64_string']) {
+            $image = $data['base64_string']; //bace64 image
+            $id    = $data['user_id'];
+            $user      = User::find($id);
+            $folderPath = public_path('/storage/images');
+            $filename = (new Base64Image)->save($image, $folderPath);
+            $user->image = $filename;
+            $user->save();
 
-        return redirect()->route('cleaner.account');
+            return redirect()->route('cleaner.account');
+        } else {
+            return $this->alert("error", "Please select Image");
+        }
     }
 
     public function editData($userId, $action)
@@ -73,6 +87,7 @@ class Account extends Component
         }
         if ($action == 'timezone') {
             $this->timezone = $user->UserDetails->timezone;
+
         }
         if ($action == 'image') {
             $this->image = $user->image;
@@ -102,21 +117,24 @@ class Account extends Component
 
     public function updateData($action)
     {
+        $this->actionData = $action;
 
         if ($this->userId) {
             $user = User::find($this->userId);
             $userdetail = $user->UserDetails;
+
             // if ($action == 'name') {
             //     $name = explode(' ', $this->name);
             //     $user->first_name = @$name[0];
             //     $user->last_name = @$name[1];
             // }
             if ($action == 'contact_number') {
+                $this->validate([
+                    'contact_number' => 'required|max:10',
+                ]);
                 $user->contact_number = $this->contact_number;
             }
-            // if ($action == 'email') {
-            //     $user->email = $this->email;
-            // }
+
 
             $user->update();
 
@@ -134,7 +152,7 @@ class Account extends Component
             if ($action == 'facebook') {
                 $userdetail->facebook = $this->facebook;
             }
-            
+
             if ($action == 'twitter') {
                 $userdetail->twitter = $this->twitter;
             }

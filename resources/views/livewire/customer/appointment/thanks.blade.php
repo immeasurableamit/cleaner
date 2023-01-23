@@ -1,14 +1,12 @@
-
-
 <!-- Checkout Page -->
 <section class="light-banner build-checkout-page" style="background-image: url('/assets/images/white-pattern.png')">
     <div class="container">
-            <!-- progressbar -->
-            <ul id="progressbar">
-                <li class="active">Summary</li>
-                <li class="active">Payment Details</li>
-                <li class="active">Order success</li>
-            </ul>
+        <!-- progressbar -->
+        <ul id="progressbar">
+            <li class="active">Summary</li>
+            <li class="active">Payment Details</li>
+            <li class="active">Order success</li>
+        </ul>
 
         <fieldset>
             <!-- 3 -->
@@ -51,26 +49,49 @@
                                 <div class="schduled-text-div">
                                     <p class="schedule_label">Service</p>
                                     <span
-                                        class="schedule_value-text">{{ $order->serviceOrderItem()->service_item->service->title }} - {{ $order->serviceOrderItem()->service_item->title }}</span>
+                                        class="schedule_value-text">{{ $order->serviceOrderItem()->service_item->service->title }}
+                                        - {{ $order->serviceOrderItem()->service_item->title }}</span>
                                 </div>
 
-                                @if (count($order->addonsOrderItems() ) > 0 )
+                                @if (count($order->addonsOrderItems()) > 0)
                                     <div class="schduled-text-div">
                                         <p class="schedule_label">Addons</p>
                                         <span class="schedule_value-text">
 
                                             @foreach ($order->addonsOrderItems() as $addonOrderItem)
-                                                {{ $addonOrderItem->service_item->title  }}
-                                                @if ( ! $loop->last ) , @endif
+                                                {{ $addonOrderItem->service_item->title }}
+                                                @if (!$loop->last)
+                                                    ,
+                                                @endif
                                             @endforeach
                                         </span>
                                     </div>
                                 @endif
+
+
                                 <div class="schduled-text-div">
                                     <p class="schedule_label">Start Date</p>
-                                    <span class="schedule_value-text">{{ $order->cleaning_datetime->toDayDateTimeString() }}</span>
-                                    <b class="link-design-2">Add to calendar</b>
+                                    <span
+                                        class="schedule_value-text">{{ $order->cleaning_datetime->toDayDateTimeString() }}</span>
+
+                                    <div class="dropdown add_calender">
+                                        <button class="bg-none dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            <b class="link-design-2 no-hover"> Add to calendar</b>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <a class="link-design-2" href="{{ $link->google() }}"><i
+                                                    class="fa-brands fa-google"></i></a>
+
+                                            <a class="link-design-2" href="{{ $link->webOffice() }}"> <i
+                                                    class="fa-brands fa-microsoft"></i></a>
+
+                                            <a class="link-design-2" href="{{ $link->ics() }}"><i
+                                                    class="fa-brands fa-apple"></i> </a>
+                                        </div>
+                                    </div>
                                 </div>
+
                                 <div class="schduled-text-div">
                                     <p class="schedule_label">Payment Method</p>
                                     <span
@@ -103,7 +124,7 @@
 
                             <div class="btn_nxt_prs">
                                 <label for="next3" class="btn_c" wire:click="saveOrderNotes"><a
-                                        href="message.html">Send Notes</a></label>
+                                        href="message.html">Message Provider</a></label>
                             </div>
                             <a href="#" class="link-design-2 d-block pb-3">Please inform your provider about
                                 any future changes or cancellations as soon as possible. </a>
@@ -122,4 +143,4 @@
         </fieldset>
     </div>
 
-    </section>
+</section>

@@ -20,14 +20,16 @@
         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
           <div class="d-flex height-100 align-items-center auth_form login">
           {!! Form::open(['route' => 'login', 'method'=>'post', 'class'=>'form-design']) !!}
-            
+
+          {{--
               <div class="social-buttons">
-                <button class="social-auth-btn"><img src="assets/images/icons/google.svg"> Continue with Google</button>
-                <button class="social-auth-btn"><img src="assets/images/icons/apple.svg"> Continue with Google</button>
+                <button class="social-auth-btn"><img src="assets/images/icons/google.svg"> Continue With Google</button>
+                <button class="social-auth-btn"><img src="assets/images/icons/apple.svg"> Continue With Apple</button>
               </div>
               <div class="or-block">
                 <p>Or</p>
               </div>
+              --}}
               <div class="form-grouph input-design input-icon-left mb-25">
               <input type="text" name="email" placeholder="Enter your email address" class="form-control{!! ($errors->has('email') ? ' is-invalid' : '') !!}" />
               {!! $errors->first('email', '<span class="help-block">:message</span>') !!}

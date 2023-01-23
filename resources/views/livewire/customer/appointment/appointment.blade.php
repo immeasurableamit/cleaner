@@ -16,7 +16,7 @@
                     </div>
                     <div class="date_show_v">
                         <button> Date </button>
-                        <span>{{ $selectedDate }}</span>
+                        <span>{{ \Carbon\Carbon::parse($selectedDate)->format('m-d-Y') }}</span>
                     </div>
 
                     <div class="card_service_row appoitments-alternative-row row">

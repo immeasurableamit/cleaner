@@ -37,7 +37,7 @@
                         </div>
                         <div class="date_show_v">
                             <button> Date </button>
-                            <span>{{ $selectedDate }}</span>
+                            <span>{{ formatDateTimeForUser($selectedDate, 'date') }}</span>
                         </div>
 
                         <div class="card_service_row appoitments-alternative-row row">
@@ -192,7 +192,6 @@
 @push('scripts')
 <script>
     function renderCalendar(intialDate, events) {
-        console.log(events);
         var calendarEl = document.getElementById('calendar');
 
         var calendar = new FullCalendar.Calendar(calendarEl, {

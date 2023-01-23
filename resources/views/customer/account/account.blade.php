@@ -19,7 +19,7 @@
                   <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 no-padd">
                      <div class="customer-account-forms">
                         <div class="form-headeing-second">
-                           <h4>Account Photo</h4>
+                           <h4>Account Info</h4>
                         </div>
                         @livewire('customer.account.account')
                      </div>

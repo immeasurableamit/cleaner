@@ -1,4 +1,4 @@
-<div>
+<div class="team_services">
 <div class="services-alternate-wrap-sec">
         <div class="alternative-service-block">
             
@@ -19,16 +19,17 @@
             </div>
             <!-- One Time Row -->
             <div class="card_service_row">
-                <div class="row">
+                <div class="row pb-3">
                     @foreach(@$type['services'] as $s => $service)
                     <div class="col-xl-6 col-md-6 col-sm-12">
                         <div class="btn_header_service py-3">
                             <h4 class="mb-0 btn_blue">{{ $service['title'] }}</h4>
-                        </div>
-
-                        <div class="form-check form-switch heading heading-toggle {{$service['checked']=='on'?'active-toggle':''}}">
+                            <div class="form-check form-switch heading heading-toggle {{$service['checked']=='on'?'active-toggle':''}}">
                             <input class="check form-check-input" wire:model="serviceData.{{$t}}.services.{{$s}}.checked" wire:click="serviceAction({{$t}}, {{$s}})" type="checkbox">
                         </div>
+                        </div>
+
+                      
                         
                     </div>
                     <div class="row">
@@ -63,9 +64,9 @@
                                 <button type="button" wire:click="addServices({{$t}}, {{$s}})">+ Add Services</button>
                             @endif
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 what_included">
 
-                            <div class="card_header_tittle">
+                            <div class="card_header_tittle pt-0">
                                 <h3>Edit "What's Included"</h3>
                             </div>
 
@@ -74,7 +75,7 @@
                                 @error ('included.'.$service["id"].'.data') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
 
-                            <button class="btn btn-success btn-sm" wire:click="storeIncluded">Save</button>
+                            <button class="btn_blue" wire:click="storeIncluded">Save</button>
 
                         </div>
                     </div>

@@ -21,7 +21,10 @@
                                 <span>to</span>
                             </div>
                             <div class="y_text add">
-                                <span></span>
+                                <span>Add</span>
+                            </div>
+                            <div class="y_text delete">
+                                <span>Delete</span>
                             </div>
                         </div>
                         <div class="availability_sheet">
@@ -53,7 +56,7 @@
                                                 @error('days.'.$day.'.data.'.$i.'.to_time')<div class="alert ">{{ $message }}</div>@enderror
 
                                                 @if($i>0)
-                                                <button type="button" class="border-0 bg-none" wire:click="deleteLayout('{{$day}}', '{{$i}}')">
+                                                <button type="button" class="border-0 bg-none btn_deleter" wire:click="deleteLayout('{{$day}}', '{{$i}}')">
                                                     <img src="{{asset('assets/images/icons/delete_2.svg')}}">
                                                 </button>
                                                 @endif

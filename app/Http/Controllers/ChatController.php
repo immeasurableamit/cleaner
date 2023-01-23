@@ -22,7 +22,15 @@ class ChatController extends Controller
             'title' => 'Messages',
             'active' => 'messages'
         );
-        return view('chat', compact('title'));
+        $user = auth()->user();
+
+        $layout = 'layouts.cleanerapp';
+        if($user->role=='customer'){
+            $layout = 'layouts.app';
+        }
+
+
+        return view('chat', compact('title', 'layout'));
     }
 
     public function fetchUsers(Request $request)

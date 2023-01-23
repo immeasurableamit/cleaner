@@ -1,6 +1,10 @@
 @extends('layouts.cleanerapp')
 
 @section('content')
+
+
+
+
 <section class="light-banner customer-account-page" style="background-image: url('assets/images/white-pattern.png')">
     <div class="container">
         <div class="customer-white-wrapper">
@@ -97,5 +101,11 @@
     </div>
     </div>
     </div>
+
+
 </section>
+
+
 @endsection
+
+

@@ -28,7 +28,9 @@ class BillingController extends Controller
     public function edit()
     {
         $states = State::all();
-        return view('customer.billing.edit', compact('states'));
+        $user   = auth()->user();
+        $billingAddress = BillingAddress::where('user_id', $user->id)->first();
+        return view('customer.billing.edit', compact('states', 'billingAddress'));
     }
 
     public function update(CustomerBillingRequest $request)

@@ -27,7 +27,7 @@
                                 </div>
                             </div>
 
-                            <div class="append_row_preschduled row">
+                            <div class="append_row_preschduled row pb-2">
                               <div class="col-md-4 col-sm-12">
                                 <div class="select-design">
                                 <select class="form-select select-custom-design" aria-label="Default select example">
