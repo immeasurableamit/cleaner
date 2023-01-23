@@ -297,7 +297,12 @@
                     start: '00:01',
                     end: '23:59',
                 },
+                eventClick: (eventClickInfo) => {
+                    let selectedEventDate = eventClickInfo.event.startStr;
+                    window.calendar.select(selectedEventDate);
+                    @this.set('selectedDate', selectedEventDate);
 
+                },
                 dateClick: function(info) {
                     @this.set('selectedDate', info.dateStr);
                 },

@@ -24,7 +24,7 @@ class FavouriteController extends Controller
         $user_id = auth()->user()->id;
         $favourites = Favourite::where('user_id', $user_id )->with('cleaner.cleanerReviews')->get();
 
-        return view('customer.favourite.index', compact('favourites') );
+        return view('customer.favourite.index', compact('favourites','title') );
     }
 
 
