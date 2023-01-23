@@ -115,7 +115,8 @@
                       {!! $errors->first('city', '<span class="alert">:message</span>') !!}
                       <div class="selecti-box">
                         <select class="select-custom-design" name="state" value="{{old('state')}}">
-                          @foreach ($states as $state )
+                        <option>Select State</option>  
+                        @foreach ($states as $state )
                           <option value='{{ $state->id }}'>{{$state->name}}</option>
                           @endforeach
                         </select>
@@ -153,7 +154,7 @@
                     </div>
                     <div class="form-grouph select-design mb-30">
                       <select class="select-custom-design" name="payment_method" value="{{old('payment_method')}}">
-                        <option disabled>Payment Method</option>
+                        <option>Payment Method</option>
                         <option value="PayPal">PayPal</option>
                         <option value="Direct Deposit">Direct Deposit</option>
                       </select>

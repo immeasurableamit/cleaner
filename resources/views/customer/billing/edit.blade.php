@@ -178,6 +178,9 @@
                                                         @error('exp_year')
                                                             <span class="text-danger"> {{ $message }} </span>
                                                         @enderror
+                                                        @error('cvc')
+                                                            <span class="text-danger"> {{ $message }} </span>
+                                                        @enderror
                                                         @error('stripe_verification')
                                                             <span class="text-danger"> {{ $message }} </span>
                                                         @enderror

@@ -174,12 +174,14 @@ class Checkout extends Component
     protected function cardValidationRules()
     {
         return [
-            'number'       => 'required|numeric',
+            'number'       => 'required|numeric|max:19',
             'expMonthYear' => 'required',
             'cvc'          => 'required|numeric',
             'expMonth'     => 'required|numeric',
-            'expYear'      => 'required|numeric'
+            'expYear'      => 'required|numeric',
+
         ];
+       
     }
 
     protected function checkoutRules()
