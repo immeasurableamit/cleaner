@@ -346,9 +346,10 @@
                             </div>
                         </div>
 
-                        <div class="btn_nxt_prs">
+                        <div class="btn_nxt_prs modal-footer">
                             <label for="back2" class="btn_b" wire:click="previous">Back</label>
-                            <label for="next2" class="btn_c" wire:click="schedule">Schedule Now</label>
+                            <label for="next2" class="btn_c" id="schedules" wire:click="schedule">Schedule Now
+                            </label>
                         </div>
                         <p class="privacy_link mb-5">By clicking “Schedule Now”, you agree with all Canary
                             Clean’s<a class="link-design-2"> terms and conditions</a> and <a class="link-design-2">privacy policy</a></p>
@@ -540,6 +541,13 @@
             @this.set('number', number);
             console.log(number);
         });
+
+// loader on schedule button
+        $("#schedules").on("click",function(){
+            $(".modal-footer").append("<div><i class='fa fa-spinner fa-spin' style='font-size:24px'></i></div>");
+
+  });
+
     </script>
 
 </div>

@@ -304,7 +304,9 @@ class Profile extends Component
         $user = auth()->user()->role ?? null;
 
         if ($user == 'cleaner') {
+            
             return $this->alert("error", "Cleaner don't have permission");
+
         } else {
             $validatedData = $this->validate(...$this->checkoutRules());
             $validatedData['cleanerId'] = $this->cleanerId;

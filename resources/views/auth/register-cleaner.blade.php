@@ -196,7 +196,7 @@
                     {!! Form::label('payment','Payment Method', ['class' => 'form-label']) !!}
 
                     <select class="select-custom-design" name="payment_method" value="{{old('payment_method')}}">
-                      <option disabled>Payment Method</option>
+                      <option>Payment Method</option>
                       <option value="PayPal">PayPal</option>
                       <option value="Direct Deposit">Direct Deposit</option>
                     </select>
@@ -214,7 +214,7 @@
                 </div>
                 <div class="form-right-block">
                   <div class="form-grouph submit-design mb-30">
-                    <input type="submit" placeholder="Create My Account" class="subit-btn-2">
+                    <input type="submit" placeholder="Create My Account" class="subit-btn-2" value="Create My Account">
                   </div>
                 </div>
               </div>
