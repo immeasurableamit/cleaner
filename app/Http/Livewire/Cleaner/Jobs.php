@@ -9,14 +9,19 @@ use \Carbon\Carbon;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 // use App\Http\Livewire\Cleaner\Notification\Notification;
 use Illuminate\Notifications\Notifiable;
-use App\Notifications\OrderConfirmed;
+use App\Notifications\Customer\OrderConfirmed as CustomerOrderConfirmed;
+use App\Notifications\Cleaner\OrderConfirmed as CleanerOrderConfirmed;
+
+use App\Notifications\Customer\OrderCancelled as CustomerOrderCancelled;
+use App\Notifications\Cleaner\OrderCancelled as CleanerOrderCancelled;
+
 use Illuminate\Support\Facades\Notification;
 
 class Jobs extends Component
 {
 
     use LivewireAlert;
-    use Notifiable;
+ //   use Notifiable;
 
     /*
      * @var: selectedTab
@@ -164,7 +169,8 @@ class Jobs extends Component
         $order->save();
 
 
-        $order->user->notify(new OrderConfirmed($order));
+        $order->user->notify(new CustomerOrderConfirmed($order));
+		$order->cleaner->notify( new CleanerOrderConfirmed($order) );
         $this->alert('success', 'Order accepted');
         $this->refreshSelectedTab();
         return true;
@@ -172,10 +178,11 @@ class Jobs extends Component
 
     public function rejectOrder( $orderId )
     {
+
         $order = Order::find($orderId);
         $order->status = 'rejected';
         $order->save();
-
+		$this->sendCancelOrderNotifications($order);
         $this->alert('success', 'Booking rejected');
         $this->refreshSelectedTab();
     }
@@ -287,6 +294,11 @@ class Jobs extends Component
         ]);
     }
 
+	protected function sendCancelOrderNotifications($order)
+	{
+		$order->user->notify( new CustomerOrderCancelled( $order ) );
+		$order->cleaner->notify( new CleanerOrderCancelled( $order ) );
+	}
 
     public function cancelOrder( $data )
     {
@@ -295,6 +307,8 @@ class Jobs extends Component
         if ( $order->status != 'payment_collected' ) {
             $order->status = 'cancelled';
             $order->save();
+
+			$this->sendCancelOrderNotifications($order);
 
             $this->alert('success','Booking cancelled');
             $this->refreshSelectedTab();
@@ -321,6 +335,8 @@ class Jobs extends Component
         $order->refund_transaction_id  = $transaction->id;
         $order->status = 'cancelled';
         $order->save();
+
+		$this->sendCancelOrderNotifications($order);
 
         $this->alert('success','Booking cancelled');
         $this->refreshSelectedTab();

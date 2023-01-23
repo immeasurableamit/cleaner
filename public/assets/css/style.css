@@ -5935,7 +5935,7 @@ fieldset .row.no-mrg .checkout_div h4{
 }
 .form_availibility .availability_row .time_input {
     width: 55%;
- 
+
 }
 .form_availibility .time-schedule-addon .time-input-addon {
     position: relative;
@@ -8047,4 +8047,8 @@ span.alert, span.help-block,div.alert {
     color: red;
     /* display: inline;
     font-size: 13px; */
+}
+
+.select-date-toggles.show {
+    max-height: 100%;
 }

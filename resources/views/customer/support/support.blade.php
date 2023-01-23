@@ -52,5 +52,5 @@
 
 @endsection
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="{{ asset('assets/js/mdb.min.js') }}"></script>
-<x-livewire-alert::scripts />
+{{-- <script src="{{ asset('assets/js/mdb.min.js') }}"></script>
+ --}}<x-livewire-alert::scripts />

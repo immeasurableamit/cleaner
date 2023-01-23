@@ -19,11 +19,13 @@
                                     </li>
                                 </ul>
                             </div>
+						{{--
                             <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
                                 <div class="time-zone-text">
                                     <a href="cleaner-account.html">Time Zone: -5:00 CST, current time 11:11am</a>
                                 </div>
                             </div>
+						--}}
                         </div>
                     </div>
                     <!-- Tab panes -->
