@@ -55,8 +55,6 @@ class Checkout extends Component
 
     protected $listeners = ['cancelOrder'];
     public $user_id, $getCleanerId;
-
-
     protected function prepareServiceAddOnsAndEstimatedDurationProps()
     {
         /* Fetch selected services from DB */
@@ -328,7 +326,6 @@ class Checkout extends Component
      */
     protected function storeBillingAddress($user_id)
     {
-        // dd($user_id);
         $billing = BillingAddress::create([
             'user_id'     => $user_id,
             'state_id'    => $this->stateId,
@@ -367,7 +364,6 @@ class Checkout extends Component
 
 
         ]);
-        // dd($userCard);
 
         return $userCard;
     }
@@ -375,7 +371,6 @@ class Checkout extends Component
 
     protected function validateCardWithStripe()
     {
-
         $card = [
             'number'    => $this->number,
             'exp_month' => $this->expMonth,
@@ -472,7 +467,6 @@ class Checkout extends Component
 
     public function mount()
     {
-
         $this->prepare();
         $this->handleLoggedInUser();
 
@@ -482,12 +476,8 @@ class Checkout extends Component
 
     public function updatedFormattedNumber($value)
     {
-
-        $this->formattedNumber = wordwrap($value, 4, " ", true); // add space after each 4 characters
-
+                $this->formattedNumber = wordwrap($value, 4, " ", true); // add space after each 4 characters
         $this->number = str_replace(" ", "", $this->formattedNumber); // set number for stripe verification
-
-
     }
 
 
