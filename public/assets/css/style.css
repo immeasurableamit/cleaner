@@ -6012,6 +6012,11 @@ fieldset .row.no-mrg .checkout_div h4{
 .selct_2{
     padding: 15px 25px 15px 19px;
 }
+.add_calender button{
+    border: 0px;
+    background-color: transparent;
+    padding: 0px;
+}
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {
     display: none;
