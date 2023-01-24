@@ -30,13 +30,10 @@
                         <div class="altrntive_rw">
                             <p class="appointment_label">Name</p>
                             <p class="app-value">{{ $teamMember->name }}</p>
-                            @error('name')
-                            <div class="alert ">{{ $message }}</div>
-                            @enderror
                         </div>
                         <div class="altrntive_rw">
                             <p class="appointment_label">Insured?</p>
-                            <p class="app-value green"><strong>Yes</strong></p>
+                            <p class="app-value green"><strong>{{$teamMember->insured}}</strong></p>
                         </div>
                         <div class="altrntive_rw">
                             <p class="appointment_label">Phone</p>
@@ -86,63 +83,84 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="form-grouph input-design mb-30 col-md-6">
-                            <p class="appointment_label">First Name</p>
-                            <input type="text" wire:model="first_name" />
-                            @error('first_name')
-                            <div class="alert ">{{ $message }}</div>
-                            @enderror
+                            <div class="form-grouph select-design mb-30">
+                                <label>First Name</label>
+                                <input type="text" wire:model="first_name" />
+                                @error('first_name')
+                                <div class="alert ">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
                         <div class="form-grouph input-design mb-30 col-md-6">
-                            <p class="appointment_label">Last Name</p>
-                            <input type="text" wire:model="last_name" />
-                            @error('last_name')
-                            <div class="alert ">{{ $message }}</div>
-                            @enderror
+                            <div class="form-grouph select-design mb-30">
+                                <label>Last Name</label>
+                                <input type="text" wire:model="last_name" />
+                                @error('last_name')
+                                <div class="alert ">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-grouph input-design mb-30 col-md-6">
-                            <p class="appointment_label">Insured?</p>
-                            <input type="text" wire:model="insured" />
-                            @error('insured')
-                            <div class="alert ">{{ $message }}</div>
-                            @enderror
-
+                    <div class="col-xl-6 col-lg-6 col-sm-12 col-md-6">
+                            <div class="form-grouph select-search-design select-design mb-30">
+                                <label>Insured</label>
+                                <select wire:model="insured" class="form-control">
+                                    <option value="" selected>Choose Insured</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+                            @error ('insured') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-grouph input-design mb-30 col-md-6">
-                            <p class="appointment_label">Phone</p>
-                            <input type="number" wire:model="contact_number" />
-                            @error('contact_number')
-                            <div class="alert ">{{ $message }}</div>
-                            @enderror
+                            <div class="form-grouph select-design mb-30">
+                                <label>Phone</label>
+                                <input type="number" wire:model="contact_number" />
+                                @error('contact_number')
+                                <div class="alert ">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-grouph input-design mb-30 col-md-6">
+                            <div class="form-grouph select-design mb-30">
+                                <label>Email</label>
+                                <input type="email" wire:model="email" disabled />
+                                @error('email')
+                                <div class="alert ">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-grouph input-design mb-30 col-md-6">
+                            <div class="form-grouph select-design mb-30">
+                                <label>Address</label>
+                                <input type="address" wire:model="address" />
+                                @error('address')
+                                <div class="alert ">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-grouph input-design mb-30 col-md-6">
+                            <div class="form-grouph select-design mb-30">
+                                <label>SSN/TIN</label>
+                                <input type="number" wire:model="ssn_or_tax" />
+                                @error('ssn_or_tax')
+                                <div class="alert ">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
                     </div>
-                    <div class="form-grouph input-design mb-30">
-                        <p class="appointment_label">Email</p>
-                        <input type="email" wire:model="email" disabled />
-                        @error('email')
-                        <div class="alert ">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="form-grouph input-design mb-30">
-                        <p class="appointment_label">Address</p>
-                        <input type="address" wire:model="address" />
-                        @error('address')
-                        <div class="alert ">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="form-grouph input-design mb-30">
-                        <p class="appointment_label">SSN/TIN</p>
-                        <input type="number" wire:model="ssn_or_tax" />
-                        @error('ssn_or_tax')
-                        <div class="alert ">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="modal-footer form-grouph submit-design mb-30">
-                        {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
+                    <div class="col-xl-12 col-lg-12 col-sm-12 col-md-12">
+                        <div class="text-center pt-3">
+                            {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
 
-                        <a href="javascript::void(0)" wire:click="update()" class="subit-btn-2">Update</a>
+                            <a href="javascript::void(0)" wire:click="update()" class="subit-btn-2 btn_c w-50">Update</a>
+                        </div>
                     </div>
+
+
+
                 </div>
             </div>
         </div>
@@ -183,24 +201,21 @@
                         </div>
 
                         <div class="col-xl-6 col-lg-6 col-sm-12 col-md-6">
-                            <div class="form-grouph select-design mb-30">
+                            <div class="form-grouph select-search-design select-design mb-30">
                                 <label>Insured</label>
-                                <div wire:ignore>
-                                    <select class="select-custom-design" id="insured-selector" wire:model="insured">
-                                    <option>Select Insured</option>
+                                <select wire:model="insured" class="form-control">
+                                    <option value="" selected>Choose Insured</option>
                                     <option value="Yes">Yes</option>
                                     <option value="No">No</option>
-                                    </select>
-                                </div>
-                                @error ('insured') <span class="text-danger">{{ $message }}</span> @enderror
+                                </select>
                             </div>
+                            @error ('insured') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
-                        
                         <div class="col-xl-6 col-lg-6 col-sm-12 col-md-6">
                             <div class="form-grouph select-design mb-30">
                                 <label>Phone</label>
                                 <div class="form-grouph input-design mb-30 col-md-12">
-                                    <input type="number" wire:model="contact_number" placeholder="Contact Name" />
+                                    <input type="number" wire:model="contact_number" placeholder="Contact Number" />
                                 </div>
                                 @error('contact_number')
                                 <div class="alert ">{{ $message }}</div>
@@ -312,22 +327,6 @@
             }
         });
 
-        window.addEventListener('load', () => {
-
-            integrateSelect2();
-        });
-
-        function integrateSelect2() {
-
-            $("#insured-selector").select2({
-
-                placeholder: 'Select an Insured',
-            });
-            $("#insured-selector").on('select2:select', function(e) {
-                var data = e.params.data;
-                @this.set('issue', data.id)
-            });
-        }
     </script>
     @endpush
     <style>
