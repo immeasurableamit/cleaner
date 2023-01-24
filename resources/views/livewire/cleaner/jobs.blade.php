@@ -208,12 +208,18 @@
             dayMaxEvents: true, // allow "more" link when too many events
             events: events,
             selectable: true,
+            eventClick: (eventClickInfo) => {
+                let selectedEventDate = eventClickInfo.event.startStr;
+                window.calendar.select( selectedEventDate );
+                @this.set('selectedDate', selectedEventDate );
+
+            },
             selectConstraint: {
                 start: '00:01',
                 end: '23:59',
             },
             dateClick: function(info) {
-                console.log('date clicked');
+                console.log(info.dateStr);
                 @this.set('selectedDate', info.dateStr);
             },
 

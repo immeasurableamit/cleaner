@@ -2,11 +2,11 @@
     <ul class="list-unstyled">
     @if (Auth::user()->role=="customer")
     <li><a class="nav-link {{ request()->routeIs('customer.account') ? ' active' : '' }}" href="{{ route('customer.account') }}">Account </a></li>
-    <li><a href="{{route('customer.appointment.index')}}" class="{{ @$title['active']=='appoinment' ? 'active' : '' }}">Appointments</a></li>
+    <li><a href="{{route('customer.appointment.index')}}" class="{{ @$title['active']=='appointments' ? 'active' : '' }}">Appointments</a></li>
     <li><a href="{{route('customer.billing.index')}}" class="{{ @$title['active']=='billing' ? 'active' : '' }}">Billing</a></li>
     <li><a href="{{ route('customer.notification.index') }}" class="{{ @$title['active'] == 'notification' ? 'active' : '' }}">Notification</a></li>
-    <li><a href="{{route('customer.favourite.index') }}" class="{{ @$title['active']=='favourite' ? 'active' : '' }}">Favourite</a></li>
-    <li><a href="{{ route('customer.support.service') }}">Support</a></li>
+    <li><a href="{{route('customer.favourite.index') }}" class="{{ @$title['active'] == 'favourite' ? 'active' : '' }}">Favourite</a></li>
+    <li><a href="{{ route('customer.support.service') }}" class="{{ @$title['active'] == 'support' ? 'active' : '' }}">Support</a></li>
 
 
     @elseif (Auth::user()->role=="cleaner")
