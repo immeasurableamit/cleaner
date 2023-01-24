@@ -21,7 +21,8 @@
                 <div id="data_Table" class="col-xl-9 col-lg-9 col-md-12 col-sm-12 car_right_div">
 
                     <div class="listing-row">
-                        @if(count($favourites) <= 0) <h2>No Favourite Found</h2>
+                        @if(count($favourites) <= 0) 
+                        <h2>No Favourite Found</h2>
 
                             @else
                             @foreach($favourites as $favourite)
