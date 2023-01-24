@@ -126,7 +126,7 @@ class CreateNewUser implements CreatesNewUsers
                     'contact_number' => 'required',
                     'address' => 'required',
                     'city' => 'required',
-                    'state' => 'required',
+                    'state' => 'required|exists:states,id',
                     'zip_code' => 'required',
                     'apt_or_unit' => 'required',
                     'payment_method' => 'required',

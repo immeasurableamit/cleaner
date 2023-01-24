@@ -150,6 +150,7 @@
                                         <p class="font-regular">Est Time : {{ $cleaner->duration_for_selected_service }}
 
                                             hours</p>
+                                            <p class="font-regular">Buffer Time : {{$cleaner->UserDetails->buffer}}</p>
                                         <div class="badges_insurnce_img">
                                             @if ( $cleaner->UserDetails->provide_organic_service )
                                                 <img src="{{ asset('assets/images/badges.svg') }}">

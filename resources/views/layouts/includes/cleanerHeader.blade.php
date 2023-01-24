@@ -67,7 +67,7 @@
                             <li><a href="{{route('cleaner.reviews')}}" class="">Reviews</a></li>
                           </ul>
                         </li>
-                        <li><a href="cleaner-appoitments.html">Appointments</a></li>
+                        <li><a href="{{route('cleaner.jobs.jobs')}}">Jobs</a></li>
                         <li><a href="{{route('cleaner.billing.editBankAccount')}}">Billing</a></li>
                         <li><a href="{{route('cleaner.notification.index')}}">Notifications</a></li>
                         <li><a href="{{route('cleaner.support.service')}}">Support</a></li>

@@ -113,6 +113,7 @@
                       {!! Form::text('city', request()->city ?? null, ['id' => 'city', 'placeholder' => 'City','class' => 'form-control'.($errors->has('city') ? ' is-invalid' : '')]) !!}
                       </div>
                       {!! $errors->first('city', '<span class="alert">:message</span>') !!}
+                    <div>  {!! $errors->first('state', '<span class="alert">:message</span>') !!} </div>
                       <div class="selecti-box">
                         <select class="select-custom-design" name="state" value="{{old('state')}}">
                         <option>Select State</option>  
@@ -120,7 +121,7 @@
                           <option value='{{ $state->id }}'>{{$state->name}}</option>
                           @endforeach
                         </select>
-                        {!! $errors->first('state', '<span class="alert">:message</span>') !!}
+                       
                       </div>
                     </div>
                     <div>
