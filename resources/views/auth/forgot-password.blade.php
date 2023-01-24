@@ -19,11 +19,7 @@
         </div>
         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
           <div class="d-flex height-100 align-items-center auth_form login">
-            @if (session('status'))
-            <div class="alert alert-success" role="alert">
-              {{ session('status') }}
-            </div>
-            @endif
+            
             <form class="form-design" method="POST" action="{{ route('password.email') }}">
               @csrf
 
@@ -32,11 +28,15 @@
                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Enter your email address" autofocus>
 
                 @error('email')
-                <span class="input-icon" role="alert">
+                <span class="input-icon" role="alert" style="position: static;">
                   <strong>{{ $message }}</strong>
                 </span>
                 @enderror
-
+                @if (session('status'))
+            <div class="alert" role="alert">
+              {{ session('status') }}
+            </div>
+            @endif
                 <!-- <span class="input-icon"><img src="assets/images/icons/email.svg"></span> -->
               </div>
               <div class="form-grouph submit-design mb-25">

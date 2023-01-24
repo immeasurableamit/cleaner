@@ -31,19 +31,20 @@
             <span class="icn"><i class="far fa-envelope"></i></span>
             <span class="indicators">01</span>
           </li>
-          <li class="admin-user-li position-relative">
+          <li class="admin-user-li position-relative ">
             <div class="dropdown">
               <button type="button" class="dropdown-toggle position-relative" data-bs-toggle="dropdown">
                   <img src="{{ asset('assets/images/thumbnail.png') }}">
               </button>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu" style="min-width: 183px;">
                 <li><a class="dropdown-item" href="#">Link 1</a></li>
                 <li><a class="dropdown-item" href="#">Link 2</a></li>
               <!--   <li><a class="dropdown-item" href="#">Link 3</a></li> -->
-                <form action="{{ route('logout') }}" method="post">
+              <div class="dropsown-logout-design">  <form action="{{ route('logout') }}" method="post">
                                                 @csrf
-                                                <button type="submit"><img src="{{asset('assets/images/icons/logout.svg')}}"> Logout</button>
+                                                <button type="submit" style="border: none; background: transparent"><img src="{{asset('assets/images/icons/logout.svg')}}" > Logout</button>
                                             </form>
+              </div>
               </ul>
             </div>
           </li>

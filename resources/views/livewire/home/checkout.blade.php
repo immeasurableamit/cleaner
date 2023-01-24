@@ -23,7 +23,7 @@
                         </div>
                     </div>
                     <div class="blue-logo-block text-center max-width-100">
-                        <a href="index.html"><img src="/assets/images/logo/logo.svg" /></a>
+                        <a href="index.html"><img src="{{asset('/assets/images/logo/logo.svg')}}" /></a>
                     </div>
                 </div>
             </div>
@@ -97,12 +97,13 @@
     <!-- Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
         <div class="modal-dialog" role="document">
+        <button type="button" class="close btn_close" onclick="$('#loginModal').modal('hide')" style="border: none; background: transparent;">
+                        <i class="fa fa-times fa-xl" aria-hidden="true"></i>
+                    </button>
             <div class="modal-content">
                 <div class="modal-header border border-bottom-0">
                     <h5 class="modal-title" id="exampleModalLabel"></h5>
-                    <button type="button" class="close" onclick="$('#loginModal').modal('hide')" style="border: none; background: white;">
-                        <i class="fa fa-times fa-xl" aria-hidden="true"></i>
-                    </button>
+                    
                 </div>
                 <div class="modal-body">
                     <form class="form-grouph input-design mb-30" wire:submit.prevent="authenticateUser">
@@ -120,7 +121,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
+                <div class="py-3 text-center">
 
                     <button type="button" wire:click="authenticateUser" class="btn_blue">Login</button>
                 </div>
@@ -142,7 +143,7 @@
                             </div>
                         </div>
                         <div class="blue-logo-block text-center max-width-100">
-                            <a href="#"><img src="/assets/images/logo/logo.svg"></a>
+                            <a href="#"><img src="{{asset('/assets/images/logo/logo.svg')}}"></a>
                         </div>
                     </div>
                 </div>
@@ -375,7 +376,7 @@
                             </div>
                         </div>
                         <div class="blue-logo-block text-center max-width-100">
-                            <a href="#"><img src="/assets/images/logo/logo.svg"></a>
+                            <a href="#"><img src="{{asset('/assets/images/logo/logo.svg')}}"></a>
                         </div>
                     </div>
                 </div>
@@ -532,7 +533,7 @@
             var foo = $(this).val().replace(/\s+/g, "").replace(/[^0-9]/gi, ""); // remove non numeric
             foo = foo.split(" ").join(""); // remove spaces
             if (foo.length > 0) {
-                foo = foo.match(new RegExp(".{1,4}", "g")).join(" ").slice(-23); // max 23 chars
+                foo = foo.match(new RegExp(".{1,4}", "g")).join(" ").slice(-30); // max 23 chars
             }
             $(this).val(foo);
             console.log(foo);

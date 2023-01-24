@@ -174,7 +174,7 @@ class Checkout extends Component
     protected function cardValidationRules()
     {
         return [
-            'number'       => 'required|numeric|max:19',
+            'number'       => 'required|numeric',
             'expMonthYear' => 'required',
             'cvc'          => 'required|numeric',
             'expMonth'     => 'required|numeric',
