@@ -3,7 +3,7 @@
 <section class="table-layout-sec jobs">
   <div class="white-bg-wrapper">
     
-    @livewire('admin.jobs.jobs')
+    @livewire('admin.profile.profile')
     
   </div>
 </section>

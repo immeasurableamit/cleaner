@@ -9,6 +9,7 @@ class CleanerBooking extends Component
 {
     public $userId;
     public $allData;
+     public $dateStart, $dateEnd, $searchResult;
     public $allCount, $scheduledCount, $completedCount, $cancelledCount;
     public $tab = 'all';
 
@@ -60,6 +61,29 @@ class CleanerBooking extends Component
 
             $orders = $this->allData->whereIn('status', $statusArray);
         }
+
+           if(!empty($this->dateStart) && !empty($this->dateEnd)){
+
+          $orders = $this->allData = Order::with('user')
+            ->whereBetween('cleaning_datetime', [$this->dateStart, $this->dateEnd])
+            ->where(function($query) {
+                $query->where('cleaner_id', $this->userId);
+            })->get();
+       
+          }
+
+           if(!empty($this->searchResult)) {
+            $value = $this->searchResult;
+            
+            $orders = $this->allData = Order::with(['user'])
+                ->where('cleaner_id', $this->userId)
+                ->where(function($query) use ($value) {
+                    $query->where('status', 'like', '%'.$value.'%');
+                    $query->orWhereHas('user', function($q) use($value) {
+                        $q->where('first_name', 'like', $value.'%');
+                    });
+                })->get();       
+        } 
 
         return view('livewire.admin.cleaner.cleaner-booking', compact('orders'));
     }

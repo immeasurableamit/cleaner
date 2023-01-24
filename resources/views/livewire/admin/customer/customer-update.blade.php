@@ -103,14 +103,14 @@
                   <li class="d-flex payment-methoud">
                      <h6 class="title-label"><i class="far fa-credit-card"></i></h6>
                      <p class=""> Payment Method Visa ******3245</p>
-                     <div class="action-block">
+                     <!-- <div class="action-block">
                         <button class="edit">Edit</button>
                         <button class="save-icn-btn"><i class="fas fa-save"></i></button>
                         <button class="cancel"><i class="fas fa-times"></i></button>
-                     </div>
+                     </div> -->
                   </li>
                   <li class="reset-password">
-                     <a href="#"><img src="{{ asset('../assets/admin/images/icons/reset-password.svg') }}"> Reset Password</a>
+                     <a href="#" id="reset-password" class="addService"><img src="{{ asset('../assets/admin/images/icons/reset-password.svg') }}"> Reset Password</a>
                   </li>
                </ul>
             </div>
@@ -118,4 +118,58 @@
       </div>
    </div>
 </div>
+
+<div wire:ignore.self class="modal fade show in" id="serviceForm" tabindex="-1" role="dialog" aria-labelledby="serviceForm" aria-hidden="true">
+        <div class="modal-dialog modal_style">
+        <button type="button" class="btn btn-default serviceFormClose"><span aria-hidden="true">×</span></button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Reset Password</h4>
+                </div>
+                <div class="modal-body">
+                     <div class="form-group">
+                        <label>New password</label>
+                        <input type="password" wire:model="new_password" class="form-control" id="password">
+                     
+                    </div>
+                   
+                   
+                <div class="text-center mb-3">
+
+                    <button type="submit" class="btn_s serviceFormClose" wire:click.prevent="updateData('new_password')" wire:loading.attr="disabled">
+                         Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  @push('scripts')
+    <script>
+        $(document).ready(function () {
+            window.livewire.on('serviceForm', () => {
+                $('#serviceForm').modal('show');
+            });
+            window.livewire.on('serviceFormClose', () => {
+                $('#serviceForm').modal('hide');
+            });
+        });
+
+
+        $(document).on('click', '.addService', function (e) {
+             $('#password').val('');
+            $('#serviceForm').modal('show');
+        });
+        $(document).on('click', '.serviceFormClose', function (e) {
+            $('#serviceForm').modal('hide');
+        });
+
+    </script>
+    @endpush
+
+
 </div>
+</div>
+
+
+

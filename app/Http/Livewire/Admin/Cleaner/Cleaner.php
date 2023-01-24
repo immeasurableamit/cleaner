@@ -10,6 +10,8 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 class Cleaner extends Component
 {
     use LivewireAlert;
+    public $search;
+    public $dateStart, $dateEnd;
     public $cleanerStatus, $userId;
     public $allCount, $activeCount, $inactiveCount;
     public $tab = 'all';
@@ -67,17 +69,67 @@ class Cleaner extends Component
 
     public function render()
     {
+
+         $sta = null;
+        if($this->tab=='active'){
+            $sta = '1';
+        }
+        if($this->tab=='inactive'){
+            $sta = '0';
+        }
+       
+        $value = [];
+        $value[] = 'completed';
+        $value[] = 'payment_collected';
+        $value[] = 'accepted';
+        
+
+        $users  = User::with(['orders' => function ($query) use($value) {
+                    $query->whereIn('status', $value);
+                }])
+                ->where('role', '=', 'cleaner')                
+                ->withCount(['orders' => function ($query) use($value) {
+                    $query->whereIn('status', $value);
+                }])                
+                ->groupBy('id');
+            
+
+        if(!empty($this->search)){
+            $vl = $this->search;
+            $users->where(function($query) use($vl) {
+                $query->where('email', 'like', '%'.$vl.'%')
+                    ->orWhere('first_name', 'like', '%'.$vl.'%');
+            });
+        }
+
+         if($sta) {
+                $users->whereStatus($sta);
+            }
+            
+        $users = $users->orderBy('id', 'DESC')->get();
+                
+     
+        foreach ($users as $key => $value) {
+            $lastdate = '';
+            if(count($value->orders)){
+                foreach ($value->orders as $oky => $ord) {
+                     $lastdate = $ord->cleaning_datetime;
+                }
+            }
+              $users[$key]['order_lastdate'] = $lastdate;
+        }
     
-        $users = User::whereRole('cleaner')
-                ->where(function ($query){
-                    if($this->tab=='active'){
-                        $query->whereStatus('1');
-                    }
-                    if($this->tab=='inactive'){
-                        $query->whereStatus('0');
-                    }
-                })
-                ->get();
+        // $users = User::whereRole('cleaner')
+        //         ->where(function ($query){
+        //             if($this->tab=='active'){
+        //                 $query->whereStatus('1');
+        //             }
+        //             if($this->tab=='inactive'){
+        //                 $query->whereStatus('0');
+        //             }
+        //         })->orderBy('id', 'DESC')
+        //         ->get();
+        
       
         return view('livewire.admin.cleaner.cleaner', compact('users'));
     }

@@ -187,6 +187,24 @@ Route::middleware(['auth', 'verified', 'trackLastActiveAt'])->group(function () 
                 return view('admin.services.index', compact('title'));
             })->name('admin.services.index');
         });
+
+        //Settings
+        Route::get('/settings', function () {
+                $title = array(
+                    'title' => 'Settings',
+                    'active' => 'settings',
+                );
+                return view('admin.settings.index');
+            })->name('admin.setting');
+
+            //Settings
+        Route::get('/profile', function () {
+                $title = array(
+                    'title' => 'Profile',
+                    'active' => 'profile',
+                );
+                return view('admin.profile.index');
+            })->name('admin.profile');
     });
 });
 

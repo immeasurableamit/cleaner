@@ -1,7 +1,7 @@
 <div>
      <div class="white-bg-wrapper">
         <div class="job_id">
-       <h5>Job # {{$user->id}}</h5>
+       <h5>Job # {{$orders->id}}</h5>
         </div>
 
         <div class="row pt-3 job_row "> 
@@ -11,31 +11,31 @@
      
             <div class="job_lists">
         <h3>Completion date:</h3>
-        <p>{{ date("d/m/Y", strtotime($user->cleaning_datetime))}}</p>
+        <p>{{ date("d/m/Y", strtotime($orders->cleaning_datetime))}}</p>
         <a class="cancel_r" href="#" ></a>
        </div>
 
        <div class="job_lists">
         <h3>Status:</h3>
-        <p>{{$user->statusForAdmin()}}</p>
+        <p>{{$orders->statusForAdmin()}}</p>
         <a class="cancel_r" href="#" ></a>
        </div>
 
        <div class="job_lists">
         <h3> Amount:</h3>
-        <p>{{$user->total}}</p>
+        <p>{{$orders->total}}</p>
         <a class="cancel_r" href="#" ></a>
        </div>
 
        <div class="job_lists">
         <h3>Customer:</h3>
-        <p>{{$user->user->first_name}} {{$user->user->last_name}}</p>
+        <p>{{$orders->user->first_name}} {{$orders->user->last_name}}</p>
         <a class="cancel_r" href="#" ></a>
        </div>
 
        <div class="job_lists">
         <h3> Cleaner:</h3>
-        <p>{{$user->cleaner->first_name}} {{$user->cleaner->last_name}}</p>
+        <p>{{$orders->cleaner->first_name}} {{$orders->cleaner->last_name}}</p>
         <a class="cancel_r" href="#" ></a>
        </div>
 
@@ -52,27 +52,27 @@
        <div class="job_card">
         <div class="job_lists">
             <h3>Address:</h3>
-            <p>{{$user->address}}</p>
+            <p>{{$orders->address}}</p>
             <a class="edit_r" href="#" ></a>
            </div>
            <div class="job_lists">
             <h3>Address 2:</h3>
-            <p>{{$user->address}}</p>
+            <p>{{$orders->address}}</p>
             <a class="edit_r" href="#" ></a>
            </div>
            <div class="job_lists">
             <h3>City:</h3>
-            <p>{{$user->city}}</p>
+            <p>{{$orders->city}}</p>
             <a class="edit_r" href="#" ></a>
            </div>
            <div class="job_lists">
             <h3>State:</h3>
-            <p>{{$user->state->code}}</p>
+            <p>{{$orders->state->code}}</p>
             <a class="edit_r" href="#" ></a>
            </div>
            <div class="job_lists">
             <h3>Zip</h3>
-            <p>{{$user->zip}}</p>
+            <p>{{$orders->zip}}</p>
             <a class="edit_r" href="#" ></a>
            </div>
            
@@ -111,17 +111,21 @@
               </tr>
           </thead>
           <tbody>
+            @foreach($orders->transactions as $order)
               <tr>
-                  <td>{{$user->transactions->first()->id ?? ''}}</td>
+                  <td>{{$order->id ?? ''}}</td>
                   <td>Deep clean - 20500 sq ft</td>
-                  <td>{{$user->transactions->first()->amount ?? ''}}</td>
-                  <td>{{ date("d/m/Y", strtotime($user->transactions->first()->created_at ?? ''))}}</td>
-                  <td>Refunded</td>
+                  <td>{{$order->amount ?? ''}}</td>
+                  <td>{{ date("d/m/Y", strtotime($order->created_at ?? ''))}}</td>
+                  <td>{{$order->action ?? ''}}</td>
                   <td>
                     <div class="dropdown refund_div">
+                          @if($order->action == 'completed' || $order->action == 'reviewed' )
                         <button class="refund_link dropdown-toggle"  id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             Refund
                         </button>
+
+                        @endif
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <div class="full_partail">
                             <div class="full_1">
@@ -142,38 +146,7 @@
                       </div>
                 </td>
               </tr>
-            
-          <!--   <tr>
-                <td>324-254-458</td>
-                <td>Deep clean - 20500 sq ft</td>
-                <td>$220</td>
-                <td>2/11/22</td>
-                <td>Refunded</td>
-                <td>
-                  <div class="dropdown refund_div">
-                      <button class="refund_link dropdown-toggle"  id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                          Refund
-                      </button>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                      <div class="full_partail">
-                          <div class="full_1">
-                              <h6>Full</h6>
-                          <input style="width:100px;" type="text" placeholder="Amount">
-                          <input style="width:70px;" type="text" placeholder="2FR">
-                        </div>
-                        <div class="partial_1">
-                          <h6>Partial</h6>
-                          <input style="width:100px;" type="text" placeholder="$0.00">
-                          <input style="width:70px;" type="text" placeholder="-------">
-                        </div>
-                      </div>
-                      <div class="btn_refund_div">
-                      <a class="btn_refund" href="#">SEND REFUND<img class="" src="../assets\admin\images\icons\send.png"></a>
-                      </div>
-                      </div>
-                    </div>
-              </td>
-            </tr> -->
+                @endforeach 
 
             <!-- refunds tr -->
             <tr class="refunds_tr">

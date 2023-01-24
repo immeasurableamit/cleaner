@@ -34,16 +34,19 @@
           <li class="admin-user-li position-relative">
             <div class="dropdown">
               <button type="button" class="dropdown-toggle position-relative" data-bs-toggle="dropdown">
+                <!--  @if(auth()->user()->image)
+                                    <img src="{{ asset('/storage' . auth()->user()->image) }}">
+                                    @else
+                                    <img src="{{asset('/assets/images/icons/profile-circle.svg')}}">
+                                    @endif -->
                   <img src="{{ asset('assets/images/thumbnail.png') }}">
               </button>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Link 1</a></li>
-                <li><a class="dropdown-item" href="#">Link 2</a></li>
-              <!--   <li><a class="dropdown-item" href="#">Link 3</a></li> -->
+                <li><a class="dropdown-item" href="{{route('admin.profile')}}">Profile</a></li>
                 <form action="{{ route('logout') }}" method="post">
-                                                @csrf
-                                                <button type="submit"><img src="{{asset('assets/images/icons/logout.svg')}}"> Logout</button>
-                                            </form>
+                  @csrf
+                  <button type="submit"><img src="{{asset('assets/images/icons/logout.svg')}}"> Logout</button>
+                  </form>
               </ul>
             </div>
           </li>

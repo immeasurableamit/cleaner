@@ -2,7 +2,7 @@
 
   <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
     <div class="detail-div-block">
-      <h4>Customer account info</h4>
+      <h4>Cleaner account info</h4>
       <div class="inner-white-wrapper">
         <div class="customer-account-forms">
           <div class="customer-account-information">
@@ -95,15 +95,15 @@
                       </svg><!-- <i class="far fa-credit-card"></i> Font Awesome fontawesome.com -->
                     </h6>
                     <p class=""> Payment Method Checking ******3245</p>
-                    <div class="action-block">
+                  <!--   <div class="action-block">
                       <button class="edit">Edit</button>
                       <button class="save-icn-btn"><svg class="svg-inline--fa fa-floppy-disk" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="floppy-disk" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
                           <path fill="currentColor" d="M433.1 129.1l-83.9-83.9C342.3 38.32 327.1 32 316.1 32H64C28.65 32 0 60.65 0 96v320c0 35.35 28.65 64 64 64h320c35.35 0 64-28.65 64-64V163.9C448 152.9 441.7 137.7 433.1 129.1zM224 416c-35.34 0-64-28.66-64-64s28.66-64 64-64s64 28.66 64 64S259.3 416 224 416zM320 208C320 216.8 312.8 224 304 224h-224C71.16 224 64 216.8 64 208v-96C64 103.2 71.16 96 80 96h224C312.8 96 320 103.2 320 112V208z"></path>
-                        </svg><!-- <i class="fas fa-save"></i> Font Awesome fontawesome.com --></button>
+                        </svg><i class="fas fa-save"></i> Font Awesome fontawesome.com</button>
                       <button class="cancel"><svg class="svg-inline--fa fa-xmark" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
                           <path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path>
-                        </svg><!-- <i class="fas fa-times"></i> Font Awesome fontawesome.com --></button>
-                    </div>
+                        </svg><i class="fas fa-times"></i> Font Awesome fontawesome.com</button>
+                    </div> -->
                   </form>
                 </div>
                 <div class="payemnt-first-block">
@@ -113,15 +113,15 @@
                       </svg><!-- <i class="far fa-credit-card"></i> Font Awesome fontawesome.com -->
                     </h6>
                     <p class=""> Payment Method Visa ******3245</p>
-                    <div class="action-block">
+                    <!-- <div class="action-block">
                       <button class="edit">Edit</button>
                       <button class="save-icn-btn"><svg class="svg-inline--fa fa-floppy-disk" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="floppy-disk" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
                           <path fill="currentColor" d="M433.1 129.1l-83.9-83.9C342.3 38.32 327.1 32 316.1 32H64C28.65 32 0 60.65 0 96v320c0 35.35 28.65 64 64 64h320c35.35 0 64-28.65 64-64V163.9C448 152.9 441.7 137.7 433.1 129.1zM224 416c-35.34 0-64-28.66-64-64s28.66-64 64-64s64 28.66 64 64S259.3 416 224 416zM320 208C320 216.8 312.8 224 304 224h-224C71.16 224 64 216.8 64 208v-96C64 103.2 71.16 96 80 96h224C312.8 96 320 103.2 320 112V208z"></path>
-                        </svg><!-- <i class="fas fa-save"></i> Font Awesome fontawesome.com --></button>
+                        </svg><i class="fas fa-save"></i> Font Awesome fontawesome.com</button>
                       <button class="cancel"><svg class="svg-inline--fa fa-xmark" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
                           <path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path>
-                        </svg><!-- <i class="fas fa-times"></i> Font Awesome fontawesome.com --></button>
-                    </div>
+                        </svg> <i class="fas fa-times"></i> Font Awesome fontawesome.com </button>
+                    </div> -->
                   </form>
                 </div>
               </li>
@@ -130,15 +130,15 @@
                   <h6 class="title-label"><img src="{{ asset('assets/admin/images/icons/tin.svg') }}"></h6>
                   <input type="number" placeholder="Enter Tin Number" style="display: none;">
                   <p>TIN: ****1164</p>
-                  <div class="action-block">
+                <!--   <div class="action-block">
                     <button class="edit">Edit</button>
                     <button class="save-icn-btn"><svg class="svg-inline--fa fa-floppy-disk" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="floppy-disk" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
                         <path fill="currentColor" d="M433.1 129.1l-83.9-83.9C342.3 38.32 327.1 32 316.1 32H64C28.65 32 0 60.65 0 96v320c0 35.35 28.65 64 64 64h320c35.35 0 64-28.65 64-64V163.9C448 152.9 441.7 137.7 433.1 129.1zM224 416c-35.34 0-64-28.66-64-64s28.66-64 64-64s64 28.66 64 64S259.3 416 224 416zM320 208C320 216.8 312.8 224 304 224h-224C71.16 224 64 216.8 64 208v-96C64 103.2 71.16 96 80 96h224C312.8 96 320 103.2 320 112V208z"></path>
-                      </svg><!-- <i class="fas fa-save"></i> Font Awesome fontawesome.com --></button>
+                      </svg></button>
                     <button class="cancel"><svg class="svg-inline--fa fa-xmark" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
                         <path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path>
-                      </svg><!-- <i class="fas fa-times"></i> Font Awesome fontawesome.com --></button>
-                  </div>
+                      </svg></button>
+                  </div> -->
                 </form>
               </li>
               <li class="d-flex position-relative">
@@ -149,8 +149,9 @@
                 <h6 class="title-label"><img src="{{ asset('assets/admin/images/icons/insured.svg') }}"></h6>
                 <p>Insured: Yes</p>
               </li>
+              
               <li class="reset-password">
-                <a href="#"><img src="{{ asset('assets/admin/images/icons/reset-password.svg') }}"> Reset Password</a>
+                <a href="#" id="reset-password" class="addService"><img src="{{ asset('assets/admin/images/icons/reset-password.svg') }}"> Reset Password</a>
               </li>
             </ul>
           </div>
@@ -159,4 +160,55 @@
     </div>
 
   </div>
+
+  <div wire:ignore.self class="modal fade show in" id="serviceForm" tabindex="-1" role="dialog" aria-labelledby="serviceForm" aria-hidden="true">
+        <div class="modal-dialog modal_style">
+        <button type="button" class="btn btn-default serviceFormClose"><span aria-hidden="true">×</span></button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Reset Password</h4>
+                </div>
+                <div class="modal-body">
+                     <div class="form-group">
+                        <label>New password</label>
+                        <input type="password" wire:model="new_password" class="form-control" id="password">
+                     
+                    </div>
+                   
+                   
+                <div class="text-center mb-3">
+
+                    <button type="submit" class="btn_s serviceFormClose" wire:click.prevent="updateData('new_password')" wire:loading.attr="disabled">
+                         Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  @push('scripts')
+    <script>
+        $(document).ready(function () {
+            window.livewire.on('serviceForm', () => {
+                $('#serviceForm').modal('show');
+            });
+            window.livewire.on('serviceFormClose', () => {
+                $('#serviceForm').modal('hide');
+            });
+        });
+
+
+        $(document).on('click', '.addService', function (e) {
+             $('#password').val('');
+            $('#serviceForm').modal('show');
+        });
+        $(document).on('click', '.serviceFormClose', function (e) {
+            $('#serviceForm').modal('hide');
+        });
+
+    </script>
+    @endpush
+
+
+</div>
 </div>

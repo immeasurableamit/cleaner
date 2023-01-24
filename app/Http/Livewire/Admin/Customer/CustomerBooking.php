@@ -4,18 +4,22 @@ namespace App\Http\Livewire\Admin\Customer;
 
 use Livewire\Component;
 use App\Models\Order;
+use Livewire\WithPagination;
 
 class CustomerBooking extends Component
 {
+    use WithPagination;
     public $userId;
     public $allData;
+    public $dateStart, $dateEnd, $searchResult;
     public $allCount, $scheduledCount, $completedCount, $cancelledCount;
     public $tab = 'all';
 
-    public function mount()
-    {
-        $this->allData = Order::with('cleaner')->where('user_id', $this->userId)->get();
 
+    public function mount()
+    {   
+        $this->allData = Order::with('cleaner')->where('user_id', $this->userId)->get();
+        
         $this->countBookings();
     }
 
@@ -36,12 +40,14 @@ class CustomerBooking extends Component
         $this->tab = $tab;
     }
 
+
     public function render()
     {
+         // dd($this->searchResult);
+
         if($this->tab=='all'){
             $orders = $this->allData;
-        }
-        else {
+        } else {
             $statusArray = [];
             if($this->tab=='scheduled'){
                 $statusArray[] = 'pending';
@@ -59,8 +65,33 @@ class CustomerBooking extends Component
             }
 
             $orders = $this->allData->whereIn('status', $statusArray);
-        }
         
+        }
+           
+        if(!empty($this->dateStart) && !empty($this->dateEnd)){
+
+          $orders = $this->allData = Order::with('cleaner')
+            ->whereBetween('cleaning_datetime', [$this->dateStart, $this->dateEnd])
+            ->where(function($query) {
+                $query->where('user_id', $this->userId);
+            })->get();
+       
+        }
+
+        if(!empty($this->searchResult)) {
+            $value = $this->searchResult;
+            
+            $orders = $this->allData = Order::with(['cleaner'])
+                ->where('user_id', $this->userId)
+                ->where(function($query) use ($value) {
+                    $query->where('status', 'like', '%'.$value.'%');
+                    $query->orWhereHas('cleaner', function($q) use($value) {
+                        $q->where('first_name', 'like', $value.'%');
+                    });
+                })->get();       
+        } 
+
+             
 
         return view('livewire.admin.customer.customer-booking', compact('orders'));
     }
