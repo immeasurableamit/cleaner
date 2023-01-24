@@ -84,7 +84,8 @@ class Team extends Component
             'last_name' => 'required',
             'contact_number' => 'required',
             'address' => 'required',
-            'ssn_or_tax' => 'required'
+            'ssn_or_tax' => 'required',
+            'insured' => 'required',
         ]);
         if ($this->user_id) {
 
@@ -95,7 +96,7 @@ class Team extends Component
                 'contact_number' => $this->contact_number,
                 'address' => $this->address,
                 'ssn_or_tax' => $this->ssn_or_tax,
-
+                'insured' => $this->insured,
             ]);
             $this->emit('close-modal', $this->user_id, 'success');
             // $this->emit('close-modal');
@@ -138,6 +139,7 @@ class Team extends Component
             CleanerTeam::find($this->user_id)->delete();
         }
         $this->alert('success', 'Deleted successfully');
+        return redirect()->route('cleaner.team');
     }
 
     public function render()

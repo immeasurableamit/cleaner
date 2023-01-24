@@ -92,6 +92,7 @@
             });
 
             $("#issues-selector").select2({
+            
                 placeholder: 'Select an Issue',
             });
 
