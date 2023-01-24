@@ -20,3 +20,5 @@ yarn-error.log
 .ftpquota
 /public/error_log
 /public/adminer.php
+favicon.ico
+/public/uploads/files/

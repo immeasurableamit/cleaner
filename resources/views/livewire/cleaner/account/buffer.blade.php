@@ -6,7 +6,7 @@
             <label>Set Minutes</label>
             <div class="incremnt_decrmnt number for_alternative">
                 <span class="minus" wire:click="action('minus')">-</span>
-                <input type="text" wire:model="buffer">
+                <input type="text" wire:model="buffer" disabled>
                 <span class="plus" wire:click="action('plus')">+</span>
             </div>
           </div>

@@ -43,7 +43,8 @@ class CleanerController extends Controller
             $latLngForMap['lng'] = -73.935242;
         }
 
-        return view('cleaner.set-location', compact('user', 'latLngForMap', 'radiusInMilesForMap', 'serveLocationAlreadySet') );
+        $title = ['title' => 'Set your service area', 'active' => 'set-location'];
+        return view('cleaner.set-location', compact('user', 'latLngForMap', 'radiusInMilesForMap', 'serveLocationAlreadySet', 'title') );
     }
 
     public function setLocation(Request $request)
@@ -68,7 +69,9 @@ class CleanerController extends Controller
             $user->UserDetails->save();
         }
 
-        return view('cleaner.insurance', compact('policy','user')  );
+        $title = ['title' => 'Insurance', 'active' => 'insurance'];
+
+        return view('cleaner.insurance', compact('policy','user','title')  );
     }
 
     public function redirectToInsuranceProvider()

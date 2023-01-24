@@ -1,9 +1,13 @@
 <x-mail::message>
 
-Hello, {{ $user->name }}
+Hello, {{ ucwords( $user->name ) }}
 
-{{ $message }}
+Thank you for using our application!
 
-Thanks,<br>
+Your account has been successfully created. Please click the link below to complete your profile.
+
+<x-mail::button :url="route('customer.account')">Complete profile</x-mail::button>
+
+Regards,<br>
 {{ config('app.name') }}
 </x-mail::message>

@@ -63,7 +63,7 @@
                                             </p>
                                         </div>
                                         @empty
-                                            <p>No Reviews Yet</p>
+                                            <p>No Reviews Found!</p>
                                         @endforelse
 
                                         @if ( $reviews->count() > 3 )

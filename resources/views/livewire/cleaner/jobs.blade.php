@@ -19,11 +19,13 @@
                                     </li>
                                 </ul>
                             </div>
+						{{--
                             <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
                                 <div class="time-zone-text">
                                     <a href="cleaner-account.html">Time Zone: -5:00 CST, current time 11:11am</a>
                                 </div>
                             </div>
+						--}}
                         </div>
                     </div>
                     <!-- Tab panes -->
@@ -37,7 +39,7 @@
                         </div>
                         <div class="date_show_v">
                             <button> Date </button>
-                            <span>{{ $selectedDate }}</span>
+                            <span>{{ formatDateTimeForUser($selectedDate, 'date') }}</span>
                         </div>
 
                         <div class="card_service_row appoitments-alternative-row row">
@@ -62,6 +64,7 @@
                                                 <p class="job-d-info address">{{ $order->address }}</p>
                                             </div>
                                             <div class="response-msg">
+
                                                 @if ( $order->status == 'pending' )
                                                 <button wire:loading.attr="disabled" wire:target="acceptOrder" wire:click="acceptOrder( {{ $order->id }} )" class="accept-request-btn crd-btn">
                                                     <span wire:loading.remove wire:target="acceptOrder">{{ $order->statusForCleaner() }}</span>
@@ -69,11 +72,13 @@
                                                 </button>
                                                 @elseif ( $order->status == 'rejected' )
                                                 <a href="#" class="refuse-request-btn crd-btn">{{ $order->statusForCleaner() }}</a>
-                                                @elseif ( $order->status == 'accepted' && now()->greaterThanOrEqualTo( $order->cleaning_datetime->copy()->subDay() ) ) {{-- if status is accepted and the order is tomorrow --}}
+                                                @elseif ( $order->status == 'accepted' && now()->greaterThanOrEqualTo( $order->cleaning_datetime->copy()->subDay() ) ) {{-- if status is accepted and the order is 24 hours ahead of the current time  --}}
                                                  <a href="javascript:void(0);" wire:loading.attr="disabled" wire:target="collectPayment" wire:click="collectPayment( {{ $order->id }} )" class="collect_payment crd-btn">
                                                     <span wire:loading.remove wire:target="collectPayment">{{ $order->statusForCleaner() }}</span>
                                                     <span wire:target="collectPayment" wire:loading><i class="fa-solid fa-spinner fa-spin"></i></span>
                                                 </a>
+                                                @elseif ($order->status == 'payment_failed')
+                                                    <a href="#" class="failed-msg crd-btn">{{ $order->statusForCleaner() }}</a>
 
                                                 @elseif ( $order->status == 'payment_collected' || $order->status == 'reviewed' )
                                                     <a href="javascript:void();" class="btn_blue crd-btn">{{ $order->statusForCleaner() }}</a>
@@ -81,6 +86,7 @@
                                                 <a href="javascript:void();" class="refuse-request-btn crd-btn">{{ $order->statusForCleaner() }}</a>
                                                 @elseif ( $order->status == 'cancelled_by_customer')
                                                 <a href="javascript:void();" class="refuse-request-btn crd-btn">{{ $order->statusForCleaner() }}</a>
+
                                                 @endif
                                             </div>
                                         </div>
@@ -156,6 +162,9 @@
                                         @elseif ( $order->status == 'accepted' && now()->greaterThanOrEqualTo( $order->cleaning_datetime->copy()->subDay() ) ) {{-- if status is accepted and the order is tomorrow --}}
                                             <a href="javascript:void(0);" wire:click="collectPayment( {{ $order->id }} )" class="collect_payment crd-btn">{{ $order->statusForCleaner() }}</a>
 
+                                            @elseif ($order->status == 'payment_failed')
+                                            <a href="#" class="failed-msg crd-btn">{{ $order->statusForCleaner() }}</a>
+
                                         @elseif ( $order->status == 'payment_collected' || $order->status == 'reviewed')
                                             <a href="javascript:void(0);" class="btn_blue crd-btn">{{ $order->statusForCleaner() }}</a>
                                         @elseif ( $order->status == 'cancelled')
@@ -185,7 +194,6 @@
 @push('scripts')
 <script>
     function renderCalendar(intialDate, events) {
-        console.log(events);
         var calendarEl = document.getElementById('calendar');
 
         var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -200,12 +208,18 @@
             dayMaxEvents: true, // allow "more" link when too many events
             events: events,
             selectable: true,
+            eventClick: (eventClickInfo) => {
+                let selectedEventDate = eventClickInfo.event.startStr;
+                window.calendar.select( selectedEventDate );
+                @this.set('selectedDate', selectedEventDate );
+
+            },
             selectConstraint: {
                 start: '00:01',
                 end: '23:59',
             },
             dateClick: function(info) {
-                console.log('date clicked');
+                console.log(info.dateStr);
                 @this.set('selectedDate', info.dateStr);
             },
 

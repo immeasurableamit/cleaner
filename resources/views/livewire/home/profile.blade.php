@@ -1,4 +1,4 @@
-<div>
+<div class="profile_id">
     <div class="row profile_row">
         <div class="col-xl-4 col-lg-6 col-md-12 px-0" style="background-color:#fff;">
             <div class="frst_tm">
@@ -123,7 +123,7 @@
 
 
                             @if ( $itemAddOns )
-                            <div class="col-md-4 select-design">
+                            <div class="col-md-4 select-design add_selcetor">
                                 <label>Add-Ons</label>
                                 <div class="selecti-box">
                                     <select id="addon-selector" class="select-custom-design" multiple>
@@ -137,9 +137,9 @@
                             </div>
                             @endif
                             <div class="col-md-4">
-                                <div class=" input-design">
+                                <div class="input-design">
                                     <label>Home Size</label>
-                                    <input type="number" wire:model="homeSize" placeholder="Enter Square Feet">
+                                    <input type="number" wire:model.debounce.500ms="homeSize" placeholder="Enter Square Feet">
                                     @error('homeSize') <span class="help-block text-danger"> {{ $message }} </span> @enderror
                                 </div>
                             </div>

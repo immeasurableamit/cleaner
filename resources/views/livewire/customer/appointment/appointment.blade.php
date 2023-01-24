@@ -16,7 +16,7 @@
                     </div>
                     <div class="date_show_v">
                         <button> Date </button>
-                        <span>{{ $selectedDate }}</span>
+                        <span>{{ \Carbon\Carbon::parse($selectedDate)->format('m-d-Y') }}</span>
                     </div>
 
                     <div class="card_service_row appoitments-alternative-row row">
@@ -96,6 +96,13 @@
                                     --}}
                                     </div>
 
+                                    @if ($order->status == 'payment_failed')
+                                        <div>
+                                            <a href="javascript:void(0);"
+                                                class="failed-msg crd-btn">{{ $order->statusForCustomer() . ' - ' }}
+                                                {{ $order->userTransaction->failure_reason }}</a>
+                                        </div>
+                                    @endif
                                     @if ($order->status == 'payment_collected' && now()->greaterThanOrEqualTo($order->cleaning_datetime))
                                         <div class="custom-dropdown rate-cleaner-dropdown" wire:ignore.self>
                                             <button type="button" class="btn  custom-dropdown-btn">Rate
@@ -235,16 +242,16 @@
                                         <option></option>
 
                                         @foreach ($rescheduledAvailableTimeSlots as $timeSlot)
-
                                             @php $isSelected = false @endphp
 
-                                            @if ( isset($rescheduleTime))
+                                            @if (isset($rescheduleTime))
                                                 @if (\Carbon\Carbon::parse($rescheduleTime)->format('h:i A') == $timeSlot)
                                                     @php $isSelected = true @endphp
                                                 @endif
                                             @endif
 
-                                            <option value="{{ $timeSlot }}" @selected($isSelected)>{{ $timeSlot }}</option>
+                                            <option value="{{ $timeSlot }}" @selected($isSelected)>
+                                                {{ $timeSlot }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -290,7 +297,12 @@
                     start: '00:01',
                     end: '23:59',
                 },
+                eventClick: (eventClickInfo) => {
+                    let selectedEventDate = eventClickInfo.event.startStr;
+                    window.calendar.select(selectedEventDate);
+                    @this.set('selectedDate', selectedEventDate);
 
+                },
                 dateClick: function(info) {
                     @this.set('selectedDate', info.dateStr);
                 },
@@ -313,7 +325,7 @@
                 numberOfColumns: 2,
                 inlineMode: true,
                 singleMode: true,
-                minDate:  new Date(),
+                minDate: new Date(),
                 parentEl: document.getElementById('rescheduleCalendar'),
                 lockDaysFilter: (date) => {
                     let weekday = date.getDay();
@@ -359,13 +371,12 @@
             addClickHandlerForRatingButtons();
         }
 
-        function resetRescheduleModalContent()
-        {
-            if ( $("#reschedule-time-selector") ) {
+        function resetRescheduleModalContent() {
+            if ($("#reschedule-time-selector")) {
                 $("#reschedule-time-selector").empty();
             }
 
-            if ( rescheduleDatePickerInstance ) {
+            if (rescheduleDatePickerInstance) {
                 rescheduleDatePickerInstance.destroy();
             }
         }

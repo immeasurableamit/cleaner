@@ -9,14 +9,19 @@ use \Carbon\Carbon;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 // use App\Http\Livewire\Cleaner\Notification\Notification;
 use Illuminate\Notifications\Notifiable;
-use App\Notifications\OrderConfirmed;
+use App\Notifications\Customer\OrderConfirmed as CustomerOrderConfirmed;
+use App\Notifications\Cleaner\OrderConfirmed as CleanerOrderConfirmed;
+
+use App\Notifications\Customer\OrderCancelled as CustomerOrderCancelled;
+use App\Notifications\Cleaner\OrderCancelled as CleanerOrderCancelled;
+
 use Illuminate\Support\Facades\Notification;
 
 class Jobs extends Component
 {
 
     use LivewireAlert;
-    use Notifiable;
+ //   use Notifiable;
 
     /*
      * @var: selectedTab
@@ -164,7 +169,8 @@ class Jobs extends Component
         $order->save();
 
 
-        $order->user->notify(new OrderConfirmed($order));
+        $order->user->notify(new CustomerOrderConfirmed($order));
+		$order->cleaner->notify( new CleanerOrderConfirmed($order) );
         $this->alert('success', 'Order accepted');
         $this->refreshSelectedTab();
         return true;
@@ -172,25 +178,44 @@ class Jobs extends Component
 
     public function rejectOrder( $orderId )
     {
+
         $order = Order::find($orderId);
         $order->status = 'rejected';
         $order->save();
-
+		$this->sendCancelOrderNotifications($order);
         $this->alert('success', 'Booking rejected');
         $this->refreshSelectedTab();
     }
 
 
-    protected function storeCollectPaymentTransaction($user_id, $order_id, $amount, $stripe_charge_id)
+    protected function storeCollectPaymentTransaction($user_id, $order_id, $amount, $chargeResp)
     {
+        $isChargeFailed = $chargeResp['status'] == false;
+        $stripeErrorObj = null;
+
+        if ( $isChargeFailed ){
+            $stripeErrorObj = $chargeResp['error']->getError();
+            $stripeId       = $stripeErrorObj->charge;
+        } else {
+            $stripeId = $chargeResp['charge_id'];
+        }
+
+
         $transaction = new Transaction;
         $transaction->user_id   = $user_id;
         $transaction->amount    = $amount;
         $transaction->type      = 'debit';
         $transaction->action    = 'charge';
-        $transaction->stripe_id = $stripe_charge_id;
+        $transaction->stripe_id = $stripeId;
         $transaction->transactionable_id   = $order_id;
         $transaction->transactionable_type = Order::class;
+
+        if ( $isChargeFailed ) {
+            $transaction->status         = 'failed';
+            $transaction->failure_code   = $stripeErrorObj->code;
+            $transaction->failure_reason = $stripeErrorObj->message;
+        }
+
         $transaction->save();
 
         return $transaction;
@@ -202,35 +227,36 @@ class Jobs extends Component
     {
         $order = Order::find( $orderId );
         $user  = $order->user;
-         /* Charge customer */
-         $chargeResp = stripeChargeCustomer(
+
+        /* Charge customer */
+        $chargeResp = stripeChargeCustomer(
             $user->UserDetails->stripe_customer_id,
             $order->totalInCents(),
             "CanaryCleaner charge for order #$order->id"
         );
 
-        /* Handle stripe charge error */
-        if ( $chargeResp['status'] == false ) {
-            $this->alert('error', 'Customer charge got failed');
-            return false;
-        }
-
+        /* Store transaction */
         $transaction = $this->storeCollectPaymentTransaction(
             $user->id,
             $order->id,
             $order->total,
-            $chargeResp['charge_id'],
+            $chargeResp,
         );
 
         /* Update order */
-        $order->status              = 'payment_collected';
-        $order->is_paid_by_user     = 1;
+        $isTransactionSuccess       = $transaction->status == 'success';
+        $order->status              = $isTransactionSuccess ? 'payment_collected' : 'payment_failed';
+        $order->is_paid_by_user     = $isTransactionSuccess ? 1 : 0;
         $order->user_transaction_id = $transaction->id;
         $order->save();
 
-        $this->alert('success', 'Payment collected');
+        /* Set alert */
+        $alertMessage = $isTransactionSuccess ? 'Payment Collected' : 'Payment Failed';
+        $alertType    = $isTransactionSuccess ? 'success' : 'error';
+        $this->alert( $alertType, $alertMessage);
         $this->refreshSelectedTab();
-        return true;
+
+        return $isTransactionSuccess;
     }
 
     public function updated($name)
@@ -268,6 +294,11 @@ class Jobs extends Component
         ]);
     }
 
+	protected function sendCancelOrderNotifications($order)
+	{
+		$order->user->notify( new CustomerOrderCancelled( $order ) );
+		$order->cleaner->notify( new CleanerOrderCancelled( $order ) );
+	}
 
     public function cancelOrder( $data )
     {
@@ -276,6 +307,8 @@ class Jobs extends Component
         if ( $order->status != 'payment_collected' ) {
             $order->status = 'cancelled';
             $order->save();
+
+			$this->sendCancelOrderNotifications($order);
 
             $this->alert('success','Booking cancelled');
             $this->refreshSelectedTab();
@@ -302,6 +335,8 @@ class Jobs extends Component
         $order->refund_transaction_id  = $transaction->id;
         $order->status = 'cancelled';
         $order->save();
+
+		$this->sendCancelOrderNotifications($order);
 
         $this->alert('success','Booking cancelled');
         $this->refreshSelectedTab();

@@ -8,7 +8,7 @@
           <div class="d-flex align-items-center">
             <div class="incremnt_decrmnt number for_alternative">
                 <span class="minus" wire:click="action('minus')">-</span>
-                <input type="text" wire:model="jobs">
+                <input type="text" wire:model="jobs" disabled>
                 <span class="plus" wire:click="action('plus')">+</span>
             </div>
             <span class="ms-3 small-grey-text"> Default is 1</span>

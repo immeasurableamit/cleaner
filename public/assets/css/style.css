@@ -79,7 +79,7 @@ input,select,textarea,form,p,span{
     color: var(--Darkblue);
     font-size: 16px;
     font-weight: 400;
-    padding: 10px;
+    padding: 10px 25px 10px 10px;
     background-image: url('../images/dropdown.png');
     background-repeat: no-repeat;
     background-position: 96%;
@@ -269,7 +269,7 @@ input:focus,select:focus,textarea:focus{
     border-radius: 10px;
     border: none;
     width: 100%;
-    padding: 19px;
+    padding:14px 19px;
     font-weight: 400;
     font-size: 14px;
     color: #363636;
@@ -715,7 +715,7 @@ color: var(--secondary);
     background-image: url('../images/icons/drop-arrpw.svg');
     background-size: auto;
     background-repeat: no-repeat;
-    background-position: 92% 50%;
+    background-position: 92% 23px;
 }
 .select2-selection__arrow {
     display: none !important;
@@ -1114,7 +1114,7 @@ padding-right: 15px;
 }
 .navigation-tab-desing li a {
     display: block;
-    color: #fff;
+    color: #fff !important;
     text-decoration: none;
     font-weight: 400;
     font-size: 16px;
@@ -1219,6 +1219,7 @@ button:focus, input:focus, select:focus, textarea:focus{
     font-size: 14px;
     font-weight: 400;
     margin-bottom: 0px;
+    text-transform: capitalize;
 }
 .customer_profile-info>.d-flex {
     padding-right: 40px;
@@ -1639,7 +1640,7 @@ li.profile_drop_down.account_dropdown .dropdown_links li a:hover,li.account_drop
 li.profile_drop_down.account_dropdown .dropdown_links li {
     margin-bottom: 5px;
 }
-.cleaner_account_2.customer-account-information p{
+.cleaner_account_2.customer-account-information ul li p{
 width: 50%;
 cursor: pointer;
 white-space: nowrap;
@@ -1811,9 +1812,9 @@ a.btn_chat_member img {
     text-align: center;
 }
 /* .y_text.delete ,.y_text.add{
-    width: 20%;
-    text-align: right;
-} */
+ *     width: 20%;
+ *         text-align: right;
+ *         } */
 .availability_row .btn_delete {
     width: 8%;
 }
@@ -2103,13 +2104,13 @@ margin-bottom: 0px;
     border-radius: 10px;
 }
 /* .bg_l_blue{
-           background: rgba(55, 169, 251, 0.2);
-                        border-radius: 10px;
-}
-.bg_l_blue .btn_buy{
-    background-color: var(--primary);
-    color: #fff;
-} */
+ *            background: rgba(55, 169, 251, 0.2);
+ *                                    border-radius: 10px;
+ *                                    }
+ *                                    .bg_l_blue .btn_buy{
+ *                                        background-color: var(--primary);
+ *                                            color: #fff;
+ *                                            } */
 .row.boosted_cards  .b_card:hover{
     background: rgba(55, 169, 251, 0.2);
                         border-radius: 10px;
@@ -2613,7 +2614,7 @@ a.btn_sign_in img{
     align-items: center;
 }
 .banner_home{
-    padding: 200px 0px 10px 0px;
+    padding: 103px 0px 0px 0px;
     position: relative;
     background-image: url(../images/bg_home.png);
     background-size: cover;
@@ -2864,8 +2865,10 @@ border-radius: 20px;}
         overflow: auto;
         margin-bottom: 40px;
     }
-    .card_rated .clnr_img{
+    .card_rated .clnr_img {
         width: 100%;
+        height: 273px;
+        object-fit: cover;
     }
     .card_rated .bottom_part {
         padding: 25px;
@@ -3324,6 +3327,8 @@ button.btn_filter.btn_filter_by {
   right:35px;
   top: 15px;
 }
+
+
 .card_search_result .like_img input[type="checkbox"].like_1::before{
     position: absolute;
     content: '';
@@ -3338,6 +3343,8 @@ button.btn_filter.btn_filter_by {
 }
 .card_search_result .like_img img{
     width: 100%;
+    height: 230px;
+    object-fit: cover;
 }
 .card_search_result {
     background: #FFFFFF;
@@ -4583,8 +4590,8 @@ td.contact_info img.profile_img {
 }
 /* css table   here */
 /*
-	Max width before this PARTICULAR table gets nasty. This query will take effect for any screen smaller than 760px and also iPads specifically.
-	*/
+ * 	Max width before this PARTICULAR table gets nasty. This query will take effect for any screen smaller than 760px and also iPads specifically.
+ * 		*/
       /* css  full_home_cleaning_table */
   .full_home_cleaning_table table{
     width: 100%;
@@ -5891,11 +5898,125 @@ input[type="time"] {
     margin: 20px 0px;
 }
 
+/* start here css */
+.avatar-edit span.help-block {
+    position: absolute;
+    left: 25%;
+    bottom: -30px;
+    color: red;
+}
+.checkout_div {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+fieldset .row.no-mrg .checkout_div h4{
+    font-size: 55px;
+    font-weight: 700;
+}
+.banner_text .search-form-wrapper.select-design {
+    border: 1px solid #D7D7D7;
+}
+.banner_text .search-form-wrapper.select-design button.search-btn {
+    box-shadow: none;
+}
 
+.customer-account-information.cleaner_account_2.mt-4 li.position-relative .time-zone-select-design {
+    padding-left: 8px;
+}
+.form-grouph.mb-30.input-select-abs input#city {
+    border-radius: 0px;
+}
+.select_state .selecti-box {
+    top: 20px !important;
+    bottom: auto;
+}
+.form_availibility .availability_row {
+    justify-content: initial;
+    align-items: flex-start;
+    position: relative;
+}
+.form_availibility .availability_row .time_input {
+    width: 55%;
 
-
-
-
+}
+.form_availibility .time-schedule-addon .time-input-addon {
+    position: relative;
+    padding-bottom: 10px;
+}
+.form_availibility .time-schedule-addon .time-input-addon button.border-0.bg-none.btn_deleter {
+    position: absolute;
+    right: -35%;
+    top: 10px;
+}
+.form_availibility .availbility_cover {
+    max-height: 230px;
+    overflow: auto;
+    margin-bottom: 15px;
+}
+.profile_id span.select2-selection.select2-selection--single {
+    background-color: inherit !important;
+}
+.profile_id ul#select2-addon-selector-container {
+    padding: 0px !important;
+}
+.profile_id span.select2-selection.select2-selection--multiple {
+    max-height: 95px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+.final-steps-sec .something_amazing_div h3 {
+    font-size: 35px;
+    font-weight: 700;
+}
+.final-steps-sec h3 span {
+    font-family: 'Poppins', sans-serif;
+}
+.team_row .teams-table-layout-view {
+    padding-left: 55px;
+}
+.form_availibility .availbility_cover .btn_switch,.form_availibility .availbility_cover .add_more {
+    position: sticky;
+    top: 0px;
+}
+.team_services .btn_header_service.py-3 {
+    padding-right: 28px;
+}
+.what_included {
+    margin-top: -50px;
+}
+.clean_house_section button.search-btn {
+    top: 0px;
+}
+.terms_r{
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+.terms_r input[type="checkbox"] {
+    position: relative;
+    top: 3px;
+}
+.biling_form .customer-account-information li.three_column>p {
+    width: 63%;
+    font-weight: 400;
+}
+.btn_close{
+    position: absolute;
+    right: 0px;
+    top: -30px;
+    cursor: pointer;
+    z-index: 2;
+    color: #fff;
+}
+.selct_2{
+    padding: 15px 25px 15px 19px;
+}
+/* doc changes here */
+footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {
+    display: none;
+}
+/* doc changes here */
    /* css  full_home_cleaning_table end here */
 	@media
 	  only screen
@@ -5921,8 +6042,8 @@ input[type="time"] {
     }
 
     /* .appoitments_table  tr:nth-child(odd),.common_table tr:nth-child(odd) {
-      background: #ccc;
-    } */
+ *       background: #ccc;
+ *           } */
     .common_table tr{
         position: relative;
         border-radius: 10px;
@@ -5967,9 +6088,9 @@ input[type="time"] {
             padding: 20px 5px;
         }
 		/*
-		Label the data
-    You could also use a data-* attribute and content for this. That way "bloats" the HTML, this way means you need to keep HTML and CSS in sync. Lea Verou has a clever way to handle with text-shadow.
-		*/
+ * 		Label the data
+ * 		    You could also use a data-* attribute and content for this. That way "bloats" the HTML, this way means you need to keep HTML and CSS in sync. Lea Verou has a clever way to handle with text-shadow.
+ * 		    		*/
 		.appoitments_table td:nth-of-type(1):before { content: "Cleaner Contact Info"; }
 		.appoitments_table td:nth-of-type(2):before { content: "Date"; }
 		.appoitments_table td:nth-of-type(3):before { content: "Time"; }
@@ -6910,8 +7031,8 @@ input[type="time"] {
             right: 13px;
         }
         /* .availability_row .time_input {
-            width: 35%;
-        } */
+ *             width: 35%;
+ *                     } */
         .availability_row .btn_switch {
             width: 28%;
         }
@@ -7498,8 +7619,8 @@ tr.arrow:after {
       display: block;
     }
     /* .signup_all_container .row.no-mrg {
-        flex-direction: column-reverse;
-    } */
+ *         flex-direction: column-reverse;
+ *             } */
     .signup_all_container .account-header-heading{
              padding-top: 20px;
     }
@@ -7946,4 +8067,15 @@ a.subit-btn-2 {
 }
 .pro-card {
 padding-bottom: 13px;
+}
+
+
+span.alert, span.help-block,div.alert {
+    color: red;
+    /* display: inline;
+    font-size: 13px; */
+}
+
+.select-date-toggles.show {
+    max-height: 100%;
 }

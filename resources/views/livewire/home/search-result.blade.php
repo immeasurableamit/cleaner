@@ -28,6 +28,10 @@
                         <option value="">Sort by</option>
                         <option value="price_asc">Price - Low to High</option>
                         <option value="price_desc">Price - High to Low</option>
+                        <option value="rating_desc">Rating - High to Low</option>
+                        <option value="rating_asc">Rating - Low to High</option>
+                        <option value="duration_asc">Duration - Low to High</option>
+                        <option value="duration_desc">Duration - High to Low</option>
                     </select>
                 </div>
             </div>
@@ -105,7 +109,7 @@
                 </div>
                 <div class="pb-5 d-flex reset-next-btn">
                     <button class="btn_reset"><img src="assets/images/icons/filter_by.svg" class="me-3">Reset</button>
-                    <a class="btn_next">Next</a>
+                    {{-- <a class="btn_next">Next</a> --}}
                 </div>
             </div>
         </div>
@@ -185,6 +189,8 @@
             new Litepicker({
                 element: document.getElementById('datepicker'),
                 singleMode: false,
+                minDate: new Date(),
+                format: 'MM-DD-YYYY',
                 tooltipText: {
                     one: 'Start Date',
                     other: 'End Date'

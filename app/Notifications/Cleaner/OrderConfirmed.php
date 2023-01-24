@@ -1,27 +1,27 @@
 <?php
 
-namespace App\Notifications;
+namespace App\Notifications\Cleaner;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use App\Mail\OrderConfirmedMail;
+use App\Models\Order;
 
-class OrderConfirmed extends Notification
+class OrderConfirmed extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    public $order;
+	protected $order;
 
     /**
      * Create a new notification instance.
-     *e
+     *
      * @return void
      */
-    public function __construct($order)
+    public function __construct(Order $order)
     {
-        $this->order = $order;
+		$this->order = $order;
     }
 
     /**
@@ -43,13 +43,10 @@ class OrderConfirmed extends Notification
      */
     public function toMail($notifiable)
     {
-        $mailable = new OrderConfirmedMail($notifiable, $this->order);
-        // return (new MailMessage)
-        //             ->line('The introduction to the notification.' . $this->order->name)
-        //             ->action('Notification Action', url('/'))
-        //             ->line('Thank you ,Your Order Confirmed!');
-
-        return $mailable->to($notifiable->email);
+        return (new MailMessage)->subject('CanaryClean Appointment Confirmed')
+			->markdown('email.cleaner.order-confirmed', [
+				'order' => $this->order,
+			]);
     }
 
     /**

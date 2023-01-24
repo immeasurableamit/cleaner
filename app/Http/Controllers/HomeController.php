@@ -38,13 +38,14 @@ class HomeController extends Controller
 	public function searchResultParameters(Request $request)
 	{
 
-        /* default search paramters will be used when
+        /*
+         * default search paramters will be used when
          * customer comes to search page directly ( by clicking browse cleaners )
          *
          */
         if ( empty( $request->query() ) ){
             $defaultParameters = getDefaultParametersForSearchPage();
-            return view("home.search-result", $defaultParameters );
+            return redirect()->route('search-result', $defaultParameters );
         }
 
         $rules = [
@@ -101,5 +102,18 @@ class HomeController extends Controller
         $order = Order::find( $orderId );
 
         return view('home.checkout-completed');
+    }
+
+    public function redirectUserToAccountPage(Request $req)
+    {
+        $user = $req->user();
+        $routeNamesForEachUserRole = [
+            'admin'    => 'admin.customer',
+            'customer' => 'customer.account',
+            'cleaner'  => 'cleaner.account',
+        ];
+
+        $routeName = $routeNamesForEachUserRole[strtolower($user->role)];
+        return redirect()->route($routeName);
     }
 }
