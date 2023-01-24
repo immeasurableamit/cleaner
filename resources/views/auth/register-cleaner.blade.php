@@ -192,10 +192,10 @@
                     {!! Form::number('zip_code', request()->zip_code ?? null, ['id' => 'zip', 'placeholder' => 'Zip','class' => 'form-control'.($errors->has('zip_code') ? ' is-invalid' : '')]) !!}
                     {!! $errors->first('zip_code', '<span class="alert">:message</span>') !!}
                   </div>
-                  <div class="form-grouph select-design mb-30">
+                  <div class="form-grouph payment_search select-design mb-30">
                     {!! Form::label('payment','Payment Method', ['class' => 'form-label']) !!}
 
-                    <select class="select-custom-design" name="payment_method" value="{{old('payment_method')}}">
+                    <select class=" select-custom-design" name="payment_method" value="{{old('payment_method')}}">
                       <option>Payment Method</option>
                       <option value="PayPal">PayPal</option>
                       <option value="Direct Deposit">Direct Deposit</option>

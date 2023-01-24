@@ -114,7 +114,7 @@
             </div>
         </div>
 
-        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 car_right_div">
+        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 car_right_div py-3">
 
             @if ($filteredCleaners->isEmpty())
                 <p class="text-center display-6"><strong>No cleaners found. Try changing filters.</strong></p>
