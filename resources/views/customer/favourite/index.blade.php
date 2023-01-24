@@ -18,13 +18,13 @@
                     </div>
                 </div>
 
-                <div id="data_Table" class="col-xl-9 col-lg-9 col-md-12 col-sm-12 car_right_div">
+                <div id="data_Table" class="col-xl-9 col-lg-9 col-md-12 col-sm-12 car_right_div py-3">
 
                     <div class="listing-row">
                         @if(count($favourites) <= 0) 
-                      
+                      <div class="p-5">
                         <h3>No Favourite Found</h3>
-
+                    </div>
                             @else
                             @foreach($favourites as $favourite)
                             <div class="listing-column lcd-4 lc-6">
