@@ -6009,6 +6009,9 @@ fieldset .row.no-mrg .checkout_div h4{
     z-index: 2;
     color: #fff;
 }
+.selct_2{
+    padding: 15px 25px 15px 19px;
+}
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {
     display: none;
