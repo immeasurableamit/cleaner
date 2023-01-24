@@ -19,11 +19,13 @@
                                     </li>
                                 </ul>
                             </div>
+						{{--
                             <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
                                 <div class="time-zone-text">
                                     <a href="cleaner-account.html">Time Zone: -5:00 CST, current time 11:11am</a>
                                 </div>
                             </div>
+						--}}
                         </div>
                     </div>
                     <!-- Tab panes -->
@@ -206,12 +208,18 @@
             dayMaxEvents: true, // allow "more" link when too many events
             events: events,
             selectable: true,
+            eventClick: (eventClickInfo) => {
+                let selectedEventDate = eventClickInfo.event.startStr;
+                window.calendar.select( selectedEventDate );
+                @this.set('selectedDate', selectedEventDate );
+
+            },
             selectConstraint: {
                 start: '00:01',
                 end: '23:59',
             },
             dateClick: function(info) {
-                console.log('date clicked');
+                console.log(info.dateStr);
                 @this.set('selectedDate', info.dateStr);
             },
 

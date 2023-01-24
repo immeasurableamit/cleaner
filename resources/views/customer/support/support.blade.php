@@ -2,7 +2,7 @@
 
 @section('content')
 
-<section class="light-banner customer-account-page" style="background-image: url('assets/images/white-pattern.png')">
+<section class="light-banner customer-account-page" style="background-image: url('/assets/images/white-pattern.png')">
   <div class="container">
     <div class="customer-white-wrapper">
       <div class="row no-mrg">
@@ -13,7 +13,7 @@
             </div>
             @include('layouts.common.sidebar')
             <div class="blue-logo-block text-center max-width-100">
-              <a href="#"><img src="assets/images/logo/logo.svg"></a>
+              <a href="#"><img src="/assets/images/logo/logo.svg"></a>
             </div>
           </div>
         </div>
@@ -52,5 +52,5 @@
 
 @endsection
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="{{ asset('assets/js/mdb.min.js') }}"></script>
-<x-livewire-alert::scripts />
+{{-- <script src="{{ asset('assets/js/mdb.min.js') }}"></script>
+ --}}<x-livewire-alert::scripts />

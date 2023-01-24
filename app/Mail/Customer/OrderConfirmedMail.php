@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Mail;
+namespace App\Mail\Customer;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -48,11 +48,10 @@ class OrderConfirmedMail extends Mailable implements ShouldQueue
     public function content()
     {
         return new Content(
-            markdown: 'email.order_confirmed',
+            markdown: 'email.customer.order_confirmed',
             with: [
                 'user'    => $this->user,
                 'order'   => $this->order,
-                //'message' => "Your order #".$this->order->id." has confirmed by cleaner"
             ],
         );
     }

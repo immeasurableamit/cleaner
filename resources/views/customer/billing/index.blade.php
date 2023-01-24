@@ -13,6 +13,9 @@
                                 <h4>Settings</h4>
                             </div>
                             @include('layouts.common.sidebar')
+                            <div class="blue-logo-block text-center max-width-100">
+                                <a href="#"><img src="/assets/images/logo/logo.svg"></a>
+                            </div>
                         </div>
                     </div>
 
@@ -49,7 +52,7 @@
                                                 <h6 class="title-label">State</h6>
                                                 <p>{{ $user->billing_address->state->name }}</p>
                                             </li>
-                                          
+
                                             <li class="d-flex justify-content-spacebw three_column">
                                                 <h6 class="title-label">Zip Code</h6>
                                                 <p>{{ $user->billing_address->zip }}</p>
@@ -58,8 +61,8 @@
                                                 <h6 class="title-label">Apt or Unit</h6>
                                                 <p>{{ $user->billing_address->apt_or_unit }}</p>
                                             </li>
-                                            
-                                            
+
+
                                         </ul>
                                     </div>
 

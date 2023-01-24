@@ -8,7 +8,8 @@ use App\Models\OrderItem;
 use \Carbon\Carbon;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Models\Review;
-
+use App\Notifications\Customer\OrderRescheduled as CustomerOrderRescheduled;
+use App\Notifications\Cleaner\OrderRescheduled as CleanerOrderRescheduled;
 
 class Appointment extends Component
 {
@@ -209,11 +210,13 @@ class Appointment extends Component
         $order->cleaning_datetime = $rescheduleDatetime;
         $order->save();
 
+		$order->user->notify(new CustomerOrderRescheduled($order));
+		$order->cleaner->notify(new CleanerOrderRescheduled($order));
+
         $this->alert('success', 'Order Rescheduled');
         $this->hideRescheduleModal();
         $this->refreshSelectedTab();
 
-        //public $rescheduleDate, $rescheduleDate, $rescheduleOrderId, $rescheduledAvailableTimeSlots = [];
         $this->reset([
             'rescheduleDate',
             'rescheduleDate',
