@@ -65,7 +65,7 @@
         </div>
         @endforeach
         <div class="">
-            <button type="button" class="submit-design mb-30 btn_blue" style="background-color:var(--secondary);" data-bs-toggle="modal" data-bs-target="#teamModal">
+            <button type="button" class="submit-design mb-2 btn_blue" style="background-color:var(--secondary);" data-bs-toggle="modal" data-bs-target="#teamModal">
                 Add Team Members
             </button>
         </div>
@@ -82,8 +82,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="form-grouph input-design mb-30 col-md-6">
-                            <div class="form-grouph select-design mb-30">
+                        <div class="form-grouph input-design mb-2 col-md-6">
+                            <div class="form-grouph select-design mb-2">
                                 <label>First Name</label>
                                 <input type="text" wire:model="first_name" />
                                 @error('first_name')
@@ -91,8 +91,8 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-grouph input-design mb-30 col-md-6">
-                            <div class="form-grouph select-design mb-30">
+                        <div class="form-grouph input-design mb-2 col-md-6">
+                            <div class="form-grouph select-design mb-2">
                                 <label>Last Name</label>
                                 <input type="text" wire:model="last_name" />
                                 @error('last_name')
@@ -103,9 +103,9 @@
                     </div>
                     <div class="row">
                     <div class="col-xl-6 col-lg-6 col-sm-12 col-md-6">
-                            <div class="form-grouph select-search-design select-design mb-30">
+                            <div class="form-grouph select-search-design select-design mb-2">
                                 <label>Insured</label>
-                                <select wire:model="insured" class="form-control">
+                                <select wire:model="insured" class="form-control selct_2" style="box-shadow: 0px 15px 50px rgb(16 85 135 / 15%);">
                                     <option value="" selected>Choose Insured</option>
                                     <option value="Yes">Yes</option>
                                     <option value="No">No</option>
@@ -113,8 +113,8 @@
                             </div>
                             @error ('insured') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
-                        <div class="form-grouph input-design mb-30 col-md-6">
-                            <div class="form-grouph select-design mb-30">
+                        <div class="form-grouph input-design mb-2 col-md-6">
+                            <div class="form-grouph select-design mb-2">
                                 <label>Phone</label>
                                 <input type="number" wire:model="contact_number" />
                                 @error('contact_number')
@@ -123,8 +123,8 @@
                             </div>
                         </div>
 
-                        <div class="form-grouph input-design mb-30 col-md-6">
-                            <div class="form-grouph select-design mb-30">
+                        <div class="form-grouph input-design mb-2 col-md-6">
+                            <div class="form-grouph select-design mb-2">
                                 <label>Email</label>
                                 <input type="email" wire:model="email" disabled />
                                 @error('email')
@@ -132,8 +132,8 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-grouph input-design mb-30 col-md-6">
-                            <div class="form-grouph select-design mb-30">
+                        <div class="form-grouph input-design mb-2 col-md-6">
+                            <div class="form-grouph select-design mb-2">
                                 <label>Address</label>
                                 <input type="address" wire:model="address" />
                                 @error('address')
@@ -141,8 +141,8 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-grouph input-design mb-30 col-md-6">
-                            <div class="form-grouph select-design mb-30">
+                        <div class="form-grouph input-design mb-2 col-md-6">
+                            <div class="form-grouph select-design mb-2">
                                 <label>SSN/TIN</label>
                                 <input type="number" wire:model="ssn_or_tax" />
                                 @error('ssn_or_tax')
@@ -178,9 +178,9 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-sm-12 col-md-6">
-                            <div class="form-grouph select-design mb-30">
+                            <div class="form-grouph select-design mb-2">
                                 <label>First Name</label>
-                                <div class="form-grouph input-design mb-30 col-md-12">
+                                <div class="form-grouph input-design mb-2 col-md-12">
                                     <input type="text" wire:model="first_name" placeholder="Enter your First Name" />
                                 </div>
                                 @error('first_name')
@@ -189,9 +189,9 @@
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-sm-12 col-md-6">
-                            <div class="form-grouph select-design mb-30">
+                            <div class="form-grouph select-design mb-2">
                                 <label>Last Name</label>
-                                <div class="form-grouph input-design mb-30 col-md-12">
+                                <div class="form-grouph input-design mb-2 col-md-12">
                                     <input type="text" wire:model="last_name" placeholder="Enter your Last Name" />
                                 </div>
                                 @error('last_name')
@@ -201,9 +201,9 @@
                         </div>
 
                         <div class="col-xl-6 col-lg-6 col-sm-12 col-md-6">
-                            <div class="form-grouph select-search-design select-design mb-30">
+                            <div class="form-grouph select-search-design select-design mb-2">
                                 <label>Insured</label>
-                                <select wire:model="insured" class="form-control">
+                                <select wire:model="insured" class="form-control selct_2" style="box-shadow: 0px 15px 50px rgb(16 85 135 / 15%);" >
                                     <option value="" selected>Choose Insured</option>
                                     <option value="Yes">Yes</option>
                                     <option value="No">No</option>
@@ -212,9 +212,9 @@
                             @error ('insured') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                         <div class="col-xl-6 col-lg-6 col-sm-12 col-md-6">
-                            <div class="form-grouph select-design mb-30">
+                            <div class="form-grouph select-design mb-2">
                                 <label>Phone</label>
-                                <div class="form-grouph input-design mb-30 col-md-12">
+                                <div class="form-grouph input-design mb-2 col-md-12">
                                     <input type="number" wire:model="contact_number" placeholder="Contact Number" />
                                 </div>
                                 @error('contact_number')
@@ -223,9 +223,9 @@
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-sm-12 col-md-6">
-                            <div class="form-grouph select-design mb-30">
+                            <div class="form-grouph select-design mb-2">
                                 <label>Email</label>
-                                <div class="form-grouph input-design mb-30 col-md-12">
+                                <div class="form-grouph input-design mb-2 col-md-12">
                                     <input type="email" wire:model="email" placeholder="Enter your Email" />
                                 </div>
                                 @error('email')
@@ -235,9 +235,9 @@
                         </div>
 
                         <div class="col-xl-6 col-lg-6 col-sm-12 col-md-6">
-                            <div class="form-grouph select-design mb-30">
+                            <div class="form-grouph select-design mb-2">
                                 <label>Address</label>
-                                <div class="form-grouph input-design mb-30 col-md-12">
+                                <div class="form-grouph input-design mb-2 col-md-12">
                                     <input type="address" id='address' wire:model="address" placeholder="Enter your Address" />
                                 </div>
                                 @error('address')
@@ -246,9 +246,9 @@
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-sm-12 col-md-6">
-                            <div class="form-grouph select-design mb-30">
+                            <div class="form-grouph select-design mb-2">
                                 <label>SSN/TIN</label>
-                                <div class="form-grouph input-design mb-30 col-md-12">
+                                <div class="form-grouph input-design mb-2 col-md-12">
                                     <input type="number" wire:model="ssn_or_tax" placeholder="Enter your SSN/TIN" />
                                 </div>
                                 @error('ssn_or_tax')
