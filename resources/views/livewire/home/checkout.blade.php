@@ -533,7 +533,7 @@
             var foo = $(this).val().replace(/\s+/g, "").replace(/[^0-9]/gi, ""); // remove non numeric
             foo = foo.split(" ").join(""); // remove spaces
             if (foo.length > 0) {
-                foo = foo.match(new RegExp(".{1,4}", "g")).join(" ").slice(-23); // max 23 chars
+                foo = foo.match(new RegExp(".{1,4}", "g")).join(" ").slice(-30); // max 23 chars
             }
             $(this).val(foo);
             console.log(foo);
