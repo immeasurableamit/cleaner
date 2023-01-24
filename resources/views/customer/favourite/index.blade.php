@@ -22,7 +22,8 @@
 
                     <div class="listing-row">
                         @if(count($favourites) <= 0) 
-                        <h2>No Favourite Found</h2>
+                      
+                        <h3>No Favourite Found</h3>
 
                             @else
                             @foreach($favourites as $favourite)
