@@ -285,6 +285,9 @@ input:focus,select:focus,textarea:focus{
     left: 20px;
     top: 16px;
 }
+.auth_form span.input-icon {
+    top: 10px;
+}
 body .input-icon-left input {
     padding-left: 50px !important;
 }
@@ -708,7 +711,7 @@ color: var(--secondary);
     border-radius: 10px !important;
     border: none !important;
     width: 100%;
-    padding: 20.5px 24px;
+    padding: 14.5px 24px;
     font-weight: 400;
     font-size: 14px;
     height: auto !important;
@@ -864,8 +867,8 @@ color: var(--secondary);
     background-size: auto;
     background-repeat: no-repeat;
     background-position: 86% 50%;
-    padding-top: 6px;
-    padding-bottom: 6px;
+    /* padding-top: 6px;
+    padding-bottom: 6px; */
     background-color: transparent !important;
 }
 .form-grouph label {
@@ -1151,7 +1154,7 @@ button:focus, input:focus, select:focus, textarea:focus{
     color: #fff;
     font-weight: 600;
     font-size: 16px;
-    width: 100px;
+    /* width: 100px; */
     display: inline-block;
     margin-left: 10px;
     text-overflow: ellipsis;
@@ -1428,7 +1431,7 @@ button:focus{
     align-items: center;
 }
 .date_show_v button {
-    padding: 10px 15px;
+    padding: 11px 15px;
     background-color: var(--primary);
     border: 0px;
     border-radius: 0px;
@@ -6010,13 +6013,32 @@ fieldset .row.no-mrg .checkout_div h4{
     color: #fff;
 }
 .selct_2{
-    padding: 15px 25px 15px 19px;
+    padding: 15px 25px 15px 19px !important;
+    border-radius: 10px !important;
 }
 .add_calender button{
     border: 0px;
     background-color: transparent;
     padding: 0px;
 }
+.edit_frm input[type="number"], .edit_frm input[type="email"], .edit_frm input[type="text"] {
+    border: 1px solid;
+    padding: 5px !important;
+    height: auto;
+} 
+.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr {
+    padding-right: 10px;
+}
+.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr .fc-toolbar-chunk:last-child {
+    display: none;
+}
+.card_chat.active a.nav-link.getmsgs {
+    color: #fff;
+}
+.singup_auth-design .select-three-pair.d-flex,.payment_search span.select2-selection.select2-selection--single {
+    padding: 22px 19px;
+}
+
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {
     display: none;
