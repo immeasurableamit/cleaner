@@ -19,12 +19,32 @@
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" wire:ignore.self>
       <div class="form-group row">
+        <label for="type" class="col-sm-2 col-form-label">Tax type</label>
+        <div class="col-sm-10">
+          <select class="form-control" wire:model="tax_type">
+            <option value="">Select type</option>
+            <option value="percentage" selected="selected">Percentage</option>
+            <option value="fixed">Fixed</option>
+          </select>
+        </div>
+      </div><br>
+      <div class="form-group row">
         <label for="tax" class="col-sm-2 col-form-label">Tax</label>
         <div class="col-sm-10">
           <input type="text" class="form-control" id="tax" placeholder="" wire:model="tax">
         </div>
       </div>
       <br>
+       <div class="form-group row">
+        <label for="Transaction" class="col-sm-2 col-form-label">Transaction fee type</label>
+        <div class="col-sm-10">
+          <select class="form-control" wire:model="transaction_type" required>
+            <option value="">Select type</option>
+            <option value="percentage" selected="selected">Percentage</option>
+            <option value="fixed">Fixed</option>
+          </select>
+        </div>
+      </div><br>
       <div class="form-group row">
         <label for="fee" class="col-sm-2 col-form-label">Transaction Fee</label>
         <div class="col-sm-10">
@@ -33,7 +53,7 @@
       </div>
       <br>
       <div class="form-group">
-        <button type="submit" wire:click.prevent="update()" class="btn btn-primary">Submit</button>
+        <button type="submit" wire:click.prevent="update()" class="btn_blue">Submit</button>
       </div>
     </div>
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" wire:ignore.self>
@@ -66,7 +86,7 @@
       </div>
       <br>
       <div class="form-group">
-        <button type="submit" wire:click.prevent="update()" class="btn btn-primary">Submit</button>
+        <button type="submit" wire:click.prevent="update()" class="btn_blue">Submit</button>
       </div>
     </div>
     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab" wire:ignore.self>
@@ -85,7 +105,7 @@
       </div>
       <br>
       <div class="form-group">
-        <button type="submit" wire:click.prevent="update()" class="btn btn-primary">Submit</button>
+        <button type="submit" wire:click.prevent="update()" class="btn_blue">Submit</button>
       </div>
     </div>
     <div class="tab-pane fade" id="social" role="tabpanel" aria-labelledby="social-tab" wire:ignore.self>
@@ -124,7 +144,7 @@
     <div class="tab-pane fade" id="seo" role="tabpanel" aria-labelledby="seo-tab" wire:ignore.self>
       <div class="tab-content">
         <div class="add-litigations py-3">
-          <button type="button" class="accept_btn showModal">Add</button>
+          <button type="button" class="btn_blue showModal">Add</button>
         </div>
         <div class="tab-pane active" id="all">
           <div class="table-design">
@@ -204,7 +224,7 @@
             </div>
           </div>
           <div class="text-center mb-3">
-            <button type="button" class="btn-design-first" wire:click.prevent="store" wire:loading.attr="disabled">Save </button>
+            <button type="button" class="btn_blue" wire:click.prevent="store" wire:loading.attr="disabled">Save </button>
           </div>
         </form>
       </div>

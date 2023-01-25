@@ -1126,6 +1126,9 @@ padding-right: 15px;
     border-radius: 10px;
     margin-bottom: 5px;
 }
+.navigation-tab-desing li a.active{
+    color: #000 !important;
+}
 .navigation-tab-desing li a:hover,.navigation-tab-desing li a.active {
     font-weight: bold;
     background-color: var(--secondary);
@@ -6026,6 +6029,10 @@ fieldset .row.no-mrg .checkout_div h4{
     padding: 5px !important;
     height: auto;
 } 
+.edit_frm input:disabled{
+    border: 0px !important;
+    background-color: inherit !important;
+}
 .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr {
     padding-right: 10px;
 }
@@ -6035,10 +6042,22 @@ fieldset .row.no-mrg .checkout_div h4{
 .card_chat.active a.nav-link.getmsgs {
     color: #fff;
 }
+.service_div.pb-5 .selecti-box span.select2-selection__rendered {
+    line-height: inherit !important;
+} 
 .singup_auth-design .select-three-pair.d-flex,.payment_search span.select2-selection.select2-selection--single {
     padding: 22px 19px;
 }
-
+.customer-account-information.cleaner_account_2.about-updation-wrap .d-flex.justify-content-spacebw.three_column.edit_frm textarea {
+    width: 90%;
+}
+.customer-account-information.cleaner_account_2.mt-4 form.d-flex.justify-content-spacebw.three_column.edit_frm .time-zone-select-design input[type="text"]:disabled {
+    border: 0px;
+    background: inherit;
+    padding: 0px !important;
+    position: relative;
+    left: -5px;
+}
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {
     display: none;

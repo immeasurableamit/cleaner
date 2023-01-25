@@ -9,9 +9,11 @@ class Setting extends Model
 {
     use HasFactory;
 
-        protected $fillable = [
+    protected $fillable = [
         'tax',
+        'tax_type',
         'transaction_fees',
+        'transaction_fee_type',
         'smtp_host',
         'smtp_port',
         'smtp_username',
@@ -24,5 +26,4 @@ class Setting extends Model
         'linkedin_link',
 
     ];
-
 }

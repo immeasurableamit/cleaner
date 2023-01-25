@@ -7,7 +7,7 @@
       <li><a href="{{route('admin.services.index')}}"><img src="{{ asset('assets/admin/images/icons/cleaners.svg') }}"> Services</a></li>
     </ul>
     <ul class="list-unstyled admin-ul-scnd">
-      <li><a href="#"><img src="{{ asset('assets/admin/images/icons/faq.svg') }}"> FAQs</a></li>
+      <li><a href="{{route('admin.faqs')}}"><img src="{{ asset('assets/admin/images/icons/faq.svg') }}"> FAQs</a></li>
       <li><a href="{{route('admin.support.service')}}"><img src="{{ asset('assets/admin/images/icons/support.svg') }}"> Support</a></li>
       <li><a href="{{route('admin.setting')}}"><img src="{{ asset('assets/admin/images/icons/support.svg') }}"> Settings</a></li>
       <li><a href="{{route('admin.support.contactus')}}"><img src="{{ asset('assets/admin/images/icons/support.svg') }}"> Contact us</a></li>
