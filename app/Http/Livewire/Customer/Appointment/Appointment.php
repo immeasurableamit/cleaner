@@ -10,6 +10,7 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Models\Review;
 use App\Notifications\Customer\OrderRescheduled as CustomerOrderRescheduled;
 use App\Notifications\Cleaner\OrderRescheduled as CleanerOrderRescheduled;
+use App\Notifications\Cleaner\OrderCancelled as CancelledOrderNotificationForCleaner;
 
 class Appointment extends Component
 {
@@ -147,6 +148,10 @@ class Appointment extends Component
     {
         $orderId = $data['value'];
         $order   = Order::where('id', $orderId )->update(['status' => 'cancelled_by_customer']);
+        $order   = Order::find($orderId);
+
+        $order->cleaner->notify( new CancelledOrderNotificationForCleaner($order));
+
         $this->alert('success', 'Order cancelled');
         $this->refreshSelectedTab();
     }

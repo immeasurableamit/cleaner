@@ -5,15 +5,16 @@ namespace App\Http\Livewire\Admin\Jobs\View;
 use Livewire\Component;
 use App\Models\Order;
 use App\Models\User;
+use App\Models\Transaction;
 
 class JobsInfo extends Component
 {   
-    public $user;
+    public $orders;
     public $order_id;
 
     public function mount(){
         
-        $this->user = Order::with(['user','cleaner','state','transactions'])->where('id', '=', $this->order_id)->first();
+        $this->orders = Order::with(['user','cleaner','state','transactions'])->where('id', '=', $this->order_id)->first();
     }
 
     public function render()

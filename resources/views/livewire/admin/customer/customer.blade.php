@@ -14,7 +14,10 @@
       </ul>
     </div>
     <div class="table-right-block">
-      <div class="dropdown">
+        <div class="table-right-block">
+      <button id="all-time1" class="all-time-btn">All Time</button>
+    </div>
+     <!--  <div class="dropdown">
         <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
         All <img src="{{ asset('assets/admin/images/icons/all-filter.svg') }}">
         </button>
@@ -23,8 +26,12 @@
           <li><a class="dropdown-item" href="#">Link 2</a></li>
           <li><a class="dropdown-item" href="#">Link 3</a></li>
         </ul>
-      </div>
+      </div> -->
     </div>
+
+    <div class="header-search">
+          <input type="search" placeholder="Search here..." id="search" wire:model="search">
+         </div>
   </div>
   <!-- Tab panes -->
   <div class="tab-content">
@@ -46,28 +53,61 @@
           </thead>
           <tbody>
             @foreach($users as $user)
-            <tr>
-              <td class="name"><a href="{{ route('admin.customer.show', $user->id) }}">{{$user->first_name}} {{$user->last_name}}</a></td>
-              <td>{{$user->email}}</td>
-              <td>12</td>
-              <td>2/14/22</td>
-              <td>{{@$user->UserDetails->city}}</td>
-              <td>{{@$user->UserDetails->State->code}}</td>
-              <!-- <td>USA</td> -->
-              <td>2/14/22</td>
-              <td>$2,555</td>
-              <td class="status">
-                @if( $user->status == 1)
-                <a type="button" class="text-success" wire:click="confirmStatus({{$user->id}})" value="0">Active</a>
+
+              <tr>
+                <td class="name"><a href="{{ route('admin.customer.show', $user->id) }}">{{$user->first_name}} {{$user->last_name}}</a></td>
+                <td>{{$user->email}}</td>
+                <td>{{$user->orders_count}}</td>
+                @if($user->order_lastdate)
+                <td>{{date("m/d/Y", strtotime($user->order_lastdate))}}</td>
                 @else
-                <a type="button" class="text-danger" wire:click="confirmStatus({{$user->id}})" value="1">Inactive</a>
+                <td></td>
                 @endif
-              </td>
-            </tr>
+                <td>{{@$user->UserDetails->city}}</td>
+                <td>{{@$user->UserDetails->State->code}}</td>
+                <!-- <td>USA</td> -->
+                <td>{{ date("m/d/Y", strtotime($user->created_at))}}</td>
+                <td>${{$user->total_sum}}</td>
+                <td class="status">
+                  @if( $user->status == 1)
+                  <a type="button" class="text-success" wire:click="confirmStatus({{$user->id}})" value="0">Active</a>
+                  @else
+                  <a type="button" class="text-danger" wire:click="confirmStatus({{$user->id}})" value="1">Inactive</a>
+                  @endif
+                </td>
+              </tr>
+          
             @endforeach
           </tbody>
         </table>
       </div>
     </div>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
+
+    <script>
+    new Litepicker({
+        element: document.getElementById('all-time1'),
+        singleMode: false,
+        allowRepick: true,
+        numberOfMonths: 2,
+        numberOfColumns: 2,
+        setup: (picker) => {
+            picker.on('selected', (date1, date2) => { 
+              
+                @this.set('dateStart', formatDate(date1.dateInstance));
+                @this.set('dateEnd', formatDate(date2.dateInstance))
+            });
+        },
+
+    });
+
+     function formatDate(dateInstance) {
+            let year = dateInstance.getFullYear();
+            let month = dateInstance.getMonth() + 1; // adding 1 because getMonth returns month from range 0 to 11
+            let day = dateInstance.getDate();
+            let date = `${year}-${month}-${day}`;
+            return date;
+        }
+</script>
 </div>

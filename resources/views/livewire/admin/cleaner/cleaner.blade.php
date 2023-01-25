@@ -14,7 +14,10 @@
       </ul>
     </div>
     <div class="table-right-block">
-      <div class="dropdown">
+     <!--  <div class="table-right-block">
+      <button id="all-time1" class="all-time-btn">All Time</button>
+    </div> -->
+      <!-- <div class="dropdown">
         <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
         All <img src="{{ asset('assets/admin/images/icons/all-filter.svg') }}">
         </button>
@@ -23,8 +26,12 @@
           <li><a class="dropdown-item" href="#">Link 2</a></li>
           <li><a class="dropdown-item" href="#">Link 3</a></li>
         </ul>
-      </div>
+      </div> -->
     </div>
+     <div class="header-search">
+          <input type="search" placeholder="Search here..." id="search" wire:model="search">
+         </div>
+
   </div>
   <!-- Tab panes -->
   <div class="tab-content">
@@ -56,8 +63,12 @@
               @endif
               <td class="name"><a href="{{ route('admin.cleaner.show', $user->id) }}">{{$user->first_name}} {{$user->last_name}}</a></td>
               <td>{{$user->email}}</td>
-              <td>729</td>
-              <td>3/19/2022</td>
+              <td>{{$user->orders_count}}</td>
+              @if($user->order_lastdate)
+              <td>{{date("m/d/Y", strtotime($user->order_lastdate))}}</td>
+              @else
+              <td></td>
+              @endif
               @if($user->UserDetails)
               <td>{{$user->UserDetails->city}}</td>
               @else
@@ -69,7 +80,7 @@
               <td></td>
               @endif
               <td>USA</td>
-              <td>$182,695dsffsd</td>
+              <td>$182,695</td>
               <!-- <td><a href="">o0k</a></td> -->
               <td class="status">
                 @if( $user->status == 1)
