@@ -6030,8 +6030,8 @@ fieldset .row.no-mrg .checkout_div h4{
     height: auto;
 } 
 .edit_frm input:disabled{
-    border: 0px;
-    background-color: inherit;
+    border: 0px !important;
+    background-color: inherit !important;
 }
 .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr {
     padding-right: 10px;
@@ -6050,6 +6050,13 @@ fieldset .row.no-mrg .checkout_div h4{
 }
 .customer-account-information.cleaner_account_2.about-updation-wrap .d-flex.justify-content-spacebw.three_column.edit_frm textarea {
     width: 90%;
+}
+.customer-account-information.cleaner_account_2.mt-4 form.d-flex.justify-content-spacebw.three_column.edit_frm .time-zone-select-design input[type="text"]:disabled {
+    border: 0px;
+    background: inherit;
+    padding: 0px !important;
+    position: relative;
+    left: -5px;
 }
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {
