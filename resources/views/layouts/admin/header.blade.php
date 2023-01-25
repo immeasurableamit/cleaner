@@ -34,12 +34,12 @@
           <li class="admin-user-li position-relative ">
             <div class="dropdown">
               <button type="button" class="dropdown-toggle position-relative" data-bs-toggle="dropdown">
-                <!--  @if(auth()->user()->image)
-                                    <img src="{{ asset('/storage' . auth()->user()->image) }}">
+                 @if(auth()->user()->image)
+                                    <img src="{{ asset('/storage/' . auth()->user()->image) }}">
                                     @else
-                                    <img src="{{asset('/assets/images/icons/profile-circle.svg')}}">
-                                    @endif -->
-                  <img src="{{ asset('assets/images/thumbnail.png') }}">
+                                    <img src="{{asset('/assets/images/thumbnail.png')}}">
+                                    @endif
+                  <!-- <img src="{{ asset('assets/images/thumbnail.png') }}"> -->
               </button>
 
               <ul class="dropdown-menu">

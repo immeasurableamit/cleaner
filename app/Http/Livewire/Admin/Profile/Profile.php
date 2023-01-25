@@ -6,11 +6,12 @@ use Livewire\Component;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\WithFileUploads;
-use App\Base64Image;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Profile extends Component
 {
      use WithFileUploads;
+     use LivewireAlert;
     public $roles;
     public $old_image;
     public $first_name, $last_name, $password, $email, $file;
@@ -43,7 +44,7 @@ class Profile extends Component
     
         }
         else{
-        $filename = $this->file->store('storage','public');
+        $filename = $this->file->store('storage/images','public');
         $this->roles->image = $filename;
 
         } 
@@ -64,7 +65,8 @@ class Profile extends Component
         }
 
         $this->roles->update();
-        session()->flash('message', 'Updated Successfully.');
+        $this->alert('success', 'Profile updated');
+        // session()->flash('message', 'Updated Successfully.');
 
     }
 
