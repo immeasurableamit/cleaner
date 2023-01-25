@@ -12,6 +12,8 @@ class Customer extends Component
 {
     use LivewireAlert;
     public $userId;
+    public $search;
+    public $dateStart, $dateEnd;
     public $allCount, $activeCount, $inactiveCount;
     public $tab = 'all';
     protected $listeners = ['changeStatus'];
@@ -71,17 +73,69 @@ class Customer extends Component
 
     public function render()
     {
-        $users = User::whereRole('customer')
-                ->where(function ($query){
-                    if($this->tab=='active'){
-                        $query->whereStatus('1');
-                    }
-                    if($this->tab=='inactive'){
-                        $query->whereStatus('0');
-                    }
-                })
-                ->get();
+        $sta = null;
+        if($this->tab=='active'){
+            $sta = 1;
+        }
+        if($this->tab=='inactive'){
+            $sta = 0;
+        }
+       
+        $value = [];
+        $value[] = 'completed';
+        $value[] = 'payment_collected';
+        $value[] = 'reviewed';
+        
+
+        $users  = User::with(['orders' => function ($query) use($value) {
+                    $query->whereIn('status', $value);
+                
+                }])
+                ->where('role', '=', 'customer')                
+                ->withCount(['orders' => function ($query) use($value) {
+                    $query->whereIn('status', $value);
+                }])                
+                ->groupBy('id');
+            
+
+
+        if(!empty($this->dateStart) && !empty($this->dateEnd)) {
+
+            $users->whereBetween('created_at', [$this->dateStart, $this->dateEnd]);
+        }
+
+        if(!empty($this->search)){
+            $vl = $this->search;
+            $users->where(function($query) use($vl) {
+                $query->where('email', 'like', '%'.$vl.'%')
+                    ->orWhere('first_name', 'like', '%'.$vl.'%');
+            });
+        }
+
+         if($sta){
+                $users->whereStatus($sta);
+            }
+
+        $users = $users->orderBy('id', 'DESC')->get();
+                
+        foreach ($users as $key => $value) {
+
+            $cnt = 0;
+            $lastdate = '';
+            if(count($value->orders)){
+                foreach ($value->orders as $oky => $ord) {
+                    $cnt = $cnt + $ord->total;
+                    $lastdate = $ord->cleaning_datetime;
+                }
+            }
+            $users[$key]['total_sum'] = $cnt;
+            $users[$key]['order_lastdate'] = $lastdate;
+        }
+
+        // echo "<pre>";
+        // print_r($users);
+        // die;      
          
-         return view('livewire.admin.customer.customer', compact('users'));
+        return view('livewire.admin.customer.customer', compact('users'));
     }
 }

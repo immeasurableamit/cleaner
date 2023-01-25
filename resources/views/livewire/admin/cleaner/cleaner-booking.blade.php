@@ -16,9 +16,12 @@
         </li>
       </ul>
     </div>
-    <div class="table-right-block">
-      <button id="all-time" class="all-time-btn">All Time</button>
-    </div>
+     <div class="table-right-block">
+             <button id="all-time1" class="all-time-btn">All Time</button>
+            </div>
+            <div class="header-search">
+          <input type="search" placeholder="Search here..." id="search" wire:model="searchResult">
+         </div>
   </div>
   <!-- Tab panes -->
   <div class="tab-content">
@@ -40,12 +43,16 @@
             @foreach($orders as $order)
             <tr>
               <td class="job-number">{{ $order->id }}</td>
-              <td>{{ $order->cleaning_datetime }}</td>
+              <td>{{ date("m/d/Y", strtotime($order->cleaning_datetime))}}</td>
               <td><span class="scheduled">{{ $order->statusForAdmin()  }}</span></td>
               <td>${{ $order->total }}</td>
               <td>One time</td>
               <td>Deep Clean</td>
-              <td><a href="{{ route('admin.customer.show', $order->user->id) }}" class="name cleaner">{{ $order->name }}</a></td>
+              <td>
+                 @if(@$order->cleaner->id) 
+                <a href="{{ route('admin.customer.show', $order->user->id) }}" class="name cleaner">{{ $order->name }}</a>
+                @endif
+              </td>
             </tr>
             @endforeach
           </tbody>
@@ -54,4 +61,31 @@
     </div>
     
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
+
+    <script>
+    new Litepicker({
+        element: document.getElementById('all-time1'),
+        singleMode: false,
+        allowRepick: true,
+        numberOfMonths: 2,
+        numberOfColumns: 2,
+        setup: (picker) => {
+            picker.on('selected', (date1, date2) => { 
+                // console.log(date1.toLocaleString())
+                @this.set('dateStart', formatDate(date1.dateInstance));
+                @this.set('dateEnd', formatDate(date2.dateInstance))
+            });
+        },
+
+    });
+
+     function formatDate(dateInstance) {
+            let year = dateInstance.getFullYear();
+            let month = dateInstance.getMonth() + 1; // adding 1 because getMonth returns month from range 0 to 11
+            let day = dateInstance.getDate();
+            let date = `${year}-${month}-${day}`;
+            return date;
+        }
+</script>
 </div>

@@ -32,7 +32,7 @@ class OrderConfirmed extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -44,10 +44,6 @@ class OrderConfirmed extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         $mailable = new OrderConfirmedMail($notifiable, $this->order);
-        // return (new MailMessage)
-        //             ->line('The introduction to the notification.' . $this->order->name)
-        //             ->action('Notification Action', url('/'))
-        //             ->line('Thank you ,Your Order Confirmed!');
 
         return $mailable->to($notifiable->email);
     }
@@ -61,7 +57,7 @@ class OrderConfirmed extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            //
+            'order_id' => $this->order->id,
         ];
     }
 }
