@@ -84,9 +84,9 @@
               <!-- <td><a href="">o0k</a></td> -->
               <td class="status">
                 @if( $user->status == 1)
-                <button type="button" class="btn btn-success" wire:click="confirmStatus({{$user->id}})" value="0">Active</button>
+                <a type="button" class="text-success" wire:click="confirmStatus({{$user->id}})" value="0">Active</a>
                 @else
-                <button type="button" class="btn btn-danger" wire:click="confirmStatus({{$user->id}})" value="1">Inactive</button>
+                <a type="button" class="text-danger" wire:click="confirmStatus({{$user->id}})" value="1">Inactive</a>
                 @endif
               </td>
             </tr>
