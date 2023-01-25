@@ -13,7 +13,7 @@ Address: {{ $order->address }}
 City: {{ $order->city }}
 
 State: {{ $order->state->name }}
-<x-mail::button :url="route('cleaner.jobs.jobs', ['selectedDate' => $order->cleaning_datetime->toDateString() ])">Take me to Order</x-mail::button>
+<x-mail::button :url="route('cleaner.jobs.jobs', ['selectedDate' => $order->cleaning_datetime->toDateString()])">Take me to Order</x-mail::button>
 
 
 Thanks,<br>
