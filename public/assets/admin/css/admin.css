@@ -125,7 +125,7 @@ input,select,textarea,form,p,span,table,td{
     border: none;
     position: absolute;
     right: 12px;
-    top: 9px;
+    top: 12px;
     cursor: pointer;
     z-index: 9;
 }
@@ -289,6 +289,7 @@ input:focus{
     font-size: 13px;
     font-weight: 400;
     padding-left: 15px;
+    white-space: nowrap;
 }
 .table-design tbody tr td {
     color: #161A1E;
@@ -371,6 +372,7 @@ input:focus{
 }
 .table-design .pagination li {
     margin-right: 8px;
+    opacity: 0;
 }
 .table-design .pagination li.previous>.page-link {
     background-color: #2877b2;
@@ -845,7 +847,23 @@ a.pdf_r {
     color: #84ABC7;
 }
 /* job view css here */
+.catergory_service_table thead tr th:nth-of-type(1) {
+    width: 30%;
+}
 
+.catergory_service_table thead tr th:nth-of-type(2) {
+    width: 23%;
+}
+.sub_catergory_service_table thead tr th:nth-of-type(1) {
+    width: 53.5%;
+}
+.sub_catergory_service_table thead tr th:nth-of-type(2) {
+    width: 12.3%;
+}
+.modal-dialog.modal_style .modal-body label {
+    padding-bottom: 3px;
+    padding-top: 5px;
+}
 @media (min-width: 1200px){
     .table-design .dataTables_length {
         position: absolute;
