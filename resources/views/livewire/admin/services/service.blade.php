@@ -4,7 +4,7 @@
     </div>
 
     @foreach($services as $service)
-    <table id="all-cleaner-table22" class="table dt-responsive nowrap" style="width:100%">
+    <table id="all-cleaner-table22" class="table dt-responsive nowrap catergory_service_table" style="width:100%">
         <thead>
             <tr>
                 <th>Title</th>
@@ -19,17 +19,17 @@
                 <td>{{@$service->type->title}}</td>
                 <td>{{ $service->status=='1'?'Active':'In-active' }}</td>
                 <td class="status">
-                    <button type="button" class="btn btn-success" wire:click="edit({{$service->id}})">Edit</button>
+                    <a type="button" class="text-success" wire:click="edit({{$service->id}})">Edit</a>
 
-                    <button type="button" class="btn btn-danger" wire:click="deleteService({{$service->id}})">Delete</button>
+                    <a type="button" class="text-danger px-2" wire:click="deleteService({{$service->id}})">Delete</a>
 
-                    <button type="button" class="btn btn-success" wire:click="storeServiceItem({{$service->id}})">Add Items</button>
+                    <a type="button" class="text-success" wire:click="storeServiceItem({{$service->id}})">Add Items</a>
                 </td>
             </tr>
 
 
             @if(@count($service->items)>0)
-            <table id="all-cleaner-table22" class="table dt-responsive nowrap" style="width:100%">
+            <table id="all-cleaner-table22" class="table dt-responsive nowrap sub_catergory_service_table" style="width:100%">
                 <thead>
                     <tr>
                         <th>Title</th>
@@ -53,9 +53,9 @@
                         --}}
                         <td>{{ $item->status=='1'?'Active':'In-active' }}</td>
                         <td class="status">
-                            <button type="button" class="btn btn-success" wire:click="editItem({{$item->id}})">Edit</button>
+                            <a type="button" class="text-success pe-2" wire:click="editItem({{$item->id}})">Edit</a>
 
-                            <button type="button" class="btn btn-danger" wire:click="deleteItem({{$item->id}})">Delete</button>
+                            <a type="button" class="text-danger" wire:click="deleteItem({{$item->id}})">Delete</a>
                         </td>
                     </tr>
                     @endforeach

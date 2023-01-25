@@ -50,6 +50,8 @@ class Profile extends Component
     public $serviceItemId;
     public $addOnIds = [];
 
+    public $cleanerOrders;
+
     public $selectedDetails = [
         'service_item_id' => null,
         'home_size' => null,
@@ -78,6 +80,8 @@ class Profile extends Component
         $addOnService     = $this->services->where('types_id', 2)->first();
         $this->itemAddOns = is_null($addOnService) ? null : $addOnService->serviceItems;
 
+        /* orders */
+        $this->cleanerOrders = Order::where('cleaner_id', $this->cleaner->id )->whereIn('status', ['accepted','payment_collected'])->get();
         $this->fillSocialMediaShareInfo();
         $this->fillCleanerAdditionalInfo();
 
@@ -166,7 +170,26 @@ class Profile extends Component
         $this->emit('fireCalender', $this->workingDates, $fromDate);
     }
 
+    function doesCleanerHasOrderInTimeSlot($date, $startTime, $endTime )
+    {
+        $ordersInSlot = $this->cleanerOrders->filter(function($order) use ( $date, $startTime, $endTime ){
 
+            $orderCleaningTime = strtotime($order->cleaning_datetime->startOfMinute()->toTimeString());
+
+            $isDateSame           = $order->cleaning_datetime->toDateString() == $date;
+            $isBetweenTheTimeSlot =  $startTime <= $orderCleaningTime && $endTime > $orderCleaningTime;
+            if ( $isDateSame && $isBetweenTheTimeSlot){
+                return true;
+            }
+
+        });
+
+        if ( $ordersInSlot->count() >= $this->cleaner->UserDetails->jobs ){
+            return true;
+        }
+
+        return false;
+    }
 
     public function slotAvailability()
     {
@@ -186,7 +209,7 @@ class Profile extends Component
         if (@$hoursDayAll && $date >= date('Y-m-d')) {
 
 
-            $duration = '30'; // duration for what?
+            $duration = '30';
 
             $time_slots = array();
             $add_mins  = $duration * 60; // 30 * 60 = 180
@@ -209,6 +232,12 @@ class Profile extends Component
 
                     $timeSlot['time'] = date("H:i", $startTime);
 
+                    $startTimeInSlot = $startTime;
+                    $endTimeInSlot  = $startTimeInSlot + $add_mins;
+                    $isSlotNotFree = $this->doesCleanerHasOrderInTimeSlot( $date, $startTimeInSlot, $endTimeInSlot);
+                    if ( $isSlotNotFree ){
+                        $timeSlot['is_free'] = 'no';
+                    }
 
 
                     $currentDate = date('Y-m-d');
@@ -217,8 +246,8 @@ class Profile extends Component
                         $timeAfterTwoHours = date("H:i", strtotime("+2hour") );
 
                         if ( $timeSlot['time'] <= $timeAfterTwoHours ){
-                            $startTime += $add_mins;
-                            continue;
+                           $startTime += $add_mins;
+                           continue;
                         }
                     }
 
@@ -304,7 +333,7 @@ class Profile extends Component
         $user = auth()->user()->role ?? null;
 
         if ($user == 'cleaner') {
-            
+
             return $this->alert("error", "Cleaner don't have permission");
 
         } else {

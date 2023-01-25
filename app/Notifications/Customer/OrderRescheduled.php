@@ -32,7 +32,7 @@ class OrderRescheduled extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -56,8 +56,9 @@ class OrderRescheduled extends Notification implements ShouldQueue
      */
     public function toArray($notifiable)
     {
+
         return [
-            //
+            'order_id' => $this->order->id,
         ];
     }
 }

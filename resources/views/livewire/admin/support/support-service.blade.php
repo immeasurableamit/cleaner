@@ -42,14 +42,14 @@
 
                 <td class="status">
                     @if (@$supportService->status == 1)
-                    <button type="button" class="btn btn-success" wire:click="confirmStatus({{ $supportService->id }})" value="0">Open</button>
+                    <a type="button" class="text-success" wire:click="confirmStatus({{ $supportService->id }})" value="0">Open</a>
                     @else
-                    <button type="button" class="btn btn-danger" wire:click="confirmStatus({{ $supportService->id }})" value="1">Closed</button>
+                    <a type="button" class="text-danger" wire:click="confirmStatus({{ $supportService->id }})" value="1">Closed</a>
                     @endif
                 </td>
-
+ 
                 <td class="del" wire:key="{{@$supportService->id}}">
-                    <button type="button" class="btn btn-danger" wire:click="deleteConfirm({{ $supportService->id }})">Delete</button>
+                    <a type="button" class="text-danger" wire:click="deleteConfirm({{ $supportService->id }})">Delete</a>
                 </td>
 
             </tr>
