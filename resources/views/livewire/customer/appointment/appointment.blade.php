@@ -59,7 +59,7 @@
                                                     </a></li>
                                                 {{-- <li><a href="#" class="link-design-2"><img src="{{asset('/assets/images/icons/home.svg')}}">15648
                                             Maple St, Austin, TX 78744</a></li> --}}
-                                                <li class="chat_with_member"><a href="message.html"
+                                                <li class="chat_with_member"><a href="{{route('messages')}}"
                                                         class="btn_chat_member">Chat With
                                                         Member<img
                                                             src="{{ asset('/assets/images/icons/email-2.svg') }}" /></a>
