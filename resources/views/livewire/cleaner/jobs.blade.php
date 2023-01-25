@@ -15,7 +15,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link {{ $selectedTab == 2 ? 'active' : '' }}" wire:click="$set('selectedTab', 2 )">New Requests</a>
+                                        <a class="nav-link {{ $selectedTab == 2 ? 'active' : '' }}" wire:click="$set('selectedTab', 2 )" >New Requests</a>
                                     </li>
                                 </ul>
                             </div>
@@ -77,7 +77,7 @@
                                                     <span wire:loading.remove wire:target="collectPayment">{{ $order->statusForCleaner() }}</span>
                                                     <span wire:target="collectPayment" wire:loading><i class="fa-solid fa-spinner fa-spin"></i></span>
                                                 </a>
-                                                @elseif ($order->status == 'payment_failed')
+                                                @elseif ( $order->status == 'payment_failed' )
                                                     <a href="#" class="failed-msg crd-btn">{{ $order->statusForCleaner() }}</a>
 
                                                 @elseif ( $order->status == 'payment_collected' || $order->status == 'reviewed' )

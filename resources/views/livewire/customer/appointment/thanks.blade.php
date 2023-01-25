@@ -39,15 +39,15 @@
                             </div>
                             <div class="schedule-block-searccntnt">
                                 <div class="schduled-text-div">
-                                    <p class="schedule_label">Provider</p>
+                                    <label class="schedule_label">Provider</label>
                                     <span class="schedule_value-text text-capitalize">{{ $order->cleaner->name }}</span>
                                 </div>
                                 <div class="schduled-text-div">
-                                    <p class="schedule_label">Services Address</p>
+                                    <label class="schedule_label">Services Address</label>
                                     <span class="schedule_value-text">{{ $order->address }}</span>
                                 </div>
                                 <div class="schduled-text-div">
-                                    <p class="schedule_label">Service</p>
+                                    <label class="schedule_label">Service</label>
                                     <span
                                         class="schedule_value-text">{{ $order->serviceOrderItem()->service_item->service->title }}
                                         - {{ $order->serviceOrderItem()->service_item->title }}</span>
@@ -55,7 +55,7 @@
 
                                 @if (count($order->addonsOrderItems()) > 0)
                                     <div class="schduled-text-div">
-                                        <p class="schedule_label">Addons</p>
+                                        <label class="schedule_label">Addons</label>
                                         <span class="schedule_value-text">
 
                                             @foreach ($order->addonsOrderItems() as $addonOrderItem)
@@ -70,14 +70,14 @@
 
 
                                 <div class="schduled-text-div">
-                                    <p class="schedule_label">Start Date</p>
+                                    <label class="schedule_label">Start Date</label>
                                     <span
                                         class="schedule_value-text">{{ $order->cleaning_datetime->toDayDateTimeString() }}</span>
 
                                     <div class="dropdown add_calender">
-                                        <button class="bg-none dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                        <button class="bg-none dropdown-toggle link-design-2 no-hover" type="button" id="dropdownMenuButton1"
                                             data-bs-toggle="dropdown" aria-expanded="false">
-                                            <b class="link-design-2 no-hover"> Add to calendar</b>
+                                            Add to calendar
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                             <a class="link-design-2" href="{{ $link->google() }}"><i
@@ -93,7 +93,7 @@
                                 </div>
 
                                 <div class="schduled-text-div">
-                                    <p class="schedule_label">Payment Method</p>
+                                    <label class="schedule_label">Payment Method</label>
                                     <span
                                         class="schedule_value-text text-capitalize">{{ str_replace('_', ' ', $order->payment_method) }}</span>
                                 </div>
@@ -124,7 +124,7 @@
 
                             <div class="btn_nxt_prs">
                                 <label for="next3" class="btn_c" wire:click="saveOrderNotes"><a
-                                        href="message.html">Message Provider</a></label>
+                                        href="{{route('messages')}}">Message Provider</a></label>
                             </div>
                             <a href="#" class="link-design-2 d-block pb-3">Please inform your provider about
                                 any future changes or cancellations as soon as possible. </a>

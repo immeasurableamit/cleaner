@@ -108,11 +108,12 @@
                     {!! Form::text('address', request()->address ?? null, ['id' => 'address', 'placeholder' => 'Address','class' => 'form-control'.($errors->has('address') ? ' is-invalid' : '')]) !!}
                     {!! $errors->first('address', '<span class="alert">:message</span>') !!}
                     </div>
-                    <div class="form-grouph mb-30 input-select-abs">
+                    <div class="form-grouph mb-30 input-select-abs select_state">
                       <div class="inputs-box">
                       {!! Form::text('city', request()->city ?? null, ['id' => 'city', 'placeholder' => 'City','class' => 'form-control'.($errors->has('city') ? ' is-invalid' : '')]) !!}
                       </div>
                       {!! $errors->first('city', '<span class="alert">:message</span>') !!}
+                    <div>  {!! $errors->first('state', '<span class="alert">:message</span>') !!} </div>
                       <div class="selecti-box">
                         <select class="select-custom-design" name="state" value="{{old('state')}}">
                         <option>Select State</option>  
@@ -120,7 +121,7 @@
                           <option value='{{ $state->id }}'>{{$state->name}}</option>
                           @endforeach
                         </select>
-                        {!! $errors->first('state', '<span class="alert">:message</span>') !!}
+                       
                       </div>
                     </div>
                     <div>
@@ -154,8 +155,8 @@
                     {!! Form::number('zip_code', request()->zip_code ?? null, [ 'id' => 'zip', 'placeholder' => 'Zip','class' => 'form-control'.($errors->has('zip_code') ? ' is-invalid' : '')]) !!}
                     {!! $errors->first('zip_code', '<span class="alert">:message</span>') !!}
                     </div>
-                    <div class="form-grouph select-design mb-30">
-                      <select class="select-custom-design" name="payment_method" value="{{old('payment_method')}}">
+                    <div class="form-grouph payment_search select-design mb-30">
+                      <select class=" select-custom-design" name="payment_method" value="{{old('payment_method')}}">
                         <option>Payment Method</option>
                         <option value="PayPal">PayPal</option>
                         <option value="Direct Deposit">Direct Deposit</option>
