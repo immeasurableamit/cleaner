@@ -199,7 +199,7 @@ Route::middleware(['auth', 'verified', 'trackLastActiveAt'])->group(function () 
                 return view('admin.settings.index');
             })->name('admin.setting');
 
-            //Settings
+            //Admin Profile
         Route::get('/profile', function () {
                 $title = array(
                     'title' => 'Profile',
@@ -207,6 +207,15 @@ Route::middleware(['auth', 'verified', 'trackLastActiveAt'])->group(function () 
                 );
                 return view('admin.profile.index');
             })->name('admin.profile');
+           
+            //Admin FAQS
+        Route::get('/faqs', function () {
+                $title = array(
+                    'title' => 'Faqs',
+                    'active' => 'faqs',
+                );
+                return view('admin.faqs.index');
+            })->name('admin.faqs');
     });
 });
 

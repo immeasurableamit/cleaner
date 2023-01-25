@@ -75,10 +75,10 @@ class Customer extends Component
     {
         $sta = null;
         if($this->tab=='active'){
-            $sta = 1;
+            $sta = 0;
         }
         if($this->tab=='inactive'){
-            $sta = 0;
+            $sta = 1;
         }
        
         $value = [];

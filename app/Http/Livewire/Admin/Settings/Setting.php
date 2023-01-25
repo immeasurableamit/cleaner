@@ -15,9 +15,11 @@ class Setting extends Component
 
     public $page_name, $title, $description, $keywords;
     public $seoId;
-    public $seos;
+    // public $seos;
    
     public $tax, $transaction_fee;
+    public $tax_type, $transaction_type;
+
     public $stripe_key, $stripe_secret_key;
     public $facebook, $twitter, $instagram, $linkedin;
     public $smtp_host, $smtp_port, $smtp_username, $smtp_password;
@@ -25,9 +27,11 @@ class Setting extends Component
     protected $listeners = ['confirmedAction'];
 
       public function mount(){
-    
+        
+
         $this->settings = SettingModel::findOrFail(1)->first();
-        $this->seos = SeoModel::all();
+
+        // $this->seos = SeoModel::all();
 
         $this->smtp_host = $this->settings->smtp_host;
         $this->smtp_port = $this->settings->smtp_port;
@@ -45,11 +49,50 @@ class Setting extends Component
         $this->instagram = $this->settings->instagram_link;
         $this->linkedin = $this->settings->linkedin_link;
 
-        // $this->page_name = $this->seos->page;
+        $this->tax_type = $this->settings->tax_type;
+        $this->transaction_type = $this->settings->transaction_fee_type;
 
     }
 
-     public function resetFields()
+   
+
+    public function update(){
+
+        //   $validatedDate = $this->validate([
+        //     'smtp_host' => 'required',
+        //     'smtp_port' => 'required',
+        //     'smtp_username' => 'required',
+        //     'smtp_password' => 'required',
+        // ]);
+          
+        // $store = new SettingModel;
+
+        $store = SettingModel::findOrFail(1);
+        $store->smtp_host = $this->smtp_host;
+        $store->smtp_port = $this->smtp_port;
+        $store->smtp_username = $this->smtp_username;
+        $store->smtp_password = $this->smtp_password;
+
+        $store->stripe_key = $this->stripe_key;
+        $store->stripe_secret_key = $this->stripe_secret_key;
+
+        $store->tax = $this->tax;
+        $store->tax_type = $this->tax_type;
+        $store->transaction_fees = $this->transaction_fee;
+        $store->transaction_fee_type = $this->transaction_type;
+
+        $store->facebook_link = $this->facebook;
+        $store->twitter_link = $this->twitter;
+        $store->instagram_link = $this->instagram;
+        $store->linkedin_link = $this->linkedin;
+        $store->save();
+
+        $this->alert('success', 'Details stored successfully');
+  
+
+    }
+
+      public function resetFields()
     {
         $this->page_name = '';
         $this->title = '';
@@ -106,41 +149,6 @@ class Setting extends Component
         $this->emit('formClose');
         $this->resetFields();
     }
-
-    public function update(){
-
-          $validatedDate = $this->validate([
-            'smtp_host' => 'required',
-            'smtp_port' => 'required',
-            'smtp_username' => 'required',
-            'smtp_password' => 'required',
-        ]);
-
-        $store = SettingModel::find(1);
-        $store->smtp_host = $this->smtp_host;
-        $store->smtp_port = $this->smtp_port;
-        $store->smtp_username = $this->smtp_username;
-        $store->smtp_password = $this->smtp_password;
-
-        $store->stripe_key = $this->stripe_key;
-        $store->stripe_secret_key = $this->stripe_secret_key;
-
-        $store->tax = $this->tax;
-        $store->transaction_fees = $this->transaction_fee;
-
-        $store->facebook_link = $this->facebook;
-        $store->twitter_link = $this->twitter;
-        $store->instagram_link = $this->instagram;
-        $store->linkedin_link = $this->linkedin;
-  
-
-    
-        $store->save();
-
-        $this->alert('success', 'Details stored successfully');
-  
-
-    }
     
       public function delete($id)
         {
@@ -169,7 +177,9 @@ class Setting extends Component
         }
 
     public function render()
-    {
-        return view('livewire.admin.settings.setting');
+    {   
+        $seos = SeoModel::all();
+
+        return view('livewire.admin.settings.setting', ['seos'=>$seos]);
     }
 }
