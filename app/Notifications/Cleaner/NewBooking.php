@@ -8,8 +8,9 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Models\Order;
 use App\Mail\Cleaner\NewBookingMail;
+use App\Notifications\CustomChannels\TwilioChannel;
 
-class NewBooking extends Notification implements ShouldQueue
+class NewBooking extends Notification
 {
     use Queueable;
 
@@ -33,7 +34,7 @@ class NewBooking extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail','database'];
+        return ['mail','database', TwilioChannel::class];
     }
 
     /**
@@ -58,6 +59,20 @@ class NewBooking extends Notification implements ShouldQueue
     {
         return [
             'order_id' => $this->order->id,
+        ];
+    }
+
+    /*
+     * should return array with keys ( phone, body )
+     */
+    public function toTwilio($notifiable)
+    {
+        $url     = route('cleaner.jobs.jobs', ['selectedDate' => $this->order->cleaning_datetime->toDateString() ]);
+        $message = "You got a new booking! Click the link to view: $url";
+
+        return [
+            'phone'   => "+91$notifiable->contact_number",
+            'body' => $message,
         ];
     }
 }
