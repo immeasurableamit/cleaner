@@ -5,12 +5,13 @@ namespace App\Http\Livewire\Admin\Cleaner;
 use Livewire\Component;
 use App\Models\User;
 use App\Models\UserDetails;
-
+use Illuminate\Support\Facades\Hash;
 
 class CleanerAccount extends Component
 {   
-     public $user, $first_name, $last_name, $address, $contact_number, $full_name, $Team_name;
+    public $user, $first_name, $last_name, $address, $contact_number, $full_name, $Team_name;
     public $user_id;
+    public $new_password;
 
     public $fieldStatus = false, $action;
 
@@ -62,6 +63,9 @@ class CleanerAccount extends Component
         }
         if ($action == 'contact_number') {
             $this->user->contact_number = $this->contact_number;
+        }
+        if ($action == 'new_password') {
+            $this->user->password = Hash::make($this->new_password);
         }
 
         $this->user->update();

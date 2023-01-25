@@ -5,12 +5,14 @@ namespace App\Http\Livewire\Admin\Customer;
 use Livewire\Component;
 use App\Models\User;
 use App\Models\UserDetails;
+use Illuminate\Support\Facades\Hash;
 
 class CustomerUpdate extends Component
 {
 
     public $user, $first_name, $last_name, $address, $contact_number, $full_name;
     public $user_id;
+    public $new_password;
 
     public $fieldStatus = false, $action;
 
@@ -54,6 +56,9 @@ class CustomerUpdate extends Component
         }
         if ($action == 'email') {
             $this->user->email = $this->email;
+        }
+        if ($action == 'new_password') {
+            $this->user->password = Hash::make($this->new_password);
         }
 
         $this->user->update();

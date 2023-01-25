@@ -115,4 +115,17 @@ return [
         ],
     ],
 
+
+    // public function update(Request $request)
+    // {
+
+    //     Config::set('mail.mailers.smtp.host', DB::table('settings')->find(1)->where('smtp_host')->val);
+    //     Config::set('mail.mailers.smtp.username', DB::table('settings')->find(1)->val);
+    //     Config::set('mail.mailers.smtp.password', DB::table('settings')->find(1)->val);
+    //     Config::set('mail.mailers.smtp.port', DB::table('settings')->find(5)->val);
+
+    //     if($request->email_test !== null) {
+    //         Mail::send(new MailTesting());
+    //     }
+    // }
 ];
