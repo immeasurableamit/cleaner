@@ -114,7 +114,7 @@
             </div>
         </div>
 
-        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 car_right_div">
+        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 car_right_div py-3">
 
             @if ($filteredCleaners->isEmpty())
                 <p class="text-center display-6"><strong>No cleaners found. Try changing filters.</strong></p>
@@ -150,6 +150,7 @@
                                         <p class="font-regular">Est Time : {{ $cleaner->duration_for_selected_service }}
 
                                             hours</p>
+                                            <p class="font-regular">Buffer Time : {{$cleaner->UserDetails->buffer}}</p>
                                         <div class="badges_insurnce_img">
                                             @if ( $cleaner->UserDetails->provide_organic_service )
                                                 <img src="{{ asset('assets/images/badges.svg') }}">
