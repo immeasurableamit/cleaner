@@ -14,9 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('settings', function (Blueprint $table) {
-            $table->id();
+             $table->id();
             $table->string('tax')->nullable();
+            $table->string('tax_type');
             $table->string('transaction_fees')->nullable();
+            $table->string('transaction_fee_type');
             $table->string('smtp_host')->nullable();
             $table->string('smtp_port')->nullable();
             $table->string('smtp_username')->nullable();
@@ -27,8 +29,6 @@ return new class extends Migration
             $table->string('twitter_link')->nullable();
             $table->string('instagram_link')->nullable();
             $table->string('linkedin_link')->nullable();
-            $table->string('name')->nullable();
-            $table->string('page')->nullable();
             $table->timestamps();
         });
     }
