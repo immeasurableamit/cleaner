@@ -7,6 +7,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Models\Order;
+use App\Notifications\CustomChannels\TwilioChannel;
+
 
 class OrderConfirmed extends Notification implements ShouldQueue
 {
@@ -32,7 +34,7 @@ class OrderConfirmed extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail', 'database'];
+        return ['mail', 'database', TwilioChannel::class];
     }
 
     /**
@@ -59,6 +61,14 @@ class OrderConfirmed extends Notification implements ShouldQueue
     {
         return [
             'order_id' => $this->order->id,
+        ];
+    }
+
+    public function toTwilio($notifiable)
+    {
+        return [
+            'from' => $notifiable->contact_number,
+            'body' => 'Order confirmed',
         ];
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Models\Order;
+use App\Notifications\CustomChannels\TwilioChannel;
 
 class OrderRescheduled extends Notification implements ShouldQueue
 {
@@ -32,7 +33,7 @@ class OrderRescheduled extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail', 'database'];
+        return ['mail', 'database', TwilioChannel::class];
     }
 
     /**
@@ -59,6 +60,20 @@ class OrderRescheduled extends Notification implements ShouldQueue
 
         return [
             'order_id' => $this->order->id,
+        ];
+    }
+
+    /*
+     * should return array with keys ( phone, body )
+     */
+    public function toTwilio($notifiable)
+    {
+        $url     = route('customer.appointment.index', ['selectedDate' => $order->cleaning_datetime->toDateString() ]);
+        $message = "Your booking has been rescheduled. Please see your Appointment schedule below. Click on this link to view: ";
+
+        return [
+            'phone'   => "+91$notifiable->contact_number",
+            'body' => $message,
         ];
     }
 }
