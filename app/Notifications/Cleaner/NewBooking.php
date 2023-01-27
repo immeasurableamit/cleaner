@@ -10,7 +10,7 @@ use App\Models\Order;
 use App\Mail\Cleaner\NewBookingMail;
 use App\Notifications\CustomChannels\TwilioChannel;
 
-class NewBooking extends Notification
+class NewBooking extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -68,10 +68,13 @@ class NewBooking extends Notification
     public function toTwilio($notifiable)
     {
         $url     = route('cleaner.jobs.jobs', ['selectedDate' => $this->order->cleaning_datetime->toDateString() ]);
-        $message = "You got a new booking! Click the link to view: $url";
+        $message = "Hello ".ucwords( $this->order->cleaner->name )." Congratulations you have new Booking!  Please view your Appointment schedule below.";
+        $message .= "\n\nBooking Time: ".$this->order->cleaning_datetime->format('F, l d,Y | h:i A');
+        $message .="\n\nView appointment: ".route('cleaner.jobs.jobs', ['selectedDate' => $this->order->cleaning_datetime->toDateString()]);
 
+		$phone  = config("app.country_prefix_for_phone_number").(string)$notifiable->contact_number;
         return [
-            'phone'   => "+91$notifiable->contact_number",
+            'phone'   => $phone,
             'body' => $message,
         ];
     }

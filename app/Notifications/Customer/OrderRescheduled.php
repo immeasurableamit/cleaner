@@ -68,12 +68,15 @@ class OrderRescheduled extends Notification implements ShouldQueue
      */
     public function toTwilio($notifiable)
     {
-        $url     = route('customer.appointment.index', ['selectedDate' => $order->cleaning_datetime->toDateString() ]);
-        $message = "Your booking has been rescheduled. Please see your Appointment schedule below. Click on this link to view: ";
+        $url      = route('customer.appointment.index', ['selectedDate' => $this->order->cleaning_datetime->toDateString() ]);
+        $phone    = config('app.country_prefix_for_phone_number').(string)$notifiable->contact_number;
+        $message  = "Hello ".ucwords($this->order->user->name).", Your booking has been rescheduled. Please see your Appointment schedule below.";
+        $message .= "\n\nBooking Time: ".$this->order->cleaning_datetime->format('F, l d,Y | h:i A');
+        $message .= "\n\nView appointment: $url\n\nRegards\n".config('app.name');
 
         return [
-            'phone'   => "+91$notifiable->contact_number",
-            'body' => $message,
+            'phone' => $phone,
+            'body'  => $message,
         ];
     }
 }

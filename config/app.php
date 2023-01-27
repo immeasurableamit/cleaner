@@ -212,4 +212,6 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
+
+	'country_prefix_for_phone_number' => "+91",
 ];
