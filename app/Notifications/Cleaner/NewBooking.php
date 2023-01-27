@@ -10,7 +10,7 @@ use App\Models\Order;
 use App\Mail\Cleaner\NewBookingMail;
 use App\Notifications\CustomChannels\TwilioChannel;
 
-class NewBooking extends Notification
+class NewBooking extends Notification implements ShouldQueue
 {
     use Queueable;
 
