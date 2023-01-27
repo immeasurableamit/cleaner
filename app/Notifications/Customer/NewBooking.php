@@ -44,7 +44,7 @@ class NewBooking extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->subject('CanaryClean - New Booking!')->markdown('email.customer.new-booking', ['order' => $this->order]);
+        return (new MailMessage)->subject('CanaryClean Appointment  Placed Successfully')->markdown('email.customer.new-booking', ['order' => $this->order]);
     }
 
     /**
@@ -63,9 +63,9 @@ class NewBooking extends Notification implements ShouldQueue
     public function toTwilio($notifiable)
     {
         $url      = route('customer.appointment.index', ['selectedDate' => $this->order->cleaning_datetime->toDateString() ]);
-        $message  = "Hello ".ucwords( $this->order->cleaner->name )." You have a new booking.";
+        $message  = "Hello ".ucwords( $this->order->cleaner->name )." Your booking has been placed successfully. Please view your Booking schedule below";
         $message .= "\n\nBooking Time: ".$this->order->cleaning_datetime->format('F, l d,Y | h:i A');
-        $message .="\n\nView Booking: $url";
+        $message .="\n\nView appointment: $url";
 		$phone    = config("app.country_prefix_for_phone_number").(string)$notifiable->contact_number;
 
         return [

@@ -68,9 +68,9 @@ class NewBooking extends Notification implements ShouldQueue
     public function toTwilio($notifiable)
     {
         $url     = route('cleaner.jobs.jobs', ['selectedDate' => $this->order->cleaning_datetime->toDateString() ]);
-        $message = "Hello ".ucwords( $this->order->cleaner->name )." You have a new booking.";
+        $message = "Hello ".ucwords( $this->order->cleaner->name )." Congratulations you have new Booking!  Please view your Appointment schedule below.";
         $message .= "\n\nBooking Time: ".$this->order->cleaning_datetime->format('F, l d,Y | h:i A');
-        $message .=" View Booking: ".route('cleaner.jobs.jobs', ['selectedDate' => $this->order->cleaning_datetime->toDateString()]);
+        $message .="\n\nView appointment: ".route('cleaner.jobs.jobs', ['selectedDate' => $this->order->cleaning_datetime->toDateString()]);
 
 		$phone  = config("app.country_prefix_for_phone_number").(string)$notifiable->contact_number;
         return [

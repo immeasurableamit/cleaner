@@ -1,10 +1,10 @@
 <x-mail::message>
 
-Hello {{ ucwords( $order->cleaner->name ) }}, You have a new booking.
+Hello {{ ucwords( $order->cleaner->name ) }}, Congratulations you have new Booking!  Please view your Appointment schedule below.
 
 Booking Time: {{ $order->cleaning_datetime->format('F, l d,Y | h:i A') }}
 
-<x-mail::button :url="route('cleaner.jobs.jobs', ['selectedDate' => $order->cleaning_datetime->toDateString()])">View </x-mail::button>
+<x-mail::button :url="route('cleaner.jobs.jobs', ['selectedDate' => $order->cleaning_datetime->toDateString()])">View appointment</x-mail::button>
 
 
 Thanks,<br>

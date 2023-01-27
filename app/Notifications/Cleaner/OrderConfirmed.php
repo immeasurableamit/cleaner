@@ -45,7 +45,7 @@ class OrderConfirmed extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->subject('CanaryClean Appointment Confirmed')
+        return (new MailMessage)->subject('Your Appointment Accepted')
 			->markdown('email.cleaner.order-confirmed', [
 				'order' => $this->order,
 			]);
@@ -66,9 +66,13 @@ class OrderConfirmed extends Notification implements ShouldQueue
 
     public function toTwilio($notifiable)
     {
+        $phone = config('app.country_prefix_for_phone_number').(string)$notifiable->contact_number;
+        $message = "Hello ".ucwords($this->order->cleaner->name).", Booking has been confirmed successfully.";
+        $message .= "\n\nRegards\n".config('app.name');
+
         return [
-            'from' => $notifiable->contact_number,
-            'body' => 'Order confirmed',
+            'phone' => $phone,
+            'body' => $message,
         ];
     }
 }
