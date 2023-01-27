@@ -458,7 +458,7 @@ class Checkout extends Component
         $status        = $this->placeOrder();
 
         if ($status) {
-            $this->cleaner->notify(new NewBooking($this->order));
+        //    $this->cleaner->notify(new NewBooking($this->order));
             return redirect()->route('customer.appointment.thanks', [ 'order_id' => $this->order->id ]);
         }
     }
