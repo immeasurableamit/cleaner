@@ -31,6 +31,6 @@
     <input type="email" class="form-control" id="email" wire:model="email">
   </div>
   <br>
-  <button type="submit" class="btn btn-primary" wire:click.prevent="update()">Submit</button>
+  <button type="submit" class="btn_blue" wire:click.prevent="update()">Submit</button>
 
 </div>

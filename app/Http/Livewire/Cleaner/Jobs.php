@@ -217,6 +217,7 @@ class Jobs extends Component
         }
 
         $transaction->save();
+	$transaction->refresh();
 
         return $transaction;
     }

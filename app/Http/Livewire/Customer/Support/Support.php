@@ -34,10 +34,12 @@ class Support extends Component
 
     public function addCustomAttributesInCompletedOrdersProp()
     {
+
         $this->completedOrders->each( function($order) {
 
             $formattedDateTime = $order->cleaning_datetime->format('m/d/y');
-            $order->title = "$formattedDateTime - ".$order->service()->title." - ".$order->user->name;
+            //$order->title = "$formattedDateTime - ".$order->service()->title." - ".$order->user->name;
+            $order->title = "$formattedDateTime - ".$order->serviceOrderItem()->service_item->service->title." - ".$order->user->name;
         });
     }
 
