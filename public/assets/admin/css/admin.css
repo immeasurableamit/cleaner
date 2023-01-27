@@ -222,10 +222,10 @@ input:focus{
     border-radius: 20px;
     padding: 25px;
 }
-.table-tabs-wrap .nav-tabs {
+.table-tabs-wrap .nav-tabs,.seeting_tabs ul#myTab {
     border: none;
 }
-.table-tabs-wrap .nav-tabs .nav-link {
+.table-tabs-wrap .nav-tabs .nav-link,.seeting_tabs li.nav-item .nav-link {
     border: none;
     margin: 0px;
     color: #2677B1;
@@ -236,7 +236,7 @@ input:focus{
     border-bottom: 2px solid transparent;
     background: transparent;
 }
-.table-tabs-wrap .nav-tabs .nav-link.active {
+.table-tabs-wrap .nav-tabs .nav-link.active,.seeting_tabs li.nav-item .nav-link.active {
     border-color: #2677B1;
     text-shadow: 0.5px 0px 0px #2677B1;
 }
@@ -863,6 +863,11 @@ a.pdf_r {
 .modal-dialog.modal_style .modal-body label {
     padding-bottom: 3px;
     padding-top: 5px;
+}
+.header-search input[type="search"],.search_input2 input[type="search"] {
+    border-radius: 50px;
+    padding: 10px;
+    border: 1px solid #2677b1;
 }
 @media (min-width: 1200px){
     .table-design .dataTables_length {

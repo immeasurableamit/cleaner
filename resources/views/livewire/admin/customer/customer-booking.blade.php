@@ -19,7 +19,7 @@
          <div class="table-right-block">
              <button id="all-time" class="all-time-btn">All Time</button>
             </div>
-            <div class="header-search">
+            <div class="header-search search_input2">
           <input type="search" placeholder="Search here..." id="search" wire:model="searchResult">
          </div>
     </div>
