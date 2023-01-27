@@ -613,6 +613,14 @@ color: var(--secondary);
     margin: 0 auto;
     position: relative;
 }
+
+.lawyer_profile-img.mb-3 div#imagePreview {
+    overflow: hidden;
+}
+
+.lawyer_profile-img.mb-3 div#imagePreview img#imagePreview {
+    background-color: #fff;
+}
 .avatar-preview {
     position: relative;
 }
@@ -6010,10 +6018,11 @@ fieldset .row.no-mrg .checkout_div h4{
 .btn_close{
     position: absolute;
     right: 0px;
-    top: -30px;
+    top: -13px;
     cursor: pointer;
     z-index: 2;
-    color: #fff;
+    color: #000;
+    font-size: 25px;
 }
 .selct_2{
     padding: 15px 25px 15px 19px !important;
