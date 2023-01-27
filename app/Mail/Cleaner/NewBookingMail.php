@@ -35,7 +35,7 @@ class NewBookingMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Canary Clean - New Booking!',
+            subject: 'CanaryClean New Booking',
         );
     }
 
@@ -49,7 +49,7 @@ class NewBookingMail extends Mailable
         return new Content(
 		markdown: 'email.cleaner.new-booking',
 		with: [
-			'order' => $this->order 
+			'order' => $this->order
 		]
         );
     }

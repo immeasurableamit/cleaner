@@ -250,4 +250,9 @@ public function sendEmailVerificationNotification()
 {
     $this->notify(new VerifyEmail); // my notification
 }
+
+	public function cleanerOrders()
+	{
+		return $this->hasMany( Order::class, 'cleaner_id', 'id' );
+	}
 }

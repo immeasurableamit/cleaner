@@ -14,6 +14,8 @@ use App\Notifications\Cleaner\OrderConfirmed as CleanerOrderConfirmed;
 
 use App\Notifications\Customer\OrderCancelled as CustomerOrderCancelled;
 use App\Notifications\Cleaner\OrderCancelled as CleanerOrderCancelled;
+use App\Notifications\Customer\OrderDeclined;
+
 
 use Illuminate\Support\Facades\Notification;
 
@@ -170,7 +172,7 @@ class Jobs extends Component
 
 
         $order->user->notify(new CustomerOrderConfirmed($order));
-		$order->cleaner->notify( new CleanerOrderConfirmed($order) );
+		//$order->cleaner->notify( new CleanerOrderConfirmed($order) );
         $this->alert('success', 'Order accepted');
         $this->refreshSelectedTab();
         return true;
@@ -182,7 +184,9 @@ class Jobs extends Component
         $order = Order::find($orderId);
         $order->status = 'rejected';
         $order->save();
-		$this->sendCancelOrderNotifications($order);
+		//$this->sendCancelOrderNotifications($order);
+        $order->user->notify( new OrderDeclined( $order ) );
+        info('order declined');
         $this->alert('success', 'Booking rejected');
         $this->refreshSelectedTab();
     }
@@ -308,8 +312,9 @@ class Jobs extends Component
             $order->status = 'cancelled';
             $order->save();
 
-			$this->sendCancelOrderNotifications($order);
-
+			//$this->sendCancelOrderNotifications($order);
+            $order->user->notify( new App\Notifications\Customer\OrderDeclined( $order ) );
+            info('order declined notification');
             $this->alert('success','Booking cancelled');
             $this->refreshSelectedTab();
             return true;
@@ -336,8 +341,8 @@ class Jobs extends Component
         $order->status = 'cancelled';
         $order->save();
 
-		$this->sendCancelOrderNotifications($order);
-
+		//$this->sendCancelOrderNotifications($order);
+        $order->user->notify( new App\Notifications\Customer\OrderCancelled( $order ) );
         $this->alert('success','Booking cancelled');
         $this->refreshSelectedTab();
         return true;
