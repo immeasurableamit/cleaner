@@ -33,7 +33,7 @@
                 </span>
                 @enderror
                 @if (session('status'))
-            <div class="alert" role="alert">
+            <div class="alert text-success" role="alert">
               {{ session('status') }}
             </div>
             @endif

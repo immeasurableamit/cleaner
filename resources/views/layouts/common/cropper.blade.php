@@ -1,10 +1,10 @@
 <!-- Accept Modal Start Here-->
 <div id="cropModal" class="modal" role="dialog">
     <div class="modal-dialog modal_style">
-        <button type="button" class="btn btn-default close closeCropModal" data-dismiss="modal">x</button>
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Upload & Crop Image</h4>
+        <div class="modal-content" style="border-radius: 15px;">
+        <button type="button" class="btn btn-default btn_close close closeCropModal" data-dismiss="modal">x</button>
+            <div class="modal-header justify-content-center">
+                <h4 class="modal-title ">Upload & Crop Image</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="text-center mb-3">
-                <button class="btn_s crop_image">Crop Image</button>
+                <button class="btn_blue crop_image">Crop Image</button>
             </div>
         </div>
     </div>
