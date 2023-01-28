@@ -20,6 +20,7 @@ function storeRefundOrderTransaction($user_id, $order_id, $amount, $stripe_refun
     return $transaction;
 }
 
+/*
 function storePayoutTransaction($user_id, $order_id, $amount, $stripe_transfer_id)
 {
     $transaction = new Transaction;
@@ -30,6 +31,30 @@ function storePayoutTransaction($user_id, $order_id, $amount, $stripe_transfer_i
     $transaction->stripe_id = $stripe_transfer_id;
     $transaction->transactionable_id   = $order_id;
     $transaction->transactionable_type = Order::class;
+    $transaction->save();
+
+    return $transaction;
+}
+*/
+
+function storePayoutTransaction( $order, $transferResponse)
+{
+    $transaction = new Transaction;
+    $transaction->user_id   = $order->cleaner->id;
+    $transaction->amount    = convertDollarsIntoCents( $order->cleanerFee() );
+    $transaction->type      = 'credit';
+    $transaction->action    = 'transfer';
+    $transaction->transactionable_id   = $order->id;
+    $transaction->transactionable_type = Order::class;
+
+    if ( $transferResponse['status'] == true ) {
+        $transaction->status    = 'success';
+        $transaction->stripe_id = $transferResponse['response']->id;
+    } else {        
+        $transaction->status = 'failed';
+        $transaction->failure_reason = $transferResponse['exception']->getMessage();        
+    }
+    
     $transaction->save();
 
     return $transaction;
@@ -65,7 +90,7 @@ function getDefaultParametersForSearchPage()
 function convertDollarsIntoCents($dollars)
 {
     $cents = $dollars * 100;
-    return (float) number_format( $cents, 2, ".", "" ); // number, number of decimal points, seprator sign of decimal points, jsn
+    return (int) number_format( $cents, 0, "", "" ); // number, number of decimal points, seprator sign of decimal points, jsn
 }
 
 function convertCentsIntoDollars($cents)

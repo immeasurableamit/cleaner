@@ -13,15 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('payouts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->restrictOnDelete();
-            $table->decimal('amount', 18,2);
-	        $table->enum('type', ['debit','credit']);
-	        $table->string('action');
-            $table->string('stripe_id');
-            $table->integer('transactionable_id');
-            $table->string('transactionable_type');
+            $table->foreignId('cleaner_id')->constrained('users');
+            $table->foreignId('transaction_id')->unique()->constrained();
             $table->timestamps();
         });
     }
@@ -33,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('payouts');
     }
 };

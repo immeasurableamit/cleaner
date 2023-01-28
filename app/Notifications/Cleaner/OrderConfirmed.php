@@ -67,7 +67,8 @@ class OrderConfirmed extends Notification implements ShouldQueue
     public function toTwilio($notifiable)
     {
         $phone = config('app.country_prefix_for_phone_number').(string)$notifiable->contact_number;
-        $message = "Hello ".ucwords($this->order->cleaner->name).", Booking has been confirmed successfully.";
+        $message  = "Your Appointment Accepted";
+        $message .= "Hello ".ucwords($this->order->cleaner->name).",\n\nBooking has been confirmed successfully.";
         $message .= "\n\nRegards\n".config('app.name');
 
         return [

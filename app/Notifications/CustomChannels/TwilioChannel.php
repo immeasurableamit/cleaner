@@ -17,6 +17,7 @@ class TwilioChannel
     public function send($notifiable, Notification $notification)
     {
         $message = $notification->toTwilio($notifiable);
+		//return true;
 
         $resp = twiloSendMessage($message['phone'], $message['body']);
         if ( $resp['status'] == false ){
