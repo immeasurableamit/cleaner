@@ -11,6 +11,7 @@ use App\Models\Review;
 use App\Notifications\Customer\OrderRescheduled as CustomerOrderRescheduled;
 use App\Notifications\Cleaner\OrderRescheduled as CleanerOrderRescheduled;
 use App\Notifications\Cleaner\OrderCancelled as CancelledOrderNotificationForCleaner;
+use App\Notifications\Customer\OrderCancelled as CancelledOrderNotificationForCustomer;
 
 class Appointment extends Component
 {
@@ -127,13 +128,13 @@ class Appointment extends Component
     public function cancelOrder($orderId)
     {
 
-        $this->alert('warning', 'Are you sure do want to delete?', [
+        $this->alert('warning', 'Are you surely want to cancel?', [
             'toast' => false,
             'position' => 'center',
             'showCancelButton' => true,
-            'cancelButtonText' => 'Cancel',
+            'cancelButtonText' => 'No',
             'showConfirmButton' => true,
-            'confirmButtonText' => 'Delete it',
+            'confirmButtonText' => 'Yes',
             'onConfirmed' => 'orderCancelledByCustomer',
             'timer' => null,
             'input' => 'text',
@@ -151,6 +152,7 @@ class Appointment extends Component
         $order   = Order::find($orderId);
 
         $order->cleaner->notify( new CancelledOrderNotificationForCleaner($order));
+        $order->user->notify( new CancelledOrderNotificationForCustomer($order) );
 
         $this->alert('success', 'Order cancelled');
         $this->refreshSelectedTab();
@@ -210,6 +212,11 @@ class Appointment extends Component
 
     public function rescheduleSelectedOrder()
     {
+        $this->validate([
+            'rescheduleDate' => 'required',
+            'rescheduleTime' => 'required',
+        ]);
+
         $rescheduleDatetime = Carbon::createFromFormat("Y-m-d H:i:s", "$this->rescheduleDate $this->rescheduleTime" );
         $order = $this->orders->find( $this->rescheduleOrderId );
         $order->cleaning_datetime = $rescheduleDatetime;

@@ -21,7 +21,7 @@ class VerifyEmail extends VerifyEmailBase
         }
 
         return (new MailMessage)
-			->greeting("Hello $notifiable->first_name!")
+			->greeting("Hello $notifiable->first_name")
             ->subject('Verify Email Address')
             ->line('Please click the button below to verify your email address.')
             ->action(

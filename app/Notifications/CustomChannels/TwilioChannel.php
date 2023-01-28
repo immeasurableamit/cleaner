@@ -20,7 +20,7 @@ class TwilioChannel
 
         $resp = twiloSendMessage($message['phone'], $message['body']);
         if ( $resp['status'] == false ){
-            info("[TWILIO CHANNEL][FAILED] phone: ", $message);
+            info("[TWILIO CHANNEL][FAILED][PHONE ".$message['phone']."] failure message: ".$resp['response']->getMessage());
         }
 
         return $resp;
