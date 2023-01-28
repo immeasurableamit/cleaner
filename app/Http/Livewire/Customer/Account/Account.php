@@ -17,6 +17,16 @@ class Account extends Component
 
     protected $listeners = ['imgUploaded' => 'storeUploadedImage'];
 
+    public function mount()
+    {
+        $user = auth()->user();
+
+        $this->userId = $user->id;
+        $this->email  = $user->email;
+        $this->address = $user->UserDetails->address;
+        $this->contact_number = $user->contact_number;
+    }
+
     public function rules()
     {
         return [
@@ -50,7 +60,6 @@ class Account extends Component
 
     public function edit($userId, $action)
     {
-
         $user = User::find($userId);
         $this->userId = $userId;
         if ($action == 'contact_number') {
@@ -87,6 +96,7 @@ class Account extends Component
 
             }
             $user->update();
+
             if ($action == 'address') {
 
                 $userdetail->address = $this->address;
