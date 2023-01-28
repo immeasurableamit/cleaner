@@ -1,7 +1,9 @@
 <?php
 
 use Stripe\Exception\CardException;
+use Stripe\Exception\InvalidRequestException;
 use \Stripe\StripeClient;
+
 /*
  * @param string $email
  *
@@ -270,8 +272,13 @@ function stripeTransfer( $options )
 {
     $stripe = new StripeClient( config('services.stripe.secret') );
 
-    $transfer = $stripe->transfers->create( $options );
-    return ['status' => true, 'response' => $transfer, 'transfer_id' => $transfer->id ];
+    try {
+        $transfer = $stripe->transfers->create( $options );
+        return ['status' => true, 'response' => $transfer, 'transfer_id' => $transfer->id ];
+    } catch (InvalidRequestException $e) {
+        return ['status' => false, 'exception' => $e];
+    }    
+    
 }
 
 /*
