@@ -11,6 +11,7 @@ use App\Models\Review;
 use App\Notifications\Customer\OrderRescheduled as CustomerOrderRescheduled;
 use App\Notifications\Cleaner\OrderRescheduled as CleanerOrderRescheduled;
 use App\Notifications\Cleaner\OrderCancelled as CancelledOrderNotificationForCleaner;
+use App\Notifications\Customer\OrderCancelled as CancelledOrderNotificationForCustomer;
 
 class Appointment extends Component
 {
@@ -127,13 +128,13 @@ class Appointment extends Component
     public function cancelOrder($orderId)
     {
 
-        $this->alert('warning', 'Are you sure do want to delete?', [
+        $this->alert('warning', 'Are you surely want to cancel?', [
             'toast' => false,
             'position' => 'center',
             'showCancelButton' => true,
-            'cancelButtonText' => 'Cancel',
+            'cancelButtonText' => 'No',
             'showConfirmButton' => true,
-            'confirmButtonText' => 'Delete it',
+            'confirmButtonText' => 'Yes',
             'onConfirmed' => 'orderCancelledByCustomer',
             'timer' => null,
             'input' => 'text',
@@ -151,6 +152,7 @@ class Appointment extends Component
         $order   = Order::find($orderId);
 
         $order->cleaner->notify( new CancelledOrderNotificationForCleaner($order));
+        $order->user->notify( new CancelledOrderNotificationForCustomer($order) );
 
         $this->alert('success', 'Order cancelled');
         $this->refreshSelectedTab();

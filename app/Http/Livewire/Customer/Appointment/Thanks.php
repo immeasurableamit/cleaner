@@ -9,6 +9,8 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Link as InlineLink;
 use Spatie\CalendarLinks\Link;
 use Illuminate\Support\Carbon;
+use App\Notifications\Cleaner\OrderCancelled as OrderCancelledNotificationForCleaner;
+use App\Notifications\Customer\OrderCancelled as OrderCancelledNotificationForCustomer;
 
 class Thanks extends Component
 {
@@ -37,13 +39,13 @@ class Thanks extends Component
     {
         $this->order_id = $iid;
 
-        $this->alert('warning', 'Are you sure do want to delete?', [
+        $this->alert('warning', 'Are you surely want to cancel?', [
             'toast' => false,
             'position' => 'center',
             'showCancelButton' => true,
-            'cancelButtonText' => 'Cancel',
+            'cancelButtonText' => 'No',
             'showConfirmButton' => true,
-            'confirmButtonText' => 'Delete it',
+            'confirmButtonText' => 'Yes',
             'onConfirmed' => 'cancelOrder',
             'timer' => null
         ]);
@@ -55,6 +57,10 @@ class Thanks extends Component
         $status = Order::where('id', $this->order_id)->update([
             'status' => 'cancelled_by_customer',
         ]);
+
+        $order = Order::find( $this->order_id );
+        $order->cleaner->notify(new OrderCancelledNotificationForCleaner($order));
+        $order->user->notify( new CancelledOrderNotificationForCustomer($order) );
 
 
         return redirect()->route('profile', $this->order->cleaner_id);
