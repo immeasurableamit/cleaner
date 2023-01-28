@@ -103,7 +103,7 @@
                                                 {{ $order->userTransaction->failure_reason }}</a>
                                         </div>
                                     @endif
-                                    @if ($order->status == 'payment_collected' && now()->greaterThanOrEqualTo($order->cleaning_datetime))
+                                    @if ($order->status == 'completed' && $order->is_reviewed == 0)
                                         <div class="custom-dropdown rate-cleaner-dropdown" wire:ignore.self>
                                             <button type="button" class="btn  custom-dropdown-btn">Rate
                                                 Cleaner</button>

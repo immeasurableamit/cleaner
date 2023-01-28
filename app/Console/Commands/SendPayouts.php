@@ -29,7 +29,7 @@ class SendPayouts extends Command
     public function handle()
     {
         $currentDateTime = now()->toDateTimeString();
-        $ordersToPayout  = Order::whereIn('status', [ 'payment_collected', 'reviewed'])
+        $ordersToPayout  = Order::where('status', 'completed')
                             ->where('cleaning_datetime', '<=', $currentDateTime )
                             ->where('is_paid_out_to_cleaner', 0 )->get();
 
@@ -54,7 +54,6 @@ class SendPayouts extends Command
             );
 
             /* update order */
-            $order->status = 'completed';
             $order->is_paid_out_to_cleaner = 1;
             $order->cleaner_transaction_id = $transaction->id;
             $order->save();

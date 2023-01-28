@@ -114,7 +114,7 @@
                                                 <li><a href="mailto:example@mail.com" class="link-design-2"><img src="/assets/images/icons/email.svg">{{ $order->user->email }}</a>
                                                 </li>
                                                 <li><a href="#" class="link-design-2"><img src="/assets/images/icons/home.svg">{{ $order->address }}</a></li>
-                                                <li class="chat_with_member"><a href="message.html" class="btn_chat_member">Chat With
+                                                <li class="chat_with_member"><a href="{{ route('messages') }}" class="btn_chat_member">Chat With
                                                         Member<img src="/assets/images/icons/email-2.svg" /></a>
                                                 </li>
                                             </ul>
@@ -257,15 +257,17 @@
         renderCalendar(date, events);
 
         makeBookingsCardToggalable();
-        newRequestTab();
+        //newRequestTab();
     });
 
     // try
 
+    {{--
     function newRequestTab() {
         @this.set('selectedTab', 2);
 
     }
+    --}}
 </script>
 <script>
     $(document).ready(function() {

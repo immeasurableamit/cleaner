@@ -255,4 +255,10 @@ public function sendEmailVerificationNotification()
 	{
 		return $this->hasMany( Order::class, 'cleaner_id', 'id' );
 	}
+
+    public function getContactNumberWithCountryCodeAttribute()
+    {
+        $contactNumber = config('app.country_prefix_for_phone_number').$this->contact_number;
+        return $contactNumber;
+    }
 }

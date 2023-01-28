@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
 	    $schedule->command('send:payouts')->everyFiveMinutes();
+        $schedule->command('markOrdersCompleted')->everyMinute(); //everyFiveMinutes();
         $schedule->command('send:order-reminders')->hourly();
 	    $schedule->command('queue:work --tries=2 --stop-when-empty')->everyMinute()->withoutOverlapping();
     }

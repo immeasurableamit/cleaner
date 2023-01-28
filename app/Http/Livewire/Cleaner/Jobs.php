@@ -39,6 +39,7 @@ class Jobs extends Component
 
     protected $queryString = [
         'selectedDate' => [ 'except' => ''],
+        'selectedTab'  => ['except' => 1]
     ];
 
     protected $listeners = [

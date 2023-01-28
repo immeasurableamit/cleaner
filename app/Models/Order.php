@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Http\Livewire\Admin\Support\SupportService;
+//use App\Http\Livewire\Admin\Support\SupportService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\OrderItem;
@@ -20,7 +20,7 @@ class Order extends Model
     protected $commissionPercentage = 20; // for owner
 
     protected $casts = [
-	    'cleaning_datetime' => 'datetime',
+        'cleaning_datetime' => 'datetime',
     ];
 
     public function user()
@@ -37,10 +37,9 @@ class Order extends Model
         return $this->belongsTo(ServicesItems::class);
     }
 
-     public function state()
+    public function state()
     {
         return $this->belongsTo(State::class);
-
     }
     public function review()
     {
@@ -49,7 +48,7 @@ class Order extends Model
 
     public function items()
     {
-        return $this->hasMany( OrderItem::class );
+        return $this->hasMany(OrderItem::class);
     }
 
     public function getNameAttribute()
@@ -74,12 +73,12 @@ class Order extends Model
 
     public function userTransaction()
     {
-        return $this->belongsTo( Transaction::class, 'user_transaction_id');
+        return $this->belongsTo(Transaction::class, 'user_transaction_id');
     }
 
     public function cleanerTransaction()
     {
-        return $this->belongsTo( Transaction::class, 'cleaner_transaction_id' );
+        return $this->belongsTo(Transaction::class, 'cleaner_transaction_id');
     }
 
     public function transactions()
@@ -87,10 +86,10 @@ class Order extends Model
         return $this->morphMany(Transaction::class, 'transactionable');
     }
 
-public function favourite()
-{
-    return $this->belongsTo(Favourite::class, 'cleaner_id', 'id');
-}
+    public function favourite()
+    {
+        return $this->belongsTo(Favourite::class, 'cleaner_id', 'id');
+    }
 
     public function statusForCleaner()
     {
@@ -107,7 +106,7 @@ public function favourite()
 
         ];
 
-        return $statuses[ $this->status ];
+        return $statuses[$this->status];
     }
 
     public function statusForCustomer()
@@ -125,11 +124,11 @@ public function favourite()
 
         ];
 
-        return $statuses[ $this->status ];
+        return $statuses[$this->status];
     }
 
 
-     public function statusForAdmin()
+    public function statusForAdmin()
     {
         $statuses = [
             'pending'   => 'Pending',
@@ -143,7 +142,7 @@ public function favourite()
             'payment_failed'    => 'Payment failed',
         ];
 
-        return $statuses[ $this->status ];
+        return $statuses[$this->status];
     }
 
 
@@ -151,7 +150,7 @@ public function favourite()
 
     public function service()
     {
-        return $this->items->pluck('service_item')->flatten()->pluck('service')->where('types_id',1)->first();
+        return $this->items->pluck('service_item')->flatten()->pluck('service')->where('types_id', 1)->first();
     }
 
     /*
@@ -163,7 +162,7 @@ public function favourite()
      */
     public function serviceOrderItem()
     {
-        $item = $this->items->first( function( $item ) {
+        $item = $this->items->first(function ($item) {
             return $item->service_item->service->types_id == 1;
         });
 
@@ -174,17 +173,23 @@ public function favourite()
     /* To use this function following relationship should be loaded, example: Order::with('items.service_item.service') */
     public function addonsOrderItems()
     {
-        $items = $this->items->filter(function($order_item){
+        $items = $this->items->filter(function ($order_item) {
             return $order_item->service_item->service->types_id == 2; // type id 2 means addon
         })->values();
 
         return $items;
     }
 
+    /* 
+     * Commented by -Jashan
+     * whoever added this function before uncommenting this please
+     * discuss with me.
+     * 
+     * Commenting because don't know if removing this will interrupt app
+     
     public function supportService()
     {
-        return $this->hasMany( SupportService::class );
+        return $this->hasMany(SupportService::class);
     }
-
-
+    */
 }
