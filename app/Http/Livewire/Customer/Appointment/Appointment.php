@@ -212,6 +212,11 @@ class Appointment extends Component
 
     public function rescheduleSelectedOrder()
     {
+        $this->validate([
+            'rescheduleDate' => 'required',
+            'rescheduleTime' => 'required',
+        ]);
+
         $rescheduleDatetime = Carbon::createFromFormat("Y-m-d H:i:s", "$this->rescheduleDate $this->rescheduleTime" );
         $order = $this->orders->find( $this->rescheduleOrderId );
         $order->cleaning_datetime = $rescheduleDatetime;
