@@ -113,7 +113,7 @@
                                                                     @php $selectedState = old('state_id') @endphp
                                                                 @elseif( $billingAddress )
                                                                     @php $selectedState = $billingAddress->state_id @endphp
-                                                                @else 
+                                                                @else
                                                                     @php $selectedState = null @endphp
                                                                 @endif
 
@@ -163,7 +163,7 @@
                                                                 placeholder="Card number">
                                                             <input type="text" id="exp_month_year" name="exp_month_year"
                                                                 placeholder="MM/YY" class="mm_input">
-                                                            <input type="text" name="cvc" placeholder="CVC"
+                                                            <input type="password" name="cvc" placeholder="CVC"
                                                                 class="cvc">
                                                             <input type="hidden" id="exp_month" name="exp_month" />
                                                             <input type="hidden" id="exp_year" name="exp_year" />
