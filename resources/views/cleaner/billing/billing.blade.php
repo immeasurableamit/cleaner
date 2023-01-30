@@ -28,7 +28,7 @@
 
                 @if ( empty( $bank ) )
 
-                  <div><a href="{{ route('cleaner.billing.stripeConnect') }}" class="btn_blue">Connect Bank Account </a></div>
+                  <div><a href="{{ route('cleaner.billing.stripeConnect') }}" class="btn_blue">Connect Bank Account </a></div>      
                 @else
 
                     @include('cleaner.billing.includes.addBankAccount')

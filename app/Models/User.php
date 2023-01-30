@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\BillingAddress;
+use App\Notifications\CustomChannels\TwilioChannel;
 use App\Notifications\VerifyEmail;
 
 
@@ -260,5 +261,29 @@ public function sendEmailVerificationNotification()
     {
         $contactNumber = config('app.country_prefix_for_phone_number').$this->contact_number;
         return $contactNumber;
+    }
+
+    public function autoVerifyEmailIfNotVerified()
+    {
+        if ( ! $this->hasVerifiedEmail() ){
+            $this->markEmailAsVerified();
+        }
+
+        return true;
+    }    
+
+    public function subscribedNotificationChannels():array
+    {
+        $channels = [];
+
+        if ( $this->UserDetails->sms_marketing ) {
+            array_push( $channels, TwilioChannel::class);
+        }
+
+        if ( $this->UserDetails->email_marketing ) {
+            array_push( $channels, 'mail');
+        }
+                
+        return $channels;
     }
 }

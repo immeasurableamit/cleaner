@@ -448,6 +448,7 @@ class Checkout extends Component
         $orderItems = $this->storeOrderItems($order->id);
         $billing      = $this->storeBillingAddress($this->user->id);
         $userCard      = $this->storeUserCard($this->user->id);
+        $this->user->autoVerifyEmailIfNotVerified();
 
         $this->order = $order;
         return true;

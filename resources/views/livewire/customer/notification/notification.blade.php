@@ -1,6 +1,6 @@
 <div>
     <div class="msg_togles mb-3">
-        <span>SMS Marketing Messages</span>
+        <span>SMS Messages</span>
 
         <div class="form-check form-switch">
             @if($cleanerDetail->sms_marketing == 1)
@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="msg_togles mb-4">
-        <span>Email Marketing Messages</span>
+        <span>Email Messages</span>
 
         <div class="form-check form-switch">
             @if($cleanerDetail->email_marketing == 1)

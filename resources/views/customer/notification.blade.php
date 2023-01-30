@@ -27,7 +27,7 @@
                                 </div>
 
                                 <div class="notification_toggles mt-4">
-                                    @livewire('cleaner.notification.notification')
+                                    @livewire('customer.notification.notification')
 
                                     <a href="#" class="b_link">Don’t worry - these changes will not affect your invoice, appointment reminder, or other service critical notifications.</a>
                                 </div>
