@@ -127,6 +127,11 @@ class Profile extends Component
         //dd( $this->cleanerServices->pluck('services_items_id')->toArray() );
     }
 
+    // public function facebook($url){
+    //     // dd($url);
+    //     return redirect($url);
+    // }
+
 
     public function getWorkingDays($today)
     {
@@ -332,9 +337,9 @@ class Profile extends Component
     {
         $user = auth()->user()->role ?? null;
 
-        if ($user == 'cleaner') {
+        if ($user == 'cleaner' || $user == 'admin') {
 
-            return $this->alert("error", "Cleaner don't have permission");
+            return $this->alert("error", "You don't have permission");
 
         } else {
             $validatedData = $this->validate(...$this->checkoutRules());
