@@ -12,8 +12,10 @@ use Illuminate\Notifications\Notifiable;
 use App\Notifications\Customer\OrderConfirmed as CustomerOrderConfirmed;
 use App\Notifications\Cleaner\OrderConfirmed as CleanerOrderConfirmed;
 
-use App\Notifications\Customer\OrderCancelled as CustomerOrderCancelled;
-use App\Notifications\Cleaner\OrderCancelled as CleanerOrderCancelled;
+use App\Notifications\Customer\OrderCancelled as OrderCancelledNotificationForCustomer;
+use App\Notifications\Cleaner\OrderCancelled as OrderCancelledNotificationForCleaner;
+use App\Notifications\Customer\OrderDeclined;
+
 
 use Illuminate\Support\Facades\Notification;
 
@@ -37,6 +39,7 @@ class Jobs extends Component
 
     protected $queryString = [
         'selectedDate' => [ 'except' => ''],
+        'selectedTab'  => ['except' => 1]
     ];
 
     protected $listeners = [
@@ -170,7 +173,7 @@ class Jobs extends Component
 
 
         $order->user->notify(new CustomerOrderConfirmed($order));
-		$order->cleaner->notify( new CleanerOrderConfirmed($order) );
+		//$order->cleaner->notify( new CleanerOrderConfirmed($order) );
         $this->alert('success', 'Order accepted');
         $this->refreshSelectedTab();
         return true;
@@ -182,7 +185,7 @@ class Jobs extends Component
         $order = Order::find($orderId);
         $order->status = 'rejected';
         $order->save();
-		$this->sendCancelOrderNotifications($order);
+        $order->user->notify( new OrderDeclined( $order ) );
         $this->alert('success', 'Booking rejected');
         $this->refreshSelectedTab();
     }
@@ -217,6 +220,7 @@ class Jobs extends Component
         }
 
         $transaction->save();
+	$transaction->refresh();
 
         return $transaction;
     }
@@ -296,8 +300,8 @@ class Jobs extends Component
 
 	protected function sendCancelOrderNotifications($order)
 	{
-		$order->user->notify( new CustomerOrderCancelled( $order ) );
-		$order->cleaner->notify( new CleanerOrderCancelled( $order ) );
+		$order->user->notify( new OrderCancelledNotificationForCustomer( $order ) );
+		$order->cleaner->notify( new OrderCancelledNotificationForCleaner( $order ) );
 	}
 
     public function cancelOrder( $data )
@@ -309,7 +313,6 @@ class Jobs extends Component
             $order->save();
 
 			$this->sendCancelOrderNotifications($order);
-
             $this->alert('success','Booking cancelled');
             $this->refreshSelectedTab();
             return true;
@@ -337,7 +340,7 @@ class Jobs extends Component
         $order->save();
 
 		$this->sendCancelOrderNotifications($order);
-
+        $order->user->notify( new App\Notifications\Customer\OrderCancelled( $order ) );
         $this->alert('success','Booking cancelled');
         $this->refreshSelectedTab();
         return true;

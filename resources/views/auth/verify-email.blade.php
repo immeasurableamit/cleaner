@@ -10,7 +10,7 @@
 
 
 			@if (session('status'))
-			<div class="card p-3" role="alert">
+			<div class="card text-success p-3" role="alert">
 				{{ __('A fresh verification link has been sent to your email address.') }}
 			</div>
 			@endif
@@ -21,7 +21,7 @@
 			</div>
 			<form class="d-inline pt-3 d-block" method="POST" action="{{ route('verification.send') }}">
 				@csrf
-				<button type="submit" class="btn_blue  m-0 align-baseline">{{ __('click here to request another') }}</button>
+				<button type="submit" class="btn_blue  m-0 align-baseline">{{ __('Click here to request another') }}</button>
 				
 			</form>
 		</div>

@@ -6,21 +6,21 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use App\Mail\Customer\OrderConfirmedMail;
+use App\Models\Order;
 use App\Notifications\CustomChannels\TwilioChannel;
 
-class OrderConfirmed extends Notification implements ShouldQueue
+class OrderDeclined extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    public $order;
+    protected $order;
 
     /**
      * Create a new notification instance.
-     *e
+     *
      * @return void
      */
-    public function __construct($order)
+    public function __construct(Order $order)
     {
         $this->order = $order;
     }
@@ -44,9 +44,7 @@ class OrderConfirmed extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        $mailable = new OrderConfirmedMail($notifiable, $this->order);
-
-        return $mailable->to($notifiable->email);
+        return (new MailMessage)->subject('Your Appointment Rejected')->markdown('email.customer.order-declined', ['user' => $this->order->user]);
     }
 
     /**
@@ -57,21 +55,22 @@ class OrderConfirmed extends Notification implements ShouldQueue
      */
     public function toArray($notifiable)
     {
+        $message  = "Hello ".ucwords($this->order->user->name).",\n\nWe are sorry to inform you that your booking has been rejected by the Cleaner. Please re-try to book another one.";
         return [
             'order_id' => $this->order->id,
+            'message'  => $message,
         ];
     }
 
     public function toTwilio($notifiable)
     {
         $phone    = config('app.country_prefix_for_phone_number').(string)$notifiable->contact_number;
-        $message  = "Your Appointment Accepted";
-        $message  .= "\n\nHello ".ucwords($this->order->user->name).",\n\nWe are glad to inform you that your booking has been accepted by the Cleaner.";
+        $message  = "Hello ".ucwords($this->order->user->name).",\n\nWe are sorry to inform you that your booking has been rejected by the Cleaner. Please re-try to book another one.";
         $message .= "\n\nRegards\n".config('app.name');
 
         return [
             'phone' => $phone,
-            'body'  => $message,
+            'body' => $message,
         ];
     }
 }

@@ -103,7 +103,7 @@
                                                 {{ $order->userTransaction->failure_reason }}</a>
                                         </div>
                                     @endif
-                                    @if ($order->status == 'payment_collected' && now()->greaterThanOrEqualTo($order->cleaning_datetime))
+                                    @if ($order->status == 'completed' && $order->is_reviewed == 0)
                                         <div class="custom-dropdown rate-cleaner-dropdown" wire:ignore.self>
                                             <button type="button" class="btn  custom-dropdown-btn">Rate
                                                 Cleaner</button>
@@ -233,11 +233,14 @@
 
                     <div id="rescheduleCalendar" class="text-center" wire:ignore>
                     </div>
+                    @error ('rescheduleDate')
+                    <div class="alert text-center">{{ $message }}</div>
+                    @enderror
 
                     @if (!empty($rescheduledAvailableTimeSlots))
                         <div class="row block_start_time">
                             <div class="col-md-3 select-design">
-                                <div class="selecti-box">
+                                <div class="selecti-box" wire:ignore>
                                     <select class="select-custom-design" id="reschedule-time-selector">
                                         <option></option>
 
@@ -256,6 +259,9 @@
                                     </select>
                                 </div>
                             </div>
+                            @error ('rescheduleTime')
+                                <div class="alert text-center">{{ $message }}</div>
+                            @enderror
                         </div>
                     @endif
 

@@ -8,6 +8,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Models\Order;
 use App\Mail\Cleaner\NewBookingMail;
+use App\Notifications\CustomChannels\TwilioChannel;
 
 class NewBooking extends Notification implements ShouldQueue
 {
@@ -33,7 +34,7 @@ class NewBooking extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail','database'];
+        return ['mail','database', TwilioChannel::class];
     }
 
     /**
@@ -58,6 +59,24 @@ class NewBooking extends Notification implements ShouldQueue
     {
         return [
             'order_id' => $this->order->id,
+        ];
+    }
+
+    /*
+     * should return array with keys ( phone, body )
+     */
+    public function toTwilio($notifiable)
+    {
+        $url     = route('cleaner.jobs.jobs', ['selectedDate' => $this->order->cleaning_datetime->toDateString() , 'selectedTab' => 2]);
+        $message  = "CanaryClean New Booking\n\n";
+        $message .= "Hello ".ucwords( $this->order->cleaner->name ).",\n\nCongratulations you have new Booking!  Please view your Appointment schedule below.";
+        $message .= "\n\nBooking Time: ".$this->order->cleaning_datetime->format('F, l d,Y | h:i A');
+        $message .="\n\nView appointment: ".route('cleaner.jobs.jobs', ['selectedDate' => $this->order->cleaning_datetime->toDateString()]);
+
+		$phone  = config("app.country_prefix_for_phone_number").(string)$notifiable->contact_number;
+        return [
+            'phone'   => $phone,
+            'body' => $message,
         ];
     }
 }

@@ -19,7 +19,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Request;
 
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use App\Notifications\Cleaner\NewBooking;
+use App\Notifications\Cleaner\NewBooking as CleanerNewBookingNotification;
+use App\Notifications\Customer\NewBooking as CustomerNewBookingNotification;
 
 
 
@@ -181,7 +182,7 @@ class Checkout extends Component
             'expYear'      => 'required|numeric',
 
         ];
-       
+
     }
 
     protected function checkoutRules()
@@ -458,7 +459,8 @@ class Checkout extends Component
         $status        = $this->placeOrder();
 
         if ($status) {
-            $this->cleaner->notify(new NewBooking($this->order));
+            $this->cleaner->notify(new CleanerNewBookingNotification($this->order));
+            $this->user->notify(new CustomerNewBookingNotification($this->order));
             return redirect()->route('customer.appointment.thanks', [ 'order_id' => $this->order->id ]);
         }
     }

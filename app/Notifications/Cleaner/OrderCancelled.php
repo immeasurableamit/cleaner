@@ -7,12 +7,16 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Models\Order;
+use App\Notifications\CustomChannels\TwilioChannel;
+
 
 class OrderCancelled extends Notification implements ShouldQueue
 {
     use Queueable;
 
 	protected $order;
+    protected $isCancelledByCustomer;
+    protected $subject;
 
     /**
      * Create a new notification instance.
@@ -22,6 +26,13 @@ class OrderCancelled extends Notification implements ShouldQueue
     public function __construct(Order $order)
     {
 		$this->order = $order;
+        $this->isCancelledByCustomer = $order->status == "cancelled_by_customer" ;
+
+        if ( $this->isCancelledByCustomer ) {
+            $this->subject = "Appointment Cancelled by Customer";
+        } else {
+            $this->subject = "Appointment Cancelled by Cleaner";
+        }
     }
 
     /**
@@ -32,7 +43,7 @@ class OrderCancelled extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail','database'];
+        return ['mail','database', TwilioChannel::class];
     }
 
     /**
@@ -43,8 +54,7 @@ class OrderCancelled extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->subject('Appointment Cancelled by Customer')
-				->markdown('email.cleaner.order-cancelled', ['order' => $this->order]);
+        return (new MailMessage)->subject($this->subject)->markdown('email.cleaner.order-cancelled', ['order' => $this->order, 'isCancelledByCustomer' => $this->isCancelledByCustomer]);
     }
 
     /**
@@ -57,6 +67,30 @@ class OrderCancelled extends Notification implements ShouldQueue
     {
         return [
             'order_id' => $this->order->id,
+            'message'  => $this->subject,
+        ];
+    }
+
+     /*
+     * should return array with keys ( phone, body )
+     */
+    public function toTwilio($notifiable)
+    {
+        $phone = config('app.country_prefix_for_phone_number').(string) $notifiable->contact_number;
+
+        $message = "Hello ".ucwords( $this->order->cleaner->name ).",\n\n";
+
+        if ( $this->isCancelledByCustomer ) {
+            $message .= "We  are sorry to inform you that your appointment has been cancelled by the Customer";
+        } else {
+            $message .= "We  are sorry to inform you that your appointment has been cancelled";
+        }
+
+        $message .= "\n\nRegards\n".config('app.name');
+
+        return [
+            'phone' => $phone,
+            'body'  => $message,
         ];
     }
 }

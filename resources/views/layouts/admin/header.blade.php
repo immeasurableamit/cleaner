@@ -42,13 +42,14 @@
                   <!-- <img src="{{ asset('assets/images/thumbnail.png') }}"> -->
               </button>
 
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu" style="width: 183px;">
                 <li><a class="dropdown-item" href="{{route('admin.profile')}}">Profile</a></li>
+                <div class="dropsown-logout-design">
                 <form action="{{ route('logout') }}" method="post">
                   @csrf
-                  <button type="submit"><img src="{{asset('assets/images/icons/logout.svg')}}"> Logout</button>
+                  <button type="submit" style="border: none; background: transparent"><img src="{{asset('assets/images/icons/logout.svg')}}"> Logout</button>
                   </form>
-
+                </div>
               <ul class="dropdown-menu" style="min-width: 183px;">
                 <li><a class="dropdown-item" href="#">Link 1</a></li>
                 <li><a class="dropdown-item" href="#">Link 2</a></li>

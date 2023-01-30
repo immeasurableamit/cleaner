@@ -71,8 +71,8 @@
 
     <div wire:ignore.self class="modal fade show in" id="serviceForm" tabindex="-1" role="dialog" aria-labelledby="serviceForm" aria-hidden="true">
         <div class="modal-dialog modal_style">
-        <button type="button" class="btn btn_close serviceFormClose"><span aria-hidden="true">×</span></button>
             <div class="modal-content">
+            <button type="button" class="btn btn_close close serviceFormClose"><span aria-hidden="true">×</span></button>
                 <div class="modal-header">
                     <h4 class="modal-title">@if(!empty($serviceId)) Edit @else Add @endif Service</h4>
                 </div>
@@ -118,8 +118,9 @@
 
     <div wire:ignore.self class="modal fade show in" id="serviceItemsForm" tabindex="-1" role="dialog" aria-labelledby="serviceItemsForm" aria-hidden="true">
         <div class="modal-dialog modal_style">
-        <button type="button" class="btn btn_close serviceFormClose"><span aria-hidden="true">×</span></button>
             <div class="modal-content">
+            <button type="button" class="btn btn_close close serviceFormClose"><span aria-hidden="true">×</span></button>
+
                 <div class="modal-header">
                     <h4 class="modal-title">@if(!empty($serviceId)) Edit @else Add @endif Service Items</h4>
                 </div>

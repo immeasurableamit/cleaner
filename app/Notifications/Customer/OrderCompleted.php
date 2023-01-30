@@ -6,23 +6,24 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use App\Mail\Customer\OrderConfirmedMail;
+use App\Models\Order;
 use App\Notifications\CustomChannels\TwilioChannel;
 
-class OrderConfirmed extends Notification implements ShouldQueue
+class OrderCompleted extends Notification implements ShouldQueue
 {
     use Queueable;
-
-    public $order;
+    protected $order;
+    protected $subject;
 
     /**
      * Create a new notification instance.
-     *e
+     *
      * @return void
      */
-    public function __construct($order)
+    public function __construct(Order $order)
     {
         $this->order = $order;
+        $this->subject = "Booking Completed Successfully";
     }
 
     /**
@@ -44,9 +45,10 @@ class OrderConfirmed extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        $mailable = new OrderConfirmedMail($notifiable, $this->order);
-
-        return $mailable->to($notifiable->email);
+        return (new MailMessage)->subject($this->subject)
+            ->markdown('email.customer.order-completed', [
+                'order' => $this->order,
+            ]);
     }
 
     /**
@@ -59,18 +61,21 @@ class OrderConfirmed extends Notification implements ShouldQueue
     {
         return [
             'order_id' => $this->order->id,
+            'message'  => $this->subject,
         ];
     }
 
     public function toTwilio($notifiable)
     {
-        $phone    = config('app.country_prefix_for_phone_number').(string)$notifiable->contact_number;
-        $message  = "Your Appointment Accepted";
-        $message  .= "\n\nHello ".ucwords($this->order->user->name).",\n\nWe are glad to inform you that your booking has been accepted by the Cleaner.";
-        $message .= "\n\nRegards\n".config('app.name');
+        $url = route('customer.appointment.index', ['selectedDate' => $this->order->cleaning_datetime->toDateString() ]);
+
+        $message  = $this->subject . "\n\nHello " . ucwords($notifiable->name) . ",";
+        $message .= "\n\nYour Booking has been successfully Completed, Please share your valuable feedback regarding Cleaner service this will help cleaner to perform better in future.";
+        $message .= "\n\nBooking Details: ".$this->order->cleaning_datetime->format('F, l d,Y | h:i A');
+        $message .= "\n\nView appointment: $url\n\nRegards\n".config('app.name');
 
         return [
-            'phone' => $phone,
+            'phone' => $notifiable->contact_number_with_country_code,
             'body'  => $message,
         ];
     }

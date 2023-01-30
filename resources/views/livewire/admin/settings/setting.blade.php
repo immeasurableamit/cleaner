@@ -1,4 +1,4 @@
-<div>
+<div class="seeting_tabs">
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation" wire:ignore>
       <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Settings</button>
@@ -148,7 +148,7 @@
         </div>
         <div class="tab-pane active" id="all">
           <div class="table-design">
-            <table style="width:100%">
+            <table class="table dt-responsive nowrap" style="width:100%">
               <thead>
                 <tr>
                   <th>Page</th>
@@ -160,7 +160,7 @@
                   <td>{{ $seo->page }}</td>
                   <td>{{ $seo->title }}</td>
                   <td>
-                    <a class="edit-icons" href="javascript::void(0)" wire:click="edit('{{$seo->id}}')">
+                    <a class="edit-icons pe-2" href="javascript::void(0)" wire:click="edit('{{$seo->id}}')">
                       <i class="fas fa-pen"></i>
                     </a>
                     <a class="view-icon" href="javascript::void(0)" wire:click="delete('{{$seo->id}}')">
@@ -178,7 +178,7 @@
   <div wire:ignore.self class="modal fade common_modal modal-design" id="seoForm" tabindex="-1" aria-labelledby="stateForm" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <button type="button" class="btn btn-default close closeModal">
+        <button type="button" class="btn btn_close btn-default close closeModal">
           <i class="fas fa-close"></i>
         </button>
         <form>
