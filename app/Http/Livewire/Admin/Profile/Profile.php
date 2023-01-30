@@ -39,6 +39,7 @@ class Profile extends Component
             $user->image = $filename;
             $user->save();
             $this->alert('success', 'Profile updated');
+            return redirect(route('admin.profile'));
         }else{
             return $this->alert("error", "Please select Image");
         }
@@ -83,7 +84,6 @@ class Profile extends Component
 
         $this->roles->update();
         $this->alert('success', 'Profile updated');
-        // session()->flash('message', 'Updated Successfully.');
 
     }
 

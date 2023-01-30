@@ -12,7 +12,7 @@
     </ul>
     </div>
     <div class="table-right-block">
-      <div class="dropdown">
+    <!--   <div class="dropdown">
         <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
           All <img src="../assets/admin/images/icons/all-filter.svg">
         </button>
@@ -21,7 +21,7 @@
           <li><a class="dropdown-item" href="#">Link 2</a></li>
           <li><a class="dropdown-item" href="#">Link 3</a></li>
         </ul>
-      </div>
+      </div> -->
     </div>
     </div>
     <!-- Tab panes -->
