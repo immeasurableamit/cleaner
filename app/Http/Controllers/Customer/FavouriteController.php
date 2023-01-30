@@ -22,9 +22,9 @@ class FavouriteController extends Controller
         );
 
         $user_id = auth()->user()->id;
-        $favourites = Favourite::where('user_id', $user_id )->with('cleaner.cleanerReviews')->get();
+        $favourites = Favourite::where('user_id', $user_id)->with('cleaner.cleanerReviews')->get();
 
-        return view('customer.favourite.index', compact('favourites','title') );
+        return view('customer.favourite.index', compact('favourites', 'title'));
     }
 
 
@@ -33,13 +33,11 @@ class FavouriteController extends Controller
         if ($id) {
             Favourite::find($id)->delete();
         }
-
-        return response()->json(['status' => 'Category Deleted Successfully']);
+        return back();
+        // return response()->json(['status' => 'Category Deleted Successfully']);
     }
 
     public function cleanerRating()
     {
-
     }
-
 }

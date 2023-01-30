@@ -119,7 +119,7 @@
     <div wire:ignore.self class="modal fade show in" id="serviceItemsForm" tabindex="-1" role="dialog" aria-labelledby="serviceItemsForm" aria-hidden="true">
         <div class="modal-dialog modal_style">
             <div class="modal-content">
-            <button type="button" class="btn btn_close close serviceFormClose"><span aria-hidden="true">×</span></button>
+            <button type="button" class="btn btn_close close serviceItemsFormClose"><span aria-hidden="true">×</span></button>
 
                 <div class="modal-header">
                     <h4 class="modal-title">@if(!empty($serviceId)) Edit @else Add @endif Service Items</h4>
@@ -195,7 +195,9 @@
         $(document).on('click', '.serviceFormClose', function (e) {
             $('#serviceForm').modal('hide');
         });
-
+          $(document).on('click', '.serviceItemsFormClose', function (e) {
+            $('#serviceItemsForm').modal('hide');
+        });
     </script>
     @endpush
 

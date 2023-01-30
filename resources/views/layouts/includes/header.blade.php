@@ -109,7 +109,7 @@
                                                 <li><a href="{{route('customer.favourite.index')}}" class="{{ @$title['active']=='favourite' ? 'active' : '' }}">Favourite</a></li>
                                                 <li><a href="{{ route('customer.support.service') }}" class="{{ @$title['active']=='support' ? 'active' : '' }}">Support</a>
                                                 </li>
-                                                @else
+                                                @elseif(Auth::user()->role == 'cleaner')
                                                 <li><a href="{{route('cleaner.account')}}" class="{{ @$title['active']=='account' ? 'active' : '' }}">Account</a></li>
                                                 <li><a href="{{route('cleaner.jobs.jobs')}}" class="{{ @$title['active']=='jobs' ? 'active' : '' }}">Jobs</a></li>
                                                 <li><a href="{{route('cleaner.billing.billing')}}" class="{{ @$title['active']=='billing' ? 'active' : '' }}">Billing</a>
@@ -118,6 +118,9 @@
                                                 </li>
                                                 <li><a href="{{route('cleaner.support.service')}}" class="{{ @$title['active']=='support' ? 'active' : '' }}">Supports</a>
                                                 </li>
+                                                @else
+                                                <li><a href="{{route('admin.customer')}}" class="{{ @$title['active']=='customer' ? 'active' : '' }}">Customer</a></li>
+
                                                 @endif
 
                                             </ul>
