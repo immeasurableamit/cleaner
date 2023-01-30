@@ -6,11 +6,12 @@ use Livewire\Component;
 use App\Models\Setting as SettingModel;
 use App\Models\Seo as SeoModel;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-
+use Livewire\WithPagination;
 
 class Setting extends Component
 {   
     use LivewireAlert;
+    use WithPagination;
     public $settings;
 
     public $page_name, $title, $description, $keywords;
@@ -178,7 +179,7 @@ class Setting extends Component
 
     public function render()
     {   
-        $seos = SeoModel::all();
+        $seos = SeoModel::paginate(10);
 
         return view('livewire.admin.settings.setting', ['seos'=>$seos]);
     }

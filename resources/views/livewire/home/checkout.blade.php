@@ -103,7 +103,7 @@
             <div class="modal-content">
                 <div class="modal-header border border-bottom-0">
                     <h5 class="modal-title" id="exampleModalLabel"></h5>
-                    
+
                 </div>
                 <div class="modal-body">
                     <form class="form-grouph input-design mb-30" wire:submit.prevent="authenticateUser">
@@ -350,10 +350,11 @@
                         <div class="btn_nxt_prs modal-footer">
                             <label for="back2" class="btn_b" wire:click="previous">Back</label>
                             <label for="next2" class="btn_c" id="schedules" wire:click="schedule">Schedule Now
+
                             </label>
                         </div>
                         <p class="privacy_link mb-5">By clicking “Schedule Now”, you agree with all Canary
-                            Clean’s<a class="link-design-2"> terms and conditions</a> and <a class="link-design-2">privacy policy</a></p>
+                            Clean’s<a href="#" class="link-design-2"> terms and conditions</a> and <a href="#" class="link-design-2">privacy policy</a></p>
                     </div>
                 </div>
             </div>
@@ -545,7 +546,7 @@
 
 // loader on schedule button
         $("#schedules").on("click",function(){
-            $(".modal-footer").append("<div><i class='fa fa-spinner fa-spin' style='font-size:24px'></i></div>");
+            $("#schedules").html("<div><i class='fa fa-spinner fa-spin' style='font-size:24px'></i></div>");
 
   });
 
