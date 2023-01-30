@@ -22,7 +22,7 @@ class ContactService extends Component
         ]);
 
         $name = 'Admin';
-        Mail::to($contact->email)->send(new ContactMail($name, $contact));
+        Mail::to($contact->email)->send(new ContactMail($contact));
         $this->alert('success', 'Email sent for status close');
     }
 

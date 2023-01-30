@@ -172,8 +172,8 @@
 
   <div wire:ignore.self class="modal fade show in" id="serviceForm" tabindex="-1" role="dialog" aria-labelledby="serviceForm" aria-hidden="true">
         <div class="modal-dialog modal_style">
-        <button type="button" class="btn btn-default serviceFormClose"><span aria-hidden="true">×</span></button>
-            <div class="modal-content">
+        <div class="modal-content">
+        <button type="button" class="btn btn_close btn-default close serviceFormClose"><i class="fas fa-close"></i></button>
                 <div class="modal-header">
                     <h4 class="modal-title">Reset Password</h4>
                 </div>
@@ -187,7 +187,7 @@
                    
                 <div class="text-center mb-3">
 
-                    <button type="submit" class="btn_s serviceFormClose" wire:click.prevent="updateData('new_password')" wire:loading.attr="disabled">
+                    <button type="submit" class="btn_blue serviceFormClose" wire:click.prevent="updateData('new_password')" wire:loading.attr="disabled">
                          Save
                     </button>
                 </div>
