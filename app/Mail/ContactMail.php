@@ -12,7 +12,7 @@ use App\Models\Contact;
 class ContactMail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $name;
+    // public $name;
     public $contact;
 
     /**
@@ -32,7 +32,7 @@ class ContactMail extends Mailable
      */
     public function build()
     {
-
+       
         return $this->subject('Mail from CanaryCleaner')
             ->view('email.contactmail');
     }
