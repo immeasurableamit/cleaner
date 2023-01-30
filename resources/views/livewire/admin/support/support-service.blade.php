@@ -11,7 +11,7 @@
         height: 40px;
 }
     </style>
-    <div class="col-md-4">
+    <div class="col-md-4 search_input3">
         <input type="text" class="form-control" placeholder="Search..." wire:model="searchRecord" />
     </div>
     <br>

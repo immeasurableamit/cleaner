@@ -146,15 +146,23 @@
                         <a href="{{ route('signup') }}" class="btn_sign_up"><img src="{{ asset('/assets/images/icons/user.svg') }}">Sign Up</a>
                         <a href="{{ route('login') }}" class="btn_sign_in"><img src="{{ asset('/assets/images/icons/user.svg') }}">Sign in</a>
                     </div>
-                    <a href="{{ route('signup-cleaner') }}"><span class="b_cleaner">Become a Cleaner!</span></a>
+                    <a href="{{ route('signup-cleaner') }}" class="d-none d-md-block"><span class="b_cleaner">Become a Cleaner!</span></a>
                 </div>
+                
+                @endif
                 <div class="toggle_menu d-block d-lg-none">
                     <img src="{{ asset('/assets/images/icons/toggle.svg') }}">
                 </div>
-                @endif
-
-
             </div>
         </div>
     </div>
 </header>
+<script>
+    $(document).ready(function(){
+
+        $(".toggle_menu").click( () => {
+            $('.bar_left').toggleClass('show');
+        });
+        
+    });
+    </script> 
