@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\WithFileUploads;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use App\Base64Image;
 
 class Profile extends Component
 {
@@ -15,7 +16,7 @@ class Profile extends Component
     public $roles;
     public $old_image;
     public $first_name, $last_name, $password, $email, $file;
-
+    protected $listeners = ['imgUploaded' => 'storeUploadedImage'];
 
     public function mount(){
     
@@ -28,6 +29,22 @@ class Profile extends Component
   
     }
 
+      public function storeUploadedImage(array $data)
+    {
+        if($data['base64_string']){
+            $image = $data['base64_string']; //bace64 image
+            $user     = User::where('role', '=', 'admin')->first();
+            $folderPath = public_path('/admin/images');
+            $filename = (new Base64Image)->save($image, $folderPath);
+            $user->image = $filename;
+            $user->save();
+            $this->alert('success', 'Profile updated');
+        }else{
+            return $this->alert("error", "Please select Image");
+        }
+
+    } 
+
         public function update()
     {   
 
@@ -36,18 +53,18 @@ class Profile extends Component
         $validatedDate = $this->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'file' => 'required|max:1024',
+            // 'file' => 'required|max:1024',
         ]);
         if(is_string($this->file)){
         
         $this->roles->image = $this->old_image->image;
     
         }
-        else{
-        $filename = $this->file->store('storage/images','public');
-        $this->roles->image = $filename;
+        // else{
+        // $filename = $this->file->store('storage/images','public');
+        // $this->roles->image = $filename;
 
-        } 
+        // } 
 
         
 

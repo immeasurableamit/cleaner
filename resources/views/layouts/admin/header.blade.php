@@ -35,9 +35,9 @@
             <div class="dropdown">
               <button type="button" class="dropdown-toggle position-relative" data-bs-toggle="dropdown">
                  @if(auth()->user()->image)
-                                    <img src="{{ asset('/storage/' . auth()->user()->image) }}">
+                                    <img src="{{ asset('/admin/images/' . auth()->user()->image) }}">
                                     @else
-                                    <img src="{{asset('/assets/images/thumbnail.png')}}">
+                                    <img src="{{ asset('/assets/images/iconshow.png') }}">
                                     @endif
                   <!-- <img src="{{ asset('assets/images/thumbnail.png') }}"> -->
               </button>
