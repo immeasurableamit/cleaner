@@ -201,7 +201,7 @@ class Appointment extends Component
         $timeSlotsForCustomer = collect();
         foreach ( $cleanerTimeSlots as $from => $to ) {
 
-            $timeSlots = collect(\Carbon\CarbonInterval::minutes(60)->toPeriod( $from, $to ))->map->format('h:i A');
+            $timeSlots = collect(\Carbon\CarbonInterval::minutes(30)->toPeriod( $from, $to ))->map->format('h:i A');
             $timeSlotsForCustomer->push( $timeSlots );
         }
 
