@@ -19,132 +19,146 @@
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" wire:ignore.self>
       <div class="form-group row">
-        <label for="type" class="col-sm-2 col-form-label">Tax type</label>
-        <div class="col-sm-10">
-          <select class="form-control" wire:model="tax_type">
+        
+        <div class="col-sm-8 select-design ">
+        <label for="type" class=" col-form-label">Tax type</label>
+        <select class="form-control select-custom-design" wire:model="tax_type">
             <option value="">Select type</option>
             <option value="percentage" selected="selected">Percentage</option>
             <option value="fixed">Fixed</option>
           </select>
         </div>
-      </div><br>
+      </div>
       <div class="form-group row">
-        <label for="tax" class="col-sm-2 col-form-label">Tax</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="tax" placeholder="" wire:model="tax">
+        
+        <div class="col-sm-8 input-design">
+        <label for="tax" class=" col-form-label">Tax</label>
+        <input type="text" class="form-control" id="tax" placeholder="" wire:model="tax">
         </div>
       </div>
-      <br>
+      
        <div class="form-group row">
-        <label for="Transaction" class="col-sm-2 col-form-label">Transaction fee type</label>
-        <div class="col-sm-10">
-          <select class="form-control" wire:model="transaction_type" required>
+        
+        <div class="col-sm-8 select-design ">
+        <label for="Transaction" class=" col-form-label">Transaction fee type</label>
+        <select class="form-control select-custom-design" wire:model="transaction_type" required>
             <option value="">Select type</option>
             <option value="percentage" selected="selected">Percentage</option>
             <option value="fixed">Fixed</option>
           </select>
         </div>
-      </div><br>
+      </div>
       <div class="form-group row">
-        <label for="fee" class="col-sm-2 col-form-label">Transaction Fee</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="fee" placeholder="" wire:model="transaction_fee">
+        
+        <div class="col-sm-8 input-design">
+        <label for="fee" class=" col-form-label">Transaction Fee</label>
+        <input type="text" class="form-control" id="fee" placeholder="" wire:model="transaction_fee">
         </div>
       </div>
-      <br>
+      
       <div class="form-group">
-        <button type="submit" wire:click.prevent="update()" class="btn_blue">Submit</button>
+        <button type="submit" wire:click.prevent="update()" class="btn_blue mt-3">Submit</button>
       </div>
     </div>
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" wire:ignore.self>
       <div class="form-group row">
-        <label for="SMTPserver" class="col-sm-2 col-form-label">smtphost</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="SMTPserver" wire:model="smtp_host" aria-describedby="emailHelp">
+        
+        <div class="col-sm-8 input-design">
+        <label for="SMTPserver" class=" col-form-label">smtphost</label>
+        <input type="text" class="form-control" id="SMTPserver" wire:model="smtp_host" aria-describedby="emailHelp">
         </div>
       </div>
-      <br>
+      
       <div class="form-group row">
-        <label for="SMTPport" class="col-sm-2 col-form-label">smtpport</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="SMTPport" wire:model="smtp_port" placeholder="">
+        
+        <div class="col-sm-8 input-design">
+        <label for="SMTPport" class=" col-form-label">smtpport</label>
+        <input type="text" class="form-control" id="SMTPport" wire:model="smtp_port" placeholder="">
         </div>
       </div>
-      <br>
+      
       <div class="form-group row">
-        <label for="SMTPemail" class="col-sm-2 col-form-label">smtpusername</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="SMTPemail" wire:model="smtp_username" placeholder="">
+        
+        <div class="col-sm-8 input-design">
+        <label for="SMTPemail" class=" col-form-label">smtpusername</label>
+        <input type="text" class="form-control" id="SMTPemail" wire:model="smtp_username" placeholder="">
         </div>
       </div>
-      <br>
+      
       <div class="form-group row">
-        <label for="SMTPpassword" class="col-sm-2 col-form-label">smtppassword</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="SMTPpassword" wire:model="smtp_password" placeholder="">
+        
+        <div class="col-sm-8 input-design">
+        <label for="SMTPpassword" class=" col-form-label">smtppassword</label>
+        <input type="text" class="form-control" id="SMTPpassword" wire:model="smtp_password" placeholder="">
         </div>
       </div>
-      <br>
+      
       <div class="form-group">
-        <button type="submit" wire:click.prevent="update()" class="btn_blue">Submit</button>
+        <button type="submit" wire:click.prevent="update()" class="btn_blue mt-3">Submit</button>
       </div>
     </div>
     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab" wire:ignore.self>
       <div class="form-group row">
-        <label for="public_key" class="col-sm-2 col-form-label">Stripe key</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="public_key" wire:model="stripe_key" placeholder="">
+        
+        <div class="col-sm-8 input-design">
+        <label for="public_key" class=" col-form-label">Stripe key</label>
+        <input type="text" class="form-control" id="public_key" wire:model="stripe_key" placeholder="">
         </div>
       </div>
-      <br>
+      
       <div class="form-group row">
-        <label for="secret_key" class="col-sm-2 col-form-label">Stripe secret key</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="secret_key" wire:model="stripe_secret_key" placeholder="">
+        
+        <div class="col-sm-8 input-design">
+        <label for="secret_key" class=" col-form-label">Stripe secret key</label>
+        <input type="text" class="form-control" id="secret_key" wire:model="stripe_secret_key" placeholder="">
         </div>
       </div>
-      <br>
+      
       <div class="form-group">
-        <button type="submit" wire:click.prevent="update()" class="btn_blue">Submit</button>
+        <button type="submit" wire:click.prevent="update()" class="btn_blue mt-3">Submit</button>
       </div>
     </div>
     <div class="tab-pane fade" id="social" role="tabpanel" aria-labelledby="social-tab" wire:ignore.self>
       <div class="form-group row">
-        <label for="fb" class="col-sm-2 col-form-label">Facebook</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="fb" wire:model="facebook" placeholder="Enter link">
+        
+        <div class="col-sm-8 input-design">
+        <label for="fb" class=" col-form-label">Facebook</label>
+        <input type="text" class="form-control" id="fb" wire:model="facebook" placeholder="Enter link">
         </div>
       </div>
-      <br>
+      
       <div class="form-group row">
-        <label for="twitter" class="col-sm-2 col-form-label">Twitter</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="twitter" wire:model="twitter" placeholder="Enter link">
+        
+        <div class="col-sm-8 input-design">
+        <label for="twitter" class=" col-form-label">Twitter</label>
+        <input type="text" class="form-control" id="twitter" wire:model="twitter" placeholder="Enter link">
         </div>
       </div>
-      <br>
+      
       <div class="form-group row">
-        <label for="instagram" class="col-sm-2 col-form-label">Instagram</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="instagram" wire:model="instagram" placeholder="Enter link">
+        
+        <div class="col-sm-8 input-design">
+        <label for="instagram" class=" col-form-label">Instagram</label>
+        <input type="text" class="form-control" id="instagram" wire:model="instagram" placeholder="Enter link">
         </div>
       </div>
-      <br>
+      
       <div class="form-group row">
-        <label for="linkedin" class="col-sm-2 col-form-label">Linked In</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="linkedin" wire:model="linkedin" placeholder="Enter link">
+        
+        <div class="col-sm-8 input-design">
+        <label for="linkedin" class=" col-form-label">Linked In</label>
+        <input type="text" class="form-control" id="linkedin" wire:model="linkedin" placeholder="Enter link">
         </div>
       </div>
-      <br>
+      
       <div class="form-group">
-        <button type="submit" wire:click.prevent="update()" class="btn_blue">Submit</button>
+        <button type="submit" wire:click.prevent="update()" class="btn_blue mt-3">Submit</button>
       </div>
     </div>
     <div class="tab-pane fade" id="seo" role="tabpanel" aria-labelledby="seo-tab" wire:ignore.self>
       <div class="tab-content">
         <div class="add-litigations py-3">
-          <button type="button" class="btn_blue showModal">Add</button>
+          <button type="button" class="btn_blue mt-3 showModal">Add</button>
         </div>
         <div class="tab-pane active" id="all">
           <div class="table-design">
@@ -187,9 +201,9 @@
           </div>
           <div class="modal-body">
             <div>
-              <div class="form-group">
+              <div class="form-group ">
                 <label>Select Page</label>
-                <select class="form-control" wire:model="page_name">
+                <select class="form-control " wire:model="page_name">
                   <option value="">Select Page</option>
                   <option value="account">Account</option>
                   <option value="billing">Billing</option>
@@ -224,7 +238,7 @@
             </div>
           </div>
           <div class="text-center mb-3">
-            <button type="button" class="btn_blue" wire:click.prevent="store" wire:loading.attr="disabled">Save </button>
+            <button type="button" class="btn_blue mt-3" wire:click.prevent="store" wire:loading.attr="disabled">Save </button>
           </div>
         </form>
       </div>

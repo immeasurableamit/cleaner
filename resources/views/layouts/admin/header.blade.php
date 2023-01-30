@@ -66,3 +66,12 @@
     </div>
    </div>
 </header>
+<script>
+    $(document).ready(function(){
+
+        $(".toggle_menu").click( () => {
+            $('.bar_left').toggleClass('show');
+        });
+        
+    });
+    </script> 
