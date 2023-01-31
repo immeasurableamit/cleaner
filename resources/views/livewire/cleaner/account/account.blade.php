@@ -178,6 +178,9 @@
                         @if (@$fieldStatus == true && $action == 'facebook')
                             <input class="border-text" type="text" value="{{ $user->UserDetails->facebook }}"
                                 wire:model="facebook" />
+                                <span style="color:red"> @error('facebook')
+                                    {{ $message }}
+                                @enderror </span>
                             <span class="edit"><a class="link-design-2" wire:click="updateData('facebook')"><i
                                         class="fas fa-save"></i></a></span>
                             <span class="cancel"><a href="javascript::void(0)" class="link-design-2"
@@ -199,6 +202,9 @@
 
                         @if (@$fieldStatus == true && $action == 'twitter')
                             <input type="text" value="{{ $user->UserDetails->twitter }}" wire:model="twitter" />
+                            <span style="color:red"> @error('twitter')
+                                {{ $message }}
+                            @enderror </span>
                             <span class="edit"><a class="link-design-2" wire:click="updateData('twitter')"><i
                                         class="fas fa-save"></i></a></span>
                             <span class="cancel"><a href="javascript::void(0)" class="link-design-2"
@@ -221,6 +227,9 @@
                         @if (@$fieldStatus == true && $action == 'instagram')
                             <input type="text" value="{{ $user->UserDetails->instagram }}"
                                 wire:model="instagram" />
+                                <span style="color:red"> @error('instagram')
+                                    {{ $message }}
+                                @enderror </span>
                             <span class="edit"><a class="link-design-2" wire:click="updateData('instagram')"><i
                                         class="fas fa-save"></i></a></span>
                             <span class="cancel"><a href="javascript::void(0)" class="link-design-2"
@@ -243,6 +252,9 @@
                         @if (@$fieldStatus == true && $action == 'linkedin')
                             <input type="text" value="{{ $user->UserDetails->linkedin }}"
                                 wire:model="linkedin" />
+                                <span style="color:red"> @error('linkedin')
+                                    {{ $message }}
+                                @enderror </span>
                             <span class="edit"><a class="link-design-2" wire:click="updateData('linkedin')"><i
                                         class="fas fa-save"></i></a></span>
                             <span class="cancel"><a href="javascript::void(0)" class="link-design-2"
