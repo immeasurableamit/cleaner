@@ -24,5 +24,19 @@
 </section>
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
+
 @endpush
+<script>
+      $(document).ready(function(){
+      $(".btn_filter_by ").click(function(){
+         $(".filter_by_div").toggleClass('active');
+         $(this).parent().toggleClass('active');
+         });
+         $(".close-btn").click(function(){
+         $(".filter_by_div").removeClass('active');
+         $(this).parent().removeClass('active');
+         });
+      });
+         
+   </script>
 @endsection

@@ -6067,6 +6067,25 @@ fieldset .row.no-mrg .checkout_div h4{
     position: relative;
     left: -5px;
 }
+.customer-appoitments-alternative-section .select-date-toggles.show {
+    height: 248px;
+    max-height: 248px;
+}
+.scheduling-calender-design.clender-design .fc-toolbar-chunk button.fc-today-button.fc-button.fc-button-primary {
+    display: none;
+}
+.biling_form .customer-account-information li.three_column>p,.customer-account-information li.two_column>p,.cleaner_account_2.customer-account-information ul li p{
+    text-transform: capitalize;
+}
+.card_search_result .bottom_card_text .name_str a {
+    width: 157px;
+}
+.card_filter.oferd_select.select-design ul#select2-addonsSelector-container {
+    padding: 0px !important;
+}
+.card_filter.oferd_select.select-design span.select2-selection.select2-selection--multiple {
+    padding: 13px 15px;
+}
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {
     display: none;

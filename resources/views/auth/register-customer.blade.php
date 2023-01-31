@@ -37,7 +37,7 @@
               <div class="avatar-upload">
                 <div class="avatar-edit">
                   <input type='file' id="upload" accept=".png, .jpg, .jpeg" />
-                  {!! Form::label('upload','Upload a profile pic', ['class' => 'form-label']) !!}
+                  {!! Form::label('upload','Upload a Profile Pic', ['class' => 'form-label']) !!}
                   {!! $errors->first('image', '<span class="help-block">:message</span>') !!}
                 </div>
 
