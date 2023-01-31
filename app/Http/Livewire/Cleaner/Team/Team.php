@@ -120,13 +120,13 @@ class Team extends Component
     {
         $this->user_id = $iid;
 
-        $this->alert('warning', 'Are you sure do want to delete?', [
+        $this->alert('', 'Are you sure do want to delete team member?', [
 			'toast' => false,
 			'position' => 'center',
 			'showCancelButton' => true,
-			'cancelButtonText' => 'Cancel',
+			'cancelButtonText' => 'No',
 			'showConfirmButton' => true,
-			'confirmButtonText' => 'Delete it',
+			'confirmButtonText' => 'Yes',
 			'onConfirmed' => 'delete',
 			'timer' => null
 		]);

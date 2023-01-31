@@ -163,8 +163,8 @@
           event.preventDefault();
           swal({
               title: `Are you sure you want to remove cleaner from Favourites?`,
-              text: "If you delete this, it will be gone forever.",
-              icon: "warning",
+            //   text: "If you delete this, it will be gone forever.",
+            //   icon: "warning",
               buttons: true,
               buttons: ["No", "Yes"],
               dangerMode: true,

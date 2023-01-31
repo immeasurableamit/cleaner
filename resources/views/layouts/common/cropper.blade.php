@@ -28,14 +28,17 @@
         width: 100% !important;
         height: 100%;
     }
+    .modal-dialog {
+    max-width: 450px;
+    }
 </style>
 <script>
     $(document).ready(function() {
 
-        let viewportWidth = 300;
-        let viewportHeight = 300;
-        let boundaryWidth = 300;
-        let boundaryHeight = 300;
+        let viewportWidth = 350;
+        let viewportHeight = 350;
+        let boundaryWidth = 400;
+        let boundaryHeight = 400;
 
         $image_crop = $('#image').croppie({
             enableExif: true,
