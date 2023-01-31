@@ -1,7 +1,7 @@
 <footer id="footer">
         <div class="container">
             <div class="footer-logo">
-                <a href="#"><img src="{{asset('assets/images/logo/footer-logo.svg')}}"></a>
+                <a href="{{ route('index') }}"><img src="{{asset('assets/images/logo/footer-logo.svg')}}"></a>
             </div>
             <div class="footer-flex">
                 <div class="footer-widget footer-widget-first">
@@ -32,10 +32,10 @@
                     <div class="folow-us">
                         <ul class="list-unstyled d-flex">
                             <li><span>Follow Us</span></li>
-                            <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                            <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                            <li><a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i></a></li>
+                            <li><a href="https://twitter.com/" target="_blank"><i class="fa-brands fa-twitter"></i></a></li>
+                            <li><a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+                            <li><a href="https://in.linkedin.com/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
                         </ul>
                     </div>
                 </div>

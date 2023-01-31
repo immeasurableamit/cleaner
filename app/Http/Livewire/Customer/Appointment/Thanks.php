@@ -39,7 +39,7 @@ class Thanks extends Component
     {
         $this->order_id = $iid;
 
-        $this->alert('warning', 'Are you surely want to cancel?', [
+        $this->alert('', 'Are you surely want to cancel?', [
             'toast' => false,
             'position' => 'center',
             'showCancelButton' => true,

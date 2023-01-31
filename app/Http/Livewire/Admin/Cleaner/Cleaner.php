@@ -38,7 +38,7 @@ class Cleaner extends Component
     public function confirmStatus($iid)
     {
         $this->userId = $iid;
-        $this->alert('warning', 'Are you sure do you want to change status?', [
+        $this->alert('', 'Are you sure do you want to change status?', [
 			'toast' => false,
 			'position' => 'center',
 			'showCancelButton' => true,
@@ -54,7 +54,7 @@ class Cleaner extends Component
     {
         if($this->userId){
         $cleanerStatus = User::find($this->userId);
-    
+
         if ($cleanerStatus->status == '1') {
             $cleanerStatus->status = '0';
             $cleanerStatus->save();
@@ -77,22 +77,22 @@ class Cleaner extends Component
         if($this->tab=='inactive'){
             $sta = '0';
         }
-       
+
         $value = [];
         $value[] = 'completed';
         $value[] = 'payment_collected';
         $value[] = 'accepted';
-        
+
 
         $users  = User::with(['orders' => function ($query) use($value) {
                     $query->whereIn('status', $value);
                 }])
-                ->where('role', '=', 'cleaner')                
+                ->where('role', '=', 'cleaner')
                 ->withCount(['orders' => function ($query) use($value) {
                     $query->whereIn('status', $value);
-                }])                
+                }])
                 ->groupBy('id');
-            
+
 
         if(!empty($this->search)){
             $vl = $this->search;
@@ -105,10 +105,10 @@ class Cleaner extends Component
          if($sta) {
                 $users->whereStatus($sta);
             }
-            
+
         $users = $users->orderBy('id', 'DESC')->get();
-                
-     
+
+
         foreach ($users as $key => $value) {
             $lastdate = '';
             if(count($value->orders)){
@@ -118,7 +118,7 @@ class Cleaner extends Component
             }
               $users[$key]['order_lastdate'] = $lastdate;
         }
-    
+
         // $users = User::whereRole('cleaner')
         //         ->where(function ($query){
         //             if($this->tab=='active'){
@@ -129,8 +129,8 @@ class Cleaner extends Component
         //             }
         //         })->orderBy('id', 'DESC')
         //         ->get();
-        
-      
+
+
         return view('livewire.admin.cleaner.cleaner', compact('users'));
     }
 }

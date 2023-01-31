@@ -18,7 +18,7 @@ class SupportService extends Component
     public function confirmStatus($id)
     {
         $this->userId = $id;
-        $this->alert('warning', 'Are you sure do you want to change status?', [
+        $this->alert('', 'Are you sure do you want to change status?', [
             'toast' => false,
             'position' => 'center',
             'showCancelButton' => true,
@@ -49,13 +49,13 @@ class SupportService extends Component
     public function deleteConfirm($id)
     {
         $this->user_id = $id;
-        $this->alert('warning', 'Are you sure do want to delete?', [
+        $this->alert('', 'Are you sure do want to delete?', [
             'toast' => false,
             'position' => 'center',
             'showCancelButton' => true,
-            'cancelButtonText' => 'Cancel',
+            'cancelButtonText' => 'No',
             'showConfirmButton' => true,
-            'confirmButtonText' => 'Delete it',
+            'confirmButtonText' => 'Yes',
             'onConfirmed' => 'destroy',
             'timer' => null
         ]);
