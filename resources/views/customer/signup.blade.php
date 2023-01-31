@@ -30,7 +30,7 @@
               <div class="avatar-upload">
                 <div class="avatar-edit">
                     <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
-                    <label for="imageUpload">Upload a profile pic</label>
+                    <label for="imageUpload">Upload a Profile Pic</label>
                 </div>
                 <div class="avatar-preview">
                     <div id="imagePreview" style="background-image: url(assets/images/thumbnail.png);">
