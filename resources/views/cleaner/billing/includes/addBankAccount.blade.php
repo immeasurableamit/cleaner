@@ -49,7 +49,7 @@
             @endif
             </div>
             <div class="col-6">
-                <a href="{{ route('cleaner.billing.stripeConnectUpdate') }}" class="btn_blue" role="button" type="button">Update Bank Account</a>
+                <a href="{{ route('cleaner.billing.stripeConnectUpdate') }}" class="btn_blue" role="button" type="button">Update stripe account</a>
             </div>
         </div>
     </form>

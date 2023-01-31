@@ -50,7 +50,7 @@ class SupportContact extends Component
         $contact->save();
 
         $adminEmail= env('ADMIN_EMAIL');
-        Mail::to($adminEmail)->send(new ContactMail($contact));
+        Mail::to($adminEmail)->queue(new ContactMail($contact));
         $this->alert('success', 'Message sent');
         $this->resetInputFields();
     }
