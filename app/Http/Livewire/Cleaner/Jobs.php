@@ -278,7 +278,7 @@ class Jobs extends Component
 
     public function confirmCancelOrderAction( $orderId )
     {
-        $this->alert('warning', 'Are you surely want to cancel the booking?', [
+        $this->alert('', 'Are you surely want to cancel the booking?', [
             'position' => 'center',
             'toast' => false,
             'showConfirmButton' => true,

@@ -128,7 +128,7 @@ class Appointment extends Component
     public function cancelOrder($orderId)
     {
 
-        $this->alert('warning', 'Are you surely want to cancel?', [
+        $this->alert('', 'Are you surely want to cancel?', [
             'toast' => false,
             'position' => 'center',
             'showCancelButton' => true,

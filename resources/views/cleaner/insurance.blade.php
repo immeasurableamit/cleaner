@@ -13,7 +13,7 @@
                             </div>
                             @include('layouts.common.sidebar')
                             <div class="blue-logo-block text-center max-width-100">
-                                <a href="javascript::void(0)"><img src="{{asset('/assets/images/logo/logo.svg')}}"></a>
+                                <a href="{{ route('index') }}"><img src="{{asset('/assets/images/logo/logo.svg')}}"></a>
                             </div>
                         </div>
                     </div>

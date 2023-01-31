@@ -86,7 +86,7 @@ class Support extends Component
 
         $this->resetFormFields();
 
-        Mail::to( env("ADMIN_EMAIL") )->send( new SupportRequestMail( $supportRequest ))->queue();
+        Mail::to( env("ADMIN_EMAIL") )->queue( new SupportRequestMail( $supportRequest ));
         $this->alert('success', 'Support request submitted');
         $this->dispatchBrowserEvent('cleaerSelectionsInSelectors');
         return true;

@@ -14,7 +14,7 @@
                 </div>
                 @include('layouts.common.sidebar')
                 <div class="blue-logo-block text-center max-width-100">
-                  <a href="#"><img src="{{asset('assets/images/logo/logo.svg')}}"></a>
+                  <a href="{{ route('index') }}"><img src="{{asset('assets/images/logo/logo.svg')}}"></a>
                 </div>
              </div>
             </div>
@@ -65,7 +65,7 @@
                               </div>
                             </div>
                       </div>
-    
+
                       <div class="row">
                         <div class="col-md-6">
                         <div class="form-grouph input-design mb-30">
@@ -78,7 +78,7 @@
                               </div>
                             </div>
                       </div>
-                      
+
                        <div class="row">
                         <div class="col-md-6">
                             <div class="form-grouph mb-30 input-select-abs">

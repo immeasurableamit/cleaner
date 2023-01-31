@@ -36,12 +36,12 @@ class Customer extends Component
         $this->tab = $tab;
     }
 
-    
+
 
     public function confirmStatus($iid)
     {
         $this->userId = $iid;
-        $this->alert('warning', 'Are you sure do you want to change status?', [
+        $this->alert('', 'Are you sure do you want to change status?', [
 			'toast' => false,
 			'position' => 'center',
 			'showCancelButton' => true,
@@ -57,7 +57,7 @@ class Customer extends Component
     {
         if($this->userId){
             $cleanerStatus = User::find($this->userId);
-        
+
             if ($cleanerStatus->status == '1') {
                 $cleanerStatus->status = '0';
                 $cleanerStatus->save();
@@ -80,23 +80,23 @@ class Customer extends Component
         if($this->tab=='inactive'){
             $sta = 1;
         }
-       
+
         $value = [];
         $value[] = 'completed';
         $value[] = 'payment_collected';
         $value[] = 'reviewed';
-        
+
 
         $users  = User::with(['orders' => function ($query) use($value) {
                     $query->whereIn('status', $value);
-                
+
                 }])
-                ->where('role', '=', 'customer')                
+                ->where('role', '=', 'customer')
                 ->withCount(['orders' => function ($query) use($value) {
                     $query->whereIn('status', $value);
-                }])                
+                }])
                 ->groupBy('id');
-            
+
 
 
         if(!empty($this->dateStart) && !empty($this->dateEnd)) {
@@ -117,7 +117,7 @@ class Customer extends Component
             }
 
         $users = $users->orderBy('id', 'DESC')->get();
-                
+
         foreach ($users as $key => $value) {
 
             $cnt = 0;
@@ -134,8 +134,8 @@ class Customer extends Component
 
         // echo "<pre>";
         // print_r($users);
-        // die;      
-         
+        // die;
+
         return view('livewire.admin.customer.customer', compact('users'));
     }
 }

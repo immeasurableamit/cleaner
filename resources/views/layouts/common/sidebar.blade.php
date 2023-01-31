@@ -5,7 +5,7 @@
     <li><a href="{{route('customer.appointment.index')}}" class="{{ @$title['active']=='appointments' ? 'active' : '' }}">Appointments</a></li>
     <li><a href="{{route('customer.billing.index')}}" class="{{ @$title['active']=='billing' ? 'active' : '' }}">Billing</a></li>
     <li><a href="{{ route('customer.notification.index') }}" class="{{ @$title['active'] == 'notification' ? 'active' : '' }}">Notifications</a></li>
-    <li><a href="{{route('customer.favourite.index') }}" class="{{ @$title['active'] == 'favourite' ? 'active' : '' }}">Favourite</a></li>
+    <li><a href="{{route('customer.favourite.index') }}" class="{{ @$title['active'] == 'favourite' ? 'active' : '' }}">Favourites</a></li>
     <li><a href="{{ route('customer.support.service') }}" class="{{ @$title['active'] == 'support' ? 'active' : '' }}">Support</a></li>
 
 
