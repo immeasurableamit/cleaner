@@ -400,6 +400,11 @@
                     @this.set('addOnIds', $("#addon-selector").val());
                 });
 
+                $("#addon-selector").on('select2:unselect', function(e) {
+
+                    @this.set('addOnIds', $("#addon-selector").val());
+                });
+
                 $("#time-selector").on('select2:select', function(e) {
                     var data = e.params.data;
                     @this.set('time', data.id);
