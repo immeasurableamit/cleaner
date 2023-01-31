@@ -339,7 +339,7 @@ class Profile extends Component
 
         if ($user == 'cleaner' || $user == 'admin') {
 
-            return $this->alert("error", "You don't have permission");
+            return $this->alert("error", "To continue for Booking, Must be login as Customer");
 
         } else {
             $validatedData = $this->validate(...$this->checkoutRules());

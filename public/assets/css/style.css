@@ -7024,7 +7024,7 @@ footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter 
     width: 20%;
 }
 .buffers_section .set_minutes_row .minutes_labes {
-    width: 73%;
+    width: 83%;
 }
 .row.prescheduled_row span{
     width: 124.3px;
@@ -7367,10 +7367,10 @@ tr.arrow:after {
         max-width: 100%;
     }
     .banner_home  .banner_text .search-form-wrapper .select-search-design,.clean_house_section .search-form-wrapper .select-search-design,.clean_house_section .search-form-wrapper .search-input-design{
-        width: 50%;
+        width: 50% !important;
     }
     .banner_home  .banner_text .search-form-wrapper .select-search-design:last-child{
-        width: 100%;
+        width: 100% !important;
     }
     .banner_home  .banner_text .search-form-wrapper .select-search-design:nth-of-type(1) select,.clean_house_section .search-form-wrapper .select-search-design:nth-of-type(1) select{
      border-radius: 50px 0px 0px 50px;
@@ -7804,6 +7804,145 @@ tr.arrow:after {
     .date_show_v{
         width: 100%;
     }
+    .banner_text .search-form-wrapper.select-design {
+        border: 0px;
+    }
+    body .banner_home .select-design .select2-selection {
+        padding: 10.5px 15px !important;
+        background-color: #fff !important;
+        box-shadow: none !important;
+        border: 0px !important;
+        border-radius: 0px !important;
+    }
+    body .banner_home .select-design .select-search-design:nth-of-type(1) span.select2-selection{
+        border-radius: 35px 0px 0px 35px !important;
+        border:1px solid #37A9FB !important;
+        border-right: 0px !important;
+        position: relative !important;
+    }
+    body .banner_home .select-design .select-search-design:nth-of-type(1) span.select2-selection:after{
+        content: '';
+        position: absolute;
+        width: 1px;
+        height: 40px;
+        background-color: grey;
+        z-index: 1;
+        top: 5px;
+        right: 0px;
+    }
+    body .banner_home .select-design .select-search-design:nth-of-type(2) span.select2-selection{
+        border-radius: 0px 35px 35px 0px !important;
+        border:1px solid #37A9FB !important;
+        border-left: 0px !important;
+    }
+.clean_house_section .search-form-wrapper .select-search-design:nth-of-type(2) {
+    display:none;
+}
+.clean_house_section .search-input-design .search-btn {
+    width: 40px;
+    height: 40px;
+    top: 4px;
+}
+.login-page .blue-bg-wrapper.justify-content-center {
+    padding-bottom: 35px;
+    border-radius: 20px 20px 0px 0px;
+}
+.select_state .selecti-box {
+    top: 12px !important;
+    bottom: auto;
+}
+.signup_all_container .form-grouph.mb-30.input-select-abs.select_state .selecti-box {
+    width: 37%;
+}
+.subit-btn-2 {
+    font-size: 13px;
+}
+.header-wrapper .header-flex .header-flex-item.header-flex-item-2 {
+    display: none;
+}
+.toggle_menu {
+    padding-right: 0px;
+}
+.account-profile .dropdown-menu::before {
+    content: '';
+    left: auto;
+    right: 23px;
+    border-left: 35px solid transparent;
+    border-right: 35px solid transparent;
+    border-top: 84px solid #fff;
+    position: absolute;
+    width: 52px;
+    height: 90px;
+    margin: 0 auto;
+    transform: rotate(180deg);
+    top: -40px;
+    z-index: -1;
+}
+.customer-avatar-upload .customer-avatar-edit {
+    position: absolute;
+    bottom: 13px;
+    left: 143px;
+}
+li.nav-item.signin.account-profile ul.dropdown-menu.show {
+    right: -43px !important;
+    top: 73px !important;
+}
+.card_rated .clnr_img {
+    height: 173px;
+}
+.join_us_cleaning_services_section .col-md-6{padding-top: 157px;
+background-position: top;
+background-size: contain;
+background-repeat: no-repeat;
+background-color: #c0c0bc;
+}
+div#requirements-alert-container .alert.alert-success.alert-dismissible.fade.show.mx-5.mt-3.customer-white-wrapper {
+    margin: 15px 0px !important;
+}
+.cleaner_account_2.customer-account-information ul li p {
+    white-space: inherit;
+    text-overflow: initial;
+    overflow: inherit;
+}
+.team_row .teams-table-layout-view {
+    padding-left: 0px;
+}
+.team_row .teams-table-layout-view button.submit-design.mb-2.btn_blue{
+  width: 100%;
+}
+.modal-dialog.pop-up-form{
+    max-width: 100% !important;
+}
+.modal-dialog.pop-up-form .modal-content a.subit-btn-2.btn_c.w-50 {
+    width: 100% !important;
+}
+.customer-account-forms.pe-5.pb-2 .form-headeing-second.border-bottom.pb-3 span {
+    padding-top: 15px;
+    display: block;
+}
+.form_availibility .availability_row label.form-check-label.d-flex.d-md-none {
+    padding-left: 10px;
+    width: 37px;
+    overflow: hidden;
+}
+.form_availibility .availability_row .time_input {
+    width: 40%;
+}
+.form_availibility .time-schedule-addon .time-input-addon button.border-0.bg-none.btn_deleter {
+    right: -73%;
+}
+.preschedule-time-details .btn_c {
+    font-size: 13px !important;
+}
+.append_row_preschduled.row.pb-2 {
+    padding-bottom: 35px !important;
+}
+.what_included {
+    margin-top: 0px;
+}
+.bg_ylow_h5 {
+    font-size: 13px;
+}
 /* css 767 end here */
 .full_home_cleaning_table{
     overflow: auto;

@@ -864,10 +864,16 @@ a.pdf_r {
     padding-bottom: 3px;
     padding-top: 5px;
 }
-.header-search input[type="search"],.search_input2 input[type="search"] {
+.header-search input[type="search"],.search_input2 input[type="search"],.search_input3 input[type="text"]{
     border-radius: 50px;
     padding: 10px;
     border: 1px solid #2677b1;
+}
+.common_modal label {
+    padding: 10px 0px 3px 0px;
+}
+.seeting_tabs label {
+    padding-top: 15px;
 }
 @media (min-width: 1200px){
     .table-design .dataTables_length {
