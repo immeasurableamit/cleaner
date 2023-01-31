@@ -60,7 +60,8 @@ class Thanks extends Component
 
         $order = Order::find( $this->order_id );
         $order->cleaner->notify(new OrderCancelledNotificationForCleaner($order));
-        $order->user->notify( new CancelledOrderNotificationForCustomer($order) );
+        // $order->user->notify( new CancelledOrderNotificationForCustomer($order) );
+        $order->user->notify( new OrderCancelledNotificationForCustomer($order) );
 
 
         return redirect()->route('profile', $this->order->cleaner_id);
