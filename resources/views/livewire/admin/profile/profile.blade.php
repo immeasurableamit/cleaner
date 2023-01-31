@@ -11,7 +11,7 @@
         <div class="customer-avatar-upload">
             <div class="customer-avatar-edit">
                 <input type='file' id="upload" accept=".png, .jpg, .jpeg" />
-                <label for="upload">Upload a profile pic</label>
+                <label for="upload">Upload a Profile Pic</label>
             </div>
             <div class="customer-avatar-preview position-relative">
             
@@ -36,7 +36,7 @@
             </div>
         <div class="h3-p-design">
             <h3>Profile Photo</h3>
-            <p>Upload a new profile photo.</p>
+            <p>Upload a New Profile Photo.</p>
         </div>
     </div> 
     </div>          
@@ -48,23 +48,21 @@
 <div class="row">
     <div class="col-md-7">
         
-  <div class="form-group input-design">
-    <label for="name" class="pt-3 pb-2">Firstname</label>
-    <input type="text" class="form-control" id="name" wire:model="first_name" aria-describedby="emailHelp" value="{{$roles->first_name}}">
+  <div class="form-group input-design pb-3">
+
+    <input type="text" class="form-control" id="name" wire:model="first_name" aria-describedby="emailHelp" value="{{$roles->first_name}}" placeholder="Firstname">
     @error('first_name') <span class="text-danger">{{ $message }}</span>@enderror
   </div>
-   <div class="form-group input-design">
-    <label for="name" class="pt-3 pb-2">Lastname</label>
-    <input type="text" class="form-control" id="name" wire:model="last_name" aria-describedby="emailHelp">
+   <div class="form-group input-design pb-3">
+
+    <input type="text" class="form-control" id="name" wire:model="last_name" aria-describedby="emailHelp" placeholder="Lastname">
      @error('last_name') <span class="text-danger">{{ $message }}</span>@enderror
   </div>
-  <div class="form-group input-design">
-    <label for="exampleInputPassword1" class="pt-3 pb-2">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" wire:model="password">
-  </div>
-  <div class="form-group input-design">
-    <label for="email" class="pt-3 pb-2">Email</label>
-    <input type="email" class="form-control" id="email" wire:model="email">
+  <div class="form-group input-design pb-3">
+    <input type="password" class="form-control" id="exampleInputPassword1" wire:model="password" placeholder="Password">
+  </div> 
+  <div class="form-group input-design pb-3">
+    <input type="email" class="form-control" id="email" wire:model="email" placeholder="Email">
   </div>
   <br>
   <button type="submit" class="btn_blue" wire:click.prevent="update()">Submit</button>

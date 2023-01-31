@@ -11,19 +11,19 @@
                         </div>
                         @include('layouts.common.sidebar')
                         <div class="blue-logo-block text-center max-width-100">
-                            <a href="javascript::void(0)"><img src="{{asset('assets/images/logo/logo.svg')}}"></a>
+                            <a href="{{ route('index') }}"><img src="{{asset('assets/images/logo/logo.svg')}}"></a>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 no-padd">
-                    
+
                     <div class="row no-mrg">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 no-padd cleaner_availability_section">
                             <div class="customer-account-forms ">
                                 <div class="form-headeing-second border-bottom pb-3 top_heading">
                                     <h3 class="mb-0">Your Services</h3>
                                 </div>
-                                
+
                                 <div class="service_text border-0">
                                     <p>Canary Clean makes it easy to get started! Enter your price and time estimates below to help us give prospective customers an idea of your time and costs.<b>Prices and times are automatically scaled and can be adjusted at any time. </b>  </p>
                                     <p>Remember - you will still review any jobs before accepting them, having the chance to raise or lower the price or estimated duration. You can also reach out to the customer at anytime before or after accepting.</p>
@@ -34,7 +34,7 @@
 
 
                                 @livewire('cleaner.account.services')
-                                
+
                             </div>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
 
             var service = $(this).attr('data-service');
             var item = $(this).attr('data-item');
-            
+
             $('.item_'+ item +'.common_card_service').removeClass("show-2");
 
             if($(this).find('input').prop('checked') == true){
@@ -103,9 +103,9 @@
        /* $('.heading-toggle').click(function() {
             $(this).toggleClass('active-toggle');
             if ($(this).parents('.card_service_row').find(".common_card_service").hasClass('show')){
-                $(this).parents('.card_service_row').find(".common_card_service").removeClass('show');  
+                $(this).parents('.card_service_row').find(".common_card_service").removeClass('show');
             } else {
-                $(this).parents('.card_service_row').find(".common_card_service").addClass('show'); 
+                $(this).parents('.card_service_row').find(".common_card_service").addClass('show');
             }
         });*/
 
@@ -116,14 +116,14 @@
       $('.heading-toggle').click(function() {
             $(this).toggleClass('active-toggle');
             if ($(this).parents('.card_service_row').find(".common_card_service").hasClass('show')){
-                $(this).parents('.card_service_row').find(".common_card_service").removeClass('show');  
+                $(this).parents('.card_service_row').find(".common_card_service").removeClass('show');
             } else {
-                $(this).parents('.card_service_row').find(".common_card_service").addClass('show'); 
+                $(this).parents('.card_service_row').find(".common_card_service").addClass('show');
             }
         });
         $('.heading-toggle').click(function() {
             if ($(this).parents('.card_service_row').find(".common_card_service").hasClass('show-2')){
-                $(this).parents('.card_service_row').find(".common_card_service").removeClass('show-2');  
+                $(this).parents('.card_service_row').find(".common_card_service").removeClass('show-2');
             }
         });*/
 
@@ -145,6 +145,6 @@
           });
         });
     });
-</script> 
+</script>
 @endsection
 --}}

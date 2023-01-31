@@ -3,7 +3,7 @@
         <div class="customer-avatar-upload">
             <div class="customer-avatar-edit">
                 <input type='file' id="upload" accept=".png, .jpg, .jpeg" />
-                <label for="upload">Upload a profile pic</label>
+                <label for="upload">Upload a Profile Pic</label>
             </div>
             <div class="customer-avatar-preview position-relative">
 
@@ -37,7 +37,7 @@
         </div>
         <div class="h3-p-design">
             <h3>Profile Photo</h3>
-            <p>Upload a new profile photo.</p>
+            <p>Upload a New Profile Photo.</p>
         </div>
     </div>
     <div class="h4-design">

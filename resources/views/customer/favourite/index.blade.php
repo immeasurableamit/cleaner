@@ -13,7 +13,7 @@
                             </div>
                             @include('layouts.common.sidebar')
                             <div class="blue-logo-block text-center max-width-100">
-                                <a href="#"><img src="{{ asset('assets/images/logo/logo.svg') }}"></a>
+                                <a href="{{ route('index') }}"><img src="{{ asset('assets/images/logo/logo.svg') }}"></a>
                             </div>
                         </div>
                     </div>
@@ -163,8 +163,8 @@
           event.preventDefault();
           swal({
               title: `Are you sure you want to remove cleaner from Favourites?`,
-              text: "If you delete this, it will be gone forever.",
-              icon: "warning",
+            //   text: "If you delete this, it will be gone forever.",
+            //   icon: "warning",
               buttons: true,
               buttons: ["No", "Yes"],
               dangerMode: true,
