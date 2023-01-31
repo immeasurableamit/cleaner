@@ -352,6 +352,7 @@
                     numberOfColumns: 3,
                     inlineMode: true,
                     singleMode: true,
+                    minDate: new Date(),
                     lockDaysFilter: (date1, date2, pickedDates) => {
                         return !workingDates.includes(date1.format('YYYY-MM-DD'));
                     },
