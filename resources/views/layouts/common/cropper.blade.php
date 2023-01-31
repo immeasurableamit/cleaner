@@ -42,7 +42,7 @@
             viewport: {
                 width: viewportWidth,
                 height: viewportHeight,
-                type: 'circle' //circle  square
+                type: 'square' //circle  square
             },
             boundary: {
                 width: boundaryWidth,
@@ -71,7 +71,7 @@
                 type: 'canvas',
                 size: 'viewport'
             }).then(function(response) {
-                
+
                // alert(response);
             //    var data = btoa(response);
             //    console.log(data, "hello")

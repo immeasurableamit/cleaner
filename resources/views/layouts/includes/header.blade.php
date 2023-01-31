@@ -116,7 +116,7 @@
                                                 </li>
                                                 <li><a href="{{route('cleaner.notification.index')}}" class="{{ @$title['active']=='notification' ? 'active' : '' }}">Notifications</a>
                                                 </li>
-                                                <li><a href="{{route('cleaner.support.service')}}" class="{{ @$title['active']=='support' ? 'active' : '' }}">Supports</a>
+                                                <li><a href="{{route('cleaner.support.service')}}" class="{{ @$title['active']=='support' ? 'active' : '' }}">Support</a>
                                                 </li>
                                                 @else
                                                 <li><a href="{{route('admin.customer')}}" class="{{ @$title['active']=='customer' ? 'active' : '' }}">Customer</a></li>
@@ -148,7 +148,7 @@
                     </div>
                     <a href="{{ route('signup-cleaner') }}" class="d-none d-md-block"><span class="b_cleaner">Become a Cleaner!</span></a>
                 </div>
-                
+
                 @endif
                 <div class="toggle_menu d-block d-lg-none">
                     <img src="{{ asset('/assets/images/icons/toggle.svg') }}">
@@ -163,6 +163,6 @@
         $(".toggle_menu").click( () => {
             $('.bar_left').toggleClass('show');
         });
-        
+
     });
-    </script> 
+    </script>

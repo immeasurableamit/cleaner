@@ -6,7 +6,7 @@
                <div class="select-signup-img">
                 <img src="assets/images/customer.png">
                </div>
-               <div class="select-signup-cntnt"> 
+               <div class="select-signup-cntnt">
                 <p>I’m a Customer</p>
                </div>
                <a href="signup-customers.html" class="link-overlay"></a>
