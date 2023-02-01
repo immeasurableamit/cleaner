@@ -207,7 +207,7 @@
 
     <script>
         function addDatePickerInStartDateFilter() {
-            new Litepicker({
+            let picker = new Litepicker({
                 element: document.getElementById('datepicker'),
                 singleMode: false,
                 minDate: new Date(),
@@ -227,7 +227,9 @@
 
                     })
                 }
-            })
+            });
+
+            window.startDateRangePicker = picker;
         }
 
         function formatDate(dateInstance) {
@@ -284,6 +286,7 @@
         window.addEventListener('filtersReset', () => {
             $('#ratingFilter').val(null).trigger('change');
             $('#addonsSelector').val([]).trigger('change');
+            window.startDateRangePicker.clearSelection();
 
         });
     </script>

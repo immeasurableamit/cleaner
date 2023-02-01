@@ -286,4 +286,9 @@ public function sendEmailVerificationNotification()
                 
         return $channels;
     }
+
+    public function hasCleanerOrderBetween($fromTime, $toTime)
+    {
+        
+    }
 }
