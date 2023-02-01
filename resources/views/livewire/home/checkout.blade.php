@@ -153,6 +153,8 @@
                         <h3>Enter Payment Details </h3>
                         <div class="text-center link-design-2 pt-3 bold">You don't pay until cleaning day!</div>
                     </div>
+
+                    
                     <div class="built_text_div">
                         @if (is_null($user))
                         <div class="provider_service pb-5 border-bottom  text-center">

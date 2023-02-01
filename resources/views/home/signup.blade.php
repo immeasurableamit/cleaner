@@ -4,7 +4,7 @@
      <div class="container sign_up_container">
 
       <div class="account_type_div pb-5">
-          <button>Select your account type</button>
+          <button>Select Your Account Type</button>
       </div>
        <div class="signup-selection-wrapper">
            <div class="selection-wrap d-flex justify-content-spacebw">

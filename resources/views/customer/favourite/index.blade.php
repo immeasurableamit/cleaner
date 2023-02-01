@@ -173,6 +173,7 @@
               buttons: true,
               buttons: ["No", "Yes"],
               dangerMode: true,
+              className: "customer_r",
           })
           .then((willDelete) => {
             if (willDelete) {
