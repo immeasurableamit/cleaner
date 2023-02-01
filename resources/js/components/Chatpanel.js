@@ -354,7 +354,7 @@ const Chatpanel = () => {
 		            <div className="card_chat">
 	                  <img src={currentUser.profile_pic}/>
 	                  <h4>{currentUser.name}</h4>
-		                <span className="number">555555555</span>
+		                <span className="number">555-555-555</span>
 	               </div>
 	           	</div>
 

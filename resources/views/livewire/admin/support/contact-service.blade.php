@@ -1,5 +1,20 @@
 <div>
-<table id="all-customer-table" class="table dt-responsive nowrap" style="width:100%">
+     <style>
+        nav svg {
+            max-height: 20px;
+        }
+            .pagi_links .flex.justify-between.flex-1.sm\:hidden {
+        display: none;
+    }
+    .pagi_links span.relative.z-0.inline-flex.rounded-md.shadow-sm button {
+        width: 38px;
+        height: 40px;
+}
+    </style>
+  <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="Search..." wire:model="searchRecord" />
+    </div><br>
+<table id="all-customer-table22" class="table dt-responsive nowrap" style="width:100%">
           <thead>
               <tr>
                   <th>Name #</th>
@@ -31,5 +46,7 @@
 
           </tbody>
         </table>
-
+       <div class="pagi_links">
+   {{$contacts->links()}}
+   </div>
 </div>

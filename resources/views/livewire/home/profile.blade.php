@@ -55,7 +55,7 @@
                         <p>Rating</p>
                         <div>
                             <img src="{{ asset('assets/images/icons/b_star.svg') }}">
-                            <span>{{ $cleanerAdditionalInfo['rating'] }}</span>
+                            <span>{{ formatAvgRating($cleanerAdditionalInfo['rating']) }}</span>
                         </div>
                     </div>
                     <div class="rating_row">
@@ -244,7 +244,7 @@
                                 class="day_month_year">{{ @$selected_date ? date('l, M d Y', strtotime($selected_date)) : '' }}</span>
                         </div>
                         <p class="d-none d-md-block">Future recurring cleanings will be scheduled in the nearest
-                            availabel time slot. Please contact your cleaner if you need to reschedule any cleanings.
+                            available time slot. Please contact your cleaner if you need to reschedule any cleanings.
                         </p>
                     </div>
                     <div class="row block_start_time">
@@ -279,7 +279,7 @@
                 <h4 class="h4_tittle"><span class="c_number">3</span>Click to schedule </h4>
                 <button class="btn_c" type="button" wire:click="redirectToCheckout">Let’s Go!</button>
                 <div class="date_show d-md-none d-block ">
-                    <p>Future recurring cleanings will be scheduled in the nearest availabel time slot. Please contact
+                    <p>Future recurring cleanings will be scheduled in the nearest available time slot. Please contact
                         your cleaner if you need to reschedule any cleanings.</p>
                 </div>
             </div>

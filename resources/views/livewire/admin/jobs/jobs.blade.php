@@ -50,8 +50,8 @@
                   <td>{{ date("m/d/Y", strtotime($order->cleaning_datetime))}}</td>
                   <td><span class="scheduled">{{$order->statusForAdmin()}}</span></td>
                   <td>{{$order->total}}</td>
-                  <td>One time</td>
-                  <td>Deep Clean</td>
+                  <td>{{$order->title2}}</td>
+                  <td>{{$order->title}}</td>
                  
                   <td><span class="name cleaner">{{$order->cleaner->first_name}} {{$order->cleaner->last_name}}</span></td>
                  

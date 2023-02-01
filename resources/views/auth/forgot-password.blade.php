@@ -19,7 +19,7 @@
         </div>
         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
           <div class="d-flex height-100 align-items-center auth_form login">
-            
+
             <form class="form-design" method="POST" action="{{ route('password.email') }}">
               @csrf
 

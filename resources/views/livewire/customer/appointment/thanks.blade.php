@@ -43,7 +43,7 @@
                                     <span class="schedule_value-text text-capitalize">{{ $order->cleaner->name }}</span>
                                 </div>
                                 <div class="schduled-text-div">
-                                    <label class="schedule_label">Services Address</label>
+                                    <label class="schedule_label">Address</label>
                                     <span class="schedule_value-text">{{ $order->address }}</span>
                                 </div>
                                 <div class="schduled-text-div">
@@ -70,7 +70,7 @@
 
 
                                 <div class="schduled-text-div">
-                                    <label class="schedule_label">Start Date</label>
+                                    <label class="schedule_label">Start Date/Time</label>
                                     <span
                                         class="schedule_value-text">{{ $order->cleaning_datetime->toDayDateTimeString() }}</span>
 

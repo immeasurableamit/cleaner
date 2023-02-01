@@ -96,7 +96,6 @@ class BillingController extends Controller
 
         $bank = addAccountDetailsInBankInfo( $bank, $request->all() );
 
-
         return redirect()->route('cleaner.billing.billing')->with('success', 'Your bank details are added successfully');
     }
 

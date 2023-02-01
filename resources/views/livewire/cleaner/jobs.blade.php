@@ -127,6 +127,12 @@
                                             <p class="appointment_label">Price</p>
                                             <p class="app-value">${{ $order->total }} </p>
                                         </div>
+					@if ( $order->status == 'completed' )
+                                        <div class="altrntive_rw">
+                                            <p class="appointment_label">Status</p>
+                                            <p class="text-center align-center complete-status">Completed </p>
+                                        </div>
+					@endif
 
                                         @if ( $order->status == 'pending')
                                         <div class="altrntive_rw">

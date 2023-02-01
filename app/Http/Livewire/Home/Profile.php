@@ -245,12 +245,14 @@ class Profile extends Component
 
                     $timeSlot['time'] = date("H:i", $startTime);
 
+			/*
                     $startTimeInSlot = $startTime;
                     $endTimeInSlot  = $startTimeInSlot + $add_mins;
                     $isSlotNotFree = $this->doesCleanerHasOrderInTimeSlot( $date, $startTimeInSlot, $endTimeInSlot);
                     if ( $isSlotNotFree ){
                         $timeSlot['is_free'] = 'no';
                     }
+			*/
 
 
                     $currentDate = date('Y-m-d');
