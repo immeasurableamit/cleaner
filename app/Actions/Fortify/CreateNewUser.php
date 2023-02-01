@@ -108,6 +108,8 @@ class CreateNewUser implements CreatesNewUsers
             $userDetail->sms_marketing = "1";
             $userDetail->email_marketing = "1";
 
+            $userDetail->jobs= "1";
+
             $userDetail->save();
 
         } else {
@@ -183,7 +185,7 @@ class CreateNewUser implements CreatesNewUsers
             $userDetail->sms_marketing = "1";
             $userDetail->email_marketing = "1";
             $userDetail->save();
-            
+
 
 
         }

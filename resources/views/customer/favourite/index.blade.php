@@ -20,6 +20,11 @@
 
                     <div id="data_Table" class="col-xl-9 col-lg-9 col-md-12 col-sm-12 car_right_div py-3">
 
+                        <div class="form-headeing-second appointment-heading">
+                            <h4>Favourites</h4>
+                        </div>
+
+
                         <div class="listing-row">
                             @if (count($favourites) <= 0)
                                 <div class="p-5">
