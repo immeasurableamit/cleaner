@@ -176,6 +176,7 @@ Route::middleware(['auth', 'verified', 'trackLastActiveAt'])->group(function () 
 
         // Team Section
         Route::get('/cleaner/team/{id}', [AdminController::class, 'teamView'])->name('admin.cleaner.team');
+        Route::get('/socialLinks', [AdminController::class, 'socialLinks'])->name('layouts.includes.footer');
 
 
 

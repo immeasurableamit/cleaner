@@ -116,9 +116,9 @@ function generateCleanerServiceBlueprintForSaving($cleaner_id, $item_data)
         $blueprint['services_id'] = $item_data['id'];
     }
     else {
-        $blueprint['services_items_id'] = $item_data['id'];  
+        $blueprint['services_items_id'] = $item_data['id'];
     }
-    
+
 
     $blueprint['price'] = $item_data['price'];
     $blueprint['duration'] = $item_data['duration'];

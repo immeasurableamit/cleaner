@@ -19,9 +19,17 @@ class AdminController extends Controller
     }
 
 
-    // public function socialLinks()
-    // {
-    //     $socialProfile = Setting::findOrFail('1');
-    //     dd($socialProfile);
-    // }
+//     public function socialLinks()
+//     {
+//         dd('in controller');
+//         $socialProfile = Setting::findOrFail('1');
+//         // dd($socialProfile->facebook_link);
+
+//         $facebook = $socialProfile->facebook_link;
+// // dd($facebook);
+//         return back();
+//         // return view('layouts.includes.footer');
+//     }
+
+
 }
