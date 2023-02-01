@@ -7,11 +7,14 @@ use App\Models\Contact;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactMail;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\WithPagination;
 
 class ContactService extends Component
 {
 
     use LivewireAlert;
+    use WithPagination;
+    public $searchRecord;
     
     public function statusClose($id)
   
@@ -34,9 +37,16 @@ class ContactService extends Component
    
 
     public function render()
-    {
-         $contacts = Contact::all();
+    {   
+        $contacts = Contact::paginate(5);
 
-        return view('livewire.admin.support.contact-service', compact('contacts'));
+         if(!empty($this->searchRecord)){
+            $vl = $this->searchRecord;
+              $contacts = Contact::where(function ($query) use ($vl) {
+                $query->where('name', 'LIKE', '%'.$vl.'%')
+                      ->orWhere('email', 'LIKE', '%'.$vl.'%');
+            })->paginate(5);
+          }
+        return view('livewire.admin.support.contact-service', ['contacts'=>$contacts]);
     }
 }

@@ -19,7 +19,7 @@ class OrderItem extends Model
 
     public function cleaner_service()
     {
-        return $this->belongsTo( CleanerServices::class);
+        return $this->belongsTo( CleanerServices::class, 'cleaner_service_id', 'id');
     }
 
     public function order()
