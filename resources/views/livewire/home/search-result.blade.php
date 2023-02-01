@@ -78,17 +78,18 @@
                     <h5 class="pb-2">Rating</h5>
                     <div class="selecti-box" wire:ignore>
                         <select class="select-custom-design" id="ratingFilter">
-                            <option>Select</option>
+                            <option></option>
                             @foreach (range(1, 5) as $i)
                                 <option value="{{ $i }}">{{ $i }}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
-                <div class="card_filter select-design">
+                <div class="card_filter oferd_select select-design">
                     <h5 class="pb-2">Addons Offered</h5>
                     <div class="selecti-box" wire:ignore>
-                        <select class="select-custom-design" multiple onchange="addOnSelectChanged( this )">
+                        <select class="select-custom-design" multiple onchange="addOnSelectChanged( this )" id="addonsSelector">
+                            <option></option>
                             @foreach ($addons->first()->servicesItems as $item)
                                 <option value="{{ $item->id }}">{{ $item->title }}</option>
                             @endforeach
@@ -98,19 +99,26 @@
                 <div class="card_filter">
                     <div class="h5_input_checkbox">
                         <h5 class="">Organic Cleaners Only<img src="assets/images/badges.svg" class="ms-3"></h5>
-                        <input type="checkbox" wire:click="$toggle('organicOnly')">
-                    </div>
+{{--                         <input type="checkbox" wire:click="$toggle('organicOnly')">
+
+ --}}
+                     <input type="checkbox" wire:model="organicOnly">
+
+</div>
                     <div class="h5_input_checkbox">
                         <h5 class="">Insured Cleaners Only<img src="assets/images/insurance.svg" class="ms-3">
                         </h5>
-                        <input type="checkbox" wire:click="$toggle('insuredOnly')">
-                    </div>
+{{--                         <input type="checkbox" wire:click="$toggle('insuredOnly')">
+ --}}
+                 <input type="checkbox" wire:model="insuredOnly">
+
+</div>
                 </div>
                 <div class="card_filter border-0">
-                    <input type="text" placeholder="Search by keywords" class="search_input">
+                    <input type="text" placeholder="Search by keywords" class="search_input" wire:model="keyword">
                 </div>
                 <div class="pb-5 d-flex reset-next-btn">
-                    <button class="btn_reset"><img src="assets/images/icons/filter_by.svg"
+                    <button class="btn_reset" wire:click="resetFilters"><img src="assets/images/icons/filter_by.svg"
                             class="me-3">Reset</button>
                     {{-- <a class="btn_next">Next</a> --}}
                 </div>
@@ -249,6 +257,8 @@
         }
 
         function addEventHandlerInRatingFilter() {
+
+            $("#ratingFilter").select2({placeholder: 'Min Rating'});
             $("#ratingFilter").on('select2:select', (e) => {
                 var data = e.params.data;
                 @this.set('rating', data.id)
@@ -258,6 +268,7 @@
         function addEventHandlers() {
             addEventHandlerInSortByFilter();
             addEventHandlerInRatingFilter();
+            
         }
 
         window.addEventListener('load', () => {
@@ -265,9 +276,15 @@
             addDatePickerInStartDateFilter();
             addEventHandlers();
 
-
+            $("#addonsSelector").select2({placeholder: 'Select'});
             var element = document.getElementById('address');
             makeAddressInputAutocompletable(element, addressChanged);
+        });
+
+        window.addEventListener('filtersReset', () => {
+            $('#ratingFilter').val(null).trigger('change');
+            $('#addonsSelector').val([]).trigger('change');
+
         });
     </script>
 </div>
