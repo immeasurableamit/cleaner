@@ -55,7 +55,9 @@
                 <div class="card_filter">
                     <h5 class="pb-2">Home Size</h5>
                     <input type="text" placeholder="Update square feet" wire:model="homeSize">
-                    @error ('homeSize') <span class="text-danger">{{ $message }}</span> @enderror
+                    @error('homeSize')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="card_filter">
                     <h5 class="pb-2">Location</h5>
@@ -76,17 +78,18 @@
                     <h5 class="pb-2">Rating</h5>
                     <div class="selecti-box" wire:ignore>
                         <select class="select-custom-design" id="ratingFilter">
-                            <option>Select</option>
-                            @foreach ( range(1,5) as $i)
-                            <option value="{{ $i }}">{{ $i }}</option>
+                            <option></option>
+                            @foreach (range(1, 5) as $i)
+                                <option value="{{ $i }}">{{ $i }}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
-                <div class="card_filter select-design">
+                <div class="card_filter oferd_select select-design">
                     <h5 class="pb-2">Addons Offered</h5>
                     <div class="selecti-box" wire:ignore>
-                        <select class="select-custom-design" multiple onchange="addOnSelectChanged( this )">
+                        <select class="select-custom-design" multiple onchange="addOnSelectChanged( this )" id="addonsSelector">
+                            <option></option>
                             @foreach ($addons->first()->servicesItems as $item)
                                 <option value="{{ $item->id }}">{{ $item->title }}</option>
                             @endforeach
@@ -96,19 +99,27 @@
                 <div class="card_filter">
                     <div class="h5_input_checkbox">
                         <h5 class="">Organic Cleaners Only<img src="assets/images/badges.svg" class="ms-3"></h5>
-                        <input type="checkbox" wire:click="$toggle('organicOnly')">
-                    </div>
+{{--                         <input type="checkbox" wire:click="$toggle('organicOnly')">
+
+ --}}
+                     <input type="checkbox" wire:model="organicOnly">
+
+</div>
                     <div class="h5_input_checkbox">
                         <h5 class="">Insured Cleaners Only<img src="assets/images/insurance.svg" class="ms-3">
                         </h5>
-                        <input type="checkbox" wire:click="$toggle('insuredOnly')">
-                    </div>
+{{--                         <input type="checkbox" wire:click="$toggle('insuredOnly')">
+ --}}
+                 <input type="checkbox" wire:model="insuredOnly">
+
+</div>
                 </div>
                 <div class="card_filter border-0">
-                    <input type="text" placeholder="Search by keywords" class="search_input">
+                    <input type="text" placeholder="Search by keywords" class="search_input" wire:model="keyword">
                 </div>
                 <div class="pb-5 d-flex reset-next-btn">
-                    <button class="btn_reset"><img src="assets/images/icons/filter_by.svg" class="me-3">Reset</button>
+                    <button class="btn_reset" wire:click="resetFilters"><img src="assets/images/icons/filter_by.svg"
+                            class="me-3">Reset</button>
                     {{-- <a class="btn_next">Next</a> --}}
                 </div>
             </div>
@@ -125,7 +136,13 @@
                             <div class="card_search_result">
                                 <div class="like_img">
                                     @if ($user)
-                                        <input type="checkbox" class="like_1" wire:click="toggleFavouriteCleaner({{ $cleaner->id }})" {{ $user->favourites->where('cleaner_id', $cleaner->id )->first() == null ? '' : 'checked' }}>
+                                        @if (auth()->user()->role == 'cleaner' || auth()->user()->role  == 'admin')
+                                            <input type="hidden" value="">
+                                        @else
+                                            <input type="checkbox" class="like_1"
+                                                wire:click="toggleFavouriteCleaner({{ $cleaner->id }})"
+                                                {{ $user->favourites->where('cleaner_id', $cleaner->id)->first() == null ? '' : 'checked' }}>
+                                        @endif
                                     @endif
                                     <div id="" class="profile-pic">
                                         @if ($cleaner->image)
@@ -140,23 +157,26 @@
                                         <a href="javascript::void(0)" class="name_s">{{ $cleaner->name }}</a>
                                         <div class="m-hide">
                                             <img src="{{ asset('assets/images/icons/star.svg') }}">
-                                            {{ formatAvgRating( $cleaner->avg_rating ) }}<span> ({{ $cleaner->cleanerReviews->count() }})</span>
+                                            {{ formatAvgRating($cleaner->avg_rating) }}<span>
+                                                ({{ $cleaner->cleanerReviews->count() }})
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="routine_text">
 
                                         <p class="font-semibold"> {{ $selectedServiceItem->title }}</p>
                                         <p class="font-medium">{{ $homeSize }} sq. ft.</p>
-                                        <p class="font-regular">Est Time : {{ $cleaner->duration_for_selected_service }}
+                                        <p class="font-regular">Est Time :
+                                            {{ $cleaner->duration_for_selected_service }}
 
                                             hours</p>
-                                            <p class="font-regular">Buffer Time : {{$cleaner->UserDetails->buffer}}</p>
+                                        <p class="font-regular">Buffer Time : {{ $cleaner->UserDetails->buffer }}</p>
                                         <div class="badges_insurnce_img">
-                                            @if ( $cleaner->UserDetails->provide_organic_service )
+                                            @if ($cleaner->UserDetails->provide_organic_service)
                                                 <img src="{{ asset('assets/images/badges.svg') }}">
                                             @endif
 
-                                            @if ( $cleaner->UserDetails->is_insured )
+                                            @if ($cleaner->UserDetails->is_insured)
                                                 <img src="{{ asset('assets/images/insurance.svg') }}">
                                             @endif
                                         </div>
@@ -236,18 +256,19 @@
             });
         }
 
-        function addEventHandlerInRatingFilter()
-        {
+        function addEventHandlerInRatingFilter() {
+
+            $("#ratingFilter").select2({placeholder: 'Min Rating'});
             $("#ratingFilter").on('select2:select', (e) => {
                 var data = e.params.data;
                 @this.set('rating', data.id)
             })
         }
 
-        function addEventHandlers()
-        {
+        function addEventHandlers() {
             addEventHandlerInSortByFilter();
             addEventHandlerInRatingFilter();
+            
         }
 
         window.addEventListener('load', () => {
@@ -255,9 +276,15 @@
             addDatePickerInStartDateFilter();
             addEventHandlers();
 
-
+            $("#addonsSelector").select2({placeholder: 'Select'});
             var element = document.getElementById('address');
             makeAddressInputAutocompletable(element, addressChanged);
+        });
+
+        window.addEventListener('filtersReset', () => {
+            $('#ratingFilter').val(null).trigger('change');
+            $('#addonsSelector').val([]).trigger('change');
+
         });
     </script>
 </div>

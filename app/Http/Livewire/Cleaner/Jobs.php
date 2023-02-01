@@ -121,11 +121,12 @@ class Jobs extends Component
 
     protected function parseOrdersForCalendarEvents($orders)
     {
+
         $events = $orders->map( function($order) {
             $cleaningDateTime = Carbon::parse( $order->cleaning_datetime );
             $event = [
                 'id'    => $order->id,
-                'title' => $cleaningDateTime->format("h:m A"),
+                'title' => $cleaningDateTime->format("h:i A"),
                 'start' => $cleaningDateTime->toDateString(),
             ];
             return $event;
@@ -278,7 +279,7 @@ class Jobs extends Component
 
     public function confirmCancelOrderAction( $orderId )
     {
-        $this->alert('warning', 'Are you surely want to cancel the booking?', [
+        $this->alert('', 'Are you surely want to cancel the booking?', [
             'position' => 'center',
             'toast' => false,
             'showConfirmButton' => true,

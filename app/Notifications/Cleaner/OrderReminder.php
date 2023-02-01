@@ -33,7 +33,13 @@ class OrderReminder extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        $channels = ['database'];
+        if ( method_exists($notifiable, 'subscribedNotificationChannels') ){
+            $channels = array_merge( $channels,  $notifiable->subscribedNotificationChannels() );                               
+        }
+        
+        $finalChannels = array_unique( $channels );
+        return $finalChannels;
     }
 
     /**

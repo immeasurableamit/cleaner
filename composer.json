@@ -42,7 +42,8 @@
 		"app/Helpers/stripe.php",
 		"app/Helpers/basic.php",
         "app/Helpers/thimble.php",
-        "app/Helpers/twilio.php"
+        "app/Helpers/twilio.php",
+        "app/Helpers/social.php"
 	]
     },
     "autoload-dev": {

@@ -39,7 +39,7 @@ class Thanks extends Component
     {
         $this->order_id = $iid;
 
-        $this->alert('warning', 'Are you surely want to cancel?', [
+        $this->alert('', 'Are you surely want to cancel?', [
             'toast' => false,
             'position' => 'center',
             'showCancelButton' => true,
@@ -60,7 +60,8 @@ class Thanks extends Component
 
         $order = Order::find( $this->order_id );
         $order->cleaner->notify(new OrderCancelledNotificationForCleaner($order));
-        $order->user->notify( new CancelledOrderNotificationForCustomer($order) );
+        // $order->user->notify( new CancelledOrderNotificationForCustomer($order) );
+        $order->user->notify( new OrderCancelledNotificationForCustomer($order) );
 
 
         return redirect()->route('profile', $this->order->cleaner_id);

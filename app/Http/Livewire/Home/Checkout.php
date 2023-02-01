@@ -448,6 +448,7 @@ class Checkout extends Component
         $orderItems = $this->storeOrderItems($order->id);
         $billing      = $this->storeBillingAddress($this->user->id);
         $userCard      = $this->storeUserCard($this->user->id);
+        $this->user->autoVerifyEmailIfNotVerified();
 
         $this->order = $order;
         return true;
@@ -490,13 +491,13 @@ class Checkout extends Component
     {
         $this->order_id = $iid;
 
-        $this->alert('warning', 'Are you sure do want to delete?', [
+        $this->alert('', 'Are you sure do want to delete?', [
 			'toast' => false,
 			'position' => 'center',
 			'showCancelButton' => true,
-			'cancelButtonText' => 'Cancel',
+			'cancelButtonText' => 'No',
 			'showConfirmButton' => true,
-			'confirmButtonText' => 'Delete it',
+			'confirmButtonText' => 'Yes',
 			'onConfirmed' => 'cancelOrder',
 			'timer' => null
         ]);

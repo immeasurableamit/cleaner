@@ -178,7 +178,6 @@ Route::middleware(['auth', 'verified', 'trackLastActiveAt'])->group(function () 
         Route::get('/cleaner/team/{id}', [AdminController::class, 'teamView'])->name('admin.cleaner.team');
 
 
-
         //services
         Route::prefix('services')->group(function () {
             Route::get('/', function () {
@@ -207,7 +206,7 @@ Route::middleware(['auth', 'verified', 'trackLastActiveAt'])->group(function () 
                 );
                 return view('admin.profile.index');
             })->name('admin.profile');
-           
+
             //Admin FAQS
         Route::get('/faqs', function () {
                 $title = array(
@@ -261,7 +260,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::prefix('favourite')->group(function () {
             Route::controller(FavouriteController::class)->group(function () {
                 Route::get('/', 'index')->name('customer.favourite.index');
-                Route::delete('/delete/{id}', 'deleteFavouriteCleaner')->name('customer.favourite.deleteFavouriteCleaner');
+                Route::post('/delete/{id}', 'deleteFavouriteCleaner')->name('customer.favourite.deleteFavouriteCleaner');
             });
         });
 

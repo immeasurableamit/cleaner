@@ -28,21 +28,24 @@
         width: 100% !important;
         height: 100%;
     }
+    .modal-dialog {
+    max-width: 450px;
+    }
 </style>
 <script>
     $(document).ready(function() {
 
-        let viewportWidth = 300;
-        let viewportHeight = 300;
-        let boundaryWidth = 300;
-        let boundaryHeight = 300;
+        let viewportWidth = 350;
+        let viewportHeight = 350;
+        let boundaryWidth = 400;
+        let boundaryHeight = 400;
 
         $image_crop = $('#image').croppie({
             enableExif: true,
             viewport: {
                 width: viewportWidth,
                 height: viewportHeight,
-                type: 'circle' //circle  square
+                type: 'square' //circle  square
             },
             boundary: {
                 width: boundaryWidth,
@@ -71,7 +74,7 @@
                 type: 'canvas',
                 size: 'viewport'
             }).then(function(response) {
-                
+
                // alert(response);
             //    var data = btoa(response);
             //    console.log(data, "hello")

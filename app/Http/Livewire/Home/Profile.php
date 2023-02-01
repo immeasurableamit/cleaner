@@ -93,7 +93,7 @@ class Profile extends Component
         $completedOrders = Order::where('cleaner_id', $this->cleanerId)->whereIn('status', ['payment_collected', 'completed'])->count();
         $totalMembersOfCleanerTeam = CleanerTeam::where('user_id', $this->cleanerId)->count();
         $this->cleanerAdditionalInfo = [
-            'rating' => 0,
+            'rating' => $this->cleaner->cleanerReviews->avg('rating'),
             'completed_orders' => $completedOrders,
             'total_team'       => $totalMembersOfCleanerTeam,
             'is_insured'       => $this->cleaner->UserDetails->is_insured == 1,
@@ -126,6 +126,11 @@ class Profile extends Component
 
         //dd( $this->cleanerServices->pluck('services_items_id')->toArray() );
     }
+
+    // public function facebook($url){
+    //     // dd($url);
+    //     return redirect($url);
+    // }
 
 
     public function getWorkingDays($today)
@@ -232,12 +237,14 @@ class Profile extends Component
 
                     $timeSlot['time'] = date("H:i", $startTime);
 
+			/*
                     $startTimeInSlot = $startTime;
                     $endTimeInSlot  = $startTimeInSlot + $add_mins;
                     $isSlotNotFree = $this->doesCleanerHasOrderInTimeSlot( $date, $startTimeInSlot, $endTimeInSlot);
                     if ( $isSlotNotFree ){
                         $timeSlot['is_free'] = 'no';
                     }
+			*/
 
 
                     $currentDate = date('Y-m-d');
@@ -332,9 +339,9 @@ class Profile extends Component
     {
         $user = auth()->user()->role ?? null;
 
-        if ($user == 'cleaner') {
+        if ($user == 'cleaner' || $user == 'admin') {
 
-            return $this->alert("error", "Cleaner don't have permission");
+            return $this->alert("error", "To continue for Booking, Must be login as Customer");
 
         } else {
             $validatedData = $this->validate(...$this->checkoutRules());

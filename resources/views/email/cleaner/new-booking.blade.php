@@ -4,7 +4,7 @@ Hello {{ ucwords( $order->cleaner->name ) }}, Congratulations you have new Booki
 
 Booking Time: {{ $order->cleaning_datetime->format('F, l d,Y | h:i A') }}
 
-<x-mail::button :url="route('cleaner.jobs.jobs', ['selectedDate' => $order->cleaning_datetime->toDateString(), 'selectedTab' => 2'])">View appointment</x-mail::button>
+<x-mail::button :url="route('cleaner.jobs.jobs', ['selectedDate' => $order->cleaning_datetime->toDateString(), 'selectedTab' => 2])">View appointment</x-mail::button>
 
 
 Thanks,<br>

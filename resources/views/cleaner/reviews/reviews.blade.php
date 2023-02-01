@@ -12,7 +12,7 @@
                             </div>
                             @include('layouts.common.sidebar')
                             <div class="blue-logo-block text-center max-width-100">
-                                <a href="#"><img src="{{ asset('assets/images/logo/logo.svg') }}"></a>
+                                <a href="{{ route('index') }}"><img src="{{ asset('assets/images/logo/logo.svg') }}"></a>
                             </div>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                                                     class="review-no">{{ $reviews->count() }}</span></p>
                                             <span>Overall </span>
                                             <img src="{{ asset('assets/images/star.svg') }}" />
-                                            <span>{{ $reviews->avg('rating') }}</span>
+                                            <span>{{ formatAvgRating( $reviews->avg('rating') )}}</span>
                                         </div>
                                     </div>
 

@@ -111,7 +111,7 @@ class Service extends Component
         $this->title = $service->title;
         $this->type = $service->types_id;
         $this->status = $service->status;
-        
+
         $this->emit('serviceForm');
     }
 
@@ -157,13 +157,13 @@ class Service extends Component
     {
         $this->serviceId = $id;
 
-        $this->alert('warning', 'Are you sure do want to delete?', [
+        $this->alert('', 'Are you sure do want to delete?', [
             'toast' => false,
             'position' => 'center',
             'showCancelButton' => true,
-            'cancelButtonText' => 'Cancel',
+            'cancelButtonText' => 'No',
             'showConfirmButton' => true,
-            'confirmButtonText' => 'Delete it',
+            'confirmButtonText' => 'Yes',
             'onConfirmed' => 'confirmedDelete',
             'timer' => null
         ]);
@@ -185,13 +185,13 @@ class Service extends Component
     {
         $this->serviceItemId = $id;
 
-        $this->alert('warning', 'Are you sure do want to delete?', [
+        $this->alert('', 'Are you sure do want to delete?', [
             'toast' => false,
             'position' => 'center',
             'showCancelButton' => true,
-            'cancelButtonText' => 'Cancel',
+            'cancelButtonText' => 'No',
             'showConfirmButton' => true,
-            'confirmButtonText' => 'Delete it',
+            'confirmButtonText' => 'Yes',
             'onConfirmed' => 'confirmedItemDelete',
             'timer' => null
         ]);

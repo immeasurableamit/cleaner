@@ -96,7 +96,7 @@
                                                 <p>{{ auth()->user()->role }}</p>
                                             </div>
                                             <div class="setting-div">
-                                                <a href="#"><img src="{{ asset('/assets/images/icons/setting.svg') }}"></a>
+                                                {{-- <a href="#"><img src="{{ asset('/assets/images/icons/setting.svg') }}"></a> --}}
                                             </div>
                                         </div>
                                         <div class="dropdown-list-design">
@@ -109,15 +109,18 @@
                                                 <li><a href="{{route('customer.favourite.index')}}" class="{{ @$title['active']=='favourite' ? 'active' : '' }}">Favourite</a></li>
                                                 <li><a href="{{ route('customer.support.service') }}" class="{{ @$title['active']=='support' ? 'active' : '' }}">Support</a>
                                                 </li>
-                                                @else
+                                                @elseif(Auth::user()->role == 'cleaner')
                                                 <li><a href="{{route('cleaner.account')}}" class="{{ @$title['active']=='account' ? 'active' : '' }}">Account</a></li>
                                                 <li><a href="{{route('cleaner.jobs.jobs')}}" class="{{ @$title['active']=='jobs' ? 'active' : '' }}">Jobs</a></li>
                                                 <li><a href="{{route('cleaner.billing.billing')}}" class="{{ @$title['active']=='billing' ? 'active' : '' }}">Billing</a>
                                                 </li>
                                                 <li><a href="{{route('cleaner.notification.index')}}" class="{{ @$title['active']=='notification' ? 'active' : '' }}">Notifications</a>
                                                 </li>
-                                                <li><a href="{{route('cleaner.support.service')}}" class="{{ @$title['active']=='support' ? 'active' : '' }}">Supports</a>
+                                                <li><a href="{{route('cleaner.support.service')}}" class="{{ @$title['active']=='support' ? 'active' : '' }}">Support</a>
                                                 </li>
+                                                @else
+                                                <li><a href="{{route('admin.customer')}}" class="{{ @$title['active']=='customer' ? 'active' : '' }}">Customer</a></li>
+
                                                 @endif
 
                                             </ul>
@@ -143,15 +146,23 @@
                         <a href="{{ route('signup') }}" class="btn_sign_up"><img src="{{ asset('/assets/images/icons/user.svg') }}">Sign Up</a>
                         <a href="{{ route('login') }}" class="btn_sign_in"><img src="{{ asset('/assets/images/icons/user.svg') }}">Sign in</a>
                     </div>
-                    <a href="{{ route('signup-cleaner') }}"><span class="b_cleaner">Become a Cleaner!</span></a>
+                    <a href="{{ route('signup-cleaner') }}" class="d-none d-md-block"><span class="b_cleaner">Become a Cleaner!</span></a>
                 </div>
+
+                @endif
                 <div class="toggle_menu d-block d-lg-none">
                     <img src="{{ asset('/assets/images/icons/toggle.svg') }}">
                 </div>
-                @endif
-
-
             </div>
         </div>
     </div>
 </header>
+<script>
+    $(document).ready(function(){
+
+        $(".toggle_menu").click( () => {
+            $('.bar_left').toggleClass('show');
+        });
+
+    });
+    </script>

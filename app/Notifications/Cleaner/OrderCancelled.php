@@ -7,7 +7,6 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Models\Order;
-use App\Notifications\CustomChannels\TwilioChannel;
 
 
 class OrderCancelled extends Notification implements ShouldQueue
@@ -43,7 +42,13 @@ class OrderCancelled extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail','database', TwilioChannel::class];
+        $channels = ['database'];
+        if ( method_exists($notifiable, 'subscribedNotificationChannels') ){
+            $channels = array_merge( $channels,  $notifiable->subscribedNotificationChannels() );                               
+        }
+        
+        $finalChannels = array_unique( $channels );
+        return $finalChannels;
     }
 
     /**

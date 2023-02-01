@@ -3,14 +3,14 @@
             <div class="container">
                 <div class="tittle_div">
                     <h3 class="h3_tittle">Top Rated Canary Cleaners</h3>
-                    <a href="#" class="browse_link">Browse<img src="assets/images/icons/arrow.svg" class="ms-2" /></a>
+                    <a href="{{ route('search-result') }}" class="browse_link">Browse<img src="assets/images/icons/arrow.svg" class="ms-2" /></a>
                 </div>
                 <div class="row">
                     @foreach($cleaners as $cleaner)
-                    <div class="col-md-4 col-6">
+                    <div class="col-md-3">
                         <div class="card_rated">
                             @if ( $cleaner->image )
-                                <img src={{asset('/storage/images/'.$cleaner->image)}} class="clnr_img">
+                                <img src={{ asset('/storage/images/'.$cleaner->image) }} class="clnr_img">
                             @else
                                 <img src={{ asset('/assets/images/iconshow.png') }} class="clnr_img">
                             @endif
@@ -27,7 +27,7 @@
                     @endforeach
                 </div>
                 <div class="d-block d-md-none text-center">
-                    <a href="search-result.html" class="btn_c" style="background-color:var(--primary);color:#fff;">Browse All</a>
+                    <a href="{{ route('search-result') }}" class="btn_c" style="background-color:var(--primary);color:#fff;">Browse All</a>
                 </div>
             </div>
         </div>
