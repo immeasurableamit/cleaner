@@ -19,9 +19,4 @@ class AdminController extends Controller
     }
 
 
-    // public function socialLinks()
-    // {
-    //     $socialProfile = Setting::findOrFail('1');
-    //     dd($socialProfile);
-    // }
 }

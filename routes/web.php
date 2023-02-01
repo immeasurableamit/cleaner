@@ -178,7 +178,6 @@ Route::middleware(['auth', 'verified', 'trackLastActiveAt'])->group(function () 
         Route::get('/cleaner/team/{id}', [AdminController::class, 'teamView'])->name('admin.cleaner.team');
 
 
-
         //services
         Route::prefix('services')->group(function () {
             Route::get('/', function () {

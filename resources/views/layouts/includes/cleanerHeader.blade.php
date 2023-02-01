@@ -50,7 +50,7 @@
                         <p>{{auth()->user()->role}}</p>
                       </div>
                       <div class="setting-div">
-                        <a href="#"><img src="{{asset('/assets/images/icons/setting.svg')}}"></a>
+                      {{--  <a href="#"><img src="{{asset('/assets/images/icons/setting.svg')}}"></a> --}}
                       </div>
                     </div>
                     <div class="dropdown-list-design">
@@ -100,6 +100,6 @@
         $(".toggle_menu").click( () => {
             $('.bar_left').toggleClass('show');
         });
-        
+
     });
-    </script> 
+    </script>

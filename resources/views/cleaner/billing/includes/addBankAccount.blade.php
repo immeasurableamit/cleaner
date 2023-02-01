@@ -3,6 +3,7 @@
     @if ( $bank->payouts_enabled == 0 )
     <div class="alert alert-warning" role="alert">
       Payouts are not enabled for your account
+      {{-- Unable to confirm bank details. Please check the numbers and try again. --}}
     </div>
     @endif
     <form action="{{ route('cleaner.billing.bankInfoStore') }}" method="POST">
@@ -48,11 +49,13 @@
                 <button class="btn_c" type="submit">Save</button>
             @endif
             </div>
+            @if ( $bank->payouts_enabled == 0 )
             <div class="col-6">
                 <a href="{{ route('cleaner.billing.stripeConnectUpdate') }}" class="btn_blue" role="button" type="button">Update stripe account</a>
             </div>
+            @endif
         </div>
     </form>
-    
-    
+
+
 </div>
