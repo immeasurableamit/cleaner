@@ -72,14 +72,14 @@
             <div class="folow-us">
               <ul class="list-unstyled d-flex justify-content-center">
                 <li><span>Follow Us</span></li>
-                <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                <li><a href="{{ socialLinks()->facebook_link }}" target="_blank"><i class="fa-brands fa-facebook"></i></a></li>
+                <li><a href="{{ socialLinks()->twitter_link }}" target="_blank"><i class="fa-brands fa-twitter"></i></a></li>
+                <li><a href="{{ socialLinks()->instagram_link }}" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+                <li><a href="{{ socialLinks()->linkedin_link }}" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
               </ul>
             </div>
             <div class="blue-logo-block text-center">
-              <a href="#"><img src="{{asset('assets/images/logo/logo.svg')}}"></a>
+              <a href="{{ route('index') }}"><img src="{{asset('assets/images/logo/logo.svg')}}"></a>
             </div>
           </div>
         </div>
@@ -126,7 +126,7 @@
                         <option value="{{ $state->id }}">{{ $state->name }}</option>
                         @endforeach
                       </select>
-                     
+
                     </div>
                   </div>
                   <div class="form-grouph mb-30">
@@ -138,9 +138,9 @@
                           @for($i = 1; $i <=12; $i++) <option value="{{old('month') ?? $i<=9 ? '0'.$i : $i }}">{{ date('F', mktime(0,0,0,$i)) }}</option>
                             @endfor
                         </select>
-                      
+
                       </div>
-                      
+
 
                       <div class="select-box-design-first">
                         <select class="select-custom-design" name="day" value="{{old('day')}}">
@@ -149,18 +149,18 @@
                           <option value="{{old('day') ?? $d}}">{{$d}}</option>
                           @endforeach
                         </select>
-                    
+
                       </div>
-                  
+
                       <div class="select-box-design-first">
                         <select class="select-custom-design" name="year">
                           <option value="" disabled selected>Year</option>
                           @foreach(range(date('Y')-16, date('Y')-70) as $y)
                           <option value="{{old('year') ?? $y }}">{{$y}}</option>
                           @endforeach
-                        </select>    
+                        </select>
                       </div>
-                    
+
                     </div>
                     {!! $errors->first('month', '<span class="alert d-block m-0 p-0">:message</span>') !!}
                     {!! $errors->first('day', '<span class="alert d-block m-0 p-0">:message</span>') !!}
@@ -204,11 +204,11 @@
                   </div>
                 </div>
               </div>
-              
-           
+
+
               <div class="form-flex two-column">
                 <div class="form-left-block ">
-                
+
                   <div class="terms-text terms_r">
                   <input type="checkbox" name="term">
                     <p>By clicking “Create My Account”, you agree with all Canary Clean’s <a href="#" class="link-design-2">terms and conditions</a> and <a href="#" class="link-design-2">privacy policy</a></p>

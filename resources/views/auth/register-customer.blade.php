@@ -69,14 +69,14 @@
               <div class="folow-us">
                 <ul class="list-unstyled d-flex justify-content-center">
                   <li><span>Follow Us</span></li>
-                  <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
-                  <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-                  <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                  <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                  <li><a href="{{ socialLinks()->facebook_link }}" target="_blank"><i class="fa-brands fa-facebook"></i></a></li>
+                  <li><a href="{{ socialLinks()->twitter_link }}" target="_blank"><i class="fa-brands fa-twitter"></i></a></li>
+                  <li><a href="{{ socialLinks()->instagram_link }}" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+                  <li><a href="{{ socialLinks()->linkedin_link }}" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
                 </ul>
               </div>
               <div class="blue-logo-block text-center">
-                <a href="#"><img src="{{asset('assets/images/logo/logo.svg')}}"></a>
+                <a href="{{ route('index') }}"><img src="{{asset('assets/images/logo/logo.svg')}}"></a>
               </div>
             </div>
           </div>
@@ -116,17 +116,17 @@
                     <div>  {!! $errors->first('state', '<span class="alert">:message</span>') !!} </div>
                       <div class="selecti-box">
                         <select class="select-custom-design" name="state" value="{{old('state')}}">
-                        <option>Select State</option>  
+                        <option>Select State</option>
                         @foreach ($states as $state )
                           <option value='{{ $state->id }}'>{{$state->name}}</option>
                           @endforeach
                         </select>
-                       
+
                       </div>
                     </div>
                     <div>
-                    
-             
+
+
                     <div class="terms-text terms_r">
                     <input type="checkbox" name="term">
                       <p>By clicking “Create My Account”, you agree with all Canary Clean’s <a href="#" class="link-design-2">terms and conditions</a> and <a href="#" class="link-design-2">privacy policy</a></p>
