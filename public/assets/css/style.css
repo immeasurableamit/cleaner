@@ -1656,7 +1656,7 @@ li.profile_drop_down.account_dropdown .dropdown_links li {
 }
 .cleaner_account_2.customer-account-information ul li p{
 width: 50%;
-cursor: pointer;
+/* cursor: pointer; */
 white-space: nowrap;
 text-overflow: ellipsis;
 overflow: hidden;
@@ -1670,9 +1670,10 @@ padding-right: 15px;
 .customer-account-information p a{
     text-decoration: none;
 }
-.customer-account-information p{
+
+/* .customer-account-information p{
     cursor: pointer;
-}
+} */
 .about_text {
     padding: 25px 20px;
     background: #FFFFFF;
@@ -7961,6 +7962,10 @@ div#requirements-alert-container .alert.alert-success.alert-dismissible.fade.sho
 }
 .bg_ylow_h5 {
     font-size: 13px;
+}
+.help_center .search-input-design .search-btn {
+    top: 15px;
+    right: 10px;
 }
 /* css 767 end here */
 .full_home_cleaning_table{
