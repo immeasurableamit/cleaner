@@ -875,6 +875,12 @@ a.pdf_r {
 .seeting_tabs label {
     padding-top: 15px;
 }
+.admin-right-header .admin-master-search .admin-user-li {
+    margin-left: 15px;
+}
+.admin-right-header .admin-master-search>.notification-li {
+    margin-right: 0px;
+}
 @media (min-width: 1200px){
     .table-design .dataTables_length {
         position: absolute;

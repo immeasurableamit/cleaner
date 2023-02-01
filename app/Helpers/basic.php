@@ -66,10 +66,10 @@ function getDefaultParametersForSearchPage()
 
     $deafultSearch = [
         'selectItem' => $serviceItem->id,
-        'address'    => 'New York, NY, USA',
+        'address'    => 'Austin, TX, USA',
         'homeSize'   => 2000,
-        'latitude'   => 40.7127753,
-        'longitude'  => -74.0059728,
+        'latitude'   => 30.267153,
+        'longitude'  => -97.743061,
     ];
 
     /*
