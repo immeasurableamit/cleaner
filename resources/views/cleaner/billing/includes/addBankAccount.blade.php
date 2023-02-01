@@ -43,13 +43,13 @@
         <div class="text-center row">
             <div class="col-6">
             @if ( $bank->account_number )
-                <a  class="btn_blue" href="{{ route('cleaner.billing.delete') }}">Delete bank account</a>
+                <a  class="btn_blue" href="{{ route('cleaner.billing.delete') }}">Delete Bank Account</a>
             @else
                 <button class="btn_c" type="submit">Save</button>
             @endif
             </div>
             <div class="col-6">
-                <a href="{{ route('cleaner.billing.stripeConnectUpdate') }}" class="btn_blue" role="button" type="button">Update stripe account</a>
+                <a href="{{ route('cleaner.billing.stripeConnectUpdate') }}" class="btn_blue" role="button" type="button">Update Stripe Account</a>
             </div>
         </div>
     </form>

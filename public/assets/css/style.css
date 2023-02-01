@@ -6087,9 +6087,39 @@ fieldset .row.no-mrg .checkout_div h4{
 .card_filter.oferd_select.select-design span.select2-selection.select2-selection--multiple {
     padding: 13px 15px;
 }
+.custom_w{
+    width: 83%;
+}
+.card_chat img{
+    object-fit: cover;
+}
+.msg_notification button{
+    padding: 0px;
+    height: 40px;
+    width: 40px;
+}
+.swal2-actions button.swal2-confirm.swal2-styled {
+    background-color: var(--primary);
+}
+.swal-modal.customer_r .swal-footer {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: row-reverse;
+}
+.swal-modal.customer_r .swal-footer button.swal-button.swal-button--confirm.swal-button--danger {
+    background-color: var(--primary);
+}
+.secnd_tm h5.name_tm,.account-profile .name{
+    text-transform: capitalize;
+}
+
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {
     display: none;
+}
+.col-xl-12.col-lg-12.col-md-12.col-sm-12.no-padd.cleaner_location_section h4.mb-0.border-0 {
+    font-weight: 400;
 }
 /* doc changes here */
    /* css  full_home_cleaning_table end here */
