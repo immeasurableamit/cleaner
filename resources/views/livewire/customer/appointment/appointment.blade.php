@@ -242,7 +242,7 @@
 
                     @if (!empty($rescheduledAvailableTimeSlots))
                         <div class="row block_start_time">
-                            <div class="col-md-3 select-design">
+                            <div class="col-md-5 select-design">
                                 <div class="selecti-box" wire:ignore>
                                     <select class="select-custom-design" id="reschedule-time-selector">
                                         <option></option>
@@ -269,7 +269,7 @@
                     @endif
 
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer text-center justify-content-center">
                     <button type="button" class="btn_blue" wire:click="rescheduleSelectedOrder">Reschedule order
                         #<span id="reschedule_order_id">{{ $rescheduleOrderId ?? '' }}</span></button>
                 </div>

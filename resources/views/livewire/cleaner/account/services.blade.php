@@ -71,7 +71,7 @@
                             </div>
 
                             <div class="form-grouph textarea-design mb-2">
-                                <textarea wire:model="included.{{$service['id']}}.data" placeholder="Describe what's included"></textarea>
+                                <textarea wire:model="included.{{$service['id']}}.data" placeholder="Please enter what your services include for the various services offered by you."></textarea>
                                 @error ('included.'.$service["id"].'.data') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
 

@@ -23,7 +23,7 @@
                             <div class="customer-account-forms ">
                               <div class="form-headeing-second  mb-4 ">
                                 <h4 class="border-0 mb-0">Insurance</h4>
-                                <p>Purchase 1 milion in coverage Through our partner Thimble in order to prove coverage and activate your Canary Defence badge.</p>
+                                <p>You can now purchase service coverage through our partner Thimble in order to secure proper coverage and activate your Canary Defense badge. You may use your own inurance provider but many provider's prefer the great prices and ease of use of Thimble.</p>
                               </div>
 
                               @if ( $policy )
@@ -39,7 +39,7 @@
                                       <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
                                       @if ($policy) checked @endif
                                       disabled>
-                                      <label class="form-check-label" for="flexSwitchCheckChecked">(toggle locked to status of insurance)</label>
+                                      <label class="form-check-label custom_w" for="flexSwitchCheckChecked">I certify that I and/or my Team are fully covered with at least $1m in insurance coverage applicable to our provider services, or my jusrisdiction's minimum, whichever is higher (Thimble can help you determine these amounts).</label>
                                       {{-- <span class="learn-more-link" data-bs-toggle="modal" data-bs-target="#learn-more-badge" type="button">Learn More</span> --}}
                                     </div>
 
@@ -55,7 +55,7 @@
                                     @endif
 
                                       >
-                                      <label class="form-check-label" for="flexSwitchCheckChecked">Organic service offered upon Required</label>
+                                      <label class="form-check-label" for="flexSwitchCheckChecked">Organic supplies available upon request</label>
                                     </div>
                                  </div>
 
