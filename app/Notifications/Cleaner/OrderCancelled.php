@@ -83,7 +83,8 @@ class OrderCancelled extends Notification implements ShouldQueue
     {
         $phone = config('app.country_prefix_for_phone_number').(string) $notifiable->contact_number;
 
-        $message = "Hello ".ucwords( $this->order->cleaner->name ).",\n\n";
+        $message  = $this->subject."\n\n";
+        $message .= "Hello ".ucwords( $this->order->cleaner->name ).",\n\n";
 
         if ( $this->isCancelledByCustomer ) {
             $message .= "We  are sorry to inform you that your appointment has been cancelled by the Customer";

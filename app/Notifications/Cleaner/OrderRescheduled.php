@@ -7,7 +7,6 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Models\Order;
-use App\Notifications\CustomChannels\TwilioChannel;
 
 class OrderRescheduled extends Notification implements ShouldQueue
 {

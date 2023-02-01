@@ -15,6 +15,7 @@ use App\Models\Order;
 use App\Models\CleanerTeam;
 use App\Models\Favourite;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use App\Services\CleanerAvailability;
 
 class Profile extends Component
 {
@@ -52,6 +53,8 @@ class Profile extends Component
 
     public $cleanerOrders;
 
+    public $availabilityWeekdays = [];
+
     public $selectedDetails = [
         'service_item_id' => null,
         'home_size' => null,
@@ -84,6 +87,8 @@ class Profile extends Component
         $this->cleanerOrders = Order::where('cleaner_id', $this->cleaner->id )->whereIn('status', ['accepted','payment_collected'])->get();
         $this->fillSocialMediaShareInfo();
         $this->fillCleanerAdditionalInfo();
+        
+
 
         return true;
     }
@@ -93,7 +98,7 @@ class Profile extends Component
         $completedOrders = Order::where('cleaner_id', $this->cleanerId)->whereIn('status', ['payment_collected', 'completed'])->count();
         $totalMembersOfCleanerTeam = CleanerTeam::where('user_id', $this->cleanerId)->count();
         $this->cleanerAdditionalInfo = [
-            'rating' => $this->cleaner->cleanerReviews->avg('rating'),
+            'rating' => 0,
             'completed_orders' => $completedOrders,
             'total_team'       => $totalMembersOfCleanerTeam,
             'is_insured'       => $this->cleaner->UserDetails->is_insured == 1,
@@ -122,7 +127,10 @@ class Profile extends Component
 
         $this->todayDate = Carbon::now();
 
-        $this->getWorkingDays($this->todayDate);
+        //$this->getWorkingDays($this->todayDate);
+
+        $this->availabilityWeekdays = ( new CleanerAvailability( $this->cleaner ) )->weekdays();
+
 
         //dd( $this->cleanerServices->pluck('services_items_id')->toArray() );
     }
@@ -133,7 +141,7 @@ class Profile extends Component
     // }
 
 
-    public function getWorkingDays($today)
+   /*  public function getWorkingDays($today)
     {
         $fromDate = $today->copy()->firstOfMonth()->startOfDay();
         $toDate = $today->addMonths('2')->copy()->endOfMonth()->startOfDay();
@@ -173,7 +181,7 @@ class Profile extends Component
 
 
         $this->emit('fireCalender', $this->workingDates, $fromDate);
-    }
+    } */
 
     function doesCleanerHasOrderInTimeSlot($date, $startTime, $endTime )
     {
@@ -307,13 +315,14 @@ class Profile extends Component
 
         $nDate = Carbon::parse($month);
 
-        $this->getWorkingDays($nDate);
+        //$this->getWorkingDays($nDate);
     }
 
 
     public function updatedSelectedDate()
     {
-        $this->slotAvailability();
+        $cleanerAvailability        = new CleanerAvailability($this->cleaner);
+        $this->workingDatesTimeSlot = $cleanerAvailability->getAvailableSlotsByDate($this->selected_date);
     }
 
     protected function checkoutRules()
@@ -339,7 +348,7 @@ class Profile extends Component
 
         if ($user == 'cleaner' || $user == 'admin') {
 
-            return $this->alert("error", "To continue for Booking, Must be login as Customer");
+            return $this->alert("error", "You don't have permission");
 
         } else {
             $validatedData = $this->validate(...$this->checkoutRules());
@@ -355,6 +364,7 @@ class Profile extends Component
     {
         $this->resetErrorBag();
     }
+
     public function render()
     {
 
