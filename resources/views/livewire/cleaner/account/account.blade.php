@@ -39,7 +39,7 @@
             <ul class="list-unstyled">
                 <li class="d-flex justify-content-spacebw two_column">
                     <h6 class="title-label">Name:</h6>
-                    <p class="name">{{ $user->first_name }}</p>
+                    <p class="name">{{ $user->name }}</p>
                     <div class="action-block">
                                 <span class="edit"></span>
                             </div>
@@ -151,7 +151,11 @@
                             <span class="cancel"><a href="javascript::void(0)" class="link-design-2"
                                     wire:click="cancle"><i class="fas fa-times"></i></a></span>
                         @else
+                        @if(@$user->UserDetails->about == null)
+                        <p> Highlight yourself, your team, or your services here...</p>
+                           @else
                             <p>{{ @$user->UserDetails->about }}</p>
+                           @endif
                             <div class="action-block">
                                 <span class="edit"><a href="javascript::void(0)" class="link-design-2"
                                         wire:click="editData({{ auth()->user()->id }}, 'about')">Edit</a></span>

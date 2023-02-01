@@ -223,4 +223,11 @@
        </div>
      </div>
    </section>
+   <script>
+  $(document).ready(function(){
+    $(".btn_toggle ").click(function(){
+      $(".cards_links").toggleClass("active");
+    });
+  });
+  </script>
 @endsection

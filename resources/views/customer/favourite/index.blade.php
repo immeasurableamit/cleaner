@@ -56,7 +56,8 @@
 
                                                         <img src="{{ asset('assets/images/icons/star.svg') }}">
                                                         {{ formatAvgRating($favourite->cleaner->cleanerReviews->avg('rating')) }}<span>
-                                                            ({{ $favourite->cleaner->cleanerReviews->count() }})</span>
+                                                            ({{ $favourite->cleaner->cleanerReviews->count() }})
+                                                        </span>
                                                     </div>
                                                 </div>
                                                 {{-- <div class="routine_text">
@@ -159,6 +160,29 @@
     </script>
 
 
+<<<<<<< HEAD
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+    <script type="text/javascript">
+        $('.servideletebtn').click(function(event) {
+            var form = $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            swal({
+                    title: `Are you sure you want to remove cleaner from Favourites?`,
+                    //   text: "If you delete this, it will be gone forever.",
+                    //   icon: "warning",
+                    buttons: true,
+                    buttons: ["No", "Yes"],
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        form.submit();
+                    }
+                });
+        });
+    </script>
+=======
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
 <script type="text/javascript">
 
@@ -173,6 +197,7 @@
               buttons: true,
               buttons: ["No", "Yes"],
               dangerMode: true,
+              className: "customer_r",
           })
           .then((willDelete) => {
             if (willDelete) {
@@ -182,4 +207,5 @@
       });
 
 </script>
+>>>>>>> b998fc12316ceae3114b87fb4426fbdcc057518e
 @endsection

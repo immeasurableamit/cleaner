@@ -18,7 +18,7 @@
             <span class="bg_yellow">Date:</span>
 
         </div>
-        <p class="d-none d-md-block">Future recurring cleanings will be scheduled in the nearest availabel time slot. Please contact your cleaner if you need to reschedule any cleanings.</p>
+        <p class="d-none d-md-block">Future recurring cleanings will be scheduled in the nearest available time slot. Please contact your cleaner if you need to reschedule any cleanings.</p>
     </div>
     <div class="row block_start_time">
         <div class="col-md-3 select-design">

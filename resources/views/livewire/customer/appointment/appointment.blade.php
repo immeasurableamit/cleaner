@@ -32,7 +32,6 @@
                                             <p class="app-value">{{ $order->cleaning_datetime->format('h:i A') }}</p>
                                         </div>
                                         <div class="altrntive_rw">
-
                                             <p class="appointment_label"> Job </p>
                                             @foreach ($order->items as $item)
                                                 <p class="app-value blue">
@@ -69,6 +68,10 @@
                                         <div class="altrntive_rw">
                                             <p class="appointment_label blue">Location</p>
                                             <p class="app-value location blue">{{ $order->address }}</p>
+                                        </div>
+                                        <div class="altrntive_rw">
+                                            <p class="appointment_label blue">Size</p>
+                                            <p class="app-value location blue">{{ $order->home_size_sq_ft }}</p>
                                         </div>
                                         <div class="altrntive_rw">
                                             <p class="appointment_label">Price</p>
@@ -217,13 +220,13 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade bd-example-modal-lg" id="rescheduleModal" role="dialog"
+    <div class="modal fade bd-example-modal-lg modal_style" id="rescheduleModal" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true" wire:ignore.self>
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <div class="modal-header  d-flex justify-content-end">
-
-                    <button type="button" class="close" style="border: none; background: white;"
+                <div class="modal-header  d-flex justify-content-center">
+                    <h3>Reschedule Booking</h3>
+                    <button type="button" class="close btn_close" style="border: none; background: white;top:0px;"
                         wire:click.prevent="hideRescheduleModal">
                         <i class="fa fa-times fa-xl" aria-hidden="true"></i>
                     </button>
@@ -239,7 +242,7 @@
 
                     @if (!empty($rescheduledAvailableTimeSlots))
                         <div class="row block_start_time">
-                            <div class="col-md-3 select-design">
+                            <div class="col-md-5 select-design">
                                 <div class="selecti-box" wire:ignore>
                                     <select class="select-custom-design" id="reschedule-time-selector">
                                         <option></option>
@@ -266,7 +269,7 @@
                     @endif
 
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer text-center justify-content-center">
                     <button type="button" class="btn_blue" wire:click="rescheduleSelectedOrder">Reschedule order
                         #<span id="reschedule_order_id">{{ $rescheduleOrderId ?? '' }}</span></button>
                 </div>
