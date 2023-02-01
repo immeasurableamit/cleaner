@@ -47,7 +47,7 @@
         <ul class="list-unstyled">
             <li class="d-flex justify-content-spacebw two_column">
                 <h6 class="title-label">Name:</h6>
-                <p class="name">{{@$user->first_name}}</p>
+                <p class="name">{{@$user->name}}</p>
                 <div class="action-block">
                 </div>
             </li>
