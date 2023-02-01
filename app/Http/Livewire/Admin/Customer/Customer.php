@@ -137,9 +137,6 @@ class Customer extends Component
 
         }      
          
-
-        }
-
    
         return view('livewire.admin.customer.customer', compact('users'));
     }
