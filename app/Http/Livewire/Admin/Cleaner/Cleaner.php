@@ -102,7 +102,10 @@ class Cleaner extends Component
             });
         }
 
-         if($sta) {
+        if($sta == '0'){
+                $users->whereStatus($sta);
+          }
+        if($sta == '1'){
                 $users->whereStatus($sta);
             }
             

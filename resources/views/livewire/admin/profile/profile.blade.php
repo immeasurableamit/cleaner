@@ -75,12 +75,11 @@
 @section('script')
 
 <script>
-    function uploadImgViaLivewire(user_id)
+    function uploadImgViaLivewire()
     {
 
         var base64_string = $("#upload-img").val();
-        console.log(base64_string, "rudra");
-        var data = { user_id, base64_string };
+        var data = { base64_string };
         Livewire.emit('imgUploaded', data );
     }
 

@@ -75,12 +75,13 @@ class Customer extends Component
     {
         $sta = null;
         if($this->tab=='active'){
-            $sta = 0;
+            $sta = '1';
         }
         if($this->tab=='inactive'){
-            $sta = 1;
+            $sta = '0';
+            // dd($sta);
         }
-       
+        
         $value = [];
         $value[] = 'completed';
         $value[] = 'payment_collected';
@@ -112,12 +113,14 @@ class Customer extends Component
             });
         }
 
-         if($sta){
+         if($sta == '0'){
+                $users->whereStatus($sta);
+            }
+        if($sta == '1'){
                 $users->whereStatus($sta);
             }
 
         $users = $users->orderBy('id', 'DESC')->get();
-                
         foreach ($users as $key => $value) {
 
             $cnt = 0;
@@ -130,11 +133,7 @@ class Customer extends Component
             }
             $users[$key]['total_sum'] = $cnt;
             $users[$key]['order_lastdate'] = $lastdate;
-        }
-
-        // echo "<pre>";
-        // print_r($users);
-        // die;      
+        }      
          
         return view('livewire.admin.customer.customer', compact('users'));
     }

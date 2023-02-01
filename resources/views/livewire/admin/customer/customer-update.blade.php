@@ -135,10 +135,8 @@
                         <label>New password</label>
                         <input type="password" wire:model="new_password" class="form-control" id="password">
                      
-                    </div>
-                   
-                   
-                <div class="text-center mb-3">
+                    </div>  
+                <div class="text-center pt-3">
 
                     <button type="submit" class="btn_blue serviceFormClose" wire:click.prevent="updateData('new_password')" wire:loading.attr="disabled">
                          Save

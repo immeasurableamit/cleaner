@@ -1,7 +1,7 @@
 @extends('layouts.adminapp')
 @section('content')
   <section class="table-layout-sec jobs">
-    <div class="white-bg-wrapper">
+    <div class="white-bg-wrapper mt-3">
     <div class="table-header-wrapper">
     <div class="table-tabs-wrap">
     <ul class="nav nav-tabs">
