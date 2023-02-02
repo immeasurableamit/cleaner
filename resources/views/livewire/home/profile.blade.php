@@ -55,7 +55,7 @@
                         <p>Rating</p>
                         <div>
                             <img src="{{ asset('assets/images/icons/b_star.svg') }}">
-                            <span>{{ ($cleanerAdditionalInfo['rating']) }}</span>
+                            <span>{{ formatAvgRating($cleanerAdditionalInfo['rating']) }}</span>
                         </div>
                     </div>
                     <div class="rating_row">
@@ -255,7 +255,7 @@
                                     @foreach ($workingDatesTimeSlot as $index => $slot)
 
                                     <option value="{{ $slot['start_time'] }}"
-                                        {{ $slot['is_available'] ?: 'disabled' }}>{{ date("h:i A", strtotime($slot['start_time']) ) }}</option>                                  
+                                        {{ $slot['is_available'] ?: 'disabled' }}>{{ date("h:i A", strtotime($slot['start_time']) ) }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -389,7 +389,7 @@
                 numberOfColumns: 3,
                 inlineMode: true,
                 singleMode: true,
-                minDate:  dateOfTomorrow,                
+                minDate:  dateOfTomorrow,
                 lockDaysFilter: (date) => {
                     let weekday = date.getDay();
                     if (availableWeekdays.includes(weekday)) {
@@ -398,11 +398,11 @@
 
                     return true;
                 },
-                setup: (picker) => {                    
+                setup: (picker) => {
                      picker.on('selected', (date) => {
                         let formattedDate = date.format('YYYY-MM-DD');
                         @this.selected_date = formattedDate;
-                    }); 
+                    });
                 },
             });
             }

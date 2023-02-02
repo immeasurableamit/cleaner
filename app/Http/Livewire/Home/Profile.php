@@ -98,7 +98,7 @@ class Profile extends Component
         $completedOrders = Order::where('cleaner_id', $this->cleanerId)->whereIn('status', ['payment_collected', 'completed'])->count();
         $totalMembersOfCleanerTeam = CleanerTeam::where('user_id', $this->cleanerId)->count();
         $this->cleanerAdditionalInfo = [
-            'rating' => formatAvgRating($this->cleaner->cleanerReviews->avg('rating')),
+            'rating' => $this->cleaner->cleanerReviews->avg('rating'),
             'completed_orders' => $completedOrders,
             'total_team'       => $totalMembersOfCleanerTeam,
             'is_insured'       => $this->cleaner->UserDetails->is_insured == 1,
