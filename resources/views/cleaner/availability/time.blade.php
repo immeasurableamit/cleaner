@@ -19,9 +19,9 @@ $days = \App\Models\User::getDays();
                             <span>Day of Week</span>
                         </div>
                         <div class="y_text from_to">
-                            <span>from</span>
+                            <span>From</span>
                             <span class="d-block d-lg-none">-</span>
-                            <span>to</span>
+                            <span>To</span>
                         </div>
                         <div class="y_text add">
                             <span></span>
