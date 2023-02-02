@@ -50,11 +50,11 @@ function storePayoutTransaction( $order, $transferResponse)
     if ( $transferResponse['status'] == true ) {
         $transaction->status    = 'success';
         $transaction->stripe_id = $transferResponse['response']->id;
-    } else {        
+    } else {
         $transaction->status = 'failed';
-        $transaction->failure_reason = $transferResponse['exception']->getMessage();        
+        $transaction->failure_reason = $transferResponse['exception']->getMessage();
     }
-    
+
     $transaction->save();
 
     return $transaction;
@@ -110,7 +110,7 @@ function formatAvgRating( $avgRating )
 {
     $doesHaveDecimalPoints = isset( explode( ".", $avgRating )[1] );
     if (  $doesHaveDecimalPoints ){
-        return formatNumberToDecimalPoints( $avgRating, 2 );
+        return formatNumberToDecimalPoints( $avgRating, 1 );
     }
 
     return $avgRating;

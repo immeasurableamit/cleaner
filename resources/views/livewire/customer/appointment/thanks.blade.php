@@ -126,7 +126,7 @@
                                 <label for="next3" class="btn_c" wire:click="saveOrderNotes"><a
                                         href="{{route('messages')}}">Message Provider</a></label>
                             </div>
-                            <a href="#" class="link-design-2 d-block pb-3">Please inform your provider about
+                            <a  class="d-block pb-3">Please inform your provider about
                                 any future changes or cancellations as soon as possible. </a>
                             <div class="py-3 border-top cancel_order_div">
                                 <p>Something Wrong? <span class="cancel-order_span"><a href="javascript::void(0)"

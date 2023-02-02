@@ -388,7 +388,7 @@
                 numberOfColumns: 3,
                 inlineMode: true,
                 singleMode: true,
-                minDate:  dateOfTomorrow,                
+                minDate:  dateOfTomorrow,
                 lockDaysFilter: (date) => {
                     let weekday = date.getDay();
                     if (availableWeekdays.includes(weekday)) {
@@ -397,11 +397,11 @@
 
                     return true;
                 },
-                setup: (picker) => {                    
+                setup: (picker) => {
                      picker.on('selected', (date) => {
                         let formattedDate = date.format('YYYY-MM-DD');
                         @this.selected_date = formattedDate;
-                    }); 
+                    });
                 },
             });
             }
