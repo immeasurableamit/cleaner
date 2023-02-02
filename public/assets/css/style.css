@@ -6110,10 +6110,41 @@ fieldset .row.no-mrg .checkout_div h4{
 .swal-modal.customer_r .swal-footer button.swal-button.swal-button--confirm.swal-button--danger {
     background-color: var(--primary);
 }
-.secnd_tm h5.name_tm,.account-profile .name{
+.secnd_tm h5.name_tm,.account-profile .name,.something_amazing_div h3.frst_h3{
     text-transform: capitalize;
 }
-
+.right_chat a.attachment {
+    display: block;
+    text-align: right;
+    background-color: #DDDDDD;
+    border-radius: 10px 0px 10px 10px;
+    padding: 10px;
+}
+.right_chat a.attachment img,.reciver_msg a.attachment img {
+    width: 100px;
+    height: auto;
+    background: #fff;
+    position: relative;
+    border-radius: 0px;
+}
+.sender_msg p.msg_p{
+    background-color: #DDDDDD;
+    border-color: #DDDDDD;
+}
+.reciver_msg  a.attachment {
+    text-align: left;
+    border-radius: 0px 10px 10px 10px;
+    padding: 10px;
+    border: 1px solid var(--primary);
+    background-color: #fff;
+}
+.message_sender .attached-files {
+    padding: 0px 35px;
+}
+.message_sender .file.files_r {
+    background: #dddddd;
+    padding: 10px;
+}
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {
     display: none;
