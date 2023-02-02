@@ -26,7 +26,7 @@
                                         <div class="stars_top">
                                             <p class="review-totel-no">Total Reviews: <span
                                                     class="review-no">{{ $reviews->count() }}</span></p>
-                                            <span>Overall </span>
+                                            <span>Overall Rating </span>
                                             <img src="{{ asset('assets/images/star.svg') }}" />
                                             <span>{{ formatAvgRating( $reviews->avg('rating') )}}</span>
                                         </div>

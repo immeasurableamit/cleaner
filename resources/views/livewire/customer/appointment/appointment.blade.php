@@ -33,11 +33,17 @@
                                         </div>
                                         <div class="altrntive_rw">
                                             <p class="appointment_label"> Job </p>
+
                                             @foreach ($order->items as $item)
                                                 <p class="app-value blue">
+
                                                     <strong>{{ @$item->service_item->title }}</strong>
                                                 </p>
                                             @endforeach
+                                            {{--
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal" data-id="{{$order->items}}" wire:click="viewOrderServices({{$order->id}})">View</button>
+                                            --}}
                                         </div>
                                         <div class="altrntive_rw">
                                             <p class="appointment_label">Est Duration</p>
@@ -58,7 +64,7 @@
                                                     </a></li>
                                                 {{-- <li><a href="#" class="link-design-2"><img src="{{asset('/assets/images/icons/home.svg')}}">15648
                                             Maple St, Austin, TX 78744</a></li> --}}
-                                                <li class="chat_with_member"><a href="{{route('messages')}}"
+                                                <li class="chat_with_member"><a href="{{ route('messages') }}"
                                                         class="btn_chat_member">Chat With
                                                         Member<img
                                                             src="{{ asset('/assets/images/icons/email-2.svg') }}" /></a>
@@ -236,8 +242,8 @@
 
                     <div id="rescheduleCalendar" class="text-center" wire:ignore>
                     </div>
-                    @error ('rescheduleDate')
-                    <div class="alert text-center">{{ $message }}</div>
+                    @error('rescheduleDate')
+                        <div class="alert text-center">{{ $message }}</div>
                     @enderror
 
                     @if (!empty($rescheduledAvailableTimeSlots))
@@ -262,7 +268,7 @@
                                     </select>
                                 </div>
                             </div>
-                            @error ('rescheduleTime')
+                            @error('rescheduleTime')
                                 <div class="alert text-center">{{ $message }}</div>
                             @enderror
                         </div>
@@ -277,6 +283,39 @@
         </div>
     </div>
     <!-- Modal end -->
+
+
+
+    <!-- Modal - View -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    {{-- {{dd($selectOrderItem)}} --}}
+
+
+                    <div class="altrntive_rw">
+                        <p class="appointment_label">Service</p>
+
+                        <p class="app-value">${{ @$selectOrderItem }}</p>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal End -->
 </div>
 
 @push('scripts')
