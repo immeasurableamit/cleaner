@@ -6145,6 +6145,9 @@ fieldset .row.no-mrg .checkout_div h4{
     background: #dddddd;
     padding: 10px;
 }
+.btn_close{
+    top: 0px;
+}
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {
     display: none;
