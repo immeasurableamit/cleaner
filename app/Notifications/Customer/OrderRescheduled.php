@@ -76,7 +76,8 @@ class OrderRescheduled extends Notification implements ShouldQueue
     {
         $url      = route('customer.appointment.index', ['selectedDate' => $this->order->cleaning_datetime->toDateString() ]);
         $phone    = config('app.country_prefix_for_phone_number').(string)$notifiable->contact_number;
-        $message  = "Hello ".ucwords($this->order->user->name).", Your booking has been rescheduled. Please see your Appointment schedule below.";
+        $message  = "CanaryClean Appointment Reschedule\n\n";
+        $message .= "Hello ".ucwords($this->order->user->name).", Your booking has been rescheduled. Please see your Appointment schedule below.";
         $message .= "\n\nBooking Time: ".$this->order->cleaning_datetime->format('F, l d,Y | h:i A');
         $message .= "\n\nView appointment: $url\n\nRegards\n".config('app.name');
 
