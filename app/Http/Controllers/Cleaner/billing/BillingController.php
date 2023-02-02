@@ -87,7 +87,7 @@ class BillingController extends Controller
 
         $request->validate([
             'account_number' => 'required',
-            'routing_number' => 'required|min:9',
+            'routing_number' => 'required|min:9|max:9',
             'account_holder_name' => 'required',
         ]);
 
