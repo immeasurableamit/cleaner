@@ -36,7 +36,7 @@ class CleanerAvailability {
         return $weekdaysNames;
     }
 
-    public function getSlotsByWeekday(int $weekday)
+    public function getSlotsByWeekday(int $weekday, $date = null)
     {
         $weekdayName = Carbon::getDays()[ $weekday];
 
@@ -46,7 +46,12 @@ class CleanerAvailability {
          /* Parse those time to display in frontend */
          $timeSlotsForCustomer = [];
          foreach ( $cleanerTimeSlots as $from => $to ) {
- 
+            
+            if ( $date != null ){
+                $from = Carbon::createFromFormat("Y-m-d H:i:s", "$date $from");
+                $to = Carbon::createFromFormat("Y-m-d H:i:s", "$date $to");
+            }
+
              $startTimeOfEachTimeSlot = CarbonInterval::minutes( $this->slotIntervalInMinutes)->toPeriod( $from, $to )->toArray();
 
              foreach ( $startTimeOfEachTimeSlot as $startTime ){
@@ -160,7 +165,7 @@ class CleanerAvailability {
     public function getAvailableSlotsByDate(string $date): array
     {
         $weekday              = Carbon::parse( $date )->dayOfWeek;
-        $allSlotsInDate       = $this->getSlotsByWeekday($weekday);
+        $allSlotsInDate       = $this->getSlotsByWeekday($weekday, $date);
         $availableSlotsInDate = $this->markAvailabilityInEachSlot($date, $allSlotsInDate);
         return $availableSlotsInDate;
     }

@@ -192,23 +192,15 @@ class Appointment extends Component
 
     public function preapareRescheduledAvailableTimeSlotsProp()
     {
+
         $order           = $this->orders->find( $this->rescheduleOrderId );
-        $selectedWeekDay = Carbon::parse( $this->rescheduleDate )->englishDayOfWeek;
 
-        /* Get from and to time from cleaner hours table of selected day */
-        $cleanerTimeSlots = $order->cleaner->cleanerHours->where('day', $selectedWeekDay )->pluck('to_time', 'from_time');
+        $cleanerAvailablitly  = new CleanerAvailability($order->cleaner);
+        $timeSlotsForCustomer = $cleanerAvailablitly->getAvailableSlotsByDate($this->rescheduleDate);
 
-        /* Parse those time to display in frontend */
-        $timeSlotsForCustomer = collect();
-        foreach ( $cleanerTimeSlots as $from => $to ) {
-
-            $timeSlots = collect(\Carbon\CarbonInterval::minutes(30)->toPeriod( $from, $to ))->map->format('h:i A');
-            $timeSlotsForCustomer->push( $timeSlots );
-        }
-
-        $this->rescheduledAvailableTimeSlots = $timeSlotsForCustomer->collapse()->unique()->toArray();
+        $this->rescheduledAvailableTimeSlots = $timeSlotsForCustomer; 
         $this->dispatchBrowserEvent('enableTimePickerInRescheduleTimeSelect');
-        return $timeSlotsForCustomer;
+        return $timeSlotsForCustomer;      
     }
 
     public function rescheduleSelectedOrder()
@@ -256,7 +248,6 @@ class Appointment extends Component
         $cleaner = $this->orders->find( $orderId )->loadMissing('cleaner.cleanerHours')->cleaner;
 
         $weekdaysForDatePicker = ( new CleanerAvailability( $cleaner ) )->weekdays();
-        dd( $weekdaysForDatePicker );
         $this->rescheduleOrderId = $orderId;
 
         $this->dispatchBrowserEvent('showRescheduleModal', [
@@ -268,6 +259,7 @@ class Appointment extends Component
     public function hideRescheduleModal()
     {
         $this->dispatchBrowserEvent('hideRescheduleModal');
+        $this->rescheduledAvailableTimeSlots = [];
     }
 
     public function render()
