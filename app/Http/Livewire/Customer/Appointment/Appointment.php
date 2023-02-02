@@ -113,18 +113,18 @@ class Appointment extends Component
         }
     }
 
-    public function viewOrderServices($orderId)
-    {
-        // dd($orderId);
+    // public function viewOrderServices($orderId)
+    // {
+    //     // dd($orderId);
 
-        $ord =  Order::with('items')->first();
-        // dd($ord);
-        $this->selectOrderItem = $ord->items->first()->service_item->title;
+    //     $ord =  Order::with('items')->first();
+    //     // dd($ord);
+    //     $this->selectOrderItem = $ord->items->first()->service_item->title;
 
-        // dd($this->selectOrderItem);
+    //     // dd($this->selectOrderItem);
 
-        return $this->selectOrderItem;
-    }
+    //     return $this->selectOrderItem;
+    // }
 
 
     public function renderOrders()

@@ -36,14 +36,14 @@
 
                                             @foreach ($order->items as $item)
                                                 <p class="app-value blue">
-{{-- <p>{{@$item->service_item->id}}</p>  --}}
+
                                                     <strong>{{ @$item->service_item->title }}</strong>
                                                 </p>
                                             @endforeach
-
+                                            {{--
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#exampleModal" data-id="{{$order->items}}" wire:click="viewOrderServices({{$order->id}})">View</button>
-
+                                            --}}
                                         </div>
                                         <div class="altrntive_rw">
                                             <p class="appointment_label">Est Duration</p>
@@ -305,19 +305,6 @@
 
                         <p class="app-value">${{ @$selectOrderItem }}</p>
                     </div>
-
-                  {{--   @forelse($selectedDateOrders as $order)
-
-                        @foreach ($order->items as $item)
-                            <div class="altrntive_rw">
-                                <p class="appointment_label">Service</p>
-
-                                <p class="app-value">${{ @$item->service_item->title }}</p>
-                            </div>
-
-                        @endforeach
-                    @endforeach --}}
-
 
                 </div>
                 <div class="modal-footer">
