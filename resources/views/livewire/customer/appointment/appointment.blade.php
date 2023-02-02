@@ -328,13 +328,16 @@
                 rescheduleDatePickerInstance.destroy();
             }
 
+            let dateOfToday = new Date();
+            let dateOfTomorrow = dateOfToday.setDate(dateOfToday.getDate() + 1);
+
             rescheduleDatePickerInstance = new Litepicker({
                 element: document.getElementById('rescheduleCalendar'),
                 numberOfMonths: 2,
                 numberOfColumns: 2,
                 inlineMode: true,
                 singleMode: true,
-                minDate: new Date(),
+                minDate: dateOfTomorrow,
                 parentEl: document.getElementById('rescheduleCalendar'),
                 lockDaysFilter: (date) => {
                     let weekday = date.getDay();

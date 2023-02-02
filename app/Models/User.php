@@ -287,8 +287,8 @@ public function sendEmailVerificationNotification()
         return $channels;
     }
 
-    public function hasCleanerOrderBetween($fromTime, $toTime)
+    public function cleanerPrescheduledOffs()
     {
-        
+        return $this->hasMany( CleanerPrescheduledOffTime::class, 'user_id', 'id');
     }
 }

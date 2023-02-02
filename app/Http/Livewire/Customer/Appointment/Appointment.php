@@ -12,6 +12,7 @@ use App\Notifications\Customer\OrderRescheduled as CustomerOrderRescheduled;
 use App\Notifications\Cleaner\OrderRescheduled as CleanerOrderRescheduled;
 use App\Notifications\Cleaner\OrderCancelled as CancelledOrderNotificationForCleaner;
 use App\Notifications\Customer\OrderCancelled as CancelledOrderNotificationForCustomer;
+use App\Services\CleanerAvailability;
 
 class Appointment extends Component
 {
@@ -240,19 +241,22 @@ class Appointment extends Component
     }
 
 
-    public function generateAllowedRescheduleWeekDaysOfOrderForDatePicker($orderId)
+/*     public function generateAllowedRescheduleWeekDaysOfOrderForDatePicker($orderId)
     {
-        /* get cleaner week days from DB */
         $order = $this->orders->find( $orderId )->loadMissing('cleaner.cleanerHours');
         $cleanerAvailablitlyWeekDays = $order->cleaner->cleanerHours->pluck('day')->unique()->map('strtolower')->toArray();
 
         $weekdaysForDatePicker = parseWeekdaysNameIntoWeekDaysNumber( $cleanerAvailablitlyWeekDays );
         return $weekdaysForDatePicker;
     }
-
+ */
     public function showRescheduleModal($orderId)
     {
-        $weekdaysForDatePicker   = $this->generateAllowedRescheduleWeekDaysOfOrderForDatePicker($orderId);
+        /* $weekdaysForDatePicker   = $this->generateAllowedRescheduleWeekDaysOfOrderForDatePicker($orderId); */
+        $cleaner = $this->orders->find( $orderId )->loadMissing('cleaner.cleanerHours')->cleaner;
+
+        $weekdaysForDatePicker = ( new CleanerAvailability( $cleaner ) )->weekdays();
+        dd( $weekdaysForDatePicker );
         $this->rescheduleOrderId = $orderId;
 
         $this->dispatchBrowserEvent('showRescheduleModal', [
