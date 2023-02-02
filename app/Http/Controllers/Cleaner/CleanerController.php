@@ -43,7 +43,7 @@ class CleanerController extends Controller
             $latLngForMap['lng'] = -73.935242;
         }
 
-        $title = ['title' => 'Set your service area', 'active' => 'set-location'];
+        $title = ['title' => 'Set Your Service Area', 'active' => 'set-location'];
         return view('cleaner.set-location', compact('user', 'latLngForMap', 'radiusInMilesForMap', 'serveLocationAlreadySet', 'title') );
     }
 
