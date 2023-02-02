@@ -6,6 +6,7 @@ use App\Models\User;
 use \Carbon\CarbonInterval;
 use \Carbon\Carbon;
 use Exception;
+use App\Models\CleanerPrescheduledOffTime;
 
 class CleanerAvailability {
 
@@ -35,7 +36,7 @@ class CleanerAvailability {
         return $weekdaysNames;
     }
 
-    public function getSlotsByWeekday(int $weekday)
+    public function getSlotsByWeekday(int $weekday, $date = null)
     {
         $weekdayName = Carbon::getDays()[ $weekday];
 
@@ -45,7 +46,12 @@ class CleanerAvailability {
          /* Parse those time to display in frontend */
          $timeSlotsForCustomer = [];
          foreach ( $cleanerTimeSlots as $from => $to ) {
- 
+            
+            if ( $date != null ){
+                $from = Carbon::createFromFormat("Y-m-d H:i:s", "$date $from");
+                $to = Carbon::createFromFormat("Y-m-d H:i:s", "$date $to");
+            }
+
              $startTimeOfEachTimeSlot = CarbonInterval::minutes( $this->slotIntervalInMinutes)->toPeriod( $from, $to )->toArray();
 
              foreach ( $startTimeOfEachTimeSlot as $startTime ){
@@ -92,11 +98,47 @@ class CleanerAvailability {
         return $totalOrdersInSlot;
     }
 
+    public function isSlotSetAsPrescheduledOff(string $date, string $startTime, string $endTime ):bool 
+    {           
+        $this->cleaner->loadMissing('cleanerPrescheduledOffs');
+        $offs = $this->cleaner->cleanerPrescheduledOffs;
+        
+        
+        $date      = Carbon::parse( $date )->toDateString();
+        $startTime = Carbon::parse( $startTime )->toTimeString();
+        $endTime   = Carbon::parse( $endTime )->toTimeString();
+
+        $startDateTime = Carbon::createFromFormat("Y-m-d H:i:s", "$date $startTime")->startOfMinute();
+        $endDateTime   = Carbon::createFromFormat("Y-m-d H:i:s", "$date $endTime")->startOfMinute();
+
+        foreach ( $offs as $off ) {
+            $offStartDateTime = Carbon::createFromFormat("Y-m-d H:i:s", $off['date']." ".$off['from_time']);
+            $offEndDateTime   = Carbon::createFromFormat("Y-m-d H:i:s", $off['date']." ".$off['to_time']);
+        
+            if ( $startDateTime->greaterThanOrEqualTo($offStartDateTime) && $endDateTime->lessThanOrEqualTo($offEndDateTime)) {
+                return true;
+            }
+
+            /*
+            if ( $slot['start_time']  >= $off['from_time'] && $slot['end_time'] <= $off['to_time'] ){
+                return true;
+            }
+            */
+        }
+
+        return false;
+    }
+
     protected function isSlotAvailable(string $date, array $slot ): bool
     {
+        $slotSetAsPrescheduledOff = $this->isSlotSetAsPrescheduledOff($date, $slot['start_time'], $slot['end_time']);
+
+        if ( $slotSetAsPrescheduledOff ) {
+            return false;
+        }
+
         $totalOrdersInSlot = $this->getNumberOfScheduledOrdersCleanerHasInSlot($date, $slot['start_time'], $slot['end_time']);
         $maxOrdersAllowedForSameTime  = $this->cleaner->UserDetails->jobs;
-        //var_dump( "Orders: $totalOrdersInSlot  slot: ".json_encode( $slot )." Max orders: $maxOrdersAllowedForSameTime" );
         if  ( $totalOrdersInSlot >=  $maxOrdersAllowedForSameTime ) {
             return false;
         }
@@ -123,7 +165,7 @@ class CleanerAvailability {
     public function getAvailableSlotsByDate(string $date): array
     {
         $weekday              = Carbon::parse( $date )->dayOfWeek;
-        $allSlotsInDate       = $this->getSlotsByWeekday($weekday);
+        $allSlotsInDate       = $this->getSlotsByWeekday($weekday, $date);
         $availableSlotsInDate = $this->markAvailabilityInEachSlot($date, $allSlotsInDate);
         return $availableSlotsInDate;
     }

@@ -249,13 +249,12 @@
                     </div>
                     <div class="row block_start_time">
                         <div class="col-md-3 select-design">
-                            <div class="selecti-box" wire:ignore>
+                            <div class="selecti-box">
                                 <select class="select-custom-design" id="time-selector">
                                     <option></option>
                                     @foreach ($workingDatesTimeSlot as $index => $slot)
 
-                                    <option value="{{ $slot['start_time'] }}"
-                                        {{ $slot['is_available'] ?: 'disabled' }}>{{ date("h:i A", strtotime($slot['start_time']) ) }}</option>
+                                    <option value="{{ $slot['start_time'] }}"  @disabled($slot['is_available'] == false) @selected( $slot['start_time'] == $time) }}>{{ date("h:i A", strtotime($slot['start_time']) ) }}</option>                                  
                                     @endforeach
                                 </select>
                             </div>
