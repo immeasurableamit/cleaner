@@ -206,7 +206,6 @@ class Appointment extends Component
 
     public function preapareRescheduledAvailableTimeSlotsProp()
     {
-<<<<<<< HEAD
 
         $order           = $this->orders->find( $this->rescheduleOrderId );
 
@@ -214,23 +213,6 @@ class Appointment extends Component
         $timeSlotsForCustomer = $cleanerAvailablitly->getAvailableSlotsByDate($this->rescheduleDate);
 
         $this->rescheduledAvailableTimeSlots = $timeSlotsForCustomer; 
-=======
-        $order           = $this->orders->find($this->rescheduleOrderId);
-        $selectedWeekDay = Carbon::parse($this->rescheduleDate)->englishDayOfWeek;
-
-        /* Get from and to time from cleaner hours table of selected day */
-        $cleanerTimeSlots = $order->cleaner->cleanerHours->where('day', $selectedWeekDay)->pluck('to_time', 'from_time');
-
-        /* Parse those time to display in frontend */
-        $timeSlotsForCustomer = collect();
-        foreach ($cleanerTimeSlots as $from => $to) {
-
-            $timeSlots = collect(\Carbon\CarbonInterval::minutes(30)->toPeriod($from, $to))->map->format('h:i A');
-            $timeSlotsForCustomer->push($timeSlots);
-        }
-
-        $this->rescheduledAvailableTimeSlots = $timeSlotsForCustomer->collapse()->unique()->toArray();
->>>>>>> 1e6e60878ea936a2520ba24f5505464911ada333
         $this->dispatchBrowserEvent('enableTimePickerInRescheduleTimeSelect');
         return $timeSlotsForCustomer;      
     }
