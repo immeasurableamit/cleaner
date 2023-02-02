@@ -77,7 +77,7 @@
                                         </div>
                                         <div class="altrntive_rw">
                                             <p class="appointment_label blue">Size</p>
-                                            <p class="app-value location blue">{{ $order->home_size_sq_ft }}</p>
+                                            <p class="app-value location blue">{{ $order->home_size_sq_ft }} sq ft</p>
                                         </div>
                                         <div class="altrntive_rw">
                                             <p class="appointment_label">Price</p>

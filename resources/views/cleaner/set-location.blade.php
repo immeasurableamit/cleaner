@@ -25,7 +25,7 @@
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 no-padd cleaner_location_section">
                                     <div class="customer-account-forms ">
                                         <div class="form-headeing-second border-bottom pb-3 ">
-                                            <h3 class="mb-0  d-none d-sm-block">Set your Service Area</h3>
+                                            <h3 class="mb-0  d-none d-sm-block">Set Your Service Area</h3>
                                             <h4 class="mb-0 d-block d-sm-none border-0 pb-0">Set Availability</h4>
                                         </div>
 

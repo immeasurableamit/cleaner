@@ -193,7 +193,7 @@
                     {!! $errors->first('zip_code', '<span class="alert">:message</span>') !!}
                   </div>
                   <div class="form-grouph payment_search select-design mb-30">
-                    {!! Form::label('payment','Payment Method', ['class' => 'form-label']) !!}
+                    {!! Form::label('payment','Payment Method(where you want to receivie your money)', ['class' => 'form-label']) !!}
 
                     <select class=" select-custom-design" name="payment_method" value="{{old('payment_method')}}">
                       <option>Payment Method</option>

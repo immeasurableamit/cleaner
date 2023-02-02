@@ -2,7 +2,7 @@
 
     <!-- past-service -->
     <div class="form-headeing-second mt-4">
-        <h4 class="border-0 mb-0">Get help with an issue</h4>
+        <h4 class="border-0 mb-0">Get Help With an Issue</h4>
     </div>
     <div class="get-more-issue-wrap">
         <form wire:submit.prevent="storeSupportRequest">

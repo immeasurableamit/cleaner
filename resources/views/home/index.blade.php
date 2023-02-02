@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-md-7">
                     <div class="banner_text">
-                        <h2 class="h2_tittle">Welcome to the future of cleaning.</h2>
+                        <h2 class="h2_tittle">Welcome to the Future of Cleaning.</h2>
                         <p>Finally... a place where you can get EXACTLY what you want, at prices you can afford, from people
                             you can trust. Simple. Affordable. Canary Clean. Your schedule, your Canary Cleaner. Canary
                             Clean is the #1 choice for those who know what they want - and for those who don’t!</p>
@@ -128,7 +128,7 @@
                 </div>
                 <div class="col-md-7 p-0">
                     <div class="canary_text">
-                        <h2>Canary Clean addresses the chaos of clean home outsourcing. </h2>
+                        <h2>Canary Clean Addresses the Chaos of Clean Home Outsourcing. </h2>
                         <ul>
                             <li>Pick who you want and see how they have performed in the past</li>
                             <li>Choose exactly what services you need - and nothing you don’t</li>
@@ -149,7 +149,7 @@
                 <div class="col-md-6">
                     <div class="choose_text">
                         <div class="d-none d-md-block">
-                            <h3 class="h3_tittle">Why choose us</h3>
+                            <h3 class="h3_tittle">Why Choose Us</h3>
 
                             <p>Canary Clean was born from the need to provide customers with the best cleaners at the lowest
                                 cost, while letting cleaners keep more of what they own too! Its a win-win, and we love
@@ -158,19 +158,19 @@
                         <div class="choose_list">
                             <div class="card_why">
                                 <img src="/assets/images/icons/quick_service.svg">
-                                <h5>Quick service</h5>
+                                <h5>Quick Service</h5>
                                 <p>All bookings are scheduled in a two-hour window - and many times you may find
                                     availability that same day!</p>
                             </div>
                             <div class="card_why">
                                 <img src="/assets/images/icons/booking_online.svg">
-                                <h5>Online booking</h5>
+                                <h5>Online Booking</h5>
                                 <p>Start or stop service. Add a garage to your next cleaning. Change frquency. Pause.
                                     Anything you need to do related to cleaning you can do online! </p>
                             </div>
                             <div class="card_why">
                                 <img src="/assets/images/icons/trust.svg">
-                                <h5>Cleaners you can trust</h5>
+                                <h5>Cleaners you can Trust</h5>
                                 <p>Because we utilize a rating system, you can see a real track record for the cleaner as it
                                     relates to cleanings. Only paying customers can rate!</p>
                             </div>
@@ -185,7 +185,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="d-block d-md-none">
-                        <h3 class="h3_tittle">Why choose us</h3>
+                        <h3 class="h3_tittle">Why Choose Us</h3>
 
                         <p>Canary Clean was born from the need to provide customers with the best cleaners at the lowest
                             cost, while letting cleaners keep more of what they own too! Its a win-win, and we love that!
@@ -221,7 +221,7 @@
     <div class="customers_says_sections">
         <div class="container">
             <div class="text-center">
-                <h3 class="h3_tittle">What our customers says</h3>
+                <h3 class="h3_tittle">What Our Customers Says</h3>
                 <p>Transparency is important. When you speak, we listen!</p>
             </div>
             <div class="customer_slider">
@@ -300,7 +300,7 @@
     <div class="news_update_section">
         <div class="container">
             <div class="text-center mb-5">
-                <h3 class="h3_tittle">News and updates</h3>
+                <h3 class="h3_tittle">News and Updates</h3>
                 <p>More fun bits about Canary Clean and the cleaning industry.</p>
             </div>
             <div class="row">
@@ -349,7 +349,7 @@
     <div class="clean_house_section">
         <div class="container">
             <div class="text-center mb-5">
-                <h3 class="h3_tittle text-white">A clean house is a happy house...</h3>
+                <h3 class="h3_tittle text-white">A Clean House Is a Happy House...</h3>
                 <p class="text-white">...and a cluttered house is a cluttered mind - start your journey to a cleaner home!
                 </p>
             </div>
