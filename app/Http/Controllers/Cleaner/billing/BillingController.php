@@ -94,7 +94,10 @@ class BillingController extends Controller
         $user = auth()->user();
         $bank = BankInfo::where(['users_id' => $user->id])->first();
 
-        $bank = addAccountDetailsInBankInfo( $bank, $request->all() );
+        $response = addAccountDetailsInBankInfo( $bank, $request->all() );
+        if ( $response['status'] == false ){
+            return redirect()->route('cleaner.billing.billing')->withErrors([ 'stripe_error' => $response['exception']->getMessage()]);
+        }
 
         return redirect()->route('cleaner.billing.billing')->with('success', 'Your bank details are added successfully');
     }

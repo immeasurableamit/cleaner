@@ -1,11 +1,15 @@
 <div class="biling_edit_form">
 
-    @if ( $bank->payouts_enabled == 0 )
+    @if ( $errors->has('stripe_error') )    
+    <div class="alert alert-danger" role="alert">
+        {{ $errors->first('stripe_error') }}        
+    </div>
+    @elseif ( $bank->payouts_enabled == 0 )
     <div class="alert alert-warning" role="alert">
       Payouts are not enabled for your account
-      {{-- Unable to confirm bank details. Please check the numbers and try again. --}}
     </div>
     @endif
+
     <form action="{{ route('cleaner.billing.bankInfoStore') }}" method="POST">
         @csrf
 
