@@ -63,6 +63,11 @@
               </ul>
             </div>
           </li>
+          <li class="toggle-btn-li">
+            <div class="toggle_menu d-xl-none">
+              <img src="../assets/admin/images/icons/toggle.svg">
+           </div>
+          </li>
         </ul>
     </div>
    </div>
@@ -76,3 +81,10 @@
         
     });
     </script> 
+    <script>
+      $(document).ready(function(){
+    $('.toggle_menu').click(function(){
+    $('#admin-sidebar').toggleClass('active');
+    });
+});
+    </script>
