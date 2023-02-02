@@ -55,7 +55,7 @@
                         <p>Rating</p>
                         <div>
                             <img src="{{ asset('assets/images/icons/b_star.svg') }}">
-                            <span>{{ formatAvgRating($cleanerAdditionalInfo['rating']) }}</span>
+                            <span>{{ $cleanerAdditionalInfo['rating'] }}</span>
                         </div>
                     </div>
                     <div class="rating_row">
