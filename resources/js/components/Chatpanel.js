@@ -505,7 +505,28 @@ const Chatpanel = () => {
 	             </div>
 
 
-
+<div className='message_sender'>
+				 {filesArray.length>0 &&
+							<div className="attached-files">
+							{filesArray.map(function (file, j) {
+								return (
+									<div className="file files_r" key={j}>
+										<div className='img_gallery'>
+										<a target="_blank" href={`uploads/files/${file.name}`}>
+											{file.is_image &&
+												<img width="100" src={`uploads/files/${file.name}`} />
+											}
+											{!file.is_image &&
+												<img width="100" src={`attachment.png`} />
+											}
+										</a>
+                                        <div className="btn btn-danger btn_cross" onClick={()=>removeAttachment(j)}>x</div>
+									</div>
+									</div>
+								)
+							})}
+							</div>
+						}
 	             <form onSubmit={handleSubmit(onSubmit)}>
 
 					{error &&
@@ -538,27 +559,9 @@ const Chatpanel = () => {
 
 		             </div>
 	             </form>
+				 </div>
 
-
-	             {filesArray.length>0 &&
-							<div className="attached-files">
-							{filesArray.map(function (file, j) {
-								return (
-									<div className="file files_r" key={j}>
-										<a target="_blank" href={`uploads/files/${file.name}`}>
-											{file.is_image &&
-												<img width="100" src={`uploads/files/${file.name}`} />
-											}
-											{!file.is_image &&
-												<img width="100" src={`attachment.png`} />
-											}
-										</a>
-                                        <div className="btn btn-danger btn_cross" onClick={()=>removeAttachment(j)}>x</div>
-									</div>
-								)
-							})}
-							</div>
-						}
+	            
 
 				
              </>
