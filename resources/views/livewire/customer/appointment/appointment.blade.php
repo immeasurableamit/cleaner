@@ -42,7 +42,7 @@
                                             @endforeach
 
                                             <a type="button" class="text-primary bold" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal" data-id="{{ $order->items }}"
+                                                data-bs-target="#exampleModal2" data-id="{{ $order->items }}"
                                                 wire:click="viewOrderServices({{ $order->id }})">View</a>
 
                                         </div>
@@ -292,13 +292,13 @@
 
 
     <!-- Modal - View -->
-    <div class="modal fade modal_style" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    <div wire:ignore.self class="modal fade modal_style " id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Selected Services</h5>
-                    <button type="button" class="btn-close btn_close"  data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn_close"  data-bs-dismiss="modal" aria-label="Close">X</button>
                 </div>
                 <div class="modal-body">
                     {{-- <p class="appointment_label">Service</p> --}}
