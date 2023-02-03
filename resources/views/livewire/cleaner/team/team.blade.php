@@ -19,9 +19,10 @@
     </div>
     <!-- End Model-->
     <div class="teams-table-layout-view">
+    <div class="row">
 
         @foreach ($teamMembers as $teamMember)
-        <div class="row">
+      
             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                 <div class="select-date-toggles overflow-hidden teamCard-{{$teamMember->id}}">
                     <button class="service_toggle_s removeCard-{{$teamMember->id}}" data-id="{{ $teamMember->id }}"></button>
@@ -62,9 +63,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+        
         @endforeach
-        <div class="">
+        </div>
+        <div class="pt-3">
             <button type="button" class="submit-design mb-2 btn_blue" style="background-color:var(--secondary);" data-bs-toggle="modal" data-bs-target="#teamModal">
                 Add Team Members
             </button>

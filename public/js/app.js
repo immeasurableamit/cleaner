@@ -2573,11 +2573,6 @@ var Chatpanel = function Chatpanel() {
                     })
                   })]
                 })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-                "class": "three_dots",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-                  children: "..."
-                })
               })]
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
@@ -2623,19 +2618,22 @@ var Chatpanel = function Chatpanel() {
                   }), msgs.message && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
                     className: "msg_p",
                     children: msgs.message
-                  }), (msgs === null || msgs === void 0 ? void 0 : (_msgs$files = msgs.files) === null || _msgs$files === void 0 ? void 0 : _msgs$files.length) > 0 && msgs.files.map(function (file, i) {
-                    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("a", {
-                      className: "attachment",
-                      target: "_blank",
-                      href: "uploads/files/".concat(file.name),
-                      children: [file.is_image && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
-                        width: "100",
-                        src: "uploads/files/".concat(file.name)
-                      }), !file.is_image && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
-                        width: "100",
-                        src: "attachment.png"
-                      })]
-                    }, i);
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                    className: "attachements-images",
+                    children: (msgs === null || msgs === void 0 ? void 0 : (_msgs$files = msgs.files) === null || _msgs$files === void 0 ? void 0 : _msgs$files.length) > 0 && msgs.files.map(function (file, i) {
+                      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("a", {
+                        className: "attachment",
+                        target: "_blank",
+                        href: "uploads/files/".concat(file.name),
+                        children: [file.is_image && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
+                          width: "100",
+                          src: "uploads/files/".concat(file.name)
+                        }), !file.is_image && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
+                          width: "100",
+                          src: "attachment.png"
+                        })]
+                      }, i);
+                    })
                   })]
                 })
               }, index);

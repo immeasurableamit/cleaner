@@ -1468,16 +1468,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.50.1",
+            "version": "v9.50.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "3b400f76619cd5257a69fdd6b897043b6522a89a"
+                "reference": "39932773c09658ddea9045958f305e67f9304995"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/3b400f76619cd5257a69fdd6b897043b6522a89a",
-                "reference": "3b400f76619cd5257a69fdd6b897043b6522a89a",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/39932773c09658ddea9045958f305e67f9304995",
+                "reference": "39932773c09658ddea9045958f305e67f9304995",
                 "shasum": ""
             },
             "require": {
@@ -1652,7 +1652,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2023-02-01T17:36:26+00:00"
+            "time": "2023-02-02T20:52:46+00:00"
         },
         {
             "name": "laravel/helpers",
@@ -2712,29 +2712,30 @@
         },
         {
             "name": "nette/utils",
-            "version": "v3.2.9",
+            "version": "v4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/utils.git",
-                "reference": "c91bac3470c34b2ecd5400f6e6fdf0b64a836a5c"
+                "reference": "cacdbf5a91a657ede665c541eda28941d4b09c1e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/utils/zipball/c91bac3470c34b2ecd5400f6e6fdf0b64a836a5c",
-                "reference": "c91bac3470c34b2ecd5400f6e6fdf0b64a836a5c",
+                "url": "https://api.github.com/repos/nette/utils/zipball/cacdbf5a91a657ede665c541eda28941d4b09c1e",
+                "reference": "cacdbf5a91a657ede665c541eda28941d4b09c1e",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2 <8.3"
+                "php": ">=8.0 <8.3"
             },
             "conflict": {
-                "nette/di": "<3.0.6"
+                "nette/finder": "<3",
+                "nette/schema": "<1.2.2"
             },
             "require-dev": {
                 "jetbrains/phpstorm-attributes": "dev-master",
-                "nette/tester": "~2.0",
+                "nette/tester": "^2.4",
                 "phpstan/phpstan": "^1.0",
-                "tracy/tracy": "^2.3"
+                "tracy/tracy": "^2.9"
             },
             "suggest": {
                 "ext-gd": "to use Image",
@@ -2748,7 +2749,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.2-dev"
+                    "dev-master": "4.0-dev"
                 }
             },
             "autoload": {
@@ -2792,9 +2793,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/utils/issues",
-                "source": "https://github.com/nette/utils/tree/v3.2.9"
+                "source": "https://github.com/nette/utils/tree/v4.0.0"
             },
-            "time": "2023-01-18T03:26:20+00:00"
+            "time": "2023-02-02T10:41:53+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -4105,16 +4106,16 @@
         },
         {
             "name": "stripe/stripe-php",
-            "version": "v10.4.0",
+            "version": "v10.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stripe/stripe-php.git",
-                "reference": "87def896d9a2e2914871408277d67432cb112f71"
+                "reference": "331415b232d60d7c0449de7bde4cb7d4fedf982e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/87def896d9a2e2914871408277d67432cb112f71",
-                "reference": "87def896d9a2e2914871408277d67432cb112f71",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/331415b232d60d7c0449de7bde4cb7d4fedf982e",
+                "reference": "331415b232d60d7c0449de7bde4cb7d4fedf982e",
                 "shasum": ""
             },
             "require": {
@@ -4160,9 +4161,9 @@
             ],
             "support": {
                 "issues": "https://github.com/stripe/stripe-php/issues",
-                "source": "https://github.com/stripe/stripe-php/tree/v10.4.0"
+                "source": "https://github.com/stripe/stripe-php/tree/v10.5.0"
             },
-            "time": "2023-01-19T19:18:38+00:00"
+            "time": "2023-02-02T21:02:09+00:00"
         },
         {
             "name": "symfony/console",

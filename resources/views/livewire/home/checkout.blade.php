@@ -51,10 +51,10 @@
                             <h6 class="provider-service-label">Est. Cleaning Duration</h6>
                             <p class="provider-service-value">{{ $estimatedDuration }} hrs</p>
                         </div>
-                        <div class="p_s_row two-column">
+                        <!-- <div class="p_s_row two-column">
                             <h6 class="provider-service-label">Frequency</h6>
                             <p class="provider-service-value">{{ $cleanerService->first()->service_title }}</p>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="provider_service">
                         <div class="p_s_row three-column">

@@ -25,7 +25,7 @@
     </div>
     <div class="card-second-content">
         <div class="card_row_3">
-            <span class="est">Price per sq ft (in USD)</span>
+            <span class="est">Price / sq ft (USD)</span>
             <div class="incremnt_decrmnt number for_alternative">
                 <span class="minus" wire:click="servicePrice({{$t}}, {{$s}}, {{$i}}, 'minus')">-</span>
                 <input type="text" wire:model="serviceData.{{$t}}.services.{{$s}}.items.{{$i}}.price">
@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class="card_row_3">
-            <span class="est">Est Duration</span>
+            <span class="est">Est Duration (Hours)</span>
             <div class="incremnt_decrmnt number for_alternative">
                 <span class="minus" wire:click="serviceDuration({{$t}}, {{$s}}, {{$i}}, 'minus')">-</span>
                 <input type="text" wire:model="serviceData.{{$t}}.services.{{$s}}.items.{{$i}}.duration">
