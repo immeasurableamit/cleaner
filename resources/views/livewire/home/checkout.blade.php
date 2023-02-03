@@ -341,7 +341,7 @@
                             </div>
                             <div class="sub-totel-text-block">
                                 <p class="label">Transaction Fees</p>
-                                <p class="price">${{ $transactionFees }}( 2% static )</p>
+                                <p class="price">${{ $transactionFees }}</p>
                             </div>
                             <div class="sub-totel-text-block">
                                 <p class="label"><strong>Total</strong></p>
