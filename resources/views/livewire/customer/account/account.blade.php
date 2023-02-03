@@ -57,7 +57,7 @@
                     <h6 class="title-label">Phone:</h6>
                     @if (@$fieldStatus == true && $action == 'contact_number')
                     <input type="number" value="{{$user->contact_number}}" wire:model="contact_number" />
-                    <span style="color:red"> @error('contact_number'){{$message}} @enderror </span>
+                    <span style="color:red" class="alert"> @error('contact_number'){{$message}} @enderror </span>
                     <span class="edit"><a class="link-design-2" wire:click="update('contact_number')" title="Save"><i class="fas fa-save"></i></a></span>
                     <span class="cancel"><a href="javascript::void(0)" class="link-design-2" wire:click="cancle" title="Close"><i class="fas fa-times"></i></a></span>
                     @else
@@ -75,7 +75,7 @@
                     @if (@$fieldStatus == true && $action == 'email')
 
                     <input type="email" value="{{$user->email}}" wire:model="email">
-                    <span style="color:red"> @error('email'){{$message}} @enderror </span>
+                    <span style="color:red" class="alert"> @error('email'){{$message}} @enderror </span>
                     <span class="edit"><a class="link-design-2" wire:click="emailupdate('email')" title="Save"><i class="fas fa-save"></i></a></span>
                     <span class="cancel"><a href="javascript::void(0)" class="link-design-2" wire:click="cancle" title="Close"><i class="fas fa-times"></i></a></span>
                     @else
@@ -92,7 +92,7 @@
                     <h6 class="title-label">Service Address:</h6>
                     @if (@$fieldStatus == true && $action == 'address')
                     <input type="text" value="{{$user->UserDetails->address}}" wire:model="address" />
-                    <span style="color:red"> @error('address'){{$message}} @enderror </span>
+                    <span style="color:red" class="alert"> @error('address'){{$message}} @enderror </span>
                     <span class="save-icn-btn"><a class="link-design-2" wire:click="update('address')" title="Save"><i class="fas fa-save"></i></a></span>
                     <span class="cancel"><a href="javascript::void(0)" class="link-design-2" wire:click="cancle" title="Close"><i class="fas fa-times"></i></a></span>
                     @else
