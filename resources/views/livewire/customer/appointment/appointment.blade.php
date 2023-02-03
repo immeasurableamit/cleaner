@@ -40,7 +40,7 @@
                                                     <strong>{{ @$item->service_item->title }}</strong>
                                                 </p>
                                             @endforeach
-                                            {{--   --}}
+
                                             <a type="button" class="text-primary bold" data-bs-toggle="modal"
                                                 data-bs-target="#exampleModal" data-id="{{ $order->items }}"
                                                 wire:click="viewOrderServices({{ $order->id }})">View</a>
@@ -255,9 +255,9 @@
                                         <option></option>
                                         @foreach ($rescheduledAvailableTimeSlots as $slot)
                                             {{-- <option>{{ $timeSlot['start_time'] }}</option> --}}
-                                            <option value="{{ $slot['start_time'] }}"  @disabled($slot['is_available'] == false) @selected( $slot['start_time'] == $rescheduleTime) }}>{{ date("h:i A", strtotime($slot['start_time']) ) }}</option>                                  
+                                            <option value="{{ $slot['start_time'] }}"  @disabled($slot['is_available'] == false) @selected( $slot['start_time'] == $rescheduleTime) }}>{{ date("h:i A", strtotime($slot['start_time']) ) }}</option>
                                         @endforeach
-{{-- 
+{{--
                                         @foreach ($rescheduledAvailableTimeSlots as $timeSlot)
                                             @php $isSelected = false @endphp
 
@@ -489,7 +489,7 @@
                 placeholder: 'Select time',
                 dropdownParent: $("#rescheduleModal")
             })
- 
+
             $("#reschedule-time-selector").on('select2:select', function(e) {
                 var data = e.params.data;
                 @this.set('rescheduleTime', data.id)

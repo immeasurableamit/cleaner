@@ -150,29 +150,29 @@ class Account extends Component
             }
 
             if ($action == 'facebook') {
-                // $this->validate([
-                //     'facebook' => 'required|url',
-                // ]);
+                $this->validate([
+                    'facebook' => 'required|url',
+                ]);
                 $userdetail->facebook = $this->facebook;
             }
 
             if ($action == 'twitter') {
-                // $this->validate([
-                //     'twitter' => 'required|url',
-                // ]);
+                $this->validate([
+                    'twitter' => 'required|url',
+                ]);
                 $userdetail->twitter = $this->twitter;
             }
             if ($action == 'instagram') {
-                // $this->validate([
-                //     'instagram' => 'required|url',
-                // ]);
+                $this->validate([
+                    'instagram' => 'required|url',
+                ]);
                 $userdetail->instagram = $this->instagram;
             }
 
             if ($action == 'linkedin') {
-                // $this->validate([
-                //     'linkedin' => 'required|url',
-                // ]);
+                $this->validate([
+                    'linkedin' => 'required|url',
+                ]);
                 $userdetail->linkedin = $this->linkedin;
             }
 
