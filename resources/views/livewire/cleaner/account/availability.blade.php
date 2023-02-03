@@ -21,10 +21,10 @@
                                 <span>To</span>
                             </div>
                             <div class="y_text add">
-                                <span>Add</span>
+                                <span style="visibility:hidden;">Add</span>
                             </div>
                             <div class="y_text delete">
-                                <span>Delete</span>
+                                <span style="visibility: hidden;">Delete</span>
                             </div>
                         </div>
                         <div class="availability_sheet">
