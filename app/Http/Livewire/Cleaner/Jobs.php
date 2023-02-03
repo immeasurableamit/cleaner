@@ -341,7 +341,7 @@ class Jobs extends Component
         $order->save();
 
 		$this->sendCancelOrderNotifications($order);
-        $order->user->notify( new App\Notifications\Customer\OrderCancelled( $order ) );
+        $order->user->notify( new OrderCancelledNotificationForCustomer( $order ) );
         $this->alert('success','Booking cancelled');
         $this->refreshSelectedTab();
         return true;
