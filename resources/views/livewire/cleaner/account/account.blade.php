@@ -49,7 +49,7 @@
                         <h6 class="title-label">Phone:</h6>
                         @if (@$fieldStatus == true && $action == 'contact_number')
                             <input type="number" value="{{ $user->contact_number }}" wire:model="contact_number" />
-                                <span style="color:red"> @error('contact_number')
+                                <span style="color:red" class="alert"> @error('contact_number')
                                     {{ $message }}
                                 @enderror </span>
                             <span class="edit"><a class="link-design-2" wire:click="updateData('contact_number')"><i
@@ -70,7 +70,7 @@
                         <h6 class="title-label">Email:</h6>
                         @if (@$fieldStatus == true && $action == 'email')
                             <input type="email" value="{{ $user->email }}" wire:model="email">
-                            <span style="color:red"> @error('email')
+                            <span style="color:red" class="alert"> @error('email')
                                     {{ $message }}
                                 @enderror </span>
                             <span class="edit"><a class="link-design-2" wire:click="emailupdate('email')"><i
@@ -182,7 +182,7 @@
                         @if (@$fieldStatus == true && $action == 'facebook')
                             <input class="border-text" type="text" value="{{ $user->UserDetails->facebook }}"
                                 wire:model="facebook" />
-                                <span style="color:red"> @error('facebook')
+                                <span style="color:red" class="alert"> @error('facebook')
                                     {{ $message }}
                                 @enderror </span>
                             <span class="edit"><a class="link-design-2" wire:click="updateData('facebook')"><i
@@ -206,7 +206,7 @@
 
                         @if (@$fieldStatus == true && $action == 'twitter')
                             <input type="text" value="{{ $user->UserDetails->twitter }}" wire:model="twitter" />
-                            <span style="color:red"> @error('twitter')
+                            <span style="color:red" class="alert"> @error('twitter')
                                 {{ $message }}
                             @enderror </span>
                             <span class="edit"><a class="link-design-2" wire:click="updateData('twitter')"><i
@@ -231,7 +231,7 @@
                         @if (@$fieldStatus == true && $action == 'instagram')
                             <input type="text" value="{{ $user->UserDetails->instagram }}"
                                 wire:model="instagram" />
-                                <span style="color:red"> @error('instagram')
+                                <span style="color:red" class="alert"> @error('instagram')
                                     {{ $message }}
                                 @enderror </span>
                             <span class="edit"><a class="link-design-2" wire:click="updateData('instagram')"><i
@@ -256,7 +256,7 @@
                         @if (@$fieldStatus == true && $action == 'linkedin')
                             <input type="text" value="{{ $user->UserDetails->linkedin }}"
                                 wire:model="linkedin" />
-                                <span style="color:red"> @error('linkedin')
+                                <span style="color:red" class="alert"> @error('linkedin')
                                     {{ $message }}
                                 @enderror </span>
                             <span class="edit"><a class="link-design-2" wire:click="updateData('linkedin')"><i

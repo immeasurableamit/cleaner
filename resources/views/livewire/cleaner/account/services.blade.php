@@ -65,9 +65,9 @@
                             @endif
                         </div>
                         <div class="col-md-6 what_included">
-
+                        
                             <div class="card_header_tittle pt-0">
-                                <h3>Edit "What's Included"</h3>
+                                <h3 style="color:var(--primary)" class="link-design-2"><i class="fas fa-edit pe-2"></i>Edit "What's Included"</h3>
                             </div>
 
                             <div class="form-grouph textarea-design mb-2">
@@ -76,7 +76,10 @@
                             </div>
 
                             <button class="btn_blue" wire:click="storeIncluded">Save</button>
-
+                            <div class="stng_price">
+                              <h3><img src="{{asset('assets/images/icons/!!.svg')}}">Setting Prices</h3>
+                              <p>Set Prices at the <b>square foot level </b> ensure simple and consistent pricing. You can see what that price will equal for an average 1,500 sq ft 3 bed 2 bath home above the “Save” button.</p>
+                            </div>
                         </div>
                     </div>
                     @endforeach

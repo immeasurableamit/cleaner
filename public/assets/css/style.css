@@ -4368,6 +4368,7 @@ font-size: 20px;
         align-items: center;
         position: relative;
         padding-bottom: 5px;
+        justify-content: center;
     }
     .altrntive_rw .btn_q {
         margin-right: 5px;
@@ -6050,6 +6051,7 @@ fieldset .row.no-mrg .checkout_div h4{
     font-weight: 400;
     font-size: 14px;
     color: #363636;
+    margin-bottom: 10px;
 } 
 .edit_frm input:disabled{
     border: 0px !important;
@@ -6197,6 +6199,7 @@ span.select2-container.select2-container--default.select2-container--open span.s
 }
 .modal_style .modal-content .modal-header {
     border-bottom: 0px;
+    justify-content: center;
 }
 .modal_style .modal-content .modal-footer {
     border-top: 0px;
@@ -6208,6 +6211,19 @@ span.select2-container.select2-container--default.select2-container--open span.s
 }
 .reciver_msg .attachements-images{
     justify-content: start;
+}
+.d-flex.justify-content-spacebw.three_column.edit_frm span.alert {
+    position: absolute;
+    left: 33%;
+    top: 13px;
+    font-size: 13px;
+}
+.stng_price {
+    border: 2px solid #37A9FB;
+    filter: drop-shadow(0px 15px 80px rgba(16, 85, 135, 0.15));
+    border-radius: 20px;
+    padding: 12px 22px;
+    margin: 15px 0px;
 }
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {

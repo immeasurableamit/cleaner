@@ -48,7 +48,7 @@
         <div class="col-xl-4 col-lg-6 col-md-12 ps-0">
             <div class="secnd_tm">
                 <h5 class="name_tm">{{ $cleaner->name }}</h5>
-                <span class="link-design-2" style="font-size:14px;">Provider Since
+                <span class="link-design-2" style="font-size:14px;cursor:default;">Provider Since
                     {{ $cleaner->created_at->format('Y') }}</span>
                 <div class="text_tm">
                     <div class="rating_row">

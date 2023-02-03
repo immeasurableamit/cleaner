@@ -298,7 +298,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Selected Services</h5>
-                    <button type="button" class="btn-close btn_close"  data-bs-dismiss="modal" aria-label="Close">X</button>
+                    <button type="button" class="btn_close"  data-bs-dismiss="modal" aria-label="Close" style="border:0px;">X</button>
                 </div>
                 <div class="modal-body">
                     {{-- <p class="appointment_label">Service</p> --}}
