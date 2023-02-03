@@ -4368,7 +4368,9 @@ font-size: 20px;
         align-items: center;
         position: relative;
         padding-bottom: 5px;
-        justify-content: center;
+        justify-content: space-between;
+        width: 70%;
+        margin: auto;
     }
     .altrntive_rw .btn_q {
         margin-right: 5px;
