@@ -14,6 +14,7 @@ use App\Notifications\Customer\OrderRescheduled as CustomerOrderRescheduled;
 use App\Notifications\Cleaner\OrderRescheduled as CleanerOrderRescheduled;
 use App\Notifications\Cleaner\OrderCancelled as CancelledOrderNotificationForCleaner;
 use App\Notifications\Customer\OrderCancelled as CancelledOrderNotificationForCustomer;
+use App\Services\CleanerAvailability;
 
 class Appointment extends Component
 {
@@ -205,23 +206,15 @@ class Appointment extends Component
 
     public function preapareRescheduledAvailableTimeSlotsProp()
     {
-        $order           = $this->orders->find($this->rescheduleOrderId);
-        $selectedWeekDay = Carbon::parse($this->rescheduleDate)->englishDayOfWeek;
 
-        /* Get from and to time from cleaner hours table of selected day */
-        $cleanerTimeSlots = $order->cleaner->cleanerHours->where('day', $selectedWeekDay)->pluck('to_time', 'from_time');
+        $order           = $this->orders->find( $this->rescheduleOrderId );
 
-        /* Parse those time to display in frontend */
-        $timeSlotsForCustomer = collect();
-        foreach ($cleanerTimeSlots as $from => $to) {
+        $cleanerAvailablitly  = new CleanerAvailability($order->cleaner);
+        $timeSlotsForCustomer = $cleanerAvailablitly->getAvailableSlotsByDate($this->rescheduleDate);
 
-            $timeSlots = collect(\Carbon\CarbonInterval::minutes(30)->toPeriod($from, $to))->map->format('h:i A');
-            $timeSlotsForCustomer->push($timeSlots);
-        }
-
-        $this->rescheduledAvailableTimeSlots = $timeSlotsForCustomer->collapse()->unique()->toArray();
+        $this->rescheduledAvailableTimeSlots = $timeSlotsForCustomer; 
         $this->dispatchBrowserEvent('enableTimePickerInRescheduleTimeSelect');
-        return $timeSlotsForCustomer;
+        return $timeSlotsForCustomer;      
     }
 
     public function rescheduleSelectedOrder()
@@ -254,19 +247,21 @@ class Appointment extends Component
     }
 
 
-    public function generateAllowedRescheduleWeekDaysOfOrderForDatePicker($orderId)
+/*     public function generateAllowedRescheduleWeekDaysOfOrderForDatePicker($orderId)
     {
-        /* get cleaner week days from DB */
-        $order = $this->orders->find($orderId)->loadMissing('cleaner.cleanerHours');
+        $order = $this->orders->find( $orderId )->loadMissing('cleaner.cleanerHours');
         $cleanerAvailablitlyWeekDays = $order->cleaner->cleanerHours->pluck('day')->unique()->map('strtolower')->toArray();
 
         $weekdaysForDatePicker = parseWeekdaysNameIntoWeekDaysNumber($cleanerAvailablitlyWeekDays);
         return $weekdaysForDatePicker;
     }
-
+ */
     public function showRescheduleModal($orderId)
     {
-        $weekdaysForDatePicker   = $this->generateAllowedRescheduleWeekDaysOfOrderForDatePicker($orderId);
+        /* $weekdaysForDatePicker   = $this->generateAllowedRescheduleWeekDaysOfOrderForDatePicker($orderId); */
+        $cleaner = $this->orders->find( $orderId )->loadMissing('cleaner.cleanerHours')->cleaner;
+
+        $weekdaysForDatePicker = ( new CleanerAvailability( $cleaner ) )->weekdays();
         $this->rescheduleOrderId = $orderId;
 
         $this->dispatchBrowserEvent('showRescheduleModal', [
@@ -278,6 +273,7 @@ class Appointment extends Component
     public function hideRescheduleModal()
     {
         $this->dispatchBrowserEvent('hideRescheduleModal');
+        $this->rescheduledAvailableTimeSlots = [];
     }
 
     public function render()

@@ -160,14 +160,17 @@ function createBankInfoEntry($cleaner)
  */
 function addAccountDetailsInBankInfo($bank, $accountDetails)
 {
-    $externalAccount = stripeCreateExternalAccount( $bank->account_id, $accountDetails );
+    $response = stripeCreateExternalAccount( $bank->account_id, $accountDetails );
+    if ( $response['status'] == false ) {
+        return $response;
+    }
 
     $bank->account_holder_name = $accountDetails['account_holder_name'];
     $bank->account_number      = $accountDetails['account_number'];
     $bank->routing_number      = $accountDetails['routing_number'];
     $bank->save();
 
-    return $bank;
+    return [ 'status' => true, 'bank' => $bank];
 }
 
 /*

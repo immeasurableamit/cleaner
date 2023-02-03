@@ -1054,6 +1054,25 @@ a.pdf_r {
     .admin-right-header .admin-master-search .search-box {
         margin-right: 10px;
     }
+    .admin-right-header ul.admin-master-search li.search-box.position-relative{
+        display: none;
+    }
+    .table-design {
+        overflow: scroll;
+    }
+    .row.job_row .col-md-4,.row.job_row .col-md-3{
+        width: 100%;
+        padding-top: 20px;
+    }
+    #admin-sidebar.active{
+        justify-content:start;
+    }
+    .admin-right-header li.toggle-btn-li .toggle_menu.d-xl-none {
+        width: auto;
+    }
+    .admin-right-header .admin-master-search>.notification-li {
+        margin-right: 0px;
+    }
 }
 @media (max-width: 480px){
     .page-heading{

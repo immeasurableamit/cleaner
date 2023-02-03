@@ -22,7 +22,7 @@
 
               <div class="customer-account-forms biling_form">
                 <div class="form-headeing-second">
-                  <h4>Billing information</h4>
+                  <h4>Billing Information</h4>
                 </div>
 
 
@@ -35,63 +35,6 @@
 
                 @endif
 
-                 {{--  <div><a href="{{ route('cleaner.billing.stripeConnectUpdate') }}" class="btn_blue">Update Bank Account</a></div> --}}
-{{--
-                @elseif ( ! $bank->payouts_enabled)
-
-                @else
-
-                  Account Number: {{ $bank->account_number }}
-                  <br>
-                  Holder Name: {{ $bank->account_holder_name }}
-                  <br>
-                  Routing Number: {{ $bank->routing_number }}
-                  --}}
-
-                {{--
-                <div class="customer-account-information">
-                  <ul class="list-unstyled">
-                    <!-- <li class="d-flex justify-content-spacebw two_column">
-                           <h6 class="title-label"> Next invoice:</h6>
-                           <p class="">February 22, 2022</p>
-                        </li>
-                        <li class="d-flex justify-content-spacebw three_column">
-                         <h6 class="title-label">Est. Invoice Amount</h6>
-                         <p>$113.25</p>
-                         <a href="#" class="link-design-2">View</a>
-                      </li> -->
-                    <li class="d-flex justify-content-spacebw two_column">
-                      <h6 class="title-label">View past invoices</h6>
-                      <a href="#" class="link-design-2">View</a>
-
-                    </li>
-
-                  </ul>
-                </div>
-
-                <div class="form-headeing-second payment_heading pt-3">
-                  <h4><img src="{{asset('assets/images/payout.svg')}}" class="me-3" />Payout location</h4>
-                </div>
-                <div class="customer-account-information">
-                  <ul class="list-unstyled">
-                    <li class="d-flex justify-content-spacebw two_column">
-                      <h6 class="title-label">Account Holder Name*:</h6>
-                      <p class="">Checking</p>
-                    </li>
-                    <li class="d-flex justify-content-spacebw two_column">
-                      <h6 class="title-label">Account Number*:</h6>
-                      <p class="">98745611232658</p>
-                    </li>
-
-                    <li class="d-flex justify-content-spacebw three_column">
-                      <h6 class="title-label">Routing Number*:</h6>
-                      <p class=""> Chase Bank</p>
-                      <a href="{{route('cleaner.billing.editBankAccount')}}" class="link-design-2">Edit</a>
-                    </li>
-                  </ul>
-                </div>
-                --}}
-
               </div>
             </div>
           </div>
@@ -100,4 +43,9 @@
     </div>
   </div>
 </section>
+
+@if ( $errors->any() )
+<script>console.log( @json( $errors->all() )  )</script>
+@endif
+
 @endsection
