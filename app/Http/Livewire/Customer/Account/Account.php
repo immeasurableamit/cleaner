@@ -96,6 +96,7 @@ class Account extends Component
 
             }
             $user->update();
+            $this->alert('success', 'Detail Updated successfully');
 
             if ($action == 'address') {
 
@@ -106,6 +107,7 @@ class Account extends Component
             //     $userdetail->timezone = $this->timezone;
             // }
             $userdetail->update();
+            $this->alert('success', 'Detail Updated successfully');
             $this->fieldStatus = false;
         }
 

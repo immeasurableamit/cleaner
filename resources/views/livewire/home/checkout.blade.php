@@ -95,14 +95,15 @@
     @elseif ($currentlyActiveStep == 2)
     <!--Login Modal -->
     <!-- Modal -->
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+    <div class="modal fade modal_style" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
         <div class="modal-dialog" role="document">
         <button type="button" class="close btn_close" onclick="$('#loginModal').modal('hide')" style="border: none; background: transparent;">
                         <i class="fa fa-times fa-xl" aria-hidden="true"></i>
                     </button>
             <div class="modal-content">
                 <div class="modal-header border border-bottom-0">
-                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <h3>Sign In </h3>
+                    {{-- <h5 class="modal-title" id="exampleModalLabel"></h5> --}}
 
                 </div>
                 <div class="modal-body">
@@ -154,7 +155,7 @@
                         <div class="text-center link-design-2 pt-3 bold">You don't pay until cleaning day!</div>
                     </div>
 
-                    
+
                     <div class="built_text_div">
                         @if (is_null($user))
                         <div class="provider_service pb-5 border-bottom  text-center">

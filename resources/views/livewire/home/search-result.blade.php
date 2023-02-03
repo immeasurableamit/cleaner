@@ -88,7 +88,8 @@
                 <div class="card_filter oferd_select select-design">
                     <h5 class="pb-2">Addons Offered</h5>
                     <div class="selecti-box" wire:ignore>
-                        <select class="select-custom-design" multiple onchange="addOnSelectChanged( this )" id="addonsSelector">
+                        <select class="select-custom-design" multiple onchange="addOnSelectChanged( this )"
+                            id="addonsSelector">
                             <option></option>
                             @foreach ($addons->first()->servicesItems as $item)
                                 <option value="{{ $item->id }}">{{ $item->title }}</option>
@@ -99,20 +100,20 @@
                 <div class="card_filter">
                     <div class="h5_input_checkbox">
                         <h5 class="">Organic Cleaners Only<img src="assets/images/badges.svg" class="ms-3"></h5>
-{{--                         <input type="checkbox" wire:click="$toggle('organicOnly')">
+                        {{--                         <input type="checkbox" wire:click="$toggle('organicOnly')">
 
  --}}
-                     <input type="checkbox" wire:model="organicOnly">
+                        <input type="checkbox" wire:model="organicOnly">
 
-</div>
+                    </div>
                     <div class="h5_input_checkbox">
                         <h5 class="">Insured Cleaners Only<img src="assets/images/insurance.svg" class="ms-3">
                         </h5>
-{{--                         <input type="checkbox" wire:click="$toggle('insuredOnly')">
+                        {{--                         <input type="checkbox" wire:click="$toggle('insuredOnly')">
  --}}
-                 <input type="checkbox" wire:model="insuredOnly">
+                        <input type="checkbox" wire:model="insuredOnly">
 
-</div>
+                    </div>
                 </div>
                 <div class="card_filter border-0">
                     <input type="text" placeholder="Search by keywords" class="search_input" wire:model="keyword">
@@ -135,14 +136,28 @@
                         <div class="listing-column lcd-4 lc-6">
                             <div class="card_search_result">
                                 <div class="like_img">
-                                    @if ($user)
-                                        @if (auth()->user()->role == 'cleaner' || auth()->user()->role  == 'admin')
-                                            <input type="hidden" value="">
-                                        @else
+
+                                    {{-- working --}}
+                                    {{-- @if ($user) --}}
+                                    @if(auth()->check())
+
+                                        @if (auth()->user()->role != 'cleaner' && auth()->user()->role != 'admin')
+                                            <input type="checkbox" class="like_1"
+                                            wire:click="toggleFavouriteCleaner({{ $cleaner->id }})"
+                                            {{ $user->favourites->where('cleaner_id', $cleaner->id)->first() == null ? '' : 'checked' }}>
+                                        {{-- @elseif(auth()->user()->role == 'customer')
                                             <input type="checkbox" class="like_1"
                                                 wire:click="toggleFavouriteCleaner({{ $cleaner->id }})"
-                                                {{ $user->favourites->where('cleaner_id', $cleaner->id)->first() == null ? '' : 'checked' }}>
+                                                {{ $user->favourites->where('cleaner_id', $cleaner->id)->first() == null ? '' : 'checked' }}> --}}
+                                        {{-- @else
+
+                                            <input type="checkbox" class="like_1"> --}}
                                         @endif
+                                    @else
+
+                                        <input type="checkbox" class="like_1" wire:click= "signupMove()">
+
+
                                     @endif
                                     <div id="" class="profile-pic">
                                         @if ($cleaner->image)
@@ -205,6 +220,12 @@
         </div>
     </div>
 
+
+
+
+
+
+
     <script>
         function addDatePickerInStartDateFilter() {
             let picker = new Litepicker({
@@ -260,7 +281,9 @@
 
         function addEventHandlerInRatingFilter() {
 
-            $("#ratingFilter").select2({placeholder: 'Min Rating'});
+            $("#ratingFilter").select2({
+                placeholder: 'Min Rating'
+            });
             $("#ratingFilter").on('select2:select', (e) => {
                 var data = e.params.data;
                 @this.set('rating', data.id)
@@ -270,7 +293,7 @@
         function addEventHandlers() {
             addEventHandlerInSortByFilter();
             addEventHandlerInRatingFilter();
-            
+
         }
 
         window.addEventListener('load', () => {
@@ -278,7 +301,9 @@
             addDatePickerInStartDateFilter();
             addEventHandlers();
 
-            $("#addonsSelector").select2({placeholder: 'Select'});
+            $("#addonsSelector").select2({
+                placeholder: 'Select'
+            });
             var element = document.getElementById('address');
             makeAddressInputAutocompletable(element, addressChanged);
         });

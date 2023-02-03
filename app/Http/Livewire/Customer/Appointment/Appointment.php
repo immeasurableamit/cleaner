@@ -2,12 +2,14 @@
 
 namespace App\Http\Livewire\Customer\Appointment;
 
+use App\Models\CleanerServices;
 use Livewire\Component;
 use App\Models\Order;
 use App\Models\OrderItem;
 use \Carbon\Carbon;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Models\Review;
+use App\Models\ServicesItems;
 use App\Notifications\Customer\OrderRescheduled as CustomerOrderRescheduled;
 use App\Notifications\Cleaner\OrderRescheduled as CleanerOrderRescheduled;
 use App\Notifications\Cleaner\OrderCancelled as CancelledOrderNotificationForCleaner;
@@ -113,18 +115,16 @@ class Appointment extends Component
         }
     }
 
-    // public function viewOrderServices($orderId)
-    // {
-    //     // dd($orderId);
+    public function viewOrderServices($orderId)
+    {
+        $ord=  OrderItem::where('order_id', $orderId)->pluck('service_item_id');
 
-    //     $ord =  Order::with('items')->first();
-    //     // dd($ord);
-    //     $this->selectOrderItem = $ord->items->first()->service_item->title;
+        // dd($ord); // 9,2
+        $this->selectOrderItem = ServicesItems::whereIn('id',$ord)->select('title','services_id')->get();
+        // dd($this->selectOrderItem );
 
-    //     // dd($this->selectOrderItem);
-
-    //     return $this->selectOrderItem;
-    // }
+        return $this->selectOrderItem;
+    }
 
 
     public function renderOrders()
