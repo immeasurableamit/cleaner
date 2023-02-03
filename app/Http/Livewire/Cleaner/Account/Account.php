@@ -151,32 +151,32 @@ class Account extends Component
 
             if ($action == 'facebook') {
                 $this->validate([
-                    'facebook' => 'required|url',
+                    'facebook' => 'url',
                 ]);
                 $userdetail->facebook = $this->facebook;
             }
 
             if ($action == 'twitter') {
                 $this->validate([
-                    'twitter' => 'required|url',
+                    'twitter' => 'url',
                 ]);
                 $userdetail->twitter = $this->twitter;
             }
             if ($action == 'instagram') {
                 $this->validate([
-                    'instagram' => 'required|url',
+                    'instagram' => 'url',
                 ]);
                 $userdetail->instagram = $this->instagram;
             }
 
             if ($action == 'linkedin') {
                 $this->validate([
-                    'linkedin' => 'required|url',
+                    'linkedin' => 'url',
                 ]);
                 $userdetail->linkedin = $this->linkedin;
             }
 
-            $userdetail->update();
+            $userdetail->save();
             $this->alert('success', 'Detail Updated successfully');
             $this->fieldStatus = false;
         }

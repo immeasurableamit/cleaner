@@ -86,37 +86,34 @@
                             <span>{{ $cleanerAdditionalInfo['is_organic'] ? 'Yes' : 'No' }}</span>
                         </div>
                     </div>
-                    <div class="rating_row">
-                        <p>Social Profile</p>
-                        <div class="s_icons">
-                        @if ($cleaner->userdetails->facebook !== null)
-                            <div>
-                                <a href="{{ url($cleaner->userdetails->facebook) }}" target="_blank"><i
-                                        class="fa-brands fa-facebook"></i>
-                                </a>
-                            </div>
-                        @endif
-                        @if ($cleaner->userdetails->instagram !== null)
-                            <div> <a href="{{ url($cleaner->userdetails->instagram) }}" target="_blank"><i
-                                        class="fa-brands fa-instagram"></i></a>
-                            </div>
-                        @endif
+                    {{-- {{dd($cleaner->userdetails->facebook)}} --}}
+                    @if ($cleaner->userdetails->facebook || $cleaner->userdetails->instagram || $cleaner->userdetails->twitter || $cleaner->userdetails->linkedin)
+                        <div class="rating_row">
+                            <p>Social Profile</p>
+                            <div class="s_icons">
+                                @if ($cleaner->userdetails->facebook)
+                                        <a href="{{ url($cleaner->userdetails->facebook) }}" target="_blank"><i
+                                                class="fa-brands fa-facebook"></i>
+                                        </a>
 
-                        @if ($cleaner->userdetails->twitter !== null)
-                            <div>
-                                <a href="{{ url($cleaner->userdetails->twitter) }}" target="_blank"> <i
-                                        class="fa-brands fa-twitter"></i></a>
+                                @endif
+                                @if ($cleaner->userdetails->instagram)
+                                     <a href="{{ url($cleaner->userdetails->instagram) }}" target="_blank"><i
+                                                class="fa-brands fa-instagram"></i></a>
+                                @endif
+
+                                @if ($cleaner->userdetails->twitter)
+                                        <a href="{{ url($cleaner->userdetails->twitter) }}" target="_blank"> <i
+                                                class="fa-brands fa-twitter"></i></a>
+                                @endif
+                                @if ($cleaner->userdetails->linkedin)
+                                        <a href="{{ url($cleaner->userdetails->linkedin) }}" target="_blank"><i
+                                                class="fa-brands fa-linkedin-in"></i></a>
+
+                                @endif
                             </div>
-                        @endif
-                        @if ($cleaner->userdetails->linkedin !== null)
-                            <div>
-                                <a href="{{ url($cleaner->userdetails->linkedin) }}" target="_blank"><i
-                                        class="fa-brands fa-linkedin-in"></i></a>
-                            </div>
-                        @endif
                         </div>
-                    </div>
-
+                    @endif
                 </div>
                 <div class="btn_msg_cleaner">
                     @php
@@ -504,12 +501,13 @@
             });
         </script>
         <style>
-            .s_icons{
-                display:flex;
+            .s_icons {
+                display: flex;
                 align-items: center;
                 gap: 10px;
             }
-            .s_icons a{
+
+            .s_icons a {
                 color: var(--primary);
             }
         </style>
