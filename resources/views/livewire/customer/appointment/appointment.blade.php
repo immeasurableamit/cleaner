@@ -241,7 +241,7 @@
                     @enderror
 
                     @if (!empty($rescheduledAvailableTimeSlots))
-                        <div class="row block_start_time">
+                        <div class="row block_start_time ">
                             <div class="col-md-5 select-design">
                                 <div class="selecti-box" wire:ignore>
                                     <select class="select-custom-design" id="reschedule-time-selector">

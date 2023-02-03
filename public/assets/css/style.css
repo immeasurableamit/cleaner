@@ -1690,7 +1690,7 @@ padding-right: 15px;
 }
 .card_service_row ul.dropdown-menu.show {
     padding: 18px 20px !important;
-    width: 241px;
+    width: 293px;
     transform: translate(83px, 22px) !important;
     box-shadow: 0px 15px 80px rgba(16, 85, 135, 0.15);
     border: 0px;
@@ -6016,14 +6016,18 @@ fieldset .row.no-mrg .checkout_div h4{
     width: 63%;
     font-weight: 400;
 }
-.btn_close{
+.btn_close {
     position: absolute;
-    right: 0px;
-    top: -13px;
+    right: -17px;
+    top: -18px !important;
     cursor: pointer;
     z-index: 2;
-    color: #000;
-    font-size: 25px;
+    color: #fff;
+    font-size: 17px;
+    background: #5a4b4b !important;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
 }
 .selct_2{
     padding: 15px 25px 15px 19px !important;
@@ -6034,10 +6038,18 @@ fieldset .row.no-mrg .checkout_div h4{
     background-color: transparent;
     padding: 0px;
 }
-.edit_frm input[type="number"], .edit_frm input[type="email"], .edit_frm input[type="text"] {
+.edit_frm input[type="number"], .edit_frm input[type="email"], .edit_frm input[type="text"],.edit_frm select {
     border: 1px solid;
     padding: 5px !important;
     height: auto;
+    background: var(--bwhite);
+    box-shadow: 0px 15px 50px rgb(16 85 135 / 15%);
+    border-radius: 10px;
+    border: none;
+    display: block;
+    font-weight: 400;
+    font-size: 14px;
+    color: #363636;
 } 
 .edit_frm input:disabled{
     border: 0px !important;
@@ -6064,6 +6076,7 @@ fieldset .row.no-mrg .checkout_div h4{
 .customer-account-information.cleaner_account_2.mt-4 form.d-flex.justify-content-spacebw.three_column.edit_frm .time-zone-select-design input[type="text"]:disabled {
     border: 0px;
     background: inherit;
+    box-shadow: none;
     padding: 0px !important;
     position: relative;
     left: -5px;
@@ -6147,6 +6160,54 @@ fieldset .row.no-mrg .checkout_div h4{
 }
 .btn_close{
     top: 0px;
+}
+.s_icons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.customer-avatar-preview.position-relative div#uploaded a{
+    color: var(--primary);
+}
+.jobs-tab-header .nav-tabs .nav-link{
+    cursor: pointer;
+}
+.d-flex.justify-content-spacebw.three_column.edit_frm span.edit,.d-flex.justify-content-spacebw.three_column.edit_frm  span.save-icn-btn {
+    width: 9.5%;
+    text-align: right;
+    font-size: 17px;
+}
+.d-flex.justify-content-spacebw.three_column.edit_frm span.cancel {
+    width: 5.5%;
+    text-align: right;
+}
+form.d-flex.justify-content-spacebw.three_column.edit_frm .time-zone-select-design {
+    padding-left: 0px;
+}
+span.select2-container.select2-container--default.select2-container--open span.select2-dropdown.select2-dropdown--below {
+    width: fit-content !important;
+}
+.modal-content .modal-body .block_start_time {
+    display: flex;
+    justify-content: center;
+}
+.modal_style .modal-content {
+    border: 0px;
+    border-radius: 15px;
+}
+.modal_style .modal-content .modal-header {
+    border-bottom: 0px;
+}
+.modal_style .modal-content .modal-footer {
+    border-top: 0px;
+}
+.attachements-images {
+    display: flex;
+    justify-content: end;
+    flex-wrap: wrap;
+}
+.reciver_msg .attachements-images{
+    justify-content: start;
 }
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {
