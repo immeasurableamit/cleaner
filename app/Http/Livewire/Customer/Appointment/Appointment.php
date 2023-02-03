@@ -212,9 +212,9 @@ class Appointment extends Component
         $cleanerAvailablitly  = new CleanerAvailability($order->cleaner);
         $timeSlotsForCustomer = $cleanerAvailablitly->getAvailableSlotsByDate($this->rescheduleDate);
 
-        $this->rescheduledAvailableTimeSlots = $timeSlotsForCustomer; 
+        $this->rescheduledAvailableTimeSlots = $timeSlotsForCustomer;
         $this->dispatchBrowserEvent('enableTimePickerInRescheduleTimeSelect');
-        return $timeSlotsForCustomer;      
+        return $timeSlotsForCustomer;
     }
 
     public function rescheduleSelectedOrder()
