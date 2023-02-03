@@ -86,30 +86,36 @@
                             <span>{{ $cleanerAdditionalInfo['is_organic'] ? 'Yes' : 'No' }}</span>
                         </div>
                     </div>
-                    @if (
-                        $cleaner->userdetails->facebook == null ||
-                            $cleaner->userdetails->instagram == null ||
-                            $cleaner->userdetails->twitter == null ||
-                            $cleaner->userdetails->linkedin == null)
-                        <input type="hidden">
-                    @else
-                        <div class="rating_row">
-                            <p>Social Profile</p>
+                    <div class="rating_row">
+                        <p>Social Profile</p>
+                        <div class="s_icons">
+                        @if ($cleaner->userdetails->facebook !== null)
                             <div>
                                 <a href="{{ url($cleaner->userdetails->facebook) }}" target="_blank"><i
                                         class="fa-brands fa-facebook"></i>
                                 </a>
+                            </div>
+                        @endif
+                        @if ($cleaner->userdetails->instagram !== null)
+                            <div> <a href="{{ url($cleaner->userdetails->instagram) }}" target="_blank"><i
+                                        class="fa-brands fa-instagram"></i></a>
+                            </div>
+                        @endif
+
+                        @if ($cleaner->userdetails->twitter !== null)
+                            <div>
                                 <a href="{{ url($cleaner->userdetails->twitter) }}" target="_blank"> <i
                                         class="fa-brands fa-twitter"></i></a>
-
-                                <a href="{{ url($cleaner->userdetails->instagram) }}" target="_blank"><i
-                                        class="fa-brands fa-instagram"></i></a>
+                            </div>
+                        @endif
+                        @if ($cleaner->userdetails->linkedin !== null)
+                            <div>
                                 <a href="{{ url($cleaner->userdetails->linkedin) }}" target="_blank"><i
                                         class="fa-brands fa-linkedin-in"></i></a>
-
                             </div>
+                        @endif
                         </div>
-                    @endif
+                    </div>
 
                 </div>
                 <div class="btn_msg_cleaner">
@@ -253,8 +259,9 @@
                                 <select class="select-custom-design" id="time-selector">
                                     <option></option>
                                     @foreach ($workingDatesTimeSlot as $index => $slot)
-
-                                    <option value="{{ $slot['start_time'] }}"  @disabled($slot['is_available'] == false) @selected( $slot['start_time'] == $time) }}>{{ date("h:i A", strtotime($slot['start_time']) ) }}</option>                                  
+                                        <option value="{{ $slot['start_time'] }}" @disabled($slot['is_available'] == false)
+                                            @selected($slot['start_time'] == $time) }}>
+                                            {{ date('h:i A', strtotime($slot['start_time'])) }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -328,7 +335,7 @@
 
     @push('scripts')
         <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
-      {{--   <script>
+        {{--   <script>
             const allowedDates = @json(@$workingDates);
             let startDate = new Date();
 
@@ -369,12 +376,11 @@
             }
         </script> --}}
         <script>
-
-            var availableWeekdays = @json( $availabilityWeekdays);
+            var availableWeekdays = @json($availabilityWeekdays);
             var appointmentDatePickerInstance = null;
-            console.log( availableWeekdays );
-            function renderLitePickerForAppointmentSelection()
-            {
+            console.log(availableWeekdays);
+
+            function renderLitePickerForAppointmentSelection() {
                 if (appointmentDatePickerInstance) {
                     appointmentDatePickerInstance.destroy();
                 }
@@ -382,68 +388,68 @@
                 let dateOfToday = new Date();
                 let dateOfTomorrow = dateOfToday.setDate(dateOfToday.getDate() + 1);
 
-            appointmentDatePickerInstance = new Litepicker({
-                element: document.getElementById('start-end-date'),
-                numberOfMonths: 3,
-                numberOfColumns: 3,
-                inlineMode: true,
-                singleMode: true,
-                minDate:  dateOfTomorrow,
-                lockDaysFilter: (date) => {
-                    let weekday = date.getDay();
-                    if (availableWeekdays.includes(weekday)) {
-                        return false;
-                    }
-
-                    return true;
-                },
-                setup: (picker) => {
-                     picker.on('selected', (date) => {
-                        let formattedDate = date.format('YYYY-MM-DD');
-                        @this.selected_date = formattedDate;
-                    });
-                },
-            });
-            }
-
-           /*  const allowedDates = @json(@$workingDates);
-            let startDate = new Date();
-
-            getDates(allowedDates, startDate);
-
-            window.livewire.on('fireCalender', (dates, date) => {
-                $('#start-end-date').html('');
-                let sDate = new Date(date);
-                getDates(dates, sDate);
-            });
-
-            function getDates(workingDates, startDate) {
-                let newEvents = [];
-
-                new Litepicker({
+                appointmentDatePickerInstance = new Litepicker({
                     element: document.getElementById('start-end-date'),
                     numberOfMonths: 3,
                     numberOfColumns: 3,
                     inlineMode: true,
                     singleMode: true,
-                    minDate: new Date(),
-                    lockDaysFilter: (date1, date2, pickedDates) => {
-                        return !workingDates.includes(date1.format('YYYY-MM-DD'));
+                    minDate: dateOfTomorrow,
+                    lockDaysFilter: (date) => {
+                        let weekday = date.getDay();
+                        if (availableWeekdays.includes(weekday)) {
+                            return false;
+                        }
+
+                        return true;
                     },
-                    startDate: startDate,
                     setup: (picker) => {
                         picker.on('selected', (date) => {
-                            @this.set('selected_date', date.format('YYYY-MM-DD'));
+                            let formattedDate = date.format('YYYY-MM-DD');
+                            @this.selected_date = formattedDate;
                         });
-
-                        picker.on('change:month', (date, calendarIdx) => {
-                            // some action
-                            @this.set('month_date', date.format('YYYY-MM-DD'));
-                        });
-
                     },
                 });
-            } */
+            }
+
+            /*  const allowedDates = @json(@$workingDates);
+             let startDate = new Date();
+
+             getDates(allowedDates, startDate);
+
+             window.livewire.on('fireCalender', (dates, date) => {
+                 $('#start-end-date').html('');
+                 let sDate = new Date(date);
+                 getDates(dates, sDate);
+             });
+
+             function getDates(workingDates, startDate) {
+                 let newEvents = [];
+
+                 new Litepicker({
+                     element: document.getElementById('start-end-date'),
+                     numberOfMonths: 3,
+                     numberOfColumns: 3,
+                     inlineMode: true,
+                     singleMode: true,
+                     minDate: new Date(),
+                     lockDaysFilter: (date1, date2, pickedDates) => {
+                         return !workingDates.includes(date1.format('YYYY-MM-DD'));
+                     },
+                     startDate: startDate,
+                     setup: (picker) => {
+                         picker.on('selected', (date) => {
+                             @this.set('selected_date', date.format('YYYY-MM-DD'));
+                         });
+
+                         picker.on('change:month', (date, calendarIdx) => {
+                             // some action
+                             @this.set('month_date', date.format('YYYY-MM-DD'));
+                         });
+
+                     },
+                 });
+             } */
         </script>
         <script>
             function setPropInLivewire(name, value) {
@@ -497,6 +503,16 @@
                 renderLitePickerForAppointmentSelection();
             });
         </script>
+        <style>
+            .s_icons{
+                display:flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .s_icons a{
+                color: var(--primary);
+            }
+        </style>
     @endpush
 
 </div>

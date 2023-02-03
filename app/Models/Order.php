@@ -114,7 +114,7 @@ class Order extends Model
         $statuses = [
             'pending'   => 'Pending',
             'accepted'  => 'Accepted',
-            'rejected'  => 'Cancelled by cleaner',
+            'rejected'  => 'Rejected by cleaner',
             'cancelled' => 'Cancelled by cleaner',
             'cancelled_by_customer' => 'Cancelled by you',
             'payment_collected' => 'Accepted',
@@ -133,7 +133,7 @@ class Order extends Model
         $statuses = [
             'pending'   => 'Pending',
             'accepted'  => 'Accepted',
-            'rejected'  => 'Cancelled by cleaner',
+            'rejected'  => 'Rejected by cleaner',
             'cancelled' => 'Cancelled by cleaner',
             'cancelled_by_customer' => 'Cancelled by customer',
             'payment_collected' => 'Accepted',
@@ -180,13 +180,13 @@ class Order extends Model
         return $items;
     }
 
-    /* 
+    /*
      * Commented by -Jashan
      * whoever added this function before uncommenting this please
      * discuss with me.
-     * 
+     *
      * Commenting because don't know if removing this will interrupt app
-     
+
     public function supportService()
     {
         return $this->hasMany(SupportService::class);
