@@ -40,10 +40,11 @@
                                                     <strong>{{ @$item->service_item->title }}</strong>
                                                 </p>
                                             @endforeach
-                                            {{--
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal" data-id="{{$order->items}}" wire:click="viewOrderServices({{$order->id}})">View</button>
-                                            --}}
+                                            {{--   --}}
+                                            <a type="button" class="text-primary bold" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal" data-id="{{ $order->items }}"
+                                                wire:click="viewOrderServices({{ $order->id }})">View</a>
+
                                         </div>
                                         <div class="altrntive_rw">
                                             <p class="appointment_label">Est Duration</p>
@@ -291,28 +292,39 @@
 
 
     <!-- Modal - View -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    <div class="modal fade modal_style" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="exampleModalLabel">Selected Services</h5>
+                    <button type="button" class="btn-close btn_close"  data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    {{-- <p class="appointment_label">Service</p> --}}
+                    @if ($selectOrderItem)
+                        @foreach ($selectOrderItem as $selectOrderItem)
+                            <div class="altrntive_rw">
 
-                    {{-- {{dd($selectOrderItem)}} --}}
+                                @if ($selectOrderItem->services_id == '3')
+                                <div class="s_servicsess">
+                                    <p> Add ons </p>
+                                    <p class="app-value">${{ $selectOrderItem->title }}</p>
+                                </div>
+                                @else
+                                <div class="s_servicsess">
+                                    <p> Services </p>
+                                    <p class="app-value">${{ $selectOrderItem->title }}</p>
+                                </div>
+                                @endif
 
-
-                    <div class="altrntive_rw">
-                        <p class="appointment_label">Service</p>
-
-                        <p class="app-value">${{ @$selectOrderItem }}</p>
-                    </div>
+                            </div>
+                        @endforeach
+                    @endif
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    {{--  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
                     {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
                 </div>
             </div>
@@ -321,7 +333,19 @@
 
     <!-- Modal End -->
 </div>
-
+<style>
+     .s_servicsess{
+        display:flex;
+        align-items: center;
+        gap: 15px;
+     }
+     .s_servicsess p{
+        margin-bottom: 0px;
+     }
+     .s_servicsess p:first-child{
+        min-width: 100px;
+     }
+    </style>
 @push('scripts')
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.3.1/main.min.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>

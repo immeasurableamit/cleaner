@@ -99,22 +99,13 @@ class Team extends Component
                 'insured' => $this->insured,
             ]);
             $this->emit('close-modal', $this->user_id, 'success');
-            // $this->emit('close-modal');
-            // $this->emit('closeModal');
 
             $this->updateMode = false;
-
         }
         // return redirect()->route('cleaner.team');
         $this->alert('success', 'Updated successfully');
     }
 
-    // public function showHide($id)
-    // {
-
-    //     $this->emit('postAdded', $id, 'success');
-
-    // }
 
     public function deleteConfirm($iid)
     {
@@ -144,7 +135,7 @@ class Team extends Component
 
     public function render()
     {
-        $teamMemberCounts = CleanerTeam::where('user_id', auth()->user()->id)->count();
+        $teamMemberCounts = CleanerTeam::where('user_id', auth()->user()->id)->count()+1;
 
         $teamMembers = CleanerTeam::where('user_id', auth()->user()->id)->get();
         return view('livewire.cleaner.team.team', compact('teamMemberCounts', 'teamMembers'));

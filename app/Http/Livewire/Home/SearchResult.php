@@ -77,11 +77,11 @@ class SearchResult extends Component
     protected function captureInitialFilters()
     {
         $this->intialFiltersState = [
-            'selectedServiceItemId' => $this->selectedServiceItemId,                      
+            'selectedServiceItemId' => $this->selectedServiceItemId,
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
             'homeSize'  => $this->homeSize,
-            'address'   => $this->address,            
+            'address'   => $this->address,
         ];
     }
 
@@ -349,6 +349,17 @@ class SearchResult extends Component
     //     $cleanerService->save();
 
     // }
+
+ /*
+     * Used for move signup page
+     * on click of favourite icon
+     *
+     */
+    public function signupMove()
+    {
+        return redirect()->route('signup');
+
+    }
 
     public function render()
     {
