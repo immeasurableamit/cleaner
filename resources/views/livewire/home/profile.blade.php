@@ -95,16 +95,16 @@
                     @else
                         <div class="rating_row">
                             <p>Social Profile</p>
-                            <div>
-                                <a href="{{ url($cleaner->userdetails->facebook) }}" target="_blank"><i
+                            <div class="s_icons">
+                                <a href="{{ url($cleaner->userdetails->facebook) }}" target="_blank" style="color:var(--primary);"><i
                                         class="fa-brands fa-facebook"></i>
                                 </a>
-                                <a href="{{ url($cleaner->userdetails->twitter) }}" target="_blank"> <i
+                                <a href="{{ url($cleaner->userdetails->twitter) }}" target="_blank" style="color:var(--primary);"> <i
                                         class="fa-brands fa-twitter"></i></a>
 
-                                <a href="{{ url($cleaner->userdetails->instagram) }}" target="_blank"><i
+                                <a href="{{ url($cleaner->userdetails->instagram) }}" target="_blank" style="color:var(--primary);"><i
                                         class="fa-brands fa-instagram"></i></a>
-                                <a href="{{ url($cleaner->userdetails->linkedin) }}" target="_blank"><i
+                                <a href="{{ url($cleaner->userdetails->linkedin) }}" target="_blank" style="color:var(--primary);"><i
                                         class="fa-brands fa-linkedin-in"></i></a>
 
                             </div>

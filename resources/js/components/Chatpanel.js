@@ -431,9 +431,9 @@ const Chatpanel = () => {
 	                      <li><a class="dropdown-item" href="#">Something else here</a></li>
 	                    </ul>
 	                  </div>
-	                  <div class="three_dots">
+	                  {/* <div class="three_dots">
 	                     <span>...</span>
-	                  </div>
+	                  </div> */}
 	                 </div>
 	             </div>
 	                             
@@ -476,6 +476,8 @@ const Chatpanel = () => {
 				                     {msgs.message &&
 				                     <p className="msg_p">{msgs.message}</p>
 				                  	}
+																			<div className='attachements-images'>
+
 				                  	{msgs?.files?.length > 0 &&
 										msgs.files.map(function (file, i) {
 											return (
@@ -490,6 +492,8 @@ const Chatpanel = () => {
 											)
 										})
 									}
+																			</div>
+
 				                  </div>
 				                </div>
 							)
