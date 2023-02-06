@@ -309,12 +309,12 @@
                                 @if ($selectOrderItem->services_id == '3')
                                 <div class="s_servicsess">
                                     <p> Add ons </p>
-                                    <p class="app-value">${{ $selectOrderItem->title }}</p>
+                                    <p class="app-value">{{ $selectOrderItem->title }}</p>
                                 </div>
                                 @else
                                 <div class="s_servicsess">
                                     <p> Services </p>
-                                    <p class="app-value">${{ $selectOrderItem->title }}</p>
+                                    <p class="app-value">{{ $selectOrderItem->title }}</p>
                                 </div>
                                 @endif
 
