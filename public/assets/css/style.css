@@ -4368,7 +4368,9 @@ font-size: 20px;
         align-items: center;
         position: relative;
         padding-bottom: 5px;
-        justify-content: center;
+        justify-content: space-between;
+        width: 70%;
+        margin: auto;
     }
     .altrntive_rw .btn_q {
         margin-right: 5px;
@@ -6224,6 +6226,23 @@ span.select2-container.select2-container--default.select2-container--open span.s
     border-radius: 20px;
     padding: 12px 22px;
     margin: 15px 0px;
+}
+.stng_price h3 {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding-bottom: 15px;
+}
+.stng_price p {
+    color: #777777;
+    font-size: 14px;
+}
+.stng_price p b {
+    color: #000;
+}
+.stng_price p i {
+    font-style: inherit;
+    font-weight: 700;
 }
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {
