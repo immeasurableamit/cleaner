@@ -54,10 +54,17 @@
                 <li><a class="dropdown-item" href="#">Link 1</a></li>
                 <li><a class="dropdown-item" href="#">Link 2</a></li>
               <!--   <li><a class="dropdown-item" href="#">Link 3</a></li> -->
-              <div class="dropsown-logout-design"> 
-               <form action="{{ route('logout') }}" method="post">
+              <div class="dropsown-logout-design">
+
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                      document.getElementById('logout-form').submit();">
+                         <img src="{{ asset('/assets/images/icons/logout.svg') }}">{{ __('Logout') }}
+                     </a>
+
+               <form action="{{ route('logout') }}" method="post" id="logout-form">
                   @csrf
-                   <button type="submit" style="border: none; background: transparent"><img src="{{asset('assets/images/icons/logout.svg')}}" > Logout</button>
+                  {{--  <button type="submit" style="border: none; background: transparent"><img src="{{asset('assets/images/icons/logout.svg')}}" > Logout</button> --}}
                 </form>
               </div>
               </ul>
@@ -78,9 +85,9 @@
         $(".toggle_menu").click( () => {
             $('.bar_left').toggleClass('show');
         });
-        
+
     });
-    </script> 
+    </script>
     <script>
       $(document).ready(function(){
     $('.toggle_menu').click(function(){

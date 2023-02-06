@@ -5,7 +5,16 @@ use App\Models\Setting;
 
 function socialLinks()
 {
-    $socialProfile = Setting::findOrFail('1');
+    $socialProfile = Setting::find('1');
+    // $socialProfile = Setting::findOrFail('1');
 
-    return  $socialProfile;
+    if($socialProfile){
+
+        return  $socialProfile;
+
+    }else{
+        return  $socialProfile = '';
+    }
+
+
 }
