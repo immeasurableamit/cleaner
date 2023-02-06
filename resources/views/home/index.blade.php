@@ -181,6 +181,10 @@
                                     support in case any other issues were to arsise - we always will do the right thing!</p>
                             </div>
                         </div>
+
+                        <div class="why_choose_btns">
+                            <a href="#" class="btn_b">Browse Cleaners</a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-6">
