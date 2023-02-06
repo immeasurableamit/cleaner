@@ -19,10 +19,10 @@
     </div>
     <!-- End Model-->
     <div class="teams-table-layout-view">
-    <div class="row">
+        <div class="row">
 
-        @foreach ($teamMembers as $teamMember)
-      
+            @foreach ($teamMembers as $teamMember)
+
             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                 <div class="select-date-toggles overflow-hidden teamCard-{{$teamMember->id}}">
                     <button class="service_toggle_s removeCard-{{$teamMember->id}}" data-id="{{ $teamMember->id }}"></button>
@@ -34,7 +34,9 @@
                         </div>
                         <div class="altrntive_rw">
                             <p class="appointment_label">Insured?</p>
-                            <p class="app-value green"><strong>{{$teamMember->insured}}</strong></p>
+                            <p @class([ 'app-value' , 'text-success'=> strtolower($teamMember->insured) == 'yes',
+                                'text-danger' => strtolower($teamMember->insured) == 'no',
+                                ])><strong>{{$teamMember->insured}}</strong></p>
                         </div>
                         <div class="altrntive_rw">
                             <p class="appointment_label">Phone</p>
@@ -63,8 +65,8 @@
                     </div>
                 </div>
             </div>
-        
-        @endforeach
+
+            @endforeach
         </div>
         <div class="pt-3">
             <button type="button" class="submit-design mb-2 btn_blue" style="background-color:var(--secondary);" data-bs-toggle="modal" data-bs-target="#teamModal">
@@ -74,13 +76,13 @@
     </div>
 
     <!-- updateModel -->
-    <div wire:ignore.self class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div wire:ignore.self class="modal fade modal_style" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
         <div class="modal-dialog pop-up-form">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="form-heading-h4 text-center" id="exampleModalLabel">Add Team Members</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" id="updateModalClose" aria-label="Close"></button>
+                    <button type="button" class="btn_close" data-bs-dismiss="modal" id="updateModalClose" aria-label="Close" style="border:0px;">X</button>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -104,7 +106,7 @@
                         </div>
                     </div>
                     <div class="row">
-                    <div class="col-xl-6 col-lg-6 col-sm-12 col-md-6">
+                        <div class="col-xl-6 col-lg-6 col-sm-12 col-md-6">
                             <div class="form-grouph select-search-design select-design mb-2">
                                 <label>Insured</label>
                                 <select wire:model="insured" class="form-control selct_2" style="box-shadow: 0px 15px 50px rgb(16 85 135 / 15%);">
@@ -169,13 +171,13 @@
     </div>
     <!-- end updateModel -->
 
-    <div wire:ignore.self class="modal fade" id="teamModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div wire:ignore.self class="modal fade modal_style" id="teamModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
         <div class="modal-dialog pop-up-form">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="form-heading-h4 text-center" id="exampleModalLabel">Add Team Members</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" id="closeexample" aria-label="Close"></button>
+                    <button type="button" class="btn_close" data-bs-dismiss="modal" id="closeexample" aria-label="Close" style="border:0px;">X</button>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -205,7 +207,7 @@
                         <div class="col-xl-6 col-lg-6 col-sm-12 col-md-6">
                             <div class="form-grouph select-search-design select-design mb-2">
                                 <label>Insured</label>
-                                <select wire:model="insured" class="form-control selct_2" style="box-shadow: 0px 15px 50px rgb(16 85 135 / 15%);" >
+                                <select wire:model="insured" class="form-control selct_2" style="box-shadow: 0px 15px 50px rgb(16 85 135 / 15%);">
                                     <option value="" selected>Choose Insured</option>
                                     <option value="Yes">Yes</option>
                                     <option value="No">No</option>
@@ -328,7 +330,11 @@
                 location.reload();
             }
         });
-
+    </script>
+    <script>
+        $('#updateModal').click(function() {
+            location.reload();
+        });
     </script>
     @endpush
     <style>
