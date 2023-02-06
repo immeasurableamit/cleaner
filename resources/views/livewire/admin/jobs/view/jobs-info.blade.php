@@ -11,7 +11,7 @@
      
             <div class="job_lists">
         <h3>Completion date:</h3>
-        <p>{{ date("d/m/Y", strtotime($orders->cleaning_datetime))}}</p>
+        <p>{{ date("m/d/Y", strtotime($orders->cleaning_datetime))}}</p>
         <a class="cancel_r" href="#" ></a>
        </div>
 
@@ -116,7 +116,7 @@
                   <td>{{$order->id ?? ''}}</td>
                   <td>Deep clean - 20500 sq ft</td>
                   <td>{{$order->amount ?? ''}}</td>
-                  <td>{{ date("d/m/Y", strtotime($order->created_at ?? ''))}}</td>
+                  <td>{{ date("m/d/Y", strtotime($order->created_at ?? ''))}}</td>
                   <td>{{$order->action ?? ''}}</td>
                   <td>
                     <div class="dropdown refund_div">
