@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<section class="authentication-sec light-banner signup-page" style="background-image: url('assets/images/white-pattern.png')">
+<section class="authentication-sec light-banner signup-page" style="background-image: url('../assets/images/white-pattern.png')">
      <div class="container sign_up_container">
 
       <div class="account_type_div pb-5">

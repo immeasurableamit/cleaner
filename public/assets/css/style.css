@@ -562,7 +562,7 @@ color: var(--secondary);
     outline: 5px solid var(--primary);
 }
 .select-inner-box:hover .select-signup-cntnt p {
-    font-weight: 600;
+    font-weight: 700;
     color: #000;
 }
 .select-inner-box:hover .select-signup-cntnt::After {
@@ -1396,7 +1396,7 @@ button:focus{
     border-color: #C3C3C3 !important;
 }
 .btn_c,.btn_b{
-    padding: 20px 70px;
+    padding: 15px 59px;
     background-color: var(--secondary);
     box-shadow: 0px 10px 80px rgba(16, 85, 135, 0.08);
      border-radius: 10px;
@@ -1420,7 +1420,15 @@ button:focus{
     background-color: #000;
     color: #fff;
 }
-
+.canary_clean_section a.btn_c.mt-4 {
+    padding: 15px 25px;
+    margin-left: 13px;
+}
+.join_us_cleaning_services_section .col-md-6{
+    /* background-size: contain; */
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 /* css here 0 */
 .date_section .form-headeing-second h4 {
     padding-top: 25px;
@@ -2675,6 +2683,12 @@ h2.h2_tittle {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+.slider_section .slick-next:before,.slider_section .slick-prev:before{
+    content: url(../images/icons/slider_12.png);
+}
+.slider_section .slick-next{
+    transform: rotate(180deg);
+}
 .slider_section .slick-prev,.slider_section .slick-next{
     width: 50px;
     height: 50px;
@@ -2695,6 +2709,7 @@ h2.h2_tittle {
 }
 .slider_section .slick-prev:hover::before,.slider_section .slick-next:hover::before{
     color: #fff;
+    filter: brightness(0)invert(1);
 }
 .slider_section  .slick-dots li.slick-active button:before {
     color: var(--primary);
@@ -2904,6 +2919,7 @@ border-radius: 20px;}
         object-fit: cover;
         display: flex;
         align-items: end;
+        background-position: -103px 0px;
     }
     .join_us_cleaning_services_section .cleaning_services_div{
         padding: 40px 100px;
@@ -2911,7 +2927,7 @@ border-radius: 20px;}
         object-fit: cover;
     }
     .join_us_cleaning_services_section .row{
-        height: 700px;
+        height: 653px;
     }
     .join_us_cleaning_services_section {
         overflow: hidden;
@@ -6244,6 +6260,19 @@ span.select2-container.select2-container--default.select2-container--open span.s
     font-style: inherit;
     font-weight: 700;
 }
+.cleaner_about {
+    position: relative;
+    padding-top: 30px;
+}
+.cleaner_about:before {
+    position: absolute;
+    content: '';
+    top: 0px;
+    width: 480px;
+    height: 1px;
+    background: #C4C4C4;
+    left: 0px;
+}
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {
     display: none;
@@ -8126,6 +8155,14 @@ div#requirements-alert-container .alert.alert-success.alert-dismissible.fade.sho
 .help_center .search-input-design .search-btn {
     top: 15px;
     right: 10px;
+}
+.btn_close {
+    position: absolute;
+    right: 5px;
+    top: 4px !important;
+}
+.modal_style {
+    margin-top: 50px;
 }
 /* css 767 end here */
 .full_home_cleaning_table{

@@ -2,7 +2,7 @@
 
 @section('content')
 
-<section class="authentication-sec light-banner login-page" style="background-image: url('assets/images/white-pattern.png')">
+<section class="authentication-sec light-banner login-page" style="background-image: url('../assets/images/white-pattern.png')">
   <div class="container">
     <div class="authentication-form-wrapper">
       <div class="row">
