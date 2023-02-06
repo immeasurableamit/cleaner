@@ -565,7 +565,7 @@ color: var(--secondary);
     outline: 5px solid var(--primary);
 }
 .select-inner-box:hover .select-signup-cntnt p {
-    font-weight: 600;
+    font-weight: 700;
     color: #000;
 }
 .select-inner-box:hover .select-signup-cntnt::After {
