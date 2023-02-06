@@ -33,12 +33,16 @@
                                         </div>
                                         <div class="altrntive_rw">
                                             <p class="appointment_label"> Job </p>
-
+                                                <?php $count = 0; ?>
                                             @foreach ($order->items as $item)
+                                            <?php if($count == 1) break; ?>
                                                 <p class="app-value blue">
 
                                                     <strong>{{ @$item->service_item->title }}</strong>
                                                 </p>
+
+                                                <?php $count++; ?>
+
                                             @endforeach
 
                                             <a type="button" class="text-primary bold" data-bs-toggle="modal"
