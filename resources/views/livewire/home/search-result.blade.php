@@ -155,7 +155,7 @@
                                         @endif
                                     @else
 
-                                        <input type="checkbox" class="like_1" wire:click= "signupMove()">
+                                        <input type="checkbox" class="like_1 like_2" wire:click= "signupMove()">
 
 
                                     @endif
