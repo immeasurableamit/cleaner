@@ -54,6 +54,7 @@ const Chatpanel = () => {
 			loadUserSlugId(getUser);
 			loadChats(getUser);
 		}
+
     }, []);
 
 
@@ -79,6 +80,7 @@ const Chatpanel = () => {
         })
         .then(response => response.json())
         .then(dat => {
+
 			setUserList(dat.listUsers);
 			setUserListData(dat.listUsers);
 
@@ -235,6 +237,8 @@ const Chatpanel = () => {
 				setText('');
 				setSending(false);
 				setFilesArray([]);
+				//loadUserSlugId(getUser);
+				loadChats(activeUser.id);
 			})
 			.catch((error) => {
 				console.error(error);
@@ -402,9 +406,8 @@ const Chatpanel = () => {
 			</div>
 
 
-
-
-
+		
+			{msgList.length > 0 &&
 			<div className="messages_right_section">
 
 			{isActive &&
@@ -418,7 +421,7 @@ const Chatpanel = () => {
 						}
 	                 </div>
 
-	                 <div class="bar_header_search d-none d-sm-flex">
+	             {/*     <div class="bar_header_search d-none d-sm-flex">
 	                  <input type="search" placeholder="Search" class="me-3" />
 	                  <div class="dropdown msg_notification d-none d-sm-block">
 	                    <button class="dropdown-toggle border-0 me-3" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -431,12 +434,13 @@ const Chatpanel = () => {
 	                      <li><a class="dropdown-item" href="#">Something else here</a></li>
 	                    </ul>
 	                  </div>
-	                  {/* <div class="three_dots">
+	                  <div class="three_dots">
 	                     <span>...</span>
-	                  </div> */}
-	                 </div>
+	                  </div>
+	                 </div>  */}
 	             </div>
-	                             
+
+			     
 	             <div className="right_chat">
 	             	{page<lastPage &&
 						<button type="button" onClick={()=>onScrollLoadChats()}>load more chats</button>
@@ -476,8 +480,6 @@ const Chatpanel = () => {
 				                     {msgs.message &&
 				                     <p className="msg_p">{msgs.message}</p>
 				                  	}
-																			<div className='attachements-images'>
-
 				                  	{msgs?.files?.length > 0 &&
 										msgs.files.map(function (file, i) {
 											return (
@@ -492,8 +494,6 @@ const Chatpanel = () => {
 											)
 										})
 									}
-																			</div>
-
 				                  </div>
 				                </div>
 							)
@@ -571,6 +571,7 @@ const Chatpanel = () => {
              </>
          	}
           </div>
+}
         </div>
 
 
