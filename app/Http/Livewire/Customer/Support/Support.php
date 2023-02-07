@@ -20,6 +20,7 @@ class Support extends Component
     {
         $this->user = auth()->user();
         $this->completedOrders = Order::with([ 'user', 'items.service_item.service'])->where('user_id', $this->user->id )->get(); //whereIn('status', ['payment_collected', 'reviewed'])->get();
+    //    dd($this->completedOrders);
         $this->issues          = SupportRequest::issuesForUser();
         $this->resolutions     = SupportRequest::resolutionsForUser();
 

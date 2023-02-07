@@ -414,7 +414,12 @@ class Checkout extends Component
         // and update his id in DB
 
         $customer = stripeCreateCustomerWithSource($name, $this->email, $tokenResp['token_string']);
-        //    dd($customer);
+
+        if ($customer['status']  == false) {
+            $this->addError('stripe_card_verification', $customer['error_string']);
+            return ['status' => false, 'error' => $customer['error_string']];
+        }
+
         $customer = $customer['resposne']->id;
         $this->stripe_customer_id = $customer;
 

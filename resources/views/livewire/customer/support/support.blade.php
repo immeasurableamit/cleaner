@@ -17,7 +17,7 @@
                                     <option></option>
                                     @foreach ($completedOrders as $order)
                                         <option value="{{ $order->id }}" @if ( $order->id == $selectedOrderId ) selected @endif>{{ $order->title }}</option>
-                                    @endforeach
+                                        @endforeach
                                 </select>
                             </div>
 
