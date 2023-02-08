@@ -543,6 +543,7 @@
             console.log(foo);
             // @this.set('number',foo);
             var number = foo.replace(/\s/g, ''); //to remove space from numbers
+
             @this.set('number', number);
             console.log(number);
         });

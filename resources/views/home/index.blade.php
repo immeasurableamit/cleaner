@@ -183,7 +183,7 @@
                         </div>
 
                         <div class="why_choose_btns">
-                            <a href="#" class="btn_b">Browse Cleaners</a>
+                            <a href="#" class="btn_c btn_b">Browse Cleaners</a>
                         </div>
                     </div>
                 </div>

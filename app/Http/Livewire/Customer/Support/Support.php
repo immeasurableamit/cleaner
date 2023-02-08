@@ -16,11 +16,12 @@ class Support extends Component
 
     public $selectedOrderId, $issue, $requestedResolution, $description, $otherIssueExplaination;
 
+    public $completedOrdersId;
+
     public function mount()
     {
         $this->user = auth()->user();
-        $this->completedOrders = Order::with([ 'user', 'items.service_item.service'])->where('user_id', $this->user->id )->get(); //whereIn('status', ['payment_collected', 'reviewed'])->get();
-    //    dd($this->completedOrders);
+        $this->completedOrders = Order::with(['user', 'cleaner', 'items.service_item.service'])->where('user_id', $this->user->id)->get(); //whereIn('status', ['payment_collected', 'reviewed'])->get();
         $this->issues          = SupportRequest::issuesForUser();
         $this->resolutions     = SupportRequest::resolutionsForUser();
 
@@ -36,11 +37,11 @@ class Support extends Component
     public function addCustomAttributesInCompletedOrdersProp()
     {
 
-        $this->completedOrders->each( function($order) {
+        $this->completedOrders->each(function ($order) {
 
             $formattedDateTime = $order->cleaning_datetime->format('m/d/y');
             //$order->title = "$formattedDateTime - ".$order->service()->title." - ".$order->user->name;
-            $order->title = "$formattedDateTime - ".$order->serviceOrderItem()->service_item->service->title." - ".$order->user->name;
+            $order->title = "$formattedDateTime - " . $order->serviceOrderItem()->service_item->service->title . " - " . $order->cleaner->name;
         });
     }
 
@@ -72,14 +73,14 @@ class Support extends Component
 
     public function storeSupportRequest()
     {
-        $this->validate( $this->rules() );
+        $this->validate($this->rules());
 
         $supportRequest = SupportRequest::create([
             'order_id'   => $this->selectedOrderId,
             'issue_type' => $this->issue,
-            'issue'      => $this->issues[ $this->issue ],
+            'issue'      => $this->issues[$this->issue],
             'requested_resolution_type'  => $this->requestedResolution,
-            'requested_resolution'       => $this->resolutions[ $this->requestedResolution ],
+            'requested_resolution'       => $this->resolutions[$this->requestedResolution],
             'description'                => $this->description,
             'explanation_for_other_type' => $this->otherIssueExplaination,
             'user_id'                     => $this->user->id,

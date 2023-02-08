@@ -37,7 +37,7 @@
               {{ session('status') }}
             </div>
             @endif
-                <!-- <span class="input-icon"><img src="assets/images/icons/email.svg"></span> -->
+                <span class="input-icon"><img src="assets/images/icons/email.svg"></span>
               </div>
               <div class="form-grouph submit-design mb-25">
                 <!-- <input type="submit" value="Submit" class="submit-btn"> -->
