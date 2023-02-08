@@ -1415,7 +1415,7 @@ button:focus{
     background-color: var(--primary);
     color: #fff;
 }
-.btn_c:hover{
+.btn_c:hover,.btn_b:hover{
     transition: 0.3s;
     background-color: #000;
     color: #fff;
@@ -3369,6 +3369,9 @@ button.btn_filter.btn_filter_by {
     height: 21.2px;
     cursor: pointer;
 }
+.card_search_result .like_img input[type="checkbox"].like_1.like_2:checked:before{
+    background-image: url(../images/icons/e_heart.png);
+}
 .card_search_result .like_img input[type="checkbox"].like_1:checked:before{
     background-image: url(../images/icons/f_heart.png);
 }
@@ -4263,6 +4266,7 @@ font-size: 20px;
         margin-bottom: 20px;
         overflow: hidden;
         transition: max-height 0.5s ease;
+        margin-left: 15px;
     }
     .common_card_service.show .form-switch .form-check-input {
         background-position: right center;
@@ -5978,7 +5982,7 @@ fieldset .row.no-mrg .checkout_div h4{
 }
 .form_availibility .time-schedule-addon .time-input-addon {
     position: relative;
-    padding-bottom: 10px;
+    padding-bottom: 25px;
 }
 .form_availibility .time-schedule-addon .time-input-addon button.border-0.bg-none.btn_deleter {
     position: absolute;
@@ -6032,6 +6036,7 @@ fieldset .row.no-mrg .checkout_div h4{
 .terms_r input[type="checkbox"] {
     position: relative;
     top: 3px;
+    cursor: pointer;
 }
 .biling_form .customer-account-information li.three_column>p {
     width: 63%;
@@ -6282,6 +6287,21 @@ span.select2-container.select2-container--default.select2-container--open span.s
 }
 .orange_txt{
     color: orange;
+}
+.time-input-addon .alert.d-inline {
+    position: absolute;
+    left: 47px;
+    top: 34px;
+}
+.prescheduled_off-time {
+    max-height: 230px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 10px;
+    position: relative;
+}
+.profile_id span.select2-selection.select2-selection--multiple textarea.select2-search__field,.profile_id span.select2-selection.select2-selection--multiple {
+    cursor: pointer;
 }
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {

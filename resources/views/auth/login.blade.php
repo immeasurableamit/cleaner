@@ -33,6 +33,7 @@
               <div class="form-grouph input-design input-icon-left mb-25">
               <input type="text" name="email" placeholder="Enter your email address" class="form-control{!! ($errors->has('email') ? ' is-invalid' : '') !!}" />
               {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
+              <span class="input-icon"><img src="assets/images/icons/email.svg"></span>
               </div>
               <div class="form-grouph input-design input-icon-left mb-25">
               <input type="password" name="password" placeholder="Password" class="form-control{!! ($errors->has('password') ? ' is-invalid' : '') !!}" />
