@@ -13,6 +13,7 @@ use Livewire\Component;
 
 use App\Models\User;
 use App\Models\UserDetails;
+use App\Models\Setting;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -75,11 +76,44 @@ class Checkout extends Component
         $this->estimatedDuration = $cleanerServices->sum('duration');
     }
 
+    public function taxCalculate()
+    {
+        $this->subtotal = $this->cleanerService->first()->rate + $this->addOns->sum('rate');
+        $taxId = Setting::find('1');
+        if ($taxId->tax_type == 'percentage') {
+            $taxPercentCal = $this->subtotal * $taxId->tax / 100;
+
+            // dd($taxPercentCal);
+            return $taxPercentCal;
+        } else {
+            $taxFixCal = $taxId->tax;
+            return  $taxFixCal;
+        }
+
+        return true;
+    }
+
+    public function transactionFeeCalculate()
+    {
+        $this->subtotal = $this->cleanerService->first()->rate + $this->addOns->sum('rate');
+        $this->tax      = $this->taxCalculate();
+        $taxId = Setting::find('1');
+        if ($taxId->transaction_fee_type == 'percentage') {
+            $transactionPercentCal = ($this->subtotal + $this->tax) * $taxId->transaction_fees / 100;
+
+            return $transactionPercentCal;
+        } else {
+            $transactionFixedCal = $taxId->transaction_fees;
+            return $transactionFixedCal;
+        }
+    }
+
     protected function preparePricingProps()
     {
         $this->subtotal = $this->cleanerService->first()->rate + $this->addOns->sum('rate');
-        $this->tax      = 0; // TODO: make this dynamic
-        $this->transactionFees = ($this->subtotal + $this->tax) / 100 * 2; // TODO: transaction fees calculation formula needed. 2% for make it work
+        $this->tax      = $this->taxCalculate();
+        // $this->transactionFees = ($this->subtotal + $this->tax) / 100 * 2; // TODO: transaction fees calculation formula needed. 2% for make it work
+        $this->transactionFees = $this->transactionFeeCalculate();
         $this->total    = $this->subtotal + $this->tax + $this->transactionFees;
     }
 
@@ -152,10 +186,8 @@ class Checkout extends Component
 
         $user = User::where('email', $this->email)->first();
 
-        if ($user->role == 'cleaner' || $user->role == 'admin' ) {
+        if ($user->role == 'cleaner' || $user->role == 'admin') {
             return $this->alert("error", "Cleaner and Admin don't have permission to book an appointment");
-
-
         } else {
 
             if (!Hash::check($this->password, $user->password)) {
