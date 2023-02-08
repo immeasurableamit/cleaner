@@ -197,9 +197,7 @@
                                         </div>
                                     </div>
                                     <div class="btn_rate">
-                                        <b>$
-
-                                            {{ $cleaner->price_for_selected_service }}
+                                        <b>${{ $cleaner->price_for_selected_service }}
                                         </b>
                                         <a href="{{ route('profile', $cleaner->id) }}"><button
                                                 class="btn_view d-none d-md-block">View</button></a>

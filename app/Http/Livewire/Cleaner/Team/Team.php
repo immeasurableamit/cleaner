@@ -10,10 +10,10 @@ use Livewire\Component;
 class Team extends Component
 {
     use LivewireAlert;
-    public $first_name, $last_name, $email, $address, $ssn_or_tax, $insured, $contact_number, $name;
+    public $first_name, $last_name, $email, $address, $ssn_or_tax, $insured, $contact_number, $name, $user_id;
     public $updateMode = false;
     public $toggleStatus = false;
-    protected $listeners = ['delete'] ;
+    protected $listeners = ['delete', 'refreshComponent' => '$refresh'] ;
 
     public function rules()
     {
@@ -122,6 +122,7 @@ class Team extends Component
 			'timer' => null
 		]);
 
+        $this->emit('refreshComponent');
     }
 
     public function delete()
