@@ -46,7 +46,7 @@
 
 
         <div class="text-center row">
-            <div class="col-6">
+            <div class="col-12 pb-2">
             @if ( $bank->account_number )
                 <a  class="btn_blue" href="{{ route('cleaner.billing.delete') }}">Delete Bank Account</a>
             @else
@@ -54,7 +54,7 @@
             @endif
             </div>
             @if ( $bank->payouts_enabled == 0 )
-            <div class="col-6">
+            <div class="col-12 pt-3">
                 <a href="{{ route('cleaner.billing.stripeConnectUpdate') }}" class="btn_blue" role="button" type="button">Update Stripe Account</a>
             </div>
             @endif
