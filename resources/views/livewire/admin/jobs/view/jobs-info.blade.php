@@ -1,5 +1,5 @@
 <div>
-     <div class="white-bg-wrapper">
+     <div class="">
         <div class="job_id">
        <h5>Job # {{$orders->id}}</h5>
         </div>
