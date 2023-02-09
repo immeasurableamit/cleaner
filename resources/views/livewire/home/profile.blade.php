@@ -87,29 +87,31 @@
                         </div>
                     </div>
                     {{-- {{dd($cleaner->userdetails->facebook)}} --}}
-                    @if ($cleaner->userdetails->facebook || $cleaner->userdetails->instagram || $cleaner->userdetails->twitter || $cleaner->userdetails->linkedin)
+                    @if (
+                        $cleaner->userdetails->facebook ||
+                            $cleaner->userdetails->instagram ||
+                            $cleaner->userdetails->twitter ||
+                            $cleaner->userdetails->linkedin)
                         <div class="rating_row">
                             <p>Social Profile</p>
                             <div class="s_icons">
                                 @if ($cleaner->userdetails->facebook)
-                                        <a href="{{ url($cleaner->userdetails->facebook) }}" target="_blank"><i
-                                                class="fa-brands fa-facebook"></i>
-                                        </a>
-
+                                    <a href="{{ url($cleaner->userdetails->facebook) }}" target="_blank"><i
+                                            class="fa-brands fa-facebook"></i>
+                                    </a>
                                 @endif
                                 @if ($cleaner->userdetails->instagram)
-                                     <a href="{{ url($cleaner->userdetails->instagram) }}" target="_blank"><i
-                                                class="fa-brands fa-instagram"></i></a>
+                                    <a href="{{ url($cleaner->userdetails->instagram) }}" target="_blank"><i
+                                            class="fa-brands fa-instagram"></i></a>
                                 @endif
 
                                 @if ($cleaner->userdetails->twitter)
-                                        <a href="{{ url($cleaner->userdetails->twitter) }}" target="_blank"> <i
-                                                class="fa-brands fa-twitter"></i></a>
+                                    <a href="{{ url($cleaner->userdetails->twitter) }}" target="_blank"> <i
+                                            class="fa-brands fa-twitter"></i></a>
                                 @endif
                                 @if ($cleaner->userdetails->linkedin)
-                                        <a href="{{ url($cleaner->userdetails->linkedin) }}" target="_blank"><i
-                                                class="fa-brands fa-linkedin-in"></i></a>
-
+                                    <a href="{{ url($cleaner->userdetails->linkedin) }}" target="_blank"><i
+                                            class="fa-brands fa-linkedin-in"></i></a>
                                 @endif
                             </div>
                         </div>
@@ -290,7 +292,7 @@
     </div>
 
     @if ($cleaner->cleanerReviews->isNotEmpty())
-        <div class=" row mx-0 feedback_reviews_section profile_feedback_div">
+        <div class=" row mx-0 feedback_reviews_section profile_feedback_div" wire:ignore>
             <h4 class="h4_tittle text-center">Customer Feedback</h4>
 
             @foreach ($cleaner->cleanerReviews as $review)
@@ -322,10 +324,15 @@
                     </p>
                 </div>
             @endforeach
-            <div class="btn_show_more">
-                <a href="#" class="">Show more</a>
-            </div>
 
+            @if ($cleaner->cleanerReviews->count() <= '3')
+
+            @else
+                 <div class="btn_show_more" style="display: block !important;">
+                {{-- <div class="text-center"> --}}
+                    <a href="#" class=""style="color: var(--primary)">Show more</a>
+                </div>
+            @endif
         </div>
     @endif
 

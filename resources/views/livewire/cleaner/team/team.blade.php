@@ -351,18 +351,18 @@
             });
         </script>
 
-        <script>
-            $('#updateModal').click(function() {
-                location.reload();
-            });
-        </script>
+<script>
+    $('.btn_close').click(function() {
+        location.reload();
+    });
+</script>
 
 
-        <script>
-            $('.swal2-popup').click(function() {
-                location.reload();
+        {{-- <script>
+            $('.remove-member').click(function() {
+                $(".select-date-toggles").addClass("show");
             });
-        </script>
+        </script> --}}
     @endpush
     <style>
         .alert {

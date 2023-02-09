@@ -79,15 +79,20 @@ class Checkout extends Component
     public function taxCalculate()
     {
         $this->subtotal = $this->cleanerService->first()->rate + $this->addOns->sum('rate');
-        $taxId = Setting::find('1');
-        if ($taxId->tax_type == 'percentage') {
-            $taxPercentCal = $this->subtotal * $taxId->tax / 100;
 
-            // dd($taxPercentCal);
-            return $taxPercentCal;
+        $taxId = Setting::find('1');
+        if ($taxId == 'null') {
         } else {
-            $taxFixCal = $taxId->tax;
-            return  $taxFixCal;
+
+            if ($taxId->tax_type == 'percentage') {
+                $taxPercentCal = $this->subtotal * $taxId->tax / 100;
+
+                // dd($taxPercentCal);
+                return $taxPercentCal;
+            } else {
+                $taxFixCal = $taxId->tax;
+                return  $taxFixCal;
+            }
         }
 
         return true;
@@ -96,8 +101,10 @@ class Checkout extends Component
     public function transactionFeeCalculate()
     {
         $this->subtotal = $this->cleanerService->first()->rate + $this->addOns->sum('rate');
+
         $this->tax      = $this->taxCalculate();
         $taxId = Setting::find('1');
+
         if ($taxId->transaction_fee_type == 'percentage') {
             $transactionPercentCal = ($this->subtotal + $this->tax) * $taxId->transaction_fees / 100;
 
@@ -112,7 +119,6 @@ class Checkout extends Component
     {
         $this->subtotal = $this->cleanerService->first()->rate + $this->addOns->sum('rate');
         $this->tax      = $this->taxCalculate();
-        // $this->transactionFees = ($this->subtotal + $this->tax) / 100 * 2; // TODO: transaction fees calculation formula needed. 2% for make it work
         $this->transactionFees = $this->transactionFeeCalculate();
         $this->total    = $this->subtotal + $this->tax + $this->transactionFees;
     }
@@ -179,10 +185,15 @@ class Checkout extends Component
      */
     public function authenticateUser()
     {
-        $this->validate([
-            'email' => 'required|exists:users,email',
-            'password' => 'required'
-        ]);
+        $this->validate(
+            [
+                'email' => 'required|exists:users,email',
+                'password' => 'required'
+            ],
+            [
+                'email.exists' => 'These credentials do not match our records',
+            ]
+        );
 
         $user = User::where('email', $this->email)->first();
 
