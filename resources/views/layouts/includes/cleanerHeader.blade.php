@@ -63,14 +63,15 @@
                             <li><a href="{{route('cleaner.availability.index')}}" class="">Set Availability</a></li>
                             <li><a href="{{route('cleaner.services.index')}}" class="">Set Services</a></li>
                             <li><a href="{{route('cleaner.set-location')}}" class="">Set Locations Served</a></li>
-                            <li><a href="{{route('cleaner.notification.index')}}" class="">Notification Preferences</a></li>
+                            <li><a href="{{route('cleaner.notification.index')}}" class="">Notifications</a></li>
                             <li><a href="{{route('cleaner.reviews')}}" class="">Reviews</a></li>
+                            <li><a href="{{route('cleaner.billing.billing')}}">Billing</a></li>
                           </ul>
                         </li>
                         <li><a href="{{route('cleaner.jobs.jobs')}}">Jobs</a></li>
-                        <li><a href="{{route('cleaner.billing.billing')}}">Billing</a></li>
+
                       {{--   <li><a href="{{route('cleaner.billing.editBankAccount')}}">Billing</a></li>--}}
-                        <li><a href="{{route('cleaner.notification.index')}}">Notifications</a></li>
+                        <li><a href="{{route('cleaner.insurance')}}">Insurance and Badges</a></li>
                         <li><a href="{{route('cleaner.support.service')}}">Support</a></li>
                       </ul>
                     </div>

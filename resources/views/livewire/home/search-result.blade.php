@@ -181,9 +181,9 @@
 
                                         <p class="font-semibold"> {{ $selectedServiceItem->title }}</p>
                                         <p class="font-medium">{{ $homeSize }} sq. ft.</p>
-                                        <p class="font-regular">Est Time :
+                                        <p class="font-regular" wire:ignore>Est Time :
                                             {{ $cleaner->duration_for_selected_service }}
-
+                                            {{--  --}}
                                             hours</p>
                                         <p class="font-regular">Buffer Time : {{ $cleaner->UserDetails->buffer }}</p>
                                         <div class="badges_insurnce_img">
@@ -196,7 +196,7 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="btn_rate">
+                                    <div class="btn_rate" wire:ignore>
                                         <b>${{ $cleaner->price_for_selected_service }}
                                         </b>
                                         <a href="{{ route('profile', $cleaner->id) }}"><button

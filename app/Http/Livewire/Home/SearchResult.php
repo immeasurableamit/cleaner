@@ -321,6 +321,7 @@ class SearchResult extends Component
 
         $this->user->refresh();
         return true;
+
     }
 
     public function resetFilters()
