@@ -98,6 +98,8 @@
                                             <span class="orange_txt">{{$order->statusForCustomer()}}</span>
                                             @elseif ($order->status == 'accepted')
                                             <span class="orange_txt">{{$order->statusForCustomer()}}</span>
+                                            @elseif ($order->status == 'rejected')
+                                            <span class="orange_txt">{{$order->statusForCustomer()}}</span>
                                             @elseif ($order->status == 'cancelled')
                                             <span class="orange_txt">{{$order->statusForCustomer()}}</span>
 

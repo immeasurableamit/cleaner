@@ -156,7 +156,6 @@
                                     <div class="accept-request">
                                         @if ( $order->status == 'pending' )
                                         <button wire:loading.attr="disabled" wire:target="acceptOrder" wire:click="acceptOrder( {{ $order->id }} )" class="accept-request-btn crd-btn">
-
                                             <span wire:loading.remove wire:target="acceptOrder">{{ $order->statusForCleaner() }}</span>
                                             <span wire:target="acceptOrder" wire:loading><i class="fa-solid fa-spinner fa-spin"></i></span>
                                         </button>
@@ -165,7 +164,7 @@
 
                                         @elseif ( $order->status == 'rejected' )
                                         <a href="#" class="refuse-request-btn crd-btn">{{ $order->statusForCleaner() }}</a>
-                                        {{dd($order->statusForCleaner())}}
+
                                         @elseif ( $order->status == 'accepted' && now()->greaterThanOrEqualTo( $order->cleaning_datetime->copy()->subDay() ) ) {{-- if status is accepted and the order is tomorrow --}}
                                         <a href="javascript:void(0);" wire:click="collectPayment( {{ $order->id }} )" class="collect_payment crd-btn">{{ $order->statusForCleaner() }}</a>
 
