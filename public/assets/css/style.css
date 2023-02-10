@@ -4969,7 +4969,7 @@ a {
 }
 .date_time_calender {
     width: 100%;
-    max-width: 1096px;
+    max-width: 1103px;
     margin: 20px auto 30px auto;
     background: #FFFFFF;
     box-shadow: 0px 15px 80px rgba(16, 85, 135, 0.15);
@@ -5631,7 +5631,7 @@ input[type="month"]::-webkit-calendar-picker-indicator {
     color: #3da9f8;
 }
 .header-main-cntnt-differ {
-    max-height: 109px;
+    max-height: 63px;
 }
 .select-date-toggles.show .card-layout-showcase {
     display: none;
@@ -6054,6 +6054,8 @@ fieldset .row.no-mrg .checkout_div h4{
     border-radius: 50%;
     width: 35px;
     height: 35px;
+    display: flex;
+    align-items: center;
 }
 .selct_2{
     padding: 15px 25px 15px 19px !important;
@@ -6302,6 +6304,15 @@ span.select2-container.select2-container--default.select2-container--open span.s
 }
 .profile_id span.select2-selection.select2-selection--multiple textarea.select2-search__field,.profile_id span.select2-selection.select2-selection--multiple {
     cursor: pointer;
+}
+input[type="radio"] {
+    cursor: pointer;
+}
+.time-input-addon .alert.d-inline{
+    font-size: 13px;
+}
+.time-input-addon .alert.d-inline.to{
+    left:183px
 }
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {

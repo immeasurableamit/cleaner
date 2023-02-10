@@ -53,7 +53,7 @@
                                                 @error('days.'.$day.'.data.'.$i.'.from_time')<div class="alert d-inline">{{ $message }}</div>@enderror
                                                 <span class="d-none d-md-inline">-</span>
                                                 <input type="time" wire:model="days.{{$day}}.data.{{$i}}.to_time">
-                                                @error('days.'.$day.'.data.'.$i.'.to_time')<div class="alert d-inline">{{ $message }}</div>@enderror
+                                                @error('days.'.$day.'.data.'.$i.'.to_time')<div class="alert d-inline to">{{ $message }}</div>@enderror
 
                                                 @if($i>0)
                                                 <button type="button" class="border-0 bg-none btn_deleter" wire:click="deleteLayout('{{$day}}', '{{$i}}')">

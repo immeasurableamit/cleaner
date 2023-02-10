@@ -6,15 +6,21 @@ use Livewire\Component;
 use App\Models\User;
 use App\Models\UserDetails;
 use Illuminate\Support\Facades\Hash;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class CleanerAccount extends Component
 {   
+    use LivewireAlert;
     public $user, $first_name, $last_name, $address, $contact_number, $full_name, $Team_name;
     public $user_id;
     public $new_password;
 
     public $fieldStatus = false, $action;
 
+     private function resetInputFields()
+    {
+        $this->new_password = '';
+    }
 
      public function editData($action)
     {
@@ -45,6 +51,10 @@ class CleanerAccount extends Component
 
         public function updateData($action)
     {   
+
+        $this->validate([
+            'new_password' => 'required|min:8',
+        ]);
 
         $userdetail = $this->user->UserDetails;
         //$cleanerTeam = $this->user->cleanerTeam;
@@ -80,7 +90,10 @@ class CleanerAccount extends Component
        // if($cleanerTeam){
        // $cleanerTeam->update();
         //}
+         $this->emit('serviceFormClose2');
         $this->fieldStatus = false;
+        $this->resetInputFields();
+        $this->alert('success', 'Updated successfully');
 
     }
 

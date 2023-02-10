@@ -17,8 +17,16 @@
             </div>
           </div>
         </div>
+
         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-          <div class="d-flex height-100 align-items-center auth_form login">
+          <div class="d-flex height-100 align-items-center auth_form login" style="flex-direction: column;">
+         
+          @if (session()->has('message'))
+              <div class="alert alert-success">
+                  {{ session('message') }}
+              </div>
+          @endif
+        
           {!! Form::open(['route' => 'login', 'method'=>'post', 'class'=>'form-design']) !!}
 
           {{--

@@ -13,7 +13,20 @@ class SupportService extends Component
     use WithPagination;
     public $user_id, $userId, $userStatus;
     public $status, $searchRecord;
+    public $description;
     protected $listeners = ['destroy', 'changeStatus'];
+
+
+      public function edit($id)
+    {
+        // $this->resetInputFields();
+        $service = SupportRequest::find($id);
+
+        $this->description = $service->description;
+
+        $this->emit('serviceForm');
+    }
+
 
     public function confirmStatus($id)
     {
@@ -84,7 +97,7 @@ class SupportService extends Component
                 $query->where('email', 'like', '%' . $searchRecord . '%')
                     ->orWhere('first_name', 'like', '%' . $searchRecord . '%')
                     ->orWhere('last_name', 'like', '%' . $searchRecord . '%');
-            }])->paginate(1);
+            }])->paginate(10);
 
         return view('livewire.admin.support.support-service', compact('supportServices'));
     }

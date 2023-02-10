@@ -6,9 +6,11 @@ use Livewire\Component;
 use App\Models\User;
 use App\Models\UserDetails;
 use Illuminate\Support\Facades\Hash;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class CustomerUpdate extends Component
 {
+    use LivewireAlert;
 
     public $user, $first_name, $last_name, $address, $contact_number, $full_name;
     public $user_id;
@@ -16,7 +18,10 @@ class CustomerUpdate extends Component
 
     public $fieldStatus = false, $action;
 
-   
+   private function resetInputFields()
+    {
+        $this->new_password = '';
+    }
 
     public function editData($action)
     {
@@ -44,6 +49,9 @@ class CustomerUpdate extends Component
 
     public function updateData($action)
     {
+       $this->validate([
+            'new_password' => 'required|min:8',
+        ]);
 
         $userdetail = $this->user->UserDetails;
         if ($action == 'first_name') {
@@ -68,8 +76,10 @@ class CustomerUpdate extends Component
         }
     
         $userdetail->update();
+        $this->emit('serviceFormClose2');
         $this->fieldStatus = false;
-
+        $this->resetInputFields();
+        $this->alert('success', 'Updated successfully');
     }
        public function render()
     {

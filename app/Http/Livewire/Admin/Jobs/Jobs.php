@@ -63,8 +63,8 @@ class Jobs extends Component
         }
           foreach ($orders as $key => $value) {
 
-            // $title = '';
-            // $title2 = '';
+            $title = '';
+            $title2 = '';
           
             if($value->items){
                 foreach ($value->items as $oky => $ord) {

@@ -32,7 +32,7 @@
                                     </div>
 
                                     @if ( !$user->billing_address )
-                                        <a href="{{ route('customer.billing.edit') }}">Add Billing Address</a>
+                                        <a href="{{ route('customer.billing.edit') }}" style="color:var(--primary)" class="link-design-2">Add Billing Address</a>
                                     @else
                                     <div class="customer-account-information">
                                         <ul class="list-unstyled">
