@@ -57,13 +57,14 @@
             @foreach($users as $user)
             <tr>
               @if($user)
+             
               <td class="name"><a href="{{ route('admin.cleaner.team', $user->id) }}">{{$user->first_name}} {{$user->last_name}}</a></td>
               @else
               <td></td>
               @endif
               <td class="name"><a href="{{ route('admin.cleaner.show', $user->id) }}">{{$user->first_name}} {{$user->last_name}}</a></td>
               <td>{{$user->email}}</td>
-              <td>{{$user->orders_count}}</td>
+              <td>{{$user->orders_review_count}}</td>
               @if($user->order_lastdate)
               <td>{{date("m/d/Y", strtotime($user->order_lastdate))}}</td>
               @else

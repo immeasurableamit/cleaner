@@ -84,11 +84,11 @@ class Cleaner extends Component
         $value[] = 'accepted';
 
 
-        $users  = User::with(['orders' => function ($query) use($value) {
+        $users  = User::with(['ordersReview' => function ($query) use($value) {
                     $query->whereIn('status', $value);
                 }])
                 ->where('role', '=', 'cleaner')
-                ->withCount(['orders' => function ($query) use($value) {
+                ->withCount(['ordersReview' => function ($query) use($value) {
                     $query->whereIn('status', $value);
                 }])
                 ->groupBy('id');
@@ -114,25 +114,13 @@ class Cleaner extends Component
 
         foreach ($users as $key => $value) {
             $lastdate = '';
-            if(count($value->orders)){
-                foreach ($value->orders as $oky => $ord) {
+            if(count($value->ordersReview)){
+                foreach ($value->ordersReview as $oky => $ord) {
                      $lastdate = $ord->cleaning_datetime;
                 }
             }
               $users[$key]['order_lastdate'] = $lastdate;
         }
-
-        // $users = User::whereRole('cleaner')
-        //         ->where(function ($query){
-        //             if($this->tab=='active'){
-        //                 $query->whereStatus('1');
-        //             }
-        //             if($this->tab=='inactive'){
-        //                 $query->whereStatus('0');
-        //             }
-        //         })->orderBy('id', 'DESC')
-        //         ->get();
-
 
         return view('livewire.admin.cleaner.cleaner', compact('users'));
     }

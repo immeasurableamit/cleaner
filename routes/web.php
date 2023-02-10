@@ -43,6 +43,13 @@ Route::get('/cache-clear', function() {
     return "Cache is cleared";
 });
 
+Route::get('login', function () {
+    $title = array(
+        'active' => 'login',
+    );
+    return view('auth.login');
+})->name('login');
+
 Route::get('signup', function () {
     $title = array(
         'active' => 'signup',
