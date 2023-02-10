@@ -6308,6 +6308,12 @@ span.select2-container.select2-container--default.select2-container--open span.s
 input[type="radio"] {
     cursor: pointer;
 }
+.time-input-addon .alert.d-inline{
+    font-size: 13px;
+}
+.time-input-addon .alert.d-inline.to{
+    left:183px
+}
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {
     display: none;

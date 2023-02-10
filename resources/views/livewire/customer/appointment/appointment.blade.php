@@ -204,9 +204,7 @@
             <div class="modal-content">
                 <div class="modal-header  d-flex justify-content-center">
                     <h3>Reschedule Booking</h3>
-                    <button type="button" class="close btn_close" style="border: none; background: white;top:0px;" wire:click.prevent="hideRescheduleModal">
-                        <i class="fa fa-times fa-xl" aria-hidden="true"></i>
-                    </button>
+                    <button type="button" class="close btn_close" style="border: none; background: white;top:0px;" wire:click.prevent="hideRescheduleModal">x </button>
 
                 </div>
                 <div class="modal-body">
