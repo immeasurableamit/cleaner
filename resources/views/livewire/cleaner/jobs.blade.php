@@ -27,6 +27,7 @@
                             </div>
 						--}}
                         </div>
+
                     </div>
                     <!-- Tab panes -->
                     <div class="scheduling-calender-design clender-design" wire:ignore>
