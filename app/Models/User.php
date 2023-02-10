@@ -168,7 +168,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function ordersReview()
     {
-        return $this->hasMany(Order::class, 'cleaner_id');
+        return $this->hasMany(Order::class, 'cleaner_id', 'id');
     }
 
     public function hasCleanerSetHisServedLocations()
