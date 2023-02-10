@@ -56,7 +56,8 @@
 
                                                         <img src="{{ asset('assets/images/icons/star.svg') }}">
                                                         {{ formatAvgRating($favourite->cleaner->cleanerReviews->avg('rating')) }}<span>
-                                                            ({{ $favourite->cleaner->cleanerReviews->count() }})</span>
+                                                            ({{ $favourite->cleaner->cleanerReviews->count() }})
+                                                        </span>
                                                     </div>
                                                 </div>
                                                 {{-- <div class="routine_text">
@@ -173,6 +174,7 @@
               buttons: true,
               buttons: ["No", "Yes"],
               dangerMode: true,
+              className: "customer_r",
           })
           .then((willDelete) => {
             if (willDelete) {

@@ -33,7 +33,7 @@
                     <ul class="list-unstyled d-flex">
                         <li><span>Follow Us</span></li>
                        
-
+                        {{--
                         <li><a href="{{ socialLinks()->facebook_link }}" target="_blank"><i
                                     class="fa-brands fa-facebook"></i></a></li>
                         <li><a href="{{ socialLinks()->twitter_link }}" target="_blank"><i
@@ -42,6 +42,7 @@
                                     class="fa-brands fa-instagram"></i></a></li>
                         <li><a href="{{ socialLinks()->linkedin_link }}" target="_blank"><i
                                     class="fa-brands fa-linkedin-in"></i></a></li>
+                        --}}
                         
                     </ul>
                 </div>

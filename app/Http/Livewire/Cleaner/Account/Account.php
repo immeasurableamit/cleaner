@@ -92,16 +92,16 @@ class Account extends Component
             $this->image = $user->image;
         }
         if ($action == 'facebook') {
-            $this->facebook = $user->facebook;
+            $this->facebook = $user->UserDetails->facebook;
         }
         if ($action == 'twitter') {
-            $this->twitter = $user->twitter;
+            $this->twitter = $user->UserDetails->twitter;
         }
         if ($action == 'instagram') {
-            $this->instagram = $user->instagram;
+            $this->instagram = $user->UserDetails->instagram;
         }
         if ($action == 'linkedin') {
-            $this->linkedin = $user->linkedin;
+            $this->linkedin = $user->UserDetails->linkedin;
         }
 
         $this->action = $action;
@@ -136,6 +136,7 @@ class Account extends Component
 
 
             $user->update();
+            $this->alert('success', 'Detail Updated successfully');
 
             if ($action == 'address') {
                 $userdetail->address = $this->address;
@@ -149,33 +150,34 @@ class Account extends Component
             }
 
             if ($action == 'facebook') {
-                // $this->validate([
-                //     'facebook' => 'required|url',
-                // ]);
+                $this->validate([
+                    'facebook' => 'url',
+                ]);
                 $userdetail->facebook = $this->facebook;
             }
 
             if ($action == 'twitter') {
-                // $this->validate([
-                //     'twitter' => 'required|url',
-                // ]);
+                $this->validate([
+                    'twitter' => 'url',
+                ]);
                 $userdetail->twitter = $this->twitter;
             }
             if ($action == 'instagram') {
-                // $this->validate([
-                //     'instagram' => 'required|url',
-                // ]);
+                $this->validate([
+                    'instagram' => 'url',
+                ]);
                 $userdetail->instagram = $this->instagram;
             }
 
             if ($action == 'linkedin') {
-                // $this->validate([
-                //     'linkedin' => 'required|url',
-                // ]);
+                $this->validate([
+                    'linkedin' => 'url',
+                ]);
                 $userdetail->linkedin = $this->linkedin;
             }
 
-            $userdetail->update();
+            $userdetail->save();
+            $this->alert('success', 'Detail Updated successfully');
             $this->fieldStatus = false;
         }
     }

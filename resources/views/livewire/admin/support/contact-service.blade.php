@@ -11,7 +11,7 @@
         height: 40px;
 }
     </style>
-  <div class="col-md-4">
+  <div class="col-md-4 search_input3">
         <input type="text" class="form-control" placeholder="Search..." wire:model="searchRecord" />
     </div><br>
 <table id="all-customer-table22" class="table dt-responsive nowrap" style="width:100%">
@@ -36,11 +36,11 @@
                   <td>{{$contact->phone}}</td>
                   <td>{{$contact->message}}</td>
                   @if($contact->status == 0)
-                  <td><a href="javascript::void(0)" wire:click.prevent="statusClose({{$contact->id}})">Open</a></td>
+                  <td><a href="javascript::void(0)" wire:click="confirmStatus({{ $contact->id }})">Open</a></td>
                   @else
-                  <td><a href="javascript::void(0)">Closed</a></td>
+                  <td>Closed</td>
                   @endif
-                  <td><a href="javascript::void(0)" wire:click.prevent="destroy({{$contact->id}})">Delete</a></td>
+                  <td><a href="javascript::void(0)" wire:click="deleteConfirm({{ $contact->id }})">Delete</a></td>
               </tr>
                  @endforeach
 
@@ -49,4 +49,8 @@
        <div class="pagi_links">
    {{$contacts->links()}}
    </div>
+   
+
+
+
 </div>

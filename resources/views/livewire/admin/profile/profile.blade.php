@@ -21,7 +21,7 @@
                    @else
                    <img src="{{ asset('/assets/images/iconshow.png') }}" id="customerimagePreview"> 
               @endif      
-                    <a href="javascript::void(0)" onclick="uploadImgViaLivewire()" ><i class="fas fa-save"></i></a>
+                    <a href="javascript::void(0)" onclick="uploadImgViaLivewire()" title="Save"><i class="fas fa-save"></i></a>
             </div>
             <div class="lawyer_profile-img mb-3">
                     <!-- <div class="circle" id="uploaded">

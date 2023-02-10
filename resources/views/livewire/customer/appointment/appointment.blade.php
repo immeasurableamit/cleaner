@@ -32,13 +32,19 @@
                                             <p class="app-value">{{ $order->cleaning_datetime->format('h:i A') }}</p>
                                         </div>
                                         <div class="altrntive_rw">
-
                                             <p class="appointment_label"> Job </p>
+
                                             @foreach ($order->items as $item)
                                                 <p class="app-value blue">
+
                                                     <strong>{{ @$item->service_item->title }}</strong>
                                                 </p>
                                             @endforeach
+
+                                            <a type="button" class="text-primary bold" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal2" data-id="{{ $order->items }}"
+                                                wire:click="viewOrderServices({{ $order->id }})">View</a>
+
                                         </div>
                                         <div class="altrntive_rw">
                                             <p class="appointment_label">Est Duration</p>
@@ -59,7 +65,7 @@
                                                     </a></li>
                                                 {{-- <li><a href="#" class="link-design-2"><img src="{{asset('/assets/images/icons/home.svg')}}">15648
                                             Maple St, Austin, TX 78744</a></li> --}}
-                                                <li class="chat_with_member"><a href="{{route('messages')}}"
+                                                <li class="chat_with_member"><a href="{{ route('messages') }}"
                                                         class="btn_chat_member">Chat With
                                                         Member<img
                                                             src="{{ asset('/assets/images/icons/email-2.svg') }}" /></a>
@@ -69,6 +75,10 @@
                                         <div class="altrntive_rw">
                                             <p class="appointment_label blue">Location</p>
                                             <p class="app-value location blue">{{ $order->address }}</p>
+                                        </div>
+                                        <div class="altrntive_rw">
+                                            <p class="appointment_label blue">Size</p>
+                                            <p class="app-value location blue">{{ $order->home_size_sq_ft }} sq ft</p>
                                         </div>
                                         <div class="altrntive_rw">
                                             <p class="appointment_label">Price</p>
@@ -217,13 +227,13 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade bd-example-modal-lg" id="rescheduleModal" role="dialog"
+    <div class="modal fade bd-example-modal-lg modal_style" id="rescheduleModal" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true" wire:ignore.self>
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <div class="modal-header  d-flex justify-content-end">
-
-                    <button type="button" class="close" style="border: none; background: white;"
+                <div class="modal-header  d-flex justify-content-center">
+                    <h3>Reschedule Booking</h3>
+                    <button type="button" class="close btn_close" style="border: none; background: white;top:0px;"
                         wire:click.prevent="hideRescheduleModal">
                         <i class="fa fa-times fa-xl" aria-hidden="true"></i>
                     </button>
@@ -233,17 +243,21 @@
 
                     <div id="rescheduleCalendar" class="text-center" wire:ignore>
                     </div>
-                    @error ('rescheduleDate')
-                    <div class="alert text-center">{{ $message }}</div>
+                    @error('rescheduleDate')
+                        <div class="alert text-center">{{ $message }}</div>
                     @enderror
 
                     @if (!empty($rescheduledAvailableTimeSlots))
-                        <div class="row block_start_time">
-                            <div class="col-md-3 select-design">
+                        <div class="row block_start_time ">
+                            <div class="col-md-5 select-design">
                                 <div class="selecti-box" wire:ignore>
                                     <select class="select-custom-design" id="reschedule-time-selector">
                                         <option></option>
-
+                                        @foreach ($rescheduledAvailableTimeSlots as $slot)
+                                            {{-- <option>{{ $timeSlot['start_time'] }}</option> --}}
+                                            <option value="{{ $slot['start_time'] }}"  @disabled($slot['is_available'] == false) @selected( $slot['start_time'] == $rescheduleTime) }}>{{ date("h:i A", strtotime($slot['start_time']) ) }}</option>
+                                        @endforeach
+{{--
                                         @foreach ($rescheduledAvailableTimeSlots as $timeSlot)
                                             @php $isSelected = false @endphp
 
@@ -255,18 +269,18 @@
 
                                             <option value="{{ $timeSlot }}" @selected($isSelected)>
                                                 {{ $timeSlot }}</option>
-                                        @endforeach
+                                        @endforeach --}}
                                     </select>
                                 </div>
                             </div>
-                            @error ('rescheduleTime')
+                            @error('rescheduleTime')
                                 <div class="alert text-center">{{ $message }}</div>
                             @enderror
                         </div>
                     @endif
 
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer text-center justify-content-center">
                     <button type="button" class="btn_blue" wire:click="rescheduleSelectedOrder">Reschedule order
                         #<span id="reschedule_order_id">{{ $rescheduleOrderId ?? '' }}</span></button>
                 </div>
@@ -274,8 +288,64 @@
         </div>
     </div>
     <!-- Modal end -->
-</div>
 
+
+
+    <!-- Modal - View -->
+    <div wire:ignore.self class="modal fade modal_style " id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Selected Services</h5>
+                    <button type="button" class="btn_close"  data-bs-dismiss="modal" aria-label="Close" style="border:0px;">X</button>
+                </div>
+                <div class="modal-body">
+                    {{-- <p class="appointment_label">Service</p> --}}
+                    @if ($selectOrderItem)
+                        @foreach ($selectOrderItem as $selectOrderItem)
+                            <div class="altrntive_rw">
+
+                                @if ($selectOrderItem->services_id == '3')
+                                <div class="s_servicsess">
+                                    <p> Add ons </p>
+                                    <p class="app-value">${{ $selectOrderItem->title }}</p>
+                                </div>
+                                @else
+                                <div class="s_servicsess">
+                                    <p> Services </p>
+                                    <p class="app-value">${{ $selectOrderItem->title }}</p>
+                                </div>
+                                @endif
+
+                            </div>
+                        @endforeach
+                    @endif
+
+                </div>
+                <div class="modal-footer">
+                    {{--  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
+                    {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal End -->
+</div>
+<style>
+     .s_servicsess{
+        display:flex;
+        align-items: center;
+        gap: 15px;
+     }
+     .s_servicsess p{
+        margin-bottom: 0px;
+     }
+     .s_servicsess p:first-child{
+        min-width: 100px;
+     }
+    </style>
 @push('scripts')
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.3.1/main.min.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
@@ -325,13 +395,16 @@
                 rescheduleDatePickerInstance.destroy();
             }
 
+            let dateOfToday = new Date();
+            let dateOfTomorrow = dateOfToday.setDate(dateOfToday.getDate() + 1);
+
             rescheduleDatePickerInstance = new Litepicker({
                 element: document.getElementById('rescheduleCalendar'),
                 numberOfMonths: 2,
                 numberOfColumns: 2,
                 inlineMode: true,
                 singleMode: true,
-                minDate: new Date(),
+                minDate: dateOfTomorrow,
                 parentEl: document.getElementById('rescheduleCalendar'),
                 lockDaysFilter: (date) => {
                     let weekday = date.getDay();

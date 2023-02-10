@@ -2,16 +2,19 @@
 
 namespace App\Http\Livewire\Customer\Appointment;
 
+use App\Models\CleanerServices;
 use Livewire\Component;
 use App\Models\Order;
 use App\Models\OrderItem;
 use \Carbon\Carbon;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Models\Review;
+use App\Models\ServicesItems;
 use App\Notifications\Customer\OrderRescheduled as CustomerOrderRescheduled;
 use App\Notifications\Cleaner\OrderRescheduled as CleanerOrderRescheduled;
 use App\Notifications\Cleaner\OrderCancelled as CancelledOrderNotificationForCleaner;
 use App\Notifications\Customer\OrderCancelled as CancelledOrderNotificationForCustomer;
+use App\Services\CleanerAvailability;
 
 class Appointment extends Component
 {
@@ -23,6 +26,8 @@ class Appointment extends Component
     public $orders;
     protected $listeners = ['orderCancelledByCustomer'];
     protected $pendingOrderStatuses = ['pending'];
+
+    public $selectOrderItem;
 
     /* review order props */
     public $rating, $review, $reviewOrderId;
@@ -101,22 +106,32 @@ class Appointment extends Component
             $this->renderOrders();
         }
 
-        if ( $propertyname == "rescheduleDate") {
+        if ($propertyname == "rescheduleDate") {
             $this->preapareRescheduledAvailableTimeSlotsProp();
         }
 
-        if ( $propertyname == "rescheduleTime") {
-            $this->rescheduleTime = Carbon::parse( $value )->format("H:i:s");
+        if ($propertyname == "rescheduleTime") {
+            $this->rescheduleTime = Carbon::parse($value)->format("H:i:s");
             $this->dispatchBrowserEvent('enableTimePickerInRescheduleTimeSelect');
         }
     }
 
+    public function viewOrderServices($orderId)
+    {
+        $ord=  OrderItem::where('order_id', $orderId)->pluck('service_item_id');
+
+        // dd($ord); // 9,2
+        $this->selectOrderItem = ServicesItems::whereIn('id',$ord)->select('title','services_id')->get();
+        // dd($this->selectOrderItem );
+
+        return $this->selectOrderItem;
+    }
 
 
     public function renderOrders()
     {
-        $this->selectedDateOrders = $this->orders->filter(function($order) {
-            return $order->cleaning_datetime->startOfDay()->equalTo( $this->selectedDate );
+        $this->selectedDateOrders = $this->orders->filter(function ($order) {
+            return $order->cleaning_datetime->startOfDay()->equalTo($this->selectedDate);
         });
 
         $this->dispatchBrowserEvent('renderOrders');
@@ -148,11 +163,11 @@ class Appointment extends Component
     public function orderCancelledByCustomer($data)
     {
         $orderId = $data['value'];
-        $order   = Order::where('id', $orderId )->update(['status' => 'cancelled_by_customer']);
+        $order   = Order::where('id', $orderId)->update(['status' => 'cancelled_by_customer']);
         $order   = Order::find($orderId);
 
-        $order->cleaner->notify( new CancelledOrderNotificationForCleaner($order));
-        $order->user->notify( new CancelledOrderNotificationForCustomer($order) );
+        $order->cleaner->notify(new CancelledOrderNotificationForCleaner($order));
+        $order->user->notify(new CancelledOrderNotificationForCustomer($order));
 
         $this->alert('success', 'Order cancelled');
         $this->refreshSelectedTab();
@@ -168,7 +183,7 @@ class Appointment extends Component
             'review'        => 'required'
         ]);
 
-        $order  = Order::find( $orderId );
+        $order  = Order::find($orderId);
 
         /* create review */
         $review = new Review;
@@ -191,21 +206,13 @@ class Appointment extends Component
 
     public function preapareRescheduledAvailableTimeSlotsProp()
     {
+
         $order           = $this->orders->find( $this->rescheduleOrderId );
-        $selectedWeekDay = Carbon::parse( $this->rescheduleDate )->englishDayOfWeek;
 
-        /* Get from and to time from cleaner hours table of selected day */
-        $cleanerTimeSlots = $order->cleaner->cleanerHours->where('day', $selectedWeekDay )->pluck('to_time', 'from_time');
+        $cleanerAvailablitly  = new CleanerAvailability($order->cleaner);
+        $timeSlotsForCustomer = $cleanerAvailablitly->getAvailableSlotsByDate($this->rescheduleDate);
 
-        /* Parse those time to display in frontend */
-        $timeSlotsForCustomer = collect();
-        foreach ( $cleanerTimeSlots as $from => $to ) {
-
-            $timeSlots = collect(\Carbon\CarbonInterval::minutes(30)->toPeriod( $from, $to ))->map->format('h:i A');
-            $timeSlotsForCustomer->push( $timeSlots );
-        }
-
-        $this->rescheduledAvailableTimeSlots = $timeSlotsForCustomer->collapse()->unique()->toArray();
+        $this->rescheduledAvailableTimeSlots = $timeSlotsForCustomer;
         $this->dispatchBrowserEvent('enableTimePickerInRescheduleTimeSelect');
         return $timeSlotsForCustomer;
     }
@@ -217,13 +224,13 @@ class Appointment extends Component
             'rescheduleTime' => 'required',
         ]);
 
-        $rescheduleDatetime = Carbon::createFromFormat("Y-m-d H:i:s", "$this->rescheduleDate $this->rescheduleTime" );
-        $order = $this->orders->find( $this->rescheduleOrderId );
+        $rescheduleDatetime = Carbon::createFromFormat("Y-m-d H:i:s", "$this->rescheduleDate $this->rescheduleTime");
+        $order = $this->orders->find($this->rescheduleOrderId);
         $order->cleaning_datetime = $rescheduleDatetime;
         $order->save();
 
-		$order->user->notify(new CustomerOrderRescheduled($order));
-		$order->cleaner->notify(new CleanerOrderRescheduled($order));
+        $order->user->notify(new CustomerOrderRescheduled($order));
+        $order->cleaner->notify(new CleanerOrderRescheduled($order));
 
         $this->alert('success', 'Order Rescheduled');
         $this->hideRescheduleModal();
@@ -240,19 +247,21 @@ class Appointment extends Component
     }
 
 
-    public function generateAllowedRescheduleWeekDaysOfOrderForDatePicker($orderId)
+/*     public function generateAllowedRescheduleWeekDaysOfOrderForDatePicker($orderId)
     {
-        /* get cleaner week days from DB */
         $order = $this->orders->find( $orderId )->loadMissing('cleaner.cleanerHours');
         $cleanerAvailablitlyWeekDays = $order->cleaner->cleanerHours->pluck('day')->unique()->map('strtolower')->toArray();
 
-        $weekdaysForDatePicker = parseWeekdaysNameIntoWeekDaysNumber( $cleanerAvailablitlyWeekDays );
+        $weekdaysForDatePicker = parseWeekdaysNameIntoWeekDaysNumber($cleanerAvailablitlyWeekDays);
         return $weekdaysForDatePicker;
     }
-
+ */
     public function showRescheduleModal($orderId)
     {
-        $weekdaysForDatePicker   = $this->generateAllowedRescheduleWeekDaysOfOrderForDatePicker($orderId);
+        /* $weekdaysForDatePicker   = $this->generateAllowedRescheduleWeekDaysOfOrderForDatePicker($orderId); */
+        $cleaner = $this->orders->find( $orderId )->loadMissing('cleaner.cleanerHours')->cleaner;
+
+        $weekdaysForDatePicker = ( new CleanerAvailability( $cleaner ) )->weekdays();
         $this->rescheduleOrderId = $orderId;
 
         $this->dispatchBrowserEvent('showRescheduleModal', [
@@ -264,6 +273,7 @@ class Appointment extends Component
     public function hideRescheduleModal()
     {
         $this->dispatchBrowserEvent('hideRescheduleModal');
+        $this->rescheduledAvailableTimeSlots = [];
     }
 
     public function render()

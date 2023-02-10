@@ -28,7 +28,7 @@
 
                                 <div class="customer-account-forms biling_form">
                                     <div class="form-headeing-second">
-                                        <h4>Billing information</h4>
+                                        <h4>Billing Information</h4>
                                     </div>
 
                                     @if ( !$user->billing_address )

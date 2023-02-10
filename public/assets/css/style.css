@@ -1656,7 +1656,7 @@ li.profile_drop_down.account_dropdown .dropdown_links li {
 }
 .cleaner_account_2.customer-account-information ul li p{
 width: 50%;
-cursor: pointer;
+/* cursor: pointer; */
 white-space: nowrap;
 text-overflow: ellipsis;
 overflow: hidden;
@@ -1670,9 +1670,10 @@ padding-right: 15px;
 .customer-account-information p a{
     text-decoration: none;
 }
-.customer-account-information p{
+
+/* .customer-account-information p{
     cursor: pointer;
-}
+} */
 .about_text {
     padding: 25px 20px;
     background: #FFFFFF;
@@ -1689,7 +1690,7 @@ padding-right: 15px;
 }
 .card_service_row ul.dropdown-menu.show {
     padding: 18px 20px !important;
-    width: 241px;
+    width: 293px;
     transform: translate(83px, 22px) !important;
     box-shadow: 0px 15px 80px rgba(16, 85, 135, 0.15);
     border: 0px;
@@ -4367,6 +4368,9 @@ font-size: 20px;
         align-items: center;
         position: relative;
         padding-bottom: 5px;
+        justify-content: space-between;
+        width: 70%;
+        margin: auto;
     }
     .altrntive_rw .btn_q {
         margin-right: 5px;
@@ -6015,14 +6019,18 @@ fieldset .row.no-mrg .checkout_div h4{
     width: 63%;
     font-weight: 400;
 }
-.btn_close{
+.btn_close {
     position: absolute;
-    right: 0px;
-    top: -13px;
+    right: -17px;
+    top: -18px !important;
     cursor: pointer;
     z-index: 2;
-    color: #000;
-    font-size: 25px;
+    color: #fff;
+    font-size: 17px;
+    background: #5a4b4b !important;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
 }
 .selct_2{
     padding: 15px 25px 15px 19px !important;
@@ -6033,10 +6041,19 @@ fieldset .row.no-mrg .checkout_div h4{
     background-color: transparent;
     padding: 0px;
 }
-.edit_frm input[type="number"], .edit_frm input[type="email"], .edit_frm input[type="text"] {
+.edit_frm input[type="number"], .edit_frm input[type="email"], .edit_frm input[type="text"],.edit_frm select {
     border: 1px solid;
     padding: 5px !important;
     height: auto;
+    background: var(--bwhite);
+    box-shadow: 0px 15px 50px rgb(16 85 135 / 15%);
+    border-radius: 10px;
+    border: none;
+    display: block;
+    font-weight: 400;
+    font-size: 14px;
+    color: #363636;
+    margin-bottom: 10px;
 } 
 .edit_frm input:disabled{
     border: 0px !important;
@@ -6063,13 +6080,14 @@ fieldset .row.no-mrg .checkout_div h4{
 .customer-account-information.cleaner_account_2.mt-4 form.d-flex.justify-content-spacebw.three_column.edit_frm .time-zone-select-design input[type="text"]:disabled {
     border: 0px;
     background: inherit;
+    box-shadow: none;
     padding: 0px !important;
     position: relative;
     left: -5px;
 }
 .customer-appoitments-alternative-section .select-date-toggles.show {
-    height: 248px;
-    max-height: 248px;
+    height: 283px;
+    max-height: 283px;
 }
 .scheduling-calender-design.clender-design .fc-toolbar-chunk button.fc-today-button.fc-button.fc-button-primary {
     display: none;
@@ -6086,9 +6104,152 @@ fieldset .row.no-mrg .checkout_div h4{
 .card_filter.oferd_select.select-design span.select2-selection.select2-selection--multiple {
     padding: 13px 15px;
 }
+.custom_w{
+    width: 83%;
+}
+.card_chat img{
+    object-fit: cover;
+}
+.msg_notification button{
+    padding: 0px;
+    height: 40px;
+    width: 40px;
+}
+.swal2-actions button.swal2-confirm.swal2-styled {
+    background-color: var(--primary);
+}
+.swal-modal.customer_r .swal-footer {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: row-reverse;
+}
+.swal-modal.customer_r .swal-footer button.swal-button.swal-button--confirm.swal-button--danger {
+    background-color: var(--primary);
+}
+.secnd_tm h5.name_tm,.account-profile .name,.something_amazing_div h3.frst_h3{
+    text-transform: capitalize;
+}
+.right_chat a.attachment {
+    display: block;
+    text-align: right;
+    background-color: #DDDDDD;
+    border-radius: 10px 0px 10px 10px;
+    padding: 10px;
+}
+.right_chat a.attachment img,.reciver_msg a.attachment img {
+    width: 100px;
+    height: auto;
+    background: #fff;
+    position: relative;
+    border-radius: 0px;
+}
+.sender_msg p.msg_p{
+    background-color: #DDDDDD;
+    border-color: #DDDDDD;
+}
+.reciver_msg  a.attachment {
+    text-align: left;
+    border-radius: 0px 10px 10px 10px;
+    padding: 10px;
+    border: 1px solid var(--primary);
+    background-color: #fff;
+}
+.message_sender .attached-files {
+    padding: 0px 35px;
+}
+.message_sender .file.files_r {
+    background: #dddddd;
+    padding: 10px;
+}
+.btn_close{
+    top: 0px;
+}
+.s_icons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.customer-avatar-preview.position-relative div#uploaded a{
+    color: var(--primary);
+}
+.jobs-tab-header .nav-tabs .nav-link{
+    cursor: pointer;
+}
+.d-flex.justify-content-spacebw.three_column.edit_frm span.edit,.d-flex.justify-content-spacebw.three_column.edit_frm  span.save-icn-btn {
+    width: 9.5%;
+    text-align: right;
+    font-size: 17px;
+}
+.d-flex.justify-content-spacebw.three_column.edit_frm span.cancel {
+    width: 5.5%;
+    text-align: right;
+}
+form.d-flex.justify-content-spacebw.three_column.edit_frm .time-zone-select-design {
+    padding-left: 0px;
+}
+span.select2-container.select2-container--default.select2-container--open span.select2-dropdown.select2-dropdown--below {
+    width: fit-content !important;
+}
+.modal-content .modal-body .block_start_time {
+    display: flex;
+    justify-content: center;
+}
+.modal_style .modal-content {
+    border: 0px;
+    border-radius: 15px;
+}
+.modal_style .modal-content .modal-header {
+    border-bottom: 0px;
+    justify-content: center;
+}
+.modal_style .modal-content .modal-footer {
+    border-top: 0px;
+}
+.attachements-images {
+    display: flex;
+    justify-content: end;
+    flex-wrap: wrap;
+}
+.reciver_msg .attachements-images{
+    justify-content: start;
+}
+.d-flex.justify-content-spacebw.three_column.edit_frm span.alert {
+    position: absolute;
+    left: 33%;
+    top: 13px;
+    font-size: 13px;
+}
+.stng_price {
+    border: 2px solid #37A9FB;
+    filter: drop-shadow(0px 15px 80px rgba(16, 85, 135, 0.15));
+    border-radius: 20px;
+    padding: 12px 22px;
+    margin: 15px 0px;
+}
+.stng_price h3 {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding-bottom: 15px;
+}
+.stng_price p {
+    color: #777777;
+    font-size: 14px;
+}
+.stng_price p b {
+    color: #000;
+}
+.stng_price p i {
+    font-style: inherit;
+    font-weight: 700;
+}
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {
     display: none;
+}
+.col-xl-12.col-lg-12.col-md-12.col-sm-12.no-padd.cleaner_location_section h4.mb-0.border-0 {
+    font-weight: 400;
 }
 /* doc changes here */
    /* css  full_home_cleaning_table end here */
@@ -7961,6 +8122,10 @@ div#requirements-alert-container .alert.alert-success.alert-dismissible.fade.sho
 }
 .bg_ylow_h5 {
     font-size: 13px;
+}
+.help_center .search-input-design .search-btn {
+    top: 15px;
+    right: 10px;
 }
 /* css 767 end here */
 .full_home_cleaning_table{

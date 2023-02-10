@@ -102,11 +102,13 @@ function stripeCreateExternalAccount($account_id, $accountDetails)
         "account_number"      => $accountDetails['account_number']
     ];
 
-    $externalAccount = $stripe->accounts->createExternalAccount($account_id, [ 'external_account' =>  $options]);
-
-    /* TODO: exception handling is left */
-
-    return $externalAccount;
+    try {
+        $externalAccount = $stripe->accounts->createExternalAccount($account_id, [ 'external_account' =>  $options]);
+        return [ 'status' => true, 'response' => $externalAccount ];
+    } catch ( InvalidRequestException $e ){
+        return [ 'status' => false, 'exception' => $e ];
+    }
+    
 }
 
 /*

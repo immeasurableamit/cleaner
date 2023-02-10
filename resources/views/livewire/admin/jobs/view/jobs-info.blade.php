@@ -1,5 +1,6 @@
 <div>
      <div class="white-bg-wrapper">
+  @foreach($orders as $orders)
         <div class="job_id">
        <h5>Job # {{$orders->id}}</h5>
         </div>
@@ -23,7 +24,7 @@
 
        <div class="job_lists">
         <h3> Amount:</h3>
-        <p>{{$orders->total}}</p>
+        <p>${{$orders->total}}</p>
         <a class="cancel_r" href="#" ></a>
        </div>
 
@@ -42,7 +43,7 @@
        <div class="job_lists">
         <h3> Frequency:</h3>
         <p>Every 4 Weeks  </p>
-        <a class="cancel_r" href="#" >Cancel</a>
+        <!-- <a class="cancel_r" href="#" >Cancel</a> -->
        </div>
 
           </div>
@@ -52,11 +53,6 @@
        <div class="job_card">
         <div class="job_lists">
             <h3>Address:</h3>
-            <p>{{$orders->address}}</p>
-            <a class="edit_r" href="#" ></a>
-           </div>
-           <div class="job_lists">
-            <h3>Address 2:</h3>
             <p>{{$orders->address}}</p>
             <a class="edit_r" href="#" ></a>
            </div>
@@ -75,9 +71,11 @@
             <p>{{$orders->zip}}</p>
             <a class="edit_r" href="#" ></a>
            </div>
-           
+
+          
        </div>
          </div>
+         @endforeach 
          <div class="col-md-4 job_history">
 <h4>Job History log</h4>
 <div class="job_card">
@@ -114,7 +112,9 @@
             @foreach($orders->transactions as $order)
               <tr>
                   <td>{{$order->id ?? ''}}</td>
-                  <td>Deep clean - 20500 sq ft</td>
+                  @foreach($orders->items as $item)
+                  <td>{{$item->stitle}}</td>
+                  @endforeach
                   <td>{{$order->amount ?? ''}}</td>
                   <td>{{ date("m/d/Y", strtotime($order->created_at ?? ''))}}</td>
                   <td>{{$order->action ?? ''}}</td>

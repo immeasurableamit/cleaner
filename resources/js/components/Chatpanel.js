@@ -354,7 +354,7 @@ const Chatpanel = () => {
 		            <div className="card_chat">
 	                  <img src={currentUser.profile_pic}/>
 	                  <h4>{currentUser.name}</h4>
-		                <span className="number">555555555</span>
+		                <span className="number">555-555-555</span>
 	               </div>
 	           	</div>
 
@@ -431,9 +431,9 @@ const Chatpanel = () => {
 	                      <li><a class="dropdown-item" href="#">Something else here</a></li>
 	                    </ul>
 	                  </div>
-	                  <div class="three_dots">
+	                  {/* <div class="three_dots">
 	                     <span>...</span>
-	                  </div>
+	                  </div> */}
 	                 </div>
 	             </div>
 	                             
@@ -476,6 +476,8 @@ const Chatpanel = () => {
 				                     {msgs.message &&
 				                     <p className="msg_p">{msgs.message}</p>
 				                  	}
+																			<div className='attachements-images'>
+
 				                  	{msgs?.files?.length > 0 &&
 										msgs.files.map(function (file, i) {
 											return (
@@ -490,6 +492,8 @@ const Chatpanel = () => {
 											)
 										})
 									}
+																			</div>
+
 				                  </div>
 				                </div>
 							)
@@ -505,7 +509,28 @@ const Chatpanel = () => {
 	             </div>
 
 
-
+<div className='message_sender'>
+				 {filesArray.length>0 &&
+							<div className="attached-files">
+							{filesArray.map(function (file, j) {
+								return (
+									<div className="file files_r" key={j}>
+										<div className='img_gallery'>
+										<a target="_blank" href={`uploads/files/${file.name}`}>
+											{file.is_image &&
+												<img width="100" src={`uploads/files/${file.name}`} />
+											}
+											{!file.is_image &&
+												<img width="100" src={`attachment.png`} />
+											}
+										</a>
+                                        <div className="btn btn-danger btn_cross" onClick={()=>removeAttachment(j)}>x</div>
+									</div>
+									</div>
+								)
+							})}
+							</div>
+						}
 	             <form onSubmit={handleSubmit(onSubmit)}>
 
 					{error &&
@@ -538,27 +563,9 @@ const Chatpanel = () => {
 
 		             </div>
 	             </form>
+				 </div>
 
-
-	             {filesArray.length>0 &&
-							<div className="attached-files">
-							{filesArray.map(function (file, j) {
-								return (
-									<div className="file files_r" key={j}>
-										<a target="_blank" href={`uploads/files/${file.name}`}>
-											{file.is_image &&
-												<img width="100" src={`uploads/files/${file.name}`} />
-											}
-											{!file.is_image &&
-												<img width="100" src={`attachment.png`} />
-											}
-										</a>
-                                        <div className="btn btn-danger btn_cross" onClick={()=>removeAttachment(j)}>x</div>
-									</div>
-								)
-							})}
-							</div>
-						}
+	            
 
 				
              </>

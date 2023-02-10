@@ -51,10 +51,10 @@
                             <h6 class="provider-service-label">Est. Cleaning Duration</h6>
                             <p class="provider-service-value">{{ $estimatedDuration }} hrs</p>
                         </div>
-                        <div class="p_s_row two-column">
+                        <!-- <div class="p_s_row two-column">
                             <h6 class="provider-service-label">Frequency</h6>
                             <p class="provider-service-value">{{ $cleanerService->first()->service_title }}</p>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="provider_service">
                         <div class="p_s_row three-column">
@@ -95,14 +95,15 @@
     @elseif ($currentlyActiveStep == 2)
     <!--Login Modal -->
     <!-- Modal -->
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+    <div class="modal fade modal_style" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
         <div class="modal-dialog" role="document">
         <button type="button" class="close btn_close" onclick="$('#loginModal').modal('hide')" style="border: none; background: transparent;">
                         <i class="fa fa-times fa-xl" aria-hidden="true"></i>
                     </button>
             <div class="modal-content">
                 <div class="modal-header border border-bottom-0">
-                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <h3>Sign In </h3>
+                    {{-- <h5 class="modal-title" id="exampleModalLabel"></h5> --}}
 
                 </div>
                 <div class="modal-body">
@@ -153,6 +154,8 @@
                         <h3>Enter Payment Details </h3>
                         <div class="text-center link-design-2 pt-3 bold">You don't pay until cleaning day!</div>
                     </div>
+
+
                     <div class="built_text_div">
                         @if (is_null($user))
                         <div class="provider_service pb-5 border-bottom  text-center">
@@ -296,7 +299,7 @@
                             @if ($paymentMethod == 'credit_card')
                             <div class="card-details-sec show">
                                 <div class="form-headeing-second">
-                                    <h4 class="border-0 mb-0">Card details</h4>
+                                    <h4 class="border-0 mb-0">Card Details</h4>
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
@@ -339,7 +342,7 @@
                             </div>
                             <div class="sub-totel-text-block">
                                 <p class="label">Transaction Fees</p>
-                                <p class="price">${{ $transactionFees }}( 2% static )</p>
+                                <p class="price">${{ $transactionFees }}</p>
                             </div>
                             <div class="sub-totel-text-block">
                                 <p class="label"><strong>Total</strong></p>
@@ -457,7 +460,7 @@
                         <div class="btn_nxt_prs">
                             <label for="next3" class="btn_c" wire:click="saveOrderNotes"><a href="message.html">Send Notes</a></label>
                         </div>
-                        <a href="#" class="link-design-2 d-block pb-3">Please inform your provider about
+                        <a  class="link-design-2 d-block pb-3">Please inform your provider about
                             any future changes or cancellations as soon as possible. </a>
                         <div class="py-3 border-top cancel_order_div">
                             <p>Something Wrong? <span class="cancel-order_span"><a href="javascript::void(0)" wire:click="alertConfirm({{ $order->id }})">Cancel order
