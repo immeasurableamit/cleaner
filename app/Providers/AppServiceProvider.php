@@ -36,22 +36,41 @@ class AppServiceProvider extends ServiceProvider
 
         $mailSetting = Setting::first();
 
-        if ($mailSetting) {
-            $data = [
-                'driver' => 'smtp',
-                'host' => $mailSetting->smtp_host,
-                'port' => $mailSetting->smtp_port,
-                'username' => $mailSetting->smtp_username,
-                'password' => $mailSetting->smtp_password,
-                'encryption' => 'tls',
-                'from' => [
-                    'address' => 'me@example.com',
-                    'name' => 'cleaner'
-                ]
+        // if ($mailSetting) {
+        //     $data = [
+        //         'driver' => 'smtp',
+        //         'host' => $mailSetting->smtp_host,
+        //         'port' => $mailSetting->smtp_port,
+        //         'username' => $mailSetting->smtp_username,
+        //         'password' => $mailSetting->smtp_password,
+        //         'encryption' => 'tls',
+        //         'from' => [
+        //             'address' => 'me@example.com',
+        //             'name' => 'cleaner'
+        //         ]
 
-            ];
+        //     ];
 
-            Config::set('mail', $data);
-        }
+        //     Config::set('mail', $data);
+        //        }
+
+
+        $smtpDetails = Config::get('mail.mailers.smtp');
+
+        $smtpDetails = [
+            'transport' => 'smtp',
+            'host' => $mailSetting->smtp_host,
+            'port' => $mailSetting->smtp_port,
+            'username' => $mailSetting->smtp_username,
+            'password' => $mailSetting->smtp_password,
+            'encryption' => 'tls',
+            'from' => [
+                'address' => 'me@example.com',
+                'name' => 'cleaner'
+            ]
+        ];
+
+        Config::set('mail.mailers.smtp', $smtpDetails);
+        // Config::get('mail.mailers.smtp');
     }
 }
