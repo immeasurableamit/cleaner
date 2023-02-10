@@ -5631,7 +5631,7 @@ input[type="month"]::-webkit-calendar-picker-indicator {
     color: #3da9f8;
 }
 .header-main-cntnt-differ {
-    max-height: 109px;
+    max-height: 63px;
 }
 .select-date-toggles.show .card-layout-showcase {
     display: none;
