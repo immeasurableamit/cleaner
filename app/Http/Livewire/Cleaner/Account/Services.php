@@ -9,6 +9,8 @@ use App\Models\CleanerServicesIncluded;
 use App\Models\Discount;
 use App\Models\CleanerDiscount;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use App\Models\User;
+
 
 class Services extends Component
 {
@@ -20,94 +22,78 @@ class Services extends Component
     public $discounts;
     public $discountData;
 
+
+    public $cleaner, $types;
+
+    public $activeServiceItemsIds = [];
+
+
     public function mount()
     {
-        $this->user = auth()->user();
+        $this->cleaner = User::with('cleanerServices')->where('id', auth()->user()->id )->first();
+        $this->types = Types::with('services.items')->get();
+        $this->addCustomAttributesInProps();    
+    }
 
-        $this->discounts = Discount::whereStatus('1')->get();
-        $cleanerDiscounts = CleanerDiscount::where('user_id', $this->user->id)->get();
-
-        foreach($this->discounts as $discount){
-            $checkDiscount = $cleanerDiscounts->where('discounts_id', $discount->id)->first();
-
-            $this->discountData[$discount->id]['discount'] = $checkDiscount->discount ?? '0';
-        }
-
-
-
-        $includedServices = CleanerServicesIncluded::where('user_id', $this->user->id)->get();
-        foreach($includedServices as $include){
-            $this->included[$include->services_id]['data'] = $include->data;
-        }
-
-        $customServices = CleanerServices::where('users_id', $this->user->id)->where('is_custom', '1')->get();
-
-        $types = Types::with(['services', 'services.servicesItems'])->get();
-        $cservices = CleanerServices::with('servicesItems')->where('users_id', $this->user->id)->where('is_custom', '0')->get();
-
-        $cservicesItems = $cservices->where('status', 1 )->pluck('servicesItems.services_id')->toArray();
-        $cservicesItems = array_unique($cservicesItems);
+    public function hydrate()
+    {
+        $this->addCustomAttributesInProps();
+    }
 
 
 
-        $dataArray = [];
-        foreach($types as $type){
-            $typeArray = [];
+    public function addCustomAttributesInProps()
+    {
+        $cleanerServices = $this->cleaner->cleanerServices;
 
-            $typeArray['id'] = $type->id;
-            $typeArray['title'] = $type->title;
+        foreach ( $this->types as $type ) {
 
-            foreach($type->services as $service){
-                $serviceArray = [];
+            foreach ( $type->services as $service ) {
 
-                $serviceArray['id'] = $service->id;
-                $serviceArray['title'] = $service->title;
-                $serviceArray['home_discount'] = $service->home_discount;
-                $serviceArray['checked'] = in_array($service->id, $cservicesItems) ? 'on' : false;
-
-                if($service->title=='Custom Offerings'){
-                    foreach($customServices as $cservi){
-                        $itemArray = [];
-
-                        $itemArray['id'] = $cservi->services_id;
-                        $itemArray['title'] = $cservi->title;
-                        $itemArray['price'] = @$cservi->price ?? '1';
-                        $itemArray['duration'] = @$cservi->duration ?? '1';
-                        $itemArray['checked'] = @$cservi->status=='1' ? 'on' : false;
-                        $itemArray['toogle'] = false;
-                        $itemArray['custom'] = @$cservi->is_custom=='1' ? true : false;
-                        $itemArray['is_recurring'] = @$cservi->is_recurring=='1' ? true : false;
-
-                        $serviceArray['items'][] = $itemArray;
-                    }
+                foreach ( $service->items as $item ) {                    
+                    $item->cleaner_service = $cleanerServices->where('services_items_id', $item->id )->first();
                 }
-                else {
-                    foreach($service->servicesItems as $item){
-                        $cservice = $cservices->where('services_items_id', $item->id )->first();
-                        $itemArray = [];
-
-                        $itemArray['id'] = $item->id;
-                        $itemArray['title'] = $item->title;
-                        $itemArray['price'] = @$cservice->price ?? '1';
-                        $itemArray['duration'] = @$cservice->duration ?? '1';
-                        $itemArray['checked'] = @$cservice->status=='1' ? 'on' : false;
-                        $itemArray['toogle'] = false;
-                        $itemArray['custom'] = false;
-
-                        $serviceArray['items'][] = $itemArray;
-                    }
-                }
-
-                $typeArray['services'][] = $serviceArray;
             }
+        }
+        
+    }
 
-            //array_push($dataArray, $typeArray);
-            $dataArray[] = $typeArray;
+    public function refreshCleanerServicesRelation()
+    {
+        $this->cleaner->load('cleanerServices');
+        $this->addCustomAttributesInProps();
+    }
+
+    public function toggleService($itemId)
+    {
+
+        $cleanerService = getCleanerServiceByServiceItemId( $this->cleaner, $itemId );
+
+        if ( $cleanerService ){
+            toggleCleanerServiceStatus($cleanerService);          
+            $this->alert('success', "Service updated");
+            $this->refreshCleanerServicesRelation();
+            return true;
         }
 
-        $this->serviceData = $dataArray;
+        $cleanerService = storeCleanerServiceWithDefaults($this->cleaner, $itemId );
 
-        //dd($dataArray);
+        $this->alert('success', "Service updated");
+        $this->refreshCleanerServicesRelation();     
+        return true;              
+    }
+
+    function updateCleanerService($cleanerServiceId, $details)
+    {
+        $cleanerService = $this->cleaner->cleanerServices->find( $cleanerServiceId );
+        
+        $cleanerService->price = $details['price'];
+        $cleanerService->duration = $details['duration'];
+        $cleanerService->save();
+
+        $this->refreshCleanerServicesRelation();     
+        $this->alert('success', 'Service updated');
+        return true;
     }
 
     public function serviceAction($type, $service)
@@ -166,6 +152,7 @@ class Services extends Component
 
 
     public function saveData(){
+        dd( $this->serviceData );
         updateServicesOfCleaners($this->user, $this->serviceData);
 
         $this->alert('success', 'Services saved');

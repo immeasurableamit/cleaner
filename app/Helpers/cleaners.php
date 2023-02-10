@@ -48,7 +48,6 @@ function updateServicesOfCleaners($cleaner, $types)
 
                 /* Prepare to store service item if needs to get saved */
                 if ($item_data['status'] == '1') {
-
                     $newCleanerService = generateCleanerServiceBlueprintForSaving($cleaner->id, $item_data);
                     array_push($newCleanerServies, $newCleanerService);
                 }
@@ -200,4 +199,33 @@ function sendPayoutOfOrder( $order )
     $resp = stripeTransferAmountToConnectedAccount( $amountInCents, $accountId, $description );
     return $resp;
 
+}
+
+function getCleanerServiceByServiceItemId( $cleaner, $serviceItemId ) 
+{
+    $cleaner->loadMissing('cleanerServices');
+    
+    $cleanerService = $cleaner->cleanerServices->where('services_items_id', $serviceItemId )->first();
+    return $cleanerService;
+}
+
+function storeCleanerServiceWithDefaults($cleaner, $serviceItemId)
+{
+    $cleanerService = new CleanerServices;
+    $cleanerService->users_id = $cleaner->id;
+    $cleanerService->services_items_id = $serviceItemId;
+    $cleanerService->status = '1';
+    $cleanerService->price = 0;
+    $cleanerService->duration = 0;
+    $cleanerService->save();   
+
+    return $cleanerService;
+}
+
+function toggleCleanerServiceStatus( $cleanerService )
+{
+    $isServiceOn            = $cleanerService->status == '1';
+    $cleanerService->status = $isServiceOn ? '0' : '1'; // toggle status
+    $cleanerService->save();
+    return $cleanerService;
 }

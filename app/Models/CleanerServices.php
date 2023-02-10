@@ -17,11 +17,15 @@ class CleanerServices extends Model
 
     public function priceForSqFt($sqFt)
     {
+        if (empty( $sqFt ) ) return 0;
+
         return $this->price * $sqFt;
     }
 
     public function durationForSqFt($sqFt)
     {
-        return $this->duration * $sqFt;
+        if (empty( $sqFt ) ) return 0;
+        return $this->duration;        
+        //return $this->duration * $sqFt;
     }
 }
