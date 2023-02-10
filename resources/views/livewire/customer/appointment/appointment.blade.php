@@ -96,6 +96,11 @@
 
                                             @if ($order->status == 'pending')
                                             <span class="orange_txt">{{$order->statusForCustomer()}}</span>
+                                            @elseif ($order->status == 'accepted')
+                                            <span class="orange_txt">{{$order->statusForCustomer()}}</span>
+                                            @elseif ($order->status == 'cancelled')
+                                            <span class="orange_txt">{{$order->statusForCustomer()}}</span>
+
                                             @elseif ( $order->status = 'cancelled_by_customer')
                                             <span class="text-danger">{{$order->statusForCustomer()}}</span>
                                             @else

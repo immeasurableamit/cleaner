@@ -82,6 +82,7 @@ class Jobs extends Component
         $relations = array_merge( $userRelation, $itemsRelation );
 
         $this->orders = Order::with($relations)->where('cleaner_id', auth()->user()->id )->get();
+
         $this->addAttributesInOrders();
 
     }
@@ -112,6 +113,7 @@ class Jobs extends Component
     protected function getPendingOrders()
     {
         return $this->orders->whereIn('status', $this->pendingOrderStatuses );
+
     }
 
     protected function getAcceptedOrders()
