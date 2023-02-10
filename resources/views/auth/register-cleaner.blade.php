@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="authentication-sec light-banner signup-page" style="background-image: url('assets/images/white-pattern.png')">
+<section class="authentication-sec light-banner signup-page" style="background-image: url('../assets/images/white-pattern.png')">
   <div class="container signup_all_container">
     <div class="signup-selection-wrapper">
       <div class="selection-wrap d-flex justify-content-spacebw">
@@ -193,7 +193,7 @@
                     {!! $errors->first('zip_code', '<span class="alert">:message</span>') !!}
                   </div>
                   <div class="form-grouph payment_search select-design mb-30">
-                    {!! Form::label('payment','Payment Method(where you want to receivie your money)', ['class' => 'form-label']) !!}
+                    <span>{!! Form::label('payment','Payment Method <span style="font-size: 11px;">(where you want to receivie your money)</span>', ['class' => 'form-label'], false) !!}</span>
 
                     <select class=" select-custom-design" name="payment_method" value="{{old('payment_method')}}">
                       <option>Payment Method</option>

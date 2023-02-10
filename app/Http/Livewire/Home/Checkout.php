@@ -13,6 +13,7 @@ use Livewire\Component;
 
 use App\Models\User;
 use App\Models\UserDetails;
+use App\Models\Setting;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -75,11 +76,50 @@ class Checkout extends Component
         $this->estimatedDuration = $cleanerServices->sum('duration');
     }
 
+    public function taxCalculate()
+    {
+        $this->subtotal = $this->cleanerService->first()->rate + $this->addOns->sum('rate');
+
+        $taxId = Setting::find('1');
+        if ($taxId == 'null') {
+        } else {
+
+            if ($taxId->tax_type == 'percentage') {
+                $taxPercentCal = $this->subtotal * $taxId->tax / 100;
+
+                // dd($taxPercentCal);
+                return $taxPercentCal;
+            } else {
+                $taxFixCal = $taxId->tax;
+                return  $taxFixCal;
+            }
+        }
+
+        return true;
+    }
+
+    public function transactionFeeCalculate()
+    {
+        $this->subtotal = $this->cleanerService->first()->rate + $this->addOns->sum('rate');
+
+        $this->tax      = $this->taxCalculate();
+        $taxId = Setting::find('1');
+
+        if ($taxId->transaction_fee_type == 'percentage') {
+            $transactionPercentCal = ($this->subtotal + $this->tax) * $taxId->transaction_fees / 100;
+
+            return $transactionPercentCal;
+        } else {
+            $transactionFixedCal = $taxId->transaction_fees;
+            return $transactionFixedCal;
+        }
+    }
+
     protected function preparePricingProps()
     {
         $this->subtotal = $this->cleanerService->first()->rate + $this->addOns->sum('rate');
-        $this->tax      = 0; // TODO: make this dynamic
-        $this->transactionFees = ($this->subtotal + $this->tax) / 100 * 2; // TODO: transaction fees calculation formula needed. 2% for make it work
+        $this->tax      = $this->taxCalculate();
+        $this->transactionFees = $this->transactionFeeCalculate();
         $this->total    = $this->subtotal + $this->tax + $this->transactionFees;
     }
 
@@ -145,21 +185,29 @@ class Checkout extends Component
      */
     public function authenticateUser()
     {
-        $this->validate([
-            'email' => 'required|exists:users,email',
-            'password' => 'required'
-        ]);
-
+        $this->validate(
+            [
+                'email' => 'required|exists:users,email',
+                'password' => 'required'
+            ],
+            [
+                'email.exists' => 'These credentials do not match our records',
+            ]
+        );
 
         $user = User::where('email', $this->email)->first();
 
-        if (!Hash::check($this->password, $user->password)) {
-            $this->addError('password', 'Input credentials are not matched in our records.');
-            return true;
+        if ($user->role == 'cleaner' || $user->role == 'admin') {
+            return $this->alert("error", "Cleaner and Admin don't have permission to book an appointment");
+        } else {
+
+            if (!Hash::check($this->password, $user->password)) {
+                $this->addError('password', 'Input credentials are not matched in our records.');
+                return true;
+            }
+
+            auth()->loginUsingId($user->id);
         }
-
-        auth()->loginUsingId($user->id);
-
         // redirecting to same page to change the design of header
         return redirect($this->currentPageUrl . "?step=2");
     }
@@ -182,7 +230,6 @@ class Checkout extends Component
             'expYear'      => 'required|numeric',
 
         ];
-
     }
 
     protected function checkoutRules()
@@ -361,7 +408,7 @@ class Checkout extends Component
         $userCard = UserCard::create([
             'user_id'     => $user_id,
             'brand'  => $this->stripeTokenResp['token']->card->brand,
-            'last4_digits' =>$this->stripeTokenResp['token']->card->last4,
+            'last4_digits' => $this->stripeTokenResp['token']->card->last4,
             'exp_month'   => $this->stripeTokenResp['token']->card->exp_month,
             'exp_year' => $this->stripeTokenResp['token']->card->exp_year,
 
@@ -414,7 +461,12 @@ class Checkout extends Component
         // and update his id in DB
 
         $customer = stripeCreateCustomerWithSource($name, $this->email, $tokenResp['token_string']);
-        //    dd($customer);
+
+        if ($customer['status']  == false) {
+            $this->addError('stripe_card_verification', $customer['error_string']);
+            return ['status' => false, 'error' => $customer['error_string']];
+        }
+
         $customer = $customer['resposne']->id;
         $this->stripe_customer_id = $customer;
 
@@ -440,7 +492,7 @@ class Checkout extends Component
         /* Handle guest user */
         if (is_null($this->user)) {
             $this->user = $this->storeUserAsCustomer();
-            auth()->loginUsingId( $this->user->id );
+            auth()->loginUsingId($this->user->id);
         }
 
         /* Store order */
@@ -462,7 +514,7 @@ class Checkout extends Component
         if ($status) {
             $this->cleaner->notify(new CleanerNewBookingNotification($this->order));
             $this->user->notify(new CustomerNewBookingNotification($this->order));
-            return redirect()->route('customer.appointment.thanks', [ 'order_id' => $this->order->id ]);
+            return redirect()->route('customer.appointment.thanks', ['order_id' => $this->order->id]);
         }
     }
 
@@ -481,7 +533,7 @@ class Checkout extends Component
 
     public function updatedFormattedNumber($value)
     {
-                $this->formattedNumber = wordwrap($value, 4, " ", true); // add space after each 4 characters
+        $this->formattedNumber = wordwrap($value, 4, " ", true); // add space after each 4 characters
         $this->number = str_replace(" ", "", $this->formattedNumber); // set number for stripe verification
     }
 
@@ -492,14 +544,14 @@ class Checkout extends Component
         $this->order_id = $iid;
 
         $this->alert('', 'Are you sure do want to delete?', [
-			'toast' => false,
-			'position' => 'center',
-			'showCancelButton' => true,
-			'cancelButtonText' => 'No',
-			'showConfirmButton' => true,
-			'confirmButtonText' => 'Yes',
-			'onConfirmed' => 'cancelOrder',
-			'timer' => null
+            'toast' => false,
+            'position' => 'center',
+            'showCancelButton' => true,
+            'cancelButtonText' => 'No',
+            'showConfirmButton' => true,
+            'confirmButtonText' => 'Yes',
+            'onConfirmed' => 'cancelOrder',
+            'timer' => null
         ]);
     }
     public function cancelOrder()
@@ -516,7 +568,7 @@ class Checkout extends Component
 
         $this->alert('success', 'Your Order Cancelled successfully');
 
-        return redirect()->route('profile',$this->getCleanerId);
+        return redirect()->route('profile', $this->getCleanerId);
     }
 
 

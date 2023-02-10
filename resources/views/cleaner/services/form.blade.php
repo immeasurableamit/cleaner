@@ -3,7 +3,7 @@
         <h3>{{ $item->title }}</h3>
         <div class="form-check form-switch body heading-toggle" data-service="{{$service->id}}" data-item="{{$item->id}}">
 
-        @if ( ! $cservice ) 
+        @if ( ! $cservice )
             <input class="check form-check-input" name="service[{{$service->id}}][item][{{$item->id}}][checked]" type="checkbox">
         @else
             <input class="check form-check-input" name="service[{{$service->id}}][item][{{$item->id}}][checked]" type="checkbox" {{@$cservice->status == '1' ? 'checked' : ''}}>
@@ -31,8 +31,10 @@
                 <span class="minus">-</span>
                 <input type="text" value="{{@$cservice->duration ?? '1'}}" name="service[{{$service->id}}][item][{{$item->id}}][duration]">
                 <span class="plus">+</span>
+
             </div>
         </div>
+
         <div class="btn_text">
             {{--<p class="text_3">{{ $item->description }}</p>--}}
             <button type="submit" class="btn_blue">Save</button>

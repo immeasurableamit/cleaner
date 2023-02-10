@@ -1,6 +1,8 @@
 <x-mail::message>
 
-Hello {{ ucwords( $order->cleaner->name ) }},
+{{-- Hello {{ ucwords( $order->cleaner->name ) }}, --}}
+
+Hello {{ ucwords( $order->user->name ) }},
 
 Your Booking has been successfully Completed, Please share your valuable feedback regarding Cleaner service this will help cleaner to perform better in future.
 

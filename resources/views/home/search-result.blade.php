@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<section class="light-banner customer-account-page" style="background-image: url('assets/images/white-pattern.png')">
+<section class="light-banner customer-account-page" style="background-image: url('../assets/images/white-pattern.png')">
    <div class="container">
       <div class="customer-white-wrapper search_result_section">
          <div class="result_text">

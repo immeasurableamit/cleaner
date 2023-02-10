@@ -15,7 +15,7 @@
         <div class="form-check form-switch body heading-toggle {{$item['checked']?'active-toggle':''}}">
 
         	<input class="check form-check-input" wire:model="serviceData.{{$t}}.services.{{$s}}.items.{{$i}}.checked" type="checkbox">
-            
+
         </div>
     </div>
     <div class="card-edit-content">
@@ -29,6 +29,7 @@
             <div class="incremnt_decrmnt number for_alternative">
                 <span class="minus" wire:click="servicePrice({{$t}}, {{$s}}, {{$i}}, 'minus')">-</span>
                 <input type="text" wire:model="serviceData.{{$t}}.services.{{$s}}.items.{{$i}}.price">
+
                 <span class="plus" wire:click="servicePrice({{$t}}, {{$s}}, {{$i}}, 'plus')">+</span>
             </div>
         </div>
@@ -45,13 +46,17 @@
             <span class="est">Frequency</span>
             <div class="incremnt_decrmnt number for_alternative">
                 Allow recurring job?
-                
+
                 <div class="form-check form-switch body heading-toggle {{$item['is_recurring']?'active-toggle':''}}">
                     <input class="check form-check-input" wire:model="serviceData.{{$t}}.services.{{$s}}.items.{{$i}}.is_recurring" type="checkbox">
                 </div>
             </div>
         </div>
         @endif
+        <?php
+        $price = 1500 *@$item['price'];
+        ?>
+        <div> <p>Your quote would be <b>$ {{ $price}} </b>for a customer with a 1,500 sq ft 3 bed 2 bath home </p> </div>
         <div class="btn_text">
             <button type="button" class="btn_blue" wire:click="saveData">Save</button>
         </div>

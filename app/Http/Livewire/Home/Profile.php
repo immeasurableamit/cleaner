@@ -96,7 +96,7 @@ class Profile extends Component
     protected function fillCleanerAdditionalInfo()
     {
         $completedOrders = Order::where('cleaner_id', $this->cleanerId)->whereIn('status', ['payment_collected', 'completed'])->count();
-        $totalMembersOfCleanerTeam = CleanerTeam::where('user_id', $this->cleanerId)->count();
+        $totalMembersOfCleanerTeam = CleanerTeam::where('user_id', $this->cleanerId)->count()+1;
         $this->cleanerAdditionalInfo = [
             'rating' => $this->cleaner->cleanerReviews->avg('rating'),
             'completed_orders' => $completedOrders,
@@ -350,7 +350,7 @@ class Profile extends Component
 
         if ($user == 'cleaner' || $user == 'admin') {
 
-            return $this->alert("error", "You don't have permission");
+            return $this->alert("error", "Cleaner and Admin don't have permission to book an appointment");
 
         } else {
             $validatedData = $this->validate(...$this->checkoutRules());

@@ -1,6 +1,10 @@
 <div>
+
      <div class="white-bg-wrapper">
   @foreach($orders as $orders)
+
+     <div class="">
+
         <div class="job_id">
        <h5>Job # {{$orders->id}}</h5>
         </div>

@@ -136,7 +136,7 @@
                 </li>
             </ul>
         </div>
-        <div class="h4-design mt-4 padding-about-frm-right">
+        <div class="h4-design mt-4 padding-about-frm-right cleaner_about">
             <h4>About</h4>
         </div>
         <div class="customer-account-information cleaner_account_2 about-updation-wrap">

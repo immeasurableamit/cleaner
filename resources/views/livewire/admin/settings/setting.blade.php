@@ -211,7 +211,7 @@
       </div>
    </div>
    <!-- Accept Modal Start Here-->
-   <div wire:ignore.self class="modal fade common_modal modal-design" id="seoForm" tabindex="-1" aria-labelledby="stateForm" aria-hidden="true">
+   <div wire:ignore.self class="modal fade common_modal modal-design modal_style" id="seoForm" tabindex="-1" aria-labelledby="stateForm" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
          <div class="modal-content">
             <button type="button" class="btn btn_close btn-default close closeModal">

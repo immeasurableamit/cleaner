@@ -105,8 +105,8 @@
                                                 <li><a href="{{ route('customer.account') }}" class="{{ @$title['active']=='account' ? 'active' : '' }}">Account</a></li>
                                                 <li><a href="{{route('customer.appointment.index')}}" class="{{ @$title['active']=='appointments' ? 'active' : '' }}">Appointments</a></li>
                                                 <li><a href="{{route('customer.billing.index')}}" class="{{ @$title['active']=='billing' ? 'active' : '' }}">Billing</a></li>
-                                                <li><a href="#">Notifications</a></li>
-                                                <li><a href="{{route('customer.favourite.index')}}" class="{{ @$title['active']=='favourite' ? 'active' : '' }}">Favourite</a></li>
+                                                <li><a href="{{route('customer.notification.index')}}">Notifications</a></li>
+                                                <li><a href="{{route('customer.favourite.index')}}" class="{{ @$title['active']=='favourite' ? 'active' : '' }}">Favourites</a></li>
                                                 <li><a href="{{ route('customer.support.service') }}" class="{{ @$title['active']=='support' ? 'active' : '' }}">Support</a>
                                                 </li>
                                                 @elseif(Auth::user()->role == 'cleaner')
@@ -126,11 +126,15 @@
                                             </ul>
                                         </div>
                                         <div class="dropsown-logout-design">
-
-                                            <form action="{{ route('logout') }}" method="post">
+                                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                          document.getElementById('logout-form').submit();">
+                                            <img src="{{ asset('/assets/images/icons/logout.svg') }}"> {{ __('Logout') }}
+                                         </a>
+                                            <form action="{{ route('logout') }}" method="post" id="logout-form" >
                                                 @csrf
-                                                <button type="submit" style="border: none; background: transparent;"><img src="{{ asset('/assets/images/icons/logout.svg') }}">
-                                                    Logout</button>
+                                               {{--   <button type="submit" style="border: none; background: transparent;"><img src="{{ asset('/assets/images/icons/logout.svg') }}">
+                                                    Logout</button>  --}}
                                             </form>
 
                                         </div>

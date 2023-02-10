@@ -881,6 +881,9 @@ a.pdf_r {
 .admin-right-header .admin-master-search>.notification-li {
     margin-right: 0px;
 }
+.edit-icons,.view-icon{
+    color: var(--primary);
+}
 @media (min-width: 1200px){
     .table-design .dataTables_length {
         position: absolute;
@@ -1020,9 +1023,9 @@ a.pdf_r {
     .table-header-wrapper {
         flex-wrap: wrap;
     }
-    .table-header-wrapper>div {
+    /* .table-header-wrapper>div {
         width: 100%;
-    }
+    } */
     .add-job-flex .add-job-btn {
         text-align: left;
         margin-bottom: 10px;
@@ -1073,6 +1076,14 @@ a.pdf_r {
     .admin-right-header .admin-master-search>.notification-li {
         margin-right: 0px;
     }
+    td.status a.text-danger.px-2 {
+        padding-left: 0px !important;
+    }
+    .table-tabs-wrap .nav-tabs .nav-link, .seeting_tabs li.nav-item .nav-link {
+        font-size: 13px;
+        padding: 10px 5px;
+    }
+    /* 767  */
 }
 @media (max-width: 480px){
     .page-heading{
