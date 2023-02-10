@@ -23,7 +23,7 @@
 
             @foreach ($teamMembers as $teamMember)
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                    <div class="select-date-toggles overflow-hidden teamCard-{{ $teamMember->id }}">
+                    <div class="select-date-toggles overflow-hidden teamCard-{{ $teamMember->id }} ">
                         <button class="service_toggle_s removeCard-{{ $teamMember->id }}"
                             data-id="{{ $teamMember->id }}"></button>
                         <div class="service-main-service-column">
@@ -348,6 +348,11 @@
                 if (action == 'success') {
                     location.reload();
                 }
+            });
+
+            window.livewire.on('showCard', (id) => {
+                var id = id;
+                $('.teamCard-'+ id).addClass('show');
             });
         </script>
 
