@@ -291,4 +291,15 @@ public function sendEmailVerificationNotification()
     {
         return $this->hasMany( CleanerPrescheduledOffTime::class, 'user_id', 'id');
     }
+
+    public function cleanerServicesDescriptions()
+    {
+        return $this->hasMany( CleanerServicesIncluded::class, 'cleaner_id');
+    }
+
+    public function cleanerDiscounts()
+    {
+        return $this->hasMany( CleanerDiscount::class, 'user_id', 'id');
+    }
+
 }

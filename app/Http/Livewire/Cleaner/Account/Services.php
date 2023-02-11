@@ -10,45 +10,80 @@ use App\Models\Discount;
 use App\Models\CleanerDiscount;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Models\User;
+use Illuminate\Support\Facades\Validator;
+use App\Models\ServicesItems;
+
 
 
 class Services extends Component
 {
     use LivewireAlert;
 
-    public $user;
-    public $serviceData;
-    public $included;
-    public $discounts;
-    public $discountData;
-
-
-    public $cleaner, $types;
-
+    public $cleaner, $types, $discounts;
     public $activeServiceItemsIds = [];
+    public $newCustomServiceCardOpen = false;
+    // public $newCustomService = [
+    //     'title' => '',
+    //     'price' => 0,
+    //     'is_recurring' => false,
+    //     'duration' => 0,
+    // ];
 
 
     public function mount()
     {
-        $this->cleaner = User::with('cleanerServices')->where('id', auth()->user()->id )->first();
-        $this->types = Types::with('services.items')->get();
+        $this->prepareProps();
+    }
+
+    public function prepareProps()
+    {
+        $this->cleaner = User::with(['cleanerServices', 'cleanerServicesDescriptions', 'cleanerDiscounts'])->where('id', auth()->user()->id )->first();
+        $this->types = Types::whereRelation('services', 'status', '1')->with('services.items')->get();    
+        $this->discounts = Discount::all();
         $this->addCustomAttributesInProps();    
     }
+
+    public function updated($prop, $value )
+    {
+
+    }
+
+
+    public function upsertDiscount($discountId, $percentage)
+    {
+        $fieldsToCompare = ['user_id' => $this->cleaner->id, 'discounts_id' => $discountId];
+        $fieldsToUpdate  = ['discount' => $percentage ];
+        $resp = CleanerDiscount::updateOrCreate($fieldsToCompare, $fieldsToUpdate);
+
+        $this->alert('success', 'Discount updated');
+        $this->cleaner->load('cleanerDiscounts'); // refresh relation
+        $this->addCustomAttributesInProps();
+        return true;
+    }
+
 
     public function hydrate()
     {
         $this->addCustomAttributesInProps();
-    }
-
-
+    }    
 
     public function addCustomAttributesInProps()
     {
         $cleanerServices = $this->cleaner->cleanerServices;
+        $cleanerServicesDescriptions = $this->cleaner->cleanerServicesDescriptions;
 
+        /* Discounts Prop */
+        foreach ( $this->discounts as $discount ) {
+            $discount->cleaner_discount = $this->cleaner->cleanerDiscounts->where('discounts_id', $discount->id )->first();
+        }
+
+        /* Types prop */
         foreach ( $this->types as $type ) {
 
             foreach ( $type->services as $service ) {
+
+                $service->cleaner_service_description = $cleanerServicesDescriptions->where('service_id', $service->id )->first();
+                $service->does_offer_customization    = str_contains( strtolower( $service->title ), 'custom offer' ); // TODO: this code can break since it's hard coded
 
                 foreach ( $service->items as $item ) {                    
                     $item->cleaner_service = $cleanerServices->where('services_items_id', $item->id )->first();
@@ -66,7 +101,6 @@ class Services extends Component
 
     public function toggleService($itemId)
     {
-
         $cleanerService = getCleanerServiceByServiceItemId( $this->cleaner, $itemId );
 
         if ( $cleanerService ){
@@ -96,7 +130,61 @@ class Services extends Component
         return true;
     }
 
-    public function serviceAction($type, $service)
+    public function storeServiceDescription( $serviceId, $description ) 
+    {
+        $cleanerServiceIncluded = CleanerServicesIncluded::where('cleaner_id', $this->cleaner->id )
+                                    ->where('service_id', $serviceId)->first();        
+
+        if ( $cleanerServiceIncluded ) {
+
+            $cleanerServiceIncluded->description = $description;
+            $cleanerServiceIncluded->save();
+            $this->alert('success', 'Description updated');
+            return true;            
+        }
+
+        $cleanerServiceIncluded = new CleanerServicesIncluded;
+        $cleanerServiceIncluded->cleaner_id = $this->cleaner->id;
+        $cleanerServiceIncluded->service_id = $serviceId;
+        $cleanerServiceIncluded->description = $description;
+        $cleanerServiceIncluded->save();
+
+        $this->alert('success', 'Description updated');        
+        return true;
+    }
+
+
+
+    public function storeCustomServiceItem($serviceId, $details)
+    {
+        // TODO: fields validation is left
+        
+        $serviceItem = new ServicesItems;
+        $serviceItem->services_id = $serviceId;
+        $serviceItem->title = empty( $details['title'] ) ? "Custom service " : $details['title']; // TODO: added unnecessary condition to handle errors
+        $serviceItem->is_custom   = true;
+        $serviceItem->cleaner_id  = $this->cleaner->id;
+        $serviceItem->save();
+
+        $serviceItem->refresh();
+
+
+        $cleanerService = new CleanerServices;
+        $cleanerService->users_id = $this->cleaner->id;
+        $cleanerService->services_items_id = $serviceItem->id;
+        $cleanerService->price = $details['price'];
+        $cleanerService->duration = $details['duration'];
+        $cleanerService->status = '1';
+        $cleanerService->save();
+
+        $this->alert('success', 'Service added');
+        $this->newCustomServiceCardOpen = false;
+        $this->prepareProps();
+        return true;                
+
+    }
+
+/*     public function serviceAction($type, $service)
     {
         $dataArray = $this->serviceData;
 
@@ -148,7 +236,7 @@ class Services extends Component
                 $this->serviceData[$type]['services'][$service]['items'][$item]['duration'] = $this->serviceData[$type]['services'][$service]['items'][$item]['duration'] - 1;
             }
         }
-    }
+    } 
 
 
     public function saveData(){
@@ -251,10 +339,12 @@ class Services extends Component
 
         $this->alert('success', 'Large Home Discount Saved');
     }
+    */
 
 
     public function render()
     {
+        $this->dispatchBrowserEvent('componentRendered');
         return view('livewire.cleaner.account.services');
     }
 }

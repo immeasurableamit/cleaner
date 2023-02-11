@@ -163,7 +163,9 @@ class Order extends Model
     public function serviceOrderItem()
     {
         $item = $this->items->first(function ($item) {
-            return $item->service_item->service->types_id == 1;
+            $itemTypeId = $item->service_item->service->types_id;
+            $isServiceOrderItem = $itemTypeId == 1 || $itemTypeId == 3;
+            return $isServiceOrderItem;
         });
 
         return $item;

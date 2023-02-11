@@ -27,5 +27,5 @@ class CleanerServices extends Model
         if (empty( $sqFt ) ) return 0;
         return $this->duration;        
         //return $this->duration * $sqFt;
-    }
+    }    
 }
