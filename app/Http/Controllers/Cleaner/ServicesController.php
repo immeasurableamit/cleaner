@@ -18,6 +18,19 @@ class ServicesController extends Controller
             'title' => 'Services',
             'active' => 'services',
         );
+
+        /* 
+         *------------------------
+         *   IMPORTANT NOTE!     |
+         * -----------------------
+         * 
+         * If Custom Offerings are not getting appear in set-services page
+         * then please verify following requirements:
+         * 
+         * 1. An entry should be added with id of '3' in 'types' table ( other cleanings )
+         * 2. An entry should be added in 'services' table with 'types_id' set to '3'
+         * 
+         */
         
         return view('cleaner.services.index', compact('title'));
     }
