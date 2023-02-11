@@ -164,7 +164,7 @@
                                     <select class="select-custom-design-group" id="select-service-selector">
 
                                         <option></option>
-                                        @foreach ($services->where('types_id', '1') as $service)
+                                        @foreach ($services->whereIn('types_id', ['1', '3']) as $service)
                                             <optgroup label="{{ $service['title'] }}">
                                                 @foreach ($service['serviceItems'] as $serviceItem)
                                                     <option value="{{ $serviceItem['id'] }}"

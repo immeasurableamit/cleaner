@@ -17,9 +17,9 @@ return new class extends Migration
             $table->engine = 'InnoDB';
             $table->id();
 
-            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreignId('services_id')->references('id')->on('services')->onDelete('cascade');
-            $table->text('data');
+            $table->foreignId('cleaner_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('service_id')->constrained('services')->cascadeOnDelete();
+            $table->text('description');
 
             $table->timestamps();
         });
