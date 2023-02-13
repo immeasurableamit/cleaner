@@ -81,11 +81,11 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getOnlineDateAttribute()
     {
-        $date = date('Y-m-d', strtotime($this->last_active_at));
+        $date = date('m-d-Y', strtotime($this->last_active_at));
         $dateDay = date('l', strtotime($this->last_active_at));
         $time = date('h:ma', strtotime($this->last_active_at));
 
-        $newDate = \Carbon\Carbon::now()->subDays(6)->format('Y-m-d');
+        $newDate = \Carbon\Carbon::now()->subDays(6)->format('m-d-Y');
 
         if($date >= $newDate){
             return $dateDay.' '.$time;
@@ -96,7 +96,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getProfilePicAttribute(){
         if($this->image){
-            return asset('storage/logo/'.$this->image);
+            return asset('storage/images/'.$this->image);
         }
 
         return asset('no-user.jpg');

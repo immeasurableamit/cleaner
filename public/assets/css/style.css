@@ -2374,6 +2374,7 @@ margin-bottom: 0px;
 .right_chat {
     padding: 30px;
     height: 770px;
+    height: 500px;
     overflow: auto;
 }
 .s_r_msg img {
