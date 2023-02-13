@@ -335,6 +335,12 @@
                                 <p class="label">Subtotal</p>
                                 <p class="price">${{ $subtotal }}</p>
                             </div>
+                            @if ( $discount > 0 )
+                            <div class="sub-totel-text-block">
+                                <p class="label">Discount -{{ $discountTitle }} </p>
+                                <p class="price">${{ $discount }}</p>
+                            </div>
+                            @endif
                             <div class="sub-totel-text-block">
                                 <p class="label">Tax</p>
                                 <p class="price">${{ $tax }}</p>
