@@ -50,6 +50,7 @@
                                             @if(@$data['delete']=='no')
                                             <div class="time-input-addon">
                                                 <input type="time" wire:model="days.{{$day}}.data.{{$i}}.from_time">
+
                                                 @error('days.'.$day.'.data.'.$i.'.from_time')<div class="alert d-inline">{{ $message }}</div>@enderror
                                                 <span class="d-none d-md-inline">-</span>
                                                 <input type="time" wire:model="days.{{$day}}.data.{{$i}}.to_time">

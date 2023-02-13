@@ -274,9 +274,9 @@ class Checkout extends Component
             'zip_code'    => $this->zip,
             'payment_method'     => $this->paymentMethod,
             'stripe_customer_id' => $this->stripe_customer_id,
+            'sms_marketing'=> '1',
+            'email_marketing'=>'1',
         ]);
-
-
         // TODO: store lat/lng
 
         return $userDetails;
@@ -298,6 +298,8 @@ class Checkout extends Component
             'status'     => '1',
             'contact_number' => $this->contact,
             'email_verified_at' => now(),
+
+
         ]);
 
         $this->storeUserDetails($user->id);

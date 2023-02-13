@@ -25,6 +25,8 @@ class UserDetails extends Model
         'payment_method',
         'timezone',
         'stripe_customer_id',
+        'sms_marketing',
+        'email_marketing'
 
     ];
 
