@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Request;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Notifications\Cleaner\NewBooking as CleanerNewBookingNotification;
 use App\Notifications\Customer\NewBooking as CustomerNewBookingNotification;
-
+use App\Models\CleanerDiscount;
 
 
 class Checkout extends Component
@@ -37,7 +37,7 @@ class Checkout extends Component
     public $cleanerService, $addOns, $homeSize;
 
     /* Second step props */
-    public $subtotal, $tax, $transactionFees, $total, $states, $user;
+    public $subtotal, $tax, $transactionFees, $total, $states, $user, $discount, $discountTitle;
 
     /* Second step: User details form props */
     public $firstname, $lastname, $email, $password;
@@ -116,11 +116,35 @@ class Checkout extends Component
         }
     }
 
+    protected function calculateDiscount($subtotal)
+    {
+        $this->cleaner->loadMissing('cleanerDiscounts.mainDiscount');
+        $cleanerDiscounts= $this->cleaner->cleanerDiscounts->sortByDesc('mainDiscount.min_sqft');                
+
+        $eligibleDiscount = $cleanerDiscounts->first( function( $cleanerDiscount ) {        
+
+            $isHomeSizeAboveThanMinSqft = $this->homeSize >= $cleanerDiscount->mainDiscount->min_sqft;        
+            if (  $isHomeSizeAboveThanMinSqft ) {
+                return true;
+            }
+        });
+        
+        if ( ! $eligibleDiscount ) {
+            return 0;
+        }
+
+        $eligibileDiscountPercentage = $eligibleDiscount->discount;
+        $discountAmount = calculateXPercentageOfYNumber( $subtotal, $eligibileDiscountPercentage);
+        $this->discountTitle = $eligibleDiscount->mainDiscount->title;
+        return $discountAmount;                        
+    }
+
     protected function preparePricingProps()
     {
         $this->subtotal = $this->cleanerService->first()->rate + $this->addOns->sum('rate');
         $this->tax      = $this->taxCalculate();
         $this->transactionFees = $this->transactionFeeCalculate();
+        $this->discount = $this->calculateDiscount($this->subtotal);
         $this->total    = $this->subtotal + $this->tax + $this->transactionFees;
     }
 
@@ -332,7 +356,8 @@ class Checkout extends Component
             'home_size_sq_ft'  => $this->homeSize,
             'cleaning_datetime'        => Carbon::createFromFormat('Y-m-d H:i:s', $this->details['selected_date'] . " " . $this->details['time']),
             'estimated_duration_hours' => $this->estimatedDuration,
-            'cleaner_id'               => $this->cleaner->id
+            'cleaner_id'               => $this->cleaner->id,
+            'discount'  => $this->discount,
 
         ]);
 

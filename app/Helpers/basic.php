@@ -134,5 +134,11 @@ function parseWeekdaysNameIntoWeekDaysNumber(array $namesOfWeekdays): array
     return $weekdaysInNumbers;
 }
 
+function calculateXPercentageOfYNumber($number, $percentage)
+{
+    if ( empty( $percentage ) ) return 0;
+    return $number / 100 * $percentage;
+}
+
 
 
