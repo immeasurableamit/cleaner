@@ -94,7 +94,10 @@
 'completed'
 'reviewed' -->
 
-                                            @if ($order->status == 'pending')
+                                                {{ $order->statusForCustomer() }}
+
+
+                                         {{--    @if ($order->status == 'pending')
                                             <span class="orange_txt">{{$order->statusForCustomer()}}</span>
                                             @elseif ($order->status == 'accepted')
                                             <span class="text-success">{{$order->statusForCustomer()}}</span>
@@ -106,6 +109,7 @@
                                             <span class="text-danger">{{$order->statusForCustomer()}}</span>
                                             @elseif ( $order->status = 'payment_collected')
                                             <span class="text-danger">{{$order->statusForCustomer()}}</span>
+
                                             @elseif ( $order->status = 'payment_failed')
                                             <span class="text-danger">{{$order->statusForCustomer()}}</span>
                                             @elseif ( $order->status = 'completed')
@@ -114,7 +118,7 @@
                                             <span class="text-danger">{{$order->statusForCustomer()}}</span>
                                             @else
                                             <span class="text-success">{{$order->statusForCustomer()}}</span>
-                                            @endif
+                                            @endif --}}
                                         </div>
 
                                         @if ($order->status == 'pending')
