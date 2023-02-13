@@ -135,7 +135,7 @@ class Customer extends Component
             $users[$key]['total_sum'] = $cnt;
             $users[$key]['order_lastdate'] = $lastdate;
 
-        }      
+        }    
          
    
         return view('livewire.admin.customer.customer', compact('users'));

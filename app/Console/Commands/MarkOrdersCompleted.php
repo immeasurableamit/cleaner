@@ -30,6 +30,7 @@ class MarkOrdersCompleted extends Command
      */
     public function handle()
     {
+info("Mark order as completed ran");
         $orders        = Order::where('status', 'payment_collected')->where('cleaning_datetime', '<=', now() )->get();
         $updatedOrders = Order::whereIn('id', $orders->pluck('id'))->update(['status' => 'completed']);
 

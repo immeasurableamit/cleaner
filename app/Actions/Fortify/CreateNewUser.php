@@ -69,6 +69,7 @@ class CreateNewUser implements CreatesNewUsers
             $user->contact_number = $input['contact_number'];
             $user->password = Hash::make($input['password']);
             $user->role = $input['user_type'];
+            $user->status = '1';
 
             //...
 
@@ -152,6 +153,7 @@ class CreateNewUser implements CreatesNewUsers
             $user->password = Hash::make($input['password']);
             $user->contact_number = $input['contact_number'];
             $user->role = $input['user_type'];
+            $user->status = '1';
 
             if ($input['image'] && strpos($input['image'] , "data:") !== false) {
                 $image = $input['image'];

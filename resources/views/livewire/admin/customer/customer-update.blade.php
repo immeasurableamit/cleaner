@@ -126,7 +126,7 @@
 <div wire:ignore.self class="modal fade show in" id="serviceForm" tabindex="-1" role="dialog" aria-labelledby="serviceForm" aria-hidden="true">
         <div class="modal-dialog modal_style">
             <div class="modal-content">
-               <button type="button" class="btn btn_close btn-default close serviceFormClose"><i class="fas fa-close"></i></button>
+               <button type="button" class="btn btn_close btn-default close serviceFormClose2"><i class="fas fa-close"></i></button>
                 <div class="modal-header">
                     <h4 class="modal-title">Reset Password</h4>
                 </div>
@@ -134,7 +134,7 @@
                      <div class="form-group">
                         <label>New password</label>
                         <input type="password" wire:model="new_password" class="form-control" id="password">
-                     
+                     @error('new_password') <span class="text-danger">{{ $message }}</span>@enderror
                     </div>  
                 <div class="text-center pt-3">
 
@@ -152,7 +152,7 @@
             window.livewire.on('serviceForm', () => {
                 $('#serviceForm').modal('show');
             });
-            window.livewire.on('serviceFormClose', () => {
+            window.livewire.on('serviceFormClose2', () => {
                 $('#serviceForm').modal('hide');
             });
         });
@@ -162,9 +162,9 @@
              $('#password').val('');
             $('#serviceForm').modal('show');
         });
-        $(document).on('click', '.serviceFormClose', function (e) {
-            $('#serviceForm').modal('hide');
-        });
+        $(document).on('click', '.serviceFormClose2', function (e) {
+            $('#serviceForm').modal('hide'); 
+        }); 
 
     </script>
     @endpush

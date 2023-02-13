@@ -49,7 +49,8 @@ class Checkout extends Component
     public $number, $formattedNumber, $expMonthYear, $cvc;
 
     /* Second step: Stripe card saving props */
-    public $stripe_customer_id, $expMonth, $expYear, $stripeTokenResp, $tokenSave;
+    public $stripe_customer_id, $expMonth, $expYear, $tokenSave;
+    protected $stripeTokenResp;
 
     /* Third Step */
     public $order, $notes, $billing, $userCard;
