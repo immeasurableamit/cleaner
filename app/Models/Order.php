@@ -117,7 +117,8 @@ class Order extends Model
             'rejected'  => 'Rejected by cleaner',
             'cancelled' => 'Cancelled by cleaner',
             'cancelled_by_customer' => 'Cancelled by you',
-            'payment_collected' => 'Accepted',
+            // 'payment_collected' => 'Accepted',
+            'payment_collected' => 'Payment collected',
             'payment_failed'    => 'Payment failed',
             'completed' => 'Completed',
             'reviewed'  => 'Completed'
