@@ -55,18 +55,6 @@
                 }
             });
 
-        
-            //.....
-            var notificationsCountElem   = $('.notification-alert');
-
-            // Subscribe to the channel we specified in our Laravel Event
-            var channel = pusher.subscribe('private-chat-count-'+user.id);
-
-            channel.bind('App\\Events\\MessageCount', function(data) {
-                let htm = '<span class="notification-indicators">'+data.messageCount+'</span>';
-                notificationsCountElem.html(htm);
-            }.bind(this));
-            
         </script>
 
 
@@ -112,12 +100,24 @@
 
     </main>
 
+    @if(!Request::routeIs('messages'))
     @include('layouts.includes.footer')
+    @endif
+
     @include('layouts.includes.script')
 
-
     
+    <script>
+    var notificationsCountElem = $('.notification-alert');
 
+// Subscribe to the channel we specified in our Laravel Event
+var channel = pusher.subscribe('private-chat-count-'+user.id);
+
+channel.bind('App\\Events\\MessageCount', function(data) {
+    let htm = '<span class="notification-indicators">'+data.messageCount+'</span>';
+    notificationsCountElem.html(htm);
+}.bind(this));
+</script>
 </body>
 
 </html>

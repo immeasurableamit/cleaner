@@ -34,7 +34,7 @@ const Chatpanel = () => {
 	const [page, setPage] = useState(1);
 	const [lastPage, setLastPage] = useState(1);
 	const [loadMore, setLoadMore] = useState(false);
-
+	const [isLoadLoading, setIsLoadLoading] = useState(false);
 
 
 
@@ -159,9 +159,9 @@ const Chatpanel = () => {
     }
 
     function onScrollLoadChats(){
-
+		
     	setLoadMore(true);
-
+		setIsLoadLoading(true);
 		setError('');
 		let nPage = page + 1;
 
@@ -182,10 +182,11 @@ const Chatpanel = () => {
             setMsgList(msgList => [...dat.msg_list.data.reverse(), ...msgList]);
         	setPage(dat.msg_list.current_page);
         	setLastPage(dat.msg_list.last_page);
-
+			setIsLoadLoading(false);
         })
         .catch((error) => {
             console.error(error);
+			setIsLoadLoading(false);
         });
     }
 
@@ -238,7 +239,7 @@ const Chatpanel = () => {
 				setSending(false);
 				setFilesArray([]);
 				//loadUserSlugId(getUser);
-				loadChats(activeUser.id);
+				//loadChats(activeUser.id);
 			})
 			.catch((error) => {
 				console.error(error);
@@ -258,6 +259,9 @@ const Chatpanel = () => {
 	const subscribeToPusher = useCallback(() => {
 		var new_msg = [];
         var channel = pusher.subscribe('private-chat-'+user.id);
+
+		//console.log('channel23232323', channel);
+
 
 		channel.bind('App\\Events\\MessageEvent', function(d) {
 
@@ -358,7 +362,7 @@ const Chatpanel = () => {
 		            <div className="card_chat">
 	                  <img src={currentUser.profile_pic}/>
 	                  <h4>{currentUser.name}</h4>
-		                <span className="number">555-555-555</span>
+		                <span className="number">{currentUser.contact_number}</span>
 	               </div>
 	           	</div>
 
@@ -443,7 +447,9 @@ const Chatpanel = () => {
 			     
 	             <div className="right_chat">
 	             	{page<lastPage &&
-						<button type="button" onClick={()=>onScrollLoadChats()}>load more chats</button>
+						<button type="button" onClick={()=>onScrollLoadChats()} className={`loadMore ${isLoadLoading ? 'loader disabled' : '' }`}>
+							load more chats
+						</button>
 					}
 
 					{msgList.length > 0 &&
@@ -463,7 +469,7 @@ const Chatpanel = () => {
 
 							let timeFor = Moment(msgs.created_at).format('L LT');
 							if(ndateFrom >= dateFrom){
-								timeFor = Moment(msgs.created_at).format('dddd LT');
+								timeFor = Moment(msgs.created_at).format('MM-DD-YYY LT');
 							}
 
 							return (
