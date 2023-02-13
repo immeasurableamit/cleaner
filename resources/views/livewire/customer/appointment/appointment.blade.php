@@ -102,8 +102,15 @@
                                             <span class="text-danger">{{$order->statusForCustomer()}}</span>
                                             @elseif ($order->status == 'cancelled')
                                             <span class="text-danger">{{$order->statusForCustomer()}}</span>
-
                                             @elseif ( $order->status = 'cancelled_by_customer')
+                                            <span class="text-danger">{{$order->statusForCustomer()}}</span>
+                                            @elseif ( $order->status = 'payment_collected')
+                                            <span class="text-danger">{{$order->statusForCustomer()}}</span>
+                                            @elseif ( $order->status = 'payment_failed')
+                                            <span class="text-danger">{{$order->statusForCustomer()}}</span>
+                                            @elseif ( $order->status = 'completed')
+                                            <span class="text-danger">{{$order->statusForCustomer()}}</span>
+                                            @elseif ( $order->status = 'reviewed')
                                             <span class="text-danger">{{$order->statusForCustomer()}}</span>
                                             @else
                                             <span class="text-success">{{$order->statusForCustomer()}}</span>
