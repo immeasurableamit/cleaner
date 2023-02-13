@@ -318,6 +318,10 @@
 
     function addFunctionalityInMinusAndPlusButton()
     {
+
+        $(".minus").unbind('click');
+        $(".plus").unbind('click');
+
         $('.minus').click(function() {
             var $input = $(this).parent().find('input');
             var count = parseInt($input.val()) - 1;
@@ -326,26 +330,17 @@
             $input.change();
             return false;
         });
+        
         $('.plus').click(function() {
             var $input = $(this).parent().find('input');
-            $input.val(parseInt($input.val()) + 1);
+            var count = parseInt($input.val()) + 1;
+            $input.val(count);
             $input.change();
             return false;
         });
     }
 
-    window.addEventListener('componentRendered', () => {
-        addFunctionalityInMinusAndPlusButton();
-    })
-    // HTML CSS JSResult Skip Results Iframe
-    $(document).ready(function() {
-        addFunctionalityInMinusAndPlusButton();
-    });
 
-
-    // Resources1× 0.5× 0.25×Rerun
-</script>
-<script>
     function updateCleanerService(cleanerServiceId) {
         let price = document.getElementById(`price-${cleanerServiceId}`).value;
         let duration = document.getElementById(`duration-${cleanerServiceId}`).value;
@@ -363,7 +358,6 @@
             activeServcieItemsIds.push(serviceItemId);
         });
 
-        console.log(activeServcieItemsIds);
         @this.set('activeServiceItemsIds', activeServcieItemsIds);
     }
 
@@ -386,13 +380,15 @@
         @this.call( 'storeCustomServiceItem', service_id, { title, price, duration, recurring });
 
     }
-
-    $(document).ready(function() {
+    function makeCardsToggleable()
+    {
+        $(".common_card_service .form-switch").unbind('click');
+        $(".card_toggle_s").unbind('click');
+        $('.heading-toggle').unbind('click');
         $(".common_card_service .form-switch").click(function() {
             $(this).parents('.common_card_service').toggleClass("show");
             $(this).parents('.common_card_service').removeClass("show-2");
             let itemId = $(this).attr('data-item-id');
-            console.log(itemId);
             @this.call('toggleService', itemId);
             if ($(this).parents('.card_service_row').find(".common_card_service").hasClass('show')) {
                 $(this).parents('.card_service_row').find(".heading-toggle").addClass('active-toggle');
@@ -419,6 +415,18 @@
                 $(this).parents('.card_service_row').find(".common_card_service").removeClass('show-2');
             }
         });
+    }
+
+    $(document).ready(function() {
+        makeCardsToggleable();
+        addFunctionalityInMinusAndPlusButton();    
     });
+
+    window.addEventListener('componentRendered', () => {
+        makeCardsToggleable();
+        addFunctionalityInMinusAndPlusButton();
+
+    })
+
 </script>
 </div>
