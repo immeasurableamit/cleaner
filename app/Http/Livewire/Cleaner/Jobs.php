@@ -235,13 +235,13 @@ class Jobs extends Component
         $order = Order::find( $orderId );
         $user  = $order->user;
 
+
         /* Charge customer */
         $chargeResp = stripeChargeCustomer(
             $user->UserDetails->stripe_customer_id,
             $order->totalInCents(),
             "CanaryCleaner charge for order #$order->id"
         );
-
         /* Store transaction */
         $transaction = $this->storeCollectPaymentTransaction(
             $user->id,

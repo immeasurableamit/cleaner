@@ -103,7 +103,7 @@
                                             @if (empty($item->cleaner_service))
                                                 <div class="card-second-content">
                                                     <div class="card_row_3">
-                                                        <span class="est">Price per sq ft (in USD)</span>
+                                                        <span class="est">Price  sq ft (in USD)</span>
                                                         <div class="incremnt_decrmnt number for_alternative">
                                                             <span class="minus">-</span>
                                                             <input type="text" value="1" />
@@ -129,7 +129,7 @@
                                             @else
                                                 <div class="card-second-content">
                                                     <div class="card_row_3">
-                                                        <span class="est">Price per sq ft (in USD)</span>
+                                                        <span class="est">Price / sq ft (in USD)</span>
                                                         <div class="incremnt_decrmnt number for_alternative">
                                                             <span class="minus">-</span>
                                                             <input type="text"
@@ -139,7 +139,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="card_row_3">
-                                                        <span class="est">Est Duration</span>
+                                                        <span class="est">Est Duration (Hours)</span>
                                                         <div class="incremnt_decrmnt number for_alternative">
                                                             <span class="minus">-</span>
                                                             <input type="text"
@@ -149,10 +149,9 @@
                                                         </div>
                                                     </div>
                                                     <div class="btn_text">
-                                                        <p class="text_3">This would equal.... <span
+                                                        <p class="text_3">Your quote would be <span
                                                                 class="price">${{ $item->cleaner_service->priceForSqFt(1500) }}</span>
-                                                            on the
-                                                            average <span class="area">1,500 sq</span> ft home</p>
+                                                           for a customer with a  <span class="area">1,500 sq</span> ft 3 bed 2 bath home</p>
                                                         <button class="btn_blue"
                                                             onclick="updateCleanerService('{{ $item->cleaner_service->id }}')">Save</button>
                                                     </div>
@@ -174,7 +173,7 @@
         <div class="heder_row">
             <div class="form-grouph input-design mb-2 w-75">
                 <input placeholder="Enter Service Name" id="custom-service-title">
-            </div>    
+            </div>
         </div>
         <div class="card-second-content">
            <div class="card_row_3">
@@ -182,7 +181,7 @@
             <div class="incremnt_decrmnt number for_alternative">
             <span class="minus">-</span>
             <input type="text" value="1" id="custom-service-price">
-            <span class="plus">+</span>   
+            <span class="plus">+</span>
         </div>
         </div>
         <div class="card_row_3">
@@ -190,7 +189,7 @@
             <div class="incremnt_decrmnt number for_alternative">
                 <span class="minus">-</span>
                 <input type="text" value="1" id="custom-service-duration">
-                <span class="plus">+</span>   
+                <span class="plus">+</span>
             </div>
         </div>
         <div class="card_row_3">
@@ -216,10 +215,10 @@
 <!-- Add custom service -->
 <div class="col-12"><button class="btn_blue mx-md-2  my-2" wire:click="$toggle('newCustomServiceCardOpen')">{{ $newCustomServiceCardOpen ? 'Cancel' : 'Add service' }}</button></div>
 <!-- Add custom service -->
-@endif 
+@endif
             </div>
             <!-- Service items end -->
-            
+
             <!--- Included -->
             <div class="col-md-6 ">
 
@@ -330,7 +329,7 @@
             $input.change();
             return false;
         });
-        
+
         $('.plus').click(function() {
             var $input = $(this).parent().find('input');
             var count = parseInt($input.val()) + 1;
@@ -419,7 +418,7 @@
 
     $(document).ready(function() {
         makeCardsToggleable();
-        addFunctionalityInMinusAndPlusButton();    
+        addFunctionalityInMinusAndPlusButton();
     });
 
     window.addEventListener('componentRendered', () => {

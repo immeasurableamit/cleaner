@@ -302,6 +302,7 @@ class Checkout extends Component
             'sms_marketing'=> '1',
             'email_marketing'=>'1',
         ]);
+
         // TODO: store lat/lng
 
         return $userDetails;
@@ -323,7 +324,6 @@ class Checkout extends Component
             'status'     => '1',
             'contact_number' => $this->contact,
             'email_verified_at' => now(),
-
 
         ]);
 
@@ -515,6 +515,15 @@ class Checkout extends Component
             if ($result['status'] == false) {
                 return false;
             }
+        }
+
+        /* if customer is logged in and does not have stripe_id in his account
+         * then store stripe's customer id
+         */
+        if ( $this->user != null && $this->user->UserDetails->stripe_customer_id == null ){
+            $this->user->UserDetails->stripe_customer_id = $this->stripe_customer_id;
+            $this->user->UserDetails->save();
+
         }
 
         /* Handle guest user */
