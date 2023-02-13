@@ -58,7 +58,8 @@ class ChatController extends Controller
         $usersArray = array_unique($usersArray);
 
         $users_list = User::whereIn('id', $usersArray)
-                    //->whereStatus('1')
+                    ->whereStatus('1')
+                    ->where('id', '!=', $user->id)
                     ->get();
 
 
@@ -128,13 +129,15 @@ class ChatController extends Controller
             ->count();
 
 
-        $created_at = date('Y-m-d H:i:s', strtotime($request->created_at));
+        //$created_at = date('Y-m-d H:i:s', strtotime($request->created_at));
+        $created_at = $m->created_at;
 
         //broadcasting message
-        event(new MessageEvent($user->id, $request->rec_id, $request->message, $request->files_attached, $created_at));
+            event(new MessageEvent($user->id, $request->rec_id, $request->message, $request->files_attached, $created_at));
 
-        //broadcast(new MessageCount($request->rec_id, $messageCount));
-        event(new MessageCount($request->rec_id, $messageCount));
+            //broadcast(new MessageCount($request->rec_id, $messageCount));
+            event(new MessageCount($request->rec_id, $messageCount));
+    
 
 
         return ['success' => 'msg sent'];

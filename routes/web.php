@@ -30,6 +30,13 @@ use App\Http\Livewire\Customer\Appointment\Thanks as ThanksComponent;
 */
 
 
+Route::get('/broadcast', function() {
+    event(new \App\Events\MessageCount('q', 'e'));
+
+    return 'ok';
+});
+
+
 Route::get('/home', [ HomeController::class, 'redirectUserToAccountPage'] )->middleware('auth');
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
