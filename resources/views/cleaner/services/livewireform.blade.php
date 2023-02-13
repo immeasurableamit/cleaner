@@ -18,6 +18,7 @@
 
         </div>
     </div>
+    <h1>fhdgkjfdhgk</h1>
     <div class="card-edit-content">
         <p class="price-area-text"><span class="price_span">${{@$item['price']}}</span> <span class="area_span">per sq ft</span></p>
         <p class="time">{{@$item['duration']}} hrs</p>
