@@ -6057,6 +6057,7 @@ fieldset .row.no-mrg .checkout_div h4{
     height: 35px;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 .selct_2{
     padding: 15px 25px 15px 19px !important;
@@ -6314,6 +6315,13 @@ input[type="radio"] {
 }
 .time-input-addon .alert.d-inline.to{
     left:183px
+}
+.allow_jobs{
+    gap: 10px;
+    align-items: center;
+}
+.allow_jobs label{
+ font-size: 13px;
 }
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {

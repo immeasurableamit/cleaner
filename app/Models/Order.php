@@ -151,7 +151,8 @@ class Order extends Model
 
     public function service()
     {
-        return $this->items->pluck('service_item')->flatten()->pluck('service')->where('types_id', 1)->first();
+
+        return $this->serviceOrderItem()->service_item->service;
     }
 
     /*

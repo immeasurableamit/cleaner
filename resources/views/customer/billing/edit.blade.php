@@ -24,7 +24,7 @@
                                             <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12">
                                                 <div class="forms-short-heading">
                                                     <h4><img src="/assets/images/credit-card.png" class="me-3" />New
-                                                        payment method</h4>
+                                                        Payment Method</h4>
                                                 </div>
                                             </div>
                                         </div>
@@ -154,7 +154,7 @@
                                             </div>
                                             <div class="card-details-sec show">
                                                 <div class="form-headeing-second">
-                                                    <h4 class="border-0 mb-0">Card details</h4>
+                                                    <h4 class="border-0 mb-0">Card Details</h4>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-12">
