@@ -182,7 +182,7 @@
                    <tr class="final_invoice_tr">
                     <td style="color: #2677B1;">Final Invoice</td>
                     <td>$290</td>
-                    <td class="pdf" style="color: #2677B1;"><a class="pdf_r"style="color: #2677B1;"href="#">PDF Download <img src="../assets/admin/images/icons/pdf.png"></a></td>  
+                    <td class="pdf" style="color: #2677B1;"><a class="pdf_r pe-2"style="color: #2677B1;"href="#">PDF Download <img src="../../assets/admin/images/icons/pdf.png" width="17px"></a></td>  
                 </tr>
             </table>
     </div>  

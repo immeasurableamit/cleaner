@@ -194,11 +194,11 @@
         </div>
         <div class="card_row_3">
             <span class="est">Frequency</span>
-            <div class="incremnt_decrmnt number for_alternative w-100">
-                Allow recurring job?
+            <div class="d-flex allow_jobs">
+              <label>  Allow recurring job?</label>
 
-                <div class="" style="width: 100%">
-                    <input class=""  type="checkbox"  id="custom-service-recurring">
+                <div class="form-check form-switch" >
+                    <input class="form-check-input"  type="checkbox"  id="custom-service-recurring" >
                 </div>
             </div>
         </div>
