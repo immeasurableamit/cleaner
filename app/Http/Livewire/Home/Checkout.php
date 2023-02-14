@@ -37,7 +37,7 @@ class Checkout extends Component
     public $cleanerService, $addOns, $homeSize;
 
     /* Second step props */
-    public $subtotal, $tax, $transactionFees, $total, $states, $user, $discount, $discountTitle;
+    public $subtotal, $tax, $transactionFees, $total, $states, $user, $discount, $discountTitle, $subtotalAfterDiscount, $discountPercentage;
 
     /* Second step: User details form props */
     public $firstname, $lastname, $email, $password;
@@ -136,6 +136,7 @@ class Checkout extends Component
         $eligibileDiscountPercentage = $eligibleDiscount->discount;
         $discountAmount = calculateXPercentageOfYNumber( $subtotal, $eligibileDiscountPercentage);
         $this->discountTitle = $eligibleDiscount->mainDiscount->title;
+	$this->discountPercentage = $eligibileDiscountPercentage;
         return $discountAmount;                        
     }
 
@@ -145,7 +146,8 @@ class Checkout extends Component
         $this->tax      = $this->taxCalculate();
         $this->transactionFees = $this->transactionFeeCalculate();
         $this->discount = $this->calculateDiscount($this->subtotal);
-        $this->total    = $this->subtotal + $this->tax + $this->transactionFees;
+	$this->subtotalAfterDiscount = $this->subtotal - $this->discount;
+        $this->total    = $this->subtotalAfterDiscount + $this->tax + $this->transactionFees;
     }
 
     protected function handleLoggedInUser()

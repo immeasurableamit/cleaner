@@ -106,7 +106,7 @@
                                                         <span class="est">Price  sq ft (in USD)</span>
                                                         <div class="incremnt_decrmnt number for_alternative">
                                                             <span class="minus">-</span>
-                                                            <input type="text" value="1" />
+                                                            <input type="number" value="1" />
                                                             <span class="plus">+</span>
                                                         </div>
                                                     </div>
@@ -132,7 +132,7 @@
                                                         <span class="est">Price / sq ft (in USD)</span>
                                                         <div class="incremnt_decrmnt number for_alternative">
                                                             <span class="minus">-</span>
-                                                            <input type="text"
+                                                            <input type="number"
                                                                 value="{{ $item->cleaner_service->price }}"
                                                                 id="price-{{ $item->cleaner_service->id }}" />
                                                             <span class="plus">+</span>
