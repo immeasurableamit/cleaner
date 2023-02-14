@@ -19,9 +19,9 @@
                 <td>{{@$service->type->title}}</td>
                 <td>{{ $service->status=='1'?'Active':'In-active' }}</td>
                 <td class="status">
-                    <a type="button" class="text-success" wire:click="edit({{$service->id}})">Edit</a>
+                    <a type="button" class="text-success" wire:click="edit({{$service->id}})">Edit</a> |
 
-                    <a type="button" class="text-danger px-2" wire:click="deleteService({{$service->id}})">Delete</a>
+                    <!-- <a type="button" class="text-danger px-2" wire:click="deleteService({{$service->id}})">Delete</a> -->
 
                     <a type="button" class="text-success" wire:click="storeServiceItem({{$service->id}})">Add Items</a>
                 </td>
@@ -55,7 +55,7 @@
                         <td class="status">
                             <a type="button" class="text-success pe-2" wire:click="editItem({{$item->id}})">Edit</a>
 
-                            <a type="button" class="text-danger" wire:click="deleteItem({{$item->id}})">Delete</a>
+                            <!-- <a type="button" class="text-danger" wire:click="deleteItem({{$item->id}})">Delete</a> -->
                         </td>
                     </tr>
                     @endforeach

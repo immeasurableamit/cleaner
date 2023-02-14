@@ -1,6 +1,6 @@
-<div>
-  
 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+  
+<div>
    <div class="detail-div-block">
       <h4>Customer account info</h4>
       <div class="inner-white-wrapper max-251px">

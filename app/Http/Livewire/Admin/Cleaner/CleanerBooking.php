@@ -8,27 +8,32 @@ use App\Models\Order;
 class CleanerBooking extends Component
 {
     public $userId;
-    public $allData;
+    // public $allData;
     public $dateStart, $dateEnd, $searchResult;
     public $allCount, $scheduledCount, $completedCount, $cancelledCount;
     public $tab = 'all';
 
     public function mount()
     {
-        // $this->allData = Order::with('user')->where('cleaner_id', $this->userId)->get();
-        $this->allData = Order::with(['user','items.service_item.service'])->where('cleaner_id', $this->userId)->get();
+
+        // $this->allData = Order::with(['user','items.service_item.service'])->where('cleaner_id', $this->userId)->get();
         $this->countBookings();
     }
 
     public function countBookings()
     {
-        $this->allCount = $this->allData->count();
 
-        $this->scheduledCount = $this->allData->whereIn('status', ['pending', 'accepted', 'payment_collected'])->count();
 
-        $this->completedCount = $this->allData->whereIn('status', ['completed', 'reviewed'])->count();
+        $this->allCount = Order::where('cleaner_id', $this->userId)->count();
 
-        $this->cancelledCount = $this->allData->whereIn('status', ['rejected', 'cancelled', 'cancelled_by_customer'])->count();
+        $this->scheduledCount = Order::where('cleaner_id', $this->userId)->whereIn('status', ['pending', 'accepted', 'payment_collected'])->count();
+
+        $this->completedCount = Order::where('cleaner_id', $this->userId)->whereIn('status', ['completed', 'reviewed'])->count();
+
+        $this->cancelledCount = Order::where('cleaner_id', $this->userId)->whereIn('status', ['rejected', 'cancelled', 'cancelled_by_customer'])->count();
+
+        // $this->allCount = $this->allData->count();
+
     }
 
 
@@ -39,8 +44,10 @@ class CleanerBooking extends Component
 
     public function render()
     {
+        $orders = Order::with(['user','items.service_item.service'])->where('cleaner_id', $this->userId);
+
         if($this->tab=='all'){
-            $orders = $this->allData;
+            $orders = $orders;
         }
         else {
             $statusArray = [];
@@ -59,10 +66,31 @@ class CleanerBooking extends Component
                 $statusArray[] = 'cancelled_by_customer';
             }
 
-            $orders = $this->allData->whereIn('status', $statusArray);
+            $orders = Order::whereIn('status', $statusArray)->where('cleaner_id', $this->userId);
         }
 
-         foreach ($orders as $key => $value) {
+         if(!empty($this->dateStart) && !empty($this->dateEnd)) {
+            $orders->whereBetween('cleaning_datetime', [$this->dateStart, $this->dateEnd])
+            ->where(function($query) {
+                $query->where('cleaner_id', $this->userId);
+            });
+        }
+
+       
+         if(!empty($this->searchResult)){
+            $value = $this->searchResult;
+            $orders->where('cleaner_id', $this->userId)
+                ->where(function($query) use ($value) {
+                    $query->where('status', 'like', '%'.$value.'%');
+                    $query->orWhereHas('user', function($q) use($value) {
+                        $q->where('first_name', 'like', $value.'%');
+                    });
+                });
+        }
+ 
+        $orders = $orders->orderBy('id', 'DESC')->get();
+
+          foreach ($orders as $key => $value) {
 
             $title = '';
             $title2 = '';
@@ -77,30 +105,7 @@ class CleanerBooking extends Component
                         $orders[$key]['title2'] = $title2;
                 }
             }
-        } 
-
-           if(!empty($this->dateStart) && !empty($this->dateEnd)){
-
-          $orders = $this->allData = Order::with('user')
-            ->whereBetween('cleaning_datetime', [$this->dateStart, $this->dateEnd])
-            ->where(function($query) {
-                $query->where('cleaner_id', $this->userId);
-            })->get();
-       
-          }
-
-           if(!empty($this->searchResult)) {
-            $value = $this->searchResult;
-            
-            $orders = $this->allData = Order::with(['user'])
-                ->where('cleaner_id', $this->userId)
-                ->where(function($query) use ($value) {
-                    $query->where('status', 'like', '%'.$value.'%');
-                    $query->orWhereHas('user', function($q) use($value) {
-                        $q->where('first_name', 'like', $value.'%');
-                    });
-                })->get();       
-        } 
+        }
 
         return view('livewire.admin.cleaner.cleaner-booking', compact('orders'));
     }
