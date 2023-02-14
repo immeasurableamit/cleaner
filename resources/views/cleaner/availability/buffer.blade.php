@@ -1,7 +1,7 @@
 <div class="buffers_section">
   <form action="{{ route('cleaner.availability.buffer') }}" method="post">
     @csrf
-    <h3>Buffer <span>(how much time you require between cleanings)</span></h3>
+    <h3>Buffer <span>(How much time you require between cleanings)</span></h3>
     <div class="set_minutes_row">
       <div class="minutes_labes">
         <label>Set Minutes</label>
