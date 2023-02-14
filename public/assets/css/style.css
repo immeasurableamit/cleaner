@@ -6259,6 +6259,7 @@ span.select2-container.select2-container--default.select2-container--open span.s
     align-items: center;
     gap: 30px;
     padding-bottom: 15px;
+    font-size: 25px;
 }
 .stng_price p {
     color: #777777;
@@ -6322,6 +6323,37 @@ input[type="radio"] {
 }
 .allow_jobs label{
  font-size: 13px;
+}
+.yellow_title h3 {
+    text-transform: capitalize;
+    margin-bottom: 0px;
+}
+.yellow_title div {
+    padding: 10px;
+    background-color: var(--secondary);
+    border: 1px solid #F4CA17;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+}
+.yellow_title div p {
+    color: #000;
+    margin-bottom: 0px;
+}
+.larger_homes{
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid var(--primary);
+    max-width: 393px;
+}
+.larger_homes h4{
+    font-size: 17px;
+}
+.larger_homes p{
+    font-size: 13px;
+    color: #777777;
+}
+.l_xl h5{
+    max-width: 213px;
 }
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {
