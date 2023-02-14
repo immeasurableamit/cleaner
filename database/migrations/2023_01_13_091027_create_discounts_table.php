@@ -20,18 +20,24 @@ return new class extends Migration
             $table->string('title');
             $table->text('discription')->nullable();
             $table->enum('status', ['0', '1'])->default('0');
+            $table->string('min_sqft');
+            $table->string('max_sqft')->nullable();
 
             $table->timestamps();
         });
 
         DB::table('discounts')->insert([
             'title' => 'Large Home Discount (2,001-3,500 Sq Ft)',
-            'status' => '1'
+            'status' => '1',
+            'min_sqft' => '2001',
+            'max_sqft' => '3500',
         ]);
 
         DB::table('discounts')->insert([
             'title' => 'XL Home Discount (3,501 and up sq ft)',
-            'status' => '1'
+            'status' => '1',
+            'min_sqft' => '3501',
+            'max_sqft' => null,
         ]);
     }
 

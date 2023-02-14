@@ -24,4 +24,9 @@ class CleanerDiscount extends Model
     {
         return $this->belongsTo( Services::class, 'services_id', 'id');
     }
+
+    public function mainDiscount()
+    {
+        return $this->belongsTo( Discount::class, 'discounts_id', 'id');
+    }
 }
