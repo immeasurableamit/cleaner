@@ -30,7 +30,7 @@ class LoginResponse implements LoginResponseContract {
 		else{
 
 		Auth::logout();
-		return redirect()->route('login')->with('message', 'Account deactivated by admin, To continue using CanaryCleaners please contact our Support(Email)');
+		return redirect()->route('login')->with('message', 'Your account is deactivated by administrator, please contact support.');
 		}
 		
     }

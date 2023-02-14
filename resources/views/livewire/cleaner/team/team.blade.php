@@ -62,9 +62,9 @@
                         </div>
                         <div class="d-flex two-column justify-content-spacebw">
 
-                            <a href="javascript::void(0)" type="submit" class="btn btn-primary" data-bs-toggle="modal"
+                            <a href="javascript::void(0)" type="submit" class="red-bordered-full-btn btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#updateModal" wire:click="edit({{ $teamMember->id }})"
-                                class="edit-member">Edit Member</a>
+                                class="edit-member" style="background-color:var(--primary);border-color:var(--primary);color:#fff;">Edit Member</a>
                             <a href="javascript::void(0)" wire:click="deleteConfirm({{ $teamMember->id }})"
                                 class="red-bordered-full-btn remove-member">Remove Member</a>
                         </div>
