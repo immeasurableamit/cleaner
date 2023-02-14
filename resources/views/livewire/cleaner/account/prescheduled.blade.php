@@ -27,7 +27,7 @@
                 <div class="append_row_preschduled row pb-2">
                     <div class="col-md-4 col-sm-12">
                         <div class="input-design">
-                            <input type="date" min="{{date('Y-m-d')}}" wire:model="dataArray.{{$i}}.date">
+                            <input type="date" min="{{date('Y-m-d')}}" wire:model="dataArray.{{$i}}.date" >
                             @error('dataArray.'.$i.'.date')<div class="alert ">{{ $message }}</div>@enderror
                         </div>
                     </div>
