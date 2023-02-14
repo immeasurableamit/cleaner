@@ -104,11 +104,17 @@
                                     <p class="label">Subtotal</p>
                                     <p class="price">${{ $order->subtotal }}</p>
                                 </div>
+                                @if ( $order->discount > 0 )
+                                <div class="sub-totel-text-block">
+                                    <p class="label"><b>Discount -{{ $order->discount_title }} ({{ $order->discount_percentage }}%)</b></p>
+                                    <p class="price">${{ $order->discount }}</p>
+                                </div>
+                                @endif
                                 <div class="sub-totel-text-block">
                                     <p class="label">Tax</p>
                                     <p class="price">${{ $order->tax }}</p>
 
-                                </div>
+                                </div>                                
                                 <div class="sub-totel-text-block">
                                     <p class="label">Transaction Fees</p>
                                     <p class="price">${{ $order->transaction_fees }}</p>
