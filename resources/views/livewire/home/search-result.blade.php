@@ -196,7 +196,7 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="btn_rate" wire:ignore>
+                                    <div class="btn_rate">
                                         <b>${{ $cleaner->price_for_selected_service }}
                                         </b>
                                         <a href="{{ route('profile', $cleaner->id) }}"><button
