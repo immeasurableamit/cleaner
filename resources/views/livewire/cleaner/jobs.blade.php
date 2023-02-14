@@ -27,6 +27,7 @@
                             </div>
 						--}}
                         </div>
+
                     </div>
                     <!-- Tab panes -->
                     <div class="scheduling-calender-design clender-design" wire:ignore>
@@ -127,7 +128,7 @@
                                             <p class="appointment_label">Price</p>
                                             <p class="app-value">${{ $order->total }} </p>
                                         </div>
-					@if ( $order->status == 'completed' )
+				    	@if ( $order->status == 'completed' )
                                         <div class="altrntive_rw">
                                             <p class="appointment_label">Status</p>
                                             <p class="text-center align-center complete-status">Completed </p>
@@ -156,8 +157,8 @@
                                     <div class="accept-request">
                                         @if ( $order->status == 'pending' )
                                         <button wire:loading.attr="disabled" wire:target="acceptOrder" wire:click="acceptOrder( {{ $order->id }} )" class="accept-request-btn crd-btn">
-                                            <span wire:loading.remove wire:target="acceptOrder">{{ $order->statusForCleaner() }}</span>
-                                            <span wire:target="acceptOrder" wire:loading><i class="fa-solid fa-spinner fa-spin"></i></span>
+                                            <span wire:loading.remove wire:target="acceptOrder( {{ $order->id }} )">{{ $order->statusForCleaner() }}</span>
+                                          <span wire:loading wire:target="acceptOrder( {{ $order->id }} )" ><i class="fa-solid fa-spinner fa-spin"></i></span>
                                         </button>
 
 

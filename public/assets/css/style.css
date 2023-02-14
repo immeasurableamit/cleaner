@@ -2374,6 +2374,7 @@ margin-bottom: 0px;
 .right_chat {
     padding: 30px;
     height: 770px;
+    height: 500px;
     overflow: auto;
 }
 .s_r_msg img {
@@ -5631,7 +5632,7 @@ input[type="month"]::-webkit-calendar-picker-indicator {
     color: #3da9f8;
 }
 .header-main-cntnt-differ {
-    max-height: 109px;
+    max-height: 63px;
 }
 .select-date-toggles.show .card-layout-showcase {
     display: none;
@@ -6056,6 +6057,7 @@ fieldset .row.no-mrg .checkout_div h4{
     height: 35px;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 .selct_2{
     padding: 15px 25px 15px 19px !important;
@@ -6307,6 +6309,19 @@ span.select2-container.select2-container--default.select2-container--open span.s
 }
 input[type="radio"] {
     cursor: pointer;
+}
+.time-input-addon .alert.d-inline{
+    font-size: 13px;
+}
+.time-input-addon .alert.d-inline.to{
+    left:183px
+}
+.allow_jobs{
+    gap: 10px;
+    align-items: center;
+}
+.allow_jobs label{
+ font-size: 13px;
 }
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {

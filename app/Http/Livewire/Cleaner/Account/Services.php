@@ -9,108 +9,182 @@ use App\Models\CleanerServicesIncluded;
 use App\Models\Discount;
 use App\Models\CleanerDiscount;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use App\Models\User;
+use Illuminate\Support\Facades\Validator;
+use App\Models\ServicesItems;
+
+
 
 class Services extends Component
 {
     use LivewireAlert;
 
-    public $user;
-    public $serviceData;
-    public $included;
-    public $discounts;
-    public $discountData;
+    public $cleaner, $types, $discounts;
+    public $activeServiceItemsIds = [];
+    public $newCustomServiceCardOpen = false;
+    // public $newCustomService = [
+    //     'title' => '',
+    //     'price' => 0,
+    //     'is_recurring' => false,
+    //     'duration' => 0,
+    // ];
+
 
     public function mount()
     {
-        $this->user = auth()->user();
-
-        $this->discounts = Discount::whereStatus('1')->get();
-        $cleanerDiscounts = CleanerDiscount::where('user_id', $this->user->id)->get();
-
-        foreach($this->discounts as $discount){
-            $checkDiscount = $cleanerDiscounts->where('discounts_id', $discount->id)->first();
-
-            $this->discountData[$discount->id]['discount'] = $checkDiscount->discount ?? '0';
-        }
-
-
-
-        $includedServices = CleanerServicesIncluded::where('user_id', $this->user->id)->get();
-        foreach($includedServices as $include){
-            $this->included[$include->services_id]['data'] = $include->data;
-        }
-
-        $customServices = CleanerServices::where('users_id', $this->user->id)->where('is_custom', '1')->get();
-
-        $types = Types::with(['services', 'services.servicesItems'])->get();
-        $cservices = CleanerServices::with('servicesItems')->where('users_id', $this->user->id)->where('is_custom', '0')->get();
-
-        $cservicesItems = $cservices->where('status', 1 )->pluck('servicesItems.services_id')->toArray();
-        $cservicesItems = array_unique($cservicesItems);
-
-
-
-        $dataArray = [];
-        foreach($types as $type){
-            $typeArray = [];
-
-            $typeArray['id'] = $type->id;
-            $typeArray['title'] = $type->title;
-
-            foreach($type->services as $service){
-                $serviceArray = [];
-
-                $serviceArray['id'] = $service->id;
-                $serviceArray['title'] = $service->title;
-                $serviceArray['home_discount'] = $service->home_discount;
-                $serviceArray['checked'] = in_array($service->id, $cservicesItems) ? 'on' : false;
-
-                if($service->title=='Custom Offerings'){
-                    foreach($customServices as $cservi){
-                        $itemArray = [];
-
-                        $itemArray['id'] = $cservi->services_id;
-                        $itemArray['title'] = $cservi->title;
-                        $itemArray['price'] = @$cservi->price ?? '1';
-                        $itemArray['duration'] = @$cservi->duration ?? '1';
-                        $itemArray['checked'] = @$cservi->status=='1' ? 'on' : false;
-                        $itemArray['toogle'] = false;
-                        $itemArray['custom'] = @$cservi->is_custom=='1' ? true : false;
-                        $itemArray['is_recurring'] = @$cservi->is_recurring=='1' ? true : false;
-
-                        $serviceArray['items'][] = $itemArray;
-                    }
-                }
-                else {
-                    foreach($service->servicesItems as $item){
-                        $cservice = $cservices->where('services_items_id', $item->id )->first();
-                        $itemArray = [];
-
-                        $itemArray['id'] = $item->id;
-                        $itemArray['title'] = $item->title;
-                        $itemArray['price'] = @$cservice->price ?? '1';
-                        $itemArray['duration'] = @$cservice->duration ?? '1';
-                        $itemArray['checked'] = @$cservice->status=='1' ? 'on' : false;
-                        $itemArray['toogle'] = false;
-                        $itemArray['custom'] = false;
-
-                        $serviceArray['items'][] = $itemArray;
-                    }
-                }
-
-                $typeArray['services'][] = $serviceArray;
-            }
-
-            //array_push($dataArray, $typeArray);
-            $dataArray[] = $typeArray;
-        }
-
-        $this->serviceData = $dataArray;
-
-        //dd($dataArray);
+        $this->prepareProps();
     }
 
-    public function serviceAction($type, $service)
+    public function prepareProps()
+    {
+        $this->cleaner = User::with(['cleanerServices', 'cleanerServicesDescriptions', 'cleanerDiscounts'])->where('id', auth()->user()->id )->first();
+        $this->types = Types::whereRelation('services', 'status', '1')->with('services.items')->get();    
+        $this->discounts = Discount::all();
+        $this->addCustomAttributesInProps();    
+    }
+
+    public function updated($prop, $value )
+    {
+
+    }
+
+
+    public function upsertDiscount($discountId, $percentage)
+    {
+        $fieldsToCompare = ['user_id' => $this->cleaner->id, 'discounts_id' => $discountId];
+        $fieldsToUpdate  = ['discount' => $percentage ];
+        $resp = CleanerDiscount::updateOrCreate($fieldsToCompare, $fieldsToUpdate);
+
+        $this->alert('success', 'Discount updated');
+        $this->cleaner->load('cleanerDiscounts'); // refresh relation
+        $this->addCustomAttributesInProps();
+        return true;
+    }
+
+
+    public function hydrate()
+    {
+        $this->addCustomAttributesInProps();
+    }    
+
+    public function addCustomAttributesInProps()
+    {
+        $cleanerServices = $this->cleaner->cleanerServices;
+        $cleanerServicesDescriptions = $this->cleaner->cleanerServicesDescriptions;
+
+        /* Discounts Prop */
+        foreach ( $this->discounts as $discount ) {
+            $discount->cleaner_discount = $this->cleaner->cleanerDiscounts->where('discounts_id', $discount->id )->first();
+        }
+
+        /* Types prop */
+        foreach ( $this->types as $type ) {
+
+            foreach ( $type->services as $service ) {
+
+                $service->cleaner_service_description = $cleanerServicesDescriptions->where('service_id', $service->id )->first();
+                $service->does_offer_customization    = str_contains( strtolower( $service->title ), 'custom offer' ); // TODO: this code can break since it's hard coded
+
+                foreach ( $service->items as $item ) {                    
+                    $item->cleaner_service = $cleanerServices->where('services_items_id', $item->id )->first();
+                }
+            }
+        }
+        
+    }
+
+    public function refreshCleanerServicesRelation()
+    {
+        $this->cleaner->load('cleanerServices');
+        $this->addCustomAttributesInProps();
+    }
+
+    public function toggleService($itemId)
+    {
+        $cleanerService = getCleanerServiceByServiceItemId( $this->cleaner, $itemId );
+
+        if ( $cleanerService ){
+            toggleCleanerServiceStatus($cleanerService);          
+            $this->alert('success', "Service updated");
+            $this->refreshCleanerServicesRelation();
+            return true;
+        }
+
+        $cleanerService = storeCleanerServiceWithDefaults($this->cleaner, $itemId );
+
+        $this->alert('success', "Service updated");
+        $this->refreshCleanerServicesRelation();     
+        return true;              
+    }
+
+    function updateCleanerService($cleanerServiceId, $details)
+    {
+        $cleanerService = $this->cleaner->cleanerServices->find( $cleanerServiceId );
+        
+        $cleanerService->price = $details['price'];
+        $cleanerService->duration = $details['duration'];
+        $cleanerService->save();
+
+        $this->refreshCleanerServicesRelation();     
+        $this->alert('success', 'Service updated');
+        return true;
+    }
+
+    public function storeServiceDescription( $serviceId, $description ) 
+    {
+        $cleanerServiceIncluded = CleanerServicesIncluded::where('cleaner_id', $this->cleaner->id )
+                                    ->where('service_id', $serviceId)->first();        
+
+        if ( $cleanerServiceIncluded ) {
+
+            $cleanerServiceIncluded->description = $description;
+            $cleanerServiceIncluded->save();
+            $this->alert('success', 'Description updated');
+            return true;            
+        }
+
+        $cleanerServiceIncluded = new CleanerServicesIncluded;
+        $cleanerServiceIncluded->cleaner_id = $this->cleaner->id;
+        $cleanerServiceIncluded->service_id = $serviceId;
+        $cleanerServiceIncluded->description = $description;
+        $cleanerServiceIncluded->save();
+
+        $this->alert('success', 'Description updated');        
+        return true;
+    }
+
+
+
+    public function storeCustomServiceItem($serviceId, $details)
+    {
+        // TODO: fields validation is left
+        
+        $serviceItem = new ServicesItems;
+        $serviceItem->services_id = $serviceId;
+        $serviceItem->title = empty( $details['title'] ) ? "Custom service " : $details['title']; // TODO: added unnecessary condition to handle errors
+        $serviceItem->is_custom   = true;
+        $serviceItem->cleaner_id  = $this->cleaner->id;
+        $serviceItem->save();
+
+        $serviceItem->refresh();
+
+
+        $cleanerService = new CleanerServices;
+        $cleanerService->users_id = $this->cleaner->id;
+        $cleanerService->services_items_id = $serviceItem->id;
+        $cleanerService->price = $details['price'];
+        $cleanerService->duration = $details['duration'];
+        $cleanerService->status = '1';
+        $cleanerService->save();
+
+        $this->alert('success', 'Service added');
+        $this->newCustomServiceCardOpen = false;
+        $this->prepareProps();
+        return true;                
+
+    }
+
+/*     public function serviceAction($type, $service)
     {
         $dataArray = $this->serviceData;
 
@@ -162,10 +236,11 @@ class Services extends Component
                 $this->serviceData[$type]['services'][$service]['items'][$item]['duration'] = $this->serviceData[$type]['services'][$service]['items'][$item]['duration'] - 1;
             }
         }
-    }
+    } 
 
 
     public function saveData(){
+        dd( $this->serviceData );
         updateServicesOfCleaners($this->user, $this->serviceData);
 
         $this->alert('success', 'Services saved');
@@ -264,10 +339,12 @@ class Services extends Component
 
         $this->alert('success', 'Large Home Discount Saved');
     }
+    */
 
 
     public function render()
     {
+        $this->dispatchBrowserEvent('componentRendered');
         return view('livewire.cleaner.account.services');
     }
 }

@@ -19,14 +19,18 @@ class ServicesController extends Controller
             'active' => 'services',
         );
 
-        /*$user = auth()->user();
-
-        $types = Types::with(['services', 'services.servicesItems'])->get();
-        $cservices = CleanerServices::with('servicesItems')->where('users_id', $user->id)->get();
-        
-
-        $cservicesItems = $cservices->where('status', 1 )->pluck('servicesItems.services_id')->toArray();
-        $cservicesItems = array_unique($cservicesItems); */
+        /* 
+         *------------------------
+         *   IMPORTANT NOTE!     |
+         * -----------------------
+         * 
+         * If Custom Offerings are not getting appear in set-services page
+         * then please verify following requirements:
+         * 
+         * 1. An entry should be added with id of '3' in 'types' table ( other cleanings )
+         * 2. An entry should be added in 'services' table with 'types_id' set to '3'
+         * 
+         */
         
         return view('cleaner.services.index', compact('title'));
     }

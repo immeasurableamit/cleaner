@@ -117,7 +117,8 @@ class Order extends Model
             'rejected'  => 'Rejected by cleaner',
             'cancelled' => 'Cancelled by cleaner',
             'cancelled_by_customer' => 'Cancelled by you',
-            'payment_collected' => 'Accepted',
+            // 'payment_collected' => 'Accepted',
+            'payment_collected' => 'Payment collected',
             'payment_failed'    => 'Payment failed',
             'completed' => 'Completed',
             'reviewed'  => 'Completed'
@@ -150,7 +151,8 @@ class Order extends Model
 
     public function service()
     {
-        return $this->items->pluck('service_item')->flatten()->pluck('service')->where('types_id', 1)->first();
+
+        return $this->serviceOrderItem()->service_item->service;
     }
 
     /*
@@ -163,7 +165,9 @@ class Order extends Model
     public function serviceOrderItem()
     {
         $item = $this->items->first(function ($item) {
-            return $item->service_item->service->types_id == 1;
+            $itemTypeId = $item->service_item->service->types_id;
+            $isServiceOrderItem = $itemTypeId == 1 || $itemTypeId == 3;
+            return $isServiceOrderItem;
         });
 
         return $item;
