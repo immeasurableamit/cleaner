@@ -11,26 +11,28 @@ class Jobs extends Component
  
     public $dateStart, $dateEnd;
     public $searchResult;
-    public $allData;
+    // public $allData;
     public $allCount, $scheduledCount, $completedCount, $cancelledCount;
     public $tab = 'all';
 
     public function mount()
     {   
         // $this->allData = Order::with(['user','cleaner'])->get();
-        $this->allData = Order::with(['user','cleaner','items.service_item.service'])->get();
+        // $this->allData = Order::with(['user','cleaner','items.service_item.service'])->get();
         $this->countUsers();
     }
 
     public function countUsers()
     {
-        $this->allCount = $this->allData->count();
+        $this->allCount = Order::count();
 
-        $this->scheduledCount = $this->allData->whereIn('status', ['accepted', 'payment_collected'])->count();
+        $this->scheduledCount = Order::whereIn('status', ['accepted', 'payment_collected'])->count();
 
-        $this->completedCount = $this->allData->whereIn('status', ['completed', 'reviewed'])->count();
+        // $this->scheduledCount = $this->allData->whereIn('status', ['accepted', 'payment_collected'])->count();
 
-        $this->cancelledCount = $this->allData->whereIn('status', ['rejected', 'cancelled', 'cancelled_by_customer'])->count();
+        $this->completedCount = Order::whereIn('status', ['completed', 'reviewed'])->count();
+
+        $this->cancelledCount = Order::whereIn('status', ['rejected', 'cancelled', 'cancelled_by_customer'])->count();
     }
 
     public function setTab($tab)
@@ -39,9 +41,11 @@ class Jobs extends Component
     }
 
     public function render()
-    {       
+    {      
+        $orders = Order::with(['user','cleaner','items.service_item.service']); 
+
          if($this->tab=='all'){
-            $orders = $this->allData;
+            $orders = $orders;
         } else {
             $statusArray = [];
             if($this->tab=='scheduled'){
@@ -58,10 +62,33 @@ class Jobs extends Component
                 $statusArray[] = 'cancelled_by_customer';
             }
 
-            $orders = $this->allData->whereIn('status', $statusArray);
+            $orders = Order::whereIn('status', $statusArray);
         
         }
-          foreach ($orders as $key => $value) {
+
+
+ 
+        // if(!empty($this->dateStart) && !empty($this->dateEnd)){
+
+        // $orders = $this->allData = Order::with(['user','cleaner'])
+        // ->whereBetween('cleaning_datetime', [$this->dateStart, $this->dateEnd])
+        // ->get();
+        // }
+         if(!empty($this->dateStart) && !empty($this->dateEnd)) {
+
+            $orders->whereBetween('cleaning_datetime', [$this->dateStart, $this->dateEnd]);
+        }
+
+          if(!empty($this->searchResult)){
+            $vl = $this->searchResult;
+            $orders->where(function($query) use($vl) {
+                $query->where('status', 'like', '%'.$vl.'%');
+            });
+        }
+
+        $orders = $orders->orderBy('id', 'DESC')->get();
+
+         foreach ($orders as $key => $value) {
 
             $title = '';
             $title2 = '';
@@ -76,23 +103,7 @@ class Jobs extends Component
                         $orders[$key]['title2'] = $title2;
                 }
             }
-        } 
-        // $this->orders = Order::with(['user','cleaner'])->get();
- 
-        if(!empty($this->dateStart) && !empty($this->dateEnd)){
-
-        $orders = $this->allData = Order::with(['user','cleaner'])
-        ->whereBetween('cleaning_datetime', [$this->dateStart, $this->dateEnd])
-        ->get();
-        }
-
-        if(!empty($this->searchResult)){
-    
-          $orders = $this->allData = Order::with(['user','cleaner'])
-            ->where('status', 'like', '%'.$this->searchResult.'%')
-            ->get();
-       
-          }
+            } 
 
         return view('livewire.admin.jobs.jobs', compact('orders'));
     }

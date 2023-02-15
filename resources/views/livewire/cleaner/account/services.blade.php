@@ -11,10 +11,12 @@
                     <div class="row">
                         <div class="col-xl-6 col-md-6 col-sm-12">
                             <div class="home_cleaning_div">
-                                <div class="card_header_tittle">
+                                <div class="card_header_tittle yellow_title">
+                                    <div>
                                     <h3>{{ $type->title }}</h3>
                                     <p> Enter your rate to match what you would charge
                                         for 1,500 sq ft - prices will scale up or down from there</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -106,7 +108,7 @@
                                                         <span class="est">Price sq ft (in USD)</span>
                                                         <div class="incremnt_decrmnt number for_alternative">
                                                             <span class="minus">-</span>
-                                                            <input type="text" value="1" />
+                                                            <input type="number" value="1" />
                                                             <span class="plus">+</span>
 
                                                         </div>
@@ -134,7 +136,7 @@
                                                         <div class="incremnt_decrmnt number for_alternative">
 
                                                             <span class="minus">-</span>
-                                                            <input type="text"
+                                                            <input type="number"
                                                                 value="{{ $item->cleaner_service->price }}"
                                                                 id="price-{{ $item->cleaner_service->id }}" />
 
@@ -288,14 +290,19 @@
 @if ($loop->iteration === 1)
     <!-- Discounts -->
     <div class="home-quotes-sec">
-        <div class="bigger-home-save-link">
-            <a href="#" class="link-design-2 py-3"> Bigger homes save you time on travel and setup. We recommend
-                offering sq ft discounts to large and extra-large sized homes. Standard discounts are 10% and 20%.</a>
-        </div>
-        <div class="home-discount-counter">
-            <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12">
+        <!-- <div class="bigger-home-save-link">
+            
+
+            <a style="cursor: inherit;" class="link-design-2 py-3"> </a>
+        </div> -->
+        <div class="row  home-discount-counter">
+            <div class="col-md-6">
+                <div class="larger_homes">
+                    <h4>Larger Homes - Full Home Price Adjuster</h4>
+                   <p>Bigger homes save you time on travel and setup. We recommend offering sq ft discounts to large and extra-large sized homes. Standard discounts are 10% and 20%. This does not apply outside of “Full Home Cleanings”.</p>
+                </div>
                 @foreach ($discounts as $discount)
-                    <div class="incremnt_input_div py-3">
+                    <div class="incremnt_input_div py-3 l_xl">
 
                         <div class="incremnt_decrmnt number">
                             <input type="text" value="{{ $discount->cleaner_discount->discount ?? '0' }}"
@@ -306,6 +313,13 @@
                         <h5>{{ $discount->title }}</h5>
                     </div>
                 @endforeach
+            </div>
+            <div class="col-md-6 p-0 pe-4">
+            <div class="stng_price">
+                    <h3><img src="https://canarycleaners.smallbizplace.com/assets/images/icons/!!.svg">
+                    Excessive Cleaning Fees </h3>
+                    <p>For messy homes that require extra cleaning, you will be able to propose an extra charge to the customer as an “Excessive Cleaning Fee” before service is rendered. The customer will receive a message to accept and pay as an additional invoice. </p>
+                </div>
             </div>
         </div>
         <div class="btn_text_service">

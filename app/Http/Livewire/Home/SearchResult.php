@@ -320,8 +320,8 @@ class SearchResult extends Component
         }
 
         $this->user->refresh();
+        $this->filterCleaners();
         return true;
-
     }
 
     public function resetFilters()

@@ -79,7 +79,6 @@ class Customer extends Component
         }
         if($this->tab=='inactive'){
             $sta = '0';
-            // dd($sta);
         }
 
         $value = [];

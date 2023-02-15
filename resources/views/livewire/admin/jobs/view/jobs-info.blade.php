@@ -116,9 +116,11 @@
             @foreach($orders->transactions as $order)
               <tr>
                   <td>{{$order->id ?? ''}}</td>
+                  <td>   
                   @foreach($orders->items as $item)
-                  <td>{{$item->stitle}}</td>
+                  {{$item->stitle}}
                   @endforeach
+                  </td>
                   <td>{{$order->amount ?? ''}}</td>
                   <td>{{ date("m/d/Y", strtotime($order->created_at ?? ''))}}</td>
                   <td>{{$order->action ?? ''}}</td>
@@ -158,7 +160,7 @@
                     <h3 class="h3_refunds">Refunds</h3>
                     324-254-458r1</td>
                 <td>Refund: Dishes</td>
-                <td>-$20</td>
+                <td>$20</td>
                 <td>2/16/22</td>
                 <td>Success</td>
             </tr>
@@ -182,7 +184,11 @@
                    <tr class="final_invoice_tr">
                     <td style="color: #2677B1;">Final Invoice</td>
                     <td>$290</td>
+
+                   <!--  <td class="pdf" style="color: #2677B1;"><a class="pdf_r"style="color: #2677B1;"href="#">PDF Download <img src="/assets/admin/images/icons/add-time.svg"></a></td>  --> 
+
                     <td class="pdf" style="color: #2677B1;"><a class="pdf_r pe-2"style="color: #2677B1;"href="#">PDF Download <img src="../../assets/admin/images/icons/pdf.png" width="17px"></a></td>  
+
                 </tr>
             </table>
     </div>  
