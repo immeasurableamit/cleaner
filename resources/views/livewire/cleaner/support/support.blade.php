@@ -15,7 +15,9 @@
                                 <div wire:ignore>
                                 <select class="select-custom-design" id="job-selector">
                                     <option></option>
+
                                     @foreach ($completedOrders as $order)
+
                                         <option value="{{ $order->id }}" @if ( $order->id == $selectedOrderId ) selected @endif>{{ $order->title }}</option>
                                     @endforeach
                                 </select>
@@ -92,7 +94,7 @@
             });
 
             $("#issues-selector").select2({
-            
+
                 placeholder: 'Select an Issue',
             });
 

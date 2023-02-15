@@ -144,3 +144,41 @@
     </div>
 
 </section>
+
+{{--
+ <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" ></script>
+
+
+<script type="text/javascript">
+
+// $(document).ready(function() {
+
+//     var url = $(location).attr('href');
+//     console.log(url, 'urllll');
+
+//   if (window.history && window.history.pushState) {
+
+//     window.history.pushState('/home', null, url);
+//     $(window).on('popstate', function() {
+//       window.location.href = '/home';
+//     });
+//   }
+// });
+
+// $(document).ready(function() {
+//     var url = $(location).attr('href');
+//     // Add a new history state and redirect to the home page
+//     window.history.replaceState({url: "/" }, "", "/");
+//     window.location.href = url;
+// });
+
+    // if (window.history && window.history.pushState) {
+
+    //     $(window).on('popstate', function() {
+    //         debugger;
+    //         window.location = "{{ route('index') }}";
+    //     });
+    // }
+// });
+
+  </script> --}}

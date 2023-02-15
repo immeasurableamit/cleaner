@@ -117,6 +117,7 @@
                         </div>
                     @endif
                 </div>
+                @if(auth()->user()->role == 'customer')
                 <div class="btn_msg_cleaner">
                     @php
                         $messageUrl = route('signup-customers');
@@ -128,6 +129,8 @@
                             src="{{ asset('assets/images/icons/email-2.svg') }}"> </a>
                     <p>Ask a <b>question</b> or request a <b>custom proposal.</b></p>
                 </div>
+
+                @endif
             </div>
         </div>
         <div class="col-xl-4 col-lg-12 col-md-12 about-provider">

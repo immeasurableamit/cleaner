@@ -21,7 +21,9 @@ class Support extends Component
     public function mount()
     {
         $this->cleaner = auth()->user();
-        $this->completedOrders = Order::with([ 'cleaner', 'items.service_item.service'])->where('cleaner_id', $this->cleaner->id )->get(); //whereIn('status', ['payment_collected', 'reviewed'])->get();
+        $this->completedOrders = Order::with([ 'cleaner','user', 'items.service_item.service'])->where('cleaner_id', $this->cleaner->id )->get(); //whereIn('status', ['payment_collected', 'reviewed'])->get();
+    //    dd( $this->completedOrders);
+
         $this->issues          = SupportRequest::issuesForCleaner();
         $this->resolutions     = SupportRequest::resolutionsForCleaner();
 
@@ -39,7 +41,7 @@ class Support extends Component
         $this->completedOrders->each( function($order) {
 
             $formattedDateTime = $order->cleaning_datetime->format('m/d/y');
-            $order->title = "$formattedDateTime - ".$order->service()->title." - ".$order->cleaner->name;
+            $order->title = "$formattedDateTime - ".$order->service()->title." - ".$order->user->name;
         });
     }
 

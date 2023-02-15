@@ -28,7 +28,7 @@ class Services extends Component
     //     'is_recurring' => false,
     //     'duration' => 0,
     // ];
-
+public $prices;
 
     public function mount()
     {
@@ -38,9 +38,9 @@ class Services extends Component
     public function prepareProps()
     {
         $this->cleaner = User::with(['cleanerServices', 'cleanerServicesDescriptions', 'cleanerDiscounts'])->where('id', auth()->user()->id )->first();
-        $this->types = Types::whereRelation('services', 'status', '1')->with('services.items')->get();    
+        $this->types = Types::whereRelation('services', 'status', '1')->with('services.items')->get();
         $this->discounts = Discount::all();
-        $this->addCustomAttributesInProps();    
+        $this->addCustomAttributesInProps();
     }
 
     public function updated($prop, $value )
@@ -65,7 +65,7 @@ class Services extends Component
     public function hydrate()
     {
         $this->addCustomAttributesInProps();
-    }    
+    }
 
     public function addCustomAttributesInProps()
     {
@@ -85,12 +85,12 @@ class Services extends Component
                 $service->cleaner_service_description = $cleanerServicesDescriptions->where('service_id', $service->id )->first();
                 $service->does_offer_customization    = str_contains( strtolower( $service->title ), 'custom offer' ); // TODO: this code can break since it's hard coded
 
-                foreach ( $service->items as $item ) {                    
+                foreach ( $service->items as $item ) {
                     $item->cleaner_service = $cleanerServices->where('services_items_id', $item->id )->first();
                 }
             }
         }
-        
+
     }
 
     public function refreshCleanerServicesRelation()
@@ -104,7 +104,7 @@ class Services extends Component
         $cleanerService = getCleanerServiceByServiceItemId( $this->cleaner, $itemId );
 
         if ( $cleanerService ){
-            toggleCleanerServiceStatus($cleanerService);          
+            toggleCleanerServiceStatus($cleanerService);
             $this->alert('success', "Service updated");
             $this->refreshCleanerServicesRelation();
             return true;
@@ -113,34 +113,38 @@ class Services extends Component
         $cleanerService = storeCleanerServiceWithDefaults($this->cleaner, $itemId );
 
         $this->alert('success', "Service updated");
-        $this->refreshCleanerServicesRelation();     
-        return true;              
+        $this->refreshCleanerServicesRelation();
+        return true;
     }
 
     function updateCleanerService($cleanerServiceId, $details)
     {
+        // $this->validate([
+        //     "price"  => "required",
+        // ]);
+        // dd($details);
         $cleanerService = $this->cleaner->cleanerServices->find( $cleanerServiceId );
-        
+
         $cleanerService->price = $details['price'];
         $cleanerService->duration = $details['duration'];
         $cleanerService->save();
 
-        $this->refreshCleanerServicesRelation();     
+        $this->refreshCleanerServicesRelation();
         $this->alert('success', 'Service updated');
         return true;
     }
 
-    public function storeServiceDescription( $serviceId, $description ) 
+    public function storeServiceDescription( $serviceId, $description )
     {
         $cleanerServiceIncluded = CleanerServicesIncluded::where('cleaner_id', $this->cleaner->id )
-                                    ->where('service_id', $serviceId)->first();        
+                                    ->where('service_id', $serviceId)->first();
 
         if ( $cleanerServiceIncluded ) {
 
             $cleanerServiceIncluded->description = $description;
             $cleanerServiceIncluded->save();
             $this->alert('success', 'Description updated');
-            return true;            
+            return true;
         }
 
         $cleanerServiceIncluded = new CleanerServicesIncluded;
@@ -149,7 +153,7 @@ class Services extends Component
         $cleanerServiceIncluded->description = $description;
         $cleanerServiceIncluded->save();
 
-        $this->alert('success', 'Description updated');        
+        $this->alert('success', 'Description updated');
         return true;
     }
 
@@ -158,7 +162,7 @@ class Services extends Component
     public function storeCustomServiceItem($serviceId, $details)
     {
         // TODO: fields validation is left
-        
+
         $serviceItem = new ServicesItems;
         $serviceItem->services_id = $serviceId;
         $serviceItem->title = empty( $details['title'] ) ? "Custom service " : $details['title']; // TODO: added unnecessary condition to handle errors
@@ -180,7 +184,7 @@ class Services extends Component
         $this->alert('success', 'Service added');
         $this->newCustomServiceCardOpen = false;
         $this->prepareProps();
-        return true;                
+        return true;
 
     }
 
@@ -197,7 +201,7 @@ class Services extends Component
                 $itemsArray[] = $item;
             }
         }
-        
+
         $dataArray[$type]['services'][$service]['items'] = $itemsArray;
 
         $this->serviceData = $dataArray;
@@ -236,7 +240,7 @@ class Services extends Component
                 $this->serviceData[$type]['services'][$service]['items'][$item]['duration'] = $this->serviceData[$type]['services'][$service]['items'][$item]['duration'] - 1;
             }
         }
-    } 
+    }
 
 
     public function saveData(){
@@ -248,16 +252,16 @@ class Services extends Component
 
 
     public function storeIncluded(){
-        
 
-        
+
+
         if(@$this->included){
             $includedServices = CleanerServicesIncluded::where('user_id', $this->user->id)->get();
 
             foreach($this->included as $service => $data){
                 if(@$data['data']){
                     $checkIncluded = $includedServices->where('services_id', $service)->first();
-                    
+
                     $store = new CleanerServicesIncluded;
                     if(@$checkIncluded){
                         $store->id = $checkIncluded->id;
@@ -276,7 +280,7 @@ class Services extends Component
             $this->alert('error', 'Add included services');
         }
     }
-    
+
 
 
     public function addServices($type, $service){
