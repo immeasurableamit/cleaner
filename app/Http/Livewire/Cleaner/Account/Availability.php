@@ -6,6 +6,7 @@ use Livewire\Component;
 
 use App\Models\User;
 use App\Models\CleanerHours;
+use Illuminate\Console\View\Components\Alert;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Availability extends Component
@@ -14,21 +15,22 @@ class Availability extends Component
     public $user, $days;
 
 
-    public function mount() {
+    public function mount()
+    {
         $this->user = auth()->user();
         $days = User::getDays();
 
         $dayArray = [];
-        foreach($days as $day){
+        foreach ($days as $day) {
             $hours = $this->user->cleanerHours()->where('day', $day)->get();
 
-            $dayArray[$day]['selected'] = count($hours)>0 ? 'on' : false;
+            $dayArray[$day]['selected'] = count($hours) > 0 ? 'on' : false;
             //$dayArray[$day]['selected'] = count($hours)>0 ? 'on' : 'off';
 
-            if(count($hours)>0) {
+            if (count($hours) > 0) {
 
                 $hoursArray = [];
-                foreach($hours as $i => $hour) {
+                foreach ($hours as $i => $hour) {
                     $hoursData = [];
                     $hoursData['id'] = @$hour->id;
                     $hoursData['delete'] = 'no';
@@ -39,8 +41,7 @@ class Availability extends Component
                 }
 
                 $dayArray[$day]['data'] = $hoursArray;
-            }
-            else {
+            } else {
 
                 $hoursArray = [];
 
@@ -59,39 +60,54 @@ class Availability extends Component
         //dd($this->days);
     }
 
-    public function addLayout($day){
+    public function addLayout($day)
+    {
+
         $hoursArray = $this->days[$day]['data'];
+        // dd($hoursArray[0]['id']);
 
-        $hoursData = [];
-        $hoursData['from_time'] = '';
-        $hoursData['to_time'] = '';
-        $hoursData['delete'] = 'no';
-        array_push($hoursArray, $hoursData);
+        $lastArrayIndexValue = end($this->days[$day]['data']);
+        // dd($lastArrayIndexValue['from_time']);
 
-        //...
-        $this->days[$day]['data'] = $hoursArray;
+        if ($lastArrayIndexValue['from_time'] == '' || $lastArrayIndexValue['to_time'] == '') {
+          $this->alert('error','Select From Time and To Time');
+        } else {
+
+
+
+            $hoursData = [];
+            $hoursData['from_time'] = '';
+            $hoursData['to_time'] = '';
+            $hoursData['delete'] = 'no';
+            array_push($hoursArray, $hoursData);
+
+            //...
+            $this->days[$day]['data'] = $hoursArray;
+        }
     }
 
+    public function deleteLayout($day, $index)
+    {
 
-    public function deleteLayout($day, $index){
-
-        if(@$this->days[$day]['data'][$index]['id']){
+        if (@$this->days[$day]['data'][$index]['id']) {
             $this->days[$day]['data'][$index]['delete'] = 'yes';
-        }
-        else {
+        } else {
             unset($this->days[$day]['data'][$index]);
         }
-
     }
 
-    public function store(){
-        $this->validate([
+    public function store()
+    {
+        $this->validate(
+            [
                 'days.*.data.*.from_time' => 'required_if:days.*.selected,on',
-                'days.*.data.*.to_time' => 'required_if:days.*.selected,on',
+                'days.*.data.*.to_time' => 'required_if:days.*.selected,on|after:days.*.data.*.from_time',
             ],
             [
                 'days.*.data.*.from_time.required_if' => 'From time is required.',
                 'days.*.data.*.to_time.required_if' => 'To time is required.',
+                'days.*.data.*.to_time.after' => 'End time must be greater then Start Time',
+
             ]
         );
 
@@ -101,20 +117,18 @@ class Availability extends Component
         $daysArray = [];
         if ($this->days) {
             foreach ($this->days as $day => $daysData) {
-                if(@$daysData['selected']=='on') {
-                    if(@$daysData['data']){
+                if (@$daysData['selected'] == 'on') {
+                    if (@$daysData['data']) {
                         array_push($daysArray, $day);
-                        foreach(@$daysData['data'] as $data){
+                        foreach (@$daysData['data'] as $data) {
 
-                            if(@$data['delete']=='yes' && @$data['id']){
+                            if (@$data['delete'] == 'yes' && @$data['id']) {
                                 $checkHour = CleanerHours::find($data['id']);
 
                                 if (@$checkHour) {
                                     $checkHour->delete();
                                 }
-
-                            }
-                            else {
+                            } else {
                                 if (@$data['from_time'] && $data['to_time']) {
                                     $hour = new CleanerHours;
                                     if (@$data['id']) {
@@ -134,8 +148,8 @@ class Availability extends Component
                         }
                     }
                 } else {
-                    $deleteDay = CleanerHours::where(['day'=>$day, 'users_id'=>$user->id])->get();
-                    foreach($deleteDay as $delDays){
+                    $deleteDay = CleanerHours::where(['day' => $day, 'users_id' => $user->id])->get();
+                    foreach ($deleteDay as $delDays) {
                         $delDays->delete();
                     }
                 }
@@ -144,7 +158,6 @@ class Availability extends Component
 
 
         $this->alert('success', 'Availability hours saved');
-
     }
 
 
