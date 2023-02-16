@@ -66,9 +66,11 @@
                                             @endforeach
                                         </div>
                                     </div>
+
                                     <div class="add_more">
                                         <button type="button" class="border-0 bg-none add-time-slots" wire:click="addLayout('{{$day}}')">+</button>
                                     </div>
+
                                 </div>
                             </div>
                             @endforeach
