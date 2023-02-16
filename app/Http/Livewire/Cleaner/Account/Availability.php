@@ -106,7 +106,7 @@ class Availability extends Component
             [
                 'days.*.data.*.from_time.required_if' => 'From time is required.',
                 'days.*.data.*.to_time.required_if' => 'To time is required.',
-                'days.*.data.*.to_time.after' => 'End time must be greater then Start Time',
+                'days.*.data.*.to_time.after' => 'End time must be greater',
 
             ]
         );
@@ -156,6 +156,7 @@ class Availability extends Component
             }
         }
 
+        
 
         $this->alert('success', 'Availability hours saved');
     }

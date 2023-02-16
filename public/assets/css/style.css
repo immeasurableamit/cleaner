@@ -6415,6 +6415,19 @@ input[type="radio"] {
     justify-content: center;
     padding-left: 113px;
 }
+.load_more_chat_btn{
+    text-align: center;
+}
+.load_more_chat_btn button.loadMore {
+    padding: 5px 20px;
+    background-color: var(--primary);
+    border-radius: 10px;
+    border-color: transparent;
+    margin-left: 20px;
+    font-weight: 500;
+    font-size: 13px;
+    color: #FFFFFF;
+}
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {
     display: none;

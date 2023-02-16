@@ -446,9 +446,11 @@ const Chatpanel = () => {
 
 							<div className="right_chat">
 								{page < lastPage &&
+								<div className='load_more_chat_btn'>
 									<button type="button" onClick={() => onScrollLoadChats()} className={`loadMore ${isLoadLoading ? 'loader disabled' : ''}`}>
 										load more chats
 									</button>
+									</div>
 								}
 
 								{msgList.length > 0 &&
