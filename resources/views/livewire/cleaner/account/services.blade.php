@@ -143,9 +143,8 @@
                                                             <span class="plus">+</span>
                                                             @error('price')<div class="alert d-inline">{{ $message }}</div>@enderror
                                                         </div>
-                                                        <span id="priceData-{{ $item->cleaner_service->id }}" class="text-danger"></span>
-
                                                     </div>
+                                                    <span id="priceData-{{ $item->cleaner_service->id }}" class="text-danger service_vlid"></span>
                                                     <div class="card_row_3">
                                                         <span class="est">Est Duration (Hours)</span>
                                                         <div class="incremnt_decrmnt number for_alternative">
@@ -154,8 +153,8 @@
 
                                                             <span class="plus">+</span>
                                                         </div>
-                                                        <span id="durationData-{{ $item->cleaner_service->id }}" class="text-danger"></span>
                                                     </div>
+                                                    <span id="durationData-{{ $item->cleaner_service->id }}" class="text-danger service_vlid"></span>
                                                     <div class="btn_text">
                                                         <p class="text_3">Your quote would be <span
                                                                 class="price">${{ $item->cleaner_service->priceForSqFt(1500) }}</span>
