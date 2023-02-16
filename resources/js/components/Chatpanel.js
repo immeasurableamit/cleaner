@@ -411,7 +411,6 @@ const Chatpanel = () => {
 
 
 		
-			{msgList.length > 0 &&
 			<div className="messages_right_section">
 
 			{isActive &&
@@ -465,11 +464,11 @@ const Chatpanel = () => {
 
 							let dateFrom = Moment().subtract(6,'d').format('YYYY-MM-DD');
 							let ndateFrom = Moment(msgs.created_at).format('YYYY-MM-DD');
-							console.log('dateFrom', dateFrom);
 
-							let timeFor = Moment(msgs.created_at).format('L LT');
+							//let timeFor = Moment(msgs.created_at).format('L LT');
+							let timeFor = Moment(msgs.created_at).format('MM-DD-YYYY LT');
 							if(ndateFrom >= dateFrom){
-								timeFor = Moment(msgs.created_at).format('MM-DD-YYY LT');
+								timeFor = Moment(msgs.created_at).format('dddd, h:mm a');
 							}
 
 							return (
@@ -577,7 +576,7 @@ const Chatpanel = () => {
              </>
          	}
           </div>
-}
+
         </div>
 
 

@@ -54,12 +54,12 @@ class Availability extends Component
             }
         }
 
-        
+
         $this->days = $dayArray;
         //dd($this->days);
     }
 
-    public function addLayout($day){        
+    public function addLayout($day){
         $hoursArray = $this->days[$day]['data'];
 
         $hoursData = [];
@@ -73,15 +73,15 @@ class Availability extends Component
     }
 
 
-    public function deleteLayout($day, $index){        
-        
+    public function deleteLayout($day, $index){
+
         if(@$this->days[$day]['data'][$index]['id']){
             $this->days[$day]['data'][$index]['delete'] = 'yes';
         }
         else {
             unset($this->days[$day]['data'][$index]);
         }
-        
+
     }
 
     public function store(){
@@ -90,8 +90,8 @@ class Availability extends Component
                 'days.*.data.*.to_time' => 'required_if:days.*.selected,on',
             ],
             [
-                'days.*.data.*.from_time.required_if' => 'From date is required.',
-                'days.*.data.*.to_time.required_if' => 'To date is required.',
+                'days.*.data.*.from_time.required_if' => 'From time is required.',
+                'days.*.data.*.to_time.required_if' => 'To time is required.',
             ]
         );
 
@@ -144,9 +144,9 @@ class Availability extends Component
 
 
         $this->alert('success', 'Availability hours saved');
-        
+
     }
-    
+
 
     public function render()
     {
