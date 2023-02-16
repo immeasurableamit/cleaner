@@ -80,7 +80,7 @@
                         <select class="select-custom-design" id="ratingFilter">
                             <option></option>
                             @foreach (range(1, 5) as $i)
-                                <option value="{{ $i }}">{{ $i }}</option>
+                                <option value="{{ $i }}">{{ $i }} +</option>
                             @endforeach
                         </select>
                     </div>

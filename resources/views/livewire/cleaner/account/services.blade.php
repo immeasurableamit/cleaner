@@ -138,7 +138,7 @@
                                                             <span class="minus">-</span>
                                                             <input type="number"
                                                                 value="{{ $item->cleaner_service->price }}"
-                                                                id="price-{{ $item->cleaner_service->id }}" />
+                                                                id="price-{{ $item->cleaner_service->id }}" onkeyup="this.value = this.value.replace(/[=,-,+,_,*,/,<,>,:,;,0]/, '')"/>
 
                                                             <span class="plus">+</span>
                                                             @error('price')<div class="alert d-inline">{{ $message }}</div>@enderror
@@ -150,7 +150,7 @@
                                                         <span class="est">Est Duration (Hours)</span>
                                                         <div class="incremnt_decrmnt number for_alternative">
                                                             <span class="minus">-</span>
-                                                            <input type="text" value="{{ $item->cleaner_service->duration }}" id="duration-{{ $item->cleaner_service->id }}" />
+                                                            <input type="text" value="{{ $item->cleaner_service->duration }}" id="duration-{{ $item->cleaner_service->id }}" onkeyup="this.value = this.value.replace(/[=,-,+,_,*,/,<,>,:,;,0]/, '')" />
 
                                                             <span class="plus">+</span>
                                                         </div>
@@ -291,7 +291,7 @@
     <!-- Discounts -->
     <div class="home-quotes-sec">
         <!-- <div class="bigger-home-save-link">
-            
+
 
             <a style="cursor: inherit;" class="link-design-2 py-3"> </a>
         </div> -->
