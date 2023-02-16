@@ -83,7 +83,7 @@ public $prices;
             foreach ( $type->services as $service ) {
 
                 $service->cleaner_service_description = $cleanerServicesDescriptions->where('service_id', $service->id )->first();
-                $service->does_offer_customization    = str_contains( strtolower( $service->title ), 'custom offer' ); // TODO: this code can break since it's hard coded
+                $service->does_offer_customization    = $type->id == Types::CUSTOM_SERVICES_TYPE; // TODO: this code can break since it's hard coded
 
                 foreach ( $service->items as $item ) {
                     $item->cleaner_service = $cleanerServices->where('services_items_id', $item->id )->first();
