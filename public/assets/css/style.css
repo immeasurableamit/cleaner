@@ -1227,6 +1227,7 @@ button:focus, input:focus, select:focus, textarea:focus{
     font-size: 16px;
     color: #161A1E;
     margin-bottom: 3px;
+    text-transform: capitalize;
 }
 .customer-pro-cntnt p {
     color: #787878;
@@ -2229,7 +2230,7 @@ margin-bottom: 0px;
     overflow: auto;
 }
 .msg_right_header,.msg_left_header{
-    padding: 20px;
+    padding: 23px;
     background-color: var(--primary);
 }
 .card_chat{
@@ -2318,6 +2319,8 @@ margin-bottom: 0px;
 .mutiple_cards_chat {
     padding-left: 30px;
     padding-bottom: 25px;
+    height: 500px;
+    overflow: auto;
 }
 .mutiple_cards_chat .serach_input input[type="search"] {
     padding: 11px 20px;
@@ -6157,25 +6160,27 @@ fieldset .row.no-mrg .checkout_div h4{
 .secnd_tm h5.name_tm,.account-profile .name,.something_amazing_div h3.frst_h3{
     text-transform: capitalize;
 }
-.right_chat a.attachment {
-    display: block;
+.right_chat .attachment_r {
+    display: flex;
     text-align: right;
     background-color: #DDDDDD;
     border-radius: 10px 0px 10px 10px;
     padding: 10px;
+    gap: 15px;
+    flex-wrap: wrap;
 }
-.right_chat a.attachment img,.reciver_msg a.attachment img {
-    width: 100px;
-    height: auto;
+.right_chat .attachment_r img,.reciver_msg .attachment_r img {
+    width: auto;
+    height: 100px;
     background: #fff;
     position: relative;
     border-radius: 0px;
 }
 .sender_msg p.msg_p{
-    background-color: #DDDDDD;
-    border-color: #DDDDDD;
+    background: rgba(55, 169, 251, 0.2);
+    border: 0.5px solid #DDDDDD;
 }
-.reciver_msg  a.attachment {
+.reciver_msg  .attachment_r {
     text-align: left;
     border-radius: 0px 10px 10px 10px;
     padding: 10px;
@@ -6185,9 +6190,15 @@ fieldset .row.no-mrg .checkout_div h4{
 .message_sender .attached-files {
     padding: 0px 35px;
 }
+.sender_msg .attachment_r {
+    justify-content: end;
+}
 .message_sender .file.files_r {
     background: #dddddd;
     padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 .btn_close{
     top: 0px;
@@ -6358,6 +6369,43 @@ input[type="radio"] {
 .myjob-main-sec .select-date-toggles p.app-value.blue {
     overflow: inherit;
     white-space: pre-wrap;
+}
+.message_sender {}
+
+.message_sender button.react-input-emoji--button {
+    filter: grayscale(1);
+}
+
+.message_sender .msg_send_input_div img {
+    filter: grayscale(1);
+    height: 24px !important;
+    width: 24px !important;
+}
+
+.message_sender button.react-input-emoji--button svg.react-input-emoji--button--icon {
+    fill: #979797;
+}
+.message_sender .galery_div label.me-3 {
+    margin-right: 0px !important;
+    width: 24px;
+}
+.file.files_r .img_gallery {
+    position: relative;
+}
+.file.files_r .img_gallery .btn.btn-danger.btn_cross {
+    padding: 7px;
+    height: 20px;
+    width: 20px;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: -5px;
+    right: -6px;
+    justify-content: center;
+}
+.attachment_r:empty {
+    display: none;
 }
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {
