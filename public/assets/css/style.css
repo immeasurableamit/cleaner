@@ -2373,6 +2373,7 @@ margin-bottom: 0px;
 }
 .msg_right_header{
     padding-left: 30px;
+    height: 87px;
 }
 .right_chat {
     padding: 30px;
@@ -2486,13 +2487,14 @@ p.msg_p{
     padding: 15px 30px;
     position: relative;
     display: flex;
+    align-items: center;
 }
 
 .msg_send_input_div button.btn_send_msg img {
     margin-left: 13px;
 }
 .msg_send_input_div button.btn_send_msg {
-    padding: 15px 39px;
+    padding: 10px 39px;
     background-color: var(--primary);
     border-radius: 10px;
     border-color: transparent;
@@ -6163,11 +6165,12 @@ fieldset .row.no-mrg .checkout_div h4{
 .right_chat .attachment_r {
     display: flex;
     text-align: right;
-    background-color: #DDDDDD;
     border-radius: 10px 0px 10px 10px;
     padding: 10px;
     gap: 15px;
     flex-wrap: wrap;
+    background: rgba(55, 169, 251, 0.2);
+    border: 0.5px solid #DDDDDD;
 }
 .right_chat .attachment_r img,.reciver_msg .attachment_r img {
     width: auto;
@@ -6406,6 +6409,11 @@ input[type="radio"] {
 }
 .attachment_r:empty {
     display: none;
+}
+.service_vlid {
+    display: flex;
+    justify-content: center;
+    padding-left: 113px;
 }
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {
