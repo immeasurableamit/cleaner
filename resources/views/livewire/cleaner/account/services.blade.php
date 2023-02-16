@@ -14,7 +14,7 @@
                                 <div class="card_header_tittle yellow_title">
                                     <div>
                                     <h3>{{ $type->title }}</h3>
-                                    <p> enter your rate to match what you would charge
+                                    <p> Enter your rate to match what you would charge
                                         for 1,500 sq ft - prices will scale up or down from there</p>
                                     </div>
                                 </div>

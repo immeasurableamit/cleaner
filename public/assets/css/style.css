@@ -6355,6 +6355,10 @@ input[type="radio"] {
 .l_xl h5{
     max-width: 213px;
 }
+.myjob-main-sec .select-date-toggles p.app-value.blue {
+    overflow: inherit;
+    white-space: pre-wrap;
+}
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {
     display: none;
