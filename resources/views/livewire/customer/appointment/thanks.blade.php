@@ -114,7 +114,7 @@
                                     <p class="label">Tax</p>
                                     <p class="price">${{ $order->tax }}</p>
 
-                                </div>                                
+                                </div>
                                 <div class="sub-totel-text-block">
                                     <p class="label">Transaction Fees</p>
                                     <p class="price">${{ $order->transaction_fees }}</p>
@@ -151,11 +151,23 @@
 
 </section>
 
-{{--
+
  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" ></script>
 
 
 <script type="text/javascript">
+
+
+// $(window).on('hashchange', function() {
+
+//     var url = $(location).attr('href');
+//     // Add a new history state and redirect to the home page
+//     window.history.replaceState({url: "/" }, "", "/");
+//     window.location.href = url;
+
+
+// });
+
 
 // $(document).ready(function() {
 
@@ -171,12 +183,7 @@
 //   }
 // });
 
-// $(document).ready(function() {
-//     var url = $(location).attr('href');
-//     // Add a new history state and redirect to the home page
-//     window.history.replaceState({url: "/" }, "", "/");
-//     window.location.href = url;
-// });
+//
 
     // if (window.history && window.history.pushState) {
 
@@ -187,4 +194,4 @@
     // }
 // });
 
-  </script> --}}
+  </script>
