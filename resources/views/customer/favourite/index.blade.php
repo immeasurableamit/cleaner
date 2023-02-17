@@ -168,7 +168,7 @@
           var name = $(this).data("name");
           event.preventDefault();
           swal({
-              title: `Are you sure you want to remove cleaner from Favourites?`,
+              title: `Are you sure you want to remove cleaner from Favorites?`,
             //   text: "If you delete this, it will be gone forever.",
             //   icon: "warning",
               buttons: true,
