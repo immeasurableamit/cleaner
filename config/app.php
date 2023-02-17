@@ -214,4 +214,5 @@ return [
     ])->toArray(),
 
 	'country_prefix_for_phone_number' => env("TWILIO_COUNTRY_CODE", "+91"),
+    'cleaner_slot_interval_in_minutes' => 30,
 ];
