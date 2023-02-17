@@ -6438,18 +6438,27 @@ input[type="radio"] {
 
 .any_size .dropdown-toggle {
     border: 0px;
+    width: 83px;
     background-color: transparent;
     color: #999;
     font-size: 15px;
     font-weight: 400;
     position: relative;
     display: block !important;
+    overflow: hidden;
 }
-
 .any_size .dropdown-toggle::before {
     position: absolute;
+    content: '';
+    right: -23px;
+    display:block !important;
+    width:40px;
+    height: 10px;
+}
+.any_size::before {
+    position: absolute;
     content: url(../images/dropdown.png);
-    right: -15px;
+    right: 5px;
     display:block !important;
 }
 .header-wrapper .any_size .dropdown-menu,.any_size .dropdown-menu {
