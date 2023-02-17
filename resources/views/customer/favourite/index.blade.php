@@ -21,14 +21,14 @@
                     <div id="data_Table" class="col-xl-9 col-lg-9 col-md-12 col-sm-12 car_right_div py-3">
 
                         <div class="form-headeing-second appointment-heading">
-                            <h4>Favourites</h4>
+                            <h4>Favorites</h4>
                         </div>
 
 
                         <div class="listing-row">
                             @if (count($favourites) <= 0)
                                 <div class="p-5">
-                                    <h3>No Favourite Found</h3>
+                                    <h3>No Favorites Found</h3>
                                 </div>
                             @else
                                 @foreach ($favourites as $favourite)
@@ -168,7 +168,7 @@
           var name = $(this).data("name");
           event.preventDefault();
           swal({
-              title: `Are you sure you want to remove cleaner from Favourites?`,
+              title: `Are you sure you want to remove cleaner from Favorites?`,
             //   text: "If you delete this, it will be gone forever.",
             //   icon: "warning",
               buttons: true,

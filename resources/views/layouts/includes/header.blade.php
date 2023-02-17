@@ -136,7 +136,7 @@
                                                                 href="{{ route('customer.notification.index') }}">Notifications</a>
                                                         </li>
                                                         <li><a href="{{ route('customer.favourite.index') }}"
-                                                                class="{{ @$title['active'] == 'favourite' ? 'active' : '' }}">Favourites</a>
+                                                                class="{{ @$title['active'] == 'favourite' ? 'active' : '' }}">Favorites</a>
                                                         </li>
                                                         <li><a href="{{ route('customer.support.service') }}"
                                                                 class="{{ @$title['active'] == 'support' ? 'active' : '' }}">Support</a>
