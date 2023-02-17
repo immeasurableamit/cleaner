@@ -80,13 +80,13 @@
                                             Add to calendar
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                            <a class="link-design-2" href="{{ $link->google() }}"><i
+                                            <a class="link-design-2" href="{{ $link->google() }}" target="_blank"><i
                                                     class="fa-brands fa-google"></i></a>
 
-                                            <a class="link-design-2" href="{{ $link->webOffice() }}"> <i
+                                            <a class="link-design-2" href="{{ $link->webOffice() }}" target="_blank"> <i
                                                     class="fa-brands fa-microsoft"></i></a>
 
-                                            <a class="link-design-2" href="{{ $link->ics() }}"><i
+                                            <a class="link-design-2" href="{{ $link->ics() }}" target="_blank"><i
                                                     class="fa-brands fa-apple"></i> </a>
                                         </div>
                                     </div>

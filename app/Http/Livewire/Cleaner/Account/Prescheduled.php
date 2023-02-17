@@ -33,12 +33,9 @@ class Prescheduled extends Component
     }
 
 
-
-
     public function addLayout()
     {
         $data = $this->dataArray;
-
         $newArray = [];
         $newArray['date'] = '';
         $newArray['from_time'] = null;
@@ -68,14 +65,24 @@ class Prescheduled extends Component
             'dataArray.*.to_time.required_with' => 'To time is required.',
         ]
         );
-        
+
+
+        $existDate = $this->offTime->pluck('date')->toArray();
+
         foreach($this->dataArray as $data){
-            $store = new CleanerPrescheduledOffTime;
-            $store->user_id = $this->user->id;
-            $store->date = $data['date'];
-            $store->from_time = $data['from_time'] ? $data['from_time'] : null;
-            $store->to_time = $data['to_time'] ? $data['to_time'] : null;
-            $store->save();
+
+            if(in_array($data['date'], $existDate)){
+               return $this->alert('success','Already Date Exist');
+            }else{
+                $store = new CleanerPrescheduledOffTime;
+                $store->user_id = $this->user->id;
+                $store->date = $data['date'];
+                // $store->from_time = $data['from_time'] ? $data['from_time'] : null;
+                $store->from_time = $data['from_time'] ? $data['from_time'] : today()->startOfDay()->toTimeString();
+                $store->to_time = $data['to_time'] ? $data['to_time'] : today()->endOfDay()->toTimeString();
+                $store->save();
+            }
+
         }
 
         $this->resetFields();
