@@ -107,6 +107,7 @@ class Appointment extends Component
         }
 
         if ($propertyname == "rescheduleDate") {
+            $this->reset('rescheduleTime');
             $this->preapareRescheduledAvailableTimeSlotsProp();
         }
 
