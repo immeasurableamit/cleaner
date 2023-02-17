@@ -5,7 +5,7 @@
     <li><a href="{{route('customer.appointment.index')}}" class="{{ @$title['active']=='appointments' ? 'active' : '' }}">Appointments</a></li>
     <li><a href="{{route('customer.billing.index')}}" class="{{ @$title['active']=='billing' ? 'active' : '' }}">Billing</a></li>
     <li><a href="{{ route('customer.notification.index') }}" class="{{ @$title['active'] == 'notification' ? 'active' : '' }}">Notifications</a></li>
-    <li><a href="{{route('customer.favourite.index') }}" class="{{ @$title['active'] == 'favourite' ? 'active' : '' }}">Favourites</a></li>
+    <li><a href="{{route('customer.favourite.index') }}" class="{{ @$title['active'] == 'favourite' ? 'active' : '' }}">Favorites</a></li>
     <li><a href="{{ route('customer.support.service') }}" class="{{ @$title['active'] == 'support' ? 'active' : '' }}">Support</a></li>
 
 
@@ -23,7 +23,7 @@
         <li><a href="{{ route('cleaner.set-location') }}" class="{{ @$title['active']== 'set-location' ? 'active' : '' }}">Set Locations Served</a></li>
         <li><a href="{{route('cleaner.notification.index')}}" class="{{ @$title['active']=='notification' ? 'active' : '' }}">Notification Preferences</a></li>
         <li><a href="{{route('cleaner.reviews')}}" class="{{ @$title['active']=='reviews' ? 'active' : '' }}">Reviews</a></li>
-        <li><a href="{{route('cleaner.billing.billing')}}" class="{{ @$title['active']=='billing' ? 'active' : '' }}">Billing</a></li>
+        <li><a href="{{route('cleaner.billing.billing')}}" class="{{ @$title['active']=='billing' ? 'active' : '' }}">Payments</a></li>
       </ul>
       </li>
 
