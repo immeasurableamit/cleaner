@@ -33,6 +33,7 @@ input,select,textarea,form,p,span{
   /* Handle */
   ::-webkit-scrollbar-thumb {
     background: var(--bgformbody);
+    background: lightblue;
   }
 
   /* Handle on hover */
@@ -430,6 +431,7 @@ filter: brightness(0) invert(1);
 }
 .footer-widget.footer-widget-first {
     width: 39%;
+    padding-left: 270px;
 }
 .newsletter-frm-div .subscrie-btn {
     position: absolute;
@@ -1099,9 +1101,9 @@ padding-right: 15px;
 }
 .customer-account-information li.three_column>p {
     width: 50%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
+    white-space: inherit;
 }
 .customer-account-information ul {
     margin-bottom: 0px;
