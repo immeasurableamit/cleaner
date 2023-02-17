@@ -37,7 +37,19 @@
 
 
                                 </div>
-                                <div class="select-search-design">
+                                <div class="any_size dropdown">
+                                    <button class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Any size
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <h3>Home Size</h3>
+                                        <div class="input-design">
+                                             <input type="text" placeholder="Enter Square Feet">
+                                        </div>
+                                        <p>Can update on search page</p>
+                                    </div>
+                                    </div>
+                                <!-- <div class="select-search-design">
                                     <select class="select-custom-design-group search-bar select-homesize" name="homeSize" required>
                                         <option></option>
                                         <option value="1361">1361 sqft</option>
@@ -45,7 +57,7 @@
                                         <option value="2755">2755 sqft</option>
                                         <option value="3267">3267 sqft</option>
                                     </select>
-                                </div>
+                                </div> -->
                                 <div class="search-input-design">
 
                                     <input type="text" id="address_in_header" name="address" placeholder="Enter location" required>

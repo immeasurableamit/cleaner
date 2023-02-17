@@ -2546,13 +2546,16 @@ var Chatpanel = function Chatpanel() {
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
             className: "right_chat",
-            children: [page < lastPage && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
-              type: "button",
-              onClick: function onClick() {
-                return onScrollLoadChats();
-              },
-              className: "loadMore ".concat(isLoadLoading ? 'loader disabled' : ''),
-              children: "load more chats"
+            children: [page < lastPage && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+              className: "load_more_chat_btn",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
+                type: "button",
+                onClick: function onClick() {
+                  return onScrollLoadChats();
+                },
+                className: "loadMore ".concat(isLoadLoading ? 'loader disabled' : ''),
+                children: "load more chats"
+              })
             }), msgList.length > 0 && msgList.map(function (msgs, index) {
               var _msgs$files;
               var classNa = 'reciver_msg';
