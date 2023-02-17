@@ -11,13 +11,15 @@ use App\Models\CleanerPrescheduledOffTime;
 class CleanerAvailability {
 
 
-    protected $slotIntervalInMinutes = 30, $cleaner, $timeFormat = "H:i:s";
+    protected $slotIntervalInMinutes, $cleaner, $timeFormat = "H:i:s";
 
     public function __construct(User $cleaner)
     {
         if ( ! $cleaner->role == "cleaner" ){
             throw new Exception(User::class." should be cleaner");
         }
+
+        $this->slotIntervalInMinutes = config('app.cleaner_slot_interval_in_minutes');
 
         $this->cleaner = $cleaner;
         $this->cleaner->loadMissing('cleanerHours');
@@ -129,7 +131,7 @@ class CleanerAvailability {
         return false;
     }
 
-    protected function isSlotAvailable(string $date, array $slot ): bool
+    public function isSlotAvailable(string $date, array $slot ): bool
     {
         $slotSetAsPrescheduledOff = $this->isSlotSetAsPrescheduledOff($date, $slot['start_time'], $slot['end_time']);
 
