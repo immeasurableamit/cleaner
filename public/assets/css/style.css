@@ -33,6 +33,7 @@ input,select,textarea,form,p,span{
   /* Handle */
   ::-webkit-scrollbar-thumb {
     background: var(--bgformbody);
+    background: lightblue;
   }
 
   /* Handle on hover */
@@ -168,7 +169,7 @@ input:focus,select:focus,textarea:focus{
 .header-wrapper ul>li {
     margin-right: 18px;
 }
-.search-form-wrapper>.select-search-design {
+.search-form-wrapper>.select-search-design,.any_size  {
     padding-right: 15px;
     margin-right: 15px;
     border-right: 1px solid #BBBBBB;
@@ -430,6 +431,7 @@ filter: brightness(0) invert(1);
 }
 .footer-widget.footer-widget-first {
     width: 39%;
+    padding-left: 270px;
 }
 .newsletter-frm-div .subscrie-btn {
     position: absolute;
@@ -1099,9 +1101,9 @@ padding-right: 15px;
 }
 .customer-account-information li.three_column>p {
     width: 50%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
+    white-space: inherit;
 }
 .customer-account-information ul {
     margin-bottom: 0px;
@@ -6427,6 +6429,59 @@ input[type="radio"] {
     font-weight: 500;
     font-size: 13px;
     color: #FFFFFF;
+}
+.dropdown {}
+
+.any_size {
+    position: relative;
+}
+
+.any_size .dropdown-toggle {
+    border: 0px;
+    width: 83px;
+    background-color: transparent;
+    color: #999;
+    font-size: 15px;
+    font-weight: 400;
+    position: relative;
+    display: block !important;
+    overflow: hidden;
+}
+.any_size .dropdown-toggle::before {
+    position: absolute;
+    content: '';
+    right: -23px;
+    display:block !important;
+    width:40px;
+    height: 10px;
+}
+.any_size::before {
+    position: absolute;
+    content: url(../images/dropdown.png);
+    right: 5px;
+    display:block !important;
+}
+.header-wrapper .any_size .dropdown-menu,.any_size .dropdown-menu {
+    right: -90px !important;
+    min-width: 222px;
+    padding: 17px !important;
+    top: 15px !important;
+}
+.any_size .dropdown-menu p {
+    font-weight: 600;
+    font-size: 15px;
+    padding-top: 20px;
+    color: #848484;
+}
+.any_size .dropdown-menu input[type="text"]::placeholder {
+    font-weight: 400;
+    font-size: 16px;
+    color: #A6A6A6;
+}
+.any_size .dropdown-menu h3 {
+    font-weight: 600;
+    font-size: 17px;
+    color: #232323;
 }
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {
