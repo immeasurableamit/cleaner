@@ -84,20 +84,36 @@ class SupportService extends Component
 
     public function render()
     {
-        $searchRecord = '%' . $this->searchRecord . '%';
+        $supportServices = SupportRequest::with(['order.user']);
+      
+        // $searchRecord = '%' . $this->searchRecord . '%';
+          
+        // $supportServices = SupportRequest::where(function ($query) use ($searchRecord) {
+        //     $query->where('order_id', 'LIKE', $searchRecord)
+        //         ->orWhere('description', 'LIKE', $searchRecord)
+        //         ->orWhere('requested_resolution', 'like', '%' . $searchRecord . '%')
+        //         ->orWhere('issue', 'like', '%' . $searchRecord . '%');
+        // })
 
-        $supportServices = SupportRequest::where(function ($query) use ($searchRecord) {
-            $query->where('order_id', 'LIKE', $searchRecord)
-                ->orWhere('description', 'LIKE', $searchRecord)
-                ->orWhere('requested_resolution', 'like', '%' . $searchRecord . '%')
-                ->orWhere('issue', 'like', '%' . $searchRecord . '%');
-        })
+        //     ->with(['order.user' => function ($query) use ($searchRecord) {
+        //         $query->where('email', 'like', '%' . $searchRecord . '%')
+        //             ->orWhere('first_name', 'like', '%' . $searchRecord . '%')
+        //             ->orWhere('last_name', 'like', '%' . $searchRecord . '%');
+        //     }])->paginate(10);
 
-            ->with(['order.user' => function ($query) use ($searchRecord) {
-                $query->where('email', 'like', '%' . $searchRecord . '%')
-                    ->orWhere('first_name', 'like', '%' . $searchRecord . '%')
-                    ->orWhere('last_name', 'like', '%' . $searchRecord . '%');
-            }])->paginate(10);
+        if(!empty($this->searchRecord)) {
+            $value = $this->searchRecord;
+            
+            $supportServices->where(function($query) use ($value) {
+                    $query->where('order_id', '=', $value);
+                    $query->orWhereHas('order.user', function($q) use($value) {
+                        $q->where('first_name', 'like', '%'.$value.'%');
+                    });
+                });       
+        }    
+
+        
+        $supportServices = $supportServices->orderBy('id', 'DESC')->paginate(10);  
 
         return view('livewire.admin.support.support-service', compact('supportServices'));
     }
