@@ -197,8 +197,11 @@
                                         </div>
                                     </div>
                                     <div class="btn_rate">
-                                        <b>${{ $cleaner->price_for_selected_service }}
+                                        {{-- <b>${{ $cleaner->price_for_selected_service }}
+                                        </b> --}}
+                                        <b>${{  number_format(round($cleaner->price_for_selected_service), 2) }}
                                         </b>
+
                                         <a href="{{ route('profile', $cleaner->id) }}"><button
                                                 class="btn_view d-none d-md-block">View</button></a>
                                         <div class="td-hide rating-mobile-listing-design">
