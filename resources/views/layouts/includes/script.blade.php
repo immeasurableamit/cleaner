@@ -179,4 +179,17 @@ window.swalToast = Toast;
 window.addEventListener('load', () => {
     initToastInstance();
 })
+
+
+function updateTextOfHomeSizeDropdownButton(homeSizeInput)
+{
+    let text = homeSizeInput.value.length == 0 ? 'Any Size' : homeSizeInput.value;
+    $(homeSizeInput).parents('.any_size.dropdown').children('.dropdown-toggle').text( homeSizeInput.value + " sq. ft." );
+}
+
 </script>
+
+@if ( $errors->any() )
+<p>errors here</p>
+<script>console.log( @json( $errors->all() )</script>
+@endif

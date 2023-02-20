@@ -8,9 +8,10 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use \App\Models\Services;
+use App\Models\Types;
+use App\Services\CleanerAvailability;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Illuminate\Contracts\Encryption\DecryptException;
-
 
 class HomeController extends Controller
 {
@@ -31,6 +32,22 @@ class HomeController extends Controller
 	public function checkout(Request $req, $details)
 	{
 		$details = json_decode(Crypt::decryptString($details), true);
+//        dd($details);
+        
+        $cleaner   = User::find( $details['cleanerId']);
+        $startTime = $details['time'];
+        $endTime   =  Carbon::parse( $startTime )->addMinutes( config('app.cleaner_slot_interval_in_minutes') )->toTimeString();
+        $slot      = [ 'start_time' => $startTime, 'end_time' => $endTime ];
+
+        $cleanerAvailability = new CleanerAvailability($cleaner);
+        $isSlotAvailable = $cleanerAvailability->isSlotAvailable( $details['selected_date'], $slot );
+        if ( ! $isSlotAvailable ) {
+            return redirect()->route('index');
+        }
+        
+
+        
+        
 
 		return view('home.checkout', compact('details') );
 	}
@@ -40,7 +57,7 @@ class HomeController extends Controller
 
         /*
          * default search paramters will be used when
-         * customer comes to search page directly ( by clicking browse cleaners )
+         * customer comes to search page directly ( for eg. clicking browse cleaners )
          *
          */
         if ( empty( $request->query() ) ){
@@ -49,9 +66,10 @@ class HomeController extends Controller
         }
 
         $rules = [
-            'selectItem' => 'required|exists:services_items,id|max:255',
+            //'selectItem' => 'required|exists:services_items,id|max:255',
+            'selectItem' => 'nullable|max:255',
+            'homeSize'   => 'nullable|numeric',
             'address'    => 'required|max:255',
-            'homeSize'   => 'required|numeric',
             'latitude'   => 'present|max:255',
             'longitude'  => 'present|max:255'
         ];
@@ -75,14 +93,18 @@ class HomeController extends Controller
                 'address'  => $response['address'],
             ]);
         }
-
-        $serviceItem = ServicesItems::findOrFail($request->selectItem);
+        
+        
+        $serviceItem = ServicesItems::find($request->selectItem);
+        if ( ! $serviceItem ) {
+            $serviceItem = Services::whereTypesId( Types::ONE_TIME_SERVICE_TYPE )->first()->items->first();
+        }
 
         $searchParamters = [
             'serviceItem'   => $serviceItem,
             'serviceItemId' => $serviceItem->id,
             'address'       => $request->address,
-            'homeSize'      => $request->homeSize,
+            'homeSize'      => $request->homeSize ?? 1500,
             'latitude'      => $request->latitude,
             'longitude'     => $request->longitude,
         ];

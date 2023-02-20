@@ -11,10 +11,12 @@
                     <div class="row">
                         <div class="col-xl-6 col-md-6 col-sm-12">
                             <div class="home_cleaning_div">
-                                <div class="card_header_tittle">
+                                <div class="card_header_tittle yellow_title">
+                                    <div>
                                     <h3>{{ $type->title }}</h3>
-                                    <p> enter your rate to match what you would charge
+                                    <p> Enter your rate to match what you would charge
                                         for 1,500 sq ft - prices will scale up or down from there</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -103,18 +105,19 @@
                                             @if (empty($item->cleaner_service))
                                                 <div class="card-second-content">
                                                     <div class="card_row_3">
-                                                        <span class="est">Price  sq ft (in USD)</span>
+                                                        <span class="est">Price sq ft (in USD)</span>
                                                         <div class="incremnt_decrmnt number for_alternative">
                                                             <span class="minus">-</span>
-                                                            <input type="text" value="1" />
+                                                            <input type="number" value="1" />
                                                             <span class="plus">+</span>
+
                                                         </div>
                                                     </div>
                                                     <div class="card_row_3">
                                                         <span class="est">Est Duration</span>
                                                         <div class="incremnt_decrmnt number for_alternative">
                                                             <span class="minus">-</span>
-                                                            <input type="text" value="1" />
+                                                            <input type="text" value="1"  />
                                                             <span class="plus">+</span>
                                                         </div>
                                                     </div>
@@ -131,29 +134,34 @@
                                                     <div class="card_row_3">
                                                         <span class="est">Price / sq ft (in USD)</span>
                                                         <div class="incremnt_decrmnt number for_alternative">
+
                                                             <span class="minus">-</span>
-                                                            <input type="text"
+                                                            <input type="number"
                                                                 value="{{ $item->cleaner_service->price }}"
-                                                                id="price-{{ $item->cleaner_service->id }}" />
+                                                                id="price-{{ $item->cleaner_service->id }}" onkeyup="this.value = this.value.replace(/[=,-,+,_,*,/,<,>,:,;,0]/, '')"/>
+
                                                             <span class="plus">+</span>
+                                                            @error('price')<div class="alert d-inline">{{ $message }}</div>@enderror
                                                         </div>
                                                     </div>
+                                                    <span id="priceData-{{ $item->cleaner_service->id }}" class="text-danger service_vlid"></span>
                                                     <div class="card_row_3">
                                                         <span class="est">Est Duration (Hours)</span>
                                                         <div class="incremnt_decrmnt number for_alternative">
                                                             <span class="minus">-</span>
-                                                            <input type="text"
-                                                                value="{{ $item->cleaner_service->duration }}"
-                                                                id="duration-{{ $item->cleaner_service->id }}" />
+                                                            <input type="text" value="{{ $item->cleaner_service->duration }}" id="duration-{{ $item->cleaner_service->id }}" onkeyup="this.value = this.value.replace(/[=,-,+,_,*,/,<,>,:,;,0]/, '')" />
+
                                                             <span class="plus">+</span>
                                                         </div>
                                                     </div>
+                                                    <span id="durationData-{{ $item->cleaner_service->id }}" class="text-danger service_vlid"></span>
                                                     <div class="btn_text">
                                                         <p class="text_3">Your quote would be <span
                                                                 class="price">${{ $item->cleaner_service->priceForSqFt(1500) }}</span>
-                                                           for a customer with a  <span class="area">1,500 sq</span> ft 3 bed 2 bath home</p>
+                                                            for a customer with a <span class="area">1,500 sq</span>
+                                                            ft 3 bed 2 bath home</p>
                                                         <button class="btn_blue"
-                                                            onclick="updateCleanerService('{{ $item->cleaner_service->id }}')">Save</button>
+                                                            onclick="updateCleanerService('{{ $item->cleaner_service->id }}')" id="submit-{{$item->cleaner_service->id}}">Save</button>
                                                     </div>
                                                 </div>
                                             @endif
@@ -163,59 +171,62 @@
 
                                 </div>
                 @endforeach
-<!-- Services end -->
+                <!-- Services end -->
 
-@if ( $newCustomServiceCardOpen && $service->does_offer_customization )
+                @if ($newCustomServiceCardOpen && $service->does_offer_customization)
+                    <!-- Custom service card -->
+                    <div class="col-12">
+                        <div class="card_collapse_service common_card_service show show-2">
+                            <div class="heder_row">
+                                <div class="form-grouph input-design mb-2 w-75">
+                                    <input placeholder="Enter Service Name" id="custom-service-title">
+                                </div>
+                            </div>
+                            <div class="card-second-content">
+                                <div class="card_row_3">
+                                    <span class="est">Price (in USD)</span>
+                                    <div class="incremnt_decrmnt number for_alternative">
+                                        <span class="minus">-</span>
+                                        <input type="text" value="1" id="custom-service-price">
+                                        <span class="plus">+</span>
+                                    </div>
+                                </div>
+                                <div class="card_row_3">
+                                    <span class="est">Est Duration</span>
+                                    <div class="incremnt_decrmnt number for_alternative">
+                                        <span class="minus">-</span>
+                                        <input type="text" value="1" id="custom-service-duration">
+                                        <span class="plus">+</span>
+                                    </div>
+                                </div>
+                                <div class="card_row_3">
+                                    <span class="est">Frequency</span>
+                                    <div class="d-flex allow_jobs">
+                                        <label> Allow recurring job?</label>
 
-<!-- Custom service card -->
-<div class="col-12">
-    <div class="card_collapse_service common_card_service show show-2">
-        <div class="heder_row">
-            <div class="form-grouph input-design mb-2 w-75">
-                <input placeholder="Enter Service Name" id="custom-service-title">
-            </div>
-        </div>
-        <div class="card-second-content">
-           <div class="card_row_3">
-            <span class="est">Price (in USD)</span>
-            <div class="incremnt_decrmnt number for_alternative">
-            <span class="minus">-</span>
-            <input type="text" value="1" id="custom-service-price">
-            <span class="plus">+</span>
-        </div>
-        </div>
-        <div class="card_row_3">
-            <span class="est">Est Duration</span>
-            <div class="incremnt_decrmnt number for_alternative">
-                <span class="minus">-</span>
-                <input type="text" value="1" id="custom-service-duration">
-                <span class="plus">+</span>
-            </div>
-        </div>
-        <div class="card_row_3">
-            <span class="est">Frequency</span>
-            <div class="d-flex allow_jobs">
-              <label>  Allow recurring job?</label>
-
-                <div class="form-check form-switch" >
-                    <input class="form-check-input"  type="checkbox"  id="custom-service-recurring" >
-                </div>
-            </div>
-        </div>
-        <div class="btn_text">
-        {{-- <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p> --}}
-        <button class="btn_blue" onclick="addCustomService('{{ $service->id }}')">Save</button>
-        </div>
-        </div>
-    </div>
-   </div>
-<!-- Custom service card end -->
-@endif
-@if ( $service->does_offer_customization )
-<!-- Add custom service -->
-<div class="col-12"><button class="btn_blue mx-md-2  my-2" wire:click="$toggle('newCustomServiceCardOpen')">{{ $newCustomServiceCardOpen ? 'Cancel' : 'Add service' }}</button></div>
-<!-- Add custom service -->
-@endif
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox"
+                                                id="custom-service-recurring">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="btn_text">
+                                    {{-- <p class="text_3">This would equal.... <span class="price">$300</span> on the average <span class="area">1,500 sq</span> ft home</p> --}}
+                                    <button class="btn_blue"
+                                        onclick="addCustomService('{{ $service->id }}')">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Custom service card end -->
+                @endif
+                @if ($service->does_offer_customization)
+                    <!-- Add custom service -->
+                    <div class="col-12"><button class="btn_blue mx-md-2  my-2"
+                            wire:click="$toggle('newCustomServiceCardOpen')">{{ $newCustomServiceCardOpen ? 'Cancel' : 'Add service' }}</button>
+                    </div>
+                    <!-- Add custom service -->
+                @endif
             </div>
             <!-- Service items end -->
 
@@ -273,21 +284,24 @@
 <!-- Service end -->
 
 </div>
-
-
 @endforeach
 
 @if ($loop->iteration === 1)
     <!-- Discounts -->
     <div class="home-quotes-sec">
-        <div class="bigger-home-save-link">
-            <a href="#" class="link-design-2 py-3"> Bigger homes save you time on travel and setup. We recommend
-                offering sq ft discounts to large and extra-large sized homes. Standard discounts are 10% and 20%.</a>
-        </div>
-        <div class="home-discount-counter">
-            <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12">
+        <!-- <div class="bigger-home-save-link">
+
+
+            <a style="cursor: inherit;" class="link-design-2 py-3"> </a>
+        </div> -->
+        <div class="row  home-discount-counter">
+            <div class="col-md-6">
+                <div class="larger_homes">
+                    <h4>Larger Homes - Full Home Price Adjuster</h4>
+                   <p>Bigger homes save you time on travel and setup. We recommend offering sq ft discounts to large and extra-large sized homes. Standard discounts are 10% and 20%. This does not apply outside of “Full Home Cleanings”.</p>
+                </div>
                 @foreach ($discounts as $discount)
-                    <div class="incremnt_input_div py-3">
+                    <div class="incremnt_input_div py-3 l_xl">
 
                         <div class="incremnt_decrmnt number">
                             <input type="text" value="{{ $discount->cleaner_discount->discount ?? '0' }}"
@@ -298,6 +312,13 @@
                         <h5>{{ $discount->title }}</h5>
                     </div>
                 @endforeach
+            </div>
+            <div class="col-md-6 p-0 pe-4">
+            <div class="stng_price">
+                    <h3><img src="https://canarycleaners.smallbizplace.com/assets/images/icons/!!.svg">
+                    Excessive Cleaning Fees </h3>
+                    <p>For messy homes that require extra cleaning, you will be able to propose an extra charge to the customer as an “Excessive Cleaning Fee” before service is rendered. The customer will receive a message to accept and pay as an additional invoice. </p>
+                </div>
             </div>
         </div>
         <div class="btn_text_service">
@@ -314,9 +335,7 @@
 
 </div>
 <script>
-
-    function addFunctionalityInMinusAndPlusButton()
-    {
+    function addFunctionalityInMinusAndPlusButton() {
 
         $(".minus").unbind('click');
         $(".plus").unbind('click');
@@ -343,6 +362,25 @@
     function updateCleanerService(cleanerServiceId) {
         let price = document.getElementById(`price-${cleanerServiceId}`).value;
         let duration = document.getElementById(`duration-${cleanerServiceId}`).value;
+
+        if(price == ''){
+            $("#priceData-"+cleanerServiceId).text("Select Price");
+        }
+        if(duration == ''){
+            $("#durationData-"+cleanerServiceId).text("Select Duration");
+        }
+
+        if (price != '' && duration != '') {
+            console.log(price, duration, "hello");
+            // $('#submit-'+cleanerServiceId).attr('disabled', false);
+        } else {
+            console.log(price, duration, "hii");
+            return false;
+            // $('#submit-'+cleanerServiceId).attr('disabled', true);
+        }
+
+        // console.log(price, duration, "hello");
+        // return false;
         @this.call('updateCleanerService', cleanerServiceId, {
             price,
             duration
@@ -369,18 +407,22 @@
         @this.call('upsertDiscount', discountId, percentage)
     }
 
-    function addCustomService(service_id)
-    {
+    function addCustomService(service_id) {
         let title = document.getElementById('custom-service-title').value;
         let price = document.getElementById('custom-service-price').value;
         let duration = document.getElementById('custom-service-duration').value;
         let recurring = document.getElementById('custom-service-recurring').checked;
 
-        @this.call( 'storeCustomServiceItem', service_id, { title, price, duration, recurring });
+        @this.call('storeCustomServiceItem', service_id, {
+            title,
+            price,
+            duration,
+            recurring
+        });
 
     }
-    function makeCardsToggleable()
-    {
+
+    function makeCardsToggleable() {
         $(".common_card_service .form-switch").unbind('click');
         $(".card_toggle_s").unbind('click');
         $('.heading-toggle').unbind('click');
@@ -426,6 +468,5 @@
         addFunctionalityInMinusAndPlusButton();
 
     })
-
 </script>
 </div>

@@ -80,13 +80,13 @@
                                             Add to calendar
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                            <a class="link-design-2" href="{{ $link->google() }}"><i
+                                            <a class="link-design-2" href="{{ $link->google() }}" target="_blank"><i
                                                     class="fa-brands fa-google"></i></a>
 
-                                            <a class="link-design-2" href="{{ $link->webOffice() }}"> <i
+                                            <a class="link-design-2" href="{{ $link->webOffice() }}" target="_blank"> <i
                                                     class="fa-brands fa-microsoft"></i></a>
 
-                                            <a class="link-design-2" href="{{ $link->ics() }}"><i
+                                            <a class="link-design-2" href="{{ $link->ics() }}" target="_blank"><i
                                                     class="fa-brands fa-apple"></i> </a>
                                         </div>
                                     </div>
@@ -104,6 +104,12 @@
                                     <p class="label">Subtotal</p>
                                     <p class="price">${{ $order->subtotal }}</p>
                                 </div>
+                                @if ( $order->discount > 0 )
+                                <div class="sub-totel-text-block">
+                                    <p class="label"><b>Discount -{{ $order->discount_title }} ({{ $order->discount_percentage }}%)</b></p>
+                                    <p class="price">${{ $order->discount }}</p>
+                                </div>
+                                @endif
                                 <div class="sub-totel-text-block">
                                     <p class="label">Tax</p>
                                     <p class="price">${{ $order->tax }}</p>
@@ -144,3 +150,48 @@
     </div>
 
 </section>
+
+
+ <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" ></script>
+
+
+<script type="text/javascript">
+
+
+// $(window).on('hashchange', function() {
+
+//     var url = $(location).attr('href');
+//     // Add a new history state and redirect to the home page
+//     window.history.replaceState({url: "/" }, "", "/");
+//     window.location.href = url;
+
+
+// });
+
+
+// $(document).ready(function() {
+
+//     var url = $(location).attr('href');
+//     console.log(url, 'urllll');
+
+//   if (window.history && window.history.pushState) {
+
+//     window.history.pushState('/home', null, url);
+//     $(window).on('popstate', function() {
+//       window.location.href = '/home';
+//     });
+//   }
+// });
+
+//
+
+    // if (window.history && window.history.pushState) {
+
+    //     $(window).on('popstate', function() {
+    //         debugger;
+    //         window.location = "{{ route('index') }}";
+    //     });
+    // }
+// });
+
+  </script>

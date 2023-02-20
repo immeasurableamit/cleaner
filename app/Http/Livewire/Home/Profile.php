@@ -325,6 +325,8 @@ class Profile extends Component
     {
         $cleanerAvailability        = new CleanerAvailability($this->cleaner);
         $this->workingDatesTimeSlot = $cleanerAvailability->getAvailableSlotsByDate($this->selected_date);
+
+        // dd($this->workingDatesTimeSlot);
     }
 
     protected function checkoutRules()

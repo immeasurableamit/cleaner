@@ -223,7 +223,7 @@ class Jobs extends Component
         }
 
         $transaction->save();
-	$transaction->refresh();
+	    $transaction->refresh();
 
         return $transaction;
     }
@@ -252,7 +252,9 @@ class Jobs extends Component
 
         /* Update order */
         $isTransactionSuccess       = $transaction->status == 'success';
+
         $order->status              = $isTransactionSuccess ? 'payment_collected' : 'payment_failed';
+
         $order->is_paid_by_user     = $isTransactionSuccess ? 1 : 0;
         $order->user_transaction_id = $transaction->id;
         $order->save();
@@ -261,6 +263,8 @@ class Jobs extends Component
         $alertMessage = $isTransactionSuccess ? 'Payment Collected' : 'Payment Failed';
         $alertType    = $isTransactionSuccess ? 'success' : 'error';
         $this->alert( $alertType, $alertMessage);
+
+
         $this->refreshSelectedTab();
 
         return $isTransactionSuccess;

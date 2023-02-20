@@ -117,6 +117,7 @@
                         </div>
                     @endif
                 </div>
+
                 <div class="btn_msg_cleaner">
                     @php
                         $messageUrl = route('signup-customers');
@@ -128,6 +129,8 @@
                             src="{{ asset('assets/images/icons/email-2.svg') }}"> </a>
                     <p>Ask a <b>question</b> or request a <b>custom proposal.</b></p>
                 </div>
+
+
             </div>
         </div>
         <div class="col-xl-4 col-lg-12 col-md-12 about-provider">
@@ -206,7 +209,7 @@
                                 <div class="input-design">
                                     <label>Home Size</label>
                                     <input type="number" wire:model.debounce.500ms="homeSize"
-                                        placeholder="Enter Square Feet">
+                                        placeholder="Enter Square Feet" onkeyup="this.value = this.value.replace(/[=,-,+,_,*,/,<,>,:,;]/, '')" />
                                     @error('homeSize')
                                         <span class="help-block text-danger"> {{ $message }} </span>
                                     @enderror

@@ -310,18 +310,18 @@ class SearchResult extends Component
         $favourite = Favourite::where('user_id', $this->user->id)->where('cleaner_id', $cleanerId)->first();
         if ($favourite) {
             $favourite->delete();
-            $this->alert('success', 'Removed from favourites');
+            $this->alert('success', 'Removed from favorites');
         } else {
             $favourite = Favourite::create([
                 'user_id' => $this->user->id,
                 'cleaner_id' => $cleanerId,
             ]);
-            $this->alert('success', 'Added to favourites');
+            $this->alert('success', 'Added to favorites');
         }
 
         $this->user->refresh();
+        $this->filterCleaners();
         return true;
-
     }
 
     public function resetFilters()

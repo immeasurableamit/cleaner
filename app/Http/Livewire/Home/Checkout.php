@@ -37,7 +37,9 @@ class Checkout extends Component
     public $cleanerService, $addOns, $homeSize;
 
     /* Second step props */
-    public $subtotal, $tax, $transactionFees, $total, $states, $user, $discount, $discountTitle;
+    public $subtotal, $tax, $transactionFees, $total, $states, $user, $discount, $discountTitle, $subtotalAfterDiscount, $discountPercentage;
+
+    public $appliedCleanerDiscount;
 
     /* Second step: User details form props */
     public $firstname, $lastname, $email, $password;
@@ -133,9 +135,13 @@ class Checkout extends Component
             return 0;
         }
 
+        $this->appliedCleanerDiscount = $eligibleDiscount;
+        //dd( $this->appliedCleanerDiscount );
+
         $eligibileDiscountPercentage = $eligibleDiscount->discount;
         $discountAmount = calculateXPercentageOfYNumber( $subtotal, $eligibileDiscountPercentage);
         $this->discountTitle = $eligibleDiscount->mainDiscount->title;
+        $this->discountPercentage = $eligibileDiscountPercentage;
         return $discountAmount;                        
     }
 
@@ -145,7 +151,8 @@ class Checkout extends Component
         $this->tax      = $this->taxCalculate();
         $this->transactionFees = $this->transactionFeeCalculate();
         $this->discount = $this->calculateDiscount($this->subtotal);
-        $this->total    = $this->subtotal + $this->tax + $this->transactionFees;
+	$this->subtotalAfterDiscount = $this->subtotal - $this->discount;
+        $this->total    = $this->subtotalAfterDiscount + $this->tax + $this->transactionFees;
     }
 
     protected function handleLoggedInUser()
@@ -340,7 +347,7 @@ class Checkout extends Component
      */
     protected function storeOrder($user_id)
     {
-        $order = Order::create([
+        $details = [
             'user_id'     => $user_id,
             'is_paid'     => 0,
             'state_id'    => $this->stateId,
@@ -359,9 +366,15 @@ class Checkout extends Component
             'cleaning_datetime'        => Carbon::createFromFormat('Y-m-d H:i:s', $this->details['selected_date'] . " " . $this->details['time']),
             'estimated_duration_hours' => $this->estimatedDuration,
             'cleaner_id'               => $this->cleaner->id,
-            'discount'  => $this->discount,
+            'discount'                 => $this->discount,
+            'cleaner_discount_id'      => $this->appliedCleanerDiscount->id ?? null,
+            'discount_percentage'      => $this->appliedCleanerDiscount->discount ?? null,
+            'discount_title'           => $this->appliedCleanerDiscount->mainDiscount->title ?? null,        
+        ];
 
-        ]);
+//        dd( $details );
+
+        $order = Order::create($details);
 
         return $order;
     }

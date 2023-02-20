@@ -43,11 +43,11 @@
                             <span>{{ formatDateTimeForUser($selectedDate, 'date') }}</span>
                         </div>
 
-                        <div class="card_service_row appoitments-alternative-row row">
+                        <div class="card_service_row appoitments-alternative-row row" >
 
                             @forelse ($selectedDateOrders as $order)
                             <!-- Booking Card -->
-                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2" id= "order--{{$order->id}}">
                                 <div class="select-date-toggles header-main-cntnt-differ">
                                     <button class="service_toggle_s"></button>
                                     <div class="service-main-service-column">
@@ -74,11 +74,20 @@
                                                 @elseif ( $order->status == 'rejected' )
                                                 <a href="#" class="refuse-request-btn crd-btn">{{ $order->statusForCleaner() }}</a>
                                                 @elseif ( $order->status == 'accepted' && now()->greaterThanOrEqualTo( $order->cleaning_datetime->copy()->subDay() ) ) {{-- if status is accepted and the order is 24 hours ahead of the current time  --}}
-                                                <a href="javascript:void(0);" wire:loading.attr="disabled" wire:target="collectPayment" wire:click="collectPayment( {{ $order->id }} )" class="collect_payment crd-btn">
-                                                    <span wire:loading.remove wire:target="collectPayment">{{ $order->statusForCleaner() }}</span>
-                                                    <span wire:target="collectPayment" wire:loading><i class="fa-solid fa-spinner fa-spin"></i></span>
-                                                </a>
+                                              {{--    <a href="javascript:void(0);" wire:loading.attr="disabled" wire:target="collectPayment" wire:click="collectPayment( {{ $order->id }} )" class="collect_payment crd-btn">
+                                                    <span wire:loading.remove wire:target="collectPayment( {{ $order->id }} )">{{ $order->statusForCleaner() }}</span>
+                                                    <span wire:target="collectPayment( {{ $order->id }} )" wire:loading><i class="fa-solid fa-spinner fa-spin"></i></span>
+                                                </a> --}}
+
+                                                <button wire:click="collectPayment( {{ $order->id }} )" class="collect_payment crd-btn" wire:loading.attr="disabled" >
+                                                    <span>{{ $order->statusForCleaner() }}</span>
+                                                    <span  wire:target="collectPayment( {{ $order->id }} )" wire:loading><i class="fa-solid fa-spinner fa-spin"></i></span>
+                                                </button>
+
                                                 @elseif ( $order->status == 'payment_failed' )
+
+                                                
+
                                                 <a href="#" class="failed-msg crd-btn">{{ $order->statusForCleaner() }}</a>
 
                                                 @elseif ( $order->status == 'payment_collected' || $order->status == 'reviewed' )
@@ -167,7 +176,10 @@
                                         <a href="#" class="refuse-request-btn crd-btn">{{ $order->statusForCleaner() }}</a>
 
                                         @elseif ( $order->status == 'accepted' && now()->greaterThanOrEqualTo( $order->cleaning_datetime->copy()->subDay() ) ) {{-- if status is accepted and the order is tomorrow --}}
-                                        <a href="javascript:void(0);" wire:click="collectPayment( {{ $order->id }} )" class="collect_payment crd-btn">{{ $order->statusForCleaner() }}</a>
+                                        <button href="javascript:void(0);" wire:click="collectPayment( {{ $order->id }} )" class="collect_payment crd-btn" wire:target="collectPayment( {{ $order->id }} )" wire:loading.attr="disabled">
+                                            <span wire:target="collectPayment( {{ $order->id }} )" wire:loading.remove>{{ $order->statusForCleaner() }}</span>
+                                            <span wire:target="collectPayment( {{ $order->id }} )" wire:loading><i class="fa-solid fa-spinner fa-spin"></i></span>
+                                        </button>
 
                                         @elseif ($order->status == 'payment_failed')
                                         <a href="#" class="failed-msg crd-btn">{{ $order->statusForCleaner() }}</a>

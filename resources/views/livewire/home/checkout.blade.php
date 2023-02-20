@@ -337,7 +337,7 @@
                             </div>
                             @if ( $discount > 0 )
                             <div class="sub-totel-text-block">
-                                <p class="label">Discount -{{ $discountTitle }} </p>
+                                <p class="label"><b>Discount -{{ $discountTitle }} ({{ $discountPercentage }}%)</b></p>
                                 <p class="price">${{ $discount }}</p>
                             </div>
                             @endif

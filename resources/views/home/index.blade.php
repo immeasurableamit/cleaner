@@ -16,7 +16,7 @@
                                 <div class="select-search-design service-selector">
                                     <select class="select-custom-design-group search-bar select-service" name="selectItem" required>
                                         <option></option>
-
+                                        <option>Any Service</option>
                                         @foreach ($services as $service)
                                             <optgroup label="{{ $service->title }}">
                                                 @foreach ($service->servicesItems as $serviceItem)
@@ -27,7 +27,21 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="select-search-design">
+                                <div class="any_size dropdown">
+                                    <button class="dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Any size
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <h3>Home Size</h3>
+                                        <div class="input-design">
+                                            <input type="number" placeholder="Enter Square Feet" name="homeSize"
+                                                oninput="updateTextOfHomeSizeDropdownButton(this)" id="jsn">
+                                        </div>
+                                        <p>Can update on search page</p>
+                                    </div>
+                                </div>
+                                {{-- <div class="select-search-design">
                                     <select class="select-custom-design search-bar select-homesize" name="homeSize" required>
                                         <option></option>
                                         <option value="1361">1361 sqft</option>
@@ -35,7 +49,7 @@
                                         <option value="2755">2755 sqft</option>
                                         <option value="3267">3267 sqft</option>
                                     </select>
-                                </div>
+                                </div> --}}
                                 <div class="search-input-design">
                                     <input type="text" id="address_in_banner" name="address"
                                         placeholder="Enter location" required>
@@ -365,6 +379,7 @@
                             <div class="select-search-design">
                                 <select class="select-custom-design-group service-selector search-bar select-service" name="selectItem" required>
                                     <option></option>
+                                    <option>Any Service</option>
                                     @foreach ($services as $service)
                                         <optgroup label="{{ $service->title }}">
                                             @foreach ($service->servicesItems as $serviceItem)
@@ -375,7 +390,21 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="select-search-design">
+                            <div class="any_size dropdown">
+                                <button class="dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Any size
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <h3>Home Size</h3>
+                                    <div class="input-design">
+                                        <input type="number" placeholder="Enter Square Feet" name="homeSize"
+                                            oninput="updateTextOfHomeSizeDropdownButton(this)" id="jsn">
+                                    </div>
+                                    <p>Can update on search page</p>
+                                </div>
+                            </div>
+                            {{-- <div class="select-search-design">
                                 <select class="select-custom-design search-bar select-homesize" name="homeSize" required>
                                     <option></option>
                                     <option value="1361">1361 sqft</option>
@@ -383,7 +412,7 @@
                                     <option value="2755">2755 sqft</option>
                                     <option value="3267">3267 sqft</option>
                                 </select>
-                            </div>
+                            </div> --}}
 
                             <div class="search-input-design">
                                 <input type="text" placeholder="Enter location" name="address" id="address_in_footer">
