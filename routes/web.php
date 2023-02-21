@@ -111,7 +111,9 @@ Route::middleware(['auth', 'verified', 'trackLastActiveAt'])->group(function () 
     Route::controller(ChatController::class)->group(function () {
         Route::get('/messages', 'index')->name('messages');
         //Route::get('/chat/{id}', 'show')->name('chat.show');
-        Route::post('/chat/users', 'fetchUsers');
+//        Route::post('/chat/users', 'fetchUsers');
+	Route::match(['GET', 'POST'], '/chat/users', 'fetchUsers');
+
         Route::post('/chat/messages', 'fetchMessages');
         Route::post('/chat/messages/send', 'sendMessage');
         Route::post('/files-upload', 'fileUpload');
