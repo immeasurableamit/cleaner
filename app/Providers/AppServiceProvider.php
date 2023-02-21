@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use \Stripe\StripeClient;
 
 use Illuminate\Support\Facades\Config;
-
+use Schema;
 // use Config;
 
 class AppServiceProvider extends ServiceProvider
@@ -32,28 +32,19 @@ class AppServiceProvider extends ServiceProvider
             return new StripeClient(config('services.stripe.secret'));
         });
 
-        // code for (send mail) make .env variables dynamic
 
+		$settingsTableExists = Schema::hasTable('settings');
+		if ( $settingsTableExists ) {
+			$this->loadSmtpSettingsFromTable();
+		}
+    }
+
+	protected function loadSmtpSettingsFromTable()
+	{
         $mailSetting = Setting::first();
-
-        // if ($mailSetting) {
-        //     $data = [
-        //         'driver' => 'smtp',
-        //         'host' => $mailSetting->smtp_host,
-        //         'port' => $mailSetting->smtp_port,
-        //         'username' => $mailSetting->smtp_username,
-        //         'password' => $mailSetting->smtp_password,
-        //         'encryption' => 'tls',
-        //         'from' => [
-        //             'address' => 'me@example.com',
-        //             'name' => 'cleaner'
-        //         ]
-
-        //     ];
-
-        //     Config::set('mail', $data);
-        //        }
-
+		if ( ! $mailSetting ) {
+			return false;		
+		}
 
         $smtpDetails = Config::get('mail.mailers.smtp');
 
@@ -71,6 +62,6 @@ class AppServiceProvider extends ServiceProvider
         ];
 
         Config::set('mail.mailers.smtp', $smtpDetails);
-        // Config::get('mail.mailers.smtp');
-    }
+		return true;
+	}
 }
