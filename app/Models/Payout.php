@@ -9,5 +9,5 @@ class Payout extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['cleaner_id', 'transaction_id'];
+    protected $fillable = ['cleaner_id', 'transaction_id', 'order_id'];
 }

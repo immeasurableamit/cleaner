@@ -81,7 +81,7 @@
               <td></td>
               @endif
               <td>USA</td>
-              <td>$182,695</td>
+              <td>${{ $user->transactions->where('status', 'success')->sum('amount') }}</td>
               <!-- <td><a href="">o0k</a></td> -->
               <td class="status">
                 @if( $user->status == 1)

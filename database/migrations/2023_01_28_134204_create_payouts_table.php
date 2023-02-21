@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('cleaner_id')->constrained('users');
             $table->foreignId('transaction_id')->unique()->constrained();
+            $table->foreignId('order_id')->constrained('orders');            
             $table->timestamps();
         });
     }
