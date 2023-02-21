@@ -11,10 +11,12 @@ class JobsInfo extends Component
 {   
     public $allData;
     public $order_id;
+    public $cleanerPayoutTransaction;
 
     public function mount(){
         
         $this->allData = Order::with(['user','cleaner','state','transactions','items.service_item'])->where('id', '=', $this->order_id)->get();
+        $this->cleanerPayoutTransaction = $this->allData->first()->cleanerTransaction;
     }
 
     public function render()

@@ -41,7 +41,7 @@ function storePayoutTransaction( $order, $transferResponse)
 {
     $transaction = new Transaction;
     $transaction->user_id   = $order->cleaner->id;
-    $transaction->amount    = convertDollarsIntoCents( $order->cleanerFee() );
+    $transaction->amount    = $order->cleanerFee();
     $transaction->type      = 'credit';
     $transaction->action    = 'transfer';
     $transaction->transactionable_id   = $order->id;

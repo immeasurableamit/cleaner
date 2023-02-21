@@ -34,9 +34,19 @@ class SendPayouts extends Command
                             ->where('cleaning_datetime', '<=', $currentDateTime )
                             ->where('is_paid_out_to_cleaner', 0 )->get();
 
+        $failedPayoutsOfOrders = Payout::whereIn('order_id', $ordersToPayout->pluck('id') )->get();
+
         info("[SEND PAYOUTS] searched datetime: $currentDateTime, total orders to payout: ".$ordersToPayout->count() );
 
         foreach ( $ordersToPayout as $order ) {
+
+            $failedPayoutsOfOrder = $failedPayoutsOfOrders->where('order_id', $order->id );
+            
+            if ( $failedPayoutsOfOrder->count() == 3 ) {
+                info("[SEND PAYOUTS][ORDER ID $order->id] skipping because it already has 3 payouts");
+                continue;
+            }
+
 
             /* send payout */
             $resp = sendPayoutOfOrder( $order );
@@ -49,7 +59,7 @@ class SendPayouts extends Command
             $payout = Payout::create([
                 'cleaner_id'     => $transaction->user_id,
                 'transaction_id' => $transaction->id,
-                'status'         => $transaction->status,
+                'order_id'       => $order->id,
             ]);
 
             if ( $resp['status'] == true ) {
@@ -57,6 +67,10 @@ class SendPayouts extends Command
                 $order->is_paid_out_to_cleaner = $transaction->status == 'success' ? 1 : 0;
                 $order->cleaner_transaction_id = $transaction->id;
                 $order->save();
+            }
+
+            if ( $resp['status']  == false ) {
+                info("[SEND PAYOUTS][ORDER ID $order->id][FAILED] response: ". $resp['exception']->getMessage() );
             }
             
         }
