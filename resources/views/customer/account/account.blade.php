@@ -21,8 +21,8 @@
                <div class="row no-mrg">
                   <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 no-padd">
                      <div class="customer-account-forms">
-                        <div class="form-headeing-second">
-                           <h4>Account Info</h4>
+                        <div class="form-headeing-second border-bottom mb-4">
+                           <h3 class="pb-3">Account Info</h3>
                         </div>
                         @livewire('customer.account.account')
                      </div>
