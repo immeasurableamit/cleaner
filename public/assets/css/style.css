@@ -6440,7 +6440,7 @@ input[type="radio"] {
     border: 0px;
     width: 83px;
     background-color: transparent;
-    color: #999;
+    color: #232323;
     font-size: 15px;
     font-weight: 400;
     position: relative;
@@ -6482,6 +6482,11 @@ input[type="radio"] {
     font-weight: 600;
     font-size: 17px;
     color: #232323;
+}
+a.link_calender {
+    font-size: 23px;
+    padding-right: 10px;
+    color: #fff;
 }
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {
@@ -8374,6 +8379,12 @@ div#requirements-alert-container .alert.alert-success.alert-dismissible.fade.sho
 .modal_style {
     margin-top: 50px;
 }
+.footer-widget.footer-widget-first{
+    padding-left: 0px;
+}
+.why_choose_btns {
+    text-align: center;
+}
 /* css 767 end here */
 .full_home_cleaning_table{
     overflow: auto;
@@ -8381,6 +8392,49 @@ div#requirements-alert-container .alert.alert-success.alert-dismissible.fade.sho
 .common_table.past_service_table tr.togler_row {
     padding-bottom: 25px;
     max-height: 90px;
+}
+.folow-us ul.list-unstyled.d-flex{
+    justify-content: center;
+}
+.search-form-wrapper.select-design .any_size{
+    width: 50% !important;
+    border-radius: 0px 35px 35px 0px !important;
+    border: 1px solid #37A9FB !important;
+    border-left: 0px !important;
+    position: relative !important;
+    padding: 12.3px 15px;
+}
+.clean_house_section .search-form-wrapper .any_size{
+display: none;
+}
+.header-wrapper {
+    padding: 15px 0px 15px 0px;
+    min-height: 59px;
+}
+.d-flex.justify-content-spacebw.three_column.edit_frm span.edit, .d-flex.justify-content-spacebw.three_column.edit_frm span.save-icn-btn{
+    width: auto;
+}
+.cleaner_about:before{
+    width: 100%;
+}
+.customer-account-information.cleaner_account_2.mt-4 form.d-flex.justify-content-spacebw.three_column.edit_frm .time-zone-select-design input[type="text"]:disabled{
+    left: 0px;
+}
+.toggle_menu{
+    display: none !important;
+}
+.sender_msg, .reciver_msg {
+    padding: 10px 0px;
+}
+li.nav-item.signin.account-profile ul.dropdown-menu.show{
+    right: 0px !important;
+}
+.account-profile .dropdown-menu::before {
+    content: '';
+    left: auto;
+    right: 0px;
+    border-left: 17px solid transparent;
+    border-right: 34px solid transparent;
 }
 }
 @media (max-width: 991px){
@@ -8555,6 +8609,15 @@ div#requirements-alert-container .alert.alert-success.alert-dismissible.fade.sho
     .blue-bg-wrapper {
         padding-top: 50px;
         padding-bottom: 50px;
+    }
+    .not-logged-in-user .toggle_menu.d-block.d-lg-none {
+        display: none !important;
+    }
+    .header-flex .header-flex-item.header-flex-item-1{
+        top: 15px;
+    }
+    .btn_sign_in_sign_up{
+        top: 7px;
     }
 }
 @media (max-width: 1300px){
