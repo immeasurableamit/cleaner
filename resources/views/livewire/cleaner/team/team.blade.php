@@ -1,7 +1,7 @@
 <div class="team_row">
     <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 no-padd cleaner_team_section">
         <div class="customer-account-forms pe-5 pb-2">
-            <div class="h4-design text-end">
+            <div class="team_count h4-design text-end">
 
                 <h4>Team Size: {{ $teamMemberCounts }} </h4>
             </div>

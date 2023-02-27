@@ -89,7 +89,7 @@
 
             <li class="position-relative">
                 <form class="d-flex justify-content-spacebw three_column edit_frm">
-                    <h6 class="title-label">Service Address:</h6>
+                    <h6 class="title-label">Address:</h6>
                     @if (@$fieldStatus == true && $action == 'address')
                     <input type="text" value="{{$user->UserDetails->address}}" wire:model="address" />
                     <span style="color:red" class="alert"> @error('address'){{$message}} @enderror </span>

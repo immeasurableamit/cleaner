@@ -1668,9 +1668,9 @@ li.profile_drop_down.account_dropdown .dropdown_links li {
 .cleaner_account_2.customer-account-information ul li p{
 width: 50%;
 /* cursor: pointer; */
-white-space: nowrap;
+/* white-space: nowrap; */
 text-overflow: ellipsis;
-overflow: hidden;
+/* overflow: hidden; */
 padding-right: 15px;
 }
 .about-updation-wrap .action-block {
@@ -5028,7 +5028,7 @@ a {
     padding-top: 50px;
     padding-bottom: 50px;
 }
-#progressbar li::after {
+/* #progressbar li::after {
     content: '';
     position: absolute;
     right: 0;
@@ -5039,7 +5039,7 @@ a {
     top: 18px;
     z-index: -1;
     max-width: 63px;
-}
+} */
 .sub-totel-text-block {
     display: flex;
     justify-content: space-between;
@@ -6117,7 +6117,6 @@ fieldset .row.no-mrg .checkout_div h4{
     box-shadow: none;
     padding: 0px !important;
     position: relative;
-    left: -5px;
 }
 .customer-appoitments-alternative-section .select-date-toggles.show {
     height: 283px;
@@ -6487,6 +6486,29 @@ a.link_calender {
     font-size: 23px;
     padding-right: 10px;
     color: #fff;
+}
+.banner_home .select2-container--default .select2-selection--single .select2-selection__placeholder,.banner_home form.search-form input#address_in_banner::placeholder {
+    color: #000;
+}
+.banner_home .any_size .dropdown-toggle {
+    width: 143px;
+    text-align: left;
+}
+.build-checkout-page .biling_edit_form .inputs-box {
+    padding: 5px 19px;
+}
+.build-checkout-page .biling_edit_form .selecti-box {
+    top: 12px !important;
+}
+.team_count{
+ position: absolute;
+ right: 50px;
+}
+.customer-account-forms{
+    position: relative;
+}
+.customer-account-page .customer_edit_payment .biling_edit_form .inputs-box {
+    padding: 5px 19px;
 }
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {
@@ -7047,7 +7069,7 @@ footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter 
         padding-bottom: 0px;
     }
     .banner_text h3 {
-        font-size: 24px;
+        font-size: 30px;
     }
     .slider_section {
         padding-top: 0px;
@@ -8385,6 +8407,52 @@ div#requirements-alert-container .alert.alert-success.alert-dismissible.fade.sho
 .why_choose_btns {
     text-align: center;
 }
+.footer-flex>.footer-widget{
+    margin-bottom: 0px;
+}
+li.folow_us_li {
+    display: block;
+    width: 100%;
+    padding-bottom: 15px;
+    padding-top: 25px;
+}
+.clean_house_section h3.h3_tittle.text-white {
+    font-size: 30px;
+}
+.top_rated_section .tittle_div{
+    justify-content: center;
+}
+.banner_text h2.h2_tittle {
+    font-size: 32px;
+}
+.avatar-edit span.help-block {
+    left: 3%;
+    bottom: -21px;
+    font-size: 13px;
+}
+.header-wrapper .any_size .dropdown-menu, .any_size .dropdown-menu {
+    right: -24px !important;
+}
+.clean_house_section .search-form-wrapper {
+    padding: 0px;
+}
+
+.clean_house_section .search-form-wrapper input#address_in_footer {
+    border-radius: 0px 50px 50px 0px;
+}
+section.light-banner.build-checkout-page .row.no-mrg .blue-bg-wrapper {
+    box-shadow: none;
+}
+#progressbar li{
+    text-align: center;
+}
+#progressbar li:before{
+    left: 38%;
+    position: relative;
+}
+.profile_drop_down .dropdown_links{
+    display: block;
+}
 /* css 767 end here */
 .full_home_cleaning_table{
     overflow: auto;
@@ -8395,6 +8463,7 @@ div#requirements-alert-container .alert.alert-success.alert-dismissible.fade.sho
 }
 .folow-us ul.list-unstyled.d-flex{
     justify-content: center;
+    flex-wrap: wrap;
 }
 .search-form-wrapper.select-design .any_size{
     width: 50% !important;
@@ -8403,6 +8472,7 @@ div#requirements-alert-container .alert.alert-success.alert-dismissible.fade.sho
     border-left: 0px !important;
     position: relative !important;
     padding: 12.3px 15px;
+    background-color: #fff;
 }
 .clean_house_section .search-form-wrapper .any_size{
 display: none;
@@ -8595,7 +8665,7 @@ li.nav-item.signin.account-profile ul.dropdown-menu.show{
     }
     .footer-flex>.footer-widget {
         width: 100%;
-        margin-bottom: 30px;
+        /* margin-bottom: 30px; */
     }
     .footer-flex {
         flex-wrap: wrap;

@@ -7,7 +7,7 @@
                 </div>
                 <div class="row">
                     @foreach($cleaners as $cleaner)
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-6">
                         <div class="card_rated">
                             @if ( $cleaner->image )
                                 <img src={{ asset('/storage/images/'.$cleaner->image) }} class="clnr_img">
