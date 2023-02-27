@@ -65,8 +65,8 @@
                         </div>
                         <div class="p_s_row three-column">
                             <h6 class="provider-service-label">Home Size</h6>
-                            <p class="provider-service-value">{{ $homeSize }} sq ft</p>
-                            <p class="price"></p>
+                            <p class="provider-service-value"></p>
+                            <p class="price">{{ $homeSize }} sq ft</p>
                         </div>
                     </div>
 

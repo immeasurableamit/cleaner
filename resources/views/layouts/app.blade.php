@@ -107,13 +107,7 @@ channel.bind('App\\Events\\MessageCount', function(data) {
     notificationsCountElem.html(htm);
 }.bind(this));
 </script>
-<script>
-    $(document).ready(function(){
-  $(".account_dropdown").click(function(){
-    $(".dropdown_links").toggle();
-  });
-});
-</script>
+    
 </body>
 
 </html>

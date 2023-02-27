@@ -124,7 +124,8 @@
 
                       </div>
                     </div>
-                    <div>
+                   
+                    <div class="d-none d-md-block">
 
 
                     <div class="terms-text terms_r">
@@ -165,7 +166,15 @@
                     </div>
                   </div>
                 </div>
+                <div class="d-block d-md-none">
 
+
+                  <div class="terms-text terms_r">
+                  <input type="checkbox" name="term">
+                    <p>By clicking “Create My Account”, you agree with all Canary Clean’s <a href="#" class="link-design-2">terms and conditions</a> and <a href="#" class="link-design-2">privacy policy</a></p>
+                  </div>
+                  {!! $errors->first('term', '<span class="alert">:message</span>') !!}
+                  </div>
                 <div class="form-flex two-column">
                   <div class="form-left-block">
 

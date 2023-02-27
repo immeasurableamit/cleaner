@@ -22,7 +22,7 @@
 
               <div class="customer-account-forms biling_form">
                 <div class="form-headeing-second">
-                  <h4>Billing Information</h4>
+                  <h4>Payments Information</h4>
                 </div>
 
 

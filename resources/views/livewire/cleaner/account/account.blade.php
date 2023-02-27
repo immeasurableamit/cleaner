@@ -88,7 +88,7 @@
                 </li>
                 <li class="position-relative">
                     <div class="d-flex justify-content-spacebw three_column edit_frm">
-                        <h6 class="title-label">Service Address:</h6>
+                        <h6 class="title-label">Address:</h6>
                         @if (@$fieldStatus == true && $action == 'address')
                             <input id="address_in_banner" type="text" value="{{ $user->UserDetails->address }}"
                                 wire:model="address" />
