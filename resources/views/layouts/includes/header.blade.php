@@ -1,4 +1,4 @@
-<header id="header">
+<header id="header" class="{{ auth()->check() ? 'logged-in-user' : 'not-logged-in-user' }}">
     <div class="header-wrapper">
         <div class="container">
             <div class="header-flex">
@@ -88,6 +88,11 @@
                                         <span class="notification-alert"></span>
                                     </a>
                                 </div>
+                            </li>
+                            <li class="icon_calender  d-block d-lg-none">
+                             <a href="#" class="link_calender">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                             </a>
                             </li>
                             <li class="nav-item signin account-profile">
                                 <div class="dropdown">
@@ -232,3 +237,4 @@
 
     });
 </script>
+
