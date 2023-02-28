@@ -86,7 +86,7 @@
 
                                                 @elseif ( $order->status == 'payment_failed' )
 
-                                                
+
 
                                                 <a href="#" class="failed-msg crd-btn">{{ $order->statusForCleaner() }}</a>
 
@@ -131,7 +131,7 @@
                                         </div>
                                         <div class="altrntive_rw">
                                             <p class="appointment_label blue">Location</p>
-                                            <p class="app-value location blue">{{ $order->address }}</p>
+                                            <p class="app-value location blue"><a href="https://www.google.com/maps/place/{{ $order->address }}" target="_blank">{{ $order->address }}</a></p>
                                         </div>
                                         <div class="altrntive_rw">
                                             <p class="appointment_label">Price</p>

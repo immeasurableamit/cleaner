@@ -89,7 +89,13 @@ class BillingController extends Controller
             'account_number' => 'required',
             'routing_number' => 'required|min:9|max:9',
             'account_holder_name' => 'required',
-        ]);
+            'confirm_account_number' => 'required|same:account_number',
+        ],
+    [
+        'confirm_account_number.required' =>'Confirmed Account number is required',
+        'confirm_account_number.same' => 'Acccount Number and Confirmed Account number do not match',
+    ]
+    );
 
         $user = auth()->user();
         $bank = BankInfo::where(['users_id' => $user->id])->first();
