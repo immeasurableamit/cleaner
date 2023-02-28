@@ -6510,6 +6510,17 @@ a.link_calender {
 .customer-account-page .customer_edit_payment .biling_edit_form .inputs-box {
     padding: 5px 19px;
 }
+.signup_all_container .folow-us {
+    display: none;
+}
+.terms_conditions_section .blue-bg-wrapper.mobile-visible .blue-bg-heading {
+    text-align: center;
+}
+.terms_conditions_section .blue-bg-wrapper.mobile-visible {
+    height: 100vh;
+    position: sticky;
+    top: 0px;
+}
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {
     display: none;
@@ -8452,6 +8463,34 @@ section.light-banner.build-checkout-page .row.no-mrg .blue-bg-wrapper {
 }
 .profile_drop_down .dropdown_links{
     display: block;
+}
+.register_mobile_reverse {
+    background: #FFFFFF;
+    box-shadow: 0px 15px 80px rgba(16, 85, 135, 0.15);
+    border-radius: 20px;
+    flex-direction: column-reverse;
+}
+
+.register_mobile_reverse .blue-bg-wrapper {
+    background: transparent;
+    box-shadow: none;
+    color: #000;
+}
+
+.register_mobile_reverse .blue-bg-wrapper label.form-label {
+    color: #000;
+}
+
+.register_mobile_reverse .blue-bg-wrapper textarea {
+    border: 1px solid #000;
+    color: #000 !important;
+}
+
+.register_mobile_reverse .blue-bg-wrapper textarea::placeholder {
+    color: #000 !important;
+}
+.register_mobile_reverse .blue-bg-wrapper .folow-us{
+    display: none;
 }
 /* css 767 end here */
 .full_home_cleaning_table{
