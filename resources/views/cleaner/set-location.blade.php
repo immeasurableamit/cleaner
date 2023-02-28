@@ -29,14 +29,8 @@
                                             <h4 class="mb-0 d-block d-sm-none border-0 pb-0">Set Availability</h4>
                                         </div>
 
-                                        <div class="form-headeing-second pt-3 ">
-                                            <h4 class="mb-0 border-0">
-                                                Adjust slider to refine service area.
-                                            </h4>
-                                        </div>
-
                                         <div class="row">
-                                            <div class="form-grouph input-design mb-30 col-md-6"
+                                            <div class="form-grouph input-design mt-5 col-md-6"
                                                 style="position: relative;">
                                                 <input type="text" name="address" id="address" class=""
                                                     placeholder="Enter City, Zip, or Address" />
@@ -44,15 +38,14 @@
                                                     style="position: absolute; top: 4px; right: 10px; width: 40px; height: 40px; background: var(--primary); border: none; border-radius: 50%; box-shadow: 0px 6px 4px rgba(55, 169, 251, 0.26); padding: 0px;">
                                                     <img src="{{ asset('assets/images/icons/search.svg') }}"></button>
                                             </div>
-
-                                            <div class="col-md-6 ">
-                                                <button type="button" class="btn_blue d-inline-block"
-                                                    onclick="handleSetLocationSubmit(this)">{{ $serveLocationAlreadySet ? 'Save' : 'Save' }}
-                                                </button>
-                                                {{-- <button type="button" class="btn_blue d-inline-block"
-                                                onclick="handleSetLocationSubmit(this)">{{ $serveLocationAlreadySet ? 'Update' : 'Save' }} </button> --}}
-                                            </div>
                                         </div>
+
+                                        <div class="form-headeing-second pt-3 ">
+                                            <h4 class="mb-0 border-0">
+                                                Adjust slider to refine service area and click "Update" to save.
+                                            </h4>
+                                        </div>
+
 
                                         <div class="co-md-12 my-3">
                                             <div id="miles_slider"></div>
@@ -63,6 +56,12 @@
                                         <input type="hidden" id="latitude" name="latitude" />
                                         <input type="hidden" id="longitude" name="longitude" />
 
+                                        <div class="col-md-12 pt-4 ">
+                                            <button type="button" class="btn_blue d-inline-block"
+                                                onclick="handleSetLocationSubmit(this)">{{ $serveLocationAlreadySet ? 'Update' : 'Save' }}
+                                            </button>
+                                            <a href="{{ route('cleaner.set-location') }}" id="location-form" onclick="handleSetLocationSubmit(this)">{{ $serveLocationAlreadySet ? 'Update' : 'Save' }}</a>
+                                        </div>
                                     </div>
                                 </div>
                             </form>
@@ -196,7 +195,7 @@
             function integrateNoUiSliderInMilesSlider() {
                 var slider = document.getElementById('miles_slider');
                 var range = {
-                    min: 1,     //10
+                    min: 1, //10
                     max: 150,
                 };
 
@@ -235,8 +234,7 @@
                     data: $("#location-form").serialize(),
                     success: (data) => {
                         console.log(data);
-                        // button.innerText = 'Update';
-                        button.innerText = 'Save';
+                        button.innerText = 'Update';
                         window.swalToast.fire({
                             icon: 'success',
                             title: 'Location set'

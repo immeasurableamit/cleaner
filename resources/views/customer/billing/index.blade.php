@@ -28,11 +28,11 @@
 
                                 <div class="customer-account-forms biling_form">
                                     <div class="form-headeing-second">
-                                        <h4>Billing Information</h4>
+                                        <h4>Payments Information</h4>
                                     </div>
 
                                     @if ( !$user->billing_address )
-                                        <a href="{{ route('customer.billing.edit') }}" style="color:var(--primary)" class="link-design-2">Add Billing Address</a>
+                                        <a href="{{ route('customer.billing.edit') }}" style="color:var(--primary)" class="link-design-2">Add Payment Method</a>
                                     @else
                                     <div class="customer-account-information">
                                         <ul class="list-unstyled">

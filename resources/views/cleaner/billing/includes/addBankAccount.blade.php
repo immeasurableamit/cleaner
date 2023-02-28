@@ -62,12 +62,16 @@
 
 
         <div class="text-center row">
-            <div class="col-12 pb-2">
-                @if ($bank->account_number)
-                    <a class="btn_blue" href="{{ route('cleaner.billing.delete') }}">Delete Bank Account</a>
-                @else
-                    <button class="btn_c" type="submit">Save</button>
-                @endif
+            <div class="col-6">
+            @if ( $bank->account_number )
+                <a  class="btn_blue bg-danger d-inline-block" href="{{ route('cleaner.billing.delete') }}">Delete Bank Account</a>
+            @else
+                <button class="btn_c" type="submit">Save</button>
+            @endif
+            </div>
+            @if ( $bank->payouts_enabled == 0 )
+            <div class="col-6 ">
+                <a href="{{ route('cleaner.billing.stripeConnectUpdate') }}" class="btn_blue" role="button" type="button">Update Payout Account</a>
             </div>
             @if ($bank->payouts_enabled == 0)
                 <div class="col-12 pt-3">
