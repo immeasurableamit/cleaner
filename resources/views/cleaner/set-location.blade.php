@@ -60,7 +60,7 @@
                                             <button type="button" class="btn_blue d-inline-block"
                                                 onclick="handleSetLocationSubmit(this)">{{ $serveLocationAlreadySet ? 'Update' : 'Save' }}
                                             </button>
-                                            <a href="{{ route('cleaner.set-location') }}" id="location-form" onclick="handleSetLocationSubmit(this)">{{ $serveLocationAlreadySet ? 'Update' : 'Save' }}</a>
+
                                         </div>
                                     </div>
                                 </div>
