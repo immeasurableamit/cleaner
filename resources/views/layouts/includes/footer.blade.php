@@ -29,7 +29,7 @@
             <div class="footer-widget footer-widget-second">
             <div class="folow-us">
                     <ul class="list-unstyled d-flex">
-                        <li><span>Follow Us</span></li>
+                        <li class="folow_us_li"><span>Follow Us</span></li>
                        
                         
                         <li><a href="{{ socialLinks()->facebook_link }}" target="_blank"><i

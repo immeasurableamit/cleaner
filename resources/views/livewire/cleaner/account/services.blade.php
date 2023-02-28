@@ -13,10 +13,15 @@
                             <div class="home_cleaning_div">
                                 <div class="card_header_tittle yellow_title">
                                     <div>
+
+
                                     <h3>{{ $type->title }}</h3>
-                                    <p> Enter your rate to match what you would charge
-                                        for 1,500 sq ft - prices will scale up or down from there</p>
-                                    </div>
+                                    @if($type->id == '1')
+                                    <p> Enter your rate and duration to match what you would charge for a standard 1,500 sq ft home</p>
+                                   @elseif($type->id == '2')
+                                   <p> Select which add-ons you would like to offer with your full home cleanings</p>
+                                    @endif
+                                </div>
                                 </div>
                             </div>
                         </div>
@@ -304,7 +309,7 @@
                     <div class="incremnt_input_div py-3 l_xl">
 
                         <div class="incremnt_decrmnt number">
-                            <input type="text" value="{{ $discount->cleaner_discount->discount ?? '0' }}"
+                            <input type="text" value="{{ $discount->cleaner_discount->discount ?? '0' }} %"
                                 onchange="upsertDiscountPercentage( '{{ $discount->id }}', this.value )">
                             <span class="plus">+</span>
                             <span class="minus">-</span>

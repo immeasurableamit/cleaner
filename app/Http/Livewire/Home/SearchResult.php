@@ -99,6 +99,8 @@ class SearchResult extends Component
     protected function preapreEligibleCleaners()
     {
         $cleaners  = User::has('bankInfo')->where('role', 'cleaner')->with(['UserDetails', 'CleanerHours', 'CleanerServices', 'cleanerReviews'])->get(); // NOTE: can be optimized --jashan
+
+
         $eligibleCleaners = $cleaners->filter(function ($cleaner) {
 
             if ($cleaner->hasCleanerSetHisServedLocations() === false) {
@@ -117,6 +119,8 @@ class SearchResult extends Component
         });
 
         $this->eligibleCleaners = $eligibleCleaners;
+
+
         return true;
     }
 
