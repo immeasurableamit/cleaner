@@ -203,7 +203,7 @@
                                         </b>
 
                                         <a href="{{ route('profile', $cleaner->id) }}"><button
-                                                class="btn_view d-none d-md-block">View</button></a>
+                                                class="btn_view d-none d-md-block">Book</button></a>
                                         <div class="td-hide rating-mobile-listing-design">
                                             <img src="{{ asset('assets/images/icons/star.svg') }}">
                                             4.5<span> (211)</span>

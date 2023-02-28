@@ -8,7 +8,7 @@
                 <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 no-padd">
                     <div class="blue-bg-wrapper mobile-visible">
                         <div class="blue-bg-heading">
-                            <h4>Terms and Conditions </h4>
+                            <a href="/"><img src="{{asset('/assets/images/logo/logo.svg')}}"></a>
                         </div>
                         <div class="customer-side-navigation navigation-tab-desing">
                             <ul class="list-unstyled">

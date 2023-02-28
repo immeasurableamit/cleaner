@@ -1094,7 +1094,7 @@ a.pdf_r {
     .inner-white-wrapper.max-251px {
         height: 100%;
         max-height: 250px;
-        overflow-x: hidden;
-        overflow-y: auto;
+        /* overflow-x: hidden;
+        overflow-y: auto; */
     }
 }
