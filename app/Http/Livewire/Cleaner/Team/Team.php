@@ -10,7 +10,7 @@ use Livewire\Component;
 class Team extends Component
 {
     use LivewireAlert;
-    public $first_name, $last_name, $email, $address, $ssn_or_tax, $insured, $contact_number, $name, $user_id;
+    public $first_name, $last_name, $email, $address, $ssn_or_tax, $insured, $contact_number, $name, $user_id, $apartment;
     public $updateMode = false;
     public $toggleStatus = false;
     protected $listeners = ['delete', 'refreshComponent' => '$refresh', 'cancelled'] ;
@@ -23,8 +23,9 @@ class Team extends Component
             'insured' => 'required',
             'contact_number' => 'required|min:10',
             'email' => 'required|email|unique:cleaner_teams',
-            'address' => 'required',
+            // 'address' => 'required',
             'ssn_or_tax' => 'required',
+            'apartment' => 'required',
 
         ];
     }
@@ -41,7 +42,9 @@ class Team extends Component
 
     public function store()
     {
+
         $this->validate();
+        // dd('kkhh');
         $id = auth()->user()->id;
 
         $user = new CleanerTeam;
@@ -53,6 +56,8 @@ class Team extends Component
         $user->email = $this->email;
         $user->address = $this->address;
         $user->ssn_or_tax = $this->ssn_or_tax;
+        $user->apartment = $this->apartment;
+        // dd( $this->address);
 
         $user->save();
         // $this->emit('close-modal');
@@ -73,6 +78,7 @@ class Team extends Component
         $this->email = $user->email;
         $this->address = $user->address;
         $this->ssn_or_tax = $user->ssn_or_tax;
+        $this->apartment = $user->apartment;
 
         $this->dispatchBrowserEvent('openModal');
     }
@@ -86,18 +92,29 @@ class Team extends Component
             'address' => 'required',
             'ssn_or_tax' => 'required',
             'insured' => 'required',
+            'apartment' =>'required',
         ]);
         if ($this->user_id) {
 
             $user = CleanerTeam::find($this->user_id);
-            $user->update([
-                'first_name' => $this->first_name,
-                'last_name' => $this->last_name,
-                'contact_number' => $this->contact_number,
-                'address' => $this->address,
-                'ssn_or_tax' => $this->ssn_or_tax,
-                'insured' => $this->insured,
-            ]);
+            $user->first_name = $this->first_name;
+            $user->last_name = $this->last_name;
+            $user->contact_number = $this->contact_number;
+            $user->address = $this->address;
+            $user->ssn_or_tax = $this->ssn_or_tax;
+            $user->insured = $this->insured;
+            $user->apartment = $this->apartment;
+            $user->save();
+
+            // $user->update([
+            //     'first_name' => $this->first_name,
+            //     'last_name' => $this->last_name,
+            //     'contact_number' => $this->contact_number,
+            //     'address' => $this->address,
+            //     'ssn_or_tax' => $this->ssn_or_tax,
+            //     'insured' => $this->insured,
+            //     'apartment' => $this->apartment,
+            // ]);
             $this->emit('close-modal', $this->user_id, 'success');
 
             $this->updateMode = false;
