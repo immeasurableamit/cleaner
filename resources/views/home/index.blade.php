@@ -9,7 +9,8 @@
                         <p>Finally... a place where you can get EXACTLY what you want, at prices you can afford, from people
                             you can trust. Simple. Affordable. Canary Clean. Your schedule, your Canary Cleaner. Canary
                             Clean is the #1 choice for those who know what they want - and for those who don’t!</p>
-                        <h3>Find Canary Cleaners near you!</h3>
+                      <div class="d-none d-md-block">
+                            <h3>Find Canary Cleaners near you!</h3>
                         <form class="search-form"  action="{{ route('search-result') }}" method="GET">
                             <!-- <span class="close-search l-hide"><svg class="svg-inline--fa fa-xmark" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path></svg></span> -->
                             <div class="search-form-wrapper select-design">
@@ -60,9 +61,63 @@
                             <input type="text" id="latitude" name="latitude" hidden>
                                     <input type="text" id="longitude" name="longitude" hidden>
                         </form>
+                      </div>
                     </div>
                 </div>
                 <div class="col-md-5">
+                    <div class="d-block d-md-none banner_text">
+                        <h3>Find Canary Cleaners near you!</h3>
+                    <form class="search-form"  action="{{ route('search-result') }}" method="GET">
+                        <!-- <span class="close-search l-hide"><svg class="svg-inline--fa fa-xmark" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path></svg></span> -->
+                        <div class="search-form-wrapper select-design">
+                            <div class="select-search-design service-selector">
+                                <select class="select-custom-design-group search-bar select-service" name="selectItem" required>
+                                    <option></option>
+                                    <option>Any Service</option>
+                                    @foreach ($services as $service)
+                                        <optgroup label="{{ $service->title }}">
+                                            @foreach ($service->servicesItems as $serviceItem)
+                                                <option value="{{ $serviceItem->id }}">{{ $serviceItem->title }}
+                                                </option>
+                                            @endforeach
+                                        </optgroup>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="any_size dropdown">
+                                <button class="dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Any size
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <h3>Home Size</h3>
+                                    <div class="input-design">
+                                        <input type="number" placeholder="Enter Square Feet" name="homeSize"
+                                            oninput="updateTextOfHomeSizeDropdownButton(this)" id="jsn">
+                                    </div>
+                                    <p>Can update on search page</p>
+                                </div>
+                            </div>
+                            {{-- <div class="select-search-design">
+                                <select class="select-custom-design search-bar select-homesize" name="homeSize" required>
+                                    <option></option>
+                                    <option value="1361">1361 sqft</option>
+                                    <option value="2178">2178 sqft</option>
+                                    <option value="2755">2755 sqft</option>
+                                    <option value="3267">3267 sqft</option>
+                                </select>
+                            </div> --}}
+                            <div class="search-input-design">
+                                <input type="text" id="address_in_banner" name="address"
+                                    placeholder="Enter location" required>
+                                <button class="search-btn" type="submit"><img
+                                        src="/assets/images/icons/search.svg" class="me-2">Search</button>
+                            </div>
+                        </div>
+                        <input type="text" id="latitude" name="latitude" hidden>
+                                <input type="text" id="longitude" name="longitude" hidden>
+                    </form>
+                  </div>
                     <div class="cleaner_home_img">
                         <img src="/assets/images/home_cleaner.png">
                     </div>

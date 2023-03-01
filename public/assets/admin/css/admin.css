@@ -1083,6 +1083,9 @@ a.pdf_r {
         font-size: 13px;
         padding: 10px 5px;
     }
+    .admin-master-search .toggle-btn-li .toggle_menu {
+        display: block !important;
+    }
     /* 767  */
 }
 @media (max-width: 480px){
