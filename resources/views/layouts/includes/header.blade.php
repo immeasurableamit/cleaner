@@ -146,6 +146,9 @@
                                                         <li><a href="{{ route('customer.support.service') }}"
                                                                 class="{{ @$title['active'] == 'support' ? 'active' : '' }}">Support</a>
                                                         </li>
+                                                        <li><a
+                                                            href="/terms-and-conditions">Terms and Conditions</a>
+                                                    </li>
                                                     @elseif(Auth::user()->role == 'cleaner')
                                                         <ul class="list-unstyled">
                                                             <li class="profile_drop_down account_dropdown">
@@ -182,6 +185,9 @@
                                                             <li><a
                                                                     href="{{ route('cleaner.support.service') }}">Support</a>
                                                             </li>
+                                                            <li><a
+                                                                href="/terms-and-conditions">Terms and Conditions</a>
+                                                        </li>
                                                         </ul>
                                                     @endif
 

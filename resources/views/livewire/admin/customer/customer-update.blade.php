@@ -4,7 +4,7 @@
    <div class="detail-div-block">
       <h4>Customer account info</h4>
       <div class="inner-white-wrapper max-251px">
-         <div class="customer-account-forms">
+         <div class="">
             <div class="customer-account-information">
                <ul class="list-unstyled">
                   <li class="position-relative">

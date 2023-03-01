@@ -363,7 +363,7 @@
                             </label>
                         </div>
                         <p class="privacy_link mb-5">By clicking “Schedule Now”, you agree with all Canary
-                            Clean’s<a href="#" class="link-design-2"> terms and conditions</a> and <a href="#" class="link-design-2">privacy policy</a></p>
+                            Clean’s<a href="/terms-and-conditions" class="link-design-2"> terms and conditions</a> and <a href="/terms-and-conditions#privacy" class="link-design-2">privacy policy</a></p>
                     </div>
                 </div>
             </div>

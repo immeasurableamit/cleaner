@@ -33,7 +33,7 @@
         <input type="hidden" id="longitude" name="longitude">
 
       <input type="hidden" name="user_type" value="cleaner">
-      <div class="row no-mrg">
+      <div class="row no-mrg register_mobile_reverse">
         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 no-padd">
           <div class="blue-bg-wrapper">
             <div class="avatar-upload">
@@ -81,6 +81,21 @@
             <div class="blue-logo-block text-center">
               <a href="{{ route('index') }}"><img src="{{asset('assets/images/logo/logo.svg')}}"></a>
             </div>
+            <div class="form-flex d-block d-md-none two-column">
+              <div class="form-left-block ">
+
+                <div class="terms-text terms_r">
+                <input type="checkbox" name="term">
+                  <p>By clicking “Create My Account”, you agree with all Canary Clean’s <a href="#" class="link-design-2">terms and conditions</a> and <a href="#" class="link-design-2">privacy policy</a></p>
+                </div>
+                {!! $errors->first('term', '<span class="alert">:message</span>') !!}
+              </div>
+              <div class="form-right-block">
+                <div class="form-grouph submit-design mb-30">
+                  <input type="submit" placeholder="Create My Account" class="subit-btn-2" value="Create My Account">
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 no-padd">
@@ -99,10 +114,18 @@
                     {!! Form::text('first_name', request()->first_name ?? null, ['placeholder' => 'First name','class' => 'form-control'.($errors->has('first_name') ? ' is-invalid' : '')]) !!}
                     {!! $errors->first('first_name', '<span class="alert">:message</span>') !!}
                   </div>
-                  <div class="form-grouph input-design mb-30">
+                  <div class="form-grouph d-block d-md-none input-design mb-30">
 
                     {!! Form::text('last_name', request()->last_name ?? null, ['placeholder' => 'Last name','class' => 'form-control'.($errors->has('last_name') ? ' is-invalid' : '')]) !!}
                     {!! $errors->first('last_name', '<span class="alert">:message</span>') !!}
+                  </div>
+                  <div class="form-grouph input-design mb-30">
+                    <input type="password" id="password" name="password" class="form-control{!! ($errors->has('password') ? ' is-invalid' : '') !!}" placeholder="Password" />
+                    {!! $errors->first('password', '<span class="alert">:message</span>') !!}
+                  </div>
+                  <div class="form-grouph d-block d-md-none input-design mb-30">
+                    <input type="password" id="password_confirmation" name="password_confirmation" class="form-control{!! ($errors->has('password_confirmation') ? ' is-invalid' : '') !!}" placeholder="Confirm Password"/>
+                    {!! $errors->first('password_confirmation', '<span class="alert">:message</span>') !!}
                   </div>
                   <div class="form-grouph input-design mb-30">
                     {!! Form::email('email', request()->email ?? null, ['placeholder' => 'Email (this will be your login)','class' => 'form-control'.($errors->has('email') ? ' is-invalid' : '')]) !!}
@@ -172,11 +195,12 @@
                   </div>
                 </div>
                 <div class="form-right-block">
-                  <div class="form-grouph input-design mb-30">
-                    <input type="password" id="password" name="password" class="form-control{!! ($errors->has('password') ? ' is-invalid' : '') !!}" placeholder="Password" />
-                    {!! $errors->first('password', '<span class="alert">:message</span>') !!}
+                  <div class="form-grouph d-none d-md-block input-design mb-30">
+
+                    {!! Form::text('last_name', request()->last_name ?? null, ['placeholder' => 'Last name','class' => 'form-control'.($errors->has('last_name') ? ' is-invalid' : '')]) !!}
+                    {!! $errors->first('last_name', '<span class="alert">:message</span>') !!}
                   </div>
-                  <div class="form-grouph input-design mb-30">
+                  <div class="form-grouph d-none d-md-block input-design mb-30">
                     <input type="password" id="password_confirmation" name="password_confirmation" class="form-control{!! ($errors->has('password_confirmation') ? ' is-invalid' : '') !!}" placeholder="Confirm Password"/>
                     {!! $errors->first('password_confirmation', '<span class="alert">:message</span>') !!}
                   </div>
@@ -206,7 +230,7 @@
               </div>
 
 
-              <div class="form-flex two-column">
+              <div class="form-flex d-none d-md-block two-column">
                 <div class="form-left-block ">
 
                   <div class="terms-text terms_r">
