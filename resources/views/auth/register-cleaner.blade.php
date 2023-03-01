@@ -86,7 +86,7 @@
 
                 <div class="terms-text terms_r">
                 <input type="checkbox" name="term">
-                  <p>By clicking “Create My Account”, you agree with all Canary Clean’s <a href="#" class="link-design-2">terms and conditions</a> and <a href="#" class="link-design-2">privacy policy</a></p>
+                  <p>By clicking “Create My Account”, you agree with all Canary Clean’s <a href="/terms-and-conditions" class="link-design-2">terms and conditions</a> and <a href="/terms-and-conditions#privacy" class="link-design-2">privacy policy</a></p>
                 </div>
                 {!! $errors->first('term', '<span class="alert">:message</span>') !!}
               </div>
@@ -189,9 +189,16 @@
                     {!! $errors->first('day', '<span class="alert d-block m-0 p-0">:message</span>') !!}
                     {!! $errors->first('year', '<span class="alert d-block m-0 p-0">:message</span>') !!}
                   </div>
-                  <div class="form-grouph input-design mb-30">
-                    {!! Form::number('ssn_or_tax', request()->ssn_or_tax ?? null, ['placeholder' => '9 Digit SSN or Tax ID','class' => 'form-control'.($errors->has('ssn_or_tax') ? ' is-invalid' : '')]) !!}
-                    {!! $errors->first('ssn_or_tax', '<span class="alert">:message</span>') !!}
+                  
+                  <div class="form-grouph payment_search select-design mb-30">
+                    <span>{!! Form::label('payment','Payment Method <span style="font-size: 11px;">(where you want to receivie your money)</span>', ['class' => 'form-label'], false) !!}</span>
+
+                    <select class=" select-custom-design" name="payment_method" value="{{old('payment_method')}}">
+                      <option>Payment Method</option>
+                      <option value="PayPal">PayPal</option>
+                      <option value="Direct Deposit">Direct Deposit</option>
+                    </select>
+                    {!! $errors->first('payment_method', '<span class="alert">:message</span>') !!}
                   </div>
                 </div>
                 <div class="form-right-block">
@@ -216,15 +223,9 @@
                     {!! Form::number('zip_code', request()->zip_code ?? null, ['id' => 'zip', 'placeholder' => 'Zip','class' => 'form-control'.($errors->has('zip_code') ? ' is-invalid' : '')]) !!}
                     {!! $errors->first('zip_code', '<span class="alert">:message</span>') !!}
                   </div>
-                  <div class="form-grouph payment_search select-design mb-30">
-                    <span>{!! Form::label('payment','Payment Method <span style="font-size: 11px;">(where you want to receivie your money)</span>', ['class' => 'form-label'], false) !!}</span>
-
-                    <select class=" select-custom-design" name="payment_method" value="{{old('payment_method')}}">
-                      <option>Payment Method</option>
-                      <option value="PayPal">PayPal</option>
-                      <option value="Direct Deposit">Direct Deposit</option>
-                    </select>
-                    {!! $errors->first('payment_method', '<span class="alert">:message</span>') !!}
+                  <div class="form-grouph input-design pt-0 mt-0 pt-md-3 mt-md-5  mb-30">
+                    {!! Form::number('ssn_or_tax', request()->ssn_or_tax ?? null, ['placeholder' => '9 Digit SSN or Tax ID','class' => 'form-control'.($errors->has('ssn_or_tax') ? ' is-invalid' : '')]) !!}
+                    {!! $errors->first('ssn_or_tax', '<span class="alert">:message</span>') !!}
                   </div>
                 </div>
               </div>
@@ -235,7 +236,7 @@
 
                   <div class="terms-text terms_r">
                   <input type="checkbox" name="term">
-                    <p>By clicking “Create My Account”, you agree with all Canary Clean’s <a href="#" class="link-design-2">terms and conditions</a> and <a href="#" class="link-design-2">privacy policy</a></p>
+                    <p>By clicking “Create My Account”, you agree with all Canary Clean’s <a href="/terms-and-conditions" class="link-design-2">terms and conditions</a> and <a href="/terms-and-conditions#privacy" class="link-design-2">privacy policy</a></p>
                   </div>
                   {!! $errors->first('term', '<span class="alert">:message</span>') !!}
                 </div>

@@ -6521,6 +6521,12 @@ a.link_calender {
     position: sticky;
     top: 0px;
 }
+.btn_msg_cleaner p{
+    display: none;
+}
+.btn_msg_cleaner{
+    justify-content: center;
+}
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {
     display: none;
@@ -7516,7 +7522,7 @@ footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter 
         width: 25%;
     }
     .yellow_header_availibility .y_text.day_of_weak {
-        width: 30%;
+        width: 25%;
         text-align: left !important;
     }
     .yellow_header_availibility .y_text span {
@@ -8491,6 +8497,22 @@ section.light-banner.build-checkout-page .row.no-mrg .blue-bg-wrapper {
 }
 .register_mobile_reverse .blue-bg-wrapper .folow-us{
     display: none;
+}
+.cleaner_reviews .form-headeing-second.top_heading.feadback_tittle.mb-5 {
+    align-items: start;
+}
+.profile_id span.select2-selection.select2-selection--multiple textarea.select2-search__field{
+    padding: 0px !important;
+}
+.time_price_div .p_t_text{
+    display: flex;
+    justify-content: space-between;
+}
+.row.profile_row .thrd_tm p {
+    min-height: 73px;
+}
+.row.quick_links_section.justify-content-center.mt-5 {
+    margin-top: 23px !important;
 }
 /* css 767 end here */
 .full_home_cleaning_table{

@@ -209,7 +209,7 @@
                                 <div class="input-design">
                                     <label>Home Size</label>
                                     <input type="number" wire:model.debounce.500ms="homeSize"
-                                        placeholder="Enter Square Feet" onkeyup="this.value = this.value.replace(/[=,-,+,_,*,/,<,>,:,;]/, '')" />
+                                        placeholder="Confirm Square Feet" onkeyup="this.value = this.value.replace(/[=,-,+,_,*,/,<,>,:,;]/, '')" />
                                     @error('homeSize')
                                         <span class="help-block text-danger"> {{ $message }} </span>
                                     @enderror
@@ -296,7 +296,7 @@
 
     @if ($cleaner->cleanerReviews->isNotEmpty())
         <div class=" row mx-0 feedback_reviews_section profile_feedback_div" wire:ignore>
-            <h4 class="h4_tittle text-center">Customer Feedback</h4>
+            <h4 class="h4_tittle text-center">Ratings and Reviews</h4>
 
             @foreach ($cleaner->cleanerReviews as $review)
                 <div class="card_reviews">
@@ -470,7 +470,7 @@
                 });
 
                 $("#select-service-selector").select2({
-                    placeholder: 'Select Cleaning Type',
+                    placeholder: 'Confirm Cleaning Type',
                 });
 
                 $("#addon-selector").select2({

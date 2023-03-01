@@ -23,13 +23,13 @@
                                         <div class="row new_payment_rown ">
                                             <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12">
                                                 <div class="forms-short-heading">
-                                                    <h4><img src="/assets/images/credit-card.png" class="me-3" />New
+                                                    <h4 class="pb-3"><img src="/assets/images/credit-card.png" class="me-3" />New
                                                         Payment Method</h4>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-headeing-second mt-4">
-                                            <h4>Billing Name and Address</h4>
+                                            <h4 class="border-0">Billing Name and Address</h4>
                                         </div>
                                         <div class="biling_edit_form">
                                             <div class="row">
@@ -78,25 +78,6 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <div class="form-grouph input-design mb-30">
-                                                        <input type="text"
-                                                        @if ( old('apt_or_unit') )
-                                                        value="{{ old('apt_or_unit') }}"
-                                                    @elseif ( $billingAddress )
-                                                        value="{{ $billingAddress->apt_or_unit }}"
-                                                    @endif
-
-                                                            name="apt_or_unit" placeholder="Apt # or Unit #">
-                                                        @error('apt_or_unit')
-                                                            <span class="text-danger"> {{ $message }} </span>
-                                                        @enderror
-
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-6">
                                                     <div class="form-grouph mb-30 input-select-abs">
                                                         <div class="inputs-box">
                                                             <input type="text"
@@ -135,6 +116,26 @@
                                                         <span class="text-danger"> {{ $message }} </span>
                                                     @enderror
 
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6">
+                                                    <div class="form-grouph input-design mb-30">
+                                                        <input type="text"
+                                                        @if ( old('apt_or_unit') )
+                                                        value="{{ old('apt_or_unit') }}"
+                                                    @elseif ( $billingAddress )
+                                                        value="{{ $billingAddress->apt_or_unit }}"
+                                                    @endif
+
+                                                            name="apt_or_unit" placeholder="Apt # or Unit #">
+                                                        @error('apt_or_unit')
+                                                            <span class="text-danger"> {{ $message }} </span>
+                                                        @enderror
+
+                                                    </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-grouph input-design mb-30">
