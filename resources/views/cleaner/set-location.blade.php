@@ -19,7 +19,8 @@
                     <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 no-padd">
                         <div class="row no-mrg">
                             <form method="POST" action="{{ route('cleaner.set-location') }}" id="location-form"
-                                class="row my-3">
+
+                            class="row my-3">
                                 @csrf
 
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 no-padd cleaner_location_section">
@@ -233,7 +234,7 @@
                     },
                     data: $("#location-form").serialize(),
                     success: (data) => {
-                        console.log(data);
+                        console.log(data,'hereeee');
                         button.innerText = 'Update';
                         window.swalToast.fire({
                             icon: 'success',

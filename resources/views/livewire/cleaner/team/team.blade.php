@@ -1,4 +1,22 @@
 <div class="team_row">
+    <style>
+        .pac-container {
+            background-color: #FFF;
+            z-index: 20;
+            position: fixed;
+            display: inline-block;
+            float: left;
+        }
+
+        .modal {
+            z-index: 20;
+        }
+
+        .modal-backdrop {
+            z-index: 10;
+        }
+    </style>
+
     <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 no-padd cleaner_team_section">
         <div class="customer-account-forms pe-5 pb-2">
             <div class="team_count h4-design text-end">
@@ -53,6 +71,10 @@
                             <div class="altrntive_rw">
                                 <p class="appointment_label">Address</p>
                                 <p class="app-value location">{{ $teamMember->address }}</p>
+                            </div>
+                            <div class="altrntive_rw">
+                                <p class="appointment_label">Apartment</p>
+                                <p class="app-value location">{{ $teamMember->apartment }}</p>
                             </div>
                             <div class="altrntive_rw">
                                 <p class="appointment_label">SSN/TIN</p>
@@ -166,6 +188,18 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="form-grouph input-design mb-2 col-md-6">
+                            <div class="form-grouph select-design mb-2">
+                                <label>Apartment</label>
+                                <input type="text" wire:model="apartment" />
+                                @error('apartment')
+                                    <div class="alert ">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+
+
                     </div>
                     <div class="col-xl-12 col-lg-12 col-sm-12 col-md-12">
                         <div class="text-center pt-3">
@@ -184,6 +218,7 @@
     </div>
     <!-- end updateModel -->
 
+    {{-- Modal Start  --}}
     <div wire:ignore.self class="modal fade modal_style" id="teamModal" tabindex="-1"
         aria-labelledby="exampleModalLabel" aria-hidden="true">
 
@@ -258,12 +293,12 @@
                             </div>
                         </div>
 
-                        <div class="col-xl-6 col-lg-6 col-sm-12 col-md-6">
-                            <div class="form-grouph select-design mb-2">
+                        <div  class="col-xl-6 col-lg-6 col-sm-12 col-md-6">
+                            <div  class="form-grouph select-design mb-2">
                                 <label>Address</label>
-                                <div class="form-grouph input-design mb-2 col-md-12">
-                                    <input type="address" id='address' wire:model="address"
-                                        placeholder="Enter your Address" />
+                                <div wire:ignore class="form-grouph input-design mb-2 col-md-12">
+                                    <input type="address" id='add-member-address' placeholder="Enter your Address"
+                                        wire:model ="address" />
                                 </div>
                                 @error('address')
                                     <div class="alert ">{{ $message }}</div>
@@ -277,6 +312,19 @@
                                     <input type="number" wire:model="ssn_or_tax" placeholder="Enter your SSN/TIN" />
                                 </div>
                                 @error('ssn_or_tax')
+                                    <div class="alert ">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 col-lg-6 col-sm-12 col-md-6">
+                            <div class="form-grouph select-design mb-2">
+                                <label>Apartment</label>
+                                <div class="form-grouph input-design mb-2 col-md-12">
+                                    <input type="text" id='add-member-address' placeholder="Enter your Apartment"
+                                        wire:model="apartment" />
+                                </div>
+                                @error('apartment')
                                     <div class="alert ">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -297,48 +345,22 @@
 
         </div>
     </div>
+    {{-- End Modal --}}
 
     @push('scripts')
         <script>
             window.addEventListener('load', () => {
-                var address_input_in_banner = document.getElementById('address');
+
+                // console.log('page loaded');
+                var address_input_in_banner = document.getElementById('add-member-address');
 
                 makeAddressInputAutocompletable(address_input_in_banner, (gmap_place) => {
-                    debugger;
-                    document.getElementById('latitude').value = gmap_place.geometry.location.lat();
-                    document.getElementById('longitude').value = gmap_place.geometry.location.lng();
-                })
+                    // console.log(address_input_in_banner, gmap_place);
+                    let address = gmap_place.formatted_address;
+                    @this.set('address', address);
+                });
+
             });
-        </script>
-
-
-        <script>
-            // function fillAddressFieldsInForm(gmap_place)
-            //     {
-            //         debugger;
-            //       var parsed_gmap_place = parseGmapPlace( gmap_place );
-
-            //       if ( parsed_gmap_place.city ) {
-            //         document.getElementById('city').value = parsed_gmap_place.city;
-            //       }
-
-            //       if ( parsed_gmap_place.zip ) {
-            //         document.getElementById('zip').value = parsed_gmap_place.zip;
-            //       }
-
-            //       document.getElementById('latitude').value  = parsed_gmap_place.lat;
-            //       document.getElementById('longitude').value = parsed_gmap_place.lng;
-
-            //     }
-
-
-            // window.addEventListener('load', function() {
-
-            //       var address_input = document.getElementById('address');
-
-            //       makeAddressInputAutocompletable( address_input, fillAddressFieldsInForm );
-            //     //   debugger;
-            //     });
         </script>
 
         <script>
@@ -363,13 +385,6 @@
                 location.reload();
             });
         </script>
-
-
-        {{-- <script>
-            $('.remove-member').click(function() {
-                $(".select-date-toggles").addClass("show");
-            });
-        </script> --}}
     @endpush
     <style>
         .alert {

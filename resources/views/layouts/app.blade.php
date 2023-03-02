@@ -27,7 +27,7 @@
 
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
-        
+
 
         <script>
             let user = {
@@ -52,12 +52,9 @@
             });
 
             //.....
-            
-            
+
+
         </script>
-
-
-
 
 </head>
 
@@ -107,7 +104,7 @@ channel.bind('App\\Events\\MessageCount', function(data) {
     notificationsCountElem.html(htm);
 }.bind(this));
 </script>
-    
+
 </body>
 
 </html>
