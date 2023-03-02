@@ -23,7 +23,7 @@
                             <div class="customer-account-forms ">
                               <div class="form-headeing-second  mb-4 ">
                                 <h4 class="border-0 mb-0">Insurance</h4>
-                                <p>You can now purchase service coverage through our partner Thimble in order to secure proper coverage and activate your <b>Canary Defense badge.</b> You may use your own inurance provider but many provider's prefer the great prices and ease of use of Thimble.</p>
+                                <p>You can now purchase service coverage through our partner Thimble in order to secure proper coverage and activate your <b>Canary Defense Badge.</b> You may use your own inurance provider but many provider's prefer the great prices and ease of use of Thimble.</p>
                               </div>
 
                               @if ( $policy )

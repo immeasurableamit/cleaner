@@ -25,7 +25,7 @@
                                     <select class="select-custom-design-group search-bar select-service"
                                         name="selectItem" required>
                                         <option></option>
-                                        <option value="0" selected>Any Service</option>
+                                        <option value="0" selected>Select service</option>
                                         @foreach ($services as $service)
                                             <optgroup label="{{ $service->title }}">
                                                 @foreach ($service->servicesItems as $serviceItem)
@@ -40,7 +40,7 @@
                                 <div class="any_size dropdown">
                                     <button class="dropdown-toggle" type="button" id="dropdownMenuButton1"
                                         data-bs-toggle="dropdown" aria-expanded="false">
-                                        Any size
+                                        Enter size
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                         <h3>Home Size</h3>
@@ -135,7 +135,7 @@
                                                                 class="{{ @$title['active'] == 'appointments' ? 'active' : '' }}">Appointments</a>
                                                         </li>
                                                         <li><a href="{{ route('customer.billing.index') }}"
-                                                                class="{{ @$title['active'] == 'billing' ? 'active' : '' }}">Billing</a>
+                                                                class="{{ @$title['active'] == 'billing' ? 'active' : '' }}">Payments</a>
                                                         </li>
                                                         <li><a
                                                                 href="{{ route('customer.notification.index') }}">Notifications</a>
