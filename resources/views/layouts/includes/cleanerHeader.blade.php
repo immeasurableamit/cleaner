@@ -83,7 +83,7 @@
                                                         <li><a href="{{ route('cleaner.reviews') }}"
                                                                 class="">Reviews</a></li>
                                                         <li><a
-                                                                href="{{ route('cleaner.billing.billing') }}">Billing</a>
+                                                                href="{{ route('cleaner.billing.billing') }}">Payments</a>
                                                         </li>
                                                     </ul>
                                                 </li>

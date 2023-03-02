@@ -932,7 +932,7 @@ img {
 }
 .select2-dropdown .select2-results__option:hover{
     background: #E3F3FF;
-    border-radius: 10px 10px 0px 0px !important;
+    border-radius:    10px !important;
     color: #363636;
 }
 .select2-container--default .select2-results__option--highlighted.select2-results__option--selectable::before {
@@ -1474,7 +1474,8 @@ button:focus{
 }
 .appointment-heading h4 {
     width: 100%;
-    max-width: 228px;
+    max-width:150px;
+    font-size: 20px;
 }
 .biling_form .customer-account-information {
     padding-right: 70px;
@@ -6503,6 +6504,7 @@ a.link_calender {
 .team_count{
  position: absolute;
  right: 50px;
+ top: 37px;
 }
 .customer-account-forms{
     position: relative;
@@ -6526,6 +6528,19 @@ a.link_calender {
 }
 .btn_msg_cleaner{
     justify-content: center;
+}
+.cleaner_account_2.customer-account-information ul li p.mail {
+    text-transform: lowercase;
+}
+.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr .fc-toolbar-chunk:nth-of-type(2n) {
+    position: absolute;
+    left: calc(50% - 53px);
+}
+.support_tabs ul#pills-tab li.nav-item:last-child button {
+    padding-right: 3px !important;
+}
+.terms_r label {
+    cursor: pointer;
 }
 /* doc changes here */
 footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter {
@@ -7210,6 +7225,7 @@ footer#footer .footer-flex .footer-widget.footer-widget-first .join-news-letter 
         margin-bottom: 0px;
         position: absolute;
         right: 30px;
+        top: 30px;
     }
     .customer-white-wrapper.cleaner_favorite_section {
         padding: 20px 20px;

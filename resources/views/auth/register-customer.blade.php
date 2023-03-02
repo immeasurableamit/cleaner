@@ -150,8 +150,8 @@
 
 
                     <div class="terms-text terms_r">
-                    <input type="checkbox" name="term">
-                      <p>By clicking “Create My Account”, you agree with all Canary Clean’s <a href="/terms-and-conditions" class="link-design-2">terms and conditions</a> and <a href="/terms-and-conditions#privacy" class="link-design-2">privacy policy</a></p>
+                    <input type="checkbox" name="term" id="term" class="d-none">
+                      <p>By clicking <label for="term">“Create My Account”</label>, you agree with all Canary Clean’s <a href="/terms-and-conditions" class="link-design-2">terms and conditions</a> and <a href="/terms-and-conditions#privacy" class="link-design-2">privacy policy</a></p>
                     </div>
                     {!! $errors->first('term', '<span class="alert">:message</span>') !!}
                     </div>

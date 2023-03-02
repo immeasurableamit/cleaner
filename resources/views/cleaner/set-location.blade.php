@@ -42,7 +42,7 @@
 
                                         <div class="form-headeing-second pt-3 ">
                                             <h4 class="mb-0 border-0">
-                                                Adjust slider to refine service area and click "Update" to save.
+                                                Adjust slider to refine service area.
                                             </h4>
                                         </div>
 

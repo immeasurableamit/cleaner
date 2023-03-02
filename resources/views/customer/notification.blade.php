@@ -29,7 +29,7 @@
                                 <div class="notification_toggles mt-4">
                                     @livewire('customer.notification.notification')
 
-                                    <p>Don’t worry - these changes will not affect your invoice, appointment reminder, or other service critical notifications.</p>
+                                    <p>Don’t worry - these changes will not affect your invoice or appointment reminder notifications.</p>
                                 </div>
 
                             </div>
