@@ -73,6 +73,8 @@
             <div class="col-6 ">
                 <a href="{{ route('cleaner.billing.stripeConnectUpdate') }}" class="btn_blue" role="button" type="button">Update Payout Account</a>
             </div>
+            @endif
+
             @if ($bank->payouts_enabled == 0)
                 <div class="col-12 pt-3">
                     <a href="{{ route('cleaner.billing.stripeConnectUpdate') }}" class="btn_blue" role="button"
