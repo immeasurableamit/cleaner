@@ -28,8 +28,9 @@
         </ul>
       </div> -->
     </div>
-     <div class="header-search">
+     <div class="header-search search-box search_input2">
           <input type="search" placeholder="Search here..." id="search" wire:model="search">
+          <button type="submit" class="admin-search-btn"><img src="../assets/images/icons/search_2.png"></button>
          </div>
 
   </div>

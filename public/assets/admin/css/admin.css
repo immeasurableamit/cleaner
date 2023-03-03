@@ -884,6 +884,29 @@ a.pdf_r {
 .edit-icons,.view-icon{
     color: var(--primary);
 }
+.header-search.search-box.search_input2 {
+    width: 31%;
+    position: relative;
+}
+
+.header-search.search-box.search_input2 img {
+    width: 23px;
+}
+
+.header-search.search-box.search_input2 input#search {
+    background: transparent;
+    color: #2677b1;
+}
+
+.header-search.search-box.search_input2 input#search::placeholder {
+    color: #2677b1;
+}
+.header-search.search-box.search_input2 button.admin-search-btn {
+    top: 9px;
+}
+.catergory_service_table thead tr th:nth-of-type(3) {
+    width: 13%;
+}
 @media (min-width: 1200px){
     .table-design .dataTables_length {
         position: absolute;
@@ -1085,6 +1108,9 @@ a.pdf_r {
     }
     .admin-master-search .toggle-btn-li .toggle_menu {
         display: block !important;
+    }
+    .header-search.search-box.search_input2{
+        position: fixed;
     }
     /* 767  */
 }
