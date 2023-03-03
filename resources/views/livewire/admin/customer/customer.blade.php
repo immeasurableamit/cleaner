@@ -13,6 +13,10 @@
         </li>
       </ul>
     </div>
+    <div class="header-search search-box search_input2">
+      <input type="search" placeholder="Search here..." id="search" wire:model="search">
+      <button type="submit" class="admin-search-btn"><img src="../assets/images/icons/search_2.png"></button>
+     </div>
     <div class="table-right-block">
         <div class="table-right-block">
       <button id="all-time1" class="all-time-btn">All Time</button>
@@ -29,9 +33,7 @@
       </div> -->
     </div>
 
-    <div class="header-search search_input2">
-          <input type="search" placeholder="Search here..." id="search" wire:model="search">
-         </div>
+    
   </div>
   <!-- Tab panes -->
   <div class="tab-content">

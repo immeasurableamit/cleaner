@@ -11,8 +11,9 @@
         height: 40px;
 }
     </style>
-    <div class="col-md-4 search_input3">
-        <input type="text" class="form-control" placeholder="Search..." wire:model="searchRecord" />
+    <div class="header-search search-box search_input2 search_input3">
+        <input type="text" class="form-control" placeholder="Search..." wire:model="searchRecord" id="search"/>
+        <button type="submit" class="admin-search-btn"><img src="../assets/images/icons/search_2.png"></button>
     </div>
     <br>
     <table id="all-customer-table22" class="table dt-responsive nowrap" style="width:100%">

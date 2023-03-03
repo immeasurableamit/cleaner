@@ -16,8 +16,9 @@
                 </li>
             </ul>
         </div>
-        <div class="header-search search_input2">
+        <div class="header-search search-box search_input2">
             <input type="search" placeholder="Search here..." id="search" wire:model="searchResult">
+            <button type="submit" class="admin-search-btn"><img src="../assets/images/icons/search_2.png"></button>
            </div>
          <div class="table-right-block">
              <button id="all-time" class="all-time-btn">All Time</button>
